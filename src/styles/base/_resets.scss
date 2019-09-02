@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Roboto", Ubuntu, "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.7;
+
+  color: $color-text;
+  background: $bg-color-primary;
+}
+
+button,
+input {
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+::selection {
+  color: $bg-color-primary;
+  background: $color-primary;
+}

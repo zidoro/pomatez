@@ -1,0 +1,12 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="icon-minimize" viewBox="0 0 14 14">
+<title>icon-minimize</title>
+<g class="b" transform="translate(-253 -75)"><g class="a" transform="translate(253 81)"><rect class="c" width="14" height="2"/><rect class="d" x="0.5" y="0.5" width="13" height="1"/></g></g>
+</symbol>
+<symbol id="icon-exit" viewBox="0 0 14 14">
+<title>icon-exit</title>
+<defs><clipPath id="a"><rect class="a" width="14" height="14" transform="translate(253 75)"/></clipPath></defs><g class="b" transform="translate(-253 -75)"><path class="c" d="M19.745,7.145l-1.4-1.4-5.6,5.6-5.6-5.6-1.4,1.4,5.6,5.6-5.6,5.6,1.4,1.4,5.6-5.6,5.6,5.6,1.4-1.4-5.6-5.6Z" transform="translate(247.255 69.255)"/></g>
+</symbol>
+</defs>
+</svg>
