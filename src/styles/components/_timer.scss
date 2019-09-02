@@ -1,0 +1,45 @@
+.timer {
+  width: 100%;
+  height: 43.2rem;
+
+  position: relative;
+
+  &__circle {
+    width: 30rem;
+    height: 30rem;
+
+    position: absolute;
+    left: 50%;
+    bottom: 4rem;
+    transform: translateX(-50%);
+
+    background: $bg-color-primary;
+    border: 4px solid $color-primary;
+    border-radius: 50%;
+  }
+}
+
+.counter {
+  line-height: 1.5;
+  user-select: none;
+  text-align: center;
+  margin-top: 1rem;
+
+  @include absolute-center;
+
+  &__heading {
+    font-weight: 300;
+    font-size: 6.4rem;
+
+    display: flex;
+
+    & > span {
+      margin: 0 1.5rem;
+    }
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 2.8rem;
+  }
+}
