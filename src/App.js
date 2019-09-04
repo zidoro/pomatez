@@ -1,7 +1,7 @@
 import React from "react";
 import { StoreProvider, createStore } from "easy-peasy";
 
-import Main from "./containers/Main";
+import Home from "./containers/Home";
 import { Titlebar } from "./components";
 
 import models from "./models";
@@ -13,7 +13,7 @@ function App() {
     <StoreProvider store={store}>
       <div className="app">
         <Titlebar />
-        <Main />
+        <Home />
       </div>
     </StoreProvider>
   );
