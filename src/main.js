@@ -1,9 +1,4 @@
 const { app, BrowserWindow } = require("electron");
-const {
-  default: installExtension,
-  REACT_DEVELOPER_TOOLS,
-  REDUX_DEVTOOLS
-} = require("electron-devtools-installer");
 
 const isDev = require("electron-is-dev");
 const path = require("path");
@@ -16,9 +11,9 @@ function createWindow() {
     height: 600,
     resizable: false,
     maximizable: false,
+    alwaysOnTop: true,
     frame: false,
     show: false,
-    vibrancy: "dark",
     webPreferences: {
       nodeIntegration: true
     }
@@ -31,14 +26,6 @@ function createWindow() {
   );
 
   window.on("ready-to-show", () => window.show());
-
-  installExtension(REACT_DEVELOPER_TOOLS)
-    .then(name => console.log(`Added Extension: ${name}`))
-    .catch(err => console.log(`An error occured: `, err));
-
-  installExtension(REDUX_DEVTOOLS)
-    .then(name => console.log(`Added Extension: ${name}`))
-    .catch(err => console.log(`An error occured: `, err));
 
   window.on("closed", () => (window = null));
 }
@@ -57,4 +44,4 @@ app.on("activate", () => {
   }
 });
 
-// process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
