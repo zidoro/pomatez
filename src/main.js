@@ -18,17 +18,17 @@ function createWindow() {
     maximizable: false,
     frame: false,
     show: false,
+    vibrancy: "dark",
     webPreferences: {
       nodeIntegration: true
     }
   });
 
-  // window.loadURL(
-  //   isDev
-  //     ? "http://localhost:3000"
-  //     : `file://${path.join(__dirname, "../build/index.html")}`
-  // );
-  window.loadURL("https://github.com");
+  window.loadURL(
+    isDev
+      ? "http://localhost:3000"
+      : `file://${path.join(__dirname, "../build/index.html")}`
+  );
 
   window.on("ready-to-show", () => window.show());
 

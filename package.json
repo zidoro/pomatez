@@ -6,7 +6,7 @@
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron src/main.js\""
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . --enable-transparent-visuals --disable-gpu\""
   },
   "dependencies": {
     "easy-peasy": "^3.0.2",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "concurrently": "^4.1.2",
     "cross-env": "^5.2.1",
+    "electron": "^6.0.7",
     "electron-builder": "^21.2.0",
     "electron-devtools-installer": "^2.2.4",
     "wait-on": "^3.3.0"
