@@ -12,6 +12,7 @@
 
   &__menu {
     justify-self: start;
+    max-height: 3.2rem;
   }
 
   &__title {
@@ -41,25 +42,49 @@
   -webkit-app-region: no-drag;
 
   &:hover {
-    background: $bg-color-tertiary;
-  }
-}
-
-.menu-box {
-  @include absolute-center;
-
-  &__icon {
-    height: 0.2rem;
-    max-width: 2rem;
-    background: $color-text;
-
-    &--1 {
-      width: 2rem;
+    .menu-box {
+      &__icon {
+        background: $color-primary;
+      }
     }
+  }
 
-    &--2 {
-      width: 1rem;
-      margin-top: 0.4rem;
+  .menu-box {
+    @include absolute-center;
+
+    &__icon {
+      height: 0.2rem;
+      max-width: 2rem;
+      background: $color-text;
+
+      &--1,
+      &--2 {
+        transition: all 0.3s;
+      }
+
+      &--1 {
+        width: 2rem;
+
+        &.active {
+          width: 1rem;
+
+          transform-origin: right;
+          transform: rotate(-45deg);
+        }
+      }
+
+      &--2 {
+        width: 1rem;
+        margin-top: 0.6rem;
+
+        &.active {
+          width: 1rem;
+          margin-top: 0.8rem;
+
+          transform-origin: bottom;
+          transform: rotate(45deg);
+        }
+      }
     }
   }
 }

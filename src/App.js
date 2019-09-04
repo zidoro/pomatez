@@ -1,12 +1,21 @@
-import React, { Fragment } from "react";
-import { Titlebar, Timer } from "./components";
+import React from "react";
+import { StoreProvider, createStore } from "easy-peasy";
+
+import Main from "./containers/Main";
+import { Titlebar } from "./components";
+
+import models from "./models";
+
+const store = createStore(models);
 
 function App() {
   return (
-    <Fragment>
-      <Titlebar />
-      <Timer />
-    </Fragment>
+    <StoreProvider store={store}>
+      <div className="app">
+        <Titlebar />
+        <Main />
+      </div>
+    </StoreProvider>
   );
 }
 
