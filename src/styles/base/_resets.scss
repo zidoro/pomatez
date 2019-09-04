@@ -30,6 +30,12 @@ input {
   font-family: inherit;
 }
 
+.app {
+  max-width: 40rem;
+  max-height: 60rem;
+  overflow: hidden;
+}
+
 ::selection {
   color: $bg-color-primary;
   background: $color-primary;

@@ -1,0 +1,144 @@
+.control {
+  width: 40rem;
+  height: 13.6rem;
+
+  display: grid;
+  align-items: center;
+  user-select: none;
+
+  &__box {
+    height: max-content;
+    margin: 0 2.4rem;
+
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 6.5rem 1fr;
+    align-items: center;
+  }
+}
+
+.session {
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.action {
+  display: grid;
+  grid-column-gap: 2rem;
+  grid-template-columns: repeat(4, max-content);
+  align-items: center;
+
+  &__reset,
+  &__next,
+  &__volume {
+    width: 3.2rem;
+    height: 3.2rem;
+
+    border-radius: 50%;
+    background: $bg-color-primary;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow: 0 0.6rem 2rem $shadow-primary;
+      transform: translateY(-0.3rem);
+    }
+
+    &:active {
+      transform: translateY(-0.1rem);
+    }
+
+    & svg {
+      transition: all 0.3s;
+    }
+
+    &:hover svg {
+      fill: $color-primary;
+    }
+  }
+
+  &__play {
+    width: 7.5rem;
+    height: 7.5rem;
+
+    background: $bg-color-primary;
+    border-radius: 50%;
+    box-shadow: 0 0.1rem 0.6rem $shadow-primary;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow: 0 0.6rem 2rem $shadow-primary;
+      transform: translateY(-0.3rem);
+    }
+
+    &:active {
+      transform: translateY(-0.1rem);
+    }
+
+    & svg {
+      transition: all 0.3s;
+    }
+
+    &:hover svg {
+      fill: $color-primary;
+    }
+  }
+
+  &__right {
+    display: grid;
+    grid-column-gap: 1.6rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.play {
+  width: 7.5rem;
+  height: 7.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__play-btn,
+  &__pause-btn {
+    width: 3.2rem;
+    height: 3.2rem;
+    fill: $color-text;
+  }
+}
+
+.reset,
+.next,
+.volume {
+  width: 3.2rem;
+  height: 3.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reset__icon,
+.next__icon,
+.volume__on,
+.volume__off {
+  width: 2.4rem;
+  height: 1.8rem;
+  fill: $color-text;
+}

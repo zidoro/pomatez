@@ -2,24 +2,27 @@
   "name": "time-management-app",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron.js",
+  "main": "src/main.js",
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron src/main.js\""
   },
   "dependencies": {
+    "easy-peasy": "^3.0.2",
     "electron-is-dev": "^1.1.0",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-ripples": "^2.2.1",
+    "react-scripts": "3.1.1",
+    "react-spring": "^8.0.27"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
     "cross-env": "^5.2.1",
-    "electron": "^6.0.7",
     "electron-builder": "^21.2.0",
+    "electron-devtools-installer": "^2.2.4",
     "wait-on": "^3.3.0"
   },
   "eslintConfig": {
