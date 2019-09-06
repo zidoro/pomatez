@@ -5,8 +5,6 @@ import Play from "./elements/Play";
 import Next from "./elements/Next";
 import Volume from "./elements/Volume";
 
-import Sprite from "../../assets/sprite.svg";
-
 function Control() {
   const [isPlaying, setPlaying] = useState(false);
 
@@ -29,24 +27,20 @@ function Control() {
 
         <div className="action">
           <div className="action__reset">
-            <Reset Sprite={Sprite} />
+            <Reset />
           </div>
 
           <div className="action__play">
-            <Play Sprite={Sprite} isPlaying={isPlaying} onClick={onPlayClick} />
+            <Play isPlaying={isPlaying} onClick={onPlayClick} />
           </div>
 
           <div className="action__right">
             <div className="action__next">
-              <Next Sprite={Sprite} />
+              <Next />
             </div>
 
             <div className="action__volume">
-              <Volume
-                Sprite={Sprite}
-                soundsOn={soundsOn}
-                onClick={onSoundClick}
-              />
+              <Volume soundsOn={soundsOn} onClick={onSoundClick} />
             </div>
           </div>
         </div>

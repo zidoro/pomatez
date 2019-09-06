@@ -1,7 +1,7 @@
 import React from "react";
 const { remote } = window.require("electron");
 
-function Exit({ Sprite }) {
+function Exit() {
   function onExit() {
     const app = remote.app;
     app.quit();
@@ -9,7 +9,7 @@ function Exit({ Sprite }) {
   return (
     <div className="exit" onClick={onExit}>
       <svg className="exit__icon">
-        <use xlinkHref={Sprite + "#icon-exit"} />
+        <use xlinkHref="#icon-exit" />
       </svg>
     </div>
   );
