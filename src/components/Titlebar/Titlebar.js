@@ -1,24 +1,31 @@
 import React from "react";
+import { useStoreState, useStoreActions } from "easy-peasy";
+
 import Menu from "./elements/Menu";
 import Minimize from "./elements/Minimize";
 import Exit from "./elements/Exit";
 
-import Sprite from "../../assets/sprite.svg";
-
 function Titlebar() {
+  const { title, showConfig } = useStoreState(({ nav }) => ({
+    title: nav.title,
+    showConfig: nav.showConfig
+  }));
+
+  const setShowConfig = useStoreActions(({ nav }) => nav.setShowConfig);
+
   return (
     <div className="titlebar">
       <div className="titlebar__menu">
-        <Menu />
+        <Menu showConfig={showConfig} setShowConfig={setShowConfig} />
       </div>
 
       <div className="titlebar__title">
-        <p className="app-name">Time Management App</p>
+        <p className="app-name">{title}</p>
       </div>
 
       <div className="titlebar__icon">
-        <Minimize Sprite={Sprite} />
-        <Exit Sprite={Sprite} />
+        <Minimize />
+        <Exit />
       </div>
     </div>
   );

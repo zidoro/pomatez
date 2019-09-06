@@ -1,12 +1,7 @@
 import React from "react";
-import { useStoreState, useStoreActions } from "easy-peasy";
-
 import Ripple from "../../Ripple";
 
-function Menu() {
-  const showConfig = useStoreState(({ nav }) => nav.showConfig);
-  const setShowConfig = useStoreActions(({ nav }) => nav.setShowConfig);
-
+function Menu({ showConfig, setShowConfig }) {
   return (
     <Ripple>
       <div className="menu" onClick={() => setShowConfig()}>

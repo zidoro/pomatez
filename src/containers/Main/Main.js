@@ -1,24 +1,29 @@
-import React from "react";
-import { useStoreState } from "easy-peasy";
-import { useTransition, animated, config } from "react-spring";
+import React, { useEffect } from "react";
+import { useStoreActions } from "easy-peasy";
+import { animated } from "react-spring";
+import useAnimation from "../_hooks/useAnimation";
+
 import { Timer, Control } from "../../components";
 
 function Main() {
-  const showConfig = useStoreState(({ nav }) => nav.showConfig);
-  const transition = useTransition(!showConfig, null, {
-    from: { opacity: 0, transform: "translate3d(-50px, 0, 0)" },
-    enter: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-    leave: { opacity: 0, transform: "translate3d(-50px, 0, 0)" },
-    config: config.wobbly
-  });
-  return transition.map(
-    ({ item, key, props }) =>
-      item && (
-        <animated.div className="main" key={key} style={props}>
-          <Timer />
-          <Control />
-        </animated.div>
-      )
+  const setTitle = useStoreActions(({ nav }) => nav.setTitle);
+
+  useEffect(() => {
+    setTitle("Time Management App");
+  }, [setTitle]);
+
+  const { o, x } = useAnimation({ axisX: -25 });
+  return (
+    <animated.div
+      className="main"
+      style={{
+        opacity: o.interpolate(o => `${o}`),
+        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
+      }}
+    >
+      <Timer />
+      <Control />
+    </animated.div>
   );
 }
 

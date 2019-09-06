@@ -1,7 +1,7 @@
 import React from "react";
 const { remote } = window.require("electron");
 
-function Minimize({ Sprite }) {
+function Minimize() {
   function onMinimize() {
     const currentWindow = remote.getCurrentWindow();
     currentWindow.minimize();
@@ -9,7 +9,7 @@ function Minimize({ Sprite }) {
   return (
     <div className="minimize" onClick={onMinimize}>
       <svg className="minimize__icon">
-        <use xlinkHref={Sprite + "#icon-minimize"} />
+        <use xlinkHref="#icon-minimize" />
       </svg>
     </div>
   );

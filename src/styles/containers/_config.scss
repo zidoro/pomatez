@@ -1,5 +1,76 @@
 .config {
-  width: 40rem;
+  width: 33.6rem;
   height: 100%;
-  text-align: center;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-rows: 53.3rem 1fr;
+
+  &__sliders {
+    display: grid;
+    grid-row-gap: 3.2rem;
+  }
+
+  &__button-wrapper {
+    width: 100%;
+    height: 4.2rem;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  &__nav {
+    width: 100%;
+    height: 3.6rem;
+    display: grid;
+    position: relative;
+  }
+}
+
+.nav {
+  width: 100%;
+  height: 3.2rem;
+
+  display: flex;
+  align-items: center;
+
+  &__timer,
+  &__setting {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.3s;
+
+    &.active {
+      svg {
+        color: $color-primary;
+      }
+    }
+
+    &:hover &--icon {
+      color: $color-primary;
+    }
+
+    &--icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      fill: currentColor;
+
+      transition: all 0.3s;
+    }
+  }
+}
+
+.active-indicator {
+  width: 50%;
+  height: 1rem;
+
+  background: $color-primary;
+  border-radius: 0.3rem;
+
+  position: absolute;
+  bottom: -0.6rem;
 }

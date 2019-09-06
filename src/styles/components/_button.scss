@@ -1,0 +1,23 @@
+.btn {
+  font-size: 1.4rem;
+  text-transform: capitalize;
+
+  padding: 0.8rem 1.6rem;
+
+  border-radius: 0.5rem;
+  background: $bg-color-primary;
+  box-shadow: 0 0.1rem 0.3rem $shadow-primary;
+
+  transition: all 0.2s;
+
+  &:hover {
+    color: $color-primary;
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.6rem 2rem $shadow-primary;
+  }
+
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.1rem 0.6rem $shadow-primary;
+  }
+}

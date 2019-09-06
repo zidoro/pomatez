@@ -1,0 +1,14 @@
+.header {
+  width: 33.6rem;
+  height: 4.2rem;
+  margin: 3.2rem auto 2.4rem auto;
+
+  display: flex;
+  align-items: center;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+}
