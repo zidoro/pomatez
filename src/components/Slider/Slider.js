@@ -15,9 +15,10 @@ function Slider({
 
   const customStyles = {
     track: {
-      backgroundColor: "#eee",
       width: "100%",
-      height: 8
+      height: 8,
+      backgroundColor: "#eee",
+      boxShadow: "inset 0 .1rem .3rem #ddd"
     },
     active: {
       backgroundColor: "#005B99"

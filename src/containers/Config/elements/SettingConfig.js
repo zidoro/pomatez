@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { animated } from "react-spring";
 import useAnimation from "../../_hooks/useAnimation";
 
 import { Header, Toggle, Shortcut } from "../../../components";
 
 function SettingConfig() {
+  const [isOnTop, setOnTop] = useState(false);
+  const [isNotified, setNotified] = useState(true);
+  const [isDarkMode, setDarkMode] = useState(false);
+
   const { o, x } = useAnimation({ axisX: 25 });
   return (
     <animated.div
@@ -18,9 +22,24 @@ function SettingConfig() {
 
       <div className="feature">
         <p className="section-header">App Features</p>
-        <Toggle toggleName="Always On Top" switchId="on-top" checked={false} />
-        <Toggle toggleName="Desktop Notification" checked={true} />
-        <Toggle toggleName="Enable Dark Mode" checked={false} />
+        <Toggle
+          toggleName="Always On Top"
+          switchId="on-top"
+          isChecked={isOnTop}
+          onChange={() => setOnTop(prevState => !prevState)}
+        />
+        <Toggle
+          toggleName="Desktop Notification"
+          switchId="desktop-notication"
+          isChecked={isNotified}
+          onChange={() => setNotified(prevState => !prevState)}
+        />
+        <Toggle
+          toggleName="Enable Dark Mode"
+          switchId="darkmode"
+          isChecked={isDarkMode}
+          onChange={() => setDarkMode(prevState => !prevState)}
+        />
       </div>
 
       <div className="keyboard">

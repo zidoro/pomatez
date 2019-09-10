@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #005b99;
+        stroke-width: 8px;
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="indicator" class="cls-1">
+    <circle class="cls-2" cx="150" cy="150" r="150"/>
+    <circle class="cls-3" cx="150" cy="150" r="146"/>
+  </g>
+</svg>

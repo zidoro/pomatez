@@ -1,13 +1,13 @@
 import React from "react";
 import { Switch } from "../Switch";
 
-function Toggle({ toggleName, switchId, checked, onClick }) {
+function Toggle({ toggleName, switchId, isChecked, onChange }) {
   return (
-    <div className="toggle" onClick={onClick}>
+    <div className="toggle">
       <label htmlFor={switchId} className="toggle__name">
         {toggleName}
       </label>
-      <Switch id={switchId} checked={checked} />
+      <Switch id={switchId} isChecked={isChecked} onChange={onChange} />
     </div>
   );
 }

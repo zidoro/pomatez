@@ -6,7 +6,7 @@ export default {
     state.title = payload;
   }),
 
-  showConfig: false,
+  showConfig: true,
   setShowConfig: action(state => {
     state.showConfig = !state.showConfig;
   })
