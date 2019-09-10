@@ -13,7 +13,7 @@
     height: 30rem;
 
     background: $bg-color-primary;
-    border: 0.8rem solid $color-primary;
+    border: 0.8rem solid rgba($color-primary, 0.8);
     border-radius: 50%;
 
     margin-top: 3.6rem;
@@ -37,6 +37,14 @@
 
   @include absolute-center;
 
+  &__heading,
+  &__title {
+    background: $color-text;
+    color: transparent;
+    text-shadow: 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 0.4);
+    background-clip: text;
+  }
+
   &__heading {
     font-weight: 300;
     font-size: 6.4rem;
@@ -51,5 +59,6 @@
   &__title {
     font-weight: 400;
     font-size: 2.8rem;
+    text-transform: uppercase;
   }
 }
