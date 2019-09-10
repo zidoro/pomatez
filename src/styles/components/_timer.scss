@@ -2,7 +2,9 @@
   width: 100%;
   height: 43.2rem;
 
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transition: all 0.3s;
 
@@ -10,14 +12,20 @@
     width: 30rem;
     height: 30rem;
 
-    position: absolute;
-    left: 50%;
-    bottom: 4rem;
-    transform: translateX(-50%);
-
     background: $bg-color-primary;
     border: 0.8rem solid $color-primary;
     border-radius: 50%;
+
+    margin-top: 3.6rem;
+
+    background-position: center center;
+    box-shadow: 0 0.3rem 0.8rem -2rem $shadow-primary;
+    transition: box-shadow 0.5s;
+    will-change: transform;
+
+    &:hover {
+      box-shadow: 0 0.3rem 2.8rem -0.4rem $shadow-secondary;
+    }
   }
 }
 

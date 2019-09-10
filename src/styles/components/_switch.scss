@@ -1,0 +1,36 @@
+.switch {
+  width: 2.8rem;
+  height: 1.6rem;
+  position: relative;
+
+  appearance: none;
+  border-radius: 5rem;
+  background: $bg-color-tertiary;
+  box-shadow: inset 0 0 0.3rem $shadow-tertiary;
+
+  transition: all 0.3s;
+
+  &:checked {
+    background: $color-primary;
+  }
+
+  &::before {
+    content: "";
+    width: 1.6rem;
+    height: 1.6rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-radius: 5rem;
+    background: $bg-color-primary;
+    box-shadow: 0 0.1rem 0.3rem $shadow-primary;
+    transform: scale(1.1);
+    transition: all 0.3s;
+  }
+
+  &:checked::before {
+    left: 50%;
+  }
+}
