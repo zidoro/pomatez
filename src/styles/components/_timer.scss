@@ -3,62 +3,73 @@
   height: 43.2rem;
 
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 
-  transition: all 0.3s;
+  &__counter {
+    position: relative;
+  }
+}
+
+.counter-svg {
+  width: 32rem;
+  height: 32rem;
+  margin-bottom: 2rem;
+  transform: rotateY(-180deg) rotateZ(-90deg);
 
   &__circle {
-    width: 30rem;
-    height: 30rem;
+    fill: none;
 
-    background: $bg-color-primary;
-    border: 0.8rem solid rgba($color-primary, 0.8);
-    border-radius: 50%;
+    &#circle-base {
+      stroke: #eee;
+      stroke-width: 0.8rem;
+    }
 
-    margin-top: 3.6rem;
-
-    background-position: center center;
-    box-shadow: 0 0.3rem 0.8rem -2rem $shadow-primary;
-    transition: box-shadow 0.5s;
-    will-change: transform;
-
-    &:hover {
-      box-shadow: 0 0.3rem 2.8rem -0.4rem $shadow-secondary;
+    &#circle-counter {
+      stroke-width: 0.4rem;
+      stroke: $color-primary;
+      stroke-dasharray: 980px;
+      stroke-dashoffset: 0;
+      stroke-linecap: round;
+      animation: countdown 250s linear forwards;
     }
   }
 }
 
-.counter {
-  line-height: 1.5;
-  user-select: none;
+.counter-num {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  line-height: 1;
   text-align: center;
-  margin-top: 1rem;
+  text-transform: uppercase;
+  user-select: none;
 
-  @include absolute-center;
+  display: grid;
+  grid-row-gap: 2.4rem;
 
-  &__heading,
-  &__title {
-    background: $color-text;
-    color: transparent;
-    text-shadow: 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 0.4);
-    background-clip: text;
-  }
-
-  &__heading {
-    font-weight: 300;
-    font-size: 6.4rem;
-
+  &__timer {
     display: flex;
+    font-size: 6.4rem;
+    color: $color-primary;
 
-    & > span {
-      margin: 0 1.5rem;
+    span {
+      margin: 0 0.8rem;
     }
   }
 
-  &__title {
-    font-weight: 400;
+  &__heading {
     font-size: 2.8rem;
-    text-transform: uppercase;
+  }
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 980px;
   }
 }
