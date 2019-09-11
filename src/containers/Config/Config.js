@@ -10,7 +10,7 @@ import SettingConfig from "./elements/SettingConfig";
 function Config() {
   const setTitle = useStoreActions(({ nav }) => nav.setTitle);
 
-  const [showSetting, setShowSetting] = useState(true);
+  const [showSetting, setShowSetting] = useState(false);
 
   useEffect(() => {
     setTitle("User Configuration");
