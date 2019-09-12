@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
-import { useStoreActions } from "easy-peasy";
 import { animated } from "react-spring";
-import useAnimation from "../_hooks/useAnimation";
-
+import { useStore, useAnimate } from "../../hooks";
 import { Timer, Control } from "../../components";
 
 function Main() {
-  const setTitle = useStoreActions(({ nav }) => nav.setTitle);
+  const { setTitle } = useStore().actions;
+  const { o, x } = useAnimate({ axisX: -25 });
 
   useEffect(() => {
     setTitle("Time Management App");
   }, [setTitle]);
 
-  const { o, x } = useAnimation({ axisX: -25 });
   return (
     <animated.div
       className="main"

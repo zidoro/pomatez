@@ -1,10 +1,11 @@
 import React from "react";
-import { useStoreState } from "easy-peasy";
+import { useStore } from "../hooks";
+
 import Main from "./Main";
 import Config from "./Config";
 
 function Home() {
-  const showConfig = useStoreState(({ nav }) => nav.showConfig);
+  const { showConfig } = useStore().states;
   return showConfig ? <Config /> : <Main />;
 }
 

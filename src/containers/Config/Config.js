@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useStoreActions } from "easy-peasy";
+import React, { useEffect } from "react";
 import { animated } from "react-spring";
-import useAnimation from "../_hooks/useAnimation";
+import { useStore, useAnimate } from "../../hooks";
 
 import Nav from "./elements/Nav";
 import TimerConfig from "./elements/TimerConfig";
 import SettingConfig from "./elements/SettingConfig";
 
 function Config() {
-  const setTitle = useStoreActions(({ nav }) => nav.setTitle);
-
-  const [showSetting, setShowSetting] = useState(false);
+  const { showSetting } = useStore().states;
+  const { setTitle, setShowSetting } = useStore().actions;
 
   useEffect(() => {
     setTitle("User Configuration");
   }, [setTitle]);
 
-  const { o, x } = useAnimation({ axisX: -25 });
+  const { o, x } = useAnimate({ axisX: -25 });
   return (
     <animated.div
       className="config"

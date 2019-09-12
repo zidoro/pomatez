@@ -1,10 +1,10 @@
 import React from "react";
 import { animated } from "react-spring";
-import useAnimation from "../../_hooks/useAnimation";
+import { useAnimate } from "../../../hooks";
 import { Header, Slider } from "../../../components";
 
 function TimerConfig() {
-  const { o, x } = useAnimation({ axisX: -25 });
+  const { o, x } = useAnimate({ axisX: -25 });
   return (
     <animated.div
       className="timer-config"
