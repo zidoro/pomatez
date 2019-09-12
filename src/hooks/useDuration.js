@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useStore from "./useStore";
 
-function useCounter(minutes) {
+function useDuration(minutes) {
+  const { playing } = useStore().states;
+
   let [counter, setCounter] = useState(minutes * 60);
 
   let secs = counter;
   let mins = Math.floor(secs / 60);
   secs -= mins * 60;
 
-  useEffect(() => {
+  if (playing) {
     let interval = setInterval(() => {
       if (counter <= 0) {
         clearInterval(interval);
@@ -17,11 +20,9 @@ function useCounter(minutes) {
         setCounter(counter);
       }
     }, 1000);
-
-    return () => clearInterval(interval);
-  });
+  }
 
   return { mins, secs };
 }
 
-export default useCounter;
+export default useDuration;

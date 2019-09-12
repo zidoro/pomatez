@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { animated } from "react-spring";
-import useAnimation from "../../_hooks/useAnimation";
+import { useStore, useAnimate } from "../../../hooks";
 
 import { Header, Toggle, Shortcut } from "../../../components";
 
 function SettingConfig() {
-  const [isOnTop, setOnTop] = useState(false);
-  const [isNotified, setNotified] = useState(true);
-  const [isDarkMode, setDarkMode] = useState(false);
+  const { onTop, notify, darkMode } = useStore().states;
+  const { setOnTop, setNotify, setDarkMode } = useStore().actions;
 
-  const { o, x } = useAnimation({ axisX: 25 });
+  const { o, x } = useAnimate({ axisX: 25 });
   return (
     <animated.div
       className="setting-config"
@@ -25,20 +24,20 @@ function SettingConfig() {
         <Toggle
           toggleName="Always On Top"
           switchId="on-top"
-          isChecked={isOnTop}
-          onChange={() => setOnTop(prevState => !prevState)}
+          isChecked={onTop}
+          onChange={() => setOnTop()}
         />
         <Toggle
           toggleName="Desktop Notification"
           switchId="desktop-notication"
-          isChecked={isNotified}
-          onChange={() => setNotified(prevState => !prevState)}
+          isChecked={notify}
+          onChange={() => setNotify()}
         />
         <Toggle
           toggleName="Enable Dark Mode"
           switchId="darkmode"
-          isChecked={isDarkMode}
-          onChange={() => setDarkMode(prevState => !prevState)}
+          isChecked={darkMode}
+          onChange={() => setDarkMode()}
         />
       </div>
 

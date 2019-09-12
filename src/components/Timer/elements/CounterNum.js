@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useDuration } from "../hooks";
+import { useDuration } from "../../../hooks";
 
 function CounterNum({ duration, countDownName }) {
   const { mins, secs } = useDuration(duration);

@@ -1,17 +1,13 @@
 import React from "react";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStore } from "../../hooks";
 
 import Menu from "./elements/Menu";
 import Minimize from "./elements/Minimize";
 import Exit from "./elements/Exit";
 
 function Titlebar() {
-  const { title, showConfig } = useStoreState(({ nav }) => ({
-    title: nav.title,
-    showConfig: nav.showConfig
-  }));
-
-  const setShowConfig = useStoreActions(({ nav }) => nav.setShowConfig);
+  const { title, showConfig } = useStore().states;
+  const { setShowConfig } = useStore().actions;
 
   return (
     <div className="titlebar">

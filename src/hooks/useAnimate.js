@@ -1,7 +1,7 @@
 import { useSpring, config } from "react-spring";
 import PropTypes from "prop-types";
 
-function useAnimation({ axisX }) {
+function useAnimate({ axisX }) {
   const { o, x } = useSpring({
     o: 1,
     x: 0,
@@ -11,8 +11,8 @@ function useAnimation({ axisX }) {
   return { o, x };
 }
 
-useAnimation.propTypes = {
+useAnimate.propTypes = {
   axisX: PropTypes.number
 };
 
-export default useAnimation;
+export default useAnimate;

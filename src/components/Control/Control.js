@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useStore } from "../../hooks";
 
 import Reset from "./elements/Reset";
 import Play from "./elements/Play";
@@ -6,17 +7,17 @@ import Next from "./elements/Next";
 import Volume from "./elements/Volume";
 
 function Control() {
-  const [isPlaying, setPlaying] = useState(false);
-
-  const [soundsOn, setSoundsOn] = useState(true);
+  const { playing, soundsOn } = useStore().states;
+  const { setPlaying, setSoundsOn } = useStore().actions;
 
   function onPlayClick() {
-    setPlaying(prevIsPlaying => !prevIsPlaying);
+    setPlaying();
   }
 
   function onSoundClick() {
-    setSoundsOn(prevSoundsOn => !prevSoundsOn);
+    setSoundsOn();
   }
+
   return (
     <div className="control">
       <div className="control__box">
@@ -31,7 +32,7 @@ function Control() {
           </div>
 
           <div className="action__play">
-            <Play isPlaying={isPlaying} onClick={onPlayClick} />
+            <Play isPlaying={playing} onClick={onPlayClick} />
           </div>
 
           <div className="action__right">
