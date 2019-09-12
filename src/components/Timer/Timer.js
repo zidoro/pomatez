@@ -1,13 +1,12 @@
 import React from "react";
-import CounterSvg from "./elements/CounterSvg";
-import CounterNum from "./elements/CounterNum";
+import { CounterNum, CounterSvg } from "./elements";
 
 function Timer() {
   return (
     <div className="timer">
       <div className="timer__counter">
-        <CounterSvg />
-        <CounterNum />
+        <CounterSvg duration={25} />
+        <CounterNum duration={25} countDownName="Work" />
       </div>
     </div>
   );

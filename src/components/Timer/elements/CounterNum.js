@@ -1,20 +1,36 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { useDuration } from "../hooks";
 
-const getText = text => {
-  let regex = new RegExp(`(:)`, "gi");
-  const parts = text.split(regex);
-  return parts.map((part, i) =>
-    part.match(regex) ? <span key={i}>{part}</span> : part
-  );
-};
+function CounterNum({ duration, countDownName }) {
+  const { mins, secs } = useDuration(duration);
 
-function CounterNum() {
+  function setPad(num) {
+    return (num < 10 ? "0" : "") + num;
+  }
+
+  function resetPad(num) {
+    return (num === 0 ? "0" : "") + num;
+  }
+
   return (
     <div className="counter-num">
-      <div className="counter-num__timer">{getText("25:00")}</div>
-      <div className="counter-num__heading">Work</div>
+      <div className="counter-num__timer">
+        {resetPad(mins)} <span>:</span> {setPad(secs)}
+      </div>
+      <div className="counter-num__heading">{countDownName}</div>
     </div>
   );
 }
+
+CounterNum.defaultProps = {
+  duration: 0,
+  countDownName: "Work"
+};
+
+CounterNum.propTypes = {
+  duration: PropTypes.number,
+  countDownName: PropTypes.string
+};
 
 export default CounterNum;

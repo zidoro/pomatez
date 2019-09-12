@@ -28,15 +28,18 @@
     &#circle-counter {
       stroke-width: 0.4rem;
       stroke: $color-primary;
-      stroke-dasharray: 980px;
+      stroke-dasharray: 98rem;
       stroke-dashoffset: 0;
       stroke-linecap: round;
-      animation: countdown 250s linear forwards;
+      animation-name: countdown;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
     }
   }
 }
 
 .counter-num {
+  width: max-content;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -48,10 +51,11 @@
   user-select: none;
 
   display: grid;
-  grid-row-gap: 2.4rem;
+  grid-row-gap: 2rem;
 
   &__timer {
     display: flex;
+    justify-content: center;
     font-size: 6.4rem;
     color: $color-primary;
 
@@ -62,14 +66,15 @@
 
   &__heading {
     font-size: 2.8rem;
+    letter-spacing: 0.1rem;
   }
 }
 
 @keyframes countdown {
   from {
-    stroke-dashoffset: 0px;
+    stroke-dashoffset: 0;
   }
   to {
-    stroke-dashoffset: 980px;
+    stroke-dashoffset: 98rem;
   }
 }
