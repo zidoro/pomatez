@@ -11,7 +11,7 @@ const timerReducer = (state, action) => {
     case SET_DURATION:
       return {
         ...state,
-        duration: action.payload
+        duration: action.payload * 60
       };
     case SET_COUNTDOWN:
       return {
