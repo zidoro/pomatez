@@ -1,11 +1,21 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Ripple from "../../Ripple";
 
-function Volume({ soundsOn, onClick }) {
+Volume.propTypes = {
+  isSoundON: PropTypes.bool,
+  onClick: PropTypes.func
+};
+
+Volume.defaultProps = {
+  isSoundON: false
+};
+
+function Volume({ isSoundON, onClick }) {
   return (
     <Ripple>
       <div className="volume" onClick={onClick}>
-        {soundsOn ? (
+        {isSoundON ? (
           <svg className="volume__on">
             <use xlinkHref="#icon-volume-on" />
           </svg>

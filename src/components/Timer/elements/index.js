@@ -1,2 +1,2 @@
-export { default as CounterNum } from "./CounterNum";
-export { default as CounterSvg } from "./CounterSvg";
+export { default as Progress } from "./Progress";
+export { default as CountDown } from "./CountDown";
