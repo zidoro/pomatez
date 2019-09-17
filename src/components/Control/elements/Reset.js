@@ -1,5 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Ripple from "../../Ripple";
+
+Reset.propTypes = {
+  onClick: PropTypes.func
+};
 
 function Reset({ onClick }) {
   return (

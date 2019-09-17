@@ -1,6 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+Header.propTypes = {
+  title: PropTypes.string
+};
+
+Header.defaultProps = {
+  title: "Header"
+};
+
 function Header({ title }) {
   return (
     <div className="header">
@@ -8,9 +16,5 @@ function Header({ title }) {
     </div>
   );
 }
-
-Header.propTypes = {
-  title: PropTypes.string
-};
 
 export default Header;

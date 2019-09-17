@@ -1,28 +1,11 @@
-import React, { useEffect } from "react";
-import { animated } from "react-spring";
-import { useStore, useAnimate } from "../../hooks";
-import { Timer, Control } from "../../components";
+import React, { useContext } from "react";
+import { StoreContext } from "../../models";
+import { Counter } from "../Counter";
+import { Config } from "../Config";
 
 function Main() {
-  const { setTitle } = useStore().actions;
-  const { o, x } = useAnimate({ axisX: -25 });
-
-  useEffect(() => {
-    setTitle("Time Management App");
-  }, [setTitle]);
-
-  return (
-    <animated.div
-      className="main"
-      style={{
-        opacity: o.interpolate(o => `${o}`),
-        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
-      }}
-    >
-      <Timer />
-      <Control />
-    </animated.div>
-  );
+  const [{ showConfig }] = useContext(StoreContext).nav;
+  return showConfig ? <Config /> : <Counter />;
 }
 
 export default Main;
