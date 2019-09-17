@@ -2,10 +2,7 @@ import React from "react";
 const { remote } = window.require("electron");
 
 function Exit() {
-  function onExit() {
-    const app = remote.app;
-    app.quit();
-  }
+  const onExit = () => remote.app.quit();
   return (
     <div className="exit" onClick={onExit}>
       <svg className="exit__icon">

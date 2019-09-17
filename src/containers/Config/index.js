@@ -1,2 +1,1 @@
-import Config from "./Config";
-export default Config;
+export { default as Config } from "./Config";

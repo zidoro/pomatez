@@ -1,5 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Switch } from "../Switch";
+
+Toggle.propTypes = {
+  toggleName: PropTypes.string.isRequired,
+  switchId: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool,
+  onChange: PropTypes.func.isRequired
+};
 
 function Toggle({ toggleName, switchId, isChecked, onChange }) {
   return (

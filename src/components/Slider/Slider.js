@@ -2,6 +2,25 @@ import React, { useState } from "react";
 import SliderRange from "react-input-slider";
 import PropTypes from "prop-types";
 
+Slider.propTypes = {
+  axis: PropTypes.string,
+  stepX: PropTypes.number,
+  minimumX: PropTypes.number,
+  maximumX: PropTypes.number,
+  valueX: PropTypes.number,
+  timeType: PropTypes.string,
+  rangeType: PropTypes.string
+};
+
+Slider.defaultProps = {
+  axis: "x",
+  stepX: 1,
+  minimumX: 0,
+  maximumX: 60,
+  valueX: 30,
+  rangeType: "min"
+};
+
 function Slider({
   axis,
   stepX,
@@ -52,24 +71,5 @@ function Slider({
     </div>
   );
 }
-
-Slider.defaultProps = {
-  axis: "x",
-  stepX: 1,
-  minimumX: 0,
-  maximumX: 60,
-  valueX: 30,
-  rangeType: "min"
-};
-
-Slider.propTypes = {
-  axis: PropTypes.string,
-  stepX: PropTypes.number,
-  minimumX: PropTypes.number,
-  maximumX: PropTypes.number,
-  valueX: PropTypes.number,
-  timeType: PropTypes.string,
-  rangeType: PropTypes.string
-};
 
 export default Slider;
