@@ -1,23 +1,9 @@
-import React from "react";
-import { useStore } from "../../hooks";
-
-import Reset from "./elements/Reset";
-import Play from "./elements/Play";
-import Next from "./elements/Next";
-import Volume from "./elements/Volume";
+import React, { useContext } from "react";
+import { StoreContext, SET_PLAYING, SET_SOUND_ON } from "../../models";
+import { Next, Play, Reset, Volume } from "./elements";
 
 function Control() {
-  const { playing, soundsOn } = useStore().states;
-  const { setPlaying, setSoundsOn } = useStore().actions;
-
-  function onPlayClick() {
-    setPlaying();
-  }
-
-  function onSoundClick() {
-    setSoundsOn();
-  }
-
+  const [{ isPlaying, isSoundON }, dispatch] = useContext(StoreContext).control;
   return (
     <div className="control">
       <div className="control__box">
@@ -32,7 +18,10 @@ function Control() {
           </div>
 
           <div className="action__play">
-            <Play isPlaying={playing} onClick={onPlayClick} />
+            <Play
+              isPlaying={isPlaying}
+              onClick={() => dispatch({ type: SET_PLAYING })}
+            />
           </div>
 
           <div className="action__right">
@@ -41,7 +30,10 @@ function Control() {
             </div>
 
             <div className="action__volume">
-              <Volume soundsOn={soundsOn} onClick={onSoundClick} />
+              <Volume
+                isSoundON={isSoundON}
+                onClick={() => dispatch({ type: SET_SOUND_ON })}
+              />
             </div>
           </div>
         </div>

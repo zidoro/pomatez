@@ -1,7 +1,16 @@
 import React, { Fragment } from "react";
 import { animated, useSpring, config } from "react-spring";
+import PropTypes from "prop-types";
 
-function Nav({ showSetting, setShowSetting }) {
+Nav.propTypes = {
+  showSetting: PropTypes.bool
+};
+
+Nav.defaultProps = {
+  showSetting: false
+};
+
+function Nav({ showSetting, onClick }) {
   const { x } = useSpring({
     x: showSetting ? 50 : 0,
     config: config.stiff
@@ -11,7 +20,7 @@ function Nav({ showSetting, setShowSetting }) {
       <div className="nav">
         <div
           className={`nav__timer ${!showSetting && "active"}`}
-          onClick={() => setShowSetting(false)}
+          onClick={onClick}
         >
           <svg className="nav__timer--icon">
             <use xlinkHref="#icon-timer" />
@@ -19,7 +28,7 @@ function Nav({ showSetting, setShowSetting }) {
         </div>
         <div
           className={`nav__setting ${showSetting && "active"}`}
-          onClick={() => setShowSetting(true)}
+          onClick={onClick}
         >
           <svg className="nav__setting--icon">
             <use xlinkHref="#icon-setting" />

@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
-import { StoreProvider, createStore } from "easy-peasy";
+import { Provider } from "./models";
 import { getSvg } from "./sprite";
 
-import Home from "./containers/Home";
 import { Titlebar } from "./components";
-
-import models from "./models";
-
-const store = createStore(models);
+import { Main } from "./containers";
 
 function App() {
   useEffect(() => getSvg(), []);
   return (
-    <StoreProvider store={store}>
+    <Provider>
       <div className="app">
         <Titlebar />
-        <Home />
+        <Main />
       </div>
-    </StoreProvider>
+    </Provider>
   );
 }
 

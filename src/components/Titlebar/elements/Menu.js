@@ -1,10 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Ripple from "../../Ripple";
 
-function Menu({ showConfig, setShowConfig }) {
+Menu.propTypes = {
+  showConfig: PropTypes.bool,
+  onClick: PropTypes.func
+};
+
+Menu.defaultProps = {
+  showConfig: false
+};
+
+function Menu({ showConfig, onClick }) {
   return (
     <Ripple>
-      <div className="menu" onClick={() => setShowConfig()}>
+      <div className="menu" onClick={onClick}>
         <div className="menu-box">
           <div
             className={`menu-box__icon menu-box__icon--1 ${

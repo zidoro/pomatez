@@ -11,7 +11,7 @@
   }
 }
 
-.counter-svg {
+.progress {
   width: 32rem;
   height: 32rem;
   margin-bottom: 2rem;
@@ -31,14 +31,14 @@
       stroke-dasharray: 98rem;
       stroke-dashoffset: 0;
       stroke-linecap: round;
-      animation-name: countdown;
+      // animation-name: countdown;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
     }
   }
 }
 
-.counter-num {
+.countdown {
   width: max-content;
   position: absolute;
   top: 50%;

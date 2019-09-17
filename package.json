@@ -9,7 +9,6 @@
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \""
   },
   "dependencies": {
-    "easy-peasy": "^3.0.2",
     "electron-is-dev": "^1.1.0",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",

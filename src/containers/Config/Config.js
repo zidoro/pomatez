@@ -1,20 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { animated } from "react-spring";
-import { useStore, useAnimate } from "../../hooks";
 
-import Nav from "./elements/Nav";
-import TimerConfig from "./elements/TimerConfig";
-import SettingConfig from "./elements/SettingConfig";
+import { StoreContext, SET_TITLE, SHOW_SETTING } from "../../models";
+import { useAnimate } from "../../hooks";
+
+import { Nav, SettingConfig, TimerConfig } from "./elements";
 
 function Config() {
-  const { showSetting } = useStore().states;
-  const { setTitle, setShowSetting } = useStore().actions;
-
-  useEffect(() => {
-    setTitle("User Configuration");
-  }, [setTitle]);
-
   const { o, x } = useAnimate({ axisX: -25 });
+
+  const [, dispatchNav] = useContext(StoreContext).nav;
+  const [{ showSetting }, dispatchSetting] = useContext(StoreContext).setting;
+
+  useEffect(
+    () =>
+      dispatchNav({
+        type: SET_TITLE,
+        payload: "User Configuration"
+      }),
+    [dispatchNav]
+  );
+
   return (
     <animated.div
       className="config"
@@ -28,7 +34,10 @@ function Config() {
       </div>
 
       <div className="config__nav">
-        <Nav showSetting={showSetting} setShowSetting={setShowSetting} />
+        <Nav
+          showSetting={showSetting}
+          onClick={() => dispatchSetting({ type: SHOW_SETTING })}
+        />
       </div>
     </animated.div>
   );

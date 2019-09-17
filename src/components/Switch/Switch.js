@@ -1,6 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+Switch.propTypes = {
+  id: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool
+};
+
+Switch.defaultProps = {
+  isChecked: false
+};
+
 function Switch({ id, isChecked, onChange }) {
   return (
     <input
@@ -12,10 +21,5 @@ function Switch({ id, isChecked, onChange }) {
     />
   );
 }
-
-Switch.propTypes = {
-  id: PropTypes.string,
-  isChecked: PropTypes.bool
-};
 
 export default Switch;
