@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import SliderRange from "react-input-slider";
+import React from "react";
 import PropTypes from "prop-types";
+import SliderRange from "react-input-slider";
 
 Slider.propTypes = {
   axis: PropTypes.string,
@@ -9,7 +9,8 @@ Slider.propTypes = {
   maximumX: PropTypes.number,
   valueX: PropTypes.number,
   timeType: PropTypes.string,
-  rangeType: PropTypes.string
+  rangeType: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 Slider.defaultProps = {
@@ -28,10 +29,9 @@ function Slider({
   maximumX,
   valueX,
   timeType,
-  rangeType
+  rangeType,
+  onChange
 }) {
-  const [initialRange, setRange] = useState({ x: valueX });
-
   const customStyles = {
     track: {
       width: "100%",
@@ -55,7 +55,7 @@ function Slider({
       <div className="time">
         <p className="time__type">{timeType}</p>
         <p className="time__initial">
-          {initialRange.x} {rangeType}
+          {valueX} {rangeType}
         </p>
       </div>
 
@@ -64,8 +64,8 @@ function Slider({
         xstep={stepX}
         xmin={minimumX}
         xmax={maximumX}
-        x={initialRange.x}
-        onChange={({ x }) => setRange({ x })}
+        x={valueX}
+        onChange={onChange}
         styles={customStyles}
       />
     </div>
