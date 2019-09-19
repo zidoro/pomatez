@@ -31,9 +31,7 @@
       stroke-dasharray: 98rem;
       stroke-dashoffset: 0;
       stroke-linecap: round;
-      // animation-name: countdown;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
+      transition: stroke-dashoffset 1s linear;
     }
   }
 }
@@ -67,14 +65,5 @@
   &__heading {
     font-size: 2.8rem;
     letter-spacing: 0.1rem;
-  }
-}
-
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: 98rem;
   }
 }

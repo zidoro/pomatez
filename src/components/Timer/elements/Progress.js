@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { animated, useSpring } from "react-spring";
 
 Progress.propTypes = {
   dashOffset: PropTypes.number
@@ -11,8 +10,6 @@ Progress.defaultProps = {
 };
 
 function Progress({ dashOffset }) {
-  const { d } = useSpring({ d: dashOffset });
-
   return (
     <svg className="progress">
       <defs>
@@ -31,14 +28,14 @@ function Progress({ dashOffset }) {
         r="156"
         filter="url(#inset-shadow)"
       />
-      <animated.circle
+      <circle
         className="progress__circle"
         id="circle-counter"
         cx="160"
         cy="160"
         r="156"
         style={{
-          strokeDashoffset: d.interpolate(d => `${d}`)
+          strokeDashoffset: `${dashOffset}`
         }}
       />
     </svg>
