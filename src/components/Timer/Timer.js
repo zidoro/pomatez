@@ -10,6 +10,8 @@ import { CountDown, Progress } from "./elements";
 function Timer() {
   const [{ workingTime }] = useContext(StoreContext).config;
 
+  const [{ isPlaying }] = useContext(StoreContext).control;
+
   const [
     { duration, counter, dashOffset, finalDashOffset },
     dispatch
@@ -25,21 +27,24 @@ function Timer() {
   );
 
   useEffect(() => {
+    let interval;
     let count = duration;
     dispatch({ type: SET_COUNTER, payload: count });
-    let interval = setInterval(() => {
-      if (count <= 0) {
-        count = 0;
-        clearInterval(interval);
-        dispatch({ type: SET_COUNTER, payload: count });
-      } else {
-        count--;
-        dispatch({ type: SET_COUNTER, payload: count });
-      }
-    }, 1000);
+    if (isPlaying) {
+      interval = setInterval(() => {
+        if (count <= 0) {
+          count = 0;
+          clearInterval(interval);
+          dispatch({ type: SET_COUNTER, payload: count });
+        } else {
+          count--;
+          dispatch({ type: SET_COUNTER, payload: count });
+        }
+      }, 1000);
+    }
 
     return () => clearInterval(interval);
-  }, [dispatch, duration]);
+  }, [dispatch, duration, isPlaying]);
 
   useEffect(
     () =>
