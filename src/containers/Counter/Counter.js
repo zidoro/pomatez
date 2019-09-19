@@ -1,11 +1,17 @@
 import React, { useContext, useEffect } from "react";
+import { animated, useSpring, config } from "react-spring";
 import { StoreContext, SET_TITLE } from "../../models";
 import { Timer, Control } from "../../components";
-import { useAnimate } from "../../hooks";
-import { animated } from "react-spring";
 
-function Counter() {
-  const { o, x } = useAnimate({ axisX: -25 });
+function Counter({ showConfig }) {
+  const { o, x } = useSpring({
+    from: { o: 0, x: -32 },
+    to: {
+      o: showConfig ? 0 : 1,
+      x: showConfig ? 32 : 0
+    },
+    config: config.stiff
+  });
   const [, dispatch] = useContext(StoreContext).nav;
 
   useEffect(
@@ -19,7 +25,7 @@ function Counter() {
 
   return (
     <animated.div
-      className="main"
+      className="counter"
       style={{
         opacity: o.interpolate(o => `${o}`),
         transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)

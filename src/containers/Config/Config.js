@@ -1,13 +1,17 @@
 import React, { useEffect, useContext } from "react";
-import { animated } from "react-spring";
-
+import { animated, useSpring, config } from "react-spring";
 import { StoreContext, SET_TITLE, SHOW_SETTING } from "../../models";
-import { useAnimate } from "../../hooks";
-
 import { Nav, SettingConfig, TimerConfig } from "./elements";
 
-function Config() {
-  const { o, x } = useAnimate({ axisX: -25 });
+function Config({ showConfig }) {
+  const { o, x, v } = useSpring({
+    to: {
+      o: showConfig ? 1 : 0,
+      x: showConfig ? 0 : -32,
+      v: showConfig ? "visible" : "hidden"
+    },
+    config: config.stiff
+  });
 
   const [, dispatchNav] = useContext(StoreContext).nav;
   const [{ showSetting }, dispatchSetting] = useContext(StoreContext).setting;
@@ -26,10 +30,11 @@ function Config() {
       className="config"
       style={{
         opacity: o.interpolate(o => `${o}`),
-        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
+        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`),
+        visibility: v
       }}
     >
-      <div className="config_body">
+      <div className="config__body">
         {showSetting ? <SettingConfig /> : <TimerConfig />}
       </div>
 

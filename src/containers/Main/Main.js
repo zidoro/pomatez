@@ -5,7 +5,13 @@ import { Config } from "../Config";
 
 function Main() {
   const [{ showConfig }] = useContext(StoreContext).nav;
-  return showConfig ? <Config /> : <Counter />;
+
+  return (
+    <div className="app__body">
+      <Counter showConfig={showConfig} />
+      <Config showConfig={showConfig} />
+    </div>
+  );
 }
 
 export default Main;

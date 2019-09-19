@@ -1,8 +1,7 @@
-import { SET_DURATION, SET_COUNTDOWN, SET_DASH_OFFSET } from "../actions";
+import { SET_DURATION, SET_DASH_OFFSET } from "../actions";
 
 const timerState = {
-  duration: 0,
-  countDown: 0,
+  duration: 1500,
   dashOffset: 0
 };
 
@@ -12,11 +11,6 @@ const timerReducer = (state, action) => {
       return {
         ...state,
         duration: action.payload * 60
-      };
-    case SET_COUNTDOWN:
-      return {
-        ...state,
-        countDown: action.payload
       };
     case SET_DASH_OFFSET:
       return {
