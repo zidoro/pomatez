@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { animated, useSpring, config } from "react-spring";
-import { StoreContext, SET_TITLE } from "../../models";
 import { Timer, Control } from "../../components";
 
 function Counter({ showConfig }) {
@@ -12,16 +11,6 @@ function Counter({ showConfig }) {
     },
     config: config.stiff
   });
-  const [, dispatch] = useContext(StoreContext).nav;
-
-  useEffect(
-    () =>
-      dispatch({
-        type: SET_TITLE,
-        payload: "Time Management App"
-      }),
-    [dispatch]
-  );
 
   return (
     <animated.div

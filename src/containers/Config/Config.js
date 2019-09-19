@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { animated, useSpring, config } from "react-spring";
-import { StoreContext, SET_TITLE, SHOW_SETTING } from "../../models";
+import { StoreContext, SHOW_SETTING } from "../../models";
 import { Nav, SettingConfig, TimerConfig } from "./elements";
 
 function Config({ showConfig }) {
@@ -13,17 +13,7 @@ function Config({ showConfig }) {
     config: config.stiff
   });
 
-  const [, dispatchNav] = useContext(StoreContext).nav;
   const [{ showSetting }, dispatchSetting] = useContext(StoreContext).setting;
-
-  useEffect(
-    () =>
-      dispatchNav({
-        type: SET_TITLE,
-        payload: "User Configuration"
-      }),
-    [dispatchNav]
-  );
 
   return (
     <animated.div
