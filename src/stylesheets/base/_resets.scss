@@ -35,6 +35,10 @@ input {
   max-width: 40rem;
   height: 60rem;
   overflow: hidden;
+
+  &__body {
+    position: relative;
+  }
 }
 
 ::selection {

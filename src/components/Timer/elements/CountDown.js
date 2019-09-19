@@ -2,17 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 CountDown.propTypes = {
-  duration: PropTypes.number,
+  counter: PropTypes.number,
   timerType: PropTypes.string
 };
 
 CountDown.defaultProps = {
-  duration: 0,
+  counter: 0,
   timerType: "Work"
 };
 
-function CountDown({ duration, timerType }) {
-  let secs = duration;
+function CountDown({ counter, timerType }) {
+  let secs = counter;
   let mins = Math.floor(secs / 60);
   secs -= mins * 60;
 

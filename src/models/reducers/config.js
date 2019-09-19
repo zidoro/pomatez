@@ -7,7 +7,7 @@ import {
 } from "../actions";
 
 const configState = {
-  workingTime: 25,
+  workingTime: 1,
   shortBreak: 5,
   longBreak: 15,
   sessionRounds: 4
