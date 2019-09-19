@@ -1,39 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 CountDown.propTypes = {
-  duration: PropTypes.number,
+  counter: PropTypes.number,
   timerType: PropTypes.string
 };
 
 CountDown.defaultProps = {
-  duration: 0,
+  counter: 0,
   timerType: "Work"
 };
 
-function CountDown({ duration, timerType }) {
-  const [time, setTime] = useState(0);
-
-  let secs = time;
+function CountDown({ counter, timerType }) {
+  let secs = counter;
   let mins = Math.floor(secs / 60);
   secs -= mins * 60;
-
-  useEffect(() => {
-    let count = duration;
-    setTime(count);
-    let interval = setInterval(() => {
-      if (count <= 0) {
-        count = 0;
-        clearInterval(interval);
-        setTime(0);
-      } else {
-        count--;
-        setTime(count);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [duration]);
 
   const setPad = num => (num < 10 ? "0" : "") + num;
   const resetPad = num => (num === 0 ? "0" : "") + num;

@@ -11,9 +11,8 @@ Progress.defaultProps = {
 };
 
 function Progress({ dashOffset }) {
-  const svgAnimated = useSpring({
-    strokeDashoffset: dashOffset
-  });
+  const { d } = useSpring({ d: dashOffset });
+
   return (
     <svg className="progress">
       <defs>
@@ -38,7 +37,9 @@ function Progress({ dashOffset }) {
         cx="160"
         cy="160"
         r="156"
-        style={svgAnimated}
+        style={{
+          strokeDashoffset: d.interpolate(d => `${d}`)
+        }}
       />
     </svg>
   );
