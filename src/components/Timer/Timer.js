@@ -2,64 +2,61 @@ import React, { useContext, useEffect } from "react";
 import {
   StoreContext,
   SET_DURATION,
+  SET_DASH_OFFSET,
   SET_COUNTER,
-  SET_DASH_OFFSET
+  SET_PLAYING
 } from "../../models";
 import { CountDown, Progress } from "./elements";
 
 function Timer() {
   const [{ workingTime }] = useContext(StoreContext).config;
-
-  const [{ isPlaying }] = useContext(StoreContext).control;
+  const [{ isPlaying }, dispatchControl] = useContext(StoreContext).control;
 
   const [
     { duration, counter, dashOffset, finalDashOffset },
-    dispatch
+    dispatchTimer
   ] = useContext(StoreContext).timer;
 
-  useEffect(
-    () =>
-      dispatch({
-        type: SET_DURATION,
-        payload: workingTime
-      }),
-    [dispatch, workingTime]
-  );
+  useEffect(() => {
+    dispatchTimer({ type: SET_DURATION, payload: workingTime * 60 });
+    dispatchTimer({ type: SET_COUNTER, payload: workingTime * 60 });
+  }, [dispatchTimer, workingTime]);
 
   useEffect(() => {
-    let interval;
-    let count = duration;
-    dispatch({ type: SET_COUNTER, payload: count });
+    let count = counter;
+    let interval = null;
+
     if (isPlaying) {
       interval = setInterval(() => {
         if (count <= 0) {
           count = 0;
           clearInterval(interval);
-          dispatch({ type: SET_COUNTER, payload: count });
+          dispatchTimer({ type: SET_COUNTER, payload: count });
+          dispatchControl({ type: SET_PLAYING, payload: false });
         } else {
           count--;
-          dispatch({ type: SET_COUNTER, payload: count });
+          dispatchTimer({ type: SET_COUNTER, payload: count });
         }
       }, 1000);
     }
 
     return () => clearInterval(interval);
-  }, [dispatch, duration, isPlaying]);
+  }, [dispatchTimer, counter, isPlaying, dispatchControl]);
 
   useEffect(
     () =>
-      dispatch({
+      dispatchTimer({
         type: SET_DASH_OFFSET,
         payload: (duration - counter) * (finalDashOffset / duration)
       }),
-    [dispatch, duration, counter, finalDashOffset]
+    [dispatchTimer, duration, counter, finalDashOffset]
   );
 
   return (
     <div className="timer">
       <div className="timer__counter">
         <Progress dashOffset={dashOffset} />
-        <CountDown counter={counter} timerType="Work" />
+        <CountDown counter={counter} timerType="Running" />
       </div>
     </div>
   );
