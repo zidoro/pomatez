@@ -20,7 +20,9 @@ function Control() {
           <div className="action__play">
             <Play
               isPlaying={isPlaying}
-              onClick={() => dispatch({ type: SET_PLAYING })}
+              onClick={() =>
+                dispatch({ type: SET_PLAYING, payload: !isPlaying })
+              }
             />
           </div>
 

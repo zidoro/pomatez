@@ -17,11 +17,10 @@ function CountDown({ counter, timerType }) {
   secs -= mins * 60;
 
   const setPad = num => (num < 10 ? "0" : "") + num;
-  const resetPad = num => (num === 0 ? "0" : "") + num;
   return (
     <div className="countdown">
       <div className="countdown__timer">
-        {resetPad(mins)} <span>:</span> {setPad(secs)}
+        {setPad(mins)} <span>:</span> {setPad(secs)}
       </div>
       <div className="countdown__heading">{timerType}</div>
     </div>

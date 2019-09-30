@@ -10,7 +10,7 @@ const controlReducer = (state, action) => {
     case SET_PLAYING:
       return {
         ...state,
-        isPlaying: !state.isPlaying
+        isPlaying: action.payload
       };
     case SET_SOUND_ON:
       return {
