@@ -5,6 +5,8 @@ const path = require("path");
 
 let window;
 
+app.setAppUserModelId("timer.management.app");
+
 function createWindow() {
   window = new BrowserWindow({
     width: 400,

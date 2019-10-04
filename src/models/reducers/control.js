@@ -1,21 +1,21 @@
-import { SET_PLAYING, SET_SOUND_ON } from "../actions";
+import { SET_RUNNING, SET_SILENT } from "../actions";
 
 const controlState = {
-  isPlaying: false,
-  isSoundON: true
+  running: false,
+  silent: false
 };
 
 const controlReducer = (state, action) => {
   switch (action.type) {
-    case SET_PLAYING:
+    case SET_RUNNING:
       return {
         ...state,
-        isPlaying: action.payload
+        running: action.payload
       };
-    case SET_SOUND_ON:
+    case SET_SILENT:
       return {
         ...state,
-        isSoundON: !state.isSoundON
+        silent: action.payload
       };
     default:
       return state;

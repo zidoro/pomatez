@@ -3,19 +3,19 @@ import PropTypes from "prop-types";
 import Ripple from "../../Ripple";
 
 Play.propTypes = {
-  isPlaying: PropTypes.bool,
+  running: PropTypes.bool,
   onClick: PropTypes.func
 };
 
 Play.defaultProps = {
-  isPlaying: false
+  running: false
 };
 
-function Play({ isPlaying, onClick }) {
+function Play({ running, onClick }) {
   return (
     <Ripple>
       <div className="play" onClick={onClick}>
-        {isPlaying ? (
+        {running ? (
           <svg className="play__pause-btn">
             <use xlinkHref="#icon-pause" />
           </svg>
