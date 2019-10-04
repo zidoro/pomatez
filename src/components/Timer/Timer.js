@@ -4,13 +4,16 @@ import {
   SET_DURATION,
   SET_DASH_OFFSET,
   SET_COUNTER,
-  SET_PLAYING
+  SET_RUNNING
 } from "../../models";
 import { CountDown, Progress } from "./elements";
+import AppIcon from "../../assets/electron.png";
 
 function Timer() {
   const [{ workingTime }] = useContext(StoreContext).config;
-  const [{ isPlaying }, dispatchControl] = useContext(StoreContext).control;
+  const [{ running, silent }, dispatchControl] = useContext(
+    StoreContext
+  ).control;
 
   const [
     { duration, counter, dashOffset, finalDashOffset },
@@ -26,13 +29,22 @@ function Timer() {
     let count = counter;
     let interval = null;
 
-    if (isPlaying) {
+    if (running) {
       interval = setInterval(() => {
         if (count <= 0) {
           count = 0;
           clearInterval(interval);
-          dispatchTimer({ type: SET_COUNTER, payload: count });
-          dispatchControl({ type: SET_PLAYING, payload: false });
+          dispatchTimer({ type: SET_COUNTER, payload: duration });
+          dispatchControl({ type: SET_RUNNING, payload: false });
+
+          const notification = {
+            title: "Work Time Finished",
+            body: "It's time for you to take a short break",
+            icon: AppIcon,
+            silent: silent
+          };
+
+          new window.Notification(notification.title, notification);
         } else {
           count--;
           dispatchTimer({ type: SET_COUNTER, payload: count });
@@ -41,7 +53,7 @@ function Timer() {
     }
 
     return () => clearInterval(interval);
-  }, [dispatchTimer, counter, isPlaying, dispatchControl]);
+  }, [dispatchTimer, counter, running, dispatchControl, duration, silent]);
 
   useEffect(
     () =>
@@ -56,7 +68,7 @@ function Timer() {
     <div className="timer">
       <div className="timer__counter">
         <Progress dashOffset={dashOffset} />
-        <CountDown counter={counter} timerType="Running" />
+        <CountDown counter={counter} timerType="Work" />
       </div>
     </div>
   );

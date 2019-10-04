@@ -9,8 +9,7 @@ const timerState = {
     { name: "Work", time: 0 },
     { name: "Short Break", time: 0 },
     { name: "Long Break", time: 0 }
-  ],
-  timerStatus: ["Running", "Paused"]
+  ]
 };
 
 const timerReducer = (state, action) => {
