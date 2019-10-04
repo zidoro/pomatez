@@ -20,6 +20,8 @@ function Timer() {
     dispatchTimer
   ] = useContext(StoreContext).timer;
 
+  const [{ notify }] = useContext(StoreContext).setting;
+
   useEffect(() => {
     dispatchTimer({ type: SET_DURATION, payload: workingTime * 60 });
     dispatchTimer({ type: SET_COUNTER, payload: workingTime * 60 });
@@ -44,7 +46,9 @@ function Timer() {
             silent: silent
           };
 
-          new window.Notification(notification.title, notification);
+          if (notify) {
+            new window.Notification(notification.title, notification);
+          }
         } else {
           count--;
           dispatchTimer({ type: SET_COUNTER, payload: count });
@@ -53,7 +57,15 @@ function Timer() {
     }
 
     return () => clearInterval(interval);
-  }, [dispatchTimer, counter, running, dispatchControl, duration, silent]);
+  }, [
+    dispatchTimer,
+    counter,
+    running,
+    dispatchControl,
+    duration,
+    silent,
+    notify
+  ]);
 
   useEffect(
     () =>

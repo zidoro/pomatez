@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { animated, useSpring, config } from "react-spring";
 import { StoreContext, SHOW_SETTING } from "../../models";
 import { Nav, SettingConfig, TimerConfig } from "./elements";
+
+const { remote } = window.require("electron");
 
 function Config({ showConfig }) {
   const { o, x, v } = useSpring({
@@ -13,7 +15,13 @@ function Config({ showConfig }) {
     config: config.stiff
   });
 
-  const [{ showSetting }, dispatchSetting] = useContext(StoreContext).setting;
+  const [{ onTop, showSetting }, dispatchSetting] = useContext(
+    StoreContext
+  ).setting;
+
+  useEffect(() => {
+    remote.getCurrentWindow().setAlwaysOnTop(onTop);
+  }, [onTop]);
 
   return (
     <animated.div
@@ -31,7 +39,12 @@ function Config({ showConfig }) {
       <div className="config__nav">
         <Nav
           showSetting={showSetting}
-          onClick={() => dispatchSetting({ type: SHOW_SETTING })}
+          onClick={() =>
+            dispatchSetting({
+              type: SHOW_SETTING,
+              payload: !showSetting
+            })
+          }
         />
       </div>
     </animated.div>
