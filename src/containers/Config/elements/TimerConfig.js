@@ -5,7 +5,8 @@ import {
   SET_SHORT_BREAK,
   SET_LONG_BREAK,
   SET_SESSION_ROUNDS,
-  RESTORE_DEFAULT
+  RESTORE_DEFAULT,
+  SET_RUNNING
 } from "../../../models";
 import { animated } from "react-spring";
 import { useAnimate } from "../../../hooks";
@@ -14,9 +15,11 @@ import { Header, Slider } from "../../../components";
 function TimerConfig() {
   const { o, x } = useAnimate({ axisX: -25 });
 
+  const [, dispatchControl] = useContext(StoreContext).control;
+
   const [
     { workingTime, shortBreak, longBreak, sessionRounds },
-    dispatch
+    dispatchConfig
   ] = useContext(StoreContext).config;
 
   return (
@@ -33,19 +36,26 @@ function TimerConfig() {
           timeType="Working Time"
           maximumX={60}
           valueX={workingTime}
-          onChange={({ x }) => dispatch({ type: SET_WORK_TIME, payload: x })}
+          onChange={({ x }) => {
+            dispatchConfig({ type: SET_WORK_TIME, payload: x });
+            dispatchControl({ type: SET_RUNNING, payload: false });
+          }}
         />
         <Slider
           timeType="Short Break"
           maximumX={60}
           valueX={shortBreak}
-          onChange={({ x }) => dispatch({ type: SET_SHORT_BREAK, payload: x })}
+          onChange={({ x }) =>
+            dispatchConfig({ type: SET_SHORT_BREAK, payload: x })
+          }
         />
         <Slider
           timeType="Long Break"
           maximumX={60}
           valueX={longBreak}
-          onChange={({ x }) => dispatch({ type: SET_LONG_BREAK, payload: x })}
+          onChange={({ x }) =>
+            dispatchConfig({ type: SET_LONG_BREAK, payload: x })
+          }
         />
         <Slider
           timeType="Session Rounds"
@@ -53,7 +63,7 @@ function TimerConfig() {
           maximumX={10}
           valueX={sessionRounds}
           onChange={({ x }) =>
-            dispatch({ type: SET_SESSION_ROUNDS, payload: x })
+            dispatchConfig({ type: SET_SESSION_ROUNDS, payload: x })
           }
         />
       </div>
@@ -61,7 +71,7 @@ function TimerConfig() {
       <div className="config__button-wrapper">
         <button
           className="btn btn-restore"
-          onClick={() => dispatch({ type: RESTORE_DEFAULT })}
+          onClick={() => dispatchConfig({ type: RESTORE_DEFAULT })}
         >
           Restore Default
         </button>
