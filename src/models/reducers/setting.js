@@ -12,22 +12,22 @@ const settingReducer = (state, action) => {
     case SET_ON_TOP:
       return {
         ...state,
-        onTop: !state.onTop
+        onTop: action.payload
       };
     case SET_NOTIFY:
       return {
         ...state,
-        notify: !state.notify
+        notify: action.payload
       };
     case SET_DARKMODE:
       return {
         ...state,
-        darkMode: !state.darkMode
+        darkMode: action.payload
       };
     case SHOW_SETTING:
       return {
         ...state,
-        showSetting: !state.showSetting
+        showSetting: action.payload
       };
     default:
       return state;
