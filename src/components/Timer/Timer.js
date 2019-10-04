@@ -2,57 +2,66 @@ import React, { useContext, useEffect } from "react";
 import {
   StoreContext,
   SET_DURATION,
+  SET_DASH_OFFSET,
   SET_COUNTER,
-  SET_DASH_OFFSET
+  SET_RUNNING
 } from "../../models";
 import { CountDown, Progress } from "./elements";
+import AppIcon from "../../assets/electron.png";
 
 function Timer() {
   const [{ workingTime }] = useContext(StoreContext).config;
-
-  const [{ isPlaying }] = useContext(StoreContext).control;
+  const [{ running, silent }, dispatchControl] = useContext(
+    StoreContext
+  ).control;
 
   const [
     { duration, counter, dashOffset, finalDashOffset },
-    dispatch
+    dispatchTimer
   ] = useContext(StoreContext).timer;
 
-  useEffect(
-    () =>
-      dispatch({
-        type: SET_DURATION,
-        payload: workingTime
-      }),
-    [dispatch, workingTime]
-  );
+  useEffect(() => {
+    dispatchTimer({ type: SET_DURATION, payload: workingTime * 60 });
+    dispatchTimer({ type: SET_COUNTER, payload: workingTime * 60 });
+  }, [dispatchTimer, workingTime]);
 
   useEffect(() => {
-    let interval;
-    let count = duration;
-    dispatch({ type: SET_COUNTER, payload: count });
-    if (isPlaying) {
+    let count = counter;
+    let interval = null;
+
+    if (running) {
       interval = setInterval(() => {
         if (count <= 0) {
           count = 0;
           clearInterval(interval);
-          dispatch({ type: SET_COUNTER, payload: count });
+          dispatchTimer({ type: SET_COUNTER, payload: duration });
+          dispatchControl({ type: SET_RUNNING, payload: false });
+
+          const notification = {
+            title: "Work Time Finished",
+            body: "It's time for you to take a short break",
+            icon: AppIcon,
+            silent: silent
+          };
+
+          new window.Notification(notification.title, notification);
         } else {
           count--;
-          dispatch({ type: SET_COUNTER, payload: count });
+          dispatchTimer({ type: SET_COUNTER, payload: count });
         }
       }, 1000);
     }
 
     return () => clearInterval(interval);
-  }, [dispatch, duration, isPlaying]);
+  }, [dispatchTimer, counter, running, dispatchControl, duration, silent]);
 
   useEffect(
     () =>
-      dispatch({
+      dispatchTimer({
         type: SET_DASH_OFFSET,
         payload: (duration - counter) * (finalDashOffset / duration)
       }),
-    [dispatch, duration, counter, finalDashOffset]
+    [dispatchTimer, duration, counter, finalDashOffset]
   );
 
   return (
