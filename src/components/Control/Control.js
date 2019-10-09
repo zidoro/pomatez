@@ -11,13 +11,16 @@ function Control() {
   const [{ running, silent }, dispatchControl] = useContext(
     StoreContext
   ).control;
+
   const [{ duration }, dispatchTimer] = useContext(StoreContext).timer;
+
+  const [{ sessionRounds }] = useContext(StoreContext).config;
 
   return (
     <div className="control">
       <div className="control__box">
         <div className="session">
-          <p className="session__count">1 / 4</p>
+          <p className="session__count">1 / {sessionRounds}</p>
           <p className="session__name">Sessions</p>
         </div>
 
