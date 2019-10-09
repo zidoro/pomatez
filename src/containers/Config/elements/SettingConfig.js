@@ -33,19 +33,34 @@ function SettingConfig() {
           toggleName="Always On Top"
           switchId="on-top"
           isChecked={onTop}
-          onChange={() => dispatch({ type: SET_ON_TOP })}
+          onChange={() =>
+            dispatch({
+              type: SET_ON_TOP,
+              payload: !onTop
+            })
+          }
         />
         <Toggle
           toggleName="Desktop Notification"
           switchId="desktop-notication"
           isChecked={notify}
-          onChange={() => dispatch({ type: SET_NOTIFY })}
+          onChange={() =>
+            dispatch({
+              type: SET_NOTIFY,
+              payload: !notify
+            })
+          }
         />
         <Toggle
           toggleName="Enable Dark Mode"
           switchId="darkmode"
           isChecked={darkMode}
-          onChange={() => dispatch({ type: SET_DARKMODE })}
+          onChange={() =>
+            dispatch({
+              type: SET_DARKMODE,
+              payload: !darkMode
+            })
+          }
         />
       </div>
 

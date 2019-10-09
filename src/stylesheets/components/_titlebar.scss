@@ -55,7 +55,7 @@
     &__icon {
       height: 0.2rem;
       max-width: 2rem;
-      background: $color-text;
+      background: $color-text-primary;
 
       &--1,
       &--2 {
@@ -109,7 +109,7 @@
   &__icon {
     width: 1.2rem;
     height: 1.2rem;
-    fill: $color-text;
+    fill: $color-text-primary;
   }
 }
 
@@ -125,6 +125,6 @@
   &__icon {
     width: 1.2rem;
     height: 1.2rem;
-    fill: $color-text;
+    fill: $color-text-primary;
   }
 }
