@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { animated, useSpring, config } from "react-spring";
-import { StoreContext, SHOW_SETTING } from "../../models";
+import { StoreContext } from "../../models";
 import { Nav, SettingConfig, TimerConfig } from "./elements";
 
 const { remote } = window.require("electron");
@@ -15,9 +15,7 @@ function Config({ showConfig }) {
     config: config.stiff
   });
 
-  const [{ onTop, showSetting }, dispatchSetting] = useContext(
-    StoreContext
-  ).setting;
+  const [{ onTop, showSetting }] = useContext(StoreContext).setting;
 
   useEffect(() => {
     remote.getCurrentWindow().setAlwaysOnTop(onTop);
@@ -37,15 +35,7 @@ function Config({ showConfig }) {
       </div>
 
       <div className="config__nav">
-        <Nav
-          showSetting={showSetting}
-          onClick={() =>
-            dispatchSetting({
-              type: SHOW_SETTING,
-              payload: !showSetting
-            })
-          }
-        />
+        <Nav />
       </div>
     </animated.div>
   );

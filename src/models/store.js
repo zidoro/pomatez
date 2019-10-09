@@ -18,18 +18,12 @@ const Provider = ({ children }) => {
   let store = JSON.parse(localStorage.getItem("store"));
 
   const nav = useReducer(navReducer, navState);
-  const timer = useReducer(
-    timerReducer,
-    store.timer ? store.timer : timerState
-  );
-  const config = useReducer(
-    configReducer,
-    store.config ? store.config : configState
-  );
+  const timer = useReducer(timerReducer, store ? store.timer : timerState);
+  const config = useReducer(configReducer, store ? store.config : configState);
   const control = useReducer(controlReducer, controlState);
   const setting = useReducer(
     settingReducer,
-    store.setting ? store.setting : settingState
+    store ? store.setting : settingState
   );
 
   localStorage.setItem(
