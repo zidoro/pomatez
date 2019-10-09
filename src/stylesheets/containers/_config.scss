@@ -42,7 +42,8 @@
   align-items: center;
 
   &__timer,
-  &__setting {
+  &__setting,
+  &__key {
     width: 50%;
     height: 100%;
 
@@ -64,6 +65,16 @@
 
     &--icon {
       width: 1.6rem;
+      height: 1.6rem;
+      fill: currentColor;
+
+      transition: all 0.3s;
+    }
+  }
+
+  &__key {
+    &--icon {
+      width: 2.4rem;
       height: 1.6rem;
       fill: currentColor;
 

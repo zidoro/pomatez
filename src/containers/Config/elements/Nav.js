@@ -1,26 +1,26 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { animated, useSpring, config } from "react-spring";
-import PropTypes from "prop-types";
+import { StoreContext, SHOW_SETTING } from "../../../models";
 
-Nav.propTypes = {
-  showSetting: PropTypes.bool
-};
+function Nav() {
+  const [{ showSetting }, dispatch] = useContext(StoreContext).setting;
 
-Nav.defaultProps = {
-  showSetting: false
-};
-
-function Nav({ showSetting, onClick }) {
   const { x } = useSpring({
     x: showSetting ? 50 : 0,
     config: config.stiff
   });
+
   return (
     <Fragment>
       <div className="nav">
         <div
           className={`nav__timer ${!showSetting && "active"}`}
-          onClick={onClick}
+          onClick={() =>
+            dispatch({
+              type: SHOW_SETTING,
+              payload: false
+            })
+          }
         >
           <svg className="nav__timer--icon">
             <use xlinkHref="#icon-timer" />
@@ -28,12 +28,26 @@ function Nav({ showSetting, onClick }) {
         </div>
         <div
           className={`nav__setting ${showSetting && "active"}`}
-          onClick={onClick}
+          onClick={() =>
+            dispatch({
+              type: SHOW_SETTING,
+              payload: true
+            })
+          }
         >
           <svg className="nav__setting--icon">
             <use xlinkHref="#icon-setting" />
           </svg>
         </div>
+
+        {/* <div
+          className={`nav__key ${showSetting && "active"}`}
+          onClick={onClick}
+        >
+          <svg className="nav__key--icon">
+            <use xlinkHref="#icon-keyboard" />
+          </svg>
+        </div> */}
       </div>
       <animated.div
         className="active-indicator"
