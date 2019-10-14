@@ -8,7 +8,7 @@ CountDown.propTypes = {
 
 CountDown.defaultProps = {
   counter: 0,
-  timerType: "Work"
+  // timerType: "Work"
 };
 
 function CountDown({ counter, timerType }) {

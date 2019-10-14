@@ -11,7 +11,7 @@
     margin: 0 2.4rem;
 
     display: grid;
-    grid-gap: 2rem;
+    grid-gap: 1.6rem;
     grid-template-columns: 6.5rem 1fr;
     align-items: center;
   }
@@ -21,10 +21,6 @@
   font-weight: 400;
   text-align: center;
   text-transform: uppercase;
-
-  &:hover {
-    color: $color-primary;
-  }
 }
 
 .action {
@@ -36,8 +32,8 @@
   &__reset,
   &__next,
   &__volume {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 3.6rem;
+    height: 3.6rem;
 
     border-radius: 50%;
     background: $bg-color-primary;
@@ -50,12 +46,14 @@
     transition: all 0.2s;
 
     &:hover {
-      box-shadow: 0 0.6rem 2rem $shadow-primary;
-      transform: translateY(-0.3rem);
+      background: $bg-color-secondary;
+      box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+      transform: translateY(-0.4rem);
     }
 
     &:active {
-      transform: translateY(-0.1rem);
+      transform: translateY(-0.2rem);
+      box-shadow: 0 0.2rem 0.4rem $shadow-primary;
     }
 
     & svg {
@@ -71,9 +69,9 @@
     width: 7.5rem;
     height: 7.5rem;
 
-    background: $bg-color-primary;
+    background: $bg-color-secondary;
     border-radius: 50%;
-    box-shadow: 0 0.1rem 0.6rem $shadow-primary;
+    box-shadow: 0 0.4rem 0.8rem $shadow-primary;
 
     display: inline-flex;
     align-items: center;
@@ -83,12 +81,15 @@
     transition: all 0.2s;
 
     &:hover {
-      box-shadow: 0 0.6rem 2rem $shadow-primary;
-      transform: translateY(-0.3rem);
+      background: $surface-16;
+      box-shadow: 0 0.8rem 1.6rem $shadow-primary;
+      transform: translateY(-0.4rem);
     }
 
     &:active {
-      transform: translateY(-0.1rem);
+      background: $bg-color-secondary;
+      transform: translateY(-0.2rem);
+      box-shadow: 0 0.4rem 0.8rem $shadow-primary;
     }
 
     & svg {
@@ -126,8 +127,8 @@
 .reset,
 .next,
 .volume {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 3.6rem;
+  height: 3.6rem;
 
   display: flex;
   align-items: center;

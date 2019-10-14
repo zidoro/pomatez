@@ -36,17 +36,18 @@ function Slider({
     track: {
       width: "100%",
       height: 8,
-      backgroundColor: "#eee",
-      boxShadow: "inset 0 .1rem .3rem #ddd"
+      backgroundColor: "#131d24",
+      boxShadow: "inset 0 .1rem .2rem #131d24"
     },
     active: {
-      backgroundColor: "#005B99"
+      backgroundColor: "#90caf9"
     },
     thumb: {
       width: 20,
       height: 12,
       borderRadius: 3,
-      boxShadow: "0 1px 6px hsla(204, 100%, 30%, 0.16)"
+      backgroundColor: "#2c363d",
+      boxShadow: "0 2px 4px #131d24"
     }
   };
 
