@@ -1,19 +1,25 @@
-import { SET_DURATION, SET_DASH_OFFSET, SET_COUNTER } from "../actions";
+import {
+  SET_DURATION,
+  SET_DASH_OFFSET,
+  SET_COUNTER,
+  SET_TIMER_TYPE
+} from "../actions";
 
 const timerState = {
+  timerType: "",
   duration: 0,
   counter: 0,
   dashOffset: 0,
-  finalDashOffset: 980,
-  timer: [
-    { name: "Work", time: 0 },
-    { name: "Short Break", time: 0 },
-    { name: "Long Break", time: 0 }
-  ]
+  finalDashOffset: 980
 };
 
 const timerReducer = (state, action) => {
   switch (action.type) {
+    case SET_TIMER_TYPE:
+      return {
+        ...state,
+        timerType: action.payload
+      };
     case SET_DURATION:
       return {
         ...state,
