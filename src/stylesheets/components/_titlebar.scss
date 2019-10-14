@@ -20,7 +20,7 @@
     justify-content: center;
     justify-self: center;
 
-    color: $color-primary;
+    color: $color-text-primary;
     font-weight: 400;
     user-select: none;
   }
@@ -103,7 +103,8 @@
 
 .minimize {
   &:hover {
-    background: $bg-color-tertiary;
+    // background: $bg-color-tertiary;
+    background: #3e4249;
   }
 
   &__icon {
@@ -118,9 +119,9 @@
     background: $color-error;
   }
 
-  &:hover &__icon {
-    fill: $bg-color-primary;
-  }
+  // &:hover &__icon {
+  //   // fill: $bg-color-primary;
+  // }
 
   &__icon {
     width: 1.2rem;

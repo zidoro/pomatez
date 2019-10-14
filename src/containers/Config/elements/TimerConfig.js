@@ -71,7 +71,10 @@ function TimerConfig() {
       <div className="config__button-wrapper">
         <button
           className="btn btn-restore"
-          onClick={() => dispatchConfig({ type: RESTORE_DEFAULT })}
+          onClick={() => {
+            dispatchConfig({ type: RESTORE_DEFAULT });
+            dispatchControl({ type: SET_RUNNING, payload: false });
+          }}
         >
           Restore Default
         </button>
