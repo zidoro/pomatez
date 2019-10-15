@@ -15,13 +15,11 @@ html {
 }
 
 body {
+  @include colored;
   font-size: 1.4rem;
   font-weight: 300;
   line-height: 1.7;
   letter-spacing: 0.04rem;
-
-  color: $color-text-primary;
-  background: $bg-color-primary;
 }
 
 button,
@@ -42,6 +40,6 @@ input {
 }
 
 ::selection {
-  color: $bg-color-primary;
+  color: set-color($color-primary);
   background: $color-primary;
 }

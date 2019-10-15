@@ -34,36 +34,48 @@ function TimerConfig() {
       <div className="config__sliders">
         <Slider
           timeType="Working Time"
-          maximumX={60}
-          valueX={workingTime}
-          onChange={({ x }) => {
-            dispatchConfig({ type: SET_WORK_TIME, payload: x });
+          max={60}
+          value={workingTime}
+          onChange={({ target }) => {
+            dispatchConfig({
+              type: SET_WORK_TIME,
+              payload: parseInt(target.value)
+            });
             dispatchControl({ type: SET_RUNNING, payload: false });
           }}
         />
         <Slider
           timeType="Short Break"
-          maximumX={60}
-          valueX={shortBreak}
-          onChange={({ x }) =>
-            dispatchConfig({ type: SET_SHORT_BREAK, payload: x })
+          max={60}
+          value={shortBreak}
+          onChange={({ target }) =>
+            dispatchConfig({
+              type: SET_SHORT_BREAK,
+              payload: parseInt(target.value)
+            })
           }
         />
         <Slider
           timeType="Long Break"
-          maximumX={60}
-          valueX={longBreak}
-          onChange={({ x }) =>
-            dispatchConfig({ type: SET_LONG_BREAK, payload: x })
+          max={60}
+          value={longBreak}
+          onChange={({ target }) =>
+            dispatchConfig({
+              type: SET_LONG_BREAK,
+              payload: parseInt(target.value)
+            })
           }
         />
         <Slider
           timeType="Session Rounds"
           rangeType="rounds"
-          maximumX={10}
-          valueX={sessionRounds}
-          onChange={({ x }) =>
-            dispatchConfig({ type: SET_SESSION_ROUNDS, payload: x })
+          max={10}
+          value={sessionRounds}
+          onChange={({ target }) =>
+            dispatchConfig({
+              type: SET_SESSION_ROUNDS,
+              payload: parseInt(target.value)
+            })
           }
         />
       </div>

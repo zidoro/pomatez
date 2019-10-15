@@ -1,3 +1,100 @@
+$track-w: 100%;
+$track-h: 0.8rem;
+$thumb-w: 2rem;
+$thumb-h: 1.2rem;
+$track-c: $surface-color-0;
+$filll-c: $color-primary;
+
+@mixin track($fill: 0) {
+  border: none;
+  border-radius: 10rem;
+  width: $track-w;
+  height: $track-h;
+  background: $track-c;
+
+  @if $fill == 1 {
+    .main & {
+      background: linear-gradient($filll-c, $filll-c)
+        0 /
+        var(--sx)
+        1000%
+        no-repeat
+        $track-c;
+    }
+  }
+}
+
+@mixin fill {
+  height: $track-h;
+  background: $filll-c;
+}
+
+@mixin thumb {
+  box-sizing: border-box;
+  border: none;
+  width: $thumb-w;
+  height: $thumb-h;
+  border-radius: 0.3rem;
+  background: set-surface-8($color-primary);
+  box-shadow: 0 0.2rem 0.8rem $shadow-primary;
+  margin-top: -0.2rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: set-surface-16($color-primary);
+    box-shadow: 0 0.4rem 1.6rem $shadow-primary;
+  }
+}
+
+input[type="range"] {
+  &,
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  --range: calc(var(--max) - var(--min));
+  --ratio: calc((var(--val) - var(--min)) / var(--range));
+  --sx: calc(0.5 * #{$thumb-w} + var(--ratio) * (100% - #{$thumb-w}));
+
+  margin: 0;
+  padding: 0;
+  width: $track-w;
+  height: $thumb-h;
+  background: transparent;
+
+  &::-webkit-slider-runnable-track {
+    @include track(1);
+  }
+  &::-moz-range-track {
+    @include track;
+  }
+  &::-ms-track {
+    @include track;
+  }
+
+  &::-moz-range-progress {
+    @include fill;
+  }
+  &::-ms-fill-lower {
+    @include fill;
+  }
+
+  &::-webkit-slider-thumb {
+    @include thumb;
+  }
+  &::-moz-range-thumb {
+    @include thumb;
+  }
+  &::-ms-thumb {
+    margin-top: 0;
+    @include thumb;
+  }
+
+  &::-ms-tooltip {
+    display: none;
+  }
+}
+
 .slider {
   width: 100%;
   height: max-content;
