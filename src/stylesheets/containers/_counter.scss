@@ -2,5 +2,5 @@
   position: absolute;
   width: max-content;
   height: max-content;
-  background: $bg-color-primary;
+  background: set-bg-color($color-primary);
 }

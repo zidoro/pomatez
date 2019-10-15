@@ -18,6 +18,6 @@
     padding: 0.4rem 0.8rem;
     border-radius: 0.3rem;
     border: 0.1rem solid $border-primary;
-    background: $bg-color-secondary;
+    background: set-key-bg-color($color-primary);
   }
 }

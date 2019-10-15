@@ -1,3 +1,58 @@
+@mixin text-color {
+  color: set-color($color-primary);
+}
+
+@mixin colored {
+  @include text-color;
+  background: set-bg-color($color-primary);
+}
+
+@mixin surface-2-color {
+  @include text-color;
+  background: set-surface-2($color-primary);
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-0.4rem);
+    background: set-surface-8($color-primary);
+    box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+  }
+
+  &:active {
+    transform: translateY(-0.2rem);
+    background: set-surface-2($color-primary);
+    box-shadow: 0 0.2rem 0.4rem $shadow-primary;
+  }
+}
+
+@mixin surface-8-color {
+  @include text-color;
+  background: set-surface-8($color-primary);
+  box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $color-primary;
+    transform: translateY(-0.4rem);
+    background: set-surface-16($color-primary);
+    box-shadow: 0 0.8rem 1.6rem $shadow-primary;
+  }
+
+  &:active {
+    transform: translateY(-0.2rem);
+    background: set-surface-8($color-primary);
+    box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+  }
+}
+
+@mixin minimize-hovered-bg-color {
+  background: set-minimize-hovered-bg-color($color-primary);
+}
+
+@mixin exit-hovered-fill-color {
+  fill: #fff;
+}
+
 @mixin absolute-center {
   position: absolute;
   top: 50%;
