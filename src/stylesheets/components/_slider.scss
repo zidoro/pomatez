@@ -2,7 +2,7 @@ $track-w: 100%;
 $track-h: 0.8rem;
 $thumb-w: 2rem;
 $thumb-h: 1.2rem;
-$track-c: $bg-color-tertiary;
+$track-c: $surface-color-0;
 $filll-c: $color-primary;
 
 @mixin track($fill: 0) {
@@ -35,13 +35,13 @@ $filll-c: $color-primary;
   width: $thumb-w;
   height: $thumb-h;
   border-radius: 0.3rem;
-  background: $bg-color-secondary;
+  background: set-surface-8($color-primary);
   box-shadow: 0 0.2rem 0.8rem $shadow-primary;
   margin-top: -0.2rem;
   transition: all 0.2s;
 
   &:hover {
-    background: $surface-16;
+    background: set-surface-16($color-primary);
     box-shadow: 0 0.4rem 1.6rem $shadow-primary;
   }
 }
@@ -108,5 +108,5 @@ input[type="range"] {
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }

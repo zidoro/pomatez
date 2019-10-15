@@ -7,7 +7,6 @@
   grid-template-columns: 10rem 1fr 10rem;
   align-items: center;
 
-  background: $bg-color-primary;
   -webkit-app-region: drag;
 
   &__menu {
@@ -20,7 +19,7 @@
     justify-content: center;
     justify-self: center;
 
-    color: $color-text-primary;
+    color: currentColor;
     font-weight: 400;
     user-select: none;
   }
@@ -55,7 +54,7 @@
     &__icon {
       height: 0.2rem;
       max-width: 2rem;
-      background: $color-text-primary;
+      background: currentColor;
 
       &--1,
       &--2 {
@@ -103,14 +102,13 @@
 
 .minimize {
   &:hover {
-    // background: $bg-color-tertiary;
-    background: $hovered-minimize-bg-color;
+    @include minimize-hovered-bg-color;
   }
 
   &__icon {
     width: 1.2rem;
     height: 1.2rem;
-    fill: $color-text-primary;
+    fill: currentColor;
   }
 }
 
@@ -120,13 +118,12 @@
   }
 
   &:hover &__icon {
-    // fill: $bg-color-primary;
-    fill: $hovered-exit-color;
+    @include exit-hovered-fill-color;
   }
 
   &__icon {
     width: 1.2rem;
     height: 1.2rem;
-    fill: $color-text-primary;
+    fill: currentColor;
   }
 }
