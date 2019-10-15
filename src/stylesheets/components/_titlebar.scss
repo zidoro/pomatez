@@ -104,7 +104,7 @@
 .minimize {
   &:hover {
     // background: $bg-color-tertiary;
-    background: #3e4249;
+    background: $hovered-minimize-bg-color;
   }
 
   &__icon {
@@ -119,9 +119,10 @@
     background: $color-error;
   }
 
-  // &:hover &__icon {
-  //   // fill: $bg-color-primary;
-  // }
+  &:hover &__icon {
+    // fill: $bg-color-primary;
+    fill: $hovered-exit-color;
+  }
 
   &__icon {
     width: 1.2rem;
