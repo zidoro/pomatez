@@ -5,8 +5,8 @@
 
   appearance: none;
   border-radius: 5rem;
-  background: $border-secondary;
-  box-shadow: inset 0 0 0.2rem $shadow-tertiary;
+  background: $surface-color-0;
+  box-shadow: inset 0 0 0.2rem $shadow-primary;
 
   transition: all 0.5s;
 
@@ -24,7 +24,7 @@
     left: 0;
 
     border-radius: 5rem;
-    background: $bg-color-secondary;
+    background: set-surface-16($color-primary);
     box-shadow: 0 0.2rem 0.4rem $shadow-primary;
     transform: scale(1.1);
     transition: all 0.3s;

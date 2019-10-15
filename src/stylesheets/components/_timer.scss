@@ -21,7 +21,7 @@
     fill: none;
 
     &#circle-base {
-      stroke: $border-secondary;
+      stroke: $surface-color-0;
       stroke-width: 0.8rem;
     }
 
@@ -38,15 +38,13 @@
 
 .countdown {
   width: max-content;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
   user-select: none;
+
+  @include absolute-center;
 
   display: grid;
   grid-row-gap: 2rem;
@@ -65,7 +63,7 @@
   &__heading {
     font-size: 2rem;
     font-weight: 500;
-    color: $color-text-secondary;
+    color: $body-text-color;
     letter-spacing: 0.4rem;
   }
 }

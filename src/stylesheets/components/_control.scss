@@ -36,25 +36,13 @@
     height: 3.6rem;
 
     border-radius: 50%;
-    background: $bg-color-primary;
 
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 
-    transition: all 0.2s;
-
-    &:hover {
-      background: $bg-color-secondary;
-      box-shadow: 0 0.4rem 0.8rem $shadow-primary;
-      transform: translateY(-0.4rem);
-    }
-
-    &:active {
-      transform: translateY(-0.2rem);
-      box-shadow: 0 0.2rem 0.4rem $shadow-primary;
-    }
+    @include surface-2-color;
 
     & svg {
       transition: all 0.3s;
@@ -69,28 +57,14 @@
     width: 7.5rem;
     height: 7.5rem;
 
-    background: $bg-color-secondary;
     border-radius: 50%;
-    box-shadow: 0 0.4rem 0.8rem $shadow-primary;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 
-    transition: all 0.2s;
-
-    &:hover {
-      background: $surface-16;
-      box-shadow: 0 0.8rem 1.6rem $shadow-primary;
-      transform: translateY(-0.4rem);
-    }
-
-    &:active {
-      background: $bg-color-secondary;
-      transform: translateY(-0.2rem);
-      box-shadow: 0 0.4rem 0.8rem $shadow-primary;
-    }
+    @include surface-8-color;
 
     & svg {
       transition: all 0.3s;
@@ -120,7 +94,7 @@
   &__pause-btn {
     width: 3.2rem;
     height: 3.2rem;
-    fill: $color-text-primary;
+    fill: currentColor;
   }
 }
 
@@ -141,5 +115,5 @@
 .volume__off {
   width: 2.4rem;
   height: 1.8rem;
-  fill: $color-text-primary;
+  fill: currentColor;
 }

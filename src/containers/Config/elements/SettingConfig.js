@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import { animated } from "react-spring";
-import { StoreContext, SET_ON_TOP, SET_NOTIFY } from "../../../models";
+import {
+  StoreContext,
+  SET_ON_TOP,
+  SET_NOTIFY,
+  SET_DARKMODE
+} from "../../../models";
 import { useAnimate } from "../../../hooks";
 
 import { Header, Toggle, Shortcut } from "../../../components";
@@ -8,7 +13,9 @@ import { Header, Toggle, Shortcut } from "../../../components";
 function SettingConfig() {
   const { o, x } = useAnimate({ axisX: 25 });
 
-  const [{ onTop, notify }, dispatch] = useContext(StoreContext).setting;
+  const [{ onTop, notify, darkMode }, dispatch] = useContext(
+    StoreContext
+  ).setting;
 
   return (
     <animated.div
@@ -47,7 +54,13 @@ function SettingConfig() {
         <Toggle
           toggleName="Enable Dark Mode"
           switchId="darkmode"
-          isChecked={true}
+          isChecked={darkMode}
+          onChange={() =>
+            dispatch({
+              type: SET_DARKMODE,
+              payload: !darkMode
+            })
+          }
         />
       </div>
 
