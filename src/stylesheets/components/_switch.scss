@@ -5,13 +5,18 @@
 
   appearance: none;
   border-radius: 5rem;
-  background: $surface-color-0;
-  box-shadow: inset 0 0 0.2rem $shadow-primary;
+
+  @include themed() {
+    background: t($surface-color-0);
+    box-shadow: inset 0 0 0.2rem t($shadow-primary);
+  }
 
   transition: all 0.5s;
 
   &:checked {
-    background: $color-primary;
+    @include themed() {
+      background: t($color-primary);
+    }
   }
 
   &::before {
@@ -23,10 +28,13 @@
     top: 0;
     left: 0;
 
-    border-radius: 5rem;
-    background: set-surface-16($color-primary);
-    box-shadow: 0 0.2rem 0.4rem $shadow-primary;
-    transform: scale(1.1);
+    @include themed() {
+      border-radius: 5rem;
+      background: t($surface-color-16);
+      box-shadow: 0 0.2rem 0.4rem t($shadow-primary);
+      transform: scale(1.1);
+    }
+
     transition: all 0.3s;
   }
 

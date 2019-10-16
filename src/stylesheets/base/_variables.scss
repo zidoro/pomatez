@@ -1,31 +1,33 @@
-$color-primary: #2196f3;
-$color-error: #e81123;
+// Light Theme Variables
+$color-primary--light: #005b99;
+$color-error--light: #e81123;
 
-$heading-text-color: #212121;
-$body-text-color: #666666;
-$disabled-text-color: #9e9e9e;
+$heading-text-color--light: #212121;
+$body-text-color--light: #666666;
+$disabled-text-color--light: #9e9e9e;
 
-$surface-color-0: #d7dbde;
-$surface-color-2: #e0e4e7;
-$surface-color-8: #f0f4f7;
-$surface-color-16: #ffffff;
+$surface-color-0--light: #d7dbde;
+$surface-color-2--light: #e0e4e7;
+$surface-color-8--light: #f0f4f7;
+$surface-color-16--light: #ffffff;
 
-$border-primary: $surface-color-8;
+$border-primary--light: $surface-color-8--light;
 
-$shadow-primary: rgba($heading-text-color, 0.16);
+$shadow-primary--light: rgba($heading-text-color--light, 0.2);
 
-// $color-primary: #90caf9;
-// $color-error: #e81123;
+// Dark Theme Variables
+$color-primary--dark: #90caf9;
+$color-error--dark: #e81123;
 
-// $heading-text-color: #e0e1e2;
-// $body-text-color: #a0a4a7;
-// $disabled-text-color: #6d7277;
+$heading-text-color--dark: #e0e1e2;
+$body-text-color--dark: #a0a4a7;
+$disabled-text-color--dark: #6d7277;
 
-// $surface-color-0: #131d24;
-// $surface-color-2: #222c33;
-// $surface-color-8: #2c363d;
-// $surface-color-16: #343e45;
+$surface-color-0--dark: #131d24;
+$surface-color-2--dark: #222c33;
+$surface-color-8--dark: #2c363d;
+$surface-color-16--dark: #343e45;
 
-// $border-primary: $surface-color-8;
+$border-primary--dark: $surface-color-8--dark;
 
-// $shadow-primary: #131d24;
+$shadow-primary--dark: #131d24;
