@@ -49,7 +49,9 @@
     }
 
     &:hover svg {
-      fill: $color-primary;
+      @include themed() {
+        fill: t($color-primary);
+      }
     }
   }
 
@@ -71,7 +73,9 @@
     }
 
     &:hover svg {
-      fill: $color-primary;
+      @include themed() {
+        fill: t($color-primary);
+      }
     }
   }
 

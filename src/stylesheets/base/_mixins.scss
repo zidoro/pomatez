@@ -1,52 +1,102 @@
 @mixin text-color {
-  color: set-color($color-primary);
+  @include themed() {
+    color: set-color(
+      t($color-primary),
+      t($heading-text-color),
+      t($body-text-color)
+    );
+  }
+}
+
+@mixin bg-color {
+  @include themed() {
+    background: set-color(
+      t($color-primary),
+      t($surface-color-2),
+      t($surface-color-16)
+    );
+  }
 }
 
 @mixin colored {
   @include text-color;
-  background: set-bg-color($color-primary);
+  @include bg-color;
 }
 
 @mixin surface-2-color {
   @include text-color;
-  background: set-surface-2($color-primary);
+  @include themed() {
+    background: set-color(
+      t($color-primary),
+      t($surface-color-2),
+      t($surface-color-16)
+    );
+  }
   transition: all 0.2s;
 
   &:hover {
     transform: translateY(-0.4rem);
-    background: set-surface-8($color-primary);
-    box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+    @include themed() {
+      background: set-color(
+        t($color-primary),
+        t($surface-color-8),
+        t($surface-color-16)
+      );
+      box-shadow: 0 0.4rem 0.8rem t($shadow-primary);
+    }
   }
 
   &:active {
     transform: translateY(-0.2rem);
-    background: set-surface-2($color-primary);
-    box-shadow: 0 0.2rem 0.4rem $shadow-primary;
+    @include themed() {
+      background: set-color(
+        t($color-primary),
+        t($surface-color-2),
+        t($surface-color-16)
+      );
+      box-shadow: 0 0.2rem 0.4rem t($shadow-primary);
+    }
   }
 }
 
 @mixin surface-8-color {
   @include text-color;
-  background: set-surface-8($color-primary);
-  box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+  @include themed() {
+    background: set-color(
+      t($color-primary),
+      t($surface-color-8),
+      t($surface-color-16)
+    );
+    box-shadow: 0 0.4rem 0.8rem t($shadow-primary);
+  }
   transition: all 0.2s;
 
   &:hover {
-    color: $color-primary;
-    transform: translateY(-0.4rem);
-    background: set-surface-16($color-primary);
-    box-shadow: 0 0.8rem 1.6rem $shadow-primary;
+    @include themed() {
+      color: t($color-primary);
+      transform: translateY(-0.4rem);
+      background: t($surface-color-16);
+      box-shadow: 0 0.8rem 1.6rem t($shadow-primary);
+    }
   }
 
   &:active {
-    transform: translateY(-0.2rem);
-    background: set-surface-8($color-primary);
-    box-shadow: 0 0.4rem 0.8rem $shadow-primary;
+    @include themed() {
+      transform: translateY(-0.2rem);
+      background: set-color(
+        t($color-primary),
+        t($surface-color-8),
+        t($surface-color-16)
+      );
+      box-shadow: 0 0.4rem 0.8rem t($shadow-primary);
+    }
   }
 }
 
 @mixin minimize-hovered-bg-color {
-  background: set-minimize-hovered-bg-color($color-primary);
+  @include themed() {
+    background: set-minimize-hovered-bg-color(t($color-primary));
+  }
 }
 
 @mixin exit-hovered-fill-color {

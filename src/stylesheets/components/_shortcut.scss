@@ -6,7 +6,10 @@
   align-items: center;
   justify-content: space-between;
   border-top: 0.1rem solid transparent;
-  border-bottom: 0.1rem solid $border-primary;
+
+  @include themed() {
+    border-bottom: 0.1rem solid t($border-primary);
+  }
 
   &__name,
   &__key {
@@ -14,10 +17,12 @@
   }
 
   &__key {
-    color: $color-primary;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.3rem;
-    border: 0.1rem solid $border-primary;
-    background: set-key-bg-color($color-primary);
+    @include themed() {
+      color: t($color-primary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.3rem;
+      border: 0.1rem solid t($border-primary);
+      background: t($surface-color-8);
+    }
   }
 }

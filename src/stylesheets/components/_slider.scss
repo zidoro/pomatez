@@ -2,31 +2,31 @@ $track-w: 100%;
 $track-h: 0.8rem;
 $thumb-w: 2rem;
 $thumb-h: 1.2rem;
-$track-c: $surface-color-0;
-$filll-c: $color-primary;
 
 @mixin track($fill: 0) {
   border: none;
   border-radius: 10rem;
   width: $track-w;
   height: $track-h;
-  background: $track-c;
+
+  @include themed() {
+    background: t($surface-color-0);
+  }
 
   @if $fill == 1 {
-    .main & {
-      background: linear-gradient($filll-c, $filll-c)
-        0 /
-        var(--sx)
-        1000%
-        no-repeat
-        $track-c;
+    @include themed() {
+      background: linear-gradient(t($color-primary), t($color-primary)) 0 /
+        var(--sx) 1000% no-repeat t($surface-color-0);
     }
   }
 }
 
 @mixin fill {
   height: $track-h;
-  background: $filll-c;
+
+  @include themed() {
+    background: t($color-primary);
+  }
 }
 
 @mixin thumb {
@@ -35,14 +35,28 @@ $filll-c: $color-primary;
   width: $thumb-w;
   height: $thumb-h;
   border-radius: 0.3rem;
-  background: set-surface-8($color-primary);
-  box-shadow: 0 0.2rem 0.8rem $shadow-primary;
+
+  @include themed() {
+    background: set-color(
+      t($color-primary),
+      t($surface-color-8),
+      t($surface-color-16)
+    );
+    box-shadow: 0 0.2rem 0.8rem t($shadow-primary);
+  }
+
   margin-top: -0.2rem;
   transition: all 0.2s;
 
   &:hover {
-    background: set-surface-16($color-primary);
-    box-shadow: 0 0.4rem 1.6rem $shadow-primary;
+    @include themed() {
+      background: set-color(
+        t($color-primary),
+        t($surface-color-16),
+        t($surface-color-16)
+      );
+      box-shadow: 0 0.4rem 1.6rem t($shadow-primary);
+    }
   }
 }
 

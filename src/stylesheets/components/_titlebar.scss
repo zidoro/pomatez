@@ -43,7 +43,9 @@
   &:hover {
     .menu-box {
       &__icon {
-        background: $color-primary;
+        @include themed() {
+          background: t($color-primary);
+        }
       }
     }
   }
@@ -114,7 +116,9 @@
 
 .exit {
   &:hover {
-    background: $color-error;
+    @include themed() {
+      background: t($color-error);
+    }
   }
 
   &:hover &__icon {
