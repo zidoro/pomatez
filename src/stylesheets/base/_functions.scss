@@ -1,41 +1,9 @@
 // Set Text Color
-@function set-color($color) {
+@function set-color($color, $dark, $light) {
   @if (lightness($color) > 60) {
-    @return $heading-text-color;
+    @return $dark;
   } @else {
-    @return $body-text-color;
-  }
-}
-
-@function set-bg-color($color) {
-  @if (lightness($color) > 60) {
-    @return $surface-color-2;
-  } @else {
-    @return $surface-color-16;
-  }
-}
-
-@function set-surface-2($color) {
-  @if (lightness($color) > 60) {
-    @return $surface-color-2;
-  } @else {
-    @return $surface-color-16;
-  }
-}
-
-@function set-surface-8($color) {
-  @if (lightness($color) > 60) {
-    @return $surface-color-8;
-  } @else {
-    @return $surface-color-16;
-  }
-}
-
-@function set-surface-16($color) {
-  @if (lightness($color) > 60) {
-    @return $surface-color-16;
-  } @else {
-    @return $surface-color-16;
+    @return $light;
   }
 }
 
@@ -44,21 +12,5 @@
     @return rgba(255, 255, 255, 0.1);
   } @else {
     @return rgba(0, 0, 0, 0.1);
-  }
-}
-
-@function set-minimize-hovered-bg-color($color) {
-  @if (lightness($color) > 60) {
-    @return rgba(255, 255, 255, 0.1);
-  } @else {
-    @return rgba(0, 0, 0, 0.1);
-  }
-}
-
-@function set-key-bg-color($color) {
-  @if (lightness($color) > 60) {
-    @return $surface-color-8;
-  } @else {
-    @return #f8f8f8;
   }
 }

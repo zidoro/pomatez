@@ -2,5 +2,11 @@
   position: absolute;
   width: max-content;
   height: max-content;
-  background: set-bg-color($color-primary);
+  @include themed() {
+    background: set-color(
+      t($color-primary),
+      t($surface-color-2),
+      t($surface-color-16)
+    );
+  }
 }

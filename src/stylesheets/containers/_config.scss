@@ -2,11 +2,18 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  background: set-bg-color($color-primary);
-  z-index: 10;
+
+  @include themed() {
+    background: set-color(
+      t($color-primary),
+      t($surface-color-2),
+      t($surface-color-16)
+    );
+  }
 
   display: grid;
   grid-template-rows: 53.3rem 1fr;
+  z-index: 10;
 
   &__body {
     padding: 0 3.2rem;
@@ -55,12 +62,16 @@
 
     &.active {
       svg {
-        color: $color-primary;
+        @include themed() {
+          color: t($color-primary);
+        }
       }
     }
 
     &:hover &--icon {
-      color: $color-primary;
+      @include themed() {
+        color: t($color-primary);
+      }
     }
 
     &--icon {
@@ -87,16 +98,20 @@
   width: 50%;
   height: 1rem;
 
-  background: $color-primary;
-  border-radius: 0.3rem;
-
   position: absolute;
   bottom: -0.6rem;
+  border-radius: 0.3rem;
+
+  @include themed() {
+    background: t($color-primary);
+  }
 }
 
 .section-header {
-  color: $body-text-color;
   font-size: 1.2rem;
+  @include themed() {
+    color: t($body-text-color);
+  }
 }
 
 .keyboard {

@@ -21,13 +21,17 @@
     fill: none;
 
     &#circle-base {
-      stroke: $surface-color-0;
-      stroke-width: 0.8rem;
+      @include themed() {
+        stroke-width: 0.8rem;
+        stroke: t($surface-color-0);
+      }
     }
 
     &#circle-counter {
+      @include themed() {
+        stroke: t($color-primary);
+      }
       stroke-width: 0.4rem;
-      stroke: $color-primary;
       stroke-dasharray: 98rem;
       stroke-dashoffset: 0;
       stroke-linecap: round;
@@ -53,7 +57,9 @@
     display: flex;
     justify-content: center;
     font-size: 6.4rem;
-    color: $color-primary;
+    @include themed() {
+      color: t($color-primary);
+    }
 
     span {
       margin: 0 0.8rem;
@@ -63,7 +69,9 @@
   &__heading {
     font-size: 2rem;
     font-weight: 500;
-    color: $body-text-color;
     letter-spacing: 0.4rem;
+    @include themed() {
+      color: t($body-text-color);
+    }
   }
 }
