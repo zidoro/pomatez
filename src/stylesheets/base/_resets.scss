@@ -40,6 +40,8 @@ input {
 }
 
 ::selection {
-  color: set-color($color-primary);
-  background: $color-primary;
+  @include themed() {
+    color: t($heading-text-color);
+    background: t($color-primary);
+  }
 }
