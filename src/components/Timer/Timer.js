@@ -115,7 +115,7 @@ function Timer() {
 
                 setNotification(
                   "Session Rounds Completed",
-                  "It's your time to take a long break now"
+                  "It's time to take long break now"
                 );
               }
               break;
@@ -138,7 +138,7 @@ function Timer() {
 
               setNotification(
                 "Short Break Finished",
-                "It's your time to work again"
+                "It's time to focus and work again"
               );
               break;
 
@@ -160,7 +160,7 @@ function Timer() {
 
               setNotification(
                 "Long Break Finished",
-                "It's your time to go back to work"
+                "It's time to go back to work"
               );
               break;
             default:

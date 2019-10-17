@@ -58,17 +58,10 @@
     align-items: center;
     justify-content: center;
 
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 
+    &:hover,
     &.active {
-      svg {
-        @include themed() {
-          color: t($color-primary);
-        }
-      }
-    }
-
-    &:hover &--icon {
       @include themed() {
         color: t($color-primary);
       }
@@ -78,8 +71,6 @@
       width: 1.6rem;
       height: 1.6rem;
       fill: currentColor;
-
-      transition: all 0.3s;
     }
   }
 
@@ -88,8 +79,6 @@
       width: 2.4rem;
       height: 1.6rem;
       fill: currentColor;
-
-      transition: all 0.3s;
     }
   }
 }

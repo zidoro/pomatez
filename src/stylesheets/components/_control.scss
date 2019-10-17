@@ -44,28 +44,24 @@
 
     @include surface-2-color;
 
-    & svg {
-      transition: all 0.3s;
-    }
-
-    &:hover svg {
+    &:hover {
       @include themed() {
-        fill: t($color-primary);
+        color: t($color-primary);
       }
     }
 
     &.short-break {
-      &:hover svg {
+      &:hover {
         @include themed() {
-          fill: t($color-secondary);
+          color: t($color-secondary);
         }
       }
     }
 
     &.long-break {
-      &:hover svg {
+      &:hover {
         @include themed() {
-          fill: t($color-tertiary);
+          color: t($color-tertiary);
         }
       }
     }
@@ -84,28 +80,24 @@
 
     @include surface-8-color;
 
-    & svg {
-      transition: all 0.3s;
-    }
-
-    &:hover svg {
+    &:hover {
       @include themed() {
-        fill: t($color-primary);
+        color: t($color-primary);
       }
     }
 
     &.short-break {
-      &:hover svg {
+      &:hover {
         @include themed() {
-          fill: t($color-secondary);
+          color: t($color-secondary);
         }
       }
     }
 
     &.long-break {
-      &:hover svg {
+      &:hover {
         @include themed() {
-          fill: t($color-tertiary);
+          color: t($color-tertiary);
         }
       }
     }

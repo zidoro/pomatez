@@ -7,11 +7,17 @@
   grid-template-columns: 10rem 1fr 10rem;
   align-items: center;
 
-  -webkit-app-region: drag;
+  @include bg-color;
 
-  &__menu {
+  -webkit-app-region: drag;
+  cursor: pointer;
+
+  &__option {
     justify-self: start;
     max-height: 3.2rem;
+
+    display: flex;
+    align-items: center;
   }
 
   &__title {
@@ -60,7 +66,15 @@
     &__icon {
       height: 0.2rem;
       max-width: 2rem;
-      background: currentColor;
+      border-radius: 10rem;
+
+      @include themed() {
+        background: set-color(
+          t($color-primary),
+          t($heading-text-color),
+          t($body-text-color)
+        );
+      }
 
       &--1,
       &--2 {
@@ -92,6 +106,46 @@
         }
       }
     }
+  }
+}
+
+.mode {
+  width: 4rem;
+  height: 3.2rem;
+  margin-left: 0.1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+
+  @include themed() {
+    color: set-color(
+      t($color-primary),
+      t($heading-text-color),
+      t($body-text-color)
+    );
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: set-color(
+        t($color-primary),
+        t($heading-text-color),
+        t($body-text-color)
+      );
+      background: set-hover-bg-color(
+        t($color-primary),
+        rgba(t($heading-text-color), 0.1),
+        rgba(t($heading-text-color), 0.1)
+      );
+    }
+  }
+
+  &__icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: currentColor;
+    margin-top: 0.2rem;
   }
 }
 
