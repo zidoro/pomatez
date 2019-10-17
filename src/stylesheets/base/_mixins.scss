@@ -32,7 +32,7 @@
       t($surface-color-16)
     );
   }
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 
   &:hover {
     transform: translateY(-0.4rem);
@@ -69,11 +69,10 @@
     );
     box-shadow: 0 0.4rem 0.8rem t($shadow-primary);
   }
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 
   &:hover {
     @include themed() {
-      color: t($color-primary);
       transform: translateY(-0.4rem);
       background: t($surface-color-16);
       box-shadow: 0 0.8rem 1.6rem t($shadow-primary);
@@ -91,16 +90,6 @@
       box-shadow: 0 0.4rem 0.8rem t($shadow-primary);
     }
   }
-}
-
-@mixin minimize-hovered-bg-color {
-  @include themed() {
-    background: set-minimize-hovered-bg-color(t($color-primary));
-  }
-}
-
-@mixin exit-hovered-fill-color {
-  fill: #fff;
 }
 
 @mixin absolute-center {

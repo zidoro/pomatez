@@ -41,7 +41,7 @@ input {
 
 ::selection {
   @include themed() {
-    color: t($heading-text-color);
+    color: set-color(t($color-primary), t($heading-text-color), #fff);
     background: t($color-primary);
   }
 }

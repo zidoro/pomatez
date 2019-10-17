@@ -11,7 +11,7 @@
     box-shadow: inset 0 0 0.2rem t($shadow-primary);
   }
 
-  transition: all 0.5s;
+  transition: all 0.5s ease;
 
   &:checked {
     @include themed() {
@@ -35,7 +35,7 @@
       transform: scale(1.1);
     }
 
-    transition: all 0.3s;
+    transition: all 0.3s ease;
   }
 
   &:checked::before {

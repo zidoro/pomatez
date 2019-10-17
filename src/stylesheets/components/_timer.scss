@@ -36,6 +36,18 @@
       stroke-dashoffset: 0;
       stroke-linecap: round;
       transition: stroke-dashoffset 1s linear;
+
+      &.short-break {
+        @include themed() {
+          stroke: t($color-secondary);
+        }
+      }
+
+      &.long-break {
+        @include themed() {
+          stroke: t($color-tertiary);
+        }
+      }
     }
   }
 }
@@ -59,6 +71,18 @@
     font-size: 6.4rem;
     @include themed() {
       color: t($color-primary);
+    }
+
+    &.short-break {
+      @include themed() {
+        color: t($color-secondary);
+      }
+    }
+
+    &.long-break {
+      @include themed() {
+        color: t($color-tertiary);
+      }
     }
 
     span {

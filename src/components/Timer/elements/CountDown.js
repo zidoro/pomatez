@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { addClass } from "../../_helpers";
 
 CountDown.propTypes = {
   counter: PropTypes.number,
-  timerType: PropTypes.string
+  timerType: PropTypes.string.isRequired
 };
 
 CountDown.defaultProps = {
-  counter: 0,
-  // timerType: "Work"
+  counter: 0
 };
 
 function CountDown({ counter, timerType }) {
@@ -19,7 +19,7 @@ function CountDown({ counter, timerType }) {
   const setPad = num => (num < 10 ? "0" : "") + num;
   return (
     <div className="countdown">
-      <div className="countdown__timer">
+      <div className={`countdown__timer ${addClass(timerType)}`}>
         {setPad(mins)} <span>:</span> {setPad(secs)}
       </div>
       <div className="countdown__heading">{timerType}</div>

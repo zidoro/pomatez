@@ -4,5 +4,11 @@
   text-transform: capitalize;
   padding: 0.8rem 1.6rem;
   border-radius: 0.5rem;
+
+  &:hover {
+    @include themed() {
+      color: t($color-primary);
+    }
+  }
   @include surface-8-color;
 }

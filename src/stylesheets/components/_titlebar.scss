@@ -7,11 +7,17 @@
   grid-template-columns: 10rem 1fr 10rem;
   align-items: center;
 
-  -webkit-app-region: drag;
+  @include bg-color;
 
-  &__menu {
+  -webkit-app-region: drag;
+  cursor: pointer;
+
+  &__option {
     justify-self: start;
     max-height: 3.2rem;
+
+    display: flex;
+    align-items: center;
   }
 
   &__title {
@@ -35,18 +41,22 @@
 }
 
 .menu {
-  width: 5.2rem;
+  width: 5rem;
   height: 3.2rem;
   position: relative;
   -webkit-app-region: no-drag;
 
-  &:hover {
-    .menu-box {
-      &__icon {
-        @include themed() {
-          background: t($color-primary);
-        }
-      }
+  border-radius: 0 0 0.3rem 0;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &.active {
+    @include themed() {
+      background: set-hover-bg-color(
+        t($color-primary),
+        rgba(t($heading-text-color), 0.1),
+        rgba(t($heading-text-color), 0.1)
+      );
     }
   }
 
@@ -56,11 +66,19 @@
     &__icon {
       height: 0.2rem;
       max-width: 2rem;
-      background: currentColor;
+      border-radius: 10rem;
+
+      @include themed() {
+        background: set-color(
+          t($color-primary),
+          t($heading-text-color),
+          t($body-text-color)
+        );
+      }
 
       &--1,
       &--2 {
-        transition: all 0.3s;
+        transition: all 0.3s ease-out;
       }
 
       &--1 {
@@ -68,6 +86,7 @@
 
         &.active {
           width: 1rem;
+          margin-top: -0.5rem;
 
           transform-origin: right;
           transform: rotate(-45deg);
@@ -90,6 +109,46 @@
   }
 }
 
+.mode {
+  width: 4rem;
+  height: 3.2rem;
+  margin-left: 0.1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: no-drag;
+
+  @include themed() {
+    color: set-color(
+      t($color-primary),
+      t($heading-text-color),
+      t($body-text-color)
+    );
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: set-color(
+        t($color-primary),
+        t($heading-text-color),
+        t($body-text-color)
+      );
+      background: set-hover-bg-color(
+        t($color-primary),
+        rgba(t($heading-text-color), 0.1),
+        rgba(t($heading-text-color), 0.1)
+      );
+    }
+  }
+
+  &__icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: currentColor;
+    margin-top: 0.2rem;
+  }
+}
+
 .minimize,
 .exit {
   width: 4.6rem;
@@ -104,7 +163,13 @@
 
 .minimize {
   &:hover {
-    @include minimize-hovered-bg-color;
+    @include themed() {
+      background: set-hover-bg-color(
+        t($color-primary),
+        rgba(t($heading-text-color), 0.16),
+        rgba(t($heading-text-color), 0.16)
+      );
+    }
   }
 
   &__icon {
@@ -117,12 +182,13 @@
 .exit {
   &:hover {
     @include themed() {
+      color: #fff;
       background: t($color-error);
     }
   }
 
   &:hover &__icon {
-    @include exit-hovered-fill-color;
+    fill: currentColor;
   }
 
   &__icon {

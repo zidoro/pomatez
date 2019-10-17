@@ -6,13 +6,16 @@ import {
   SET_COUNTER
 } from "../../models";
 import { Next, Play, Reset, Volume } from "./elements";
+import { addClass } from "../_helpers";
 
 function Control() {
   const [{ running, silent }, dispatchControl] = useContext(
     StoreContext
   ).control;
 
-  const [{ duration }, dispatchTimer] = useContext(StoreContext).timer;
+  const [{ duration, round, timerType }, dispatchTimer] = useContext(
+    StoreContext
+  ).timer;
 
   const [{ sessionRounds }] = useContext(StoreContext).config;
 
@@ -20,13 +23,16 @@ function Control() {
     <div className="control">
       <div className="control__box">
         <div className="session">
-          <p className="session__count">1 / {sessionRounds}</p>
-          <p className="session__name">Sessions</p>
+          <p className="session__count">
+            {round} / {sessionRounds}
+          </p>
+          <p className="session__name">Session</p>
         </div>
 
         <div className="action">
-          <div className="action__reset">
+          <div className={`action__reset ${addClass(timerType)}`}>
             <Reset
+              timerType={timerType}
               onClick={() => {
                 dispatchTimer({
                   type: SET_COUNTER,
@@ -40,8 +46,9 @@ function Control() {
             />
           </div>
 
-          <div className="action__play">
+          <div className={`action__play ${addClass(timerType)}`}>
             <Play
+              timerType={timerType}
               running={running}
               onClick={() =>
                 dispatchControl({
@@ -53,12 +60,13 @@ function Control() {
           </div>
 
           <div className="action__right">
-            <div className="action__next">
-              <Next />
+            <div className={`action__next ${addClass(timerType)}`}>
+              <Next timerType={timerType} />
             </div>
 
-            <div className="action__volume">
+            <div className={`action__volume ${addClass(timerType)}`}>
               <Volume
+                timerType={timerType}
                 silent={silent}
                 onClick={() =>
                   dispatchControl({

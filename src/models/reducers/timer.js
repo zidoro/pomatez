@@ -2,11 +2,13 @@ import {
   SET_DURATION,
   SET_DASH_OFFSET,
   SET_COUNTER,
-  SET_TIMER_TYPE
+  SET_TIMER_TYPE,
+  SET_ROUND
 } from "../actions";
 
 const timerState = {
-  timerType: "",
+  round: 1,
+  timerType: "WORK",
   duration: 0,
   counter: 0,
   dashOffset: 0,
@@ -34,6 +36,11 @@ const timerReducer = (state, action) => {
       return {
         ...state,
         dashOffset: action.payload
+      };
+    case SET_ROUND:
+      return {
+        ...state,
+        round: action.payload
       };
     default:
       return state;

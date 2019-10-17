@@ -44,13 +44,25 @@
 
     @include surface-2-color;
 
-    & svg {
-      transition: all 0.3s;
+    &:hover {
+      @include themed() {
+        color: t($color-primary);
+      }
     }
 
-    &:hover svg {
-      @include themed() {
-        fill: t($color-primary);
+    &.short-break {
+      &:hover {
+        @include themed() {
+          color: t($color-secondary);
+        }
+      }
+    }
+
+    &.long-break {
+      &:hover {
+        @include themed() {
+          color: t($color-tertiary);
+        }
       }
     }
   }
@@ -68,13 +80,25 @@
 
     @include surface-8-color;
 
-    & svg {
-      transition: all 0.3s;
+    &:hover {
+      @include themed() {
+        color: t($color-primary);
+      }
     }
 
-    &:hover svg {
-      @include themed() {
-        fill: t($color-primary);
+    &.short-break {
+      &:hover {
+        @include themed() {
+          color: t($color-secondary);
+        }
+      }
+    }
+
+    &.long-break {
+      &:hover {
+        @include themed() {
+          color: t($color-tertiary);
+        }
       }
     }
   }
@@ -94,6 +118,28 @@
   align-items: center;
   justify-content: center;
 
+  & + s {
+    @include themed() {
+      background: rgba(t($color-primary), 0.16) !important;
+    }
+  }
+
+  &.short-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-secondary), 0.16) !important;
+      }
+    }
+  }
+
+  &.long-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-tertiary), 0.16) !important;
+      }
+    }
+  }
+
   &__play-btn,
   &__pause-btn {
     width: 3.2rem;
@@ -111,6 +157,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  & + s {
+    @include themed() {
+      background: rgba(t($color-primary), 0.16) !important;
+    }
+  }
+
+  &.short-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-secondary), 0.16) !important;
+      }
+    }
+  }
+
+  &.long-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-tertiary), 0.16) !important;
+      }
+    }
+  }
 }
 
 .reset__icon,
