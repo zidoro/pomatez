@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Ripple from "../../Ripple";
+import { addClass } from "../../_helpers";
 
 Next.propTypes = {
+  timerType: PropTypes.string.isRequired,
   onClick: PropTypes.func
 };
 
-function Next({ onClick }) {
+function Next({ timerType, onClick }) {
   return (
     <Ripple>
-      <div className="next" onClick={onClick}>
+      <div className={`next ${addClass(timerType)}`} onClick={onClick}>
         <svg className="next__icon">
           <use xlinkHref="#icon-next" />
         </svg>

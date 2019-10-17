@@ -18,7 +18,7 @@ const Provider = ({ children }) => {
   let store = JSON.parse(localStorage.getItem("store"));
 
   const nav = useReducer(navReducer, navState);
-  const timer = useReducer(timerReducer, store ? store.timer : timerState);
+  const timer = useReducer(timerReducer, timerState);
   const config = useReducer(configReducer, store ? store.config : configState);
   const control = useReducer(controlReducer, controlState);
   const setting = useReducer(
@@ -29,7 +29,6 @@ const Provider = ({ children }) => {
   localStorage.setItem(
     "store",
     JSON.stringify({
-      timer: timer[0],
       config: config[0],
       control: control[0],
       setting: setting[0]

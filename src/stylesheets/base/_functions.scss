@@ -7,10 +7,10 @@
   }
 }
 
-@function set-minimize-hovered-bg-color($color) {
-  @if (lightness($color) > 60) {
-    @return rgba(255, 255, 255, 0.1);
-  } @else {
-    @return rgba(0, 0, 0, 0.1);
-  }
+@function set-hover-bg-color(
+  $color,
+  $dark: rgba(255, 255, 255, 0.1),
+  $light: rgba(0, 0, 0, 0.1)
+) {
+  @return if(lightness($color) > 65, $dark, $light);
 }

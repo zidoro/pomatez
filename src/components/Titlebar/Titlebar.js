@@ -1,16 +1,27 @@
 import React, { useContext } from "react";
-import { StoreContext, SHOW_CONFIG } from "../../models";
-import { Exit, Menu, Minimize } from "./elements";
+import { StoreContext, SHOW_CONFIG, SET_DARKMODE } from "../../models";
+import { Exit, Menu, Minimize, Mode } from "./elements";
 
 function Titlebar() {
-  const [{ title, showConfig }, dispatch] = useContext(StoreContext).nav;
+  const [{ title, showConfig }, dispatchNav] = useContext(StoreContext).nav;
+
+  const [{ darkMode }, dispatchSetting] = useContext(StoreContext).setting;
 
   return (
     <div className="titlebar">
-      <div className="titlebar__menu">
+      <div className="titlebar__option">
         <Menu
           showConfig={showConfig}
-          onClick={() => dispatch({ type: SHOW_CONFIG })}
+          onClick={() => dispatchNav({ type: SHOW_CONFIG })}
+        />
+        <Mode
+          darkMode={darkMode}
+          onClick={() =>
+            dispatchSetting({
+              type: SET_DARKMODE,
+              payload: !darkMode
+            })
+          }
         />
       </div>
 

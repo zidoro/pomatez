@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { addClass } from "../../_helpers";
 
 Progress.propTypes = {
-  dashOffset: PropTypes.number
+  dashOffset: PropTypes.number,
+  timerType: PropTypes.string.isRequired,
+  darkMode: PropTypes.bool.isRequired
 };
 
 Progress.defaultProps = {
   dashOffset: 0
 };
 
-function Progress({ dashOffset }) {
+function Progress({ dashOffset, timerType }) {
   return (
     <svg className="progress">
       <defs>
@@ -29,7 +32,7 @@ function Progress({ dashOffset }) {
         filter="url(#inset-shadow)"
       />
       <circle
-        className="progress__circle"
+        className={`progress__circle ${addClass(timerType)}`}
         id="circle-counter"
         cx="160"
         cy="160"

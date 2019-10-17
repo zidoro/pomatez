@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Ripple from "../../Ripple";
+import { addClass } from "../../_helpers";
 
 Play.propTypes = {
   running: PropTypes.bool,
+  timerType: PropTypes.string.isRequired,
   onClick: PropTypes.func
 };
 
@@ -11,10 +13,10 @@ Play.defaultProps = {
   running: false
 };
 
-function Play({ running, onClick }) {
+function Play({ running, timerType, onClick }) {
   return (
     <Ripple>
-      <div className="play" onClick={onClick}>
+      <div className={`play ${addClass(timerType)}`} onClick={onClick}>
         {running ? (
           <svg className="play__pause-btn">
             <use xlinkHref="#icon-pause" />
