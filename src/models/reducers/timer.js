@@ -8,7 +8,7 @@ import {
 
 const timerState = {
   round: 1,
-  timerType: "",
+  timerType: "WORK",
   duration: 0,
   counter: 0,
   dashOffset: 0,
