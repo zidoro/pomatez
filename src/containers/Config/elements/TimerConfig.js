@@ -48,35 +48,38 @@ function TimerConfig() {
           timeType="Short Break"
           max={60}
           value={shortBreak}
-          onChange={({ target }) =>
+          onChange={({ target }) => {
             dispatchConfig({
               type: SET_SHORT_BREAK,
               payload: parseInt(target.value)
-            })
-          }
+            });
+            dispatchControl({ type: SET_RUNNING, payload: false });
+          }}
         />
         <Slider
           timeType="Long Break"
           max={60}
           value={longBreak}
-          onChange={({ target }) =>
+          onChange={({ target }) => {
             dispatchConfig({
               type: SET_LONG_BREAK,
               payload: parseInt(target.value)
-            })
-          }
+            });
+            dispatchControl({ type: SET_RUNNING, payload: false });
+          }}
         />
         <Slider
           timeType="Session Rounds"
           rangeType="round"
           max={10}
           value={sessionRounds}
-          onChange={({ target }) =>
+          onChange={({ target }) => {
             dispatchConfig({
               type: SET_SESSION_ROUNDS,
               payload: parseInt(target.value)
-            })
-          }
+            });
+            dispatchControl({ type: SET_RUNNING, payload: false });
+          }}
         />
       </div>
 

@@ -29,21 +29,61 @@ function Timer() {
   const [{ notify, darkMode }] = useContext(StoreContext).setting;
 
   useEffect(() => {
-    dispatchTimer({
-      type: SET_TIMER_TYPE,
-      payload: WORK
-    });
+    switch (timerType) {
+      case WORK:
+        dispatchTimer({
+          type: SET_TIMER_TYPE,
+          payload: WORK
+        });
 
-    dispatchTimer({
-      type: SET_DURATION,
-      payload: workingTime * 60
-    });
+        dispatchTimer({
+          type: SET_DURATION,
+          payload: workingTime * 60
+        });
 
-    dispatchTimer({
-      type: SET_COUNTER,
-      payload: workingTime * 60
-    });
-  }, [dispatchTimer, workingTime]);
+        dispatchTimer({
+          type: SET_COUNTER,
+          payload: workingTime * 60
+        });
+        break;
+
+      case SHORT_BREAK:
+        dispatchTimer({
+          type: SET_TIMER_TYPE,
+          payload: SHORT_BREAK
+        });
+
+        dispatchTimer({
+          type: SET_DURATION,
+          payload: shortBreak * 60
+        });
+
+        dispatchTimer({
+          type: SET_COUNTER,
+          payload: shortBreak * 60
+        });
+        break;
+
+      case LONG_BREAK:
+        dispatchTimer({
+          type: SET_TIMER_TYPE,
+          payload: LONG_BREAK
+        });
+
+        dispatchTimer({
+          type: SET_DURATION,
+          payload: longBreak * 60
+        });
+
+        dispatchTimer({
+          type: SET_COUNTER,
+          payload: longBreak * 60
+        });
+        break;
+      default:
+        return null;
+    }
+  }, [dispatchTimer, timerType, workingTime, shortBreak, longBreak]);
 
   useEffect(() => {
     function setNotification(title, body) {
