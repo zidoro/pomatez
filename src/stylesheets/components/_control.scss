@@ -53,6 +53,22 @@
         fill: t($color-primary);
       }
     }
+
+    &.short-break {
+      &:hover svg {
+        @include themed() {
+          fill: t($color-secondary);
+        }
+      }
+    }
+
+    &.long-break {
+      &:hover svg {
+        @include themed() {
+          fill: t($color-tertiary);
+        }
+      }
+    }
   }
 
   &__play {
@@ -77,6 +93,22 @@
         fill: t($color-primary);
       }
     }
+
+    &.short-break {
+      &:hover svg {
+        @include themed() {
+          fill: t($color-secondary);
+        }
+      }
+    }
+
+    &.long-break {
+      &:hover svg {
+        @include themed() {
+          fill: t($color-tertiary);
+        }
+      }
+    }
   }
 
   &__right {
@@ -93,6 +125,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  & + s {
+    @include themed() {
+      background: rgba(t($color-primary), 0.16) !important;
+    }
+  }
+
+  &.short-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-secondary), 0.16) !important;
+      }
+    }
+  }
+
+  &.long-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-tertiary), 0.16) !important;
+      }
+    }
+  }
 
   &__play-btn,
   &__pause-btn {
@@ -111,6 +165,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  & + s {
+    @include themed() {
+      background: rgba(t($color-primary), 0.16) !important;
+    }
+  }
+
+  &.short-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-secondary), 0.16) !important;
+      }
+    }
+  }
+
+  &.long-break {
+    & + s {
+      @include themed() {
+        background: rgba(t($color-tertiary), 0.16) !important;
+      }
+    }
+  }
 }
 
 .reset__icon,

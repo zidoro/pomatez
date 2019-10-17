@@ -1,5 +1,7 @@
 // Shortcuts
 $color-primary: "color-primary";
+$color-secondary: "color-secondary";
+$color-tertiary: "color-tertiary";
 $color-error: "color-error";
 
 $heading-text-color: "heading-text-color";
@@ -19,6 +21,8 @@ $shadow-primary: "shadow-primary";
 $themes: (
   light: (
     color-primary: $color-primary--light,
+    color-secondary: $color-secondary--light,
+    color-tertiary: $color-tertiary--light,
     color-error: $color-error--light,
     heading-text-color: $heading-text-color--light,
     body-text-color: $body-text-color--light,
@@ -32,6 +36,8 @@ $themes: (
   ),
   dark: (
     color-primary: $color-primary--dark,
+    color-secondary: $color-secondary--dark,
+    color-tertiary: $color-tertiary--dark,
     color-error: $color-error--dark,
     heading-text-color: $heading-text-color--dark,
     body-text-color: $body-text-color--dark,
