@@ -12,7 +12,7 @@ import {
 import icon from "../../assets/electron.png";
 
 import { CountDown, Progress } from "./elements";
-import { WORK, SHORT_BREAK, LONG_BREAK } from "../_helpers";
+import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 
 const { remote } = window.require("electron");
 
@@ -224,7 +224,7 @@ function Timer() {
 
   return (
     <div className="timer">
-      <div className="timer__counter">
+      <div className={`timer__counter ${fullScreen && addClass(timerType)}`}>
         <Progress
           dashOffset={dashOffset}
           timerType={timerType}

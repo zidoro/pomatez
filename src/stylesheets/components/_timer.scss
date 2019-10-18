@@ -1,3 +1,12 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .timer {
   width: 100%;
   height: 43.2rem;
@@ -11,6 +20,11 @@
     align-items: center;
     justify-items: center;
     grid-template-areas: "center";
+
+    &.short-break,
+    &.long-break {
+      animation: fade-in 1s ease;
+    }
   }
 }
 
