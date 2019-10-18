@@ -79,7 +79,13 @@ function Timer() {
           type: SET_COUNTER,
           payload: longBreak * 60
         });
+
+        dispatchTimer({
+          type: SET_ROUND,
+          payload: 0
+        });
         break;
+
       default:
         return null;
     }
@@ -118,39 +124,14 @@ function Timer() {
                   payload: SHORT_BREAK
                 });
 
-                dispatchTimer({
-                  type: SET_DURATION,
-                  payload: shortBreak * 60
-                });
-
-                dispatchTimer({
-                  type: SET_COUNTER,
-                  payload: shortBreak * 60
-                });
-
                 setNotification(
                   "Work Time Finished",
                   "It's time for you to take a short break"
                 );
               } else {
                 dispatchTimer({
-                  type: SET_ROUND,
-                  payload: 1
-                });
-
-                dispatchTimer({
                   type: SET_TIMER_TYPE,
                   payload: LONG_BREAK
-                });
-
-                dispatchTimer({
-                  type: SET_DURATION,
-                  payload: longBreak * 60
-                });
-
-                dispatchTimer({
-                  type: SET_COUNTER,
-                  payload: longBreak * 60
                 });
 
                 setNotification(
@@ -166,16 +147,6 @@ function Timer() {
                 payload: WORK
               });
 
-              dispatchTimer({
-                type: SET_DURATION,
-                payload: workingTime * 60
-              });
-
-              dispatchTimer({
-                type: SET_COUNTER,
-                payload: workingTime * 60
-              });
-
               setNotification(
                 "Short Break Finished",
                 "It's time to focus and work again"
@@ -189,13 +160,8 @@ function Timer() {
               });
 
               dispatchTimer({
-                type: SET_DURATION,
-                payload: workingTime * 60
-              });
-
-              dispatchTimer({
-                type: SET_COUNTER,
-                payload: workingTime * 60
+                type: SET_ROUND,
+                payload: round + 1
               });
 
               setNotification(
