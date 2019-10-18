@@ -73,18 +73,10 @@ function Control() {
                           type: SET_TIMER_TYPE,
                           payload: SHORT_BREAK
                         });
-                        dispatchTimer({
-                          type: SET_ROUND,
-                          payload: round + 1
-                        });
                       } else {
                         dispatchTimer({
                           type: SET_TIMER_TYPE,
                           payload: LONG_BREAK
-                        });
-                        dispatchTimer({
-                          type: SET_ROUND,
-                          payload: round + 1
                         });
                       }
                       break;
@@ -93,6 +85,10 @@ function Control() {
                       dispatchTimer({
                         type: SET_TIMER_TYPE,
                         payload: WORK
+                      });
+                      dispatchTimer({
+                        type: SET_ROUND,
+                        payload: round + 1
                       });
                       break;
 
