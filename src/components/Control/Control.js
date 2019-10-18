@@ -3,10 +3,12 @@ import {
   StoreContext,
   SET_RUNNING,
   SET_SILENT,
-  SET_COUNTER
+  SET_COUNTER,
+  SET_TIMER_TYPE,
+  SET_ROUND
 } from "../../models";
 import { Next, Play, Reset, Volume } from "./elements";
-import { addClass } from "../_helpers";
+import { addClass, WORK, SHORT_BREAK, LONG_BREAK } from "../_helpers";
 
 function Control() {
   const [{ running, silent }, dispatchControl] = useContext(
@@ -61,7 +63,59 @@ function Control() {
 
           <div className="action__right">
             <div className={`action__next ${addClass(timerType)}`}>
-              <Next timerType={timerType} />
+              <Next
+                timerType={timerType}
+                onClick={() => {
+                  switch (timerType) {
+                    case WORK:
+                      if (round !== sessionRounds) {
+                        dispatchTimer({
+                          type: SET_TIMER_TYPE,
+                          payload: SHORT_BREAK
+                        });
+                        dispatchTimer({
+                          type: SET_ROUND,
+                          payload: round + 1
+                        });
+                      } else {
+                        dispatchTimer({
+                          type: SET_TIMER_TYPE,
+                          payload: LONG_BREAK
+                        });
+                        dispatchTimer({
+                          type: SET_ROUND,
+                          payload: round + 1
+                        });
+                      }
+                      break;
+
+                    case SHORT_BREAK:
+                      dispatchTimer({
+                        type: SET_TIMER_TYPE,
+                        payload: WORK
+                      });
+                      break;
+
+                    case LONG_BREAK:
+                      dispatchTimer({
+                        type: SET_TIMER_TYPE,
+                        payload: WORK
+                      });
+                      dispatchTimer({
+                        type: SET_ROUND,
+                        payload: round + 1
+                      });
+                      break;
+                    default:
+                      return null;
+                  }
+
+                  dispatchControl({
+                    type: SET_RUNNING,
+                    payload: true
+                  });
+                }}
+              />
             </div>
 
             <div className={`action__volume ${addClass(timerType)}`}>
