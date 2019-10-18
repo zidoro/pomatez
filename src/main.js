@@ -11,9 +11,9 @@ function createWindow() {
   window = new BrowserWindow({
     width: 400,
     height: 600,
-    resizable: false,
+    minWidth: 400,
+    minHeight: 600,
     maximizable: false,
-    alwaysOnTop: true,
     frame: false,
     show: false,
     backgroundColor: "#222c33",

@@ -1,19 +1,24 @@
 .control {
-  width: 40rem;
-  height: 13.6rem;
+  width: 100%;
+  height: max-content;
+  min-width: 40rem;
+  min-height: 13.6rem;
 
   display: grid;
   align-items: center;
+  justify-content: center;
   user-select: none;
 
   &__box {
+    width: 100%;
     height: max-content;
     margin: 0 2.4rem;
 
     display: grid;
     grid-gap: 1.6rem;
-    grid-template-columns: 6.5rem 1fr;
+    grid-template-columns: max-content max-content;
     align-items: center;
+    justify-items: center;
   }
 }
 

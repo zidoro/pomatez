@@ -1,7 +1,14 @@
 .counter {
+  width: inherit;
+  height: inherit;
+  min-width: max-content;
+  min-height: max-content;
+
   position: absolute;
-  width: max-content;
-  height: max-content;
+
+  display: grid;
+  align-items: center;
+
   @include themed() {
     background: set-color(
       t($color-primary),
