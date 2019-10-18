@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, globalShortcut } = require("electron");
 
 const isDev = require("electron-is-dev");
 const path = require("path");
@@ -31,6 +31,10 @@ function createWindow() {
   window.on("ready-to-show", () => window.show());
 
   window.on("closed", () => (window = null));
+
+  globalShortcut.register("CommandOrControl+Shift+Q", () => {
+    app.quit();
+  });
 }
 
 app.on("ready", createWindow);
@@ -45,6 +49,10 @@ app.on("activate", () => {
   if (window === null) {
     createWindow();
   }
+});
+
+app.on("will-quit", () => {
+  globalShortcut.unregisterAll();
 });
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
