@@ -4,16 +4,22 @@ import {
   StoreContext,
   SET_ON_TOP,
   SET_NOTIFY,
-  SET_FULL_SCREEN_ON_BREAK
+  SET_FULL_SCREEN_ON_BREAK,
+  SHOW_CONFIG
 } from "../../../models";
 import { useAnimate } from "../../../hooks";
 
 import { Header, Toggle, Shortcut } from "../../../components";
+import { SHORT_BREAK, LONG_BREAK } from "../../../components/_helpers";
 
 function SettingConfig() {
   const { o, x } = useAnimate({ axisX: 25 });
 
-  const [{ onTop, notify, fullScreenOnBreak }, dispatch] = useContext(
+  const [, dispatchNav] = useContext(StoreContext).nav;
+
+  const [{ timerType }] = useContext(StoreContext).timer;
+
+  const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
     StoreContext
   ).setting;
 
@@ -34,7 +40,7 @@ function SettingConfig() {
           switchId="on-top"
           isChecked={onTop}
           onChange={() =>
-            dispatch({
+            dispatchSetting({
               type: SET_ON_TOP,
               payload: !onTop
             })
@@ -45,7 +51,7 @@ function SettingConfig() {
           switchId="desktop-notication"
           isChecked={notify}
           onChange={() =>
-            dispatch({
+            dispatchSetting({
               type: SET_NOTIFY,
               payload: !notify
             })
@@ -55,12 +61,18 @@ function SettingConfig() {
           toggleName="Fullscreen On Break"
           switchId="fullscreen"
           isChecked={fullScreenOnBreak}
-          onChange={() =>
-            dispatch({
+          onChange={() => {
+            dispatchSetting({
               type: SET_FULL_SCREEN_ON_BREAK,
               payload: !fullScreenOnBreak
-            })
-          }
+            });
+            if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
+              dispatchNav({
+                type: SHOW_CONFIG,
+                payload: false
+              });
+            }
+          }}
         />
       </div>
 
