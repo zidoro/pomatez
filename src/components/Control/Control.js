@@ -11,7 +11,7 @@ import { Next, Play, Reset, Volume } from "./elements";
 import { addClass, WORK, SHORT_BREAK, LONG_BREAK } from "../_helpers";
 
 function Control() {
-  const [{ running, silent }, dispatchControl] = useContext(
+  const [{ running, silent, fullScreen }, dispatchControl] = useContext(
     StoreContext
   ).control;
 
@@ -22,7 +22,13 @@ function Control() {
   const [{ sessionRounds }] = useContext(StoreContext).config;
 
   return (
-    <div className="control">
+    <div
+      className="control"
+      style={{
+        opacity: fullScreen ? "0" : "1",
+        visibility: fullScreen ? "hidden" : "visible"
+      }}
+    >
       <div className="control__box">
         <div className="session">
           <p className="session__count">

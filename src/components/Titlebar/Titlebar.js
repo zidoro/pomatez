@@ -7,8 +7,16 @@ function Titlebar() {
 
   const [{ darkMode }, dispatchSetting] = useContext(StoreContext).setting;
 
+  const [{ fullScreen }] = useContext(StoreContext).control;
+
   return (
-    <div className="titlebar">
+    <div
+      className="titlebar"
+      style={{
+        opacity: fullScreen ? "0" : "1",
+        visibility: fullScreen ? "hidden" : "visible"
+      }}
+    >
       <div className="titlebar__option">
         <Menu
           showConfig={showConfig}

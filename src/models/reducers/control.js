@@ -1,8 +1,9 @@
-import { SET_RUNNING, SET_SILENT } from "../actions";
+import { SET_RUNNING, SET_SILENT, SET_FULL_SCREEN } from "../actions";
 
 const controlState = {
   running: false,
-  silent: false
+  silent: false,
+  fullScreen: false
 };
 
 const controlReducer = (state, action) => {
@@ -16,6 +17,11 @@ const controlReducer = (state, action) => {
       return {
         ...state,
         silent: action.payload
+      };
+    case SET_FULL_SCREEN:
+      return {
+        ...state,
+        fullScreen: action.payload
       };
     default:
       return state;

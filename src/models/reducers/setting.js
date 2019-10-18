@@ -1,10 +1,17 @@
-import { SET_ON_TOP, SET_NOTIFY, SET_DARKMODE, SHOW_SETTING } from "../actions";
+import {
+  SET_ON_TOP,
+  SET_NOTIFY,
+  SET_DARKMODE,
+  SHOW_SETTING,
+  SET_FULL_SCREEN_ON_BREAK
+} from "../actions";
 
 const settingState = {
   onTop: false,
   notify: true,
   darkMode: false,
-  showSetting: false
+  showSetting: false,
+  fullScreenOnBreak: false
 };
 
 const settingReducer = (state, action) => {
@@ -28,6 +35,11 @@ const settingReducer = (state, action) => {
       return {
         ...state,
         showSetting: action.payload
+      };
+    case SET_FULL_SCREEN_ON_BREAK:
+      return {
+        ...state,
+        fullScreenOnBreak: action.payload
       };
     default:
       return state;

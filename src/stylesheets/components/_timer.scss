@@ -7,15 +7,19 @@
   justify-content: center;
 
   &__counter {
-    position: relative;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas: "center";
   }
 }
 
 .progress {
   width: 32rem;
   height: 32rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.6rem;
   transform: rotateY(-180deg) rotateZ(-90deg);
+  grid-area: center;
 
   &__circle {
     fill: none;
@@ -60,10 +64,11 @@
   text-transform: uppercase;
   user-select: none;
 
-  @include absolute-center;
+  grid-area: center;
 
   display: grid;
   grid-row-gap: 2rem;
+  margin-top: 0.5rem;
 
   &__timer {
     display: flex;
