@@ -5,7 +5,8 @@ import {
   SET_ON_TOP,
   SET_NOTIFY,
   SET_FULL_SCREEN_ON_BREAK,
-  SHOW_CONFIG
+  SHOW_CONFIG,
+  SET_RUNNING
 } from "../../../models";
 import { useAnimate } from "../../../hooks";
 
@@ -16,6 +17,8 @@ function SettingConfig() {
   const { o, x } = useAnimate({ axisX: 25 });
 
   const [, dispatchNav] = useContext(StoreContext).nav;
+
+  const [{ running }, dispatchControl] = useContext(StoreContext).control;
 
   const [{ timerType }] = useContext(StoreContext).timer;
 
@@ -70,6 +73,12 @@ function SettingConfig() {
               dispatchNav({
                 type: SHOW_CONFIG,
                 payload: false
+              });
+            }
+            if (!running) {
+              dispatchControl({
+                type: SET_RUNNING,
+                payload: true
               });
             }
           }}
