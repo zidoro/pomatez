@@ -5,7 +5,8 @@ import {
   SET_DASH_OFFSET,
   SET_COUNTER,
   SET_TIMER_TYPE,
-  SET_ROUND
+  SET_ROUND,
+  SET_FULL_SCREEN
 } from "../../models";
 
 import icon from "../../assets/electron.png";
@@ -13,11 +14,13 @@ import icon from "../../assets/electron.png";
 import { CountDown, Progress } from "./elements";
 import { WORK, SHORT_BREAK, LONG_BREAK } from "../_helpers";
 
+const { remote } = window.require("electron");
+
 function Timer() {
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
     StoreContext
   ).config;
-  const [{ running, silent }, dispatchControl] = useContext(
+  const [{ running, silent, fullScreen }, dispatchControl] = useContext(
     StoreContext
   ).control;
 
@@ -26,7 +29,21 @@ function Timer() {
     dispatchTimer
   ] = useContext(StoreContext).timer;
 
-  const [{ notify, darkMode }] = useContext(StoreContext).setting;
+  const [{ notify, darkMode, fullScreenOnBreak }] = useContext(
+    StoreContext
+  ).setting;
+
+  useEffect(() => {
+    let win = remote.getCurrentWindow();
+    win.setFullScreen(fullScreen);
+
+    if (fullScreenOnBreak) {
+      dispatchControl({
+        type: SET_FULL_SCREEN,
+        payload: timerType === SHORT_BREAK || timerType === LONG_BREAK
+      });
+    }
+  }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak]);
 
   useEffect(() => {
     switch (timerType) {

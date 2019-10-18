@@ -4,7 +4,7 @@ import {
   StoreContext,
   SET_ON_TOP,
   SET_NOTIFY,
-  SET_DARKMODE
+  SET_FULL_SCREEN_ON_BREAK
 } from "../../../models";
 import { useAnimate } from "../../../hooks";
 
@@ -13,7 +13,7 @@ import { Header, Toggle, Shortcut } from "../../../components";
 function SettingConfig() {
   const { o, x } = useAnimate({ axisX: 25 });
 
-  const [{ onTop, notify, darkMode }, dispatch] = useContext(
+  const [{ onTop, notify, fullScreenOnBreak }, dispatch] = useContext(
     StoreContext
   ).setting;
 
@@ -41,7 +41,7 @@ function SettingConfig() {
           }
         />
         <Toggle
-          toggleName="Desktop Notification"
+          toggleName="Show Notification"
           switchId="desktop-notication"
           isChecked={notify}
           onChange={() =>
@@ -52,13 +52,13 @@ function SettingConfig() {
           }
         />
         <Toggle
-          toggleName="Enable Dark Mode"
-          switchId="darkmode"
-          isChecked={darkMode}
+          toggleName="Fullscreen On Break"
+          switchId="fullscreen"
+          isChecked={fullScreenOnBreak}
           onChange={() =>
             dispatch({
-              type: SET_DARKMODE,
-              payload: !darkMode
+              type: SET_FULL_SCREEN_ON_BREAK,
+              payload: !fullScreenOnBreak
             })
           }
         />
@@ -67,10 +67,13 @@ function SettingConfig() {
       <div className="keyboard">
         <p className="section-header">Keyboard Shortcuts</p>
         <Shortcut
-          shortcutName="Exit Full Screen Break"
-          shortcutKey="Press Esc"
+          shortcutName="Exist Fullscreen Break"
+          shortcutKey="Press F11"
         />
-        <Shortcut shortcutName="About the App" shortcutKey="Ctrl + H" />
+        <Shortcut
+          shortcutName="Toggle Theme Mode"
+          shortcutKey="Ctrl + Shift + M"
+        />
         <Shortcut
           shortcutName="Check for Updates"
           shortcutKey="Ctrl + Shift + U"
