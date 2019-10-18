@@ -2,7 +2,7 @@ import { SET_TITLE, SHOW_CONFIG } from "../actions";
 
 const navState = {
   title: "",
-  showConfig: false
+  showConfig: true
 };
 
 const navReducer = (state, action) => {
