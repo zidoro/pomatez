@@ -79,16 +79,16 @@ function SettingConfig() {
       <div className="keyboard">
         <p className="section-header">Keyboard Shortcuts</p>
         <Shortcut
-          shortcutName="Exist Fullscreen Break"
-          shortcutKey="Press F11"
-        />
-        <Shortcut
           shortcutName="Toggle Theme Mode"
           shortcutKey="Ctrl + Shift + M"
         />
         <Shortcut
           shortcutName="Check for Updates"
           shortcutKey="Ctrl + Shift + U"
+        />
+        <Shortcut
+          shortcutName="Quit Application"
+          shortcutKey="Ctrl + Shift + Q"
         />
       </div>
     </animated.div>
