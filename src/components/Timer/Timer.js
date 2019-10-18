@@ -115,11 +115,6 @@ function Timer() {
             case WORK:
               if (round !== sessionRounds) {
                 dispatchTimer({
-                  type: SET_ROUND,
-                  payload: round + 1
-                });
-
-                dispatchTimer({
                   type: SET_TIMER_TYPE,
                   payload: SHORT_BREAK
                 });
@@ -142,6 +137,11 @@ function Timer() {
               break;
 
             case SHORT_BREAK:
+              dispatchTimer({
+                type: SET_ROUND,
+                payload: round + 1
+              });
+
               dispatchTimer({
                 type: SET_TIMER_TYPE,
                 payload: WORK
