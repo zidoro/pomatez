@@ -53,7 +53,7 @@ function createWindow() {
     globalShortcut.register(key, callback)
   );
 
-  tray = new Tray(path.join(__dirname, "./assets/tray.png"));
+  tray = new Tray(path.join(__dirname, "../src/assets/tray.png"));
 
   let contextMenu = Menu.buildFromTemplate([
     {
