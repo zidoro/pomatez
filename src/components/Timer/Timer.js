@@ -6,7 +6,8 @@ import {
   SET_COUNTER,
   SET_TIMER_TYPE,
   SET_ROUND,
-  SET_FULL_SCREEN
+  SET_FULL_SCREEN,
+  SHOW_CONFIG
 } from "../../models";
 
 import icon from "../../assets/electron.png";
@@ -35,13 +36,50 @@ function Timer() {
 
   useEffect(() => {
     let win = remote.getCurrentWindow();
-    win.setFullScreen(fullScreen);
+
+    if (fullScreen) {
+      win.show();
+      win.setFullScreen(true);
+      win.setVisibleOnAllWorkspaces(true);
+      win.setAlwaysOnTop(true, "screen-saver");
+    } else {
+      win.setFullScreen(false);
+      win.setVisibleOnAllWorkspaces(false);
+      win.setAlwaysOnTop(false, "screen-saver");
+    }
 
     if (fullScreenOnBreak) {
       dispatchControl({
-        type: SET_FULL_SCREEN,
-        payload: timerType === SHORT_BREAK || timerType === LONG_BREAK
+        type: SHOW_CONFIG,
+        payload: false
       });
+
+      switch (timerType) {
+        case WORK:
+          dispatchControl({
+            type: SET_FULL_SCREEN,
+            payload: false
+          });
+          break;
+        case SHORT_BREAK:
+          dispatchControl({
+            type: SET_FULL_SCREEN,
+            payload: true
+          });
+          break;
+        case LONG_BREAK:
+          dispatchControl({
+            type: SET_FULL_SCREEN,
+            payload: true
+          });
+          break;
+        default:
+          return null;
+      }
+    } else {
+      if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
+        win.show();
+      }
     }
   }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak]);
 
@@ -224,7 +262,9 @@ function Timer() {
 
   return (
     <div className="timer">
-      <div className={`timer__counter ${fullScreen && addClass(timerType)}`}>
+      <div
+        className={`timer__counter ${fullScreen ? addClass(timerType) : ""}`}
+      >
         <Progress
           dashOffset={dashOffset}
           timerType={timerType}

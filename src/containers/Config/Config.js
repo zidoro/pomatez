@@ -18,7 +18,8 @@ function Config({ showConfig }) {
   const [{ onTop, showSetting }] = useContext(StoreContext).setting;
 
   useEffect(() => {
-    remote.getCurrentWindow().setAlwaysOnTop(onTop);
+    let win = remote.getCurrentWindow();
+    win.setAlwaysOnTop(onTop, "screen-saver");
   }, [onTop]);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { animated } from "react-spring";
 import {
   StoreContext,
@@ -6,7 +6,8 @@ import {
   SET_NOTIFY,
   SET_FULL_SCREEN_ON_BREAK,
   SHOW_CONFIG,
-  SET_RUNNING
+  SET_RUNNING,
+  SET_DARKMODE
 } from "../../../models";
 import { useAnimate } from "../../../hooks";
 
@@ -18,13 +19,34 @@ function SettingConfig() {
 
   const [, dispatchNav] = useContext(StoreContext).nav;
 
-  const [{ running }, dispatchControl] = useContext(StoreContext).control;
+  const [{ running, fullScreen }, dispatchControl] = useContext(
+    StoreContext
+  ).control;
 
   const [{ timerType }] = useContext(StoreContext).timer;
 
-  const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
-    StoreContext
-  ).setting;
+  const [
+    { onTop, notify, darkMode, fullScreenOnBreak },
+    dispatchSetting
+  ] = useContext(StoreContext).setting;
+
+  useEffect(() => {
+    window.addEventListener(
+      "keydown",
+      e => {
+        let keyCode = e.keyCode;
+        let keyChar = String.fromCharCode(keyCode);
+
+        if (e.ctrlKey && e.shiftKey && keyChar === "D") {
+          dispatchSetting({
+            type: SET_DARKMODE,
+            payload: !darkMode
+          });
+        }
+      },
+      true
+    );
+  }, [dispatchSetting, darkMode, fullScreen]);
 
   return (
     <animated.div
@@ -89,7 +111,7 @@ function SettingConfig() {
         <p className="section-header">Keyboard Shortcuts</p>
         <Shortcut
           shortcutName="Toggle Theme Mode"
-          shortcutKey="Ctrl + Shift + M"
+          shortcutKey="Ctrl + Shift + D"
         />
         <Shortcut
           shortcutName="Check for Updates"
@@ -97,7 +119,7 @@ function SettingConfig() {
         />
         <Shortcut
           shortcutName="Quit Application"
-          shortcutKey="Ctrl + Shift + Q"
+          shortcutKey="Ctrl + Alt + Q"
         />
       </div>
     </animated.div>
