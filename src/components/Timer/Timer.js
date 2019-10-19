@@ -18,9 +18,12 @@ import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 const { remote } = window.require("electron");
 
 function Timer() {
+  const [{ showConfig }] = useContext(StoreContext).nav;
+
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
     StoreContext
   ).config;
+
   const [{ running, silent, fullScreen }, dispatchControl] = useContext(
     StoreContext
   ).control;
@@ -49,10 +52,12 @@ function Timer() {
     }
 
     if (fullScreenOnBreak) {
-      dispatchControl({
-        type: SHOW_CONFIG,
-        payload: false
-      });
+      if (showConfig) {
+        dispatchControl({
+          type: SHOW_CONFIG,
+          payload: false
+        });
+      }
 
       switch (timerType) {
         case WORK:
@@ -77,11 +82,17 @@ function Timer() {
           return null;
       }
     } else {
-      if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
-        win.show();
+      if (!win.isVisible()) {
+        if (
+          timerType === WORK ||
+          timerType === SHORT_BREAK ||
+          timerType === LONG_BREAK
+        ) {
+          win.show();
+        }
       }
     }
-  }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak]);
+  }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak, showConfig]);
 
   useEffect(() => {
     switch (timerType) {

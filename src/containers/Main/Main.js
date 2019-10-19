@@ -10,7 +10,7 @@ function Main() {
     () =>
       dispatch({
         type: SET_TITLE,
-        payload: showConfig ? "User Configuration" : "Time Management App"
+        payload: showConfig ? "User Configuration" : "Timeframe App"
       }),
     [dispatch, showConfig]
   );
