@@ -6,7 +6,7 @@ const path = require("path");
 let window = null;
 let tray = null;
 
-app.setAppUserModelId("time.management.app");
+app.setAppUserModelId("com.roldanjrCodeArts9711.TimeframeApp");
 
 function createWindow() {
   window = new BrowserWindow({
@@ -62,7 +62,7 @@ function createWindow() {
     }
   ]);
 
-  tray.setToolTip("Time Management App");
+  tray.setToolTip("Timeframe App");
   tray.setContextMenu(contextMenu);
 
   tray.on("click", () => {
