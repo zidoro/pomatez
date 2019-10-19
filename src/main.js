@@ -1,9 +1,10 @@
-const { app, BrowserWindow, globalShortcut } = require("electron");
+const { app, BrowserWindow, Tray, Menu, globalShortcut } = require("electron");
 
 const isDev = require("electron-is-dev");
 const path = require("path");
 
-let window;
+let window = null;
+let tray = null;
 
 app.setAppUserModelId("time.management.app");
 
@@ -13,6 +14,7 @@ function createWindow() {
     height: 600,
     minWidth: 400,
     minHeight: 600,
+    resizable: false,
     maximizable: false,
     frame: false,
     show: false,
@@ -32,8 +34,39 @@ function createWindow() {
 
   window.on("closed", () => (window = null));
 
-  globalShortcut.register("CommandOrControl+Shift+Q", () => {
-    app.quit();
+  let shortcutKeys = [
+    {
+      key: "CommandOrControl+Shift+H",
+      callback: () => window.hide()
+    },
+    {
+      key: "CommandOrControl+Shift+S",
+      callback: () => window.show()
+    },
+    {
+      key: "CommandOrControl+Alt+Q",
+      callback: () => app.quit()
+    }
+  ];
+
+  shortcutKeys.map(({ key, callback }) =>
+    globalShortcut.register(key, callback)
+  );
+
+  tray = new Tray(path.join(__dirname, "./assets/tray.png"));
+
+  let contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Quit",
+      role: "quit"
+    }
+  ]);
+
+  tray.setToolTip("Time Management App");
+  tray.setContextMenu(contextMenu);
+
+  tray.on("click", () => {
+    window.isVisible() ? window.hide() : window.show();
   });
 }
 
