@@ -1,3 +1,12 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .timer {
   width: 100%;
   height: 43.2rem;
@@ -7,15 +16,24 @@
   justify-content: center;
 
   &__counter {
-    position: relative;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas: "center";
+
+    &.short-break,
+    &.long-break {
+      animation: fade-in 1s ease;
+    }
   }
 }
 
 .progress {
   width: 32rem;
   height: 32rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.6rem;
   transform: rotateY(-180deg) rotateZ(-90deg);
+  grid-area: center;
 
   &__circle {
     fill: none;
@@ -60,7 +78,7 @@
   text-transform: uppercase;
   user-select: none;
 
-  @include absolute-center;
+  grid-area: center;
 
   display: grid;
   grid-row-gap: 2rem;

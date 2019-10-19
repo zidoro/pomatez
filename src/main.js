@@ -1,9 +1,10 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Tray, Menu, globalShortcut } = require("electron");
 
 const isDev = require("electron-is-dev");
 const path = require("path");
 
-let window;
+let window = null;
+let tray = null;
 
 app.setAppUserModelId("time.management.app");
 
@@ -11,9 +12,10 @@ function createWindow() {
   window = new BrowserWindow({
     width: 400,
     height: 600,
+    minWidth: 400,
+    minHeight: 600,
     resizable: false,
     maximizable: false,
-    alwaysOnTop: true,
     frame: false,
     show: false,
     backgroundColor: "#222c33",
@@ -31,6 +33,41 @@ function createWindow() {
   window.on("ready-to-show", () => window.show());
 
   window.on("closed", () => (window = null));
+
+  let shortcutKeys = [
+    {
+      key: "CommandOrControl+Shift+H",
+      callback: () => window.hide()
+    },
+    {
+      key: "CommandOrControl+Shift+S",
+      callback: () => window.show()
+    },
+    {
+      key: "CommandOrControl+Alt+Q",
+      callback: () => app.quit()
+    }
+  ];
+
+  shortcutKeys.map(({ key, callback }) =>
+    globalShortcut.register(key, callback)
+  );
+
+  tray = new Tray(path.join(__dirname, "./assets/tray.png"));
+
+  let contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Quit",
+      role: "quit"
+    }
+  ]);
+
+  tray.setToolTip("Time Management App");
+  tray.setContextMenu(contextMenu);
+
+  tray.on("click", () => {
+    window.isVisible() ? window.hide() : window.show();
+  });
 }
 
 app.on("ready", createWindow);
@@ -45,6 +82,10 @@ app.on("activate", () => {
   if (window === null) {
     createWindow();
   }
+});
+
+app.on("will-quit", () => {
+  globalShortcut.unregisterAll();
 });
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
