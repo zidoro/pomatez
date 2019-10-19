@@ -114,12 +114,12 @@ function SettingConfig() {
           shortcutKey="Ctrl + Shift + D"
         />
         <Shortcut
-          shortcutName="Check for Updates"
-          shortcutKey="Ctrl + Shift + U"
-        />
-        <Shortcut
           shortcutName="Quit Application"
           shortcutKey="Ctrl + Alt + Q"
+        />
+        <Shortcut
+          shortcutName="Check for Updates"
+          shortcutKey="Ctrl + Shift + U"
         />
       </div>
     </animated.div>
