@@ -9,6 +9,6 @@ export const addClass = condition => {
     case LONG_BREAK:
       return "long-break";
     default:
-     return "";
+      return "";
   }
 };

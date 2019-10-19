@@ -5,19 +5,23 @@ import {
   SET_DASH_OFFSET,
   SET_COUNTER,
   SET_TIMER_TYPE,
-  SET_ROUND
+  SET_ROUND,
+  SET_FULL_SCREEN,
+  SHOW_CONFIG
 } from "../../models";
 
 import icon from "../../assets/electron.png";
 
 import { CountDown, Progress } from "./elements";
-import { WORK, SHORT_BREAK, LONG_BREAK } from "../_helpers";
+import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
+
+const { remote } = window.require("electron");
 
 function Timer() {
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
     StoreContext
   ).config;
-  const [{ running, silent }, dispatchControl] = useContext(
+  const [{ running, silent, fullScreen }, dispatchControl] = useContext(
     StoreContext
   ).control;
 
@@ -26,7 +30,58 @@ function Timer() {
     dispatchTimer
   ] = useContext(StoreContext).timer;
 
-  const [{ notify, darkMode }] = useContext(StoreContext).setting;
+  const [{ notify, darkMode, fullScreenOnBreak }] = useContext(
+    StoreContext
+  ).setting;
+
+  useEffect(() => {
+    let win = remote.getCurrentWindow();
+
+    if (fullScreen) {
+      win.show();
+      win.setFullScreen(true);
+      win.setVisibleOnAllWorkspaces(true);
+      win.setAlwaysOnTop(true, "screen-saver");
+    } else {
+      win.setFullScreen(false);
+      win.setVisibleOnAllWorkspaces(false);
+      win.setAlwaysOnTop(false, "screen-saver");
+    }
+
+    if (fullScreenOnBreak) {
+      dispatchControl({
+        type: SHOW_CONFIG,
+        payload: false
+      });
+
+      switch (timerType) {
+        case WORK:
+          dispatchControl({
+            type: SET_FULL_SCREEN,
+            payload: false
+          });
+          break;
+        case SHORT_BREAK:
+          dispatchControl({
+            type: SET_FULL_SCREEN,
+            payload: true
+          });
+          break;
+        case LONG_BREAK:
+          dispatchControl({
+            type: SET_FULL_SCREEN,
+            payload: true
+          });
+          break;
+        default:
+          return null;
+      }
+    } else {
+      if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
+        win.show();
+      }
+    }
+  }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak]);
 
   useEffect(() => {
     switch (timerType) {
@@ -207,7 +262,9 @@ function Timer() {
 
   return (
     <div className="timer">
-      <div className="timer__counter">
+      <div
+        className={`timer__counter ${fullScreen ? addClass(timerType) : ""}`}
+      >
         <Progress
           dashOffset={dashOffset}
           timerType={timerType}
