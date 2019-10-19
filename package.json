@@ -1,12 +1,34 @@
 {
-  "name": "time-management-app",
-  "version": "0.1.0",
+  "name": "timeframe-app",
+  "version": "1.0.0",
   "private": true,
-  "main": "src/main.js",
+  "main": "public/electron.js",
+  "description": "Time Management Application inspired by Pomodoro Technique",
+  "author": {
+    "name": "Roldan Montilla Jr",
+    "email": "roldanjrmontilla@gmail.com",
+    "url": "https://github.com/roldanjrCodeArts9711"
+  },
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \""
+    "postinstall": "electron-builder install-app-deps",
+    "electron-build": "electron-builder --windows --linux",
+    "electron-release": "electron-builder --windows --linux --publish always",
+    "clean-build": "rm -rf build/ dist/",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
+    "build": "yarn clean-build && yarn react-build && yarn electron-build"
+  },
+  "build": {
+    "appId": "com.roldanjrCodeArts9711.TimeframeApp",
+    "productName": "Timeframe App",
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb",
+      "category": "Production"
+    }
   },
   "dependencies": {
     "electron-is-dev": "^1.1.0",
@@ -38,9 +60,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "build": {
-    "appId": "com.roldanjrCodeArts9711.TimeframeApp",
-    "productName": "Timeframe App"
   }
 }

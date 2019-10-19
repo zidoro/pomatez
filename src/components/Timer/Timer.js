@@ -41,10 +41,10 @@ function Timer() {
     let win = remote.getCurrentWindow();
 
     if (fullScreen) {
-      win.show();
       win.setFullScreen(true);
       win.setVisibleOnAllWorkspaces(true);
       win.setAlwaysOnTop(true, "screen-saver");
+      setTimeout(() => win.show(), 500);
     } else {
       win.setFullScreen(false);
       win.setVisibleOnAllWorkspaces(false);
