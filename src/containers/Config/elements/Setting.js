@@ -25,7 +25,7 @@ function SettingConfig() {
   ] = useContext(StoreContext).setting;
 
   useEffect(() => {
-    window.addEventListener(
+    document.addEventListener(
       "keydown",
       e => {
         let keyCode = e.keyCode;
@@ -34,7 +34,12 @@ function SettingConfig() {
         if (e.ctrlKey && e.shiftKey && keyChar === "D") {
           dispatchSetting({
             type: SET_DARKMODE,
-            payload: !darkMode
+            payload: true
+          });
+        } else if (e.ctrlKey && e.shiftKey && keyChar === "L") {
+          dispatchSetting({
+            type: SET_DARKMODE,
+            payload: false
           });
         }
       },
@@ -98,16 +103,16 @@ function SettingConfig() {
       <div className="keyboard">
         <p className="section-header">Keyboard Shortcuts</p>
         <Shortcut
-          shortcutName="Toggle Theme Mode"
+          shortcutName="Switch Dark Mode"
           shortcutKey="Ctrl + Shift + D"
+        />
+        <Shortcut
+          shortcutName="Switch Light Mode"
+          shortcutKey="Ctrl + Shift + L"
         />
         <Shortcut
           shortcutName="Quit Application"
           shortcutKey="Ctrl + Alt + Q"
-        />
-        <Shortcut
-          shortcutName="Check for Updates"
-          shortcutKey="Ctrl + Shift + U"
         />
       </div>
     </animated.div>
