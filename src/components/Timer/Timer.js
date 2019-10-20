@@ -17,8 +17,10 @@ import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 
 const { remote } = window.require("electron");
 
+const say = window.require("say");
+
 function Timer() {
-  const [{ showConfig }] = useContext(StoreContext).nav;
+  const [{ showConfig }, dispatchNav] = useContext(StoreContext).nav;
 
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
     StoreContext
@@ -33,7 +35,7 @@ function Timer() {
     dispatchTimer
   ] = useContext(StoreContext).timer;
 
-  const [{ notify, darkMode, fullScreenOnBreak }] = useContext(
+  const [{ onTop, notify, darkMode, fullScreenOnBreak }] = useContext(
     StoreContext
   ).setting;
 
@@ -48,31 +50,42 @@ function Timer() {
     } else {
       win.setFullScreen(false);
       win.setVisibleOnAllWorkspaces(false);
-      win.setAlwaysOnTop(false, "screen-saver");
+      win.setAlwaysOnTop(onTop, "screen-saver");
     }
 
     if (fullScreenOnBreak) {
-      if (showConfig) {
-        dispatchControl({
-          type: SHOW_CONFIG,
-          payload: false
-        });
-      }
-
       switch (timerType) {
         case WORK:
           dispatchControl({
             type: SET_FULL_SCREEN,
             payload: false
           });
+          if (counter === 5 && showConfig) {
+            dispatchNav({
+              type: SHOW_CONFIG,
+              payload: false
+            });
+          }
           break;
         case SHORT_BREAK:
+          if (showConfig) {
+            dispatchNav({
+              type: SHOW_CONFIG,
+              payload: false
+            });
+          }
           dispatchControl({
             type: SET_FULL_SCREEN,
             payload: true
           });
           break;
         case LONG_BREAK:
+          if (showConfig) {
+            dispatchNav({
+              type: SHOW_CONFIG,
+              payload: false
+            });
+          }
           dispatchControl({
             type: SET_FULL_SCREEN,
             payload: true
@@ -82,6 +95,14 @@ function Timer() {
           return null;
       }
     } else {
+      if (timerType === WORK) {
+        if (counter === 5 && showConfig) {
+          dispatchNav({
+            type: SHOW_CONFIG,
+            payload: false
+          });
+        }
+      }
       if (!win.isVisible()) {
         if (
           timerType === WORK ||
@@ -92,7 +113,16 @@ function Timer() {
         }
       }
     }
-  }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak, showConfig]);
+  }, [
+    dispatchControl,
+    timerType,
+    fullScreen,
+    fullScreenOnBreak,
+    dispatchNav,
+    showConfig,
+    counter,
+    onTop
+  ]);
 
   useEffect(() => {
     switch (timerType) {
@@ -158,6 +188,10 @@ function Timer() {
   }, [dispatchTimer, timerType, workingTime, shortBreak, longBreak]);
 
   useEffect(() => {
+    function readMessage(title, body) {
+      say.speak(`${title}, ${body}`);
+    }
+
     function setNotification(title, body) {
       if (notify) {
         new window.Notification(title, {
@@ -165,6 +199,7 @@ function Timer() {
           icon,
           silent
         });
+        readMessage(title, body);
       }
     }
 
@@ -187,7 +222,7 @@ function Timer() {
 
                 setNotification(
                   "Work Time Finished",
-                  "It's time for you to take a short break"
+                  "It is time to take a short break."
                 );
               } else {
                 dispatchTimer({
@@ -197,7 +232,7 @@ function Timer() {
 
                 setNotification(
                   "Session Rounds Completed",
-                  "It's time to take long break now"
+                  "It is time to take long break now."
                 );
               }
               break;
@@ -215,7 +250,7 @@ function Timer() {
 
               setNotification(
                 "Short Break Finished",
-                "It's time to focus and work again"
+                "It is time to focus and work again."
               );
               break;
 
@@ -232,7 +267,7 @@ function Timer() {
 
               setNotification(
                 "Long Break Finished",
-                "It's time to go back to work"
+                "It is time to go back on work."
               );
               break;
             default:

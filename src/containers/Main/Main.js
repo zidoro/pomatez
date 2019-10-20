@@ -12,7 +12,7 @@ function Main() {
     let version = remote.app.getVersion();
     dispatch({
       type: SET_TITLE,
-      payload: showConfig ? "User Configuration" : `Timeframe App ${version}`
+      payload: showConfig ? "User Configuration" : `Timeframe App v${version}`
     });
   }, [dispatch, showConfig]);
 

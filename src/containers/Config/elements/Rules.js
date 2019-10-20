@@ -24,13 +24,13 @@ function TimerConfig() {
 
   return (
     <animated.div
-      className="timer-config"
+      className="rules"
       style={{
         opacity: o.interpolate(o => `${o}`),
         transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
       }}
     >
-      <Header title="Timer" />
+      <Header title="Rules" />
       <div className="config__sliders">
         <Slider
           timeType="Working Time"
@@ -69,8 +69,8 @@ function TimerConfig() {
           }}
         />
         <Slider
-          timeType="Session Rounds"
-          rangeType="round"
+          timeType={`Session Round${sessionRounds > 1 ? "s" : ""}`}
+          rangeType={`round${sessionRounds > 1 ? "s" : ""}`}
           max={10}
           value={sessionRounds}
           onChange={({ target }) => {

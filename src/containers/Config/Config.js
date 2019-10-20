@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { animated, useSpring, config } from "react-spring";
 import { StoreContext } from "../../models";
-import { Nav, SettingConfig, TimerConfig } from "./elements";
+import { Nav, Setting, Rules } from "./elements";
 
 const { remote } = window.require("electron");
 
@@ -32,7 +32,7 @@ function Config({ showConfig }) {
       }}
     >
       <div className="config__body">
-        {showSetting ? <SettingConfig /> : <TimerConfig />}
+        {showSetting ? <Setting /> : <Rules />}
       </div>
 
       <div className="config__nav">
