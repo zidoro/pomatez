@@ -11,7 +11,7 @@ const settingState = {
   notify: true,
   darkMode: false,
   showSetting: false,
-  fullScreenOnBreak: false
+  fullScreenOnBreak: true
 };
 
 const settingReducer = (state, action) => {
