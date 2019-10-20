@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "main": "public/electron.js",
-  "description": "Time Management Application inspired by Pomodoro Technique",
+  "description": "Time Management App for Production inspired by Pomodoro Technique",
+  "keywords": [
+    "Time Management App",
+    "Pomodoro Timer App"
+  ],
   "author": {
     "name": "Roldan Montilla Jr",
     "email": "roldanjrmontilla@gmail.com",
@@ -13,31 +17,35 @@
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
-    "electron-build": "electron-builder --windows --linux",
-    "electron-release": "electron-builder --windows --linux --publish always",
+    "electron-build": "electron-builder --windows",
+    "electron-release": "electron-builder --windows --publish always",
     "clean-build": "rm -rf build/ dist/",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
-    "build": "yarn clean-build && yarn react-build && yarn electron-build"
+    "build": "yarn clean-build && yarn react-build && yarn electron-build",
+    "release": "yarn clean-build && yarn react-build && yarn electron-release"
   },
   "build": {
     "appId": "com.roldanjrCodeArts9711.TimeframeApp",
     "productName": "Timeframe App",
+    "copyright": "Copyright © 2019 ${author}",
+    "files": [
+      "src/assets"
+    ],
     "win": {
       "target": "nsis"
-    },
-    "linux": {
-      "target": "deb",
-      "category": "Production"
     }
   },
+  "homepage": "./",
   "dependencies": {
     "electron-is-dev": "^1.1.0",
+    "electron-updater": "^4.1.2",
     "node-sass": "^4.12.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-ripples": "^2.2.1",
     "react-scripts": "3.2.0",
-    "react-spring": "^8.0.27"
+    "react-spring": "^8.0.27",
+    "say": "^0.16.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",

@@ -20,7 +20,8 @@ function createWindow() {
     show: false,
     backgroundColor: "#222c33",
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      devTools: isDev
     }
   });
 
@@ -42,6 +43,14 @@ function createWindow() {
     {
       key: "CommandOrControl+Shift+S",
       callback: () => window.show()
+    },
+    {
+      key: "CommandOrControl+R",
+      callback: () => isDev && window.reload()
+    },
+    {
+      key: "CommandOrControl+Shift+R",
+      callback: () => isDev && window.reload()
     },
     {
       key: "CommandOrControl+Alt+Q",
