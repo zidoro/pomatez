@@ -17,6 +17,8 @@ import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 
 const { remote } = window.require("electron");
 
+const say = window.require("say");
+
 function Timer() {
   const [{ showConfig }, dispatchNav] = useContext(StoreContext).nav;
 
@@ -186,6 +188,10 @@ function Timer() {
   }, [dispatchTimer, timerType, workingTime, shortBreak, longBreak]);
 
   useEffect(() => {
+    function readMessage(title, body) {
+      say.speak(`${title}, ${body}`);
+    }
+
     function setNotification(title, body) {
       if (notify) {
         new window.Notification(title, {
@@ -193,6 +199,7 @@ function Timer() {
           icon,
           silent
         });
+        readMessage(title, body);
       }
     }
 
@@ -215,7 +222,7 @@ function Timer() {
 
                 setNotification(
                   "Work Time Finished",
-                  "It's time for you to take a short break"
+                  "It is time to take a short break."
                 );
               } else {
                 dispatchTimer({
@@ -225,7 +232,7 @@ function Timer() {
 
                 setNotification(
                   "Session Rounds Completed",
-                  "It's time to take long break now"
+                  "It is time to take long break now."
                 );
               }
               break;
@@ -243,7 +250,7 @@ function Timer() {
 
               setNotification(
                 "Short Break Finished",
-                "It's time to focus and work again"
+                "It is time to focus and work again."
               );
               break;
 
@@ -260,7 +267,7 @@ function Timer() {
 
               setNotification(
                 "Long Break Finished",
-                "It's time to go back to work"
+                "It is time to go back on work."
               );
               break;
             default:
