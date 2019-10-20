@@ -18,7 +18,7 @@ import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 const { remote } = window.require("electron");
 
 function Timer() {
-  const [{ showConfig }] = useContext(StoreContext).nav;
+  const [{ showConfig }, dispatchNav] = useContext(StoreContext).nav;
 
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
     StoreContext
@@ -33,7 +33,7 @@ function Timer() {
     dispatchTimer
   ] = useContext(StoreContext).timer;
 
-  const [{ notify, darkMode, fullScreenOnBreak }] = useContext(
+  const [{ onTop, notify, darkMode, fullScreenOnBreak }] = useContext(
     StoreContext
   ).setting;
 
@@ -48,31 +48,42 @@ function Timer() {
     } else {
       win.setFullScreen(false);
       win.setVisibleOnAllWorkspaces(false);
-      win.setAlwaysOnTop(false, "screen-saver");
+      win.setAlwaysOnTop(onTop, "screen-saver");
     }
 
     if (fullScreenOnBreak) {
-      if (showConfig) {
-        dispatchControl({
-          type: SHOW_CONFIG,
-          payload: false
-        });
-      }
-
       switch (timerType) {
         case WORK:
           dispatchControl({
             type: SET_FULL_SCREEN,
             payload: false
           });
+          if (counter === 5 && showConfig) {
+            dispatchNav({
+              type: SHOW_CONFIG,
+              payload: false
+            });
+          }
           break;
         case SHORT_BREAK:
+          if (showConfig) {
+            dispatchNav({
+              type: SHOW_CONFIG,
+              payload: false
+            });
+          }
           dispatchControl({
             type: SET_FULL_SCREEN,
             payload: true
           });
           break;
         case LONG_BREAK:
+          if (showConfig) {
+            dispatchNav({
+              type: SHOW_CONFIG,
+              payload: false
+            });
+          }
           dispatchControl({
             type: SET_FULL_SCREEN,
             payload: true
@@ -82,6 +93,14 @@ function Timer() {
           return null;
       }
     } else {
+      if (timerType === WORK) {
+        if (counter === 5 && showConfig) {
+          dispatchNav({
+            type: SHOW_CONFIG,
+            payload: false
+          });
+        }
+      }
       if (!win.isVisible()) {
         if (
           timerType === WORK ||
@@ -92,7 +111,16 @@ function Timer() {
         }
       }
     }
-  }, [dispatchControl, timerType, fullScreen, fullScreenOnBreak, showConfig]);
+  }, [
+    dispatchControl,
+    timerType,
+    fullScreen,
+    fullScreenOnBreak,
+    dispatchNav,
+    showConfig,
+    counter,
+    onTop
+  ]);
 
   useEffect(() => {
     switch (timerType) {

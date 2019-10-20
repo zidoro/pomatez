@@ -5,25 +5,19 @@ import {
   SET_ON_TOP,
   SET_NOTIFY,
   SET_FULL_SCREEN_ON_BREAK,
-  SHOW_CONFIG,
   SET_RUNNING,
   SET_DARKMODE
 } from "../../../models";
 import { useAnimate } from "../../../hooks";
 
 import { Header, Toggle, Shortcut } from "../../../components";
-import { SHORT_BREAK, LONG_BREAK } from "../../../components/_helpers";
 
 function SettingConfig() {
   const { o, x } = useAnimate({ axisX: 25 });
 
-  const [, dispatchNav] = useContext(StoreContext).nav;
-
   const [{ running, fullScreen }, dispatchControl] = useContext(
     StoreContext
   ).control;
-
-  const [{ timerType }] = useContext(StoreContext).timer;
 
   const [
     { onTop, notify, darkMode, fullScreenOnBreak },
@@ -50,7 +44,7 @@ function SettingConfig() {
 
   return (
     <animated.div
-      className="setting-config"
+      className="setting"
       style={{
         opacity: o.interpolate(o => `${o}`),
         transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
@@ -91,12 +85,6 @@ function SettingConfig() {
               type: SET_FULL_SCREEN_ON_BREAK,
               payload: !fullScreenOnBreak
             });
-            if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
-              dispatchNav({
-                type: SHOW_CONFIG,
-                payload: false
-              });
-            }
             if (!running) {
               dispatchControl({
                 type: SET_RUNNING,
