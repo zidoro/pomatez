@@ -31,12 +31,12 @@ function SettingConfig() {
         let keyCode = e.keyCode;
         let keyChar = String.fromCharCode(keyCode);
 
-        if (e.ctrlKey && e.shiftKey && keyChar === "D") {
+        if (e.ctrlKey && keyChar === "D") {
           dispatchSetting({
             type: SET_DARKMODE,
             payload: true
           });
-        } else if (e.ctrlKey && e.shiftKey && keyChar === "L") {
+        } else if (e.ctrlKey && keyChar === "L") {
           dispatchSetting({
             type: SET_DARKMODE,
             payload: false
@@ -102,14 +102,8 @@ function SettingConfig() {
 
       <div className="keyboard">
         <p className="section-header">Keyboard Shortcuts</p>
-        <Shortcut
-          shortcutName="Switch Dark Mode"
-          shortcutKey="Ctrl + Shift + D"
-        />
-        <Shortcut
-          shortcutName="Switch Light Mode"
-          shortcutKey="Ctrl + Shift + L"
-        />
+        <Shortcut shortcutName="Switch to Dark Mode" shortcutKey="Ctrl + D" />
+        <Shortcut shortcutName="Switch to Light Mode" shortcutKey="Ctrl + L" />
         <Shortcut
           shortcutName="Quit Application"
           shortcutKey="Ctrl + Alt + Q"

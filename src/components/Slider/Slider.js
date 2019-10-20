@@ -11,7 +11,7 @@ Slider.propTypes = {
 };
 
 Slider.defaultProps = {
-  min: 0,
+  min: 1,
   max: 60,
   value: 30,
   rangeType: "min"
