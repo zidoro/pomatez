@@ -69,8 +69,8 @@ function TimerConfig() {
           }}
         />
         <Slider
-          timeType="Session Rounds"
-          rangeType="round"
+          timeType={`Session Round${sessionRounds > 1 ? "s" : ""}`}
+          rangeType={`round${sessionRounds > 1 ? "s" : ""}`}
           max={10}
           value={sessionRounds}
           onChange={({ target }) => {
