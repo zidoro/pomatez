@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "main": "public/electron.js",
-  "description": "Time Management App for Production inspired by Pomodoro Technique",
+  "description": "Time Management Application for Productivity inspired by Pomodoro Technique",
   "keywords": [
     "Time Management App",
-    "Pomodoro Timer App"
+    "Pomodoro Timer App",
+    "Productivity App"
   ],
   "author": {
     "name": "Roldan Montilla Jr",
