@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import { animated } from "react-spring";
 import {
   StoreContext,
@@ -15,37 +15,41 @@ import { Header, Toggle, Shortcut } from "../../../components";
 function SettingConfig() {
   const { o, x } = useAnimate({ axisX: 25 });
 
-  const [{ running, fullScreen }, dispatchControl] = useContext(
-    StoreContext
-  ).control;
+  const [{ running }, dispatchControl] = useContext(StoreContext).control;
 
-  const [
-    { onTop, notify, darkMode, fullScreenOnBreak },
-    dispatchSetting
-  ] = useContext(StoreContext).setting;
+  const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
+    StoreContext
+  ).setting;
+
+  const handleKeyPress = useCallback(
+    e => {
+      let keyCode = e.keyCode;
+      let keyChar = String.fromCharCode(keyCode);
+
+      if (e.ctrlKey && keyChar === "D") {
+        dispatchSetting({
+          type: SET_DARKMODE,
+          payload: true
+        });
+      } else if (e.ctrlKey && keyChar === "L") {
+        dispatchSetting({
+          type: SET_DARKMODE,
+          payload: false
+        });
+      } else if (keyCode === 32) {
+        dispatchControl({
+          type: SET_RUNNING,
+          payload: !running
+        });
+      }
+    },
+    [dispatchSetting, dispatchControl, running]
+  );
 
   useEffect(() => {
-    document.addEventListener(
-      "keydown",
-      e => {
-        let keyCode = e.keyCode;
-        let keyChar = String.fromCharCode(keyCode);
-
-        if (e.ctrlKey && keyChar === "D") {
-          dispatchSetting({
-            type: SET_DARKMODE,
-            payload: true
-          });
-        } else if (e.ctrlKey && keyChar === "L") {
-          dispatchSetting({
-            type: SET_DARKMODE,
-            payload: false
-          });
-        }
-      },
-      true
-    );
-  }, [dispatchSetting, darkMode, fullScreen]);
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, [handleKeyPress]);
 
   return (
     <animated.div
