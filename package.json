@@ -5,9 +5,9 @@
   "main": "public/electron.js",
   "description": "Time Management Application for Productivity inspired by Pomodoro Technique",
   "keywords": [
-    "Time Management App",
-    "Pomodoro Timer App",
-    "Productivity App"
+    "Time Management Application",
+    "Pomodoro Timer Application",
+    "Productivity Application"
   ],
   "author": {
     "name": "Roldan Montilla Jr",
@@ -24,26 +24,6 @@
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
     "release": "yarn clean-build && yarn react-build && yarn electron-release"
-  },
-  "build": {
-    "appId": "com.roldanjrCodeArts9711.TimeframeApp",
-    "productName": "Timeframe App",
-    "copyright": "Copyright © 2019 ${author}",
-    "files": [
-      "src/assets"
-    ],
-    "win": {
-      "target": "nsis",
-      "icon": "./src/assets/icons/icon.ico"
-    },
-    "linux": {
-      "category": "Development",
-      "synopsis": "Productivity Timer Application",
-      "icon": "./src/assets/icons/icon.ico",
-      "target": [
-        "pacman"
-      ]
-    }
   },
   "homepage": "./",
   "dependencies": {

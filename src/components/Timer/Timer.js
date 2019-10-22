@@ -44,6 +44,7 @@ function Timer() {
   useEffect(() => {
     if (fullScreen) {
       win.setFullScreen(true);
+      win.setSkipTaskbar(true);
       win.setVisibleOnAllWorkspaces(true);
       win.setAlwaysOnTop(true, "screen-saver");
       setTimeout(() => win.show(), 500);
@@ -54,6 +55,7 @@ function Timer() {
       }
     } else {
       win.setFullScreen(false);
+      win.setSkipTaskbar(false);
       win.setVisibleOnAllWorkspaces(false);
       win.setAlwaysOnTop(onTop, "screen-saver");
     }
@@ -271,7 +273,7 @@ function Timer() {
 
               setNotification(
                 "Long Break Finished",
-                "It is time to go back on work."
+                "It is time to go back in work."
               );
               break;
             default:

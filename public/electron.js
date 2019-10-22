@@ -1,4 +1,12 @@
-const { app, BrowserWindow, Tray, Menu, globalShortcut } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  Tray,
+  Menu,
+  globalShortcut,
+  ipcMain
+} = require("electron");
+const { autoUpdater } = require("electron-updater");
 
 const isDev = require("electron-is-dev");
 const path = require("path");
@@ -10,6 +18,8 @@ app.setAppUserModelId("com.roldanjrCodeArts9711.TimeframeApp");
 
 const appIcon = path.join(__dirname, "../src/assets/icons/icon.ico");
 const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
+
+const gotTheLock = app.requestSingleInstanceLock();
 
 function createWindow() {
   window = new BrowserWindow({
@@ -38,7 +48,27 @@ function createWindow() {
   window.on("ready-to-show", () => window.show());
 
   window.on("closed", () => (window = null));
+}
 
+function createSystemTray() {
+  tray = new Tray(trayIcon);
+
+  let contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Quit",
+      role: "quit"
+    }
+  ]);
+
+  tray.setToolTip("Timeframe App");
+  tray.setContextMenu(contextMenu);
+
+  tray.on("click", () => {
+    window.isVisible() ? window.hide() : window.show();
+  });
+}
+
+function registerGlobalShortcut() {
   let shortcutKeys = [
     {
       key: "CommandOrControl+Shift+H",
@@ -65,25 +95,29 @@ function createWindow() {
   shortcutKeys.map(({ key, callback }) =>
     globalShortcut.register(key, callback)
   );
-
-  tray = new Tray(trayIcon);
-
-  let contextMenu = Menu.buildFromTemplate([
-    {
-      label: "Quit",
-      role: "quit"
-    }
-  ]);
-
-  tray.setToolTip("Timeframe App");
-  tray.setContextMenu(contextMenu);
-
-  tray.on("click", () => {
-    window.isVisible() ? window.hide() : window.show();
-  });
 }
 
-app.on("ready", createWindow);
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on("second-instance", (event, commandLine, workingDirectory) => {
+    if (window) {
+      if (window.isMinimized()) {
+        window.restore();
+      } else if (!window.isVisible()) {
+        window.show();
+      }
+      window.focus();
+    }
+  });
+
+  app.on("ready", () => {
+    createWindow();
+    createSystemTray();
+    registerGlobalShortcut();
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+}
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -100,5 +134,15 @@ app.on("activate", () => {
 app.on("will-quit", () => {
   globalShortcut.unregisterAll();
 });
+
+autoUpdater.on("update-available", () =>
+  window.webContents.send("update_available")
+);
+
+autoUpdater.on("update-downloaded", () =>
+  window.webContents.send("update_downloaded")
+);
+
+ipcMain.on("restart_app", () => autoUpdater.quitAndInstall());
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
