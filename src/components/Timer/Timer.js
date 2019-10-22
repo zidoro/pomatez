@@ -10,7 +10,7 @@ import {
   SHOW_CONFIG
 } from "../../models";
 
-import icon from "../../assets/electron.png";
+import icon from "../../assets/icons/48x48.png";
 
 import { CountDown, Progress } from "./elements";
 import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
@@ -47,6 +47,11 @@ function Timer() {
       win.setVisibleOnAllWorkspaces(true);
       win.setAlwaysOnTop(true, "screen-saver");
       setTimeout(() => win.show(), 500);
+    } else if (!fullScreen && !win.isVisible()) {
+      if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
+        win.setVisibleOnAllWorkspaces(true);
+        win.show();
+      }
     } else {
       win.setFullScreen(false);
       win.setVisibleOnAllWorkspaces(false);
@@ -196,7 +201,9 @@ function Timer() {
             win.show();
           }
         });
-        readMessage(title, body);
+        if (!silent) {
+          readMessage(title, body);
+        }
       }
     }
 
