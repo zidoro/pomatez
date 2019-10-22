@@ -35,6 +35,14 @@
     "win": {
       "target": "nsis",
       "icon": "./src/assets/icons/icon.ico"
+    },
+    "linux": {
+      "category": "Development",
+      "synopsis": "Productivity Timer Application",
+      "icon": "./src/assets/icons/icon.ico",
+      "target": [
+        "pacman"
+      ]
     }
   },
   "homepage": "./",
@@ -43,8 +51,7 @@
     "electron-updater": "^4.1.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-ripples": "^2.2.1",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.2.0",
     "react-spring": "^8.0.27",
     "say": "^0.16.0"
   },
@@ -54,6 +61,7 @@
     "electron": "^6.0.12",
     "electron-builder": "^21.2.0",
     "node-sass": "^4.12.0",
+    "react-ripples": "^2.2.1",
     "wait-on": "^3.3.0"
   },
   "eslintConfig": {
