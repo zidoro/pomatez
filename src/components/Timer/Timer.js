@@ -10,7 +10,7 @@ import {
   SHOW_CONFIG
 } from "../../models";
 
-import icon from "../../assets/electron.png";
+import icon from "../../assets/icons/48x48.png";
 
 import { CountDown, Progress } from "./elements";
 import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
@@ -20,6 +20,8 @@ const { remote } = window.require("electron");
 const say = window.require("say");
 
 function Timer() {
+  let win = remote.getCurrentWindow();
+
   const [{ showConfig }, dispatchNav] = useContext(StoreContext).nav;
 
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
@@ -40,13 +42,16 @@ function Timer() {
   ).setting;
 
   useEffect(() => {
-    let win = remote.getCurrentWindow();
-
     if (fullScreen) {
       win.setFullScreen(true);
       win.setVisibleOnAllWorkspaces(true);
       win.setAlwaysOnTop(true, "screen-saver");
       setTimeout(() => win.show(), 500);
+    } else if (!fullScreen && !win.isVisible()) {
+      if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
+        win.setVisibleOnAllWorkspaces(true);
+        win.show();
+      }
     } else {
       win.setFullScreen(false);
       win.setVisibleOnAllWorkspaces(false);
@@ -103,15 +108,6 @@ function Timer() {
           });
         }
       }
-      if (!win.isVisible()) {
-        if (
-          timerType === WORK ||
-          timerType === SHORT_BREAK ||
-          timerType === LONG_BREAK
-        ) {
-          win.show();
-        }
-      }
     }
   }, [
     dispatchControl,
@@ -121,7 +117,8 @@ function Timer() {
     dispatchNav,
     showConfig,
     counter,
-    onTop
+    onTop,
+    win
   ]);
 
   useEffect(() => {
@@ -194,12 +191,19 @@ function Timer() {
 
     function setNotification(title, body) {
       if (notify) {
-        new window.Notification(title, {
+        let notification = new window.Notification(title, {
           body,
           icon,
           silent
         });
-        readMessage(title, body);
+        notification.addEventListener("click", () => {
+          if (!win.isVisible()) {
+            win.show();
+          }
+        });
+        if (!silent) {
+          readMessage(title, body);
+        }
       }
     }
 
@@ -294,7 +298,8 @@ function Timer() {
     longBreak,
     sessionRounds,
     round,
-    timerType
+    timerType,
+    win
   ]);
 
   useEffect(

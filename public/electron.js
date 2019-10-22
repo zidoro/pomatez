@@ -8,6 +8,9 @@ let tray = null;
 
 app.setAppUserModelId("com.roldanjrCodeArts9711.TimeframeApp");
 
+const appIcon = path.join(__dirname, "../src/assets/icons/icon.ico");
+const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
+
 function createWindow() {
   window = new BrowserWindow({
     width: 400,
@@ -18,6 +21,7 @@ function createWindow() {
     maximizable: false,
     frame: false,
     show: false,
+    icon: appIcon,
     backgroundColor: "#222c33",
     webPreferences: {
       nodeIntegration: true,
@@ -62,7 +66,7 @@ function createWindow() {
     globalShortcut.register(key, callback)
   );
 
-  tray = new Tray(path.join(__dirname, "../src/assets/tray.png"));
+  tray = new Tray(trayIcon);
 
   let contextMenu = Menu.buildFromTemplate([
     {
