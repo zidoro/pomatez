@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { StoreContext } from "./models";
 import { getSvg } from "./sprite";
 
-import { Titlebar } from "./components";
+import { Titlebar, Modal } from "./components";
 import { Main } from "./containers";
 
 const { remote } = window.require("electron");
@@ -23,6 +23,7 @@ function App() {
     <div className="app">
       <Titlebar />
       <Main />
+      <Modal />
     </div>
   );
 }
