@@ -7,3 +7,4 @@ export * from "./Switch";
 export * from "./Timer";
 export * from "./Titlebar";
 export * from "./Toggle";
+export * from "./Modal";

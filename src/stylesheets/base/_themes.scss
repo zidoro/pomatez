@@ -12,6 +12,7 @@ $surface-color-0: "surface-color-0";
 $surface-color-2: "surface-color-2";
 $surface-color-8: "surface-color-8";
 $surface-color-16: "surface-color-16";
+$surface-color-24: "surface-color-24";
 
 $border-primary: "border-primary";
 
@@ -46,6 +47,7 @@ $themes: (
     surface-color-2: $surface-color-2--dark,
     surface-color-8: $surface-color-8--dark,
     surface-color-16: $surface-color-16--dark,
+    surface-color-24: $surface-color-24--dark,
     border-primary: $border-primary--dark,
     shadow-primary: $shadow-primary--dark
   )
