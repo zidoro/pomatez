@@ -10,9 +10,13 @@ function Main() {
 
   useEffect(() => {
     let version = remote.app.getVersion();
+    let appName = `Timeframe App v${version}`;
+
+    document.title = appName;
+
     dispatch({
       type: SET_TITLE,
-      payload: showConfig ? "User Configuration" : `Timeframe App v${version}`
+      payload: showConfig ? "User Configuration" : appName
     });
   }, [dispatch, showConfig]);
 
