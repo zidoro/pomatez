@@ -45,7 +45,7 @@ function createWindow() {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
 
-  window.on("ready-to-show", () => window.show());
+  window.once("ready-to-show", () => window.show());
 
   window.on("closed", () => (window = null));
 }
