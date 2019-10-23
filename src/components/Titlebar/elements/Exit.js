@@ -1,10 +1,13 @@
 import React from "react";
-const { remote } = window.require("electron");
+import PropTypes from "prop-types";
 
-function Exit() {
-  const onExit = () => remote.getCurrentWindow().hide();
+Exit.propTypes = {
+  onClick: PropTypes.func
+};
+
+function Exit({ onClick }) {
   return (
-    <div className="exit" onClick={onExit}>
+    <div className="exit" onClick={onClick}>
       <svg className="exit__icon">
         <use xlinkHref="#icon-exit" />
       </svg>

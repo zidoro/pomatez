@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { StoreContext, SHOW_CONFIG, SET_DARKMODE } from "../../models";
 import { Exit, Menu, Minimize, Mode } from "./elements";
 
+const { remote } = window.require("electron");
+
 function Titlebar() {
   const [{ title, showConfig }, dispatchNav] = useContext(StoreContext).nav;
 
@@ -38,8 +40,8 @@ function Titlebar() {
       </div>
 
       <div className="titlebar__icon">
-        <Minimize />
-        <Exit />
+        <Minimize onClick={() => remote.getCurrentWindow().minimize()} />
+        <Exit onClick={() => remote.getCurrentWindow().hide()} />
       </div>
     </div>
   );
