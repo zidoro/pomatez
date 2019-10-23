@@ -47,7 +47,8 @@
     -webkit-app-region: drag;
 
     @include themed() {
-      border-bottom: 0.1rem solid t($surface-color-8);
+      border-bottom: 0.1rem solid
+        set-color(t($color-primary), t($surface-color-8), t($surface-color-2));
     }
 
     & .minimize {
@@ -96,6 +97,7 @@
     &--heading,
     &--indicator {
       font-weight: 300;
+      font-size: 1.4rem;
     }
   }
 
