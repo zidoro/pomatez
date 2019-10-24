@@ -3,15 +3,22 @@ import {
   SET_NOTIFY,
   SET_DARKMODE,
   SHOW_SETTING,
-  SET_FULL_SCREEN_ON_BREAK
+  SET_FULL_SCREEN_ON_BREAK,
+  SET_UPDATING,
+  SET_DOWNLOAD_COMPLETED
 } from "../actions";
+
+const getDefaultTheme = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 const settingState = {
   onTop: false,
   notify: true,
-  darkMode: false,
+  darkMode: getDefaultTheme(),
   showSetting: false,
-  fullScreenOnBreak: true
+  fullScreenOnBreak: true,
+  updating: false,
+  downloadCompleted: false
 };
 
 const settingReducer = (state, action) => {
@@ -40,6 +47,16 @@ const settingReducer = (state, action) => {
       return {
         ...state,
         fullScreenOnBreak: action.payload
+      };
+    case SET_UPDATING:
+      return {
+        ...state,
+        updating: action.payload
+      };
+    case SET_DOWNLOAD_COMPLETED:
+      return {
+        ...state,
+        downloadCompleted: action.payload
       };
     default:
       return state;
