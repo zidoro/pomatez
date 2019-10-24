@@ -6,10 +6,13 @@ import {
   SET_FULL_SCREEN_ON_BREAK
 } from "../actions";
 
+const getDefaultTheme = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
 const settingState = {
   onTop: false,
   notify: true,
-  darkMode: false,
+  darkMode: getDefaultTheme(),
   showSetting: false,
   fullScreenOnBreak: true
 };
