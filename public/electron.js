@@ -136,13 +136,21 @@ app.on("will-quit", () => {
 });
 
 autoUpdater.on("update-available", () =>
-  window.webContents.send("update_available")
+  window.webContents.send("update-available")
 );
 
 autoUpdater.on("update-downloaded", () =>
-  window.webContents.send("update_downloaded")
+  window.webContents.send("update-downloaded")
 );
 
-ipcMain.on("restart_app", () => autoUpdater.quitAndInstall());
+autoUpdater.on("download-progress", dp =>
+  ipcMain.on("get-update-progress", event =>
+    event.sender.send("download-progress", {
+      percent: Math.floor(dp.percent)
+    })
+  )
+);
+
+ipcMain.on("restart-app", () => autoUpdater.quitAndInstall());
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
