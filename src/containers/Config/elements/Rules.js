@@ -9,12 +9,9 @@ import {
   SET_RUNNING
 } from "../../../models";
 import { animated } from "react-spring";
-import { useAnimate } from "../../../hooks";
 import { Header, Slider } from "../../../components";
 
-function TimerConfig() {
-  const { o, x } = useAnimate({ axisX: -25 });
-
+function TimerConfig({ key, props }) {
   const [, dispatchControl] = useContext(StoreContext).control;
 
   const [
@@ -23,13 +20,7 @@ function TimerConfig() {
   ] = useContext(StoreContext).config;
 
   return (
-    <animated.div
-      className="rules"
-      style={{
-        opacity: o.interpolate(o => `${o}`),
-        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
-      }}
-    >
+    <animated.div className="rules" key={key} style={props}>
       <Header title="Rules" />
       <div className="config__sliders">
         <Slider

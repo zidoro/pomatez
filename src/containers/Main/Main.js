@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { StoreContext, SET_TITLE } from "../../models";
-import { Counter } from "../Counter";
-import { Config } from "../Config";
+
+import Counter from "../Counter";
+import Config from "../Config";
 
 const { remote } = window.require("electron");
 
@@ -22,7 +23,7 @@ function Main() {
 
   return (
     <div className="app__body">
-      <Counter showConfig={showConfig} />
+      <Counter />
       <Config showConfig={showConfig} />
     </div>
   );
