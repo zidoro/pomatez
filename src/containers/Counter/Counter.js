@@ -2,12 +2,12 @@ import React from "react";
 import { animated, useSpring, config } from "react-spring";
 import { Timer, Control } from "../../components";
 
-function Counter({ showConfig }) {
+function Counter() {
   const { o, x } = useSpring({
     from: { o: 0, x: -32 },
     to: {
-      o: showConfig ? 0 : 1,
-      x: showConfig ? 32 : 0
+      o: 1,
+      x: 0
     },
     config: config.stiff
   });

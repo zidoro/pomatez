@@ -1,44 +1,44 @@
 import React, { useContext, useEffect } from "react";
-import { animated, useSpring, config } from "react-spring";
+import { animated } from "react-spring";
+
 import { StoreContext } from "../../models";
+import { useAnimateLeft, useAnimateRight } from "../../hooks";
+
 import { Nav, Setting, Rules } from "./elements";
 
 const { remote } = window.require("electron");
 
 function Config({ showConfig }) {
-  const { o, x, v } = useSpring({
-    to: {
-      o: showConfig ? 1 : 0,
-      x: showConfig ? 0 : -32,
-      v: showConfig ? "visible" : "hidden"
-    },
-    config: config.stiff
-  });
-
   const [{ onTop, showSetting }] = useContext(StoreContext).setting;
+
+  const configTransition = useAnimateLeft({ condition: showConfig, x: 32 });
+
+  const contentTransition = useAnimateRight({ condition: showSetting, x: 25 });
 
   useEffect(() => {
     let win = remote.getCurrentWindow();
     win.setAlwaysOnTop(onTop, "screen-saver");
   }, [onTop]);
 
-  return (
-    <animated.div
-      className="config"
-      style={{
-        opacity: o.interpolate(o => `${o}`),
-        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`),
-        visibility: v
-      }}
-    >
-      <div className="config__body">
-        {showSetting ? <Setting /> : <Rules />}
-      </div>
+  return configTransition.map(
+    ({ item, key, props }) =>
+      item && (
+        <animated.div className="config" key={key} style={props}>
+          <div className="config__body">
+            {contentTransition.map(({ item, key, props }) =>
+              item ? (
+                <Setting key={key} props={props} />
+              ) : (
+                <Rules key={key} props={props} />
+              )
+            )}
+          </div>
 
-      <div className="config__nav">
-        <Nav />
-      </div>
-    </animated.div>
+          <div className="config__nav">
+            <Nav />
+          </div>
+        </animated.div>
+      )
   );
 }
 

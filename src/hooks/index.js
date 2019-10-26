@@ -1,1 +1,1 @@
-export { default as useAnimate } from "./useAnimate";
+export * from "./useAnimate";

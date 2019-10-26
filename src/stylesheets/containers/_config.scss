@@ -1,21 +1,25 @@
 .config {
   width: 100%;
   height: 100%;
-  min-width: max-content;
-  min-height: max-content;
-  margin: 0 auto;
+
+  position: absolute;
+  top: 0;
+  left: 0;
 
   @include themed() {
     background: set-color(
       t($color-primary),
-      t($surface-color-2),
-      t($surface-color-16)
+      rgba(t($surface-color-2), 0.8),
+      rgba(t($surface-color-16), 0.8)
     );
+    backdrop-filter: blur(1rem);
   }
 
   display: grid;
   grid-template-rows: max-content 1fr;
   z-index: 10;
+
+  will-change: opacity, transform;
 
   &__body {
     padding: 0 3.2rem;
@@ -52,8 +56,7 @@
   align-items: center;
 
   &__timer,
-  &__setting,
-  &__key {
+  &__setting {
     width: 50%;
     height: 100%;
 
@@ -112,4 +115,17 @@
 
 .btn-restore {
   padding: 0.2rem 0.8rem;
+}
+
+.rules,
+.setting {
+  width: calc(100% - 6.4rem);
+  height: 100%;
+
+  padding: 0 3.2rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: opacity, transform;
 }
