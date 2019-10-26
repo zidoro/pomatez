@@ -8,13 +8,10 @@ import {
   SET_RUNNING,
   SET_DARKMODE
 } from "../../../models";
-import { useAnimate } from "../../../hooks";
 
 import { Header, Toggle, Shortcut } from "../../../components";
 
-function SettingConfig() {
-  const { o, x } = useAnimate({ axisX: 25 });
-
+function SettingConfig({ key, props }) {
   const [{ running }, dispatchControl] = useContext(StoreContext).control;
 
   const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
@@ -26,12 +23,12 @@ function SettingConfig() {
       let keyCode = e.keyCode;
       let keyChar = String.fromCharCode(keyCode);
 
-      if (e.ctrlKey && keyChar === "D") {
+      if (e.ctrlKey && e.shiftKey && keyChar === "D") {
         dispatchSetting({
           type: SET_DARKMODE,
           payload: true
         });
-      } else if (e.ctrlKey && keyChar === "L") {
+      } else if (e.ctrlKey && e.shiftKey && keyChar === "L") {
         dispatchSetting({
           type: SET_DARKMODE,
           payload: false
@@ -47,18 +44,12 @@ function SettingConfig() {
   );
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
-    return () => document.removeEventListener("keydown", handleKeyPress);
+    document.addEventListener("keydown", handleKeyPress, true);
+    return () => document.removeEventListener("keydown", handleKeyPress, false);
   }, [handleKeyPress]);
 
   return (
-    <animated.div
-      className="setting"
-      style={{
-        opacity: o.interpolate(o => `${o}`),
-        transform: x.interpolate(x => `translate3d(${x}px, 0, 0)`)
-      }}
-    >
+    <animated.div className="setting" key={key} style={props}>
       <Header title="Setting" />
 
       <div className="feature">
@@ -106,11 +97,17 @@ function SettingConfig() {
 
       <div className="keyboard">
         <p className="section-header">Keyboard Shortcuts</p>
-        <Shortcut shortcutName="Switch to Dark Mode" shortcutKey="Ctrl + D" />
-        <Shortcut shortcutName="Switch to Light Mode" shortcutKey="Ctrl + L" />
         <Shortcut
-          shortcutName="Quit Application"
-          shortcutKey="Ctrl + Alt + Q"
+          shortcutName="Switch to Dark Mode"
+          shortcutKey="Ctrl + Shift + D"
+        />
+        <Shortcut
+          shortcutName="Switch to Light Mode"
+          shortcutKey="Ctrl + Shift + L"
+        />
+        <Shortcut
+          shortcutName="Show the Application"
+          shortcutKey="Ctrl + Shift + S"
         />
       </div>
     </animated.div>

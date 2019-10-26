@@ -1,28 +1,32 @@
 const {
   app,
   BrowserWindow,
+  globalShortcut,
   Tray,
   Menu,
-  globalShortcut,
   ipcMain
 } = require("electron");
 const { autoUpdater } = require("electron-updater");
-
-const isDev = require("electron-is-dev");
 const path = require("path");
 
-let window = null;
-let tray = null;
-
-app.setAppUserModelId("com.roldanjrCodeArts9711.TimeframeApp");
+const isDev = require("./scripts/isDev");
 
 const appIcon = path.join(__dirname, "../src/assets/icons/icon.ico");
 const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
 
 const gotTheLock = app.requestSingleInstanceLock();
+const appId = "com.roldanjrCodeArts9711.TimeframeApp";
+
+app.setAppUserModelId(appId);
+app.setLoginItemSettings({ openAtLogin: true });
+
+require("v8-compile-cache");
+
+let win = null;
+let tray = null;
 
 function createWindow() {
-  window = new BrowserWindow({
+  win = new BrowserWindow({
     width: 400,
     height: 600,
     minWidth: 400,
@@ -39,15 +43,15 @@ function createWindow() {
     }
   });
 
-  window.loadURL(
+  win.loadURL(
     isDev
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
 
-  window.once("ready-to-show", () => window.show());
+  win.once("ready-to-show", () => win.show());
 
-  window.on("closed", () => (window = null));
+  win.on("closed", () => (win = null));
 }
 
 function createSystemTray() {
@@ -64,31 +68,27 @@ function createSystemTray() {
   tray.setContextMenu(contextMenu);
 
   tray.on("click", () => {
-    window.isVisible() ? window.hide() : window.show();
+    win.isVisible() ? win.hide() : win.show();
   });
 }
 
 function registerGlobalShortcut() {
   let shortcutKeys = [
     {
-      key: "CommandOrControl+Shift+H",
-      callback: () => window.hide()
-    },
-    {
       key: "CommandOrControl+Shift+S",
-      callback: () => window.show()
+      callback: () => win.show()
     },
     {
       key: "CommandOrControl+R",
-      callback: () => isDev && window.reload()
+      callback: () => isDev && win.reload()
     },
     {
       key: "CommandOrControl+Shift+R",
-      callback: () => isDev && window.reload()
+      callback: () => isDev && win.reload()
     },
     {
       key: "CommandOrControl+Alt+Q",
-      callback: () => app.quit()
+      callback: () => isDev && app.quit()
     }
   ];
 
@@ -101,13 +101,13 @@ if (!gotTheLock) {
   app.quit();
 } else {
   app.on("second-instance", (event, commandLine, workingDirectory) => {
-    if (window) {
-      if (window.isMinimized()) {
-        window.restore();
-      } else if (!window.isVisible()) {
-        window.show();
+    if (win) {
+      if (win.isMinimized()) {
+        win.restore();
+      } else if (!win.isVisible()) {
+        win.show();
       }
-      window.focus();
+      win.focus();
     }
   });
 
@@ -126,7 +126,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-  if (window === null) {
+  if (win === null) {
     createWindow();
   }
 });
@@ -136,11 +136,11 @@ app.on("will-quit", () => {
 });
 
 autoUpdater.on("update-available", () =>
-  window.webContents.send("update-available")
+  win.webContents.send("update-available")
 );
 
 autoUpdater.on("update-downloaded", () =>
-  window.webContents.send("update-downloaded")
+  win.webContents.send("update-downloaded")
 );
 
 autoUpdater.on("download-progress", dp =>

@@ -1,2 +1,3 @@
-export { default as Update } from "./Update";
-export { default as Restart } from "./Restart";
+import loadable from "@loadable/component";
+export const Update = loadable(() => import("./Update"));
+export const Restart = loadable(() => import("./Restart"));

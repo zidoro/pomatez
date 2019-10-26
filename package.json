@@ -1,6 +1,6 @@
 {
   "name": "timeframe-app",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "main": "public/electron.js",
   "description": "Time Management Application for Productivity inspired by Pomodoro Technique",
@@ -27,15 +27,16 @@
   },
   "homepage": "./",
   "dependencies": {
-    "electron-is-dev": "^1.1.0",
     "electron-updater": "^4.1.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "^3.2.0",
     "react-spring": "^8.0.27",
-    "say": "^0.16.0"
+    "say": "^0.16.0",
+    "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
+    "@loadable/component": "^5.10.3",
     "concurrently": "^5.0.0",
     "cross-env": "^6.0.3",
     "electron": "^7.0.0",
