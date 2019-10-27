@@ -3,11 +3,11 @@
   "version": "1.0.1",
   "private": true,
   "main": "public/electron.js",
-  "description": "Productivity Timer inspired by Pomodoro Technique",
+  "description": "Time Management App for Productivity inspired by Pomodoro Technique.",
   "keywords": [
+    "Productivity Timer Application",
     "Time Management Application",
     "Pomodoro Timer Application",
-    "Productivity Application",
     "Tomato Timer Application"
   ],
   "author": {
