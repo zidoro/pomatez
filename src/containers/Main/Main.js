@@ -11,7 +11,7 @@ function Main() {
 
   useEffect(() => {
     let version = remote.app.getVersion();
-    let appName = `Timeframe App v${version}`;
+    let appName = `Productivity Timer v${version}`;
 
     document.title = appName;
 

@@ -1,13 +1,14 @@
 {
-  "name": "timeframe-app",
-  "version": "0.0.1",
+  "name": "productivity-timer",
+  "version": "1.0.1",
   "private": true,
   "main": "public/electron.js",
-  "description": "Time Management Application for Productivity inspired by Pomodoro Technique",
+  "description": "Productivity Timer inspired by Pomodoro Technique",
   "keywords": [
     "Time Management Application",
     "Pomodoro Timer Application",
-    "Productivity Application"
+    "Productivity Application",
+    "Tomato Timer Application"
   ],
   "author": {
     "name": "Roldan Montilla Jr",
