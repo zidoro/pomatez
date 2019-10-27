@@ -5,14 +5,14 @@ import { Modal } from "../../components";
 const { ipcRenderer } = window.require("electron");
 
 function Restart() {
-  const [{ downloadCompleted }, dispatchSetting] = useContext(
+  const [{ downloadCompleted }, dispatchUpdate] = useContext(
     StoreContext
-  ).setting;
+  ).update;
   return (
     <Modal
       windowTitle="Updates Completed"
       onExit={() =>
-        dispatchSetting({
+        dispatchUpdate({
           type: SET_DOWNLOAD_COMPLETED,
           payload: false
         })
@@ -30,7 +30,7 @@ function Restart() {
           <button
             className="restart__cta--later-btn btn btn--secondary"
             onClick={() =>
-              dispatchSetting({
+              dispatchUpdate({
                 type: SET_DOWNLOAD_COMPLETED,
                 payload: false
               })
@@ -42,7 +42,7 @@ function Restart() {
             className="restart__cta--now-btn btn btn--primary"
             onClick={() => {
               ipcRenderer.send("restart-app");
-              dispatchSetting({
+              dispatchUpdate({
                 type: SET_DOWNLOAD_COMPLETED,
                 payload: false
               });
