@@ -9,7 +9,9 @@ import {
   settingReducer,
   settingState,
   configReducer,
-  configState
+  configState,
+  updateReducer,
+  updateState
 } from "./reducers";
 
 const StoreContext = React.createContext();
@@ -25,6 +27,7 @@ const Provider = ({ children }) => {
     settingReducer,
     store ? store.setting : settingState
   );
+  const update = useReducer(updateReducer, updateState);
 
   localStorage.setItem(
     "store",
@@ -36,7 +39,9 @@ const Provider = ({ children }) => {
   );
 
   return (
-    <StoreContext.Provider value={{ nav, timer, control, config, setting }}>
+    <StoreContext.Provider
+      value={{ nav, timer, control, config, setting, update }}
+    >
       {children}
     </StoreContext.Provider>
   );

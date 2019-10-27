@@ -3,9 +3,7 @@ import {
   SET_NOTIFY,
   SET_DARKMODE,
   SHOW_SETTING,
-  SET_FULL_SCREEN_ON_BREAK,
-  SET_UPDATING,
-  SET_DOWNLOAD_COMPLETED
+  SET_FULL_SCREEN_ON_BREAK
 } from "../actions";
 
 const getDefaultTheme = () =>
@@ -16,9 +14,7 @@ const settingState = {
   notify: true,
   darkMode: getDefaultTheme(),
   showSetting: false,
-  fullScreenOnBreak: true,
-  updating: false,
-  downloadCompleted: false
+  fullScreenOnBreak: true
 };
 
 const settingReducer = (state, action) => {
@@ -47,16 +43,6 @@ const settingReducer = (state, action) => {
       return {
         ...state,
         fullScreenOnBreak: action.payload
-      };
-    case SET_UPDATING:
-      return {
-        ...state,
-        updating: action.payload
-      };
-    case SET_DOWNLOAD_COMPLETED:
-      return {
-        ...state,
-        downloadCompleted: action.payload
       };
     default:
       return state;
