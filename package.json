@@ -1,6 +1,6 @@
 {
   "name": "productivity-timer",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "private": true,
   "main": "public/electron.js",
   "description": "Time Management App for Productivity inspired by Pomodoro Technique.",
