@@ -7,7 +7,7 @@ const { ipcRenderer } = window.require("electron");
 function Update() {
   const [progress, setProgress] = useState(0);
 
-  const [{ updating }, dispatchSetting] = useContext(StoreContext).setting;
+  const [{ updating }, dispatchUpdate] = useContext(StoreContext).update;
 
   useEffect(() => {
     let interval = setInterval(
@@ -26,7 +26,7 @@ function Update() {
     <Modal
       windowTitle="New updates available"
       onExit={() =>
-        dispatchSetting({
+        dispatchUpdate({
           type: SET_UPDATING,
           payload: false
         })
