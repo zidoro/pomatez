@@ -11,7 +11,7 @@ import {
 
 import { Header, Toggle, Shortcut } from "../../../components";
 
-function SettingConfig({ key, props }) {
+function Setting({ key, props }) {
   const [{ running }, dispatchControl] = useContext(StoreContext).control;
 
   const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
@@ -33,14 +33,9 @@ function SettingConfig({ key, props }) {
           type: SET_DARKMODE,
           payload: false
         });
-      } else if (keyCode === 32) {
-        dispatchControl({
-          type: SET_RUNNING,
-          payload: !running
-        });
       }
     },
-    [dispatchSetting, dispatchControl, running]
+    [dispatchSetting]
   );
 
   useEffect(() => {
@@ -114,4 +109,4 @@ function SettingConfig({ key, props }) {
   );
 }
 
-export default SettingConfig;
+export default Setting;
