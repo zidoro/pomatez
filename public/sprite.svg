@@ -2,69 +2,51 @@
 <defs>
 
 <symbol id="icon-minimize" viewBox="0 0 14 14">
-<title>icon-minimize</title>
 <g class="b" transform="translate(-253 -75)"><g class="a" transform="translate(253 81)"><rect class="c" width="14" height="2"/><rect class="d" x="0.5" y="0.5" width="13" height="1"/></g></g>
 </symbol>
 
 <symbol id="icon-exit" viewBox="0 0 14 14">
-<title>icon-exit</title>
 <defs><clipPath id="a"><rect class="a" width="14" height="14" transform="translate(253 75)"/></clipPath></defs><g class="b" transform="translate(-253 -75)"><path class="c" d="M19.745,7.145l-1.4-1.4-5.6,5.6-5.6-5.6-1.4,1.4,5.6,5.6-5.6,5.6,1.4,1.4,5.6-5.6,5.6,5.6,1.4-1.4-5.6-5.6Z" transform="translate(247.255 69.255)"/></g>
 </symbol>
 
 <symbol id="icon-reset"  width="24" height="18" viewBox="0 0 24 18">
-<title>icon-reset</title>
 <defs><clipPath id="a"><rect class="a" width="24" height="18" transform="translate(42 539)"/></clipPath></defs><g class="b" transform="translate(-42 -539)"><path class="c" d="M14.455,21.2a6.75,6.75,0,0,1,0-13.5A6.539,6.539,0,0,1,19.18,9.73l-3.6,3.6h7.875V5.455L20.811,8.1a8.988,8.988,0,1,0,2.306,8.811h-2.38A6.7,6.7,0,0,1,14.455,21.2Z" transform="translate(39.545 533.545)"/></g>
 </symbol>
 
 <symbol id="icon-next" width="24" height="18" viewBox="0 0 24 18">
-<title>icon-next</title>
 <defs><clipPath id="a"><rect class="a" width="24" height="18" transform="translate(296 544)"/></clipPath></defs><g class="b" transform="translate(-296 -544)"><path class="c" d="M4,4V22l13-9ZM19,4h3V22H19Z" transform="translate(295 540)"/></g>
 </symbol>
 
 <symbol id="icon-volume-on" width="24" height="18" viewBox="0 0 24 18">
-<title>icon-volume-on</title>
 <defs><clipPath id="a"><rect class="a" width="24" height="18" transform="translate(336 544)"/></clipPath></defs><g class="b" transform="translate(-336 -544)"><path class="c" d="M4,10v6H8l5,5.229V4.771L8,10Zm13.5,3A4.673,4.673,0,0,0,15,8.835v8.28A4.537,4.537,0,0,0,17.5,13ZM15,4V6.108a7.249,7.249,0,0,1,0,13.783V22A9.286,9.286,0,0,0,15,4Z" transform="translate(335 540)"/></g>
 </symbol>
 
 <symbol id="icon-volume-off"  width="24" height="18" viewBox="0 0 24 18">
-<title>icon-volume-off</title>
 <defs><clipPath id="a"><path class="a" d="M0,0H24V18H0Z" transform="translate(308 523)"/></clipPath></defs><g class="b" transform="translate(-308 -523)"><g transform="translate(308 520)"><path class="c" d="M19.008,12a7.318,7.318,0,0,1-.638,2.993l1.494,1.494A9.342,9.342,0,0,0,21,12a9.208,9.208,0,0,0-6.984-9V5.108A7.152,7.152,0,0,1,19.008,12ZM12,3.771,9.608,6.231,12,8.623ZM19.727,18.6,4.271,3.148,3.146,4.273,7.388,8.511,7,9H3v6H7l5,5.229v-7.1l4.449,4.438a6.939,6.939,0,0,1-2.434,1.328V21a8.815,8.815,0,0,0,3.859-2.007l1.857,1.861,1.125-1.127L19.731,18.6l0,0Z"/><path class="c" d="M16.509,12a4.667,4.667,0,0,0-2.493-4.165v2.8L16.4,13.02A4.716,4.716,0,0,0,16.509,12Z"/></g></g>
 </symbol>
 
 <symbol id="icon-play" width="32" height="32" viewBox="0 0 32 32">
-<title>icon-play</title>
 <defs><clipPath id="a"><rect class="a" width="32" height="32" transform="translate(320 448)"/></clipPath></defs><g class="b" transform="translate(-320 -448)"><path class="c" d="M7.529,4.078v32l25.1-16Z" transform="translate(318.922 443.922)"/></g>
 </symbol>
 
 <symbol id="icon-pause" width="32" height="32" viewBox="0 0 32 32">
-<title>icon-pause</title>
 <defs><clipPath id="a"><rect class="a" width="32" height="32" transform="translate(308 444)"/></clipPath></defs><g class="b" transform="translate(-308 -444)"><path class="c" d="M8,37.333h8.892v-32H8Zm17.775-32v32h8.892v-32Z" transform="translate(302.667 438.667)"/></g>
 </symbol>
 
 <symbol id="icon-timer" width="16" height="16" viewBox="0 0 16 16">
-<title>icon-timer</title>
 <defs><clipPath id="a"><rect class="a" width="16" height="16"/></clipPath></defs><g class="b"><g transform="translate(0 0)"><path class="c" d="M9.608,1.615a8,8,0,1,0,8.008,8A8,8,0,0,0,9.608,1.615Zm.008,14.4a6.4,6.4,0,1,1,6.4-6.4A6.4,6.4,0,0,1,9.615,16.015Z" transform="translate(-1.615 -1.615)"/><path class="c" d="M9.115,5.115h-1.2v4.8l4.2,2.519.6-.985-3.6-2.135Z" transform="translate(-0.715 -1.115)"/></g></g>
 </symbol>
 
 <symbol id="icon-setting" width="16" height="16" viewBox="0 0 16 16">
-<title>icon-setting</title>
 <defs><clipPath id="a"><rect class="a" width="16" height="16"/></clipPath></defs><g class="b"><path class="c" d="M15.691,10.415a5,5,0,0,0,.041-.8c0-.28-.041-.52-.041-.8L17.409,7.5a.367.367,0,0,0,.082-.52l-1.636-2.76a.4.4,0,0,0-.491-.16l-2.046.8a5.955,5.955,0,0,0-1.391-.8l-.286-2.12a.438.438,0,0,0-.409-.32H7.958a.438.438,0,0,0-.409.32l-.327,2.12a6.928,6.928,0,0,0-1.391.8l-2.046-.8a.383.383,0,0,0-.491.16L1.658,6.975a.483.483,0,0,0,.082.52L3.5,8.815c0,.28-.041.52-.041.8s.041.52.041.8l-1.718,1.32a.367.367,0,0,0-.082.52l1.636,2.76a.4.4,0,0,0,.491.16l2.046-.8a5.954,5.954,0,0,0,1.391.8L7.59,17.3a.4.4,0,0,0,.409.32h3.273a.438.438,0,0,0,.409-.32l.328-2.12a6.924,6.924,0,0,0,1.391-.8l2.046.8a.383.383,0,0,0,.491-.16l1.636-2.76a.482.482,0,0,0-.082-.52l-1.8-1.32Zm-6.1,2a2.8,2.8,0,1,1,0-5.6,2.8,2.8,0,1,1,0,5.6Z" transform="translate(-1.615 -1.615)"/></g>
 </symbol>
 
-<symbol id="icon-keyboard" width="24" height="18" viewBox="0 0 24 18">
-<title>icon-keyboard</title>
-<defs>
-<clipPath id="a"><rect class="a" width="24" height="18" transform="translate(346 523)"/></clipPath></defs><g class="b" transform="translate(-346 -523)"><g transform="translate(346 520)"><path class="c" d="M23.531,5.269A1.542,1.542,0,0,0,22.4,4.8H1.6a1.541,1.541,0,0,0-1.131.469A1.542,1.542,0,0,0,0,6.4V17.6a1.542,1.542,0,0,0,.469,1.131A1.541,1.541,0,0,0,1.6,19.2H22.4A1.6,1.6,0,0,0,24,17.6V6.4A1.542,1.542,0,0,0,23.531,5.269ZM22.4,17.6H1.6V6.4H22.4Z"/><path class="c" d="M3.4,16H4.6a.177.177,0,0,0,.2-.2V14.6a.177.177,0,0,0-.2-.2H3.4a.177.177,0,0,0-.2.2v1.2A.177.177,0,0,0,3.4,16Z"/><path class="c" d="M3.4,12.8H6.2a.177.177,0,0,0,.2-.2V11.4a.177.177,0,0,0-.2-.2H3.4a.177.177,0,0,0-.2.2v1.2A.177.177,0,0,0,3.4,12.8Z"/><path class="c" d="M3.4,9.6H4.6a.177.177,0,0,0,.2-.2V8.2A.177.177,0,0,0,4.6,8H3.4a.177.177,0,0,0-.2.2V9.4A.177.177,0,0,0,3.4,9.6Z"/><path class="c" d="M17.4,14.4H6.6a.177.177,0,0,0-.2.2v1.2a.177.177,0,0,0,.2.2H17.4a.177.177,0,0,0,.2-.2V14.6A.177.177,0,0,0,17.4,14.4Z"/><path class="c" d="M8,12.6a.177.177,0,0,0,.2.2H9.4a.177.177,0,0,0,.2-.2V11.4a.177.177,0,0,0-.2-.2H8.2a.177.177,0,0,0-.2.2v1.2Z"/><path class="c" d="M6.6,9.6H7.8A.177.177,0,0,0,8,9.4V8.2A.177.177,0,0,0,7.8,8H6.6a.177.177,0,0,0-.2.2V9.4A.177.177,0,0,0,6.6,9.6Z"/><path class="c" d="M11.2,12.6a.177.177,0,0,0,.2.2h1.2a.177.177,0,0,0,.2-.2V11.4a.177.177,0,0,0-.2-.2H11.4a.177.177,0,0,0-.2.2v1.2Z"/><path class="c" d="M9.8,9.6H11a.177.177,0,0,0,.2-.2V8.2A.177.177,0,0,0,11,8H9.8a.177.177,0,0,0-.2.2V9.4A.177.177,0,0,0,9.8,9.6Z"/><path class="c" d="M14.4,12.6a.177.177,0,0,0,.2.2h1.2a.177.177,0,0,0,.2-.2V11.4a.177.177,0,0,0-.2-.2H14.6a.177.177,0,0,0-.2.2Z"/><path class="c" d="M20.6,14.4H19.4a.177.177,0,0,0-.2.2v1.2a.177.177,0,0,0,.2.2h1.2a.177.177,0,0,0,.2-.2V14.6A.177.177,0,0,0,20.6,14.4Z"/><path class="c" d="M13,9.6h1.2a.177.177,0,0,0,.2-.2V8.2a.177.177,0,0,0-.2-.2H13a.177.177,0,0,0-.2.2V9.4A.177.177,0,0,0,13,9.6Z"/><path class="c" d="M16.2,9.6h1.2a.177.177,0,0,0,.2-.2V8.2a.177.177,0,0,0-.2-.2H16.2a.177.177,0,0,0-.2.2V9.4A.177.177,0,0,0,16.2,9.6Z"/><path class="c" d="M17.6,12.6a.177.177,0,0,0,.2.2h2.8a.177.177,0,0,0,.2-.2V8.2a.177.177,0,0,0-.2-.2H19.4a.177.177,0,0,0-.2.2v3H17.8a.177.177,0,0,0-.2.2v1.2Z"/></g></g>
-</symbol>
-
 <symbol id="icon-sun" width="14" height="14" viewBox="0 0 14 14">
-<title>icon-sun</title>
 <defs>
 <clipPath id="a"><rect class="a" width="14" height="14" transform="translate(4249 534)"/></clipPath></defs><g class="b" transform="translate(-4249 -534)"><path class="c" d="M7.436,11.153a3.582,3.582,0,0,0,2.628-1.089,3.582,3.582,0,0,0,1.089-2.628,3.582,3.582,0,0,0-1.089-2.628A3.582,3.582,0,0,0,7.436,3.718,3.582,3.582,0,0,0,4.807,4.807,3.582,3.582,0,0,0,3.718,7.436a3.582,3.582,0,0,0,1.089,2.628A3.582,3.582,0,0,0,7.436,11.153ZM12.4,9.5v2.9H9.5L7.436,14.436,5.373,12.4h-2.9V9.5L.436,7.436,2.469,5.373v-2.9h2.9L7.436.436,9.5,2.469h2.9v2.9l2.033,2.062Z" transform="translate(4248.564 533.564)"/></g>
 </symbol>
 
 <symbol id="icon-moon" width="14" height="14" viewBox="0 0 14 14">
-<title>icon-moon</title>
 <defs>
 <clipPath id="a"><rect class="a" width="14" height="14"/></clipPath></defs><g class="b"><path class="c" d="M7.436,3.718A3.582,3.582,0,0,0,4.807,4.807,3.582,3.582,0,0,0,3.718,7.436a3.582,3.582,0,0,0,1.089,2.628,3.582,3.582,0,0,0,2.628,1.089A3.767,3.767,0,0,0,8.975,10.8a3.712,3.712,0,0,1-2.15-3.37,3.712,3.712,0,0,1,2.15-3.37,3.77,3.77,0,0,0-1.539-.349ZM2.469,9.5.436,7.436,2.469,5.373v-2.9h2.9L7.436.436,9.5,2.469h2.9v2.9l2.033,2.062L12.4,9.5v2.9H9.5L7.436,14.436,5.373,12.4h-2.9V9.5Z" transform="translate(-3.515 7) rotate(-45)"/></g>
 </symbol>
