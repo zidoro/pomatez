@@ -11,7 +11,7 @@ import {
 import { animated } from "react-spring";
 import { Header, Slider } from "../../../components";
 
-function TimerConfig({ key, props }) {
+function Rules({ key, props }) {
   const [, dispatchControl] = useContext(StoreContext).control;
 
   const [
@@ -89,4 +89,4 @@ function TimerConfig({ key, props }) {
   );
 }
 
-export default TimerConfig;
+export default Rules;

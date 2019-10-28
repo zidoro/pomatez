@@ -6,6 +6,8 @@
   top: 0;
   left: 0;
 
+  user-select: none;
+
   @include themed() {
     background: set-color(
       t($color-primary),
