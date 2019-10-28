@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Switch } from "../Switch";
+import Switch from "../Switch";
 
 Toggle.propTypes = {
   toggleName: PropTypes.string.isRequired,
