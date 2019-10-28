@@ -33,9 +33,14 @@ function SettingConfig({ key, props }) {
           type: SET_DARKMODE,
           payload: false
         });
+      } else if (keyCode === 32) {
+        dispatchControl({
+          type: SET_RUNNING,
+          payload: !running
+        });
       }
     },
-    [dispatchSetting]
+    [dispatchSetting, dispatchControl, running]
   );
 
   useEffect(() => {
