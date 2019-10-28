@@ -15,7 +15,7 @@ const appIcon = path.join(__dirname, "../src/assets/icons/icon.ico");
 const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
 
 const gotTheLock = app.requestSingleInstanceLock();
-const appId = "com.roldanjrCodeArts9711.ProductivityTimer";
+const appId = "com.roldanjrCodeArts9711.TimeframeApp";
 
 app.setAppUserModelId(appId);
 app.setLoginItemSettings({ openAtLogin: true });
@@ -64,7 +64,7 @@ function createSystemTray() {
     }
   ]);
 
-  tray.setToolTip("Productivity Timer");
+  tray.setToolTip("Timeframe App");
   tray.setContextMenu(contextMenu);
 
   tray.on("click", () => {
