@@ -14,4 +14,4 @@ function Ripple({ color, children }) {
   return <ReactRipples color={color}>{children}</ReactRipples>;
 }
 
-export default Ripple;
+export default React.memo(Ripple);

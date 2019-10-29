@@ -22,4 +22,4 @@ function Switch({ id, isChecked, onChange }) {
   );
 }
 
-export default Switch;
+export default React.memo(Switch);

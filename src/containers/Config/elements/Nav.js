@@ -1,9 +1,9 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useCallback } from "react";
 import { animated, useSpring, config } from "react-spring";
 import { StoreContext, SHOW_SETTING } from "../../../models";
 
 function Nav() {
-  const [{ showSetting }, dispatch] = useContext(StoreContext).setting;
+  const [{ showSetting }, dispatchSetting] = useContext(StoreContext).setting;
 
   const { x } = useSpring({
     x: showSetting ? 50 : 0,
@@ -15,12 +15,14 @@ function Nav() {
       <div className="nav">
         <div
           className={`nav__timer ${!showSetting && "active"}`}
-          onClick={() =>
-            dispatch({
-              type: SHOW_SETTING,
-              payload: false
-            })
-          }
+          onClick={useCallback(
+            () =>
+              dispatchSetting({
+                type: SHOW_SETTING,
+                payload: false
+              }),
+            [dispatchSetting]
+          )}
         >
           <svg className="nav__timer--icon">
             <use xlinkHref="#icon-timer" />
@@ -28,26 +30,19 @@ function Nav() {
         </div>
         <div
           className={`nav__setting ${showSetting && "active"}`}
-          onClick={() =>
-            dispatch({
-              type: SHOW_SETTING,
-              payload: true
-            })
-          }
+          onClick={useCallback(
+            () =>
+              dispatchSetting({
+                type: SHOW_SETTING,
+                payload: true
+              }),
+            [dispatchSetting]
+          )}
         >
           <svg className="nav__setting--icon">
             <use xlinkHref="#icon-setting" />
           </svg>
         </div>
-
-        {/* <div
-          className={`nav__key ${showSetting && "active"}`}
-          onClick={onClick}
-        >
-          <svg className="nav__key--icon">
-            <use xlinkHref="#icon-keyboard" />
-          </svg>
-        </div> */}
       </div>
       <animated.div
         className="active-indicator"

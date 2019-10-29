@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import {
   StoreContext,
   SET_RUNNING,
@@ -41,7 +41,7 @@ function Control() {
           <div className={`action__reset ${addClass(timerType)}`}>
             <Reset
               timerType={timerType}
-              onClick={() => {
+              onClick={useCallback(() => {
                 dispatchTimer({
                   type: SET_COUNTER,
                   payload: duration
@@ -50,7 +50,7 @@ function Control() {
                   type: SET_RUNNING,
                   payload: false
                 });
-              }}
+              }, [dispatchTimer, dispatchControl, duration])}
             />
           </div>
 
@@ -58,12 +58,14 @@ function Control() {
             <Play
               timerType={timerType}
               running={running}
-              onClick={() =>
-                dispatchControl({
-                  type: SET_RUNNING,
-                  payload: !running
-                })
-              }
+              onClick={useCallback(
+                () =>
+                  dispatchControl({
+                    type: SET_RUNNING,
+                    payload: !running
+                  }),
+                [dispatchControl, running]
+              )}
             />
           </div>
 
@@ -71,7 +73,7 @@ function Control() {
             <div className={`action__next ${addClass(timerType)}`}>
               <Next
                 timerType={timerType}
-                onClick={() => {
+                onClick={useCallback(() => {
                   switch (timerType) {
                     case WORK:
                       if (round !== sessionRounds) {
@@ -116,7 +118,13 @@ function Control() {
                     type: SET_RUNNING,
                     payload: true
                   });
-                }}
+                }, [
+                  dispatchControl,
+                  dispatchTimer,
+                  round,
+                  sessionRounds,
+                  timerType
+                ])}
               />
             </div>
 
@@ -124,12 +132,14 @@ function Control() {
               <Volume
                 timerType={timerType}
                 silent={silent}
-                onClick={() =>
-                  dispatchControl({
-                    type: SET_SILENT,
-                    payload: !silent
-                  })
-                }
+                onClick={useCallback(
+                  () =>
+                    dispatchControl({
+                      type: SET_SILENT,
+                      payload: !silent
+                    }),
+                  [dispatchControl, silent]
+                )}
               />
             </div>
           </div>

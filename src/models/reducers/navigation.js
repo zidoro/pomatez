@@ -15,7 +15,7 @@ const navReducer = (state, action) => {
     case SHOW_CONFIG:
       return {
         ...state,
-        showConfig: !state.showConfig
+        showConfig: action.payload
       };
     default:
       return state;

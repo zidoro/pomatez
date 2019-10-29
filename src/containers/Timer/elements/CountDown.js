@@ -27,4 +27,4 @@ function CountDown({ counter, timerType }) {
   );
 }
 
-export default CountDown;
+export default React.memo(CountDown);

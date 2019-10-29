@@ -15,4 +15,4 @@ function Shortcut({ shortcutName, shortcutKey }) {
   );
 }
 
-export default Shortcut;
+export default React.memo(Shortcut);

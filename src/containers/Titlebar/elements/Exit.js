@@ -15,4 +15,4 @@ function Exit({ onClick }) {
   );
 }
 
-export default Exit;
+export default React.memo(Exit);
