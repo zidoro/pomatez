@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import {
   StoreContext,
   SET_DURATION,
@@ -9,11 +9,10 @@ import {
   SET_FULL_SCREEN,
   SHOW_CONFIG
 } from "../../models";
-
-import icon from "../../assets/icons/48x48.png";
-
 import { CountDown, Progress } from "./elements";
 import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
+
+import icon from "../../assets/icons/48x48.png";
 
 const { remote } = window.require("electron");
 
@@ -40,6 +39,27 @@ function Timer() {
   const [{ onTop, notify, darkMode, fullScreenOnBreak }] = useContext(
     StoreContext
   ).setting;
+
+  const setNotification = useCallback(
+    (title, body) => {
+      if (notify) {
+        let notification = new window.Notification(title, {
+          body,
+          icon,
+          silent
+        });
+        notification.addEventListener("click", () => {
+          if (!win.isVisible()) {
+            win.show();
+          }
+        });
+        if (!silent) {
+          say.speak(`${title}, ${body}`);
+        }
+      }
+    },
+    [notify, silent, win]
+  );
 
   useEffect(() => {
     if (fullScreen) {
@@ -112,25 +132,20 @@ function Timer() {
       }
     }
   }, [
-    dispatchControl,
-    timerType,
     fullScreen,
+    onTop,
+    timerType,
+    win,
+    dispatchControl,
     fullScreenOnBreak,
     dispatchNav,
     showConfig,
-    counter,
-    onTop,
-    win
+    counter
   ]);
 
-  useEffect(() => {
+  const setTimer = useCallback(() => {
     switch (timerType) {
       case WORK:
-        dispatchTimer({
-          type: SET_TIMER_TYPE,
-          payload: WORK
-        });
-
         dispatchTimer({
           type: SET_DURATION,
           payload: workingTime * 60
@@ -144,11 +159,6 @@ function Timer() {
 
       case SHORT_BREAK:
         dispatchTimer({
-          type: SET_TIMER_TYPE,
-          payload: SHORT_BREAK
-        });
-
-        dispatchTimer({
           type: SET_DURATION,
           payload: shortBreak * 60
         });
@@ -160,11 +170,6 @@ function Timer() {
         break;
 
       case LONG_BREAK:
-        dispatchTimer({
-          type: SET_TIMER_TYPE,
-          payload: LONG_BREAK
-        });
-
         dispatchTimer({
           type: SET_DURATION,
           payload: longBreak * 60
@@ -186,38 +191,15 @@ function Timer() {
     }
   }, [dispatchTimer, timerType, workingTime, shortBreak, longBreak]);
 
+  useEffect(() => setTimer(), [setTimer]);
+
   useEffect(() => {
-    function readMessage(title, body) {
-      say.speak(`${title}, ${body}`);
-    }
-
-    function setNotification(title, body) {
-      if (notify) {
-        let notification = new window.Notification(title, {
-          body,
-          icon,
-          silent
-        });
-        notification.addEventListener("click", () => {
-          if (!win.isVisible()) {
-            win.show();
-          }
-        });
-        if (!silent) {
-          readMessage(title, body);
-        }
-      }
-    }
-
     let count = counter;
     let interval = null;
 
     if (running) {
       interval = setInterval(() => {
         if (count <= 0) {
-          count = 0;
-          clearInterval(interval);
-
           switch (timerType) {
             case WORK:
               if (round !== sessionRounds) {
@@ -279,10 +261,11 @@ function Timer() {
             default:
               return null;
           }
-        } else {
-          count--;
-          dispatchTimer({ type: SET_COUNTER, payload: count });
+          clearInterval(interval);
+          return;
         }
+        count--;
+        dispatchTimer({ type: SET_COUNTER, payload: count });
       }, 1000);
     }
 
@@ -301,7 +284,8 @@ function Timer() {
     sessionRounds,
     round,
     timerType,
-    win
+    win,
+    setNotification
   ]);
 
   useEffect(

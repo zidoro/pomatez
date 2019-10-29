@@ -1,24 +1,47 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useCallback } from "react";
 import { StoreContext, SET_UPDATING, SET_DOWNLOAD_COMPLETED } from "./models";
-import { getSvg } from "./sprite";
 
-import { Titlebar } from "./components";
+import { Titlebar } from "./containers";
 import { Main, Update, Restart } from "./containers";
 
 const { remote, ipcRenderer } = window.require("electron");
 
 function App() {
+  const win = remote.getCurrentWindow();
+
+  const [{ showConfig }] = useContext(StoreContext).nav;
   const [{ darkMode }, dispatchSetting] = useContext(StoreContext).setting;
+  const [{ updating, downloadCompleted }, dispatchUpdate] = useContext(
+    StoreContext
+  ).update;
 
-  useEffect(() => getSvg(), []);
+  const fetchIcons = useCallback(
+    () =>
+      fetch("sprite.svg")
+        .then(response => response.text())
+        .then(text => {
+          let root = document.getElementById("root");
+          let svgContainer = document.createElement("svgContainer");
 
-  useEffect(() => {
+          svgContainer.innerHTML = text;
+          return root.appendChild(svgContainer);
+        })
+        .catch(err => console.log(err)),
+    []
+  );
+
+  const setDataTheme = useCallback(() => {
     let theme = darkMode ? "dark" : "light";
     let mainElement = document.documentElement;
     mainElement.setAttribute("data-theme", theme);
 
-    remote.getCurrentWindow().setBackgroundColor(darkMode ? "#222c33" : "#fff");
-  }, [darkMode]);
+    win.setBackgroundColor(darkMode ? "#222c33" : "#fff");
+  }, [darkMode, win]);
+
+  useEffect(() => {
+    fetchIcons();
+    setDataTheme();
+  }, [fetchIcons, setDataTheme]);
 
   useEffect(() => {
     ipcRenderer.on("update-available", () => {
@@ -45,9 +68,29 @@ function App() {
   return (
     <div className="app">
       <Titlebar />
-      <Main />
-      <Update />
-      <Restart />
+      <Main showConfig={showConfig} />
+      <Update
+        updating={updating}
+        onExit={useCallback(
+          () =>
+            dispatchUpdate({
+              type: SET_UPDATING,
+              payload: false
+            }),
+          [dispatchUpdate]
+        )}
+      />
+      <Restart
+        downloadCompleted={downloadCompleted}
+        onExit={useCallback(
+          () =>
+            dispatchUpdate({
+              type: SET_DOWNLOAD_COMPLETED,
+              payload: false
+            }),
+          [dispatchUpdate]
+        )}
+      />
     </div>
   );
 }

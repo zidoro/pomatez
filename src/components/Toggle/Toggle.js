@@ -20,4 +20,4 @@ function Toggle({ toggleName, switchId, isChecked, onChange }) {
   );
 }
 
-export default Toggle;
+export default React.memo(Toggle);

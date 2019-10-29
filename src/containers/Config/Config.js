@@ -1,9 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { animated } from "react-spring";
-
 import { StoreContext } from "../../models";
 import { useAnimateLeft, useAnimateRight } from "../../hooks";
-
 import { Nav, Setting, Rules } from "./elements";
 
 const { remote } = window.require("electron");
@@ -27,9 +25,9 @@ function Config({ showConfig }) {
           <div className="config__body">
             {contentTransition.map(({ item, key, props }) =>
               item ? (
-                <Setting key={key} props={props} />
+                <Setting key={key} style={props} />
               ) : (
-                <Rules key={key} props={props} />
+                <Rules key={key} style={props} />
               )
             )}
           </div>

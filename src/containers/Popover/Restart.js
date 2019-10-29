@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
-import { StoreContext, SET_DOWNLOAD_COMPLETED } from "../../models";
+import React from "react";
 import { Modal } from "../../components";
+import PropTypes from "prop-types";
 
 const { ipcRenderer } = window.require("electron");
 
-function Restart() {
-  const [{ downloadCompleted }, dispatchUpdate] = useContext(
-    StoreContext
-  ).update;
+Restart.propTypes = {
+  onExit: PropTypes.func.isRequired
+};
+
+function Restart({ downloadCompleted, onExit }) {
   return (
     <Modal
       windowTitle="Updates Completed"
-      onExit={() =>
-        dispatchUpdate({
-          type: SET_DOWNLOAD_COMPLETED,
-          payload: false
-        })
-      }
+      onExit={onExit}
       isVisible={downloadCompleted}
     >
       <div className="restart">
@@ -29,12 +25,7 @@ function Restart() {
         <div className="restart__cta">
           <button
             className="restart__cta--later-btn btn btn--secondary"
-            onClick={() =>
-              dispatchUpdate({
-                type: SET_DOWNLOAD_COMPLETED,
-                payload: false
-              })
-            }
+            onClick={onExit}
           >
             Restart Later
           </button>
@@ -42,10 +33,7 @@ function Restart() {
             className="restart__cta--now-btn btn btn--primary"
             onClick={() => {
               ipcRenderer.send("restart-app");
-              dispatchUpdate({
-                type: SET_DOWNLOAD_COMPLETED,
-                payload: false
-              });
+              onExit();
             }}
           >
             Restart Now
@@ -56,4 +44,4 @@ function Restart() {
   );
 }
 
-export default Restart;
+export default React.memo(Restart);

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { animated, useTransition, config } from "react-spring";
 
-import { Minimize, Exit } from "../Titlebar/elements";
+import { Minimize, Exit } from "../../containers/Titlebar/elements";
 import appIcon from "../../assets/icons/32x32.png";
 
 Modal.propTypes = {

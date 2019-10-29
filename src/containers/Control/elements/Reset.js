@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Ripple from "../../Ripple";
+import Ripple from "../../../components/Ripple";
 import { addClass } from "../../_helpers";
 
 Reset.propTypes = {
@@ -20,4 +20,4 @@ function Reset({ timerType, onClick }) {
   );
 }
 
-export default Reset;
+export default React.memo(Reset);
