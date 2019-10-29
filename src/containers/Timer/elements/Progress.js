@@ -37,12 +37,10 @@ function Progress({ dashOffset, timerType }) {
         cx="160"
         cy="160"
         r="156"
-        style={{
-          strokeDashoffset: `${dashOffset}`
-        }}
+        style={{ strokeDashoffset: `${dashOffset}` }}
       />
     </svg>
   );
 }
 
-export default Progress;
+export default React.memo(Progress);

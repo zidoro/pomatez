@@ -26,4 +26,4 @@ function Mode({ darkMode, onClick }) {
   );
 }
 
-export default Mode;
+export default React.memo(Mode);

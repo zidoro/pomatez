@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Ripple from "../../Ripple";
+import Ripple from "../../../components/Ripple";
 import { addClass } from "../../_helpers";
 
 Next.propTypes = {
@@ -20,4 +20,4 @@ function Next({ timerType, onClick }) {
   );
 }
 
-export default Next;
+export default React.memo(Next);

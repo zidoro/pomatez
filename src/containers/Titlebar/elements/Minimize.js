@@ -15,4 +15,4 @@ function Minimize({ onClick }) {
   );
 }
 
-export default Minimize;
+export default React.memo(Minimize);

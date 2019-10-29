@@ -1,6 +1,7 @@
 import React from "react";
 import { animated, useSpring, config } from "react-spring";
-import { Timer, Control } from "../../components";
+import Timer from "../Timer";
+import Control from "../Control";
 
 function Counter() {
   const { o, x } = useSpring({
@@ -26,4 +27,4 @@ function Counter() {
   );
 }
 
-export default Counter;
+export default React.memo(Counter);

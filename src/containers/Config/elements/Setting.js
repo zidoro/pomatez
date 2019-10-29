@@ -11,7 +11,7 @@ import {
 
 import { Header, Toggle, Shortcut } from "../../../components";
 
-function Setting({ key, props }) {
+function Setting({ style }) {
   const [{ running }, dispatchControl] = useContext(StoreContext).control;
 
   const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
@@ -44,7 +44,7 @@ function Setting({ key, props }) {
   }, [handleKeyPress]);
 
   return (
-    <animated.div className="setting" key={key} style={props}>
+    <animated.div className="setting" style={style}>
       <Header title="Setting" />
 
       <div className="feature">
@@ -53,29 +53,33 @@ function Setting({ key, props }) {
           toggleName="Always On Top"
           switchId="on-top"
           isChecked={onTop}
-          onChange={() =>
-            dispatchSetting({
-              type: SET_ON_TOP,
-              payload: !onTop
-            })
-          }
+          onChange={useCallback(
+            () =>
+              dispatchSetting({
+                type: SET_ON_TOP,
+                payload: !onTop
+              }),
+            [dispatchSetting, onTop]
+          )}
         />
         <Toggle
           toggleName="Show Notification"
           switchId="desktop-notication"
           isChecked={notify}
-          onChange={() =>
-            dispatchSetting({
-              type: SET_NOTIFY,
-              payload: !notify
-            })
-          }
+          onChange={useCallback(
+            () =>
+              dispatchSetting({
+                type: SET_NOTIFY,
+                payload: !notify
+              }),
+            [dispatchSetting, notify]
+          )}
         />
         <Toggle
           toggleName="Fullscreen On Break"
           switchId="fullscreen"
           isChecked={fullScreenOnBreak}
-          onChange={() => {
+          onChange={useCallback(() => {
             dispatchSetting({
               type: SET_FULL_SCREEN_ON_BREAK,
               payload: !fullScreenOnBreak
@@ -86,7 +90,7 @@ function Setting({ key, props }) {
                 payload: true
               });
             }
-          }}
+          }, [dispatchSetting, dispatchControl, fullScreenOnBreak, running])}
         />
       </div>
 
