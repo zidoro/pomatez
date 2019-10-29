@@ -43,4 +43,4 @@ function Slider({ min, max, value, timeType, rangeType, onChange }) {
   );
 }
 
-export default Slider;
+export default React.memo(Slider);

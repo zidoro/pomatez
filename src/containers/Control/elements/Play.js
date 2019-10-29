@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Ripple from "../../Ripple";
+import Ripple from "../../../components/Ripple";
 import { addClass } from "../../_helpers";
 
 Play.propTypes = {
@@ -31,4 +31,4 @@ function Play({ running, timerType, onClick }) {
   );
 }
 
-export default Play;
+export default React.memo(Play);

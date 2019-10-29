@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 import {
   StoreContext,
   SET_WORK_TIME,
@@ -11,7 +11,7 @@ import {
 import { animated } from "react-spring";
 import { Header, Slider } from "../../../components";
 
-function Rules({ key, props }) {
+function Rules({ style }) {
   const [, dispatchControl] = useContext(StoreContext).control;
 
   const [
@@ -20,67 +20,84 @@ function Rules({ key, props }) {
   ] = useContext(StoreContext).config;
 
   return (
-    <animated.div className="rules" key={key} style={props}>
+    <animated.div className="rules" style={style}>
       <Header title="Rules" />
       <div className="config__sliders">
         <Slider
           timeType="Working Time"
           max={60}
           value={workingTime}
-          onChange={({ target }) => {
-            dispatchConfig({
-              type: SET_WORK_TIME,
-              payload: parseInt(target.value)
-            });
-            dispatchControl({ type: SET_RUNNING, payload: false });
-          }}
+          onChange={useCallback(
+            ({ target }) => {
+              dispatchConfig({
+                type: SET_WORK_TIME,
+                payload: parseInt(target.value)
+              });
+              dispatchControl({ type: SET_RUNNING, payload: false });
+            },
+            [dispatchConfig, dispatchControl]
+          )}
         />
         <Slider
           timeType="Short Break"
           max={60}
           value={shortBreak}
-          onChange={({ target }) => {
-            dispatchConfig({
-              type: SET_SHORT_BREAK,
-              payload: parseInt(target.value)
-            });
-            dispatchControl({ type: SET_RUNNING, payload: false });
-          }}
+          onChange={useCallback(
+            ({ target }) => {
+              dispatchConfig({
+                type: SET_SHORT_BREAK,
+                payload: parseInt(target.value)
+              });
+              dispatchControl({ type: SET_RUNNING, payload: false });
+            },
+            [dispatchConfig, dispatchControl]
+          )}
         />
         <Slider
           timeType="Long Break"
           max={60}
           value={longBreak}
-          onChange={({ target }) => {
-            dispatchConfig({
-              type: SET_LONG_BREAK,
-              payload: parseInt(target.value)
-            });
-            dispatchControl({ type: SET_RUNNING, payload: false });
-          }}
+          onChange={useCallback(
+            ({ target }) => {
+              dispatchConfig({
+                type: SET_LONG_BREAK,
+                payload: parseInt(target.value)
+              });
+              dispatchControl({ type: SET_RUNNING, payload: false });
+            },
+            [dispatchConfig, dispatchControl]
+          )}
         />
         <Slider
           timeType={`Session Round${sessionRounds > 1 ? "s" : ""}`}
           rangeType={`round${sessionRounds > 1 ? "s" : ""}`}
           max={10}
           value={sessionRounds}
-          onChange={({ target }) => {
-            dispatchConfig({
-              type: SET_SESSION_ROUNDS,
-              payload: parseInt(target.value)
-            });
-            dispatchControl({ type: SET_RUNNING, payload: false });
-          }}
+          onChange={useCallback(
+            ({ target }) => {
+              dispatchConfig({
+                type: SET_SESSION_ROUNDS,
+                payload: parseInt(target.value)
+              });
+              dispatchControl({ type: SET_RUNNING, payload: false });
+            },
+            [dispatchConfig, dispatchControl]
+          )}
         />
       </div>
 
       <div className="config__button-wrapper">
         <button
           className="btn btn-restore"
-          onClick={() => {
-            dispatchConfig({ type: RESTORE_DEFAULT });
-            dispatchControl({ type: SET_RUNNING, payload: false });
-          }}
+          onClick={useCallback(() => {
+            dispatchConfig({
+              type: RESTORE_DEFAULT
+            });
+            dispatchControl({
+              type: SET_RUNNING,
+              payload: false
+            });
+          }, [dispatchConfig, dispatchControl])}
         >
           Restore Default
         </button>

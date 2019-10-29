@@ -17,4 +17,4 @@ function Header({ title }) {
   );
 }
 
-export default Header;
+export default React.memo(Header);
