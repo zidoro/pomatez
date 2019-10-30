@@ -1,49 +1,58 @@
-import React, { useEffect, useContext, useCallback } from "react";
-import { StoreContext, SET_UPDATING, SET_DOWNLOAD_COMPLETED } from "./models";
+import React, { useEffect, useContext, useCallback, useMemo } from "react";
+import {
+  NavContext,
+  UpdateContext,
+  SET_UPDATING,
+  SET_DOWNLOAD_COMPLETED
+} from "./models";
 
 import { Titlebar } from "./containers";
 import { Main, Update, Restart } from "./containers";
 
-const { remote, ipcRenderer } = window.require("electron");
-
 function App() {
-  const win = remote.getCurrentWindow();
-
-  const [{ showConfig }] = useContext(StoreContext).nav;
-  const [{ darkMode }] = useContext(StoreContext).setting;
+  const [{ showConfig }] = useContext(NavContext);
   const [{ updating, downloadCompleted }, dispatchUpdate] = useContext(
-    StoreContext
-  ).update;
-
-  const fetchIcons = useCallback(
-    () =>
-      fetch("sprite.svg")
-        .then(response => response.text())
-        .then(text => {
-          let root = document.getElementById("root");
-          let svgContainer = document.createElement("svgContainer");
-
-          svgContainer.innerHTML = text;
-          return root.appendChild(svgContainer);
-        })
-        .catch(err => console.log(err)),
-    []
+    UpdateContext
   );
 
-  const setDataTheme = useCallback(() => {
-    let theme = darkMode ? "dark" : "light";
-    let mainElement = document.documentElement;
-    mainElement.setAttribute("data-theme", theme);
+  const updateCallback = useCallback(
+    () =>
+      dispatchUpdate({
+        type: SET_UPDATING,
+        payload: false
+      }),
+    [dispatchUpdate]
+  );
 
-    win.setBackgroundColor(darkMode ? "#222c33" : "#fff");
-  }, [darkMode, win]);
+  const restartCallback = useCallback(
+    () =>
+      dispatchUpdate({
+        type: SET_DOWNLOAD_COMPLETED,
+        payload: false
+      }),
+    [dispatchUpdate]
+  );
 
   useEffect(() => {
-    fetchIcons();
-    setDataTheme();
-  }, [fetchIcons, setDataTheme]);
+    fetch("sprite.svg")
+      .then(response => response.text())
+      .then(text => {
+        let root = document.getElementById("root");
+        let svgContainer = document.createElement("svgContainer");
+
+        svgContainer.innerHTML = text;
+        return root.appendChild(svgContainer);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
+    const { ipcRenderer, webFrame } = window.require("electron");
+
+    webFrame.setZoomFactor(1);
+    webFrame.setVisualZoomLevelLimits(1, 1);
+    webFrame.setLayoutZoomLevelLimits(0, 0);
+
     ipcRenderer.on("update-available", () => {
       ipcRenderer.removeAllListeners("update-available");
       dispatchUpdate({
@@ -65,34 +74,25 @@ function App() {
     });
   }, [dispatchUpdate]);
 
-  return (
-    <div className="app">
-      <Titlebar />
-      <Main showConfig={showConfig} />
-      <Update
-        updating={updating}
-        onExit={useCallback(
-          () =>
-            dispatchUpdate({
-              type: SET_UPDATING,
-              payload: false
-            }),
-          [dispatchUpdate]
-        )}
-      />
-      <Restart
-        downloadCompleted={downloadCompleted}
-        onExit={useCallback(
-          () =>
-            dispatchUpdate({
-              type: SET_DOWNLOAD_COMPLETED,
-              payload: false
-            }),
-          [dispatchUpdate]
-        )}
-      />
-    </div>
-  );
+  return useMemo(() => {
+    return (
+      <div className="app">
+        <Titlebar />
+        <Main showConfig={showConfig} />
+        <Update updating={updating} onExit={updateCallback} />
+        <Restart
+          downloadCompleted={downloadCompleted}
+          onExit={restartCallback}
+        />
+      </div>
+    );
+  }, [
+    downloadCompleted,
+    restartCallback,
+    showConfig,
+    updateCallback,
+    updating
+  ]);
 }
 
 export default App;
