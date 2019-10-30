@@ -29,7 +29,8 @@
   },
   "homepage": "./",
   "dependencies": {
-    "electron-updater": "^4.1.2",
+    "electron-log": "^3.0.8",
+    "electron-updater": "^4.2.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "^3.2.0",
@@ -41,7 +42,7 @@
     "concurrently": "^5.0.0",
     "cross-env": "^6.0.3",
     "electron": "^7.0.0",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^22.1.0",
     "node-sass": "^4.13.0",
     "react-ripples": "^2.2.1",
     "wait-on": "^3.3.0"
