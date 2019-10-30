@@ -76,34 +76,8 @@
         );
       }
 
-      &--1,
-      &--2 {
-        transition: all 0.3s ease-out;
-      }
-
-      &--1 {
-        width: 2rem;
-
-        &.active {
-          width: 1rem;
-          margin-top: -0.5rem;
-
-          transform-origin: right;
-          transform: rotate(-45deg);
-        }
-      }
-
-      &--2 {
+      &:last-child {
         width: 1rem;
-        margin-top: 0.6rem;
-
-        &.active {
-          width: 1rem;
-          margin-top: 0.8rem;
-
-          transform-origin: bottom;
-          transform: rotate(45deg);
-        }
       }
     }
   }
