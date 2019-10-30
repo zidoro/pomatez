@@ -1,6 +1,10 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect, useCallback, useMemo } from "react";
 import {
-  StoreContext,
+  NavContext,
+  ConfigContext,
+  ControlContext,
+  TimerContext,
+  SettingContext,
   SET_DURATION,
   SET_DASH_OFFSET,
   SET_COUNTER,
@@ -14,31 +18,26 @@ import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 
 import icon from "../../assets/icons/48x48.png";
 
-const { remote } = window.require("electron");
-
-const say = window.require("say");
-
 function Timer() {
+  const { remote } = window.require("electron");
   let win = remote.getCurrentWindow();
 
-  const [{ showConfig }, dispatchNav] = useContext(StoreContext).nav;
+  const [{ showConfig }, dispatchNav] = useContext(NavContext);
 
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
-    StoreContext
-  ).config;
+    ConfigContext
+  );
 
-  const [{ running, silent, fullScreen }, dispatchControl] = useContext(
-    StoreContext
-  ).control;
+  const [{ running, silent }, dispatchControl] = useContext(ControlContext);
 
   const [
     { timerType, duration, counter, dashOffset, finalDashOffset, round },
     dispatchTimer
-  ] = useContext(StoreContext).timer;
+  ] = useContext(TimerContext);
 
-  const [{ onTop, notify, darkMode, fullScreenOnBreak }] = useContext(
-    StoreContext
-  ).setting;
+  const [
+    { onTop, notify, darkMode, fullScreenOnBreak, fullScreen }
+  ] = useContext(SettingContext);
 
   const setNotification = useCallback(
     (title, body) => {
@@ -54,6 +53,7 @@ function Timer() {
           }
         });
         if (!silent) {
+          const say = window.require("say");
           say.speak(`${title}, ${body}`);
         }
       }
@@ -297,20 +297,22 @@ function Timer() {
     [dispatchTimer, duration, counter, finalDashOffset]
   );
 
-  return (
-    <div className="timer">
-      <div
-        className={`timer__counter ${fullScreen ? addClass(timerType) : ""}`}
-      >
-        <Progress
-          dashOffset={dashOffset}
-          timerType={timerType}
-          darkMode={darkMode}
-        />
-        <CountDown counter={counter} timerType={timerType} />
+  return useMemo(() => {
+    return (
+      <div className="timer">
+        <div
+          className={`timer__counter ${fullScreen ? addClass(timerType) : ""}`}
+        >
+          <Progress
+            dashOffset={dashOffset}
+            timerType={timerType}
+            darkMode={darkMode}
+          />
+          <CountDown counter={counter} timerType={timerType} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }, [counter, darkMode, dashOffset, fullScreen, timerType]);
 }
 
 export default Timer;

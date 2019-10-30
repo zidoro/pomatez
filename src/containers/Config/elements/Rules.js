@@ -1,6 +1,7 @@
 import React, { useContext, useCallback } from "react";
 import {
-  StoreContext,
+  ControlContext,
+  ConfigContext,
   SET_WORK_TIME,
   SET_SHORT_BREAK,
   SET_LONG_BREAK,
@@ -12,12 +13,12 @@ import { animated } from "react-spring";
 import { Header, Slider } from "../../../components";
 
 function Rules({ style }) {
-  const [, dispatchControl] = useContext(StoreContext).control;
+  const [, dispatchControl] = useContext(ControlContext);
 
   const [
     { workingTime, shortBreak, longBreak, sessionRounds },
     dispatchConfig
-  ] = useContext(StoreContext).config;
+  ] = useContext(ConfigContext);
 
   return (
     <animated.div className="rules" style={style}>
