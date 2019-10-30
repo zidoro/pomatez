@@ -1,20 +1,20 @@
 import React, { useContext, useEffect } from "react";
 import { animated } from "react-spring";
-import { StoreContext } from "../../models";
+import { SettingContext } from "../../models";
 import { useAnimateLeft, useAnimateRight } from "../../hooks";
 import { Nav, Setting, Rules } from "./elements";
 
-const { remote } = window.require("electron");
-
 function Config({ showConfig }) {
-  const [{ onTop, showSetting }] = useContext(StoreContext).setting;
+  const [{ onTop, showSetting }] = useContext(SettingContext);
 
   const configTransition = useAnimateLeft({ condition: showConfig, x: 32 });
 
   const contentTransition = useAnimateRight({ condition: showSetting, x: 25 });
 
   useEffect(() => {
+    const { remote } = window.require("electron");
     let win = remote.getCurrentWindow();
+
     win.setAlwaysOnTop(onTop, "screen-saver");
   }, [onTop]);
 

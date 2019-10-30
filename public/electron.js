@@ -4,7 +4,8 @@ const {
   globalShortcut,
   Tray,
   Menu,
-  ipcMain
+  ipcMain,
+  powerSaveBlocker
 } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
@@ -116,6 +117,7 @@ if (!gotTheLock) {
     createSystemTray();
     registerGlobalShortcut();
     autoUpdater.checkForUpdatesAndNotify();
+    powerSaveBlocker.start("prevent-display-sleep");
   });
 }
 

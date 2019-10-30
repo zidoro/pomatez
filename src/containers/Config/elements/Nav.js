@@ -1,9 +1,9 @@
 import React, { Fragment, useContext, useCallback } from "react";
 import { animated, useSpring, config } from "react-spring";
-import { StoreContext, SHOW_SETTING } from "../../../models";
+import { SettingContext, SHOW_SETTING } from "../../../models";
 
 function Nav() {
-  const [{ showSetting }, dispatchSetting] = useContext(StoreContext).setting;
+  const [{ showSetting }, dispatchSetting] = useContext(SettingContext);
 
   const { x } = useSpring({
     x: showSetting ? 50 : 0,
