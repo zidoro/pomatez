@@ -28,7 +28,7 @@ function Timer() {
     ConfigContext
   );
 
-  const [{ running, silent }, dispatchControl] = useContext(ControlContext);
+  const [{ running, silent }] = useContext(ControlContext);
 
   const [
     { timerType, duration, counter, dashOffset, finalDashOffset, round },
@@ -36,7 +36,8 @@ function Timer() {
   ] = useContext(TimerContext);
 
   const [
-    { onTop, notify, darkMode, fullScreenOnBreak, fullScreen }
+    { onTop, notify, darkMode, fullScreenOnBreak, fullScreen },
+    dispatchSetting
   ] = useContext(SettingContext);
 
   const setNotification = useCallback(
@@ -83,7 +84,7 @@ function Timer() {
     if (fullScreenOnBreak) {
       switch (timerType) {
         case WORK:
-          dispatchControl({
+          dispatchSetting({
             type: SET_FULL_SCREEN,
             payload: false
           });
@@ -101,7 +102,7 @@ function Timer() {
               payload: false
             });
           }
-          dispatchControl({
+          dispatchSetting({
             type: SET_FULL_SCREEN,
             payload: true
           });
@@ -113,7 +114,7 @@ function Timer() {
               payload: false
             });
           }
-          dispatchControl({
+          dispatchSetting({
             type: SET_FULL_SCREEN,
             payload: true
           });
@@ -136,11 +137,11 @@ function Timer() {
     onTop,
     timerType,
     win,
-    dispatchControl,
     fullScreenOnBreak,
     dispatchNav,
     showConfig,
-    counter
+    counter,
+    dispatchSetting
   ]);
 
   const setTimer = useCallback(() => {
@@ -274,7 +275,6 @@ function Timer() {
     dispatchTimer,
     counter,
     running,
-    dispatchControl,
     duration,
     silent,
     notify,
