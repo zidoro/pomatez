@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "../../components";
 import PropTypes from "prop-types";
 
-const { ipcRenderer } = window.require("electron");
-
 Update.propTypes = {
   updating: PropTypes.bool.isRequired,
   onExit: PropTypes.func.isRequired
@@ -13,6 +11,7 @@ function Update({ updating, onExit }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const { ipcRenderer } = window.require("electron");
     ipcRenderer.on("download-progress", (event, arg) => {
       setProgress(arg.percent);
     });

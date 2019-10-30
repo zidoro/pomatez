@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import { animated } from "react-spring";
 import {
-  StoreContext,
+  ControlContext,
+  SettingContext,
   SET_ON_TOP,
   SET_NOTIFY,
   SET_FULL_SCREEN_ON_BREAK,
@@ -12,11 +13,11 @@ import {
 import { Header, Toggle, Shortcut } from "../../../components";
 
 function Setting({ style }) {
-  const [{ running }, dispatchControl] = useContext(StoreContext).control;
+  const [{ running }, dispatchControl] = useContext(ControlContext);
 
   const [{ onTop, notify, fullScreenOnBreak }, dispatchSetting] = useContext(
-    StoreContext
-  ).setting;
+    SettingContext
+  );
 
   const handleKeyPress = useCallback(
     e => {

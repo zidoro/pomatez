@@ -1,9 +1,10 @@
 import {
   SET_ON_TOP,
   SET_NOTIFY,
-  SET_DARKMODE,
   SHOW_SETTING,
-  SET_FULL_SCREEN_ON_BREAK
+  SET_FULL_SCREEN_ON_BREAK,
+  SET_FULL_SCREEN,
+  SET_DARKMODE
 } from "../actions";
 
 const getDefaultTheme = () =>
@@ -12,9 +13,10 @@ const getDefaultTheme = () =>
 const settingState = {
   onTop: false,
   notify: true,
-  darkMode: getDefaultTheme(),
   showSetting: false,
-  fullScreenOnBreak: true
+  fullScreenOnBreak: true,
+  fullScreen: false,
+  darkMode: getDefaultTheme()
 };
 
 const settingReducer = (state, action) => {
@@ -29,11 +31,6 @@ const settingReducer = (state, action) => {
         ...state,
         notify: action.payload
       };
-    case SET_DARKMODE:
-      return {
-        ...state,
-        darkMode: action.payload
-      };
     case SHOW_SETTING:
       return {
         ...state,
@@ -43,6 +40,16 @@ const settingReducer = (state, action) => {
       return {
         ...state,
         fullScreenOnBreak: action.payload
+      };
+    case SET_FULL_SCREEN:
+      return {
+        ...state,
+        fullScreen: action.payload
+      };
+    case SET_DARKMODE:
+      return {
+        ...state,
+        darkMode: action.payload
       };
     default:
       return state;
