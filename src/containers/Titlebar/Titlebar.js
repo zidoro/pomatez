@@ -16,23 +16,14 @@ function Titlebar() {
   const [{ darkMode }, dispatchSetting] = useContext(StoreContext).setting;
   const [{ fullScreen }] = useContext(StoreContext).control;
 
-  const setWindowTitle = useCallback(
-    appName =>
-      dispatchNav({
-        type: SET_TITLE,
-        payload: showConfig ? "User Configuration" : appName
-      }),
-    [dispatchNav, showConfig]
-  );
-
   useEffect(() => {
-    let version = remote.app.getVersion();
-    let appName = `Productivity Timer v${version}`;
-
+    let appName = "Productivity Timer";
     document.title = appName;
-
-    setWindowTitle(appName);
-  }, [setWindowTitle]);
+    dispatchNav({
+      type: SET_TITLE,
+      payload: showConfig ? "User Configuration" : appName
+    });
+  }, [dispatchNav, showConfig]);
 
   return (
     <div
