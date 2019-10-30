@@ -10,6 +10,8 @@ const {
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
 
+require("v8-compile-cache");
+
 const isDev = require("./scripts/isDev");
 
 const appIcon = path.join(__dirname, "../src/assets/icons/icon.ico");
@@ -20,8 +22,6 @@ const appId = "com.roldanjrCodeArts9711.ProductivityTimer";
 
 app.setAppUserModelId(appId);
 app.setLoginItemSettings({ openAtLogin: true });
-
-require("v8-compile-cache");
 
 let win = null;
 let tray = null;
@@ -150,6 +150,9 @@ autoUpdater.on("download-progress", dp =>
     percent: Math.floor(dp.percent)
   })
 );
+
+autoUpdater.logger = require("electron-log");
+autoUpdater.logger.transports.file.level = "debug";
 
 ipcMain.on("restart-app", () => autoUpdater.quitAndInstall());
 
