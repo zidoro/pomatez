@@ -13,16 +13,9 @@ function Update({ updating, onExit }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    let interval = setInterval(
-      () => ipcRenderer.send("get-update-progress"),
-      3000
-    );
-    ipcRenderer.send("get-update-progress");
     ipcRenderer.on("download-progress", (event, arg) => {
       setProgress(arg.percent);
     });
-
-    return () => clearInterval(interval);
   }, [setProgress]);
 
   return (
