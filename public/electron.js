@@ -144,11 +144,9 @@ autoUpdater.on("update-downloaded", () =>
 );
 
 autoUpdater.on("download-progress", dp =>
-  ipcMain.on("get-update-progress", event =>
-    event.sender.send("download-progress", {
-      percent: Math.floor(dp.percent)
-    })
-  )
+  win.webContents.send("download-progress", {
+    percent: Math.floor(dp.percent)
+  })
 );
 
 ipcMain.on("restart-app", () => autoUpdater.quitAndInstall());

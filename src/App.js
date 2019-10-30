@@ -10,7 +10,7 @@ function App() {
   const win = remote.getCurrentWindow();
 
   const [{ showConfig }] = useContext(StoreContext).nav;
-  const [{ darkMode }, dispatchSetting] = useContext(StoreContext).setting;
+  const [{ darkMode }] = useContext(StoreContext).setting;
   const [{ updating, downloadCompleted }, dispatchUpdate] = useContext(
     StoreContext
   ).update;
@@ -46,7 +46,7 @@ function App() {
   useEffect(() => {
     ipcRenderer.on("update-available", () => {
       ipcRenderer.removeAllListeners("update-available");
-      dispatchSetting({
+      dispatchUpdate({
         type: SET_UPDATING,
         payload: true
       });
@@ -54,16 +54,16 @@ function App() {
 
     ipcRenderer.on("update-downloaded", () => {
       ipcRenderer.removeAllListeners("update-downloaded");
-      dispatchSetting({
+      dispatchUpdate({
         type: SET_UPDATING,
         payload: false
       });
-      dispatchSetting({
+      dispatchUpdate({
         type: SET_DOWNLOAD_COMPLETED,
         payload: true
       });
     });
-  }, [dispatchSetting]);
+  }, [dispatchUpdate]);
 
   return (
     <div className="app">
