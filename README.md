@@ -21,17 +21,15 @@
 
 ![Application Preview](src/assets/github/app-preview.png)
 
-### About
+## About
 
----
-
-> #### Application Overview
+> ### Application Overview
 
 - Productivity Timer wants to help you to be productive and stay in focus.
 - It may also helps your eyes to relax if it is experiencing dryness due to too much glare on your screen without a break.
 - It was design to help others reducing procastination that leads them to be unproductive.
 
-> #### What is Pomodoro Technique
+> ### What is Pomodoro Technique
 
 - Pomodoro Technique is a **time management method** that will improve your focus and productivity. It encourages you to work within the time you have, rather than struggle against it.
 
@@ -39,7 +37,7 @@
 
 - Pomodoro Technique is popular with freelancers wanting to track time, students wishing to study more effectively and anyone looking to improve themselves at work or in their personal projects.
 
-> #### How does it work
+> ### How does it work
 
 1. Choose task you'd like to get done.
 
@@ -53,7 +51,7 @@
 
 6. Repeat the cycle and for every 4 pomodoros, take a longer break of 15 minutes or more.
 
-### App Features
+## App Features
 
 > **Note** : Some of these features are optional. You may disable or enable it.
 
@@ -68,7 +66,15 @@
 - **Show Notification**
 - **Fullscreen On Break**
 - **Toggle UI Theme**
+- **Keyboard Shorcuts**
 - **Silent Mode**
 - **Text To Speech**
+- **Run On Background**
+- **Auto Updates**
 
-### Download
+### **Future Plans**
+
+- **Built In Notes Feature**
+- **Eyes Breaker Option on Every Break**
+
+## Download
