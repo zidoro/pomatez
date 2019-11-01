@@ -67,7 +67,7 @@
 
   ![Customizing Rules](github/customize-rules.gif)
 
-  > ##### Setting Preview
+  > ### Setting Preview
 
   ![Setting Preview](github/setting-preview.gif)
 
