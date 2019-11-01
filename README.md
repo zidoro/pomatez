@@ -130,7 +130,7 @@
 
 - **Auto Updates**
 
-  The app wil automatically `Check for Updates` and notify you if there's an available updates.
+  The app wil automatically `Check for Updates` and notify you if there's an available one.
 
   It will automatically download the updates so it won't bother you from downloading new and better version of the app.
 
