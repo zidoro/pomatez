@@ -5,6 +5,7 @@ const {
   Tray,
   Menu,
   ipcMain,
+  powerMonitor,
   powerSaveBlocker
 } = require("electron");
 const { autoUpdater } = require("electron-updater");
@@ -117,7 +118,13 @@ if (!gotTheLock) {
     createSystemTray();
     registerGlobalShortcut();
     autoUpdater.checkForUpdatesAndNotify();
-    powerSaveBlocker.start("prevent-display-sleep");
+
+    powerMonitor.on("lock-screen", () =>
+      powerSaveBlocker.start("prevent-display-sleep")
+    );
+    powerMonitor.on("suspend", () =>
+      powerSaveBlocker.start("prevent-app-suspension")
+    );
   });
 }
 
