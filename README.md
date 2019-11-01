@@ -61,29 +61,32 @@
 
 > Feel free to make feedbacks of what feature/s of the app do you liked the most and didn't. Also since it is on it's early stage, contributions are welcome and very much appreciated!
 
-- **Alway On Top**
+- **Setting your own rules**
+
+* **Alway On Top**
 
   If enabled, the app will always on top all application running on your desktop. It is usefull when you want to consicutively track your time but sometimes destructive for other people.
 
-- **Show Notification**
+* **Show Notification**
 
   If enabled, it will show desktop notification on every _Work Finished_, _Short Break Finished_ and on _Long Break Finished_.
 
-- **Fullscreen On Break**
+* **Fullscreen On Break**
 
   If enabled, on every _SHORT BREAK_ and _LONG BREAK_, the app will automatically fullscreen and you cannot escape from taking your break.
 
   ![Fullscreen On Break Preview](src/assets/github/fullscreen-preview.png)
 
-- **Toggle UI Theme**
+* **Toggle UI Theme**
 
-  <div style="display: flex; justify-content: flex-start;">
-   <p style="width: 600px; margin-right: 40px;">By <em>default</em>, the app will choose what theme if for you depending on your <em>Operating System Color</em> Theme when you first installed it on your machine.
-  You can toggle it after whether you prefered <em>DARK MODE</em> or <em>LIGHT MODE</em>.</p>
-  <img src="./src/assets/github/toggle-theme.gif" alt="Toggle UI Theme Preview" style="height: 40vw; box-shadow: 0 10px 20px rgba(19, 29, 36, .25);" />
+  By _default_, the app will choose what theme if for you depending on your _Operating System Color_ Theme when you first installed it on your machine.
+  You can toggle it after whether you prefered _DARK MODE_ or _LIGHT MODE_.
+
+  <div style="box-shadow: 0 10px 20px rgba(19, 29, 36, .25);">
+  <img src="./src/assets/github/toggle-theme.gif" alt="Toggle UI Theme Preview"  />
   </div>
 
-* **Keyboard Shortcuts**
+- **Keyboard Shortcuts**
 
   Some of important are being enabled due to it's usefulness.
 
@@ -95,7 +98,7 @@
   | Switch to Light Mode | CmdOrCtrl + Shift + L |
   | Show the Application | CmdOrCtrl + Shift + S |
 
-- **Text To Speech**
+* **Text To Speech**
 
   If _Show Notification_ is enabled. This feature will automatically activated.
 
@@ -103,11 +106,11 @@
 
   It will speak on every _Work Finished_, _Short Break Finished_ and on _Long Break Finished_ to inform what you should do next.
 
-* **Silent Mode**
+- **Silent Mode**
 
   You can optionally mute the sound on every notification and it will also disable _Text To Speech_ from speaking.
 
-* **Run On Background**
+- **Run On Background**
 
   This feature is very useful. You can close the application and let it run in the background if you want to be not distructed when you toggle between applications you opened.
 
@@ -117,7 +120,7 @@
   - It will decrease CPU usage by approximately 99% to 100% while it still running and doing its task.
   - It task completed, the app automatically shows if it's not visible to inform you that the task is completed.
 
-* **Auto Updates**
+- **Auto Updates**
 
   The app wil automatically `Check for Updates` and notify you if there's an available updates.
 
