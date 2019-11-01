@@ -31,9 +31,9 @@
 
 > ### What is Pomodoro Technique
 
-- Pomodoro Technique is a **time management method** that will improve your focus and productivity. It encourages you to work within the time you have, rather than struggle against it.
+- Pomodoro Technique is a _time management method_ that will improve your focus and productivity. It encourages you to work within the time you have, rather than struggle against it.
 
-- You will finish each day with a sense of accomplishment by doing nothing more than working in 25-minute blocks (called pomodoro sessions), followed by 5-minute breaks.
+- You will finish each day with a sense of accomplishment by doing nothing more than working in _25-minute blocks_ (called pomodoro sessions), followed by _5-minute breaks_.
 
 - Pomodoro Technique is popular with freelancers wanting to track time, students wishing to study more effectively and anyone looking to improve themselves at work or in their personal projects.
 
@@ -102,7 +102,7 @@
   By _default_, the app will choose what theme if for you depending on your _Operating System Color_ Theme when you first installed it on your machine.
   You can toggle it after whether you prefered _DARK MODE_ or _LIGHT MODE_.
 
-  <img src="github/toggle-theme.gif" alt="Toggle UI Theme Preview" style="box-shadow: 0 10px 20px rgba(19, 29, 36, .25)"  />
+  ![Toggle UI Theme Preview](github/toggle-theme.gif)
 
 * **Text To Speech**
 
