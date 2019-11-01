@@ -23,13 +23,13 @@
 
 ## About
 
-> ### Application Overview
+### Application Overview
 
 - Productivity Timer wants to help you to be productive and stay in focus.
 - It may also helps your eyes to relax if it is experiencing dryness due to too much glare on your screen without a break.
 - It was design to help others reducing procastination that leads them to be unproductive.
 
-> ### What is Pomodoro Technique
+### What is Pomodoro Technique
 
 - Pomodoro Technique is a _time management method_ that will improve your focus and productivity. It encourages you to work within the time you have, rather than struggle against it.
 
@@ -39,7 +39,7 @@
 
 [Read more about Pomodoro Technique](https://jawwad.me/book-summary-pomodoro-technique-illustrated-staffan-noteberg/ "Summary of Pomodoro Technique")
 
-> ### How does it work
+### How does it work
 
 :memo: 1. Choose task you'd like to get done.
 
