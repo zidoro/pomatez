@@ -20,14 +20,34 @@
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
-    "electron-build": "electron-builder --windows",
-    "electron-release": "electron-builder --windows --publish always",
+    "electron-build": "electron-builder --win",
+    "electron-release": "electron-builder --win --publish always",
     "clean-build": "rm -rf build/ dist/",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
     "release": "yarn clean-build && yarn react-build && yarn electron-release"
   },
   "homepage": "./",
+  "build": {
+    "productName": "Productivity Timer",
+    "appId": "com.roldanjrCodeArts9711.ProductivityTimer",
+    "copyright": "Copyright © 2019 ${author}",
+    "files": [
+      "src/assets"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "./src/assets/icons/icon.ico"
+    }
+  },
   "dependencies": {
     "electron-log": "^3.0.8",
     "electron-updater": "^4.2.0",
