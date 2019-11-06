@@ -18,8 +18,11 @@ import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../_helpers";
 
 import icon from "../../assets/icons/48x48.png";
 
+const { remote } = window.require("electron");
+
+const say = window.require("say");
+
 function Timer() {
-  const { remote } = window.require("electron");
   let win = remote.getCurrentWindow();
 
   const [{ showConfig }, dispatchNav] = useContext(NavContext);
@@ -54,7 +57,6 @@ function Timer() {
           }
         });
         if (!silent) {
-          const say = window.require("say");
           say.speak(`${title}, ${body}`);
         }
       }
@@ -200,6 +202,30 @@ function Timer() {
 
     if (running) {
       interval = setInterval(() => {
+        // Added 1sec due to delay showing notification
+        if (count === 61) {
+          if (timerType === SHORT_BREAK) {
+            setNotification(
+              "60 Seconds Left for Short Break",
+              "Please prepare yourself to get back to work. Do your task and focus again."
+            );
+          } else if (timerType === LONG_BREAK) {
+            setNotification(
+              "60 Seconds Left for Long Break",
+              "Please prepare yourself to get back to work. Relax, focus and continue doing your task."
+            );
+          }
+        }
+
+        if (count === 31) {
+          if (timerType === WORK) {
+            setNotification(
+              "30 Seconds Left to Work",
+              "Please finalize your task. Paused all media playing if there's one."
+            );
+          }
+        }
+
         if (count <= 0) {
           switch (timerType) {
             case WORK:
