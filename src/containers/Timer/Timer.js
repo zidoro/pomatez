@@ -219,6 +219,7 @@ function Timer() {
 
         if (count === 31) {
           if (timerType === WORK) {
+            if (!win.isVisible()) win.show();
             setNotification(
               "30 Seconds Left to Work",
               "Please finalize your task. Paused all media playing if there's one."
