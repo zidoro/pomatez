@@ -107,7 +107,7 @@ function Setting({ style }) {
         />
         <Shortcut
           shortcutName="Show the Application"
-          shortcutKey="Ctrl + Shift + S"
+          shortcutKey="Ctrl + Alt + S"
         />
       </div>
     </animated.div>
