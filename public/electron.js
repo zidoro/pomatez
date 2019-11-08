@@ -77,7 +77,7 @@ function createSystemTray() {
 function registerGlobalShortcut() {
   let shortcutKeys = [
     {
-      key: "CommandOrControl+Alt+S",
+      key: "Alt+Shift+S",
       callback: () => win.show()
     },
     {
