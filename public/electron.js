@@ -12,6 +12,7 @@ const path = require("path");
 require("v8-compile-cache");
 
 const isDev = require("./scripts/isDev");
+const soundPlayer = require("./scripts/soundPlayer");
 
 const appIcon =
   process.platform === "linux"
@@ -160,5 +161,75 @@ autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "debug";
 
 ipcMain.on("restart-app", () => autoUpdater.quitAndInstall());
+
+ipcMain.on("work-time-finished", () =>
+  setTimeout(
+    () =>
+      soundPlayer("work-time-finished.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
+
+ipcMain.on("short-break-finished", () =>
+  setTimeout(
+    () =>
+      soundPlayer("short-break-finished.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
+
+ipcMain.on("long-break-finished", () =>
+  setTimeout(
+    () =>
+      soundPlayer("long-break-finished.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
+
+ipcMain.on("session-rounds-completed", () =>
+  setTimeout(
+    () =>
+      soundPlayer("session-rounds-completed.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
+
+ipcMain.on("30-seconds-left-to-work", () =>
+  setTimeout(
+    () =>
+      soundPlayer("30-seconds-left-to-work.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
+
+ipcMain.on("60-seconds-left-for-longbreak", () =>
+  setTimeout(
+    () =>
+      soundPlayer("60-seconds-left-for-longbreak.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
+
+ipcMain.on("60-seconds-left-for-shortbreak", () =>
+  setTimeout(
+    () =>
+      soundPlayer("60-seconds-left-for-shortbreak.wav")
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    500
+  )
+);
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
