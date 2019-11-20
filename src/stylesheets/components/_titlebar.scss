@@ -128,6 +128,8 @@
   width: 4.6rem;
   height: 3.2rem;
 
+  border-radius: 0 0 0 0.1rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,6 +138,7 @@
 }
 
 .minimize {
+  border-radius: 0 0 0.1rem 0.1rem;
   &:hover {
     @include themed() {
       background: set-hover-bg-color(

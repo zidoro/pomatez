@@ -4,9 +4,7 @@ const {
   globalShortcut,
   Tray,
   Menu,
-  ipcMain,
-  powerMonitor,
-  powerSaveBlocker
+  ipcMain
 } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
@@ -15,7 +13,10 @@ require("v8-compile-cache");
 
 const isDev = require("./scripts/isDev");
 
-const appIcon = path.join(__dirname, "../src/assets/icons/icon.ico");
+const appIcon =
+  process.platform === "linux"
+    ? path.join(__dirname, "../src/assets/icons/icon.png")
+    : path.join(__dirname, "../src/assets/icons/icon.ico");
 const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
 
 const gotTheLock = app.requestSingleInstanceLock();
@@ -60,6 +61,10 @@ function createSystemTray() {
   tray = new Tray(trayIcon);
 
   let contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Show",
+      click: () => !win.isVisible() && win.show()
+    },
     {
       label: "Quit",
       role: "quit"
@@ -118,13 +123,6 @@ if (!gotTheLock) {
     createSystemTray();
     registerGlobalShortcut();
     autoUpdater.checkForUpdatesAndNotify();
-
-    powerMonitor.on("lock-screen", () =>
-      powerSaveBlocker.start("prevent-display-sleep")
-    );
-    powerMonitor.on("suspend", () =>
-      powerSaveBlocker.start("prevent-app-suspension")
-    );
   });
 }
 
