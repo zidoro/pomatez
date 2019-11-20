@@ -1,6 +1,6 @@
 {
   "name": "productivity-timer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "main": "public/electron.js",
   "description": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique",
@@ -17,6 +17,7 @@
     "url": "https://github.com/roldanjrCodeArts9711"
   },
   "scripts": {
+    "export-voice": "node src/helpers/exportVoice.js",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
@@ -55,26 +56,33 @@
         "AppImage"
       ],
       "icon": "./src/assets/icons/icon.png",
-      "category": "Development"
+      "category": "Development",
+      "synopsis": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique.",
+      "description": "This application has a lot of useful features that helps you boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness."
+    },
+    "snap": {
+      "grade": "stable",
+      "confinement": "classic"
     }
   },
   "dependencies": {
-    "electron-log": "^3.0.8",
+    "electron-log": "^3.0.9",
     "electron-updater": "^4.2.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-scripts": "^3.2.0",
     "react-spring": "^8.0.27",
-    "say": "^0.16.0",
+    "sound-play": "^1.0.5",
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
     "cross-env": "^6.0.3",
-    "electron": "^7.0.0",
-    "electron-builder": "^22.1.0",
+    "electron": "^7.1.2",
+    "electron-builder": "^21.2.0",
     "node-sass": "^4.13.0",
     "react-ripples": "^2.2.1",
+    "say": "^0.16.0",
     "wait-on": "^3.3.0"
   },
   "eslintConfig": {

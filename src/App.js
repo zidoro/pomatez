@@ -6,8 +6,8 @@ import {
   SET_DOWNLOAD_COMPLETED
 } from "./models";
 
-import { Titlebar } from "./containers";
-import { Main, Update, Restart } from "./containers";
+import { Main, Update, Restart, Titlebar } from "./components/containers";
+import { fetchSvg } from "./helpers";
 
 function App() {
   const [{ showConfig }] = useContext(NavContext);
@@ -33,31 +33,10 @@ function App() {
     [dispatchUpdate]
   );
 
-  useEffect(() => {
-    fetch("sprite.svg")
-      .then(response => response.text())
-      .then(text => {
-        let root = document.getElementById("root");
-        let svgContainer = document.createElement("svgContainer");
-
-        svgContainer.innerHTML = text;
-        return root.appendChild(svgContainer);
-      })
-      .catch(err => console.log(err));
-  }, []);
+  useEffect(() => fetchSvg(), []);
 
   useEffect(() => {
-    const { ipcRenderer, webFrame, remote } = window.require("electron");
-
-    const powerMonitor = remote.powerMonitor;
-    const powerSaveBlocker = remote.powerSaveBlocker;
-
-    powerMonitor.on("lock-screen", () =>
-      powerSaveBlocker.start("prevent-display-sleep")
-    );
-    powerMonitor.on("suspend", () =>
-      powerSaveBlocker.start("prevent-app-suspension")
-    );
+    const { ipcRenderer, webFrame } = window.require("electron");
 
     webFrame.setZoomFactor(1);
     webFrame.setVisualZoomLevelLimits(1, 1);

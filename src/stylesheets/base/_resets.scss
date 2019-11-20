@@ -39,7 +39,7 @@ input {
   box-sizing: border-box;
 
   @include themed() {
-    border: 0.1rem solid rgba(144, 202, 249, 0.1);
+    border: 0.1rem solid t($border-primary);
   }
 
   display: grid;
