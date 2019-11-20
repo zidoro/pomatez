@@ -12,7 +12,7 @@ function Titlebar() {
   const { remote } = window.require("electron");
   const win = remote.getCurrentWindow();
 
-  const [{ darkMode, fullScreen }, dispatchSetting] = useContext(
+  const [{ darkMode, fullScreen, onTop }, dispatchSetting] = useContext(
     SettingContext
   );
   const [{ title, showConfig }, dispatchNav] = useContext(NavContext);
@@ -35,9 +35,18 @@ function Titlebar() {
     [dispatchSetting, darkMode]
   );
 
-  const onMinimizeCallback = useCallback(() => win.minimize(), [win]);
+  const onMinimizeCallback = useCallback(() => {
+    win.setAlwaysOnTop(false);
+    win.minimize();
+  }, [win]);
 
   const onExitCallback = useCallback(() => win.hide(), [win]);
+
+  useEffect(() => {
+    win.on("restore", () => {
+      win.setAlwaysOnTop(true);
+    });
+  }, [win, onTop]);
 
   useEffect(() => {
     let appName = "Productivity Timer";

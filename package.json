@@ -20,8 +20,8 @@
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
-    "electron-build": "electron-builder --win",
-    "electron-release": "electron-builder --win --publish always",
+    "electron-build": "electron-builder --win --linux",
+    "electron-release": "electron-builder --win --linux --publish always",
     "clean-build": "rm -rf build/ dist/",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
@@ -46,6 +46,16 @@
         }
       ],
       "icon": "./src/assets/icons/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "snap",
+        "tar.gz",
+        "AppImage"
+      ],
+      "icon": "./src/assets/icons/icon.png",
+      "category": "Development"
     }
   },
   "dependencies": {

@@ -89,7 +89,7 @@ function Rules({ style }) {
 
       <div className="config__button-wrapper">
         <button
-          className="btn btn-restore"
+          className="btn"
           onClick={useCallback(() => {
             dispatchConfig({
               type: RESTORE_DEFAULT

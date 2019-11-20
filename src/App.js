@@ -47,7 +47,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const { ipcRenderer, webFrame } = window.require("electron");
+    const { ipcRenderer, webFrame, remote } = window.require("electron");
+
+    const powerMonitor = remote.powerMonitor;
+    const powerSaveBlocker = remote.powerSaveBlocker;
+
+    powerMonitor.on("lock-screen", () =>
+      powerSaveBlocker.start("prevent-display-sleep")
+    );
+    powerMonitor.on("suspend", () =>
+      powerSaveBlocker.start("prevent-app-suspension")
+    );
 
     webFrame.setZoomFactor(1);
     webFrame.setVisualZoomLevelLimits(1, 1);
