@@ -16,9 +16,17 @@ import {
 import { CountDown, Progress } from "./elements";
 import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../../../helpers";
 
+import workTimeFinished from "../../../assets/voices/work-time-finished.wav";
+import shortBreakFinished from "../../../assets/voices/short-break-finished.wav";
+import longBreakFinished from "../../../assets/voices/long-break-finished.wav";
+import sessionRoundsCompleted from "../../../assets/voices/session-rounds-completed.wav";
+import thirtySecondsLeftToWork from "../../../assets/voices/30-seconds-left-to-work.wav";
+import sixtySecondsLeftForShorBreak from "../../../assets/voices/60-seconds-left-for-shortbreak.wav";
+import sixtySecondsLeftForLongBreak from "../../../assets/voices/60-seconds-left-for-longbreak.wav";
+
 import icon from "../../../assets/icons/48x48.png";
 
-const { remote, ipcRenderer } = window.require("electron");
+const { remote } = window.require("electron");
 
 function Timer() {
   let win = remote.getCurrentWindow();
@@ -42,7 +50,7 @@ function Timer() {
   ] = useContext(SettingContext);
 
   const setNotification = useCallback(
-    ({ title, body, event }) => {
+    ({ title, body, audioFile }) => {
       if (notify) {
         let notification = new window.Notification(title, {
           body,
@@ -55,7 +63,8 @@ function Timer() {
           }
         });
         if (!silent) {
-          ipcRenderer.send(event);
+          const audio = new Audio(audioFile);
+          setTimeout(() => audio.play(), 1000);
         }
       }
     },
@@ -207,14 +216,14 @@ function Timer() {
               title: "60 Seconds Left for Short Break",
               body:
                 "Please prepare yourself to get back to work. Do your task and focus again.",
-              event: "60-seconds-left-for-shortbreak"
+              audioFile: sixtySecondsLeftForShorBreak
             });
           } else if (timerType === LONG_BREAK) {
             setNotification({
               title: "60 Seconds Left for Long Break",
               body:
                 "Please prepare yourself to get back to work. Relax, focus and continue doing your task.",
-              event: "60-seconds-left-for-longbreak"
+              audioFile: sixtySecondsLeftForLongBreak
             });
           }
         }
@@ -226,7 +235,7 @@ function Timer() {
               title: "30 Seconds Left to Work",
               body:
                 "Please finalize your task. Paused all media playing if there's one.",
-              event: "30-seconds-left-to-work"
+              audioFile: thirtySecondsLeftToWork
             });
           }
         }
@@ -243,7 +252,7 @@ function Timer() {
                 setNotification({
                   title: "Work Time Finished",
                   body: "It is time to take a short break.",
-                  event: "work-time-finished"
+                  audioFile: workTimeFinished
                 });
               } else {
                 dispatchTimer({
@@ -254,7 +263,7 @@ function Timer() {
                 setNotification({
                   title: "Session Rounds Completed",
                   body: "It is time to take long break now.",
-                  event: "session-rounds-completed"
+                  audioFile: sessionRoundsCompleted
                 });
               }
               break;
@@ -273,7 +282,7 @@ function Timer() {
               setNotification({
                 title: "Short Break Finished",
                 body: "It is time to focus and work again.",
-                event: "short-break-finished"
+                audioFile: shortBreakFinished
               });
               break;
 
@@ -291,7 +300,7 @@ function Timer() {
               setNotification({
                 title: "Long Break Finished",
                 body: "It is time to go back in work.",
-                event: "long-break-finished"
+                audioFile: longBreakFinished
               });
               break;
             default:

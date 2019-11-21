@@ -56,9 +56,12 @@
         "AppImage"
       ],
       "icon": "./src/assets/icons/icon.png",
-      "category": "Development",
+      "category": [
+        "Productivity",
+        "Development"
+      ],
       "synopsis": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique.",
-      "description": "This application has a lot of useful features that helps you boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness."
+      "description": "This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness."
     },
     "snap": {
       "grade": "stable",
@@ -72,7 +75,6 @@
     "react-dom": "^16.12.0",
     "react-scripts": "^3.2.0",
     "react-spring": "^8.0.27",
-    "sound-play": "^1.0.5",
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {

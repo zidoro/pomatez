@@ -1,5 +1,5 @@
-export function fetchSvg() {
-  fetch("sprite.svg")
+export function fetchSvg(sprite) {
+  fetch(sprite)
     .then(response => response.text())
     .then(text => {
       let root = document.getElementById("root");

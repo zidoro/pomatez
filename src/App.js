@@ -9,6 +9,8 @@ import {
 import { Main, Update, Restart, Titlebar } from "./components/containers";
 import { fetchSvg } from "./helpers";
 
+import Sprite from "./assets/icons/sprite.svg";
+
 function App() {
   const [{ showConfig }] = useContext(NavContext);
   const [{ updating, downloadCompleted }, dispatchUpdate] = useContext(
@@ -33,7 +35,7 @@ function App() {
     [dispatchUpdate]
   );
 
-  useEffect(() => fetchSvg(), []);
+  useEffect(() => fetchSvg(Sprite), []);
 
   useEffect(() => {
     const { ipcRenderer, webFrame } = window.require("electron");
