@@ -1,6 +1,11 @@
 const say = require("say");
+const fs = require("fs");
 
-const outDir = "src/assets/voices";
+const outDir = "public/voices";
+
+if (!fs.existsSync(outDir)) {
+  fs.mkdirSync(outDir);
+}
 
 function exportVoice(speak, filename) {
   const fileExt = "wav";

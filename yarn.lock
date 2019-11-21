@@ -9964,11 +9964,6 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
-sound-play@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/sound-play/-/sound-play-1.0.5.tgz#0995ad73c61f2281871895ed30ac99a3c3af2a8d"
-  integrity sha512-9ofZYwc+bsoavWvM4bbnt//YTh82KbZbkOtj9QhyAfP0XvtUAVU00BvLgBT5y8u8mXUjop1PpUvEfLC7K+3uuw==
-
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
