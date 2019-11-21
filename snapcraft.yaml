@@ -6,3 +6,7 @@ description: |
 
 grade: stable
 confinement: classic
+
+parts:
+  deps:
+    plugin: nil
