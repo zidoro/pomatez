@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useCallback, useMemo } from "react";
+import { currentWindow } from "window-electron";
+
 import {
   NavContext,
   ConfigContext,
@@ -28,11 +30,7 @@ import sixtySecondsLeftForLongBreak from "../../../assets/voices/60-seconds-left
 
 import icon from "../../../assets/icons/48x48.png";
 
-const { remote } = window.require("electron");
-
 function Timer() {
-  let win = remote.getCurrentWindow();
-
   const [{ showConfig }, dispatchNav] = useContext(NavContext);
 
   const [{ workingTime, shortBreak, longBreak, sessionRounds }] = useContext(
@@ -64,8 +62,8 @@ function Timer() {
         if (!silent) bellSound.play();
 
         notification.addEventListener("click", () => {
-          if (!win.isVisible()) {
-            win.show();
+          if (!currentWindow.isVisible()) {
+            currentWindow.show();
           }
         });
         if (!silent) {
@@ -74,26 +72,26 @@ function Timer() {
         }
       }
     },
-    [notify, silent, win]
+    [notify, silent]
   );
 
   useEffect(() => {
     if (fullScreen) {
-      win.setFullScreen(true);
-      win.setSkipTaskbar(true);
-      win.setVisibleOnAllWorkspaces(true);
-      win.setAlwaysOnTop(true, "screen-saver");
-      setTimeout(() => win.show(), 500);
-    } else if (!fullScreen && !win.isVisible()) {
+      currentWindow.setFullScreen(true);
+      currentWindow.setSkipTaskbar(true);
+      currentWindow.setVisibleOnAllWorkspaces(true);
+      currentWindow.setAlwaysOnTop(true, "screen-saver");
+      setTimeout(() => currentWindow.show(), 500);
+    } else if (!fullScreen && !currentWindow.isVisible()) {
       if (timerType === SHORT_BREAK || timerType === LONG_BREAK) {
-        win.setVisibleOnAllWorkspaces(true);
-        win.show();
+        currentWindow.setVisibleOnAllWorkspaces(true);
+        currentWindow.show();
       }
     } else {
-      win.setFullScreen(false);
-      win.setSkipTaskbar(false);
-      win.setVisibleOnAllWorkspaces(false);
-      win.setAlwaysOnTop(onTop, "screen-saver");
+      currentWindow.setFullScreen(false);
+      currentWindow.setSkipTaskbar(false);
+      currentWindow.setVisibleOnAllWorkspaces(false);
+      currentWindow.setAlwaysOnTop(onTop, "screen-saver");
     }
 
     if (fullScreenOnBreak) {
@@ -151,7 +149,6 @@ function Timer() {
     fullScreen,
     onTop,
     timerType,
-    win,
     fullScreenOnBreak,
     dispatchNav,
     showConfig,
@@ -236,7 +233,7 @@ function Timer() {
 
         if (count === 31) {
           if (timerType === WORK) {
-            if (!win.isVisible()) win.show();
+            if (!currentWindow.isVisible()) currentWindow.show();
             setNotification({
               title: "30 Seconds Left to Work",
               body:
@@ -334,7 +331,6 @@ function Timer() {
     sessionRounds,
     round,
     timerType,
-    win,
     setNotification
   ]);
 
