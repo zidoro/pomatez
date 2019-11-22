@@ -161,3 +161,5 @@ autoUpdater.logger.transports.file.level = "debug";
 ipcMain.on("restart-app", () => autoUpdater.quitAndInstall());
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+
+process.setMaxListeners(0);

@@ -91,11 +91,11 @@
 
   > List of available Shortcut Keys
 
-  | Command              | Keybinding            |
-  | -------------------- | --------------------- |
-  | Switch to Dark Mode  | CmdOrCtrl + Shift + D |
-  | Switch to Light Mode | CmdOrCtrl + Shift + L |
-  | Show the Application | CmdOrCtrl + Shift + S |
+  | Command              | Keybinding      |
+  | -------------------- | --------------- |
+  | Switch to Dark Mode  | Alt + Shift + D |
+  | Switch to Light Mode | Alt + Shift + L |
+  | Show the Application | Alt + Shift + S |
 
 - **Toggle UI Theme**
 
