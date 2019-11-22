@@ -3815,6 +3815,9 @@ electron-builder@^21.2.0:
     update-notifier "^3.0.1"
     yargs "^13.3.0"
 
+electron-is-dev@./library/electron-is-dev:
+  version "0.0.1"
+
 electron-log@^3.0.9:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.9.tgz#53ff1fcdb2f3e4a73ea7096d2f7204121109ec6f"
@@ -11240,6 +11243,9 @@ widest-line@^2.0.0:
   integrity sha512-Ba5m9/Fa4Xt9eb2ELXt77JxVDV8w7qQrH0zS/TWSJdLyAwQjWoOzpzj5lwVftDz6n/EOu3tNACS84v509qwnJA==
   dependencies:
     string-width "^2.1.1"
+
+window-electron@./library/window-electron/:
+  version "0.0.1"
 
 word-wrap@~1.2.3:
   version "1.2.3"
