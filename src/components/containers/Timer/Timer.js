@@ -16,6 +16,8 @@ import {
 import { CountDown, Progress } from "./elements";
 import { WORK, SHORT_BREAK, LONG_BREAK, addClass } from "../../../helpers";
 
+import notificationBell from "../../../assets/bell/notification-bell.wav";
+
 import workTimeFinished from "../../../assets/voices/work-time-finished.wav";
 import shortBreakFinished from "../../../assets/voices/short-break-finished.wav";
 import longBreakFinished from "../../../assets/voices/long-break-finished.wav";
@@ -51,20 +53,24 @@ function Timer() {
 
   const setNotification = useCallback(
     ({ title, body, audioFile }) => {
+      const bellSound = new Audio(notificationBell);
       if (notify) {
         let notification = new window.Notification(title, {
           body,
           icon,
-          silent
+          silent: true
         });
+
+        if (!silent) bellSound.play();
+
         notification.addEventListener("click", () => {
           if (!win.isVisible()) {
             win.show();
           }
         });
         if (!silent) {
-          const audio = new Audio(audioFile);
-          setTimeout(() => audio.play(), 1000);
+          const speechSound = new Audio(audioFile);
+          setTimeout(() => speechSound.play(), 1000);
         }
       }
     },

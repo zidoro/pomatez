@@ -48,6 +48,9 @@
       ],
       "icon": "./src/assets/icons/icon.ico"
     },
+    "nsis": {
+      "license": "LICENSE"
+    },
     "linux": {
       "target": [
         "deb",
