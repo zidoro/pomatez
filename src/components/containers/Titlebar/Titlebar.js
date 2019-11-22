@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useCallback, useMemo } from "react";
+import { currentWindow } from "window-electron";
+
 import {
   SettingContext,
   NavContext,
@@ -9,9 +11,6 @@ import {
 import { Exit, Menu, Minimize, Mode } from "./elements";
 
 function Titlebar() {
-  const { remote } = window.require("electron");
-  const win = remote.getCurrentWindow();
-
   const [{ darkMode, fullScreen, onTop }, dispatchSetting] = useContext(
     SettingContext
   );
@@ -36,17 +35,17 @@ function Titlebar() {
   );
 
   const onMinimizeCallback = useCallback(() => {
-    win.setAlwaysOnTop(false);
-    win.minimize();
-  }, [win]);
+    currentWindow.setAlwaysOnTop(false);
+    currentWindow.minimize();
+  }, []);
 
-  const onExitCallback = useCallback(() => win.hide(), [win]);
+  const onExitCallback = useCallback(() => currentWindow.hide(), []);
 
   useEffect(() => {
-    win.on("restore", () => {
-      win.setAlwaysOnTop(true);
+    currentWindow.on("restore", () => {
+      currentWindow.setAlwaysOnTop(true);
     });
-  }, [win, onTop]);
+  }, [onTop]);
 
   useEffect(() => {
     let appName = "Productivity Timer";
@@ -62,8 +61,8 @@ function Titlebar() {
     let mainElement = document.documentElement;
     mainElement.setAttribute("data-theme", theme);
 
-    win.setBackgroundColor(darkMode ? "#222c33" : "#fff");
-  }, [darkMode, win]);
+    currentWindow.setBackgroundColor(darkMode ? "#222c33" : "#fff");
+  }, [darkMode]);
 
   return useMemo(() => {
     return (

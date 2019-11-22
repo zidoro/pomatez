@@ -1,4 +1,6 @@
 import React from "react";
+import { ipcRenderer } from "window-electron";
+
 import { Modal } from "../../common";
 import PropTypes from "prop-types";
 
@@ -30,7 +32,6 @@ function Restart({ downloadCompleted, onExit }) {
           <button
             className="restart__cta--now-btn btn btn--primary"
             onClick={() => {
-              const { ipcRenderer } = window.require("electron");
               ipcRenderer.send("restart-app");
               onExit();
             }}
