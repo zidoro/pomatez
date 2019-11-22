@@ -11,7 +11,7 @@ const path = require("path");
 
 require("v8-compile-cache");
 
-const isDev = require("electron-is-dev");
+const isDev = require("./scripts/electron-is-dev");
 
 const appIcon =
   process.platform === "linux"
