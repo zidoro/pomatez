@@ -1,0 +1,6 @@
+{
+  "name": "electron-is-dev",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT"
+}

@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useCallback, useMemo } from "react";
+import { ipcRenderer, webFrame } from "window-electron";
+
 import {
   NavContext,
   UpdateContext,
@@ -38,8 +40,6 @@ function App() {
   useEffect(() => fetchSvg(Sprite), []);
 
   useEffect(() => {
-    const { ipcRenderer, webFrame } = window.require("electron");
-
     webFrame.setZoomFactor(1);
     webFrame.setVisualZoomLevelLimits(1, 1);
     webFrame.setLayoutZoomLevelLimits(0, 0);
