@@ -7,10 +7,6 @@ description: |
 grade: stable
 confinement: strict
 
-apps:
-  productivity-timer:
-    command: productivity-timer
-
 parts:
   deps:
     plugin: nil
