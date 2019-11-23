@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Productivity Timer</h1>
+<h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
   Beautiful Time Management App for Productivity inspired by Pomodoro Technique.
