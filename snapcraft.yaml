@@ -26,6 +26,7 @@ apps:
 
 parts:
   productivity-timer:
+    source: .
     plugin: nodejs
     node-engine: 12.9.0
     stage-packages:
