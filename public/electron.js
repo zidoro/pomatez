@@ -20,7 +20,7 @@ const appIcon =
 const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
 
 const gotTheLock = app.requestSingleInstanceLock();
-const appId = "com.roldanjrCodeArts9711.ProductivityTimer";
+const appId = "com.roldanjrCodeArts9711.productivity-timer";
 
 app.setAppUserModelId(appId);
 app.setLoginItemSettings({ openAtLogin: true });

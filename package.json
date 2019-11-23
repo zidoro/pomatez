@@ -30,8 +30,8 @@
   },
   "homepage": "./",
   "build": {
-    "productName": "Productivity Timer",
-    "appId": "com.roldanjrCodeArts9711.ProductivityTimer",
+    "productName": "PRODUCTIVITY TIMER",
+    "appId": "com.roldanjrCodeArts9711.productivity-timer",
     "copyright": "Copyright © 2019 ${author}",
     "files": [
       "src/assets"
@@ -54,8 +54,6 @@
     "linux": {
       "target": [
         "deb",
-        "snap",
-        "tar.gz",
         "AppImage"
       ],
       "icon": "./src/assets/icons/icon.png",
@@ -63,9 +61,8 @@
       "synopsis": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique.",
       "description": "This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness."
     },
-    "snap": {
-      "grade": "stable",
-      "confinement": "classic"
+    "AppImage": {
+      "license": "LICENSE"
     }
   },
   "dependencies": {
