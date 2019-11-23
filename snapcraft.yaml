@@ -12,5 +12,5 @@ apps:
     command: productivity-timer
 
 parts:
-  productivity-timer:
+  deps:
     plugin: nil
