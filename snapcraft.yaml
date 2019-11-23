@@ -7,6 +7,9 @@ description: |
 grade: stable
 confinement: strict
 
+architectures:
+  - build-on: amd64
+
 apps:
   productivity-timer:
     command: productivity-timer
