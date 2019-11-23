@@ -11,16 +11,18 @@ apps:
   productivity-timer:
     command: productivity-timer
     plugs:
-      - desktop
-      - desktop-legacy
-      - home
-      - x11
-      - unity7
-      - browser-support
-      - network
-      - gsettings
-      - pulseaudio
-      - opengl
+      [
+        desktop,
+        desktop-legacy,
+        home,
+        x11,
+        unity7,
+        browser-support,
+        network,
+        gsettings,
+        pulseaudio,
+        opengl,
+      ]
 
 parts:
   productivity-timer:
@@ -36,3 +38,5 @@ parts:
       - libpulse0
       - libxss1
       - libxtst6
+    stage:
+      - productivity-timer
