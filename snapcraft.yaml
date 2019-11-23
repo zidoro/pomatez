@@ -28,5 +28,5 @@ apps:
       ]
 
 parts:
-  productivity-timer:
+  deps:
     plugin: nil
