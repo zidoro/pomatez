@@ -5,8 +5,34 @@ description: |
   This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness.
 
 grade: stable
-confinement: classic
+confinement: strict
+
+apps:
+  productivity-timer:
+    command: productivity-timer
+    plugs:
+      - desktop
+      - desktop-legacy
+      - home
+      - x11
+      - unity7
+      - browser-support
+      - network
+      - gsettings
+      - pulseaudio
+      - opengl
 
 parts:
-  deps:
-    plugin: nil
+  productivity-timer:
+    plugin: nodejs
+    node-engine: 12.9.0
+    stage-packages:
+      - libasound2
+      - libgconf2-4
+      - libnotify4
+      - libnspr4
+      - libnss3
+      - libpcre3
+      - libpulse0
+      - libxss1
+      - libxtst6
