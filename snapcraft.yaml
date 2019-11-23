@@ -14,15 +14,3 @@ apps:
 parts:
   productivity-timer:
     plugin: nil
-    stage-packages:
-      - libasound2
-      - libgconf2-4
-      - libnotify4
-      - libnspr4
-      - libnss3
-      - libpcre3
-      - libpulse0
-      - libxss1
-      - libxtst6
-    stage:
-      - productivity-timer
