@@ -8,5 +8,5 @@ grade: stable
 confinement: strict
 
 parts:
-  deps:
+  productivity-timer:
     plugin: nil
