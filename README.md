@@ -160,6 +160,8 @@ Download the latest version from the [Releases Page](https://github.com/roldanjr
 
 > For linux user, you can directly install it using snap.
 
+> **Note** : This is not yet tested on real Linux machine. Behavior may differ.
+
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
 ## Author
