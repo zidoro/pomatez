@@ -17,9 +17,7 @@ apps:
       - unity7
       - browser-support
       - network
-      - network-bind
       - gsettings
-      - mount-observe
       - pulseaudio
       - opengl
     environment:
