@@ -53,7 +53,7 @@
     },
     "linux": {
       "target": [
-        "deb",
+        "snap",
         "AppImage"
       ],
       "icon": "./src/assets/icons/icon.png",
