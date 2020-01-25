@@ -7,6 +7,37 @@ description: |
 grade: stable
 confinement: strict
 
+apps:
+  productivity-timer:
+    plugs:
+      - desktop
+      - desktop-legacy
+      - home
+      - x11
+      - unity7
+      - browser-support
+      - network
+      - network-bind
+      - gsettings
+      - mount-observe
+      - pulseaudio
+      - opengl
+    environment:
+      TMPDIR: $XDG_RUNTIME_DIR
+
 parts:
   productivity-timer:
-    plugin: nil
+    source: .
+    plugin: dump
+    stage-packages:
+      - libasound2
+      - libgconf2-4
+      - libnotify4
+      - libnspr4
+      - libnss3
+      - libpcre3
+      - libpulse0
+      - libxss1
+      - libxtst6
+    after:
+      - desktop-gtk2
