@@ -66,23 +66,23 @@
     }
   },
   "dependencies": {
-    "electron-log": "^3.0.9",
+    "electron-log": "^4.0.4",
     "electron-updater": "^4.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "^3.2.0",
+    "react-scripts": "^3.3.0",
     "react-spring": "^8.0.27",
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
-    "concurrently": "^5.0.0",
+    "concurrently": "^5.0.2",
     "cross-env": "^6.0.3",
-    "electron": "^7.1.2",
-    "electron-builder": "^21.2.0",
-    "node-sass": "^4.13.0",
+    "electron": "^7.1.10",
+    "electron-builder": "^22.2.0",
+    "node-sass": "^4.13.1",
     "react-ripples": "^2.2.1",
     "say": "^0.16.0",
-    "wait-on": "^3.3.0"
+    "wait-on": "^4.0.0"
   },
   "eslintConfig": {
     "extends": "react-app"
