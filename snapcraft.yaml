@@ -28,7 +28,8 @@ apps:
 parts:
   productivity-timer:
     source: .
-    plugin: dump
+    plugin: nodejs
+
     stage-packages:
       - libasound2
       - libgconf2-4
@@ -39,5 +40,6 @@ parts:
       - libpulse0
       - libxss1
       - libxtst6
+
     after:
       - desktop-gtk2
