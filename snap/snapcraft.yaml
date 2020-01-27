@@ -15,7 +15,7 @@ parts:
   productivity-timer:
     source: app/
     plugin: nodejs
-    node-engine: 12.14.1
+    node-engine: 13.6.0
     stage-packages:
       - libasound2
       - libgconf2-4
@@ -28,7 +28,7 @@ parts:
       - libxtst6
     after:
       - desktop-gtk2
-    build: node_modules/.bin/electron-builder
+    build: yarn pack:snap
     install: |
       mkdir $SNAPCRAFT_PART_INSTALL/app
       mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
