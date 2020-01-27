@@ -1,4 +1,5 @@
 name: productivity-timer
+base: core18
 version: 1.0+git
 summary: Beautiful Time Management App for Productivity inspired by Pomodoro Technique.
 description: |
