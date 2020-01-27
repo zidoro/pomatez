@@ -15,10 +15,10 @@ parts:
   electron-app:
     source: app/
     plugin: nodejs
-
     node-engine: 13.6.0
-
+    nodejs-package-manager: npm
     stage-packages:
+      - libasound2
       - libgconf2-4
       - libnotify4
       - libnspr4
@@ -27,10 +27,8 @@ parts:
       - libpulse0
       - libxss1
       - libxtst6
-
     after:
       - desktop-gtk2
-
     build: node_modules/.bin/electron-builder
     install: |
       mkdir $SNAPCRAFT_PART_INSTALL/app
