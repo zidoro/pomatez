@@ -15,8 +15,6 @@ parts:
   electron-app:
     source: app/
     plugin: nodejs
-    node-engine: 13.6.0
-    nodejs-package-manager: npm
     stage-packages:
       - libasound2
       - libgconf2-4
