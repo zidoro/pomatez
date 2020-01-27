@@ -19,15 +19,14 @@ parts:
     node-engine: 13.6.0
 
     stage-packages:
+      - libgconf2-4
       - libnotify4
-      - libappindicator1
-      - libxtst6
+      - libnspr4
       - libnss3
+      - libpcre3
+      - libpulse0
       - libxss1
-      - fontconfig-config
-      - gconf2
-      - libasound2
-      - pulseaudio
+      - libxtst6
 
     after:
       - desktop-gtk2
@@ -43,6 +42,8 @@ apps:
   productivity-timer:
     command: desktop-launch $SNAP/app/productivity-timer
     plugs:
+      - desktop
+      - desktop-legacy
       - home
       - x11
       - unity7
