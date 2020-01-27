@@ -12,9 +12,10 @@ architectures:
   - build-on: i386
 
 parts:
-  electron-app:
+  productivity-timer:
     source: app/
     plugin: nodejs
+    node-engine: 12.14.1
     stage-packages:
       - libasound2
       - libgconf2-4
