@@ -17,6 +17,7 @@ parts:
     plugin: nodejs
 
     node-engine: 13.6.0
+    nodejs-package-manager: yarn
 
     stage-packages:
       - libgconf2-4
