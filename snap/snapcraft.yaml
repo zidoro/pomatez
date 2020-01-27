@@ -1,10 +1,10 @@
 name: productivity-timer
-base: core18
 version: 1.0+git
 summary: Beautiful Time Management App for Productivity inspired by Pomodoro Technique.
 description: |
   This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness.
 
+base: core18
 grade: stable
 confinement: strict
 
@@ -16,7 +16,8 @@ parts:
   productivity-timer:
     source: app/
     plugin: nodejs
-    node-engine: 13.6.0
+    nodejs-version: 13.6.0
+
     stage-packages:
       - libasound2
       - libgconf2-4
@@ -27,11 +28,10 @@ parts:
       - libpulse0
       - libxss1
       - libxtst6
-    after:
-      - desktop-gtk2
-    build: yarn pack:snap
-    install: |
-      mkdir $SNAPCRAFT_PART_INSTALL/app
+
+    override-build: |
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/app
       mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
     prime:
       - -node_modules
@@ -39,6 +39,7 @@ parts:
 apps:
   productivity-timer:
     command: desktop-launch $SNAP/app/productivity-timer
+    extensions: [gnome-3-28]
     plugs:
       - desktop
       - desktop-legacy

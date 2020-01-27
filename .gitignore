@@ -18,3 +18,5 @@ electron-builder.yml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+productivity-timer_*
