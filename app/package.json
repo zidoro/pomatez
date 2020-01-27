@@ -24,6 +24,7 @@
     "electron-release": "electron-builder --win --linux --publish always",
     "clean-build": "rm -rf build/ dist/",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
+    "pack:snap": "yarn react-build && electron-builder --dir",
     "build:linux": "yarn react-build && electron-builder --linux",
     "build:window": "yarn react-build && electron-builder --window",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
