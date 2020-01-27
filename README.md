@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="github/logo.svg" alt="Productivity Timer logo" width="72" height="72">
+    <img src="md/logo.svg" alt="Productivity Timer logo" width="72" height="72">
   </a>
 </p>
 
@@ -19,7 +19,7 @@
   <br>
 </p>
 
-![Application Preview](github/app-preview.png)
+![Application Preview](md/app-preview.png)
 
 ## About
 
@@ -65,11 +65,11 @@
 
   You can freely customize your own rules if your not good with the _default_ configuration of it.
 
-  ![Customizing Rules](github/customize-rules.gif)
+  ![Customizing Rules](md/customize-rules.gif)
 
   > ### Setting Preview
 
-  ![Setting Preview](github/setting-preview.gif)
+  ![Setting Preview](md/setting-preview.gif)
 
 - **Alway On Top**
 
@@ -83,7 +83,7 @@
 
   If enabled, on every _SHORT BREAK_ and _LONG BREAK_, the app will automatically fullscreen and you cannot escape from taking your break.
 
-  ![Fullscreen On Break Preview](github/fullscreen-on-break-preview.gif)
+  ![Fullscreen On Break Preview](md/fullscreen-on-break-preview.gif)
 
 - **Keyboard Shortcuts**
 
@@ -102,7 +102,7 @@
   By _default_, the app will choose what theme if for you depending on your _Operating System Color_ Theme when you first installed it on your machine.
   You can toggle it after whether you prefered _DARK MODE_ or _LIGHT MODE_.
 
-  ![Toggle UI Theme Preview](github/toggle-theme.gif)
+  ![Toggle UI Theme Preview](md/toggle-theme.gif)
 
 * **Text To Speech**
 
@@ -126,7 +126,7 @@
   - It will decrease CPU usage by approximately 99% to 100% while it still running and doing its task.
   - It task completed, the app automatically shows if it's not visible to inform you that the task is completed.
 
-  ![Runs On Background Preview](github/runs-on-background.gif)
+  ![Runs On Background Preview](md/runs-on-background.gif)
 
 - **Auto Updates**
 
@@ -134,7 +134,7 @@
 
   It will automatically download the updates so it won't bother you from downloading new and better version of the app.
 
-  ![Auto Update Preview](github/auto-update-preview.gif)
+  ![Auto Update Preview](md/auto-update-preview.gif)
 
 ### :soon: **Future Plans**
 
@@ -154,14 +154,14 @@
 
 :soon: In the near future. I will produce installers to those non Window users.
 
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases).
+Download the latest version from the [Releases Page](https://md.com/roldanjrCodeArts9711/productivity-timer/releases).
 
 ## Author
 
 | ![Roldan Montilla Jr](https://secure.gravatar.com/avatar/32ad502bd9b4fa72c3d183ff6f07ff93) |
 | :----------------------------------------------------------------------------------------: |
-|               [Roldan Montilla Jr](https://github.com/roldanjrCodeArts9711)                |
+|                 [Roldan Montilla Jr](https://md.com/roldanjrCodeArts9711)                  |
 
 ## License
 
-This project is licensed under the GPL - see the [LICENSE](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/LICENSE) file for details.
+This project is licensed under the GPL - see the [LICENSE](https://md.com/roldanjrCodeArts9711/productivity-timer/blob/master/LICENSE) file for details.

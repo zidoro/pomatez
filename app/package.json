@@ -25,6 +25,8 @@
     "electron-release": "electron-builder --win --linux --publish always",
     "clean-build": "rm -rf build/ dist/",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
+    "build:linux": "yarn react-build && electron-builder --linux",
+    "build:window": "yarn react-build && electron-builder --window",
     "build": "yarn clean-build && yarn react-build && yarn electron-build",
     "release": "yarn clean-build && yarn react-build && yarn electron-release"
   },
@@ -54,6 +56,7 @@
     "linux": {
       "target": [
         "deb",
+        "rpm",
         "snap",
         "tar.gz",
         "AppImage"
@@ -62,10 +65,6 @@
       "category": "Development",
       "synopsis": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique.",
       "description": "This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness."
-    },
-    "snap": {
-      "grade": "stable",
-      "confinement": "classic"
     }
   },
   "dependencies": {
@@ -75,7 +74,8 @@
     "react-dom": "^16.12.0",
     "react-scripts": "^3.3.0",
     "react-spring": "^8.0.27",
-    "v8-compile-cache": "^2.1.0"
+    "v8-compile-cache": "^2.1.0",
+    "window-electron": "file:library/window-electron/"
   },
   "devDependencies": {
     "concurrently": "^5.0.2",
