@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Productivity Timer</h1>
+<h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
   Beautiful Time Management App for Productivity inspired by Pomodoro Technique.
@@ -20,6 +20,8 @@
 </p>
 
 ![Application Preview](md/app-preview.png)
+
+[![Snap Status](https://build.snapcraft.io/badge/roldanjrCodeArts9711/productivity-timer.svg)](https://build.snapcraft.io/user/roldanjrCodeArts9711/productivity-timer) [![productivity-timer](https://snapcraft.io//productivity-timer/badge.svg)](https://snapcraft.io/productivity-timer)
 
 ## About
 
@@ -150,11 +152,17 @@
 
 ## Download
 
-> **Note** : This is currently available on Windows PC.
+> **Note** : This is currently available for Windows and Linux Users.
 
-:soon: In the near future. I will produce installers to those non Window users.
+:soon: In the near future. I will produce installer for Mac too.
 
 Download the latest version from the [Releases Page](https://md.com/roldanjrCodeArts9711/productivity-timer/releases).
+
+> For linux user, you can directly install it using snap.
+
+> **Note** : This is not yet tested on real Linux machine. Behavior may differ.
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
 ## Author
 
