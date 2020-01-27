@@ -20,7 +20,6 @@
     "export-voice": "node src/helpers/exportVoice.js",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
-    "postinstall": "electron-builder install-app-deps",
     "electron-build": "electron-builder --win --linux",
     "electron-release": "electron-builder --win --linux --publish always",
     "clean-build": "rm -rf build/ dist/",
