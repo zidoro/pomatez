@@ -9,6 +9,7 @@ confinement: strict
 
 apps:
   productivity-timer:
+    command: $SNAP/bin/productivity-timer
     plugs:
       - desktop
       - desktop-legacy

@@ -12417,7 +12417,7 @@ widest-line@^2.0.0:
   dependencies:
     string-width "^2.1.1"
 
-"window-electron@file:library/window-electron/":
+"window-electron@file:library/window-electron":
   version "0.0.1"
 
 word-wrap@~1.2.3:
