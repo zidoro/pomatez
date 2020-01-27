@@ -16,7 +16,7 @@ parts:
     source: app/
     plugin: nodejs
 
-    nodejs-version: v13.6.0
+    node-engine: 13.6.0
 
     stage-packages:
       - libnotify4
