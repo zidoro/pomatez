@@ -3,5 +3,5 @@ Type=Application
 Name=Productivity Timer
 Icon=${SNAP}/meta/gui/icon.png
 Categories=Development;Productivity;
-Exec=productivity-timer
+Exec=productivity-timer --no-sandbox
 Terminal=false
