@@ -16,7 +16,7 @@ parts:
   productivity-timer:
     source: app/
     plugin: nodejs
-    nodejs-version: 13.6.0
+    nodejs-version: 12.14.1
 
     stage-packages:
       - libasound2
@@ -30,9 +30,10 @@ parts:
       - libxtst6
 
     override-build: |
-      snapcraftctl build
+      rm -rf $SNAPCRAFT_PART_INSTALL/app
       mkdir -p $SNAPCRAFT_PART_INSTALL/app
       mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
+      snapcraftctl build
     prime:
       - -node_modules
 
