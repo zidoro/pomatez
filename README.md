@@ -144,12 +144,6 @@
 
   This feature let you write down notes or any checklist you want to accomplish at the end of the day so you won't need to use other _TODO app_ taking notes of what are those task you want to do.
 
-- **Eyes Breaker Option on Every Break**
-
-  On every _SHORT BREAK_ and _LONG BREAK_, you will be given an option to do exercise your eyes using the **Eyes Breaker** feature of the app.
-
-  It will help you especially if you are suffering from tiredness of the eyes due to long exposure to you computer.
-
 ## Download
 
 > **Note** : This is currently available for Windows and Linux Users.
