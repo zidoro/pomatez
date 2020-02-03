@@ -53,3 +53,5 @@ apps:
       - opengl
     environment:
       TMPDIR: $XDG_RUNTIME_DIR
+       # Fallback to XWayland if running in a Wayland session.
+      DISABLE_WAYLAND: 1
