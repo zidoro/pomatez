@@ -48,6 +48,7 @@ parts:
       - libpulse0
       - libxss1
       - libxtst6
+      - libglu1-mesa
 
     override-build: |
       snapcraftctl build
