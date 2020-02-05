@@ -11,6 +11,27 @@ confinement: strict
 architectures:
   - build-on: amd64
 
+apps:
+  productivity-timer:
+    command: desktop-launch $SNAP/app/productivity-timer --no-sandbox
+    extensions: [gnome-3-28]
+    plugs:
+      - audio-playback
+      - desktop
+      - desktop-legacy
+      - home
+      - x11
+      - unity7
+      - browser-support
+      - network
+      - gsettings
+      - pulseaudio
+      - opengl
+    environment:
+      TMPDIR: $XDG_RUNTIME_DIR
+      # Fallback to XWayland if running in a Wayland session.
+      DISABLE_WAYLAND: 1
+
 parts:
   productivity-timer:
     source: app/
@@ -35,23 +56,3 @@ parts:
       mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
     prime:
       - -node_modules
-
-apps:
-  productivity-timer:
-    command: desktop-launch $SNAP/app/productivity-timer
-    extensions: [gnome-3-28]
-    plugs:
-      - desktop
-      - desktop-legacy
-      - home
-      - x11
-      - unity7
-      - browser-support
-      - network
-      - gsettings
-      - pulseaudio
-      - opengl
-    environment:
-      TMPDIR: $XDG_RUNTIME_DIR
-       # Fallback to XWayland if running in a Wayland session.
-      DISABLE_WAYLAND: 1
