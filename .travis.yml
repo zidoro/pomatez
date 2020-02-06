@@ -25,20 +25,23 @@ jobs:
   include:
     - os: osx
       osx_image: xcode10.2
+      script:
+        - yarn release -- --mac --win
+      before_cache:
+        - rm -rf $HOME/.cache/electron-builder/wine
 
     - os: linux
       dist: xenial
+      script:
+        - yarn release
 
 # only deploy to github on a merge to the master branch
 deploy:
-  provider: script
-  script: bash deploy.travis.sh
+  provider: releases
+  api_key: $GH_TOKEN
   skip_cleanup: true
   on:
     branch: master
-
-before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
 
 # only run this script on pull requests and merges into
 # the 'master' branches
