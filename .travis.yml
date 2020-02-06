@@ -24,7 +24,7 @@ jobs:
       before_install:
         - cd app
       script:
-        - yarn release -- --mac --win
+        - yarn release --mac --win
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
@@ -33,8 +33,6 @@ jobs:
       before_install:
         - sudo apt-get install rpm
         - cd app
-      # Make apt-get update automatically on every build
-      # https://docs.travis-ci.com/user/installing-dependencies/
       addons:
         apt:
           update: true
@@ -47,11 +45,3 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    branch: master
-
-# only run this script on pull requests and merges into
-# the 'master' branches
-branches:
-  only:
-    - master
-    - /v\d+\.\d+[a-z]/
