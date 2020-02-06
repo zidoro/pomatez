@@ -57,8 +57,7 @@
     "linux": {
       "target": [
         "deb",
-        "rpm",
-        "snap"
+        "rpm"
       ],
       "icon": "./src/assets/icons/icon.png",
       "category": "Development",

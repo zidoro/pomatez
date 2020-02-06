@@ -19,14 +19,10 @@ env:
 # Locate the app folder
 before_install:
   - cd app
-  - sudo snap install snapcraft --classic
 
+# Making the build process parallel: one on mac and one on linux
 jobs:
   include:
-    - stage: Test
-      script:
-        - yarn test
-
     - os: osx
       osx_image: xcode10.2
 
