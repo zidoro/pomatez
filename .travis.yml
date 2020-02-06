@@ -33,7 +33,7 @@ jobs:
 deploy:
   provider: script
   script: bash deploy.travis.sh
-  cleanup: true
+  cleanup: false
   on:
     branch: master
 
