@@ -19,7 +19,8 @@ env:
 # Making the build process parallel: one on mac and one on linux
 jobs:
   include:
-    - if: tag IS present
+    - stage: Deploy Windows & Mac
+      if: tag IS present
       os: osx
       osx_image: xcode10.2
       before_install:
@@ -29,7 +30,8 @@ jobs:
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
-    - if: tag IS present
+    - stage: Deploy linux
+      if: tag IS present
       os: linux
       dist: xenial
       before_install:
