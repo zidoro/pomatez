@@ -1,0 +1,39 @@
+sudo: false
+
+language: node_js
+node_js: "12.14.1"
+
+before_install:
+  - cd app
+
+cache:
+  yarn: true
+  directories:
+    - app/node_modules
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
+
+env:
+  global:
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
+jobs:
+  include:
+    - stage: Test
+      script:
+        - yarn test
+    - stage: Deploy Windows & Mac
+      if: tag IS present
+      os: osx
+      osx_image: xcode10.1
+      script:
+        - yarn release -- --mac --win
+      before_cache:
+        - rm -rf $HOME/.cache/electron-builder/wine
+    - stage: Deploy Linux
+      if: tag IS present
+      os: linux
+      dist: trusty
+      script:
+        - yarn release
