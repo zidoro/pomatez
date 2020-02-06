@@ -29,20 +29,19 @@ jobs:
     - os: linux
       dist: xenial
 
-# only deploy to github on a merge to the development branch
+# only deploy to github on a merge to the master branch
 deploy:
   provider: script
   script: bash deploy.travis.sh
   cleanup: true
   on:
-    branch: development
+    branch: master
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
 
 # only run this script on pull requests and merges into
-# the 'master' and 'development' branches
+# the 'master' branches
 branches:
   only:
     - master
-    - development
