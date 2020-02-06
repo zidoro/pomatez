@@ -10,6 +10,9 @@ jobs:
       osx_image: xcode10.2
       language: node_js
       node_js: "12.14.1"
+      env:
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
     - os: linux
       dist: xenial
