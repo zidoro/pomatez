@@ -16,15 +16,13 @@ env:
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
-# Locate the app folder
-before_install:
-  - cd app
-
 # Making the build process parallel: one on mac and one on linux
 jobs:
   include:
     - os: osx
       osx_image: xcode10.2
+      before_install:
+        - cd app
       script:
         - yarn release -- --mac --win
       before_cache:
@@ -34,6 +32,7 @@ jobs:
       dist: xenial
       before_install:
         - sudo apt-get install rpm
+        - cd app
       # Make apt-get update automatically on every build
       # https://docs.travis-ci.com/user/installing-dependencies/
       addons:
