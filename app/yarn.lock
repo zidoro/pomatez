@@ -12417,9 +12417,6 @@ widest-line@^2.0.0:
   dependencies:
     string-width "^2.1.1"
 
-"window-electron@file:library/window-electron":
-  version "0.0.1"
-
 word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"

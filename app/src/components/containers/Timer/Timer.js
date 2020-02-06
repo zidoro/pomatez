@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useCallback, useMemo } from "react";
-import { currentWindow } from "window-electron";
+import { currentWindow } from "../../../helpers/window-electron";
 
 import {
   NavContext,

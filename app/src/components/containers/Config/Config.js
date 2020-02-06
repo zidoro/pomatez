@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { animated } from "react-spring";
-import { currentWindow } from "window-electron";
+import { currentWindow } from "../../../helpers/window-electron";
 
 import { SettingContext } from "../../../models";
 import { useAnimateLeft, useAnimateRight } from "../../../hooks";

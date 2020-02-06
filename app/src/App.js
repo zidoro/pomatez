@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useCallback, useMemo } from "react";
-import { ipcRenderer, webFrame } from "window-electron";
+import { ipcRenderer, webFrame } from "./helpers/window-electron";
 
 import {
   NavContext,
