@@ -35,13 +35,12 @@ jobs:
       script:
         - yarn release
 
-# only deploy to github on a merge to the master branch
 deploy:
   provider: releases
   api_key: $GH_TOKEN
   skip_cleanup: true
   on:
-    branch: master
+    tags: true
 
 # only run this script on pull requests and merges into
 # the 'master' branches
