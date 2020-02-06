@@ -34,6 +34,7 @@ deploy:
   provider: script
   script: bash deploy.travis.sh
   skip_cleanup: true
+  github_token: $gh_token
   on:
     branch: master
 
