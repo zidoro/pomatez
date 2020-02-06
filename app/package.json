@@ -24,7 +24,7 @@
     "electron-release": "electron-builder --publish always",
     "clean-build": "rm -rf build/ dist/",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "echo \"Error: no test specified\"",
     "prepare": "yarn react-build && electron-builder --dir",
     "build:linux": "yarn react-build && electron-builder --linux",
     "build:window": "yarn react-build && electron-builder --window",
