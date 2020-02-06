@@ -19,20 +19,26 @@ env:
 # Making the build process parallel: one on mac and one on linux
 jobs:
   include:
-    - os: osx
+    - stage: Deploy linux
+      if: tag IS present
+      os: osx
       osx_image: xcode10.2
       before_install:
         - cd app
       script:
-        - yarn release --mac --win
+        - yarn release -- --mac --win
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
-    - os: linux
+    - stage: Deploy linux
+      if: tag IS present
+      os: linux
       dist: xenial
       before_install:
         - sudo apt-get install rpm
         - cd app
+      # Make apt-get update automatically on every build
+      # https://docs.travis-ci.com/user/installing-dependencies/
       addons:
         apt:
           update: true
