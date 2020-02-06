@@ -52,6 +52,7 @@ script:
     else
       yarn test
     fi
+  - cd ..
 
 # only deploy to github on a merge to the development branch
 deploy:
