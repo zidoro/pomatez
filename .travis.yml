@@ -18,8 +18,8 @@ env:
 
 # Locate the app folder
 before_install:
+  - sudo apt-get install rpm
   - cd app
-  - apt-get install rpm
 
 # Making the build process parallel: one on mac and one on linux
 jobs:
