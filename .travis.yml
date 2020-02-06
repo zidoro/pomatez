@@ -19,24 +19,30 @@ env:
 # Locate the app folder
 before_install:
   - cd app
+  - sudo snap install snapcraft --classic
 
 jobs:
   include:
     - stage: Test
       script:
         - yarn test
-    - stage: Deploy Windows & Mac
-      os: osx
+
+    - os: osx
       osx_image: xcode10.2
-      script:
-        - yarn release -- --mac --win
-      before_cache:
-        - rm -rf $HOME/.cache/electron-builder/wine
-    - stage: Deploy linux
-      os: linux
+
+    - os: linux
       dist: xenial
-      script:
-        - yarn release
+
+# only deploy to github on a merge to the development branch
+deploy:
+  provider: script
+  script: bash deploy.travis.sh
+  cleanup: true
+  on:
+    branch: development
+
+before_cache:
+  - rm -rf $HOME/.cache/electron-builder/wine
 
 # only run this script on pull requests and merges into
 # the 'master' and 'development' branches
