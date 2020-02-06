@@ -28,10 +28,6 @@ cache:
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
 
-# go to the app directory
-before_install:
-  - cd app
-
 # add git lfs for large file support
 before_install:
   - |
@@ -43,6 +39,10 @@ before_script:
   - git lfs pull
 
 # on PRs and merges to master and development run tests and build the app
+
+before_install:
+  - cd app
+
 script:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
