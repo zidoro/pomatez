@@ -32,7 +32,6 @@ jobs:
 # only deploy to github on a merge to the master branch
 deploy:
   provider: script
-  api_key: $GH_TOKEN
   script: bash deploy.travis.sh
   skip_cleanup: true
   on:

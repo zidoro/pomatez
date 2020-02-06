@@ -4,5 +4,5 @@ if [ "$TRAVIS_OS_NAME" == osx ]; then
     yarn release --mac --win
 else
     # deploy on linux
-    yarn release
+    GH_TOKEN yarn release
 fi
