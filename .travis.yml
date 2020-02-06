@@ -46,6 +46,7 @@ deploy:
   api_key: $GH_TOKEN
   skip_cleanup: true
   on:
+    tags: true
     branch: master
 
 # only run this script on pull requests and merges into
