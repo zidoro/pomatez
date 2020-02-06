@@ -18,7 +18,6 @@ env:
 
 # Locate the app folder
 before_install:
-  - sudo apt-get install rpm
   - cd app
 
 # Making the build process parallel: one on mac and one on linux
@@ -33,6 +32,13 @@ jobs:
 
     - os: linux
       dist: xenial
+      before_install:
+        - sudo apt-get install rpm
+      # Make apt-get update automatically on every build
+      # https://docs.travis-ci.com/user/installing-dependencies/
+      addons:
+        apt:
+          update: true
       script:
         - yarn release
 
@@ -41,7 +47,7 @@ deploy:
   api_key: $GH_TOKEN
   skip_cleanup: true
   on:
-    tags: true
+    branch: master
 
 # only run this script on pull requests and merges into
 # the 'master' branches
