@@ -37,10 +37,10 @@ before_install:
     fi
 before_script:
   - git lfs pull
-  - cd app
 
 # on PRs and merges to master and development run tests and build the app
 script:
+  - cd app
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       docker run --rm \
@@ -52,6 +52,7 @@ script:
     else
       yarn test
     fi
+
 # only deploy to github on a merge to the development branch
 deploy:
   provider: script
