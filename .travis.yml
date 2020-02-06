@@ -37,6 +37,7 @@ before_install:
     fi
 before_script:
   - git lfs pull
+  - cd app
 
 # on PRs and merges to master and development run tests and build the app
 script:
