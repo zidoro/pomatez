@@ -1,5 +1,5 @@
 import React from "react";
-import { ipcRenderer } from "window-electron";
+import { ipcRenderer } from "../../../helpers/window-electron";
 
 import { Modal } from "../../common";
 import PropTypes from "prop-types";

@@ -72,8 +72,7 @@
     "react-dom": "^16.12.0",
     "react-scripts": "^3.3.0",
     "react-spring": "^8.0.27",
-    "v8-compile-cache": "^2.1.0",
-    "window-electron": "file:library/window-electron/"
+    "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
     "concurrently": "^5.0.2",
