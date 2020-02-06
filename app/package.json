@@ -33,7 +33,7 @@
   },
   "homepage": "./",
   "build": {
-    "productName": "PRODUCTIVITY TIMER",
+    "productName": "Productivity Timer",
     "appId": "com.roldanjrCodeArts9711.productivity-timer",
     "copyright": "Copyright © 2019 ${author}",
     "files": [
