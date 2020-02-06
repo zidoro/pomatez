@@ -1,23 +1,5 @@
 language: node_js
-node_js: "12.14.1"
-
-# Always run two parallel builds: one on mac and one on linux
-# the linux build will use wine to be able to build windows and
-# linux apps
-jobs:
-  include:
-    - os: osx
-      osx_image: xcode10.2
-      language: node_js
-      node_js: "12.14.1"
-      env:
-        - ELECTRON_CACHE=$HOME/.cache/electron
-        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
-    - os: linux
-      dist: xenial
-      services: docker
-      language: generic
+node_js: "stable"
 
 # cache some files for faster builds
 cache:
@@ -28,41 +10,33 @@ cache:
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
 
-# add git lfs for large file support
+# Add global environment
+env:
+  global:
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
+# Locate the app folder
 before_install:
   - cd app
-  - |
-    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v2.3.1/git-lfs-$([ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-2.3.1.tar.gz | tar -xz -C /tmp/git-lfs --strip-components 1
-      export PATH="/tmp/git-lfs:$PATH"
-    fi
-before_script:
-  - git lfs pull
 
-# on PRs and merges to master and development run tests and build the app
-script:
-  - |
-    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      docker run --rm \
-        -v ${PWD}:/project \
-        -v ~/.cache/electron:/root/.cache/electron \
-        -v ~/.cache/electron-builder:/root/.cache/electron-builder \
-        electronuserland/builder:wine \
-        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn test"
-    else
-      yarn test
-    fi
-
-# only deploy to github on a merge to the development branch
-deploy:
-  provider: script
-  script: bash deploy.travis.sh
-  cleanup: true
-  on:
-    branch: development
-
-before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
+jobs:
+  include:
+    - stage: Test
+      script:
+        - yarn test
+    - stage: Deploy Windows & Mac
+      os: osx
+      osx_image: xcode10.2
+      script:
+        - yarn release -- --mac --win
+      before_cache:
+        - rm -rf $HOME/.cache/electron-builder/wine
+    - stage: Deploy linux
+      os: linux
+      dist: xenial
+      script:
+        - yarn release
 
 # only run this script on pull requests and merges into
 # the 'master' and 'development' branches
