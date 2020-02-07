@@ -106,7 +106,7 @@
 
   ![Toggle UI Theme Preview](github/toggle-theme.gif)
 
-* **Text To Speech**
+- **Text To Speech**
 
   If _Show Notification_ is enabled. This feature will automatically activated.
 
@@ -146,15 +146,13 @@
 
 ## Download
 
-> **Note** : This is currently available for Windows and Linux Users.
+> **Note** : Mac, Windows and Linux are now supported.
 
-:soon: In the near future. I will produce installer for Mac too.
-
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases).
-
-> For linux user, you can directly install it using snap.
+> For linux users. You can directly install it from SnapStore.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
+
+Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases).
 
 ## Author
 
