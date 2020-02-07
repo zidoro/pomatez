@@ -45,7 +45,7 @@ jobs:
 
 deploy:
   provider: releases
-  api_key: $GH_TOKEN
-  skip_cleanup: true
+  token: $GH_TOKEN
+  cleanup: true
   on:
     tags: true
