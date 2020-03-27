@@ -83,7 +83,7 @@
 
 - **Fullscreen On Break**
 
-  If enabled, on every _SHORT BREAK_ and _LONG BREAK_, the app will automatically fullscreen and you cannot escape from taking your break.
+  When enabled FULL SCREEN ON BREAK, this feature disables your keyboard and mouse for the duration of break and will automatically fullscreen and you cannot escape from taking your break.
 
   ![Fullscreen On Break Preview](github/fullscreen-on-break-preview.gif)
 
