@@ -49,3 +49,4 @@ deploy:
   cleanup: true
   on:
     tags: true
+  edge: true
