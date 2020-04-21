@@ -54,6 +54,20 @@ function createWindow() {
   win.once("ready-to-show", () => win.show());
 
   win.on("closed", () => (win = null));
+
+  let blockShortcuts = ["CommandOrControl+R", "CommandOrControl+Shift+R", "CommandOrControl+Alt+Q"];
+
+  if(!isDev) {
+    win.on("focus", () =>
+        blockShortcuts.map((key) =>
+            globalShortcut.register(key, () => {})
+        ));
+    win.on("blur", () =>
+        blockShortcuts.map((key) =>
+            globalShortcut.unregister(key)
+        ));
+  }
+
 }
 
 function createSystemTray() {
@@ -83,18 +97,6 @@ function registerGlobalShortcut() {
     {
       key: "Alt+Shift+S",
       callback: () => win.show()
-    },
-    {
-      key: "CommandOrControl+R",
-      callback: () => isDev && win.reload()
-    },
-    {
-      key: "CommandOrControl+Shift+R",
-      callback: () => isDev && win.reload()
-    },
-    {
-      key: "CommandOrControl+Alt+Q",
-      callback: () => isDev && app.quit()
     }
   ];
 
