@@ -19,7 +19,8 @@ env:
 # Making the build process parallel: one on mac and one on linux
 jobs:
   include:
-    - os: osx
+    - if: tag IS present
+      os: osx
       osx_image: xcode10.2
       before_install:
         - cd app
@@ -28,7 +29,8 @@ jobs:
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
-    - os: linux
+    - if: tag IS present
+      os: linux
       dist: xenial
       before_install:
         - sudo apt-get install rpm
@@ -44,6 +46,7 @@ jobs:
 deploy:
   provider: releases
   token: $GH_TOKEN
-  cleanup: true
+  cleanup: false
   on:
     tags: true
+  edge: true
