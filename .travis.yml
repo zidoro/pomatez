@@ -46,7 +46,7 @@ jobs:
 deploy:
   provider: releases
   token: $GH_TOKEN
-  cleanup: false
+  cleanup: true
   on:
     tags: true
   edge: true
