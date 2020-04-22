@@ -21,7 +21,6 @@ jobs:
   include:
     - if: tag IS present
       os: osx
-      osx_image: xcode10.2
       before_install:
         - cd app
       script:
