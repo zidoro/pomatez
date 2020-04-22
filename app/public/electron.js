@@ -53,7 +53,9 @@ function createWindow() {
 
   win.once("ready-to-show", () => win.show());
 
-  win.on("closed", () => (win = null));
+  win.on("closed", () => {
+    (win = null)
+  });
 
   let blockShortcuts = ["CommandOrControl+R", "CommandOrControl+Shift+R", "CommandOrControl+Alt+Q"];
 
@@ -63,6 +65,14 @@ function createWindow() {
             globalShortcut.register(key, () => {})
         ));
     win.on("blur", () =>
+        blockShortcuts.map((key) =>
+            globalShortcut.unregister(key)
+        ));
+    win.on("show", () =>
+        blockShortcuts.map((key) =>
+            globalShortcut.register(key, () => {})
+        ));
+    win.on("hide", () =>
         blockShortcuts.map((key) =>
             globalShortcut.unregister(key)
         ));
