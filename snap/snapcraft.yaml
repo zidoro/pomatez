@@ -1,5 +1,4 @@
 name: productivity-timer
-version: git
 summary: Beautiful Time Management App for Productivity inspired by Pomodoro Technique.
 description: |
   This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness.
@@ -35,7 +34,6 @@ apps:
 parts:
   productivity-timer:
     source: app/
-    source-type: git
     plugin: nodejs
     nodejs-version: 12.14.1
 
@@ -50,6 +48,13 @@ parts:
       - libxss1
       - libxtst6
       - libglu1-mesa
+
+    override-pull: |
+      snapcraftctl pull
+      version="$(git describe --always | sed -e 's/-/+git/;y/-/./')"
+      [ -n "$(echo $version | grep "+git")" ] && grade=devel || grade=stable
+      snapcraftctl set-version "$version"
+      snapcraftctl set-grade "$grade"
 
     override-build: |
       snapcraftctl build
