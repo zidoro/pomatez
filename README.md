@@ -37,6 +37,7 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 - Strict Mode
 - Dark Theme
 - Lock Settings
+- Built-in Task List
 
 ## Road Map
 
