@@ -10,6 +10,7 @@
     "url": "https://github.com/roldanjrCodeArts9711"
   },
   "description": "Wonderful app that will help boost your productivity.",
+  "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
   "homepage": "./",
   "scripts": {
     "clean": "rm -rf build/ dist/",
