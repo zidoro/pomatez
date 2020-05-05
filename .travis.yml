@@ -24,6 +24,7 @@ jobs:
       osx_image: xcode11.1
       before_install:
         - cd app
+        - rm -r yarn.lock
       script:
         - yarn release -- --mac --win
       before_cache:
@@ -35,6 +36,7 @@ jobs:
       before_install:
         - sudo apt-get install rpm
         - cd app
+        - rm -r yarn.lock
       # Make apt-get update automatically on every build
       # https://docs.travis-ci.com/user/installing-dependencies/
       addons:
