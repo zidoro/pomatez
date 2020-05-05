@@ -144,6 +144,11 @@ else {
                                 win.setFullScreen(false);
                             }
                         }
+                        else {
+                            if (!win.isFullScreen()) {
+                                win.setFullScreen(true);
+                            }
+                        }
                         if (!win.isVisible()) {
                             win.show();
                             win.focus();
