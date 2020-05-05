@@ -168,6 +168,10 @@ if (!onlySingleIntance) {
               if (win.isFullScreen()) {
                 win.setFullScreen(false);
               }
+            } else {
+              if (!win.isFullScreen()) {
+                win.setFullScreen(true);
+              }
             }
 
             if (!win.isVisible()) {
