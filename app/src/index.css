@@ -1,0 +1,23 @@
+@font-face {
+  font-family: Noto-Sans;
+  src: url(./assets/fonts/noto-sans/NotoSans400.woff) format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: Noto-Sans;
+  src: url(./assets/fonts/noto-sans/NotoSans500.woff) format("woff");
+  font-style: normal;
+  font-weight: 500;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: Typo-Round;
+  src: url(./assets/fonts/typo-round/TypoRound400.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+}
