@@ -1,177 +1,193 @@
-const {
-  app,
-  BrowserWindow,
-  globalShortcut,
-  Tray,
-  Menu,
-  ipcMain
-} = require("electron");
-const { autoUpdater } = require("electron-updater");
-const path = require("path");
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var electron_1 = require("electron");
+var path_1 = __importDefault(require("path"));
+var functions_1 = require("./functions");
+var helpers_1 = require("./helpers");
 require("v8-compile-cache");
-
-const isDev = require("./scripts/electron-is-dev");
-
-const appIcon =
-  process.platform === "linux"
-    ? path.join(__dirname, "../src/assets/icons/icon.png")
-    : path.join(__dirname, "../src/assets/icons/icon.ico");
-const trayIcon = path.join(__dirname, "../src/assets/icons/32x32.png");
-
-const gotTheLock = app.requestSingleInstanceLock();
-const appId = "com.roldanjrCodeArts9711.productivity-timer";
-
-app.setAppUserModelId(appId);
-app.setLoginItemSettings({ openAtLogin: true });
-
-let win = null;
-let tray = null;
-
-function createWindow() {
-  win = new BrowserWindow({
-    width: 400,
-    height: 600,
-    minWidth: 400,
-    minHeight: 600,
-    resizable: false,
-    maximizable: false,
-    frame: false,
-    show: false,
-    icon: appIcon,
-    backgroundColor: "#222c33",
-    webPreferences: {
-      nodeIntegration: true
-    }
-  });
-
-  win.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
-  );
-
-  win.once("ready-to-show", () => win.show());
-
-  win.on("closed", () => {
-    (win = null)
-  });
-
-  let blockShortcuts = ["CommandOrControl+R", "CommandOrControl+Shift+R", "CommandOrControl+Alt+Q"];
-
-  if(!isDev) {
-    win.on("focus", () =>
-        blockShortcuts.map((key) =>
-            globalShortcut.register(key, () => {})
-        ));
-    win.on("blur", () =>
-        blockShortcuts.map((key) =>
-            globalShortcut.unregister(key)
-        ));
-    win.on("show", () =>
-        blockShortcuts.map((key) =>
-            globalShortcut.register(key, () => {})
-        ));
-    win.on("hide", () =>
-        blockShortcuts.map((key) =>
-            globalShortcut.unregister(key)
-        ));
-  }
-
+var onProduction = electron_1.app.isPackaged;
+var appIconDark = process.platform === "linux"
+    ? path_1.default.join(__dirname, "../src/assets/logos/logo-dark.png")
+    : path_1.default.join(__dirname, "../src/assets/logos/logo-dark.ico");
+var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray.png");
+var trayIconDark = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
+var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
+var win;
+function createMainWindow() {
+    win = new electron_1.BrowserWindow({
+        width: 340,
+        height: 500,
+        resizable: false,
+        maximizable: false,
+        show: false,
+        frame: false,
+        icon: appIconDark,
+        webPreferences: {
+            contextIsolation: true,
+            enableRemoteModule: false,
+            preload: path_1.default.join(__dirname, "preload.js"),
+        },
+    });
+    win.loadURL(!onProduction
+        ? "http://localhost:3000"
+        : "file://" + path_1.default.join(__dirname, "index.html"));
+    win.once("ready-to-show", function () {
+        win === null || win === void 0 ? void 0 : win.show();
+    });
+    win.on("closed", function () {
+        win = null;
+    });
 }
-
-function createSystemTray() {
-  tray = new Tray(trayIcon);
-
-  let contextMenu = Menu.buildFromTemplate([
-    {
-      label: "Show",
-      click: () => !win.isVisible() && win.show()
-    },
-    {
-      label: "Quit",
-      role: "quit"
-    }
-  ]);
-
-  tray.setToolTip("Productivity Timer");
-  tray.setContextMenu(contextMenu);
-
-  tray.on("click", () => {
-    win.isVisible() ? win.hide() : win.show();
-  });
+if (!onlySingleIntance) {
+    electron_1.app.quit();
 }
-
-function registerGlobalShortcut() {
-  let shortcutKeys = [
-    {
-      key: "Alt+Shift+S",
-      callback: () => win.show()
-    }
-  ];
-
-  shortcutKeys.map(({ key, callback }) =>
-    globalShortcut.register(key, callback)
-  );
+else {
+    electron_1.app.on("second-instance", function () {
+        if (win) {
+            if (win.isMinimized()) {
+                win.restore();
+            }
+            else if (!win.isVisible()) {
+                win.show();
+            }
+            else {
+                win.focus();
+            }
+        }
+    });
+    electron_1.app.on("ready", function () {
+        createMainWindow();
+        var tray = functions_1.createSystemTray({
+            icon: trayIconDark,
+            template: [
+                {
+                    label: "Hide",
+                    accelerator: "Alt+Shift+H",
+                    click: function () {
+                        if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
+                            win === null || win === void 0 ? void 0 : win.hide();
+                        }
+                    },
+                },
+                {
+                    label: "Show",
+                    accelerator: "Alt+Shift+S",
+                    click: function () {
+                        if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
+                            win === null || win === void 0 ? void 0 : win.show();
+                        }
+                    },
+                },
+                {
+                    label: "Quit",
+                    role: "quit",
+                },
+            ],
+        });
+        tray.on("click", function () {
+            if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
+                win === null || win === void 0 ? void 0 : win.show();
+            }
+            else {
+                win === null || win === void 0 ? void 0 : win.hide();
+            }
+        });
+        if (win && onProduction) {
+            var blockKeys = [
+                "CommandOrControl+R",
+                "CommandOrControl+Shift+R",
+                "CommandOrControl+Alt+Q",
+                "F11",
+            ];
+            functions_1.blockShortcutKeys(win, blockKeys);
+        }
+        functions_1.activateGlobalShortcuts([
+            {
+                key: "Alt+Shift+H",
+                callback: function () {
+                    win === null || win === void 0 ? void 0 : win.hide();
+                },
+            },
+            {
+                key: "Alt+Shift+S",
+                callback: function () {
+                    win === null || win === void 0 ? void 0 : win.show();
+                },
+            },
+        ]);
+        var autoUpdater = functions_1.activateAutoUpdate({});
+        electron_1.ipcMain.on(helpers_1.CHANNELS.TO_MAIN, function (event, data) {
+            if (win) {
+                switch (data.type) {
+                    case helpers_1.ACTIONS.SET_THEME:
+                        var darkTheme = data.payload.darkTheme;
+                        var backgroundColor = darkTheme ? "#141e25" : "#fff";
+                        var iconOnTray = darkTheme ? trayIconDark : trayIcon;
+                        win.setBackgroundColor(backgroundColor);
+                        tray.setImage(iconOnTray);
+                        break;
+                    case helpers_1.ACTIONS.MINIMIZE:
+                        win.minimize();
+                        break;
+                    case helpers_1.ACTIONS.HIDE:
+                        win.hide();
+                        break;
+                    case helpers_1.ACTIONS.FULL_SCREEN:
+                        win.setSkipTaskbar(data.payload);
+                        win.setFullScreen(data.payload);
+                        win.setVisibleOnAllWorkspaces(data.payload);
+                        if (data.payload === false) {
+                            if (win.isFullScreen()) {
+                                win.setFullScreen(false);
+                            }
+                        }
+                        if (!win.isVisible()) {
+                            win.show();
+                            win.focus();
+                        }
+                        if (!win.isAlwaysOnTop()) {
+                            win.setAlwaysOnTop(data.payload, "screen-saver");
+                        }
+                        else {
+                            win.setAlwaysOnTop(true, "screen-saver");
+                        }
+                        if (win.isFullScreen()) {
+                            electron_1.globalShortcut.unregister("Alt+Shift+H");
+                        }
+                        else {
+                            electron_1.globalShortcut.register("Alt+Shift+H", function () {
+                                win === null || win === void 0 ? void 0 : win.hide();
+                            });
+                        }
+                        break;
+                    case helpers_1.ACTIONS.ALWAYS_ON_TOP:
+                        win.setAlwaysOnTop(data.payload);
+                        break;
+                    case helpers_1.ACTIONS.QUIT_INSTALL_UPDATES:
+                        autoUpdater.quitAndInstall();
+                        break;
+                    default:
+                        return data.payload;
+                }
+            }
+        });
+    });
 }
-
-if (!gotTheLock) {
-  app.quit();
-} else {
-  app.on("second-instance", (event, commandLine, workingDirectory) => {
-    if (win) {
-      if (win.isMinimized()) {
-        win.restore();
-      } else if (!win.isVisible()) {
-        win.show();
-      }
-      win.focus();
+electron_1.app.on("window-all-closed", function () {
+    if (process.platform !== "darwin") {
+        electron_1.app.quit();
     }
-  });
-
-  app.on("ready", () => {
-    createWindow();
-    createSystemTray();
-    registerGlobalShortcut();
-    autoUpdater.checkForUpdatesAndNotify();
-  });
-}
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
 });
-
-app.on("activate", () => {
-  if (win === null) {
-    createWindow();
-  }
+electron_1.app.on("activate", function () {
+    if (win === null) {
+        createMainWindow();
+    }
 });
-
-app.on("will-quit", () => {
-  globalShortcut.unregisterAll();
+electron_1.app.on("will-quit", function () {
+    electron_1.globalShortcut.unregisterAll();
 });
-
-autoUpdater.on("update-available", () =>
-  win.webContents.send("update-available")
-);
-
-autoUpdater.on("update-downloaded", () =>
-  win.webContents.send("update-downloaded")
-);
-
-autoUpdater.on("download-progress", dp =>
-  win.webContents.send("download-progress", {
-    percent: Math.floor(dp.percent)
-  })
-);
-
-autoUpdater.logger = require("electron-log");
-autoUpdater.logger.transports.file.level = "debug";
-
-ipcMain.on("restart-app", () => autoUpdater.quitAndInstall());
-
-process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
-
-process.setMaxListeners(0);
+electron_1.app.setLoginItemSettings({ openAtLogin: true });
+electron_1.app.setAppUserModelId("electron.app.PRODUCTIVITY_TIMER");

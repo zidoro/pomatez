@@ -1,41 +1,39 @@
 {
   "name": "productivity-timer",
-  "version": "1.0.8",
   "private": true,
+  "version": "1.0.0",
   "main": "public/electron.js",
-  "description": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique",
-  "keywords": [
-    "Productivity Timer Application",
-    "Time Management Application",
-    "Pomodoro Timer Application",
-    "Productivity Application",
-    "Tomato Timer Application"
-  ],
+  "license": "MIT",
   "author": {
     "name": "Roldan Montilla Jr",
     "email": "roldanjrmontilla@gmail.com",
     "url": "https://github.com/roldanjrCodeArts9711"
   },
-  "scripts": {
-    "export-voice": "node src/helpers/exportVoice.js",
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
-    "electron-build": "electron-builder --win --linux",
-    "electron-release": "electron-builder --publish always",
-    "clean-build": "rm -rf build/ dist/",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . \"",
-    "test": "echo \"Error: no test specified\"",
-    "prepare": "yarn react-build && electron-builder --dir",
-    "build:linux": "yarn react-build && electron-builder --linux",
-    "build:window": "yarn react-build && electron-builder --window",
-    "build": "yarn clean-build && yarn react-build && yarn electron-build",
-    "release": "yarn clean-build && yarn react-build && yarn electron-release"
-  },
+  "description": "Wonderful app that will help boost your productivity.",
   "homepage": "./",
+  "scripts": {
+    "clean": "rm -rf build/ dist/",
+    "develop": "react-scripts start",
+    "gen-tts": "node tts-generator.js",
+    "react:build": "react-scripts build",
+    "compile:electron": "tsc -p electron/tsconfig.json",
+    "electron": "yarn compile:electron && electron .",
+    "prepare": "yarn compile:electron && yarn react:build && electron-builder --dir",
+    "build:app": "yarn clean && yarn compile:electron && yarn react:build",
+    "build:linux": "yarn build:app && electron-builder --linux",
+    "build:win": "yarn build:app && electron-builder --win",
+    "release": "yarn build:app && electron-builder --publish always"
+  },
+  "babelMacros": {
+    "styledComponents": {
+      "fileName": false,
+      "pure": true
+    }
+  },
   "build": {
-    "productName": "Productivity Timer",
-    "appId": "com.roldanjrCodeArts9711.productivity-timer",
-    "copyright": "Copyright © 2019 ${author}",
+    "productName": "PRODUCTIVITY TIMER",
+    "appId": "electron.app.PRODUCTIVITY_TIMER",
+    "copyright": "Copyright © 2020 ${author}",
     "files": [
       "src/assets"
     ],
@@ -49,43 +47,54 @@
           ]
         }
       ],
-      "icon": "./src/assets/icons/icon.ico"
-    },
-    "nsis": {
-      "license": "LICENSE"
+      "icon": "./src/assets/logos/logo-dark.ico"
     },
     "linux": {
       "target": [
+        "AppImage",
         "deb",
         "rpm"
       ],
-      "icon": "./src/assets/icons/icon.png",
-      "category": "Development",
-      "synopsis": "Beautiful Time Management App for Productivity inspired by Pomodoro Technique.",
-      "description": "This application is Free and OpenSource and has a lot of useful features that helps boost your productivity. It uses the method called Pomodoro Technique which is proven and tested to increase your overall productiveness."
+      "icon": "./src/assets/logos/logo-dark.png",
+      "category": "Productivity"
     }
   },
   "dependencies": {
-    "electron-log": "^4.1.1",
-    "electron-updater": "^4.2.5",
+    "autosize": "^4.0.2",
+    "electron-log": "^4.1.2",
+    "electron-updater": "^4.3.1",
+    "is-electron": "^2.2.0",
     "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
-    "react-spring": "^8.0.27",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "styled-components": "^5.1.0",
+    "uuid": "^8.0.0",
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "cross-env": "^7.0.2",
-    "electron": "^8.2.0",
-    "electron-builder": "^22.4.1",
-    "node-sass": "^4.13.1",
-    "react-ripples": "^2.2.1",
+    "@types/autosize": "^3.0.7",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/react-beautiful-dnd": "^12.1.2",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "@types/uuid": "^7.0.3",
+    "concurrently": "^5.2.0",
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0",
+    "prettier": "^2.0.5",
     "say": "^0.16.0",
-    "wait-on": "^4.0.1"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "typescript": "^3.8.3",
+    "wait-on": "^4.0.2"
   },
   "browserslist": {
     "production": [
