@@ -10,6 +10,8 @@
   Wonderful app that will help boost your productivity.
    <br>
   <br>
+  <a href="#overview">Overview</a>
+  .
   <a href="#features">Features</a>
   .
   <a href="#road-map">Road Map</a>
@@ -18,6 +20,10 @@
   <br>
   <br>
 </p>
+
+## Overview
+
+This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) added with some features that might help you a lot.
 
 ## Features
 

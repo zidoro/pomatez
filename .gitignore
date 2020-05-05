@@ -1,5 +1,7 @@
 electron-builder.yml
 
+yarn.lock
+
 /node_modules
 /.pnp
 .pnp.js
