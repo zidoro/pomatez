@@ -52,10 +52,8 @@ parts:
 
     override-pull: |
       snapcraftctl pull
-      version="$(git describe --abbrev=0)"
-      [ -n "$(echo $version | grep "+git")" ] && grade=devel || grade=stable
+      version="$(git describe --abbrev=0 --always)"
       snapcraftctl set-version "$version"
-      snapcraftctl set-grade "$grade"
 
     override-build: |
       snapcraftctl build
