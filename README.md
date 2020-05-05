@@ -7,7 +7,7 @@
 <h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Wonderful app that will help boost your productivity.
+  Wonderful app that will help boost your productivity
    <br>
   <br>
   <a href="#overview">Overview</a>
