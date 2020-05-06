@@ -66,7 +66,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
       if (openExternalCallback) {
         openExternalCallback();
       }
-    }, [openExternalCallback, showPreview]);
+    }, [openExternalCallback, editingDescription, showPreview]);
 
     useEffect(() => {
       if (cardTextAreaRef.current) {
@@ -149,7 +149,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
               ref={descriptionFormRef}
             >
               {showPreview ? (
-                <MDPreviewer description={card?.description} />
+                <MDPreviewer description={description} />
               ) : (
                 <>
                   <DescriptionArea
