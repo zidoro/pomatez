@@ -24,7 +24,6 @@ jobs:
       osx_image: xcode11.1
       before_install:
         - cd app
-        - rm -r yarn.lock
       script:
         - yarn release -- --mac --win
       before_cache:
