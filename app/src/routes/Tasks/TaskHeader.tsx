@@ -43,6 +43,15 @@ const TaskHeader: React.FC<Props> = ({
         inputRef.current.focus();
         inputRef.current.value = title;
 
+        inputRef.current.onblur = () => {
+          if (inputRef.current) {
+            if (onEditTitle && inputRef.current.value) {
+              onEditTitle(inputRef.current.value);
+            }
+            setEditing(false);
+          }
+        };
+
         inputRef.current.onkeyup = (e: KeyboardEvent) => {
           if (e.keyCode === 13) {
             if (inputRef.current) {
