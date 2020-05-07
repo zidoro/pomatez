@@ -46,6 +46,8 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 - Add web blocker feature.
 - Add password to Lock Settings feature.
 - Add option to switch between native titlebar.
+- Improve task list feature to make it more useful.
+- Create official website that include documentations.
 
 ## Development
 
