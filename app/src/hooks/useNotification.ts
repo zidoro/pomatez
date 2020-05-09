@@ -1,7 +1,11 @@
 import bell from "assets/audios/notification-bell.wav";
 
+type OptionProps = {
+  mute?: boolean;
+} & NotificationOptions;
+
 export const useNotification = (
-  constantOptions?: NotificationOptions,
+  constantOptions?: OptionProps,
   notify?: boolean
 ) => (title: string, options: NotificationOptions, audioSrc?: string) => {
   const defaultOptions: NotificationOptions = {
@@ -12,11 +16,12 @@ export const useNotification = (
 
   // Making sure that notification sound the same
   // in all Operating System
-  if (!options.silent) {
+
+  if (!constantOptions?.mute) {
     new Audio(bell).play();
   }
 
-  if (audioSrc && !options.silent) {
+  if (audioSrc && !constantOptions?.mute) {
     setTimeout(() => {
       new Audio(audioSrc).play();
     }, 1000);
