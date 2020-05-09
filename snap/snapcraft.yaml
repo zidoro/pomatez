@@ -52,7 +52,7 @@ parts:
 
     override-pull: |
       snapcraftctl pull
-      version="$(git describe --abbrev=0 --always)"
+      version="$(git describe)"
       snapcraftctl set-version "$version"
 
     override-build: |
