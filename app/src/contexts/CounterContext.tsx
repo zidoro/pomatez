@@ -75,7 +75,7 @@ const CounterProvider: React.FC = ({ children }) => {
   const notification = useNotification(
     {
       icon: darkMode ? notificationIconDark : notificationIcon,
-      silent: !notificationSoundOn,
+      mute: !notificationSoundOn,
     },
     enableNotifications
   );
