@@ -203,8 +203,9 @@ const CounterProvider: React.FC = ({ children }) => {
 
     if (playing) {
       interval = setInterval(() => {
-        // Added 1 second due to notification delay
-        if (counter === 61) {
+        counter--;
+        setCount(counter);
+        if (counter === 60) {
           if (timerType === SHORT_BREAK) {
             notification(
               "60 Seconds Left for Short Break",
@@ -227,7 +228,7 @@ const CounterProvider: React.FC = ({ children }) => {
         }
 
         // Added 1 second due to notification delay
-        if (counter === 31 && timerType === STAY_FOCUS) {
+        if (counter === 30 && timerType === STAY_FOCUS) {
           notification(
             "30 Seconds Left to Work",
             { body: "Please pause all media playing if there's one." },
@@ -286,8 +287,6 @@ const CounterProvider: React.FC = ({ children }) => {
           }
           return clearInterval(interval);
         }
-        counter--;
-        setCount(counter);
       }, 1000);
     }
 

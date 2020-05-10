@@ -24,7 +24,7 @@ export const useNotification = (
   if (audioSrc && !constantOptions?.mute) {
     setTimeout(() => {
       new Audio(audioSrc).play();
-    }, 1000);
+    }, 1500);
   }
 
   if (!notify) return;
