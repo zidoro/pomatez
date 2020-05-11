@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="github/logo.png" alt="Productivity Timer logo" width="72" height="72">
+    <img src="assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
   </a>
 </p>
 
@@ -21,7 +21,7 @@
   <br>
 </p>
 
-![App Preview](/github/Preview.png)
+![App Preview](/assets/Preview.png)
 
 [![productivity-timer](https://snapcraft.io//productivity-timer/badge.svg)](https://snapcraft.io/productivity-timer)
 [![Snap Status](https://build.snapcraft.io/badge/roldanjrCodeArts9711/productivity-timer.svg)](https://build.snapcraft.io/user/roldanjrCodeArts9711/productivity-timer)
