@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help the app improve
-title: Application Bug
+title: 'Bug Report: Title of the Bug'
 labels: ''
 assignees: ''
 
