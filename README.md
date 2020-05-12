@@ -44,11 +44,13 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 - Special Breaks
 
   > Allows you to set some special time when you really need to take a break.
-  > Example: Lunch Break, Dinner Break and etc...
+
+  > **Example**: Lunch Break, Dinner Break and etc...
 
 - Strict Mode
 
   > **NOTE**: Full Screen On Break feature of `version 1` is being moved here due to some request of users.
+
   > If `Enabled`: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break.
 
 - Dark Theme
@@ -57,11 +59,14 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
 - Lock Settings
 
-  > If `Enabled`: Your settings that you had set will be locked.
+  > If **Enabled**: Your settings that you had set will be locked.
+
   > **NOTE**: This feature is not yet fully implemented. There's a lot of functionalities of it that has not been develop and implemented.
 
 - Built-in Task List
+
   > Allow you to create a list of task that you want to accomplish.
+
   > **NOTE**: This feature will be improve soon.
 
 ## Road Map
