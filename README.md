@@ -51,7 +51,7 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
   > **NOTE**: Full Screen On Break feature of `version 1` is being moved here due to some request of users.
 
-  > If `Enabled`: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break.
+  > If **Enabled**: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break.
 
 - Dark Theme
 
