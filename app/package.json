@@ -13,6 +13,7 @@
   "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
   "homepage": "./",
   "scripts": {
+    "commit": "git-cz",
     "clean": "rm -rf build/ dist/",
     "develop": "react-scripts start",
     "gen-tts": "node tts-generator.js",
@@ -23,13 +24,29 @@
     "build:app": "yarn clean && yarn compile:electron && yarn react:build",
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
-    "release": "yarn build:app && electron-builder --publish always"
+    "release": "yarn build:app && electron-builder --publish always",
+    "semantic-release": "semantic-release pre && yarn release && semantic-release post"
   },
   "babelMacros": {
     "styledComponents": {
       "fileName": false,
       "pure": true
     }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/git"
+    ],
+    "branch": "master"
   },
   "build": {
     "productName": "PRODUCTIVITY TIMER",
@@ -79,6 +96,8 @@
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@types/autosize": "^3.0.7",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
@@ -89,11 +108,13 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/uuid": "^7.0.3",
+    "commitizen": "^4.1.2",
     "concurrently": "^5.2.0",
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",
     "prettier": "^2.0.5",
     "say": "^0.16.0",
+    "semantic-release": "^17.0.7",
     "typescript": "^3.8.3",
     "wait-on": "^4.0.2"
   },
