@@ -13,7 +13,6 @@
   "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
   "homepage": "./",
   "scripts": {
-    "commit": "git-cz",
     "clean": "rm -rf build/ dist/",
     "develop": "react-scripts start",
     "gen-tts": "node tts-generator.js",
@@ -45,8 +44,7 @@
       ],
       "@semantic-release/changelog",
       "@semantic-release/git"
-    ],
-    "branch": "master"
+    ]
   },
   "build": {
     "productName": "PRODUCTIVITY TIMER",
@@ -108,15 +106,12 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/uuid": "^7.0.3",
-    "commitizen": "^4.1.2",
-    "concurrently": "^5.2.0",
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",
     "prettier": "^2.0.5",
     "say": "^0.16.0",
     "semantic-release": "^17.0.7",
-    "typescript": "^3.8.3",
-    "wait-on": "^4.0.2"
+    "typescript": "^3.8.3"
   },
   "browserslist": {
     "production": [
