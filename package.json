@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "commit": "git-cz",
+    "clean": "npm run clean --prefix=app",
+    "develop": "npm run develop --prefix=app",
+    "electron": "npm run electron --prefix=app",
+    "start:app": "concurrently \"yarn develop\" \"wait-on http://localhost:3000 && yarn electron\""
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.1.2",
+    "concurrently": "^5.2.0",
+    "cz-conventional-changelog": "^3.2.0",
+    "wait-on": "^5.0.0"
+  }
+}
