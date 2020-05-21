@@ -19,16 +19,18 @@ env:
 # Making the build process parallel: one on mac and one on linux
 jobs:
   include:
-    - os: osx
+    - if: tag IS present
+      os: osx
       osx_image: xcode11.1
       before_install:
         - cd app
       script:
-        - yarn semantic-release-pre && yarn release -- --mac --win && yarn semantic-release-post
+        - yarn release -- --mac --win
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
-    - os: linux
+    - if: tag IS present
+      os: linux
       dist: xenial
       before_install:
         - sudo apt-get install rpm
@@ -40,7 +42,7 @@ jobs:
         apt:
           update: true
       script:
-        - yarn semantic-release-pre && yarn release && yarn semantic-release-post
+        - yarn release
 
 deploy:
   provider: releases
