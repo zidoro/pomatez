@@ -46,7 +46,7 @@ const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
       <StyledMarkWrapper>
         <StyledMarkLogo src={getAppIcon()} />
         <StyledMarkName>
-          {APP_NAME} <span>v{Json.version}</span>
+          {APP_NAME} {Json.version && <span>v{Json.version}</span>}
         </StyledMarkName>
       </StyledMarkWrapper>
 
