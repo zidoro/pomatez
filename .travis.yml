@@ -51,6 +51,5 @@ deploy:
   cleanup: true
   on:
     tags: true
+    branch: master
   edge: true
-  only:
-    - master
