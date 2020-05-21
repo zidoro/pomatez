@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.blockShortcutKeys = void 0;
 var electron_1 = require("electron");
 function blockShortcutKeys(window, shortcutKeys) {
     window.on("focus", function () {

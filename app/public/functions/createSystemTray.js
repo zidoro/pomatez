@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createSystemTray = void 0;
 var electron_1 = require("electron");
 var tray;
 function createSystemTray(_a) {
