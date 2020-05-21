@@ -1,6 +1,6 @@
 {
   "name": "productivity-timer",
-  "version": "2.0.5-beta",
+  "version": "2.0.6-beta",
   "private": true,
   "main": "public/electron.js",
   "license": "MIT",
@@ -24,8 +24,7 @@
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
     "release": "yarn build:app && electron-builder --publish always",
-    "semantic-release-pre": "semantic-release pre",
-    "semantic-release-post": "semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "babelMacros": {
     "styledComponents": {
