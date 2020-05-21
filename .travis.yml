@@ -24,7 +24,7 @@ jobs:
       before_install:
         - cd app
       script:
-        - yarn semantic-release -- --mac --win
+        - yarn semantic-release-pre && yarn release -- --mac --win && yarn semantic-release-post
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
@@ -40,7 +40,7 @@ jobs:
         apt:
           update: true
       script:
-        - yarn semantic-release
+        - yarn semantic-release-pre && yarn release && yarn semantic-release-post
 
 deploy:
   provider: releases

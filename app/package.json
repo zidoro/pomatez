@@ -24,27 +24,14 @@
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
     "release": "yarn build:app && electron-builder --publish always",
-    "semantic-release": "semantic-release pre && yarn release && semantic-release post"
+    "semantic-release-pre": "semantic-release pre",
+    "semantic-release-post": "semantic-release post"
   },
   "babelMacros": {
     "styledComponents": {
       "fileName": false,
       "pure": true
     }
-  },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      [
-        "@semantic-release/npm",
-        {
-          "npmPublish": false
-        }
-      ],
-      "@semantic-release/changelog",
-      "@semantic-release/git"
-    ]
   },
   "build": {
     "productName": "PRODUCTIVITY TIMER",
@@ -94,8 +81,6 @@
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
     "@types/autosize": "^3.0.7",
     "@types/jest": "^25.2.3",
     "@types/node": "^14.0.4",
