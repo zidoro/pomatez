@@ -28,6 +28,7 @@ function createMainWindow() {
         webPreferences: {
             contextIsolation: true,
             enableRemoteModule: false,
+            backgroundThrottling: false,
             preload: path_1.default.join(__dirname, "preload.js"),
         },
     });

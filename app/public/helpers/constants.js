@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BLOCKER = exports.UPDATES = exports.ACTIONS = exports.CHANNELS = void 0;
 var CHANNELS;
 (function (CHANNELS) {
     CHANNELS["TO_MAIN"] = "TO_MAIN";

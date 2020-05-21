@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.activateAutoUpdate = void 0;
 var electron_updater_1 = require("electron-updater");
 var electron_log_1 = __importDefault(require("electron-log"));
 function activateAutoUpdate(_a) {

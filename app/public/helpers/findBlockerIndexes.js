@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.findBlockerIndexes = void 0;
 var constants_1 = require("./constants");
 function findBlockerIndexes(hosts) {
     var positions = { start: -1, end: -1 };

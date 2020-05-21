@@ -43,6 +43,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.unBlockWebsiteList = exports.blockWebsiteList = void 0;
 var helpers_1 = require("../helpers");
 // TODO: run ` ipconfig /flushdns` for Windows if doesn't work
 function blockWebsiteList(domains) {
