@@ -36,7 +36,7 @@ parts:
   productivity-timer:
     source: app/
     plugin: nodejs
-    nodejs-version: "stable"
+    nodejs-version: 12.14.1
 
     stage-packages:
       - libasound2
