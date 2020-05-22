@@ -5,7 +5,8 @@
     "gen-tts": "npm run gen-tts --prefix=app",
     "develop": "npm run develop --prefix=app",
     "electron": "npm run electron --prefix=app",
-    "start:app": "concurrently \"yarn develop\" \"wait-on http://localhost:3000 && yarn electron\""
+    "start:app": "concurrently \"yarn develop\" \"wait-on http://localhost:3000 && yarn electron\"",
+    "prepare": "yarn install"
   },
   "config": {
     "commitizen": {
