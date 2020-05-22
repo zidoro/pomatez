@@ -79,6 +79,8 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 - Add option to switch between native titlebar.
 - Improve task list feature to make it more useful.
 - Create official website that include documentations.
+- Add productivity report requested. Feature request mentioned here [#68](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/68).
+- Separate toggles for alarm sounds, basic narration and extra narration. Feature request mentioned here [#69](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/69).
 
 ## Development
 
