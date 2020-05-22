@@ -29,7 +29,8 @@ export const StyledTimeInput = styled.input<{ error?: boolean }>`
   }
 
   &::-webkit-clear-button,
-  &::-webkit-inner-spin-button {
+  &::-webkit-inner-spin-button,
+  &::-webkit-calendar-picker-indicator {
     display: none;
   }
 
