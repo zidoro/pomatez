@@ -1,4 +1,4 @@
-electron-builder.yml
+/app/yarn.lock*
 
 /node_modules
 /.pnp
