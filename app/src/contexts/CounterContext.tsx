@@ -205,94 +205,92 @@ const CounterProvider: React.FC = ({ children }) => {
       interval = setInterval(() => {
         counter--;
         setCount(counter);
+
+        if (counter === 60) {
+          if (timerType === SHORT_BREAK) {
+            notification(
+              "60 Seconds Left for Short Break",
+              { body: "Please prepare yourself getting  back to work." },
+              sixtySecondsLeftShortBreak
+            );
+          } else if (timerType === LONG_BREAK) {
+            notification(
+              "60 Seconds Left for Long Break",
+              { body: "Please prepare yourself getting  back to work." },
+              sixtySecondsLeftLongBreak
+            );
+          } else if (timerType === SPECIAL_BREAK) {
+            notification(
+              "60 Seconds Left for Special Break",
+              { body: "Please prepare yourself getting  back to work." },
+              sixtySecondsLeftSpecialBreak
+            );
+          }
+        }
+
+        if (counter === 30 && timerType === STAY_FOCUS) {
+          notification(
+            "30 Seconds Left to Work",
+            { body: "Please pause all media playing if there's one." },
+            thirtySecondsLeftToWork
+          );
+        }
+
+        if (counter === 0) {
+          switch (timerType) {
+            case STAY_FOCUS:
+              if (round < sessionRounds) {
+                dispatch(setTimerType("SHORT_BREAK"));
+                notification(
+                  "Work Time Finished",
+                  { body: "It is time to take a short break." },
+                  shortBreakStart
+                );
+              } else {
+                dispatch(setTimerType("LONG_BREAK"));
+                notification(
+                  "Session Rounds Completed",
+                  { body: "It is time to take a long break." },
+                  longBreakStart
+                );
+              }
+              break;
+
+            case SHORT_BREAK:
+              dispatch(setTimerType("STAY_FOCUS"));
+              dispatch(setRound(round + 1));
+              notification(
+                "Short Break Finished",
+                { body: "It is time to focus and work again." },
+                shortBreakFinished
+              );
+              break;
+
+            case LONG_BREAK:
+              dispatch(setTimerType("STAY_FOCUS"));
+              dispatch(setRound(1));
+              notification(
+                "Long Break Finished",
+                { body: "It is time to focus and work again." },
+                longBreakFinished
+              );
+              break;
+
+            case SPECIAL_BREAK:
+              dispatch(setTimerType("STAY_FOCUS"));
+              notification(
+                "Special Break Finished",
+                { body: "It is time to focus and work again." },
+                specialBreakFinished
+              );
+              break;
+          }
+        }
       }, 1000);
     }
 
     return () => clearInterval(interval);
-  }, [count, playing]);
-
-  useEffect(() => {
-    if (count === 60) {
-      if (timerType === SHORT_BREAK) {
-        notification(
-          "60 Seconds Left for Short Break",
-          { body: "Please prepare yourself getting  back to work." },
-          sixtySecondsLeftShortBreak
-        );
-      } else if (timerType === LONG_BREAK) {
-        notification(
-          "60 Seconds Left for Long Break",
-          { body: "Please prepare yourself getting  back to work." },
-          sixtySecondsLeftLongBreak
-        );
-      } else if (timerType === SPECIAL_BREAK) {
-        notification(
-          "60 Seconds Left for Special Break",
-          { body: "Please prepare yourself getting  back to work." },
-          sixtySecondsLeftSpecialBreak
-        );
-      }
-    }
-
-    if (count === 30 && timerType === STAY_FOCUS) {
-      notification(
-        "30 Seconds Left to Work",
-        { body: "Please pause all media playing if there's one." },
-        thirtySecondsLeftToWork
-      );
-    }
-
-    if (count === 0) {
-      switch (timerType) {
-        case STAY_FOCUS:
-          if (round < sessionRounds) {
-            dispatch(setTimerType("SHORT_BREAK"));
-            notification(
-              "Work Time Finished",
-              { body: "It is time to take a short break." },
-              shortBreakStart
-            );
-          } else {
-            dispatch(setTimerType("LONG_BREAK"));
-            notification(
-              "Session Rounds Completed",
-              { body: "It is time to take a long break." },
-              longBreakStart
-            );
-          }
-          break;
-
-        case SHORT_BREAK:
-          dispatch(setTimerType("STAY_FOCUS"));
-          dispatch(setRound(round + 1));
-          notification(
-            "Short Break Finished",
-            { body: "It is time to focus and work again." },
-            shortBreakFinished
-          );
-          break;
-
-        case LONG_BREAK:
-          dispatch(setTimerType("STAY_FOCUS"));
-          dispatch(setRound(1));
-          notification(
-            "Long Break Finished",
-            { body: "It is time to focus and work again." },
-            longBreakFinished
-          );
-          break;
-
-        case SPECIAL_BREAK:
-          dispatch(setTimerType("STAY_FOCUS"));
-          notification(
-            "Special Break Finished",
-            { body: "It is time to focus and work again." },
-            specialBreakFinished
-          );
-          break;
-      }
-    }
-  }, [count, dispatch, notification, round, sessionRounds, timerType]);
+  }, [count, playing, dispatch, notification, round, sessionRounds, timerType]);
 
   return (
     <CounterContext.Provider
