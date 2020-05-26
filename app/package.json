@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "2.0.7-beta",
+  "version": "2.0.8-beta",
   "private": true,
   "main": "public/electron.js",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
     "release": "yarn build:app && electron-builder --publish always",
+    "postinstall": "electron-builder install-app-deps",
     "semantic-release": "semantic-release"
   },
   "babelMacros": {
@@ -40,6 +41,10 @@
     "files": [
       "src/assets"
     ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "./src/assets/logos/logo-dark@2x.png"
+    },
     "win": {
       "target": [
         {

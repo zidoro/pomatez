@@ -1,6 +1,5 @@
 {
   "name": "productivity-timer",
-  "version": "2.0.7-beta",
   "private": true,
   "scripts": {
     "commit": "git-cz",
