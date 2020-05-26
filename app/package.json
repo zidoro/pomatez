@@ -1,5 +1,5 @@
 {
-  "name": "productivity-timer",
+  "name": "app",
   "version": "2.0.7-beta",
   "private": true,
   "main": "public/electron.js",
@@ -19,8 +19,8 @@
     "react:build": "react-scripts build",
     "compile:electron": "tsc -p electron/tsconfig.json",
     "electron": "yarn compile:electron && electron .",
-    "prepare": "yarn compile:electron && yarn react:build && electron-builder --dir",
     "build:app": "yarn clean && yarn compile:electron && yarn react:build",
+    "build:dir": "yarn compile:electron && yarn react:build && electron-builder --dir",
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
     "release": "yarn build:app && electron-builder --publish always",
