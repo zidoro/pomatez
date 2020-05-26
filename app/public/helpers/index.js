@@ -15,3 +15,4 @@ __exportStar(require("./isWindow"), exports);
 __exportStar(require("./readHostsFile"), exports);
 __exportStar(require("./writeHostsFile"), exports);
 __exportStar(require("./findBlockerIndexes"), exports);
+__exportStar(require("./getIcon"), exports);

@@ -9,9 +9,6 @@ var functions_1 = require("./functions");
 var helpers_1 = require("./helpers");
 require("v8-compile-cache");
 var onProduction = electron_1.app.isPackaged;
-var appIconDark = process.platform === "linux"
-    ? path_1.default.join(__dirname, "../src/assets/logos/logo-dark.png")
-    : path_1.default.join(__dirname, "../src/assets/logos/logo-dark.ico");
 var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray.png");
 var trayIconDark = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
 var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
@@ -24,7 +21,7 @@ function createMainWindow() {
         maximizable: false,
         show: false,
         frame: false,
-        icon: appIconDark,
+        icon: helpers_1.getIcon(),
         webPreferences: {
             contextIsolation: true,
             enableRemoteModule: false,

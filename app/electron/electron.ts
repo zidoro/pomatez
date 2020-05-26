@@ -8,16 +8,11 @@ import {
   activateAutoUpdate,
 } from "./functions";
 
-import { CHANNELS, UPDATES, ACTIONS } from "./helpers";
+import { CHANNELS, UPDATES, ACTIONS, getIcon } from "./helpers";
 
 import "v8-compile-cache";
 
 const onProduction = app.isPackaged;
-
-const appIconDark =
-  process.platform === "linux"
-    ? path.join(__dirname, "../src/assets/logos/logo-dark.png")
-    : path.join(__dirname, "../src/assets/logos/logo-dark.ico");
 
 const trayIcon = path.join(__dirname, "../src/assets/logos/tray.png");
 const trayIconDark = path.join(__dirname, "../src/assets/logos/tray-dark.png");
@@ -34,7 +29,7 @@ function createMainWindow() {
     maximizable: false,
     show: false,
     frame: false,
-    icon: appIconDark,
+    icon: getIcon(),
     webPreferences: {
       contextIsolation: true,
       enableRemoteModule: false,

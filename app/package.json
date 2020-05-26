@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "2.0.8-beta",
+  "version": "2.0.9-beta",
   "private": true,
   "main": "public/electron.js",
   "license": "MIT",
@@ -13,7 +13,7 @@
   "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
   "homepage": "./",
   "scripts": {
-    "prepare": "yarn build:dir",
+    "postinstall": "yarn build:dir",
     "clean": "rm -rf build/ dist/",
     "develop": "react-scripts start",
     "gen-tts": "node tts-generator.js",
@@ -25,7 +25,6 @@
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
     "release": "yarn build:app && electron-builder --publish always",
-    "postinstall": "electron-builder install-app-deps",
     "semantic-release": "semantic-release"
   },
   "babelMacros": {
