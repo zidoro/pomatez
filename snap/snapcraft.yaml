@@ -34,7 +34,7 @@ apps:
 
 parts:
   productivity-timer:
-    source: .
+    source: app/
     plugin: nodejs
     nodejs-version: 12.14.1
 
@@ -57,7 +57,8 @@ parts:
 
     override-build: |
       snapcraftctl build
-      mv app/dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL
+      rm -rf $SNAPCRAFT_PART_INSTALL/app
+      mkdir -p $SNAPCRAFT_PART_INSTALL/app
+      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
     prime:
       - -node_modules
-      - -app/node_modules

@@ -13,6 +13,7 @@
   "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
   "homepage": "./",
   "scripts": {
+    "prepare": "yarn build:dir",
     "clean": "rm -rf build/ dist/",
     "develop": "react-scripts start",
     "gen-tts": "node tts-generator.js",
