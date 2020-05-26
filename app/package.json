@@ -93,7 +93,6 @@
     "@types/uuid": "^8.0.0",
     "electron": "^9.0.0",
     "electron-builder": "^22.6.1",
-    "prettier": "^2.0.5",
     "say": "^0.16.0",
     "semantic-release": "^17.0.7",
     "typescript": "^3.9.3"

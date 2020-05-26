@@ -9,7 +9,6 @@
     "develop": "npm run develop --prefix=app",
     "electron": "wait-on http://localhost:3000 && npm run electron --prefix=app",
     "start:app": "concurrently \"yarn develop\" \"yarn electron\"",
-    "prepare": "npm run build:dir --prefix=app",
     "postinstall": "cd app && yarn install --offline"
   },
   "config": {
@@ -21,6 +20,7 @@
     "commitizen": "^4.1.2",
     "concurrently": "^5.2.0",
     "cz-conventional-changelog": "^3.2.0",
+    "prettier": "^2.0.5",
     "wait-on": "^5.0.0"
   }
 }
