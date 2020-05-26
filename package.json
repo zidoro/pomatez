@@ -1,11 +1,18 @@
 {
+  "name": "productivity-timer",
+  "version": "2.0.7-beta",
+  "private": true,
+  "workspaces": [
+    "app"
+  ],
   "scripts": {
     "commit": "git-cz",
     "clean": "npm run clean --prefix=app",
     "gen-tts": "npm run gen-tts --prefix=app",
     "develop": "npm run develop --prefix=app",
-    "electron": "npm run electron --prefix=app",
-    "start:app": "concurrently \"yarn develop\" \"wait-on http://localhost:3000 && yarn electron\""
+    "electron": "wait-on http://localhost:3000 && npm run electron --prefix=app",
+    "start:app": "concurrently \"yarn develop\" \"yarn electron\"",
+    "prepare": "npm run build:dir --prefix=app"
   },
   "config": {
     "commitizen": {
