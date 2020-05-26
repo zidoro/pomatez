@@ -56,11 +56,8 @@ parts:
       snapcraftctl set-version "$version"
 
     override-build: |
-      cd app/
       snapcraftctl build
-      rm -rf $SNAPCRAFT_PART_INSTALL/app
-      mkdir -p $SNAPCRAFT_PART_INSTALL/app
-      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
+      mv app/dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL
     prime:
       - -node_modules
       - -app/node_modules
