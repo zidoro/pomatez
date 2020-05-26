@@ -37,6 +37,7 @@ parts:
     source: app/
     plugin: nodejs
     nodejs-version: 12.14.1
+    nodejs-package-manager: npm
 
     stage-packages:
       - libasound2
