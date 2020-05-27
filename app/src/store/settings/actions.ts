@@ -11,6 +11,7 @@ import {
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
   LOCK_SETTINGS,
+  ENABLE_TIMER_ANIMATION,
 } from "./types";
 
 export const setAlwaysOnTop = (
@@ -88,6 +89,15 @@ export const lockSettings = (
   return {
     type: LOCK_SETTINGS,
     payload: isSettingLock,
+  };
+};
+
+export const setEnableTimerAnimation = (
+  enableTimerAnimation: SettingTypes["enableTimerAnimation"]
+): SettingActionTypes => {
+  return {
+    type: ENABLE_TIMER_ANIMATION,
+    payload: enableTimerAnimation,
   };
 };
 

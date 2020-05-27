@@ -11,10 +11,11 @@ import {
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
   LOCK_SETTINGS,
+  ENABLE_TIMER_ANIMATION,
 } from "./types";
 import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 
-const defaultSettings = {
+const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
   notificationSoundOn: true,
   enableNotifications: true,
@@ -24,6 +25,7 @@ const defaultSettings = {
   enableWebBlocker: true,
   enableDarkTheme: isPreferredDark(),
   isSettingLock: false,
+  enableTimerAnimation: false,
 };
 
 const settings = getFromStorage("settings")
@@ -121,6 +123,16 @@ export const settingReducer = (
       const newState = {
         ...state,
         isSettingLock: action.payload,
+      };
+
+      saveToStorage("settings", newState);
+
+      return newState;
+    }
+    case ENABLE_TIMER_ANIMATION: {
+      const newState = {
+        ...state,
+        enableTimerAnimation: action.payload,
       };
 
       saveToStorage("settings", newState);
