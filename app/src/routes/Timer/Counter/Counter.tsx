@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { CounterContext, ElectronContext } from "contexts";
+import { AppStateTypes } from "store";
+
 import {
   StyledCounterContainer,
   StyledCounterWrapper,
@@ -10,12 +12,9 @@ import {
 import CounterType from "./CounterType";
 import CounterLabel from "./CounterLabel";
 import CounterTimer from "./CounterTimer";
-import { AppStateTypes } from "store";
 
 const Counter: React.FC = () => {
-  const onStrictMode = useSelector(
-    (state: AppStateTypes) => state.settings.enableStrictMode
-  );
+  const settings = useSelector((state: AppStateTypes) => state.settings);
 
   const { shouldFullscreenCallback } = useContext(ElectronContext);
 
@@ -27,7 +26,7 @@ const Counter: React.FC = () => {
   const dashOffset = (duration - count) * (674 / duration);
 
   const shouldFullscreen = useCallback(() => {
-    if (onStrictMode) {
+    if (settings.enableStrictMode) {
       switch (timerType) {
         case "SHORT_BREAK":
           return true;
@@ -40,7 +39,7 @@ const Counter: React.FC = () => {
       }
     }
     return false;
-  }, [onStrictMode, timerType]);
+  }, [settings.enableStrictMode, timerType]);
 
   useEffect(() => {
     if (shouldFullscreenCallback) {
@@ -50,7 +49,11 @@ const Counter: React.FC = () => {
 
   return (
     <StyledCounterContainer fullscreen={shouldFullscreen()}>
-      <StyledCounterProgress offset={dashOffset} type={timerType} />
+      <StyledCounterProgress
+        offset={dashOffset}
+        type={timerType}
+        animate={settings.enableTimerAnimation ? "true" : "false"}
+      />
 
       <StyledCounterWrapper>
         <CounterType timerType={timerType} />
