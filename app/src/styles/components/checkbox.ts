@@ -13,7 +13,7 @@ export const StyledCheckboxBox = styled.span`
 
   margin-right: 5px;
 
-  border-radius: 3px;
+  border-radius: 2px;
   border: 2px solid var(--color-border-secondary);
   background-color: var(--color-bg-tertiary);
 
@@ -25,7 +25,7 @@ export const StyledCheckboxBox = styled.span`
     content: "";
 
     height: 4px;
-    width: 9px;
+    width: 10px;
 
     margin-top: -2px;
 
@@ -62,20 +62,27 @@ export const StyledCheckbox = styled.label<{ disabled?: boolean }>`
     color: var(--color-primary);
   }
 
+  &:hover ${StyledCheckboxBox} {
+    box-shadow: ${(p) =>
+      p.disabled
+        ? "0 0 0 0.2rem rgba(var(--color-primary-rgb), 0)"
+        : "0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.16)"};
+  }
+
   &:active ${StyledCheckboxBox} {
-    box-shadow: ${p =>
+    box-shadow: ${(p) =>
       p.disabled
         ? "0 0 0 0.4rem rgba(var(--color-primary-rgb), 0)"
         : "0 0 0 0.4rem rgba(var(--color-primary-rgb), 0.16)"};
   }
 
   &:hover ${StyledCheckboxLabel} {
-    color: ${p =>
+    color: ${(p) =>
       p.disabled ? "var(--color-disabled-text)" : "var(--color-primary)"};
   }
 
   ${StyledCheckboxLabel} {
-    color: ${p => p.disabled && "var(--color-disabled-text)"};
+    color: ${(p) => p.disabled && "var(--color-disabled-text)"};
   }
 
   display: inline-flex;

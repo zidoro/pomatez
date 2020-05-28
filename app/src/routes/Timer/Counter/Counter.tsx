@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { CounterContext, ElectronContext } from "contexts";
-import { AppStateTypes } from "store";
+import { AppStateTypes, SettingTypes } from "store";
 
 import {
   StyledCounterContainer,
@@ -14,7 +14,9 @@ import CounterLabel from "./CounterLabel";
 import CounterTimer from "./CounterTimer";
 
 const Counter: React.FC = () => {
-  const settings = useSelector((state: AppStateTypes) => state.settings);
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
+  );
 
   const { shouldFullscreenCallback } = useContext(ElectronContext);
 

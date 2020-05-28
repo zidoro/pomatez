@@ -23,11 +23,11 @@ export const setStayFocus = (
 };
 
 export const setShorBreak = (
-  shorBreak: ConfigTypes["shorBreak"]
+  shortBreak: ConfigTypes["shortBreak"]
 ): ConfigActionTypes => {
   return {
     type: SET_SHORT_BREAK,
-    payload: shorBreak,
+    payload: shortBreak,
   };
 };
 

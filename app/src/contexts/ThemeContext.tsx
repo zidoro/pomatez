@@ -2,7 +2,7 @@ import React from "react";
 import { isPreferredDark } from "utils";
 import { GlobalStyles } from "styles";
 import { useSelector, useDispatch } from "react-redux";
-import { AppStateTypes, setEnableDarkTheme } from "store";
+import { AppStateTypes, setEnableDarkTheme, SettingTypes } from "store";
 
 type ThemeProps = {
   isDarkMode: boolean;
@@ -14,24 +14,24 @@ const ThemeContext = React.createContext<ThemeProps>({
 });
 
 const ThemeProvider: React.FC = ({ children }) => {
-  const isDarkMode = useSelector(
-    (state: AppStateTypes) => state.settings.enableDarkTheme
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
   );
 
   const dispatch = useDispatch();
 
   const toggleThemeAction = () => {
-    dispatch(setEnableDarkTheme(!isDarkMode));
+    dispatch(setEnableDarkTheme(!settings.enableDarkTheme));
   };
 
   return (
     <ThemeContext.Provider
       value={{
-        isDarkMode,
+        isDarkMode: settings.enableDarkTheme,
         toggleThemeAction,
       }}
     >
-      <GlobalStyles isDarkMode={isDarkMode} />
+      <GlobalStyles isDarkMode={settings.enableDarkTheme} />
       {children}
     </ThemeContext.Provider>
   );

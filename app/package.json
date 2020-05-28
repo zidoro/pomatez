@@ -1,6 +1,6 @@
 {
   "name": "productivity-timer",
-  "version": "2.0.9-beta",
+  "version": "2.2.0-beta",
   "private": true,
   "main": "public/electron.js",
   "license": "MIT",
@@ -15,14 +15,15 @@
   "scripts": {
     "clean": "rm -rf build/ dist/",
     "develop": "react-scripts start",
-    "gen-tts": "node tts-generator.js",
+    "gen:tts": "node tts-generator.js",
     "react:build": "react-scripts build",
     "compile:electron": "tsc -p electron/tsconfig.json",
     "electron": "yarn compile:electron && electron .",
     "build:app": "yarn clean && yarn compile:electron && yarn react:build",
     "build:dir": "yarn compile:electron && yarn react:build && electron-builder --dir",
-    "build:linux": "yarn build:app && electron-builder --linux",
     "build:win": "yarn build:app && electron-builder --win",
+    "build:mac": "yarn build:app && electron-builder --mac",
+    "build:linux": "yarn build:app && electron-builder --linux",
     "release": "yarn build:app && electron-builder --publish always",
     "semantic-release": "semantic-release"
   },

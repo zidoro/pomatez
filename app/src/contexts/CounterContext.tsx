@@ -9,6 +9,7 @@ import {
   LONG_BREAK,
   TimerTypes,
   SPECIAL_BREAK,
+  SettingTypes,
 } from "store";
 import { useNotification } from "hooks";
 
@@ -44,45 +45,26 @@ const CounterContext = React.createContext<CounterProps>({
 const CounterProvider: React.FC = ({ children }) => {
   const dispatch = useDispatch();
 
-  const {
-    round,
-    playing,
-    timerType,
-    stayFocus,
-    shortBreak,
-    longBreak,
-    sessionRounds,
-    specialBreaks,
-    enableSpecialBreaks,
-    notificationSoundOn,
-    enableNotifications,
-    darkMode,
-  } = useSelector(({ timer, config, settings }: AppStateTypes) => ({
-    round: timer.round,
-    playing: timer.playing,
-    timerType: timer.timerType,
-    stayFocus: config.stayFocus,
-    shortBreak: config.shorBreak,
-    longBreak: config.longBreak,
-    sessionRounds: config.sessionRounds,
-    specialBreaks: config.specialBreaks,
-    enableSpecialBreaks: settings.enableSpecialBreaks,
-    notificationSoundOn: settings.notificationSoundOn,
-    enableNotifications: settings.enableNotifications,
-    darkMode: settings.enableDarkTheme,
+  const { timer, config } = useSelector((state: AppStateTypes) => ({
+    timer: state.timer,
+    config: state.config,
   }));
+
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
+  );
 
   const notification = useNotification(
     {
-      icon: darkMode ? notificationIconDark : notificationIcon,
-      mute: !notificationSoundOn,
+      icon: settings.enableDarkTheme ? notificationIconDark : notificationIcon,
+      mute: !settings.notificationSoundOn,
     },
-    enableNotifications
+    settings.notificationProperty !== "none"
   );
 
-  const [count, setCount] = useState(stayFocus * 60);
+  const [count, setCount] = useState(config.stayFocus * 60);
 
-  const [duration, setDuration] = useState(stayFocus * 60);
+  const [duration, setDuration] = useState(config.stayFocus * 60);
 
   const setTimerDuration = useCallback((time: number) => {
     setDuration(time * 60);
@@ -90,15 +72,15 @@ const CounterProvider: React.FC = ({ children }) => {
   }, []);
 
   const resetTimerAction = useCallback(() => {
-    switch (timerType) {
+    switch (timer.timerType) {
       case STAY_FOCUS:
-        setTimerDuration(stayFocus);
+        setTimerDuration(config.stayFocus);
         break;
       case SHORT_BREAK:
-        setTimerDuration(shortBreak);
+        setTimerDuration(config.shortBreak);
         break;
       case LONG_BREAK:
-        setTimerDuration(longBreak);
+        setTimerDuration(config.longBreak);
         break;
       case SPECIAL_BREAK:
         setDuration(duration);
@@ -106,33 +88,38 @@ const CounterProvider: React.FC = ({ children }) => {
         break;
     }
   }, [
-    longBreak,
-    setTimerDuration,
-    stayFocus,
-    shortBreak,
-    timerType,
-    setDuration,
+    config.longBreak,
+    config.stayFocus,
+    config.shortBreak,
+    timer.timerType,
     duration,
+    setDuration,
+    setTimerDuration,
   ]);
 
   useEffect(() => {
     let interval: number;
 
-    const { firstBreak, secondBreak, thirdBreak, fourthBreak } = specialBreaks;
+    const {
+      firstBreak,
+      secondBreak,
+      thirdBreak,
+      fourthBreak,
+    } = config.specialBreaks;
 
-    if (enableSpecialBreaks && playing) {
+    if (settings.enableSpecialBreaks && timer.playing) {
       interval = setInterval(() => {
         const d = new Date();
         const ct = d.getHours() + ":" + d.getMinutes();
 
-        if (timerType !== SPECIAL_BREAK) {
+        if (timer.timerType !== SPECIAL_BREAK) {
           switch (ct) {
             case firstBreak.time:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(firstBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your special break with joy." },
+                { body: "It is time to take your special break." },
                 specialBreakStart
               );
               break;
@@ -141,7 +128,7 @@ const CounterProvider: React.FC = ({ children }) => {
               setTimerDuration(secondBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your special break with joy." },
+                { body: "It is time to take your special break." },
                 specialBreakStart
               );
               break;
@@ -150,7 +137,7 @@ const CounterProvider: React.FC = ({ children }) => {
               setTimerDuration(thirdBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your special break with joy." },
+                { body: "It is time to take your special break." },
                 specialBreakStart
               );
               break;
@@ -174,72 +161,48 @@ const CounterProvider: React.FC = ({ children }) => {
 
     return () => clearInterval(interval);
   }, [
-    enableSpecialBreaks,
-    setTimerDuration,
-    specialBreaks,
-    timerType,
+    settings.enableSpecialBreaks,
+    config.specialBreaks,
+    timer.timerType,
+    timer.playing,
     dispatch,
-    playing,
     notification,
+    setTimerDuration,
   ]);
 
   useEffect(() => {
-    switch (timerType) {
+    switch (timer.timerType) {
       case STAY_FOCUS:
-        setTimerDuration(stayFocus);
+        setTimerDuration(config.stayFocus);
         break;
       case SHORT_BREAK:
-        setTimerDuration(shortBreak);
+        setTimerDuration(config.shortBreak);
         break;
       case LONG_BREAK:
-        setTimerDuration(longBreak);
+        setTimerDuration(config.longBreak);
         break;
     }
-  }, [setTimerDuration, timerType, stayFocus, shortBreak, longBreak]);
+  }, [
+    setTimerDuration,
+    timer.timerType,
+    config.stayFocus,
+    config.shortBreak,
+    config.longBreak,
+  ]);
 
   useEffect(() => {
     let interval: number;
     let counter = count;
 
-    if (playing) {
+    if (timer.playing) {
       interval = setInterval(() => {
         counter--;
         setCount(counter);
 
-        if (counter === 60) {
-          if (timerType === SHORT_BREAK) {
-            notification(
-              "60 Seconds Left for Short Break",
-              { body: "Please prepare yourself getting  back to work." },
-              sixtySecondsLeftShortBreak
-            );
-          } else if (timerType === LONG_BREAK) {
-            notification(
-              "60 Seconds Left for Long Break",
-              { body: "Please prepare yourself getting  back to work." },
-              sixtySecondsLeftLongBreak
-            );
-          } else if (timerType === SPECIAL_BREAK) {
-            notification(
-              "60 Seconds Left for Special Break",
-              { body: "Please prepare yourself getting  back to work." },
-              sixtySecondsLeftSpecialBreak
-            );
-          }
-        }
-
-        if (counter === 30 && timerType === STAY_FOCUS) {
-          notification(
-            "30 Seconds Left to Work",
-            { body: "Please pause all media playing if there's one." },
-            thirtySecondsLeftToWork
-          );
-        }
-
         if (counter === 0) {
-          switch (timerType) {
+          switch (timer.timerType) {
             case STAY_FOCUS:
-              if (round < sessionRounds) {
+              if (timer.round < config.sessionRounds) {
                 dispatch(setTimerType("SHORT_BREAK"));
                 notification(
                   "Work Time Finished",
@@ -258,7 +221,7 @@ const CounterProvider: React.FC = ({ children }) => {
 
             case SHORT_BREAK:
               dispatch(setTimerType("STAY_FOCUS"));
-              dispatch(setRound(round + 1));
+              dispatch(setRound(timer.round + 1));
               notification(
                 "Short Break Finished",
                 { body: "It is time to focus and work again." },
@@ -290,7 +253,50 @@ const CounterProvider: React.FC = ({ children }) => {
     }
 
     return () => clearInterval(interval);
-  }, [count, playing, dispatch, notification, round, sessionRounds, timerType]);
+  }, [
+    count,
+    timer.round,
+    timer.playing,
+    timer.timerType,
+    dispatch,
+    notification,
+    config.sessionRounds,
+    settings.notificationProperty,
+  ]);
+
+  useEffect(() => {
+    if (settings.notificationProperty === "extra") {
+      if (count === 60) {
+        if (timer.timerType === SHORT_BREAK) {
+          notification(
+            "60 Seconds Left for Short Break",
+            { body: "Please prepare yourself getting  back to work." },
+            sixtySecondsLeftShortBreak
+          );
+        } else if (timer.timerType === LONG_BREAK) {
+          notification(
+            "60 Seconds Left for Long Break",
+            { body: "Please prepare yourself getting  back to work." },
+            sixtySecondsLeftLongBreak
+          );
+        } else if (timer.timerType === SPECIAL_BREAK) {
+          notification(
+            "60 Seconds Left for Special Break",
+            { body: "Please prepare yourself getting  back to work." },
+            sixtySecondsLeftSpecialBreak
+          );
+        }
+      }
+
+      if (count === 30 && timer.timerType === STAY_FOCUS) {
+        notification(
+          "30 Seconds Left to Work",
+          { body: "Please pause all media playing if there's one." },
+          thirtySecondsLeftToWork
+        );
+      }
+    }
+  }, [count, settings.notificationProperty, timer.timerType, notification]);
 
   return (
     <CounterContext.Provider
@@ -299,8 +305,8 @@ const CounterProvider: React.FC = ({ children }) => {
         setCount,
         duration,
         setDuration,
-        timerType,
         resetTimerAction,
+        timerType: timer.timerType,
       }}
     >
       {children}

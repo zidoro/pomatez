@@ -14,7 +14,7 @@ const SliderSection: React.FC = () => {
   const { stayFocus, shortBreak, longBreak, sessionRounds } = useSelector(
     ({ config }: AppStateTypes) => ({
       stayFocus: config.stayFocus,
-      shortBreak: config.shorBreak,
+      shortBreak: config.shortBreak,
       longBreak: config.longBreak,
       sessionRounds: config.sessionRounds,
     })

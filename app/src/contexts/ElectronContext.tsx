@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { AppStateTypes } from "store";
+import { AppStateTypes, SettingTypes } from "store";
 
 import isElectron from "is-electron";
 
@@ -37,11 +37,8 @@ const ElectronContext = React.createContext<ElectronProps>({});
 const ElectronProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
-  const { alwaysOnTop, darkTheme } = useSelector(
-    ({ settings }: AppStateTypes) => ({
-      alwaysOnTop: settings.alwaysOnTop,
-      darkTheme: settings.enableDarkTheme,
-    })
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
   );
 
   const shouldFullscreenCallback = useCallback(
@@ -100,19 +97,21 @@ const ElectronProvider: React.FC = ({ children }) => {
     if (isElectron()) {
       electron.send(CHANNELS.TO_MAIN, {
         type: ACTIONS.ALWAYS_ON_TOP,
-        payload: alwaysOnTop,
+        payload: settings.alwaysOnTop,
       });
     }
-  }, [electron, alwaysOnTop]);
+  }, [electron, settings.alwaysOnTop]);
 
   useEffect(() => {
     if (isElectron()) {
       electron.send(CHANNELS.TO_MAIN, {
         type: ACTIONS.SET_THEME,
-        payload: { darkTheme },
+        payload: {
+          darkTheme: settings.enableDarkTheme,
+        },
       });
     }
-  }, [electron, darkTheme]);
+  }, [electron, settings.enableDarkTheme]);
 
   return (
     <ElectronContext.Provider

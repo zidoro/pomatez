@@ -2,7 +2,6 @@ import {
   SettingTypes,
   SettingActionTypes,
   ALWAYS_ON_TOP,
-  ENABLE_NOTIFICATION,
   ENABLE_SPECIAL_BREAKS,
   ENABLE_STICKY_NOTES,
   ENABLE_STRICT_MODE,
@@ -12,6 +11,7 @@ import {
   TOGGLE_NOTIFICATION_SOUND,
   LOCK_SETTINGS,
   ENABLE_TIMER_ANIMATION,
+  SET_NOTIFICATION_PROPERTY,
 } from "./types";
 
 export const setAlwaysOnTop = (
@@ -26,15 +26,6 @@ export const setAlwaysOnTop = (
 export const togglenotificationSoundOn = () => {
   return {
     type: TOGGLE_NOTIFICATION_SOUND,
-  };
-};
-
-export const setEnableNotifications = (
-  enableNotifications: SettingTypes["enableNotifications"]
-): SettingActionTypes => {
-  return {
-    type: ENABLE_NOTIFICATION,
-    payload: enableNotifications,
   };
 };
 
@@ -98,6 +89,15 @@ export const setEnableTimerAnimation = (
   return {
     type: ENABLE_TIMER_ANIMATION,
     payload: enableTimerAnimation,
+  };
+};
+
+export const setNotificationProperty = (
+  notificationProperty: string
+): SettingActionTypes => {
+  return {
+    type: SET_NOTIFICATION_PROPERTY,
+    payload: notificationProperty,
   };
 };
 

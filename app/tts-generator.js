@@ -34,7 +34,7 @@ const textToGenerateList = [
     filename: "long-break-finished",
   },
   {
-    text: "Special Break. It is time to take your this break with joy.",
+    text: "Special Break. It is time to take your special break.",
     filename: "special-break-start",
   },
   {

@@ -15,3 +15,4 @@ export * from "./dimmer";
 export * from "./checkbox";
 export * from "./popper";
 export * from "./loaders";
+export * from "./collapse";

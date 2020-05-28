@@ -3,7 +3,6 @@ const settings = "[settings]";
 export type SettingTypes = {
   alwaysOnTop: boolean;
   notificationSoundOn: boolean;
-  enableNotifications: boolean;
   enableSpecialBreaks: boolean;
   enableDarkTheme: boolean;
   enableStickyNotes: boolean;
@@ -11,11 +10,11 @@ export type SettingTypes = {
   enableWebBlocker: boolean;
   isSettingLock: boolean;
   enableTimerAnimation: boolean;
+  notificationProperty: "none" | "normal" | "extra";
 };
 
 export const ALWAYS_ON_TOP = `${settings} ALWAYS_ON_TOP`;
 export const TOGGLE_NOTIFICATION_SOUND = `${settings} TOGGLE_NOTIFICATION_SOUND`;
-export const ENABLE_NOTIFICATION = `${settings} ENABLE_NOTIFICATION`;
 export const ENABLE_SPECIAL_BREAKS = `${settings} ENABLE_SPECIAL_BREAKS`;
 export const ENABLE_STICKY_NOTES = `${settings} ENABLE_STICKY_NOTES`;
 export const ENABLE_DARK_THEME = `${settings} ENABLE_DARK_THEME`;
@@ -26,6 +25,7 @@ export const ENABLE_WEB_BLOCKER = `${settings} ENABLE_WEB_BLOCKER`;
 export const LOCK_SETTINGS = `${settings} LOCK_SETTINGS`;
 
 export const ENABLE_TIMER_ANIMATION = `${settings} ENABLE_TIMER_ANIMATION`;
+export const SET_NOTIFICATION_PROPERTY = `${settings} SET_NOTIFICATION_PROPERTY`;
 
 export const RESTORE_DEFAULT_SETTINGS = `${settings} RESTORE_DEFAULT_SETTINGS`;
 
@@ -37,11 +37,6 @@ interface SetAlwaysOnTop {
 interface TogglenotificationSoundOn {
   type: typeof TOGGLE_NOTIFICATION_SOUND;
   payload: SettingTypes["notificationSoundOn"];
-}
-
-interface SetEnableNotifications {
-  type: typeof ENABLE_NOTIFICATION;
-  payload: SettingTypes["enableNotifications"];
 }
 
 interface SetEnableSpecialBreaks {
@@ -79,9 +74,13 @@ interface SetEnableTimerAnimation {
   payload: SettingTypes["enableTimerAnimation"];
 }
 
+interface SetNotificationProperty {
+  type: typeof SET_NOTIFICATION_PROPERTY;
+  payload: string;
+}
+
 export type SettingActionTypes =
   | SetAlwaysOnTop
-  | SetEnableNotifications
   | SetEnableSpecialBreaks
   | SetEnableStickyNotes
   | SetEnableStrictMode
@@ -89,4 +88,5 @@ export type SettingActionTypes =
   | SetEnableDarkTheme
   | TogglenotificationSoundOn
   | LockSettings
-  | SetEnableTimerAnimation;
+  | SetEnableTimerAnimation
+  | SetNotificationProperty;

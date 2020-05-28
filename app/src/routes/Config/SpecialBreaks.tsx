@@ -6,17 +6,17 @@ import {
   setSecondSpecialBreak,
   setThirdSpecialBreak,
   setFourthSpecialBreak,
+  SettingTypes,
 } from "store";
 import { StyledConfigSpecialBreaks, StyledSpecialBreakHeading } from "styles";
 
 import SpecialField from "./SpecialField";
 
 const SpecialBreaks: React.FC = () => {
-  const { enableSpecialBreaks, specialBreaks } = useSelector(
-    ({ settings, config }: AppStateTypes) => ({
-      enableSpecialBreaks: settings.enableSpecialBreaks,
-      specialBreaks: config.specialBreaks,
-    })
+  const config = useSelector((state: AppStateTypes) => state.config);
+
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
   );
 
   const dispath = useDispatch();
@@ -51,32 +51,32 @@ const SpecialBreaks: React.FC = () => {
 
   return (
     <StyledConfigSpecialBreaks>
-      <StyledSpecialBreakHeading disabled={!enableSpecialBreaks}>
+      <StyledSpecialBreakHeading disabled={!settings.enableSpecialBreaks}>
         Special Breaks
       </StyledSpecialBreakHeading>
 
       <SpecialField
-        time={specialBreaks.firstBreak?.time}
-        duration={specialBreaks.firstBreak?.duration}
-        disabled={!enableSpecialBreaks}
+        time={config.specialBreaks.firstBreak?.time}
+        duration={config.specialBreaks.firstBreak?.duration}
+        disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setFirstSpecialBreakCallback}
       />
       <SpecialField
-        time={specialBreaks.secondBreak?.time}
-        duration={specialBreaks.secondBreak?.duration}
-        disabled={!enableSpecialBreaks}
+        time={config.specialBreaks.secondBreak?.time}
+        duration={config.specialBreaks.secondBreak?.duration}
+        disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setSecondSpecialBreakCallback}
       />
       <SpecialField
-        time={specialBreaks.thirdBreak?.time}
-        duration={specialBreaks.thirdBreak?.duration}
-        disabled={!enableSpecialBreaks}
+        time={config.specialBreaks.thirdBreak?.time}
+        duration={config.specialBreaks.thirdBreak?.duration}
+        disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setThirdSpecialBreakCallback}
       />
       <SpecialField
-        time={specialBreaks.fourthBreak?.time}
-        duration={specialBreaks.fourthBreak?.duration}
-        disabled={!enableSpecialBreaks}
+        time={config.specialBreaks.fourthBreak?.time}
+        duration={config.specialBreaks.fourthBreak?.duration}
+        disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setFourthSpecialBreakCallback}
       />
     </StyledConfigSpecialBreaks>
