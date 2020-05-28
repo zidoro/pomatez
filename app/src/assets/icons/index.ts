@@ -32,3 +32,5 @@ export { ReactComponent as RefreshSVG } from "./refresh.svg";
 export { ReactComponent as LockSVG } from "./lock.svg";
 
 export { ReactComponent as HandSVG } from "./hand.svg";
+
+export { ReactComponent as ChevronDownSVG } from "./chevron-down.svg";

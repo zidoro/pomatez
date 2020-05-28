@@ -25,6 +25,7 @@ import {
   RefreshSVG,
   LockSVG,
   HandSVG,
+  ChevronDownSVG,
 } from "assets/icons";
 
 export type SVGTypes = {
@@ -53,7 +54,8 @@ export type SVGTypes = {
     | "fast-food"
     | "refresh"
     | "lock"
-    | "hand";
+    | "hand"
+    | "chevron-down";
 };
 
 const SVG: React.FC<SVGTypes> = ({ name }) => {
@@ -108,6 +110,8 @@ const SVG: React.FC<SVGTypes> = ({ name }) => {
       return <LockSVG />;
     case "hand":
       return <HandSVG />;
+    case "chevron-down":
+      return <ChevronDownSVG />;
     default:
       return <TimerSVG />;
   }

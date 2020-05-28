@@ -2,20 +2,23 @@ import React, { useCallback, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAlwaysOnTop,
-  setEnableNotifications,
   setEnableSpecialBreaks,
   setEnableStrictMode,
   AppStateTypes,
   lockSettings,
   setEnableTimerAnimation,
+  SettingTypes,
+  setNotificationProperty,
 } from "store";
 
-import { Toggler, TogglerProps } from "components";
+import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import SettingSection from "./SettingSection";
 import { ThemeContext } from "contexts";
 
 const FeatureSection: React.FC = () => {
-  const settings = useSelector((state: AppStateTypes) => state.settings);
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
+  );
 
   const dispatch = useDispatch();
 
@@ -31,16 +34,6 @@ const FeatureSection: React.FC = () => {
           dispatch(setAlwaysOnTop(!settings.alwaysOnTop));
         }
       }, [dispatch, settings.alwaysOnTop, settings.isSettingLock]),
-    },
-    {
-      id: "show-notification",
-      label: "Notifications",
-      checked: settings.enableNotifications,
-      onChange: useCallback(() => {
-        if (!settings.isSettingLock) {
-          dispatch(setEnableNotifications(!settings.enableNotifications));
-        }
-      }, [dispatch, settings.enableNotifications, settings.isSettingLock]),
     },
     {
       id: "special-breaks",
@@ -92,6 +85,13 @@ const FeatureSection: React.FC = () => {
     },
   ];
 
+  const onChangeNotificationProps = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(setNotificationProperty(e.target.value));
+    },
+    [dispatch]
+  );
+
   return (
     <SettingSection heading="App Features">
       {featureList.map(({ id, label, checked, onChange }, index) => (
@@ -103,6 +103,29 @@ const FeatureSection: React.FC = () => {
           key={index}
         />
       ))}
+      <Collapse>
+        <Radio
+          label="none"
+          name="notification"
+          value="none"
+          checked={settings.notificationProperty === "none"}
+          onChange={onChangeNotificationProps}
+        />
+        <Radio
+          label="normal"
+          name="notification"
+          value="normal"
+          checked={settings.notificationProperty === "normal"}
+          onChange={onChangeNotificationProps}
+        />
+        <Radio
+          label="extra"
+          name="notification"
+          value="extra"
+          checked={settings.notificationProperty === "extra"}
+          onChange={onChangeNotificationProps}
+        />
+      </Collapse>
     </SettingSection>
   );
 };

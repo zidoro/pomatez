@@ -14,6 +14,7 @@ const Time: React.FC<Props> = ({
   error,
   onFocus,
   onBlur,
+  ...props
 }) => {
   return (
     <StyledTimeWrapper disabled={disabled}>

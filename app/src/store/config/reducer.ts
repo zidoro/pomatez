@@ -15,7 +15,7 @@ import { getFromStorage, saveToStorage } from "utils";
 
 const defaultConfig = {
   stayFocus: 25,
-  shorBreak: 5,
+  shortBreak: 5,
   longBreak: 15,
   sessionRounds: 4,
   specialBreaks: {
@@ -62,7 +62,7 @@ export const configReducer = (
     case SET_SHORT_BREAK: {
       const newState = {
         ...state,
-        shorBreak: action.payload,
+        shortBreak: action.payload,
       };
 
       saveToStorage("config", newState);

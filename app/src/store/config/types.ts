@@ -7,7 +7,7 @@ export type SpecialBreakTypes = {
 
 export type ConfigTypes = {
   stayFocus: number;
-  shorBreak: number;
+  shortBreak: number;
   longBreak: number;
   sessionRounds: number;
   specialBreaks: {
@@ -36,7 +36,7 @@ interface SetStayFocus {
 
 interface SetShortBreak {
   type: typeof SET_SHORT_BREAK;
-  payload: ConfigTypes["shorBreak"];
+  payload: ConfigTypes["shortBreak"];
 }
 
 interface SetLongBreak {

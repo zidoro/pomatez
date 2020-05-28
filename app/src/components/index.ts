@@ -18,6 +18,9 @@ export { default as Portal } from "./Portal";
 export { default as Dimmer } from "./Dimmer";
 
 export { default as Checkbox } from "./Checkbox";
+export { default as Radio } from "./Radio";
+
+export { default as Collapse } from "./Collapse";
 
 export * from "./Popper";
 export * from "./Preloader";

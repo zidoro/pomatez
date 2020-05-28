@@ -11,6 +11,7 @@ import {
   LONG_BREAK,
   SPECIAL_BREAK,
   togglenotificationSoundOn,
+  SettingTypes,
 } from "store";
 import {
   StyledControl,
@@ -31,71 +32,69 @@ type Props = {
 };
 
 const Control: React.FC<Props> = ({ resetTimerAction }) => {
-  const {
-    round,
-    playing,
-    timerType,
-    sessionRounds,
-    notifactionSound,
-    onStrickMode,
-    isSettingLock,
-  } = useSelector(({ timer, config, settings }: AppStateTypes) => ({
-    round: timer.round,
-    playing: timer.playing,
-    timerType: timer.timerType,
-    sessionRounds: config.sessionRounds,
-    notifactionSound: settings.notificationSoundOn,
-    onStrickMode: settings.enableStrictMode,
-    isSettingLock: settings.isSettingLock,
+  const { timer, config } = useSelector((state: AppStateTypes) => ({
+    timer: state.timer,
+    config: state.config,
   }));
+
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
+  );
 
   const dispatch = useDispatch();
 
   const onResetCallback = useCallback(() => {
-    if (playing && onStrickMode) return;
+    if (timer.playing && settings.enableStrictMode) return;
     resetTimerAction();
-  }, [resetTimerAction, playing, onStrickMode]);
+  }, [resetTimerAction, timer.playing, settings.enableStrictMode]);
 
   const onPlayCallback = useCallback(() => {
-    if (playing && onStrickMode) return;
+    if (timer.playing && settings.enableStrictMode) return;
     dispatch(setPlay());
-  }, [dispatch, playing, onStrickMode]);
+  }, [dispatch, timer.playing, settings.enableStrictMode]);
 
   const onNotifacationSoundCallback = useCallback(() => {
     dispatch(togglenotificationSoundOn());
   }, [dispatch]);
 
   const onSkipAction = useCallback(() => {
-    if (playing && onStrickMode) return;
+    if (timer.playing && settings.enableStrictMode) return;
 
-    switch (timerType) {
+    switch (timer.timerType) {
       case STAY_FOCUS:
-        if (round < sessionRounds) {
+        if (timer.round < config.sessionRounds) {
           dispatch(skipTimer("SHORT_BREAK"));
         } else {
           dispatch(skipTimer("LONG_BREAK"));
         }
-        if (!playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay());
         break;
 
       case SHORT_BREAK:
         dispatch(skipTimer("STAY_FOCUS"));
-        dispatch(setRound(round + 1));
-        if (!playing) dispatch(setPlay());
+        dispatch(setRound(timer.round + 1));
+        if (!timer.playing) dispatch(setPlay());
         break;
 
       case LONG_BREAK:
         dispatch(skipTimer("STAY_FOCUS"));
         dispatch(setRound(1));
-        if (!playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay());
         break;
 
       case SPECIAL_BREAK:
         dispatch(skipTimer("STAY_FOCUS"));
-        if (!playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay());
         break;
     }
-  }, [dispatch, round, sessionRounds, timerType, playing, onStrickMode]);
+  }, [
+    dispatch,
+    timer.round,
+    timer.playing,
+    timer.timerType,
+    settings.enableStrictMode,
+    config.sessionRounds,
+  ]);
 
   const onResetSessionCallback = useCallback(() => {
     dispatch(setTimerType("STAY_FOCUS"));
@@ -103,31 +102,31 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   }, [dispatch]);
 
   return (
-    <StyledControl type={timerType}>
+    <StyledControl type={timer.timerType}>
       <Sessions
-        timerType={timerType}
-        round={round}
-        sessionRounds={sessionRounds}
+        timerType={timer.timerType}
+        round={timer.round}
+        sessionRounds={config.sessionRounds}
         onClick={onResetSessionCallback}
       />
 
       <StyledControlMain>
         <ResetButton onClick={onResetCallback} />
-        <PlayButton playing={playing} onClick={onPlayCallback} />
+        <PlayButton playing={timer.playing} onClick={onPlayCallback} />
         <SkipButton onClick={onSkipAction} />
         <VolumeButton
-          soundOn={notifactionSound}
+          soundOn={settings.notificationSoundOn}
           onClick={onNotifacationSoundCallback}
         />
       </StyledControlMain>
 
-      {onStrickMode && !isSettingLock && (
+      {settings.enableStrictMode && !settings.isSettingLock && (
         <StyledStrictIndicator>
           <SVG name="hand" />
         </StyledStrictIndicator>
       )}
 
-      {isSettingLock && (
+      {settings.isSettingLock && (
         <StyledLockIndicator>
           <SVG name="lock" />
         </StyledLockIndicator>

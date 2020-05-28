@@ -2,7 +2,6 @@ import {
   SettingTypes,
   SettingActionTypes,
   ALWAYS_ON_TOP,
-  ENABLE_NOTIFICATION,
   ENABLE_SPECIAL_BREAKS,
   ENABLE_STICKY_NOTES,
   ENABLE_STRICT_MODE,
@@ -12,20 +11,21 @@ import {
   TOGGLE_NOTIFICATION_SOUND,
   LOCK_SETTINGS,
   ENABLE_TIMER_ANIMATION,
+  SET_NOTIFICATION_PROPERTY,
 } from "./types";
 import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
   notificationSoundOn: true,
-  enableNotifications: true,
   enableSpecialBreaks: true,
   enableStickyNotes: false,
   enableStrictMode: false,
   enableWebBlocker: true,
   enableDarkTheme: isPreferredDark(),
   isSettingLock: false,
-  enableTimerAnimation: false,
+  enableTimerAnimation: true,
+  notificationProperty: "extra",
 };
 
 const settings = getFromStorage("settings")
@@ -53,16 +53,6 @@ export const settingReducer = (
       const newState = {
         ...state,
         notificationSoundOn: !state.notificationSoundOn,
-      };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_NOTIFICATION: {
-      const newState = {
-        ...state,
-        enableNotifications: action.payload,
       };
 
       saveToStorage("settings", newState);
@@ -133,6 +123,16 @@ export const settingReducer = (
       const newState = {
         ...state,
         enableTimerAnimation: action.payload,
+      };
+
+      saveToStorage("settings", newState);
+
+      return newState;
+    }
+    case SET_NOTIFICATION_PROPERTY: {
+      const newState = {
+        ...state,
+        notificationProperty: action.payload,
       };
 
       saveToStorage("settings", newState);

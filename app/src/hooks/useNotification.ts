@@ -17,9 +17,7 @@ export const useNotification = (
   // Making sure that notification sound the same
   // in all Operating System
 
-  if (!constantOptions?.mute) {
-    new Audio(bell).play();
-  }
+  new Audio(bell).play();
 
   if (audioSrc && !constantOptions?.mute) {
     setTimeout(() => {

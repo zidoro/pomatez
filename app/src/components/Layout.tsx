@@ -1,7 +1,13 @@
 import React, { useEffect, useContext, useCallback, useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { AppStateTypes, SHORT_BREAK, LONG_BREAK, SPECIAL_BREAK } from "store";
+import {
+  AppStateTypes,
+  SHORT_BREAK,
+  LONG_BREAK,
+  SPECIAL_BREAK,
+  SettingTypes,
+} from "store";
 import { StyledLayout } from "styles";
 
 import Titlebar from "./Titlebar";
@@ -11,12 +17,10 @@ import { ThemeContext } from "contexts";
 type Props = {} & RouteComponentProps;
 
 const Layout: React.FC<Props> = ({ history, location, children }) => {
-  const { timerType, onStrictMode, darkMode } = useSelector(
-    ({ timer, settings }: AppStateTypes) => ({
-      timerType: timer.timerType,
-      onStrictMode: settings.enableStrictMode,
-      darkMode: settings.enableDarkTheme,
-    })
+  const timer = useSelector((state: AppStateTypes) => state.timer);
+
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
   );
 
   const { toggleThemeAction } = useContext(ThemeContext);
@@ -41,11 +45,11 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
   }, [registerKey]);
 
   useEffect(() => {
-    if (onStrictMode) {
+    if (settings.enableStrictMode) {
       if (
-        timerType === SHORT_BREAK ||
-        timerType === LONG_BREAK ||
-        timerType === SPECIAL_BREAK
+        timer.timerType === SHORT_BREAK ||
+        timer.timerType === LONG_BREAK ||
+        timer.timerType === SPECIAL_BREAK
       ) {
         if (location.pathname !== "/") {
           setNoTransition(true);
@@ -55,12 +59,15 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
         setNoTransition(false);
       }
     }
-  }, [timerType, location, history, onStrictMode]);
+  }, [timer.timerType, location, history, settings.enableStrictMode]);
 
   return (
     <StyledLayout noTransition={noTransition}>
-      <Titlebar darkMode={darkMode} timerType={timerType} />
-      <Navigation timerType={timerType} />
+      <Titlebar
+        darkMode={settings.enableDarkTheme}
+        timerType={timer.timerType}
+      />
+      <Navigation timerType={timer.timerType} />
       {children}
     </StyledLayout>
   );
