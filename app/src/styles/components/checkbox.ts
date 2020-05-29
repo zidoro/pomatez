@@ -76,7 +76,7 @@ export const StyledCheckbox = styled.label<{ disabled?: boolean }>`
         : "0 0 0 0.4rem rgba(var(--color-primary-rgb), 0.16)"};
   }
 
-  &:hover ${StyledCheckboxLabel} {
+  &:hover ${StyledCheckboxLabel}, &:focus ${StyledCheckboxLabel} {
     color: ${(p) =>
       p.disabled ? "var(--color-disabled-text)" : "var(--color-primary)"};
   }
