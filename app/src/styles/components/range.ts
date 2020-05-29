@@ -26,7 +26,9 @@ export const StyledRangeSliderFill = styled.div<FillTypes>`
   left: 0;
 
   width: ${(p) =>
-    `calc((${p.value} - ${p.minValue}) / (${p.maxValue} - ${p.minValue}) * 100%)`};
+    p.maxValue >= 60 && p.value <= 6
+      ? `calc((${p.value} - ${p.minValue}) / (${p.maxValue} - ${p.minValue} - 25) * 100% )`
+      : `calc((${p.value} - ${p.minValue}) / (${p.maxValue} - ${p.minValue}) * 100%)`};
   height: 0.6rem;
 
   border-radius: 10rem;
@@ -69,6 +71,10 @@ export const StyledRangeSlider = styled.input`
     &:hover {
       box-shadow: 0 0 0 0.4rem rgba(var(--color-primary-rgb), 0.16);
     }
+  }
+
+  &:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 0.4rem rgba(var(--color-primary-rgb), 0.16);
   }
 
   &:active::-webkit-slider-thumb {
