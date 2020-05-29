@@ -34,7 +34,8 @@ export const StyledHeaderButton = styled.button<HeaderButtonTypes>`
     color: ${(p) => p.success && "var(--color-green)"} !important;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-primary);
   }
 `;

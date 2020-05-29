@@ -133,12 +133,29 @@ const SpecialField: React.FC<Props> = ({
     }
   }, [values.fromTime, values.toTime]);
 
+  useEffect(() => {
+    function registerEscape(e: KeyboardEvent) {
+      if (e.keyCode === 27) {
+        setShowSetter(false);
+      }
+    }
+
+    document.addEventListener("keydown", registerEscape);
+    return () => document.removeEventListener("keydown", registerEscape);
+  }, []);
+
   return (
     <>
       <StyledSpecialField
+        tabIndex={0}
         success={success}
         disabled={disabled}
         onClick={() => setShowSetter(true)}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            setShowSetter(true);
+          }
+        }}
       >
         <input type="time" value={fromTime} disabled />
         <span />
@@ -150,6 +167,7 @@ const SpecialField: React.FC<Props> = ({
         />
         <StyledSpecialClearButton
           type="button"
+          tabIndex={-1}
           success={success}
           onClick={onClear}
         >

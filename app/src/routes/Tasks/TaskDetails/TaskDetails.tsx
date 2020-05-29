@@ -131,6 +131,19 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
       []
     );
 
+    useEffect(() => {
+      function registerEscape(e: KeyboardEvent) {
+        if (e.keyCode === 27) {
+          if (onExit) {
+            onExit();
+          }
+        }
+      }
+
+      document.addEventListener("keydown", registerEscape);
+      return () => document.removeEventListener("keydown", registerEscape);
+    }, [onExit]);
+
     return (
       <StyledDetailContainer ref={ref}>
         <DetailHeader ref={cardTextAreaRef} onBlur={onEditCardText} />
