@@ -11,6 +11,10 @@ export const StyledTogglerWrapper = styled.div`
 
   position: relative;
 
+  &:focus-within label {
+    color: var(--color-primary);
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -81,7 +85,8 @@ export const StyledTogglerSwitch = styled.input`
     transition: ${themes.transition};
   }
 
-  &:hover::after {
+  &:hover::after,
+  &:focus::after {
     box-shadow: 0 0 0 0.4rem rgba(var(--color-primary-rgb), 0.16);
   }
 

@@ -105,6 +105,7 @@ const FeatureSection: React.FC = () => {
       ))}
       <Collapse>
         <Radio
+          id="none"
           label="none"
           name="notification"
           value="none"
@@ -112,6 +113,7 @@ const FeatureSection: React.FC = () => {
           onChange={onChangeNotificationProps}
         />
         <Radio
+          id="normal"
           label="normal"
           name="notification"
           value="normal"
@@ -119,6 +121,7 @@ const FeatureSection: React.FC = () => {
           onChange={onChangeNotificationProps}
         />
         <Radio
+          id="extra"
           label="extra"
           name="notification"
           value="extra"

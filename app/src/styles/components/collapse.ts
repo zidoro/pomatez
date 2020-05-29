@@ -18,6 +18,12 @@ export const StyledCollapseHeading = styled.h4<{ open?: boolean }>`
 
   color: var(--color-body-text);
   font-weight: 400;
+  border: none;
+  background-color: transparent;
+
+  &:focus {
+    color: var(--color-primary);
+  }
 
   & > svg {
     width: 1.4rem;

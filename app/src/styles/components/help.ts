@@ -10,7 +10,8 @@ export const StyledHelpWrapper = styled.a`
 
   position: relative;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-primary);
   }
 
