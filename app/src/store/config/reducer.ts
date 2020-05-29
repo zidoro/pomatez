@@ -13,27 +13,31 @@ import {
 } from "./types";
 import { getFromStorage, saveToStorage } from "utils";
 
-const defaultConfig = {
+const defaultConfig: ConfigTypes = {
   stayFocus: 25,
   shortBreak: 5,
   longBreak: 15,
   sessionRounds: 4,
   specialBreaks: {
     firstBreak: {
-      time: "",
-      duration: "",
+      fromTime: "",
+      toTime: "",
+      duration: 0,
     },
     secondBreak: {
-      time: "",
-      duration: "",
+      fromTime: "",
+      toTime: "",
+      duration: 0,
     },
     thirdBreak: {
-      time: "",
-      duration: "",
+      fromTime: "",
+      toTime: "",
+      duration: 0,
     },
     fourthBreak: {
-      time: "",
-      duration: "",
+      fromTime: "",
+      toTime: "",
+      duration: 0,
     },
   },
 };

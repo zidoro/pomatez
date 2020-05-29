@@ -1,14 +1,22 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   StyledSpecialField,
-  StyledSpecialFieldMinute,
   StyledSpecialClearButton,
+  StyledSpecialBreakSetter,
+  StyledDetailCloseButton,
+  StyledSpecialBreakSetterSection,
+  StyledSpecialBreakDuration,
+  StyledSpecialBreakAction,
+  StyledButtonNormal,
+  StyledSpecialBreakDurationSpan,
 } from "styles";
 import { Time, SVG } from "components";
+import { parseTime } from "utils";
 
 type SpecialFieldProps = {
-  time: string;
-  duration: string;
+  fromTime: string;
+  toTime: string;
+  duration: number;
 };
 
 type Props = {
@@ -17,17 +25,25 @@ type Props = {
   SpecialFieldProps;
 
 const SpecialField: React.FC<Props> = ({
-  time,
+  fromTime,
+  toTime,
   duration,
   disabled,
   onFieldSubmit,
 }) => {
-  const [values, setValues] = useState({ time, duration });
+  const [showSetter, setShowSetter] = useState(false);
+
+  const [values, setValues] = useState({
+    fromTime,
+    toTime,
+    duration,
+  });
 
   const [success, setSuccess] = useState(false);
 
   const [errors, setErrors] = useState({
-    time: false,
+    fromTime: false,
+    toTime: false,
     duration: false,
   });
 
@@ -42,34 +58,37 @@ const SpecialField: React.FC<Props> = ({
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (!values.time && values.duration) {
+      if (!values.toTime) {
         setErrors((prevState) => ({
           ...prevState,
-          time: true,
+          toTime: true,
         }));
       } else {
         setErrors((prevState) => ({
           ...prevState,
-          time: false,
+          toTime: false,
         }));
       }
 
-      if (!values.duration && values.time) {
+      if (!values.fromTime) {
         setErrors((prevState) => ({
           ...prevState,
-          duration: true,
+          fromTime: true,
         }));
       } else {
         setErrors((prevState) => ({
           ...prevState,
-          duration: false,
+          fromTime: false,
         }));
       }
 
       if (
-        (values.time && values.duration && onFieldSubmit) ||
-        (!values.time && !values.duration && onFieldSubmit)
+        values.fromTime &&
+        values.toTime &&
+        values.duration >= 5 &&
+        onFieldSubmit
       ) {
+        setShowSetter(false);
         setSuccess(true);
         onFieldSubmit(values);
 
@@ -79,49 +98,114 @@ const SpecialField: React.FC<Props> = ({
     [onFieldSubmit, values]
   );
 
-  const onClear = useCallback(() => {
-    const newValues = { time: "", duration: "" };
-    if (onFieldSubmit) {
-      setValues(newValues);
-      onFieldSubmit(newValues);
+  const onClear = useCallback(
+    (e) => {
+      e.stopPropagation();
+      const newValues = {
+        fromTime: "",
+        toTime: "",
+        duration: 0,
+      };
+      if (onFieldSubmit) {
+        setSuccess(true);
+        setValues(newValues);
+        onFieldSubmit(newValues);
+
+        setTimeout(() => setSuccess(false), 1000);
+      }
+    },
+    [onFieldSubmit]
+  );
+
+  useEffect(() => {
+    if (values.fromTime && values.toTime) {
+      const duration = parseTime(values.toTime) - parseTime(values.fromTime);
+
+      setErrors({
+        fromTime: false,
+        toTime: false,
+        duration: duration < 5 ? true : false,
+      });
+      setValues((prevState) => ({
+        ...prevState,
+        duration,
+      }));
     }
-  }, [onFieldSubmit]);
+  }, [values.fromTime, values.toTime]);
 
   return (
-    <StyledSpecialField
-      disabled={disabled}
-      onSubmit={onSubmit}
-      success={success}
-      error={errors.time || errors.duration}
-    >
-      <Time
-        name="time"
-        value={values.time}
-        onChange={getValues}
-        disabled={disabled}
-        error={errors.time}
-      />
-      <span />
-      <StyledSpecialFieldMinute
-        type="number"
-        name="duration"
-        placeholder="min"
-        value={values.duration}
-        onChange={getValues}
-        disabled={disabled}
-        error={errors.duration}
-      />
-
-      <StyledSpecialClearButton
-        type="button"
+    <>
+      <StyledSpecialField
         success={success}
-        onClick={onClear}
+        disabled={disabled}
+        onClick={() => setShowSetter(true)}
       >
-        <SVG name="close" />
-      </StyledSpecialClearButton>
+        <input type="time" value={fromTime} disabled />
+        <span />
+        <input
+          type="number"
+          value={duration === 0 ? "" : duration}
+          placeholder="min"
+          disabled
+        />
+        <StyledSpecialClearButton
+          type="button"
+          success={success}
+          onClick={onClear}
+        >
+          <SVG name="close" />
+        </StyledSpecialClearButton>
+      </StyledSpecialField>
 
-      <button type="submit" aria-hidden="true" />
-    </StyledSpecialField>
+      {showSetter && (
+        <StyledSpecialBreakSetter onSubmit={onSubmit}>
+          <StyledDetailCloseButton onClick={() => setShowSetter(false)}>
+            <SVG name="close" />
+          </StyledDetailCloseButton>
+
+          <header>
+            <h3>Special Break Setter</h3>
+            <p>Set your special break according to your daily routine.</p>
+          </header>
+
+          <StyledSpecialBreakSetterSection>
+            <Time
+              label="from"
+              name="fromTime"
+              value={values.fromTime}
+              onChange={getValues}
+              error={errors.fromTime}
+            />
+            <Time
+              label="to"
+              name="toTime"
+              value={values.toTime}
+              onChange={getValues}
+              error={errors.toTime}
+            />
+            <StyledSpecialBreakDuration>
+              Duration:&nbsp;
+              {values.duration < 5 && errors.duration ? (
+                <StyledSpecialBreakDurationSpan error>
+                  {values.duration > 1
+                    ? `${values.duration} minutes`
+                    : `${values.duration} minute`}
+                  &nbsp;is not a valid duration.
+                </StyledSpecialBreakDurationSpan>
+              ) : (
+                <StyledSpecialBreakDurationSpan>
+                  {values.duration >= 5 && `${values.duration} minutes`}
+                </StyledSpecialBreakDurationSpan>
+              )}
+            </StyledSpecialBreakDuration>
+          </StyledSpecialBreakSetterSection>
+
+          <StyledSpecialBreakAction>
+            <StyledButtonNormal type="submit">Save</StyledButtonNormal>
+          </StyledSpecialBreakAction>
+        </StyledSpecialBreakSetter>
+      )}
+    </>
   );
 };
 

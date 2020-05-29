@@ -6,6 +6,8 @@ export const StyledConfig = styled.main`
   padding: 0 2rem;
 
   animation: 320ms ${themes.enterFromLeft} ease;
+
+  position: relative;
 `;
 
 export const StyledConfigSliderSection = styled.section`
@@ -34,6 +36,7 @@ export const StyledSpecialBreakHeading = styled(StyledHeaderHeading)<{
   color: ${(p) => p.disabled && "var(--color-disabled-text)"};
 `;
 
+// TODO: Delete this
 export const StyledSpecialFieldMinute = styled.input<{ error?: boolean }>`
   padding: 0.4rem 0.8rem;
 
@@ -114,7 +117,7 @@ type SpecialBreakProps = {
   success?: boolean;
 };
 
-export const StyledSpecialField = styled.form<SpecialBreakProps>`
+export const StyledSpecialField = styled.div<SpecialBreakProps>`
   width: 100%;
   height: 3.2rem;
 
@@ -151,6 +154,38 @@ export const StyledSpecialField = styled.form<SpecialBreakProps>`
     transform: translateY(0);
   }
 
+  & > input[type="time"] {
+    border: none;
+    background-color: transparent;
+
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+    }
+
+    &::-webkit-datetime-edit-text {
+      margin: 0 0.2rem;
+    }
+
+    &::-webkit-datetime-edit {
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  & > input[type="number"] {
+    padding: 0.4rem 0.8rem;
+
+    border: none;
+    background-color: transparent;
+
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+
+    &::placeholder {
+      color: var(--color-disabled-text);
+    }
+  }
+
   & > span {
     width: 1px;
     height: 100%;
@@ -159,10 +194,6 @@ export const StyledSpecialField = styled.form<SpecialBreakProps>`
       (p.disabled && "var(--color-bg-tertiary)") ||
       (p.error && "rgba(var(--color-pink-rgb), 0.5)") ||
       "var(--color-border-primary)"};
-  }
-
-  & > button[type="submit"] {
-    display: none;
   }
 
   ${(p) =>
@@ -185,4 +216,72 @@ export const StyledSpecialField = styled.form<SpecialBreakProps>`
       box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.16);
     }
   }
+`;
+
+export const StyledSpecialBreakSetter = styled.form`
+  width: 100%;
+  height: 100%;
+
+  padding: 1.6rem 2rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  background-color: var(--color-bg-primary);
+
+  display: grid;
+  row-gap: 2rem;
+  align-content: start;
+  grid-template-rows: max-content 1fr max-content;
+
+  animation: enter 180ms ease;
+
+  & > header {
+    display: grid;
+    row-gap: 0.4rem;
+
+    & > h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    & > p {
+      width: 80%;
+    }
+  }
+
+  @keyframes enter {
+    0% {
+      opacity: 0;
+      margin-top: 1rem;
+    }
+    100% {
+      opacity: 1;
+      margin: 0;
+    }
+  }
+`;
+
+export const StyledSpecialBreakSetterSection = styled.section`
+  display: grid;
+  gap: 1.2rem;
+  align-content: start;
+  /* grid-template-columns: repeat(2, 1fr); */
+`;
+
+export const StyledSpecialBreakDuration = styled.div`
+  grid-column: 1 / -1;
+`;
+
+export const StyledSpecialBreakDurationSpan = styled.span<{ error?: boolean }>`
+  font-weight: 500;
+  color: ${(p) => (p.error ? "var(--color-pink)" : "var(--color-primary)")};
+`;
+
+export const StyledSpecialBreakAction = styled.div`
+  padding-bottom: 2rem;
 `;

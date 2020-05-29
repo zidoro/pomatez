@@ -1,7 +1,12 @@
 import React from "react";
-import { StyledTimeWrapper, StyledTimeInput } from "styles";
+import {
+  StyledTimeWrapper,
+  StyledTimeInput,
+  StyledTimeInputLabel,
+} from "styles";
 
 type Props = {
+  label?: string;
   error?: boolean;
 } & React.HTMLProps<HTMLInputElement>;
 
@@ -9,12 +14,12 @@ const Time: React.FC<Props> = ({
   id,
   name,
   value,
+  label,
   disabled,
   onChange,
   error,
   onFocus,
   onBlur,
-  ...props
 }) => {
   return (
     <StyledTimeWrapper disabled={disabled}>
@@ -29,6 +34,7 @@ const Time: React.FC<Props> = ({
         onBlur={onBlur}
         error={error}
       />
+      <StyledTimeInputLabel>{label}</StyledTimeInputLabel>
     </StyledTimeWrapper>
   );
 };

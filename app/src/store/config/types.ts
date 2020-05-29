@@ -1,8 +1,9 @@
 const config = "[config]";
 
 export type SpecialBreakTypes = {
-  time: string;
-  duration: string;
+  fromTime: string;
+  toTime: string;
+  duration: number;
 };
 
 export type ConfigTypes = {
