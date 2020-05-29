@@ -108,13 +108,13 @@ const CounterProvider: React.FC = ({ children }) => {
     } = config.specialBreaks;
 
     if (settings.enableSpecialBreaks && timer.playing) {
-      interval = setInterval(() => {
+      interval = setTimeout(() => {
         const d = new Date();
         const ct = d.getHours() + ":" + d.getMinutes();
 
         if (timer.timerType !== SPECIAL_BREAK) {
           switch (ct) {
-            case firstBreak.time:
+            case firstBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(firstBreak.duration);
               notification(
@@ -123,7 +123,7 @@ const CounterProvider: React.FC = ({ children }) => {
                 specialBreakStart
               );
               break;
-            case secondBreak.time:
+            case secondBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(secondBreak.duration);
               notification(
@@ -132,7 +132,7 @@ const CounterProvider: React.FC = ({ children }) => {
                 specialBreakStart
               );
               break;
-            case thirdBreak.time:
+            case thirdBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(thirdBreak.duration);
               notification(
@@ -141,7 +141,7 @@ const CounterProvider: React.FC = ({ children }) => {
                 specialBreakStart
               );
               break;
-            case fourthBreak.time:
+            case fourthBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(fourthBreak.duration);
               notification(
@@ -198,6 +198,36 @@ const CounterProvider: React.FC = ({ children }) => {
       interval = setInterval(() => {
         counter--;
         setCount(counter);
+
+        if (settings.notificationProperty === "extra") {
+          if (counter === 60) {
+            if (timer.timerType === SHORT_BREAK) {
+              notification(
+                "60 Seconds Left for Short Break",
+                { body: "Please prepare yourself getting  back to work." },
+                sixtySecondsLeftShortBreak
+              );
+            } else if (timer.timerType === LONG_BREAK) {
+              notification(
+                "60 Seconds Left for Long Break",
+                { body: "Please prepare yourself getting  back to work." },
+                sixtySecondsLeftLongBreak
+              );
+            } else if (timer.timerType === SPECIAL_BREAK) {
+              notification(
+                "60 Seconds Left for Special Break",
+                { body: "Please prepare yourself getting  back to work." },
+                sixtySecondsLeftSpecialBreak
+              );
+            }
+          } else if (counter === 30 && timer.timerType === STAY_FOCUS) {
+            notification(
+              "30 Seconds Left to Work",
+              { body: "Please pause all media playing if there's one." },
+              thirtySecondsLeftToWork
+            );
+          }
+        }
 
         if (counter === 0) {
           switch (timer.timerType) {
@@ -263,40 +293,6 @@ const CounterProvider: React.FC = ({ children }) => {
     config.sessionRounds,
     settings.notificationProperty,
   ]);
-
-  useEffect(() => {
-    if (settings.notificationProperty === "extra") {
-      if (count === 60) {
-        if (timer.timerType === SHORT_BREAK) {
-          notification(
-            "60 Seconds Left for Short Break",
-            { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftShortBreak
-          );
-        } else if (timer.timerType === LONG_BREAK) {
-          notification(
-            "60 Seconds Left for Long Break",
-            { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftLongBreak
-          );
-        } else if (timer.timerType === SPECIAL_BREAK) {
-          notification(
-            "60 Seconds Left for Special Break",
-            { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftSpecialBreak
-          );
-        }
-      }
-
-      if (count === 30 && timer.timerType === STAY_FOCUS) {
-        notification(
-          "30 Seconds Left to Work",
-          { body: "Please pause all media playing if there's one." },
-          thirtySecondsLeftToWork
-        );
-      }
-    }
-  }, [count, settings.notificationProperty, timer.timerType, notification]);
 
   return (
     <CounterContext.Provider

@@ -25,6 +25,19 @@ export const StyledDetailContainer = styled.div`
   overflow: hidden auto;
 
   ${StyledScrollbar};
+
+  animation: enter 180ms ease;
+
+  @keyframes enter {
+    0% {
+      opacity: 0;
+      margin-top: 1rem;
+    }
+    100% {
+      opacity: 1;
+      margin: 0;
+    }
+  }
 `;
 
 export const StyledDetailHeader = styled.textarea`
@@ -144,7 +157,7 @@ export const StyledDescriptionPreviewer = styled.div<{ hasValue?: boolean }>`
   ${StyledScrollbar};
 
   p {
-    color: ${p => !p.hasValue && "var(--color-disabled-text)"};
+    color: ${(p) => !p.hasValue && "var(--color-disabled-text)"};
   }
 
   h1 {

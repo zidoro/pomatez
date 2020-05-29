@@ -56,25 +56,29 @@ const SpecialBreaks: React.FC = () => {
       </StyledSpecialBreakHeading>
 
       <SpecialField
-        time={config.specialBreaks.firstBreak?.time}
+        fromTime={config.specialBreaks.firstBreak?.fromTime}
+        toTime={config.specialBreaks.firstBreak?.toTime}
         duration={config.specialBreaks.firstBreak?.duration}
         disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setFirstSpecialBreakCallback}
       />
       <SpecialField
-        time={config.specialBreaks.secondBreak?.time}
+        fromTime={config.specialBreaks.secondBreak?.fromTime}
+        toTime={config.specialBreaks.secondBreak?.toTime}
         duration={config.specialBreaks.secondBreak?.duration}
         disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setSecondSpecialBreakCallback}
       />
       <SpecialField
-        time={config.specialBreaks.thirdBreak?.time}
+        fromTime={config.specialBreaks.thirdBreak?.fromTime}
+        toTime={config.specialBreaks.thirdBreak?.toTime}
         duration={config.specialBreaks.thirdBreak?.duration}
         disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setThirdSpecialBreakCallback}
       />
       <SpecialField
-        time={config.specialBreaks.fourthBreak?.time}
+        fromTime={config.specialBreaks.fourthBreak?.fromTime}
+        toTime={config.specialBreaks.fourthBreak?.toTime}
         duration={config.specialBreaks.fourthBreak?.duration}
         disabled={!settings.enableSpecialBreaks}
         onFieldSubmit={setFourthSpecialBreakCallback}

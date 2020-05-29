@@ -20,7 +20,7 @@ const defaultSettings: SettingTypes = {
   notificationSoundOn: true,
   enableSpecialBreaks: true,
   enableStickyNotes: false,
-  enableStrictMode: false,
+  enableStrictMode: true,
   enableWebBlocker: true,
   enableDarkTheme: isPreferredDark(),
   isSettingLock: false,
