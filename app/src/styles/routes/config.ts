@@ -36,34 +36,6 @@ export const StyledSpecialBreakHeading = styled(StyledHeaderHeading)<{
   color: ${(p) => p.disabled && "var(--color-disabled-text)"};
 `;
 
-// TODO: Delete this
-export const StyledSpecialFieldMinute = styled.input<{ error?: boolean }>`
-  padding: 0.4rem 0.8rem;
-
-  cursor: default;
-
-  border: none;
-  color: ${(p) =>
-    (p.disabled && "transparent") || (p.error && "var(--color-pink)")};
-  background-color: ${(p) =>
-    p.disabled ? "var(--color-bg-tertiary)" : "var(--color-bg-secondary)"};
-
-  &:focus {
-    cursor: text;
-  }
-
-  &::placeholder {
-    color: ${(p) =>
-      (p.disabled && "transparent") ||
-      (p.error && "var(--color-pink)") ||
-      "var(--color-disabled-text)"};
-  }
-
-  &::-webkit-inner-spin-button {
-    display: none;
-  }
-`;
-
 export const StyledSpecialClearButton = styled.button<{ success?: boolean }>`
   position: absolute;
   top: 0;

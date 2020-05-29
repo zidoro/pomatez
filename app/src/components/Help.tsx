@@ -9,7 +9,7 @@ type Props = {
 
 const Help: React.FC<Props> = ({ label, link }) => {
   return (
-    <StyledHelpWrapper href={link}>
+    <StyledHelpWrapper href={link} target="_blank" rel="noopener noreferrer">
       <StyledHelpLabel>
         {label}
         <StyledHelpExternal>
