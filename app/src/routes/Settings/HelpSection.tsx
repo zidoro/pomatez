@@ -23,8 +23,16 @@ const HelpSection: React.FC = () => {
         link="https://github.com/roldanjrCodeArts9711/productivity-timer/issues"
       />
       <Help
-        label="Donate on Paypal"
+        label="Release notes"
+        link="https://github.com/roldanjrCodeArts9711/productivity-timer/releases"
+      />
+      <Help
+        label="Support the app"
         link="https://www.paypal.me/roldanjrDevsLife2020"
+      />
+      <Help
+        label="Contact the developer"
+        link="mailto:roldanjrmontilla@gmail.com"
       />
     </SettingSection>
   );
