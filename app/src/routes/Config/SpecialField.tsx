@@ -106,7 +106,7 @@ const SpecialField: React.FC<Props> = ({
         toTime: "",
         duration: 0,
       };
-      if (onFieldSubmit) {
+      if (onFieldSubmit && !disabled) {
         setSuccess(true);
         setValues(newValues);
         onFieldSubmit(newValues);
@@ -114,7 +114,7 @@ const SpecialField: React.FC<Props> = ({
         setTimeout(() => setSuccess(false), 1000);
       }
     },
-    [onFieldSubmit]
+    [onFieldSubmit, disabled]
   );
 
   useEffect(() => {
@@ -150,7 +150,11 @@ const SpecialField: React.FC<Props> = ({
         tabIndex={0}
         success={success}
         disabled={disabled}
-        onClick={() => setShowSetter(true)}
+        onClick={() => {
+          if (!disabled) {
+            setShowSetter(true);
+          }
+        }}
         onKeyDown={(e) => {
           if (e.keyCode === 13) {
             setShowSetter(true);

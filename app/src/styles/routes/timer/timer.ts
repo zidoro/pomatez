@@ -43,7 +43,7 @@ export const StyledTimerNoteOption = styled.button`
   justify-content: center;
 
   padding: 0.4rem 0rem;
-  margin: 0.4rem;
+  margin: 0.4rem 0.6rem;
 
   color: var(--color-body-text);
 

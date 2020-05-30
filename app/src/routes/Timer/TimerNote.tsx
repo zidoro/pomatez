@@ -24,6 +24,7 @@ import {
 } from "styles";
 import { SVG } from "components";
 import { useTargetOutside } from "hooks";
+import { isObjectEmpty } from "utils";
 
 const TimerNote: React.FC = () => {
   const tasks: TaskTypes[] = useSelector((state: AppStateTypes) => state.tasks);
@@ -41,16 +42,19 @@ const TimerNote: React.FC = () => {
   const [showOptions, setShowOptions] = useTargetOutside({ ref: optionRef });
 
   const setTaskCardDoneCallback = () => {
+    if (isObjectEmpty(priorityCard)) return;
     dispatch(setTaskCardDone(priorityList?._id, priorityCard?._id));
     setShowOptions(false);
   };
 
   const skipTaskCardCallback = () => {
+    if (isObjectEmpty(priorityCard)) return;
     dispatch(skipTaskCard(priorityList?._id));
     setShowOptions(false);
   };
 
   const deleteTaskCardCallback = () => {
+    if (isObjectEmpty(priorityCard)) return;
     dispatch(removeTaskCard(priorityList?._id, priorityCard?._id));
     setShowOptions(false);
   };
