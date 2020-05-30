@@ -45,7 +45,8 @@ export const StyledCheckboxLabel = styled.span`
 
 export const StyledCheckbox = styled.label<{ disabled?: boolean }>`
   & > input {
-    display: none;
+    width: 0;
+    height: 0;
   }
 
   & > input:checked + ${StyledCheckboxBox} {

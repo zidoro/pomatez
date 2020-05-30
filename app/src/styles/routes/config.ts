@@ -85,7 +85,6 @@ export const StyledSpecialClearButton = styled.button<{ success?: boolean }>`
 
 type SpecialBreakProps = {
   disabled?: boolean;
-  error?: boolean;
   success?: boolean;
 };
 
@@ -97,11 +96,7 @@ export const StyledSpecialField = styled.div<SpecialBreakProps>`
   grid-template-columns: 1fr 1px 4.6rem;
 
   border-radius: 1px;
-  border: 1px solid
-    ${(p) =>
-      p.error
-        ? "rgba(var(--color-pink-rgb), 0.5)"
-        : "var(--color-border-secondary)"};
+  border: 1px solid var(--color-border-secondary);
   background-color: var(--color-bg-secondary);
   box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.16);
 
@@ -109,11 +104,11 @@ export const StyledSpecialField = styled.div<SpecialBreakProps>`
 
   &:focus-within {
     border-color: ${(p) =>
-      p.error ? "var(--color-pink)" : "var(--color-primary)"};
+      p.disabled ? "var(--color-border-secondary)" : "var(--color-primary)"};
     box-shadow: 0 0 0 2px
       ${(p) =>
-        p.error
-          ? "rgba(var(--color-pink-rgb), 0.16)"
+        p.disabled
+          ? "rgba(var(--color-pink-rgb), 0)"
           : "rgba(var(--color-primary-rgb), 0.16)"};
   }
 
@@ -129,6 +124,10 @@ export const StyledSpecialField = styled.div<SpecialBreakProps>`
   & > input[type="time"] {
     border: none;
     background-color: transparent;
+
+    &::-webkit-datetime-edit-fields-wrapper {
+      color: ${(p) => p.disabled && "transparent"};
+    }
 
     &::-webkit-calendar-picker-indicator {
       display: none;
@@ -154,7 +153,8 @@ export const StyledSpecialField = styled.div<SpecialBreakProps>`
     }
 
     &::placeholder {
-      color: var(--color-disabled-text);
+      color: ${(p) =>
+        p.disabled ? "transparent" : "var(--color-disabled-text)"};
     }
   }
 
@@ -164,7 +164,6 @@ export const StyledSpecialField = styled.div<SpecialBreakProps>`
 
     background-color: ${(p) =>
       (p.disabled && "var(--color-bg-tertiary)") ||
-      (p.error && "rgba(var(--color-pink-rgb), 0.5)") ||
       "var(--color-border-primary)"};
   }
 
