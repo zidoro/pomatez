@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
+import { themes } from "styles/themes";
 
 export const StyledTimer = styled.main`
   width: 100%;
@@ -33,7 +33,39 @@ export const StyledTimerNoteContainer = styled.div`
   padding: 0 1.6rem;
 `;
 
-export const StyledTimerNoteWrapper = styled(Link)`
+export const StyledTimerNoteOption = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.4rem 0rem;
+  margin: 0.4rem;
+
+  color: var(--color-body-text);
+
+  border: none;
+  background-color: transparent;
+
+  transition: ${themes.transition};
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  & > svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: currentColor;
+  }
+`;
+
+export const StyledTimerNoteWrapper = styled.div`
+  position: relative;
+
   width: 100%;
   height: 100%;
 
@@ -47,11 +79,6 @@ export const StyledTimerNoteWrapper = styled(Link)`
   border-radius: 3px;
   border: 1px solid var(--color-border-secondary);
   background-color: var(--color-bg-secondary);
-
-  &:hover {
-    border-color: var(--color-border-primary);
-    background-color: var(--color-bg-tertiary);
-  }
 `;
 
 export const StyledTimerNoteHeader = styled.header``;

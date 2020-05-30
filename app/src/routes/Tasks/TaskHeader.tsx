@@ -104,7 +104,7 @@ const TaskHeader: React.FC<Props> = ({
                 setShowOptions(false);
               }}
             >
-              Set as priority
+              Priority List
             </StyledOptionPriority>
 
             <StyledOptionDone
@@ -113,7 +113,7 @@ const TaskHeader: React.FC<Props> = ({
                 setShowOptions(false);
               }}
             >
-              Set done
+              Done List
             </StyledOptionDone>
 
             <StyledOptionDelete

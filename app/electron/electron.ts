@@ -8,7 +8,7 @@ import {
   activateAutoUpdate,
 } from "./functions";
 
-import { CHANNELS, UPDATES, ACTIONS, getIcon } from "./helpers";
+import { CHANNELS, ACTIONS, getIcon } from "./helpers";
 
 import "v8-compile-cache";
 

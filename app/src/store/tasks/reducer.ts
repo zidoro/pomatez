@@ -13,6 +13,9 @@ import {
   REMOVE_TASK_LIST,
   SET_TASK_LIST_PRIORITY,
   SET_TASK_LIST_DONE,
+  CardTypes,
+  SET_TASK_CARD_DONE,
+  SKIP_TASK_CARD,
 } from "./types";
 
 const tasks = getFromStorage("tasks") ? getFromStorage("tasks") : [];
@@ -26,7 +29,7 @@ export const tasksReducer = (
   switch (action.type) {
     case ADD_TASK_LIST: {
       const isPriority = state.length === 0 ? true : false;
-      const newList = {
+      const newList: TaskTypes = {
         _id: uuid(),
         title: action.payload.trim().toUpperCase(),
         cards: [],
@@ -92,6 +95,7 @@ export const tasksReducer = (
         if (list._id === action.payload.listId) {
           return {
             ...list,
+            priority: false,
             done: true,
           };
         }
@@ -103,10 +107,11 @@ export const tasksReducer = (
       return newState;
     }
     case ADD_TASK_CARD: {
-      const newCard = {
+      const newCard: CardTypes = {
         _id: uuid(),
         text: action.payload.cardText.trim().capitalize(),
         description: "",
+        done: false,
       };
 
       const newState = state.map((list) => {
@@ -172,6 +177,58 @@ export const tasksReducer = (
             (card) => card._id !== action.payload.cardId
           );
           return { ...list, cards: newCards };
+        }
+        return list;
+      });
+
+      saveToStorage("tasks", newState);
+
+      return newState;
+    }
+    case SET_TASK_CARD_DONE: {
+      const newState = state.map((list) => {
+        if (list._id === action.payload.listId) {
+          const cards = list.cards.map((card) => {
+            if (card._id === action.payload.cardId) {
+              return {
+                ...card,
+                done: true,
+              };
+            }
+            return card;
+          });
+
+          const firstCard = cards.shift();
+
+          return {
+            ...list,
+            cards: [...cards, firstCard],
+          };
+        }
+        return list;
+      });
+
+      saveToStorage("tasks", newState);
+
+      return newState;
+    }
+    case SKIP_TASK_CARD: {
+      const newState = state.map((list) => {
+        if (list._id === action.payload.listId) {
+          const notDoneCards = list.cards
+            .filter((card) => !card.done)
+            .map((card) => card);
+
+          const firstNotDoneCard = notDoneCards.shift();
+
+          const doneCards = list.cards
+            .filter((card) => card.done)
+            .map((card) => card);
+
+          return {
+            ...list,
+            cards: [...notDoneCards, firstNotDoneCard, ...doneCards],
+          };
         }
         return list;
       });
