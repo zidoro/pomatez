@@ -1,8 +1,15 @@
 import styled, { css } from "styled-components/macro";
 import { StyledButton, StyledButtonPrimary } from "styles";
 
-export const StyledCardText = styled.p`
+export const StyledCardText = styled.p<{ done?: boolean }>`
   display: flex;
+
+  ${(p) =>
+    p.done &&
+    css`
+      color: var(--color-green);
+      text-decoration: line-through;
+    `}
 `;
 
 export const StyledCardTextArea = styled.textarea`

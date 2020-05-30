@@ -11,7 +11,7 @@ export const StyledPopperContent = styled.div`
 
   padding-bottom: 0.4rem;
 
-  border-radius: 1px;
+  border-radius: 2px;
   background-color: var(--color-bg-popper);
   box-shadow: 0 2px 12px -2px var(--color-shadow-primary);
 

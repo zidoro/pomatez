@@ -89,12 +89,13 @@ const TaskList: React.FC<Props> = ({
                   />
 
                   <StyledCardWrapper>
-                    {cards?.map(({ _id, text }, index) => (
+                    {cards?.map(({ _id, text, done }, index) => (
                       <TaskCard
                         key={_id}
                         text={text}
                         id={_id}
                         index={index}
+                        done={done}
                         onClick={(e) => {
                           setCardId(_id);
                           setShowDetails(true);

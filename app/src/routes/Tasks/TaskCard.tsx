@@ -15,6 +15,7 @@ type Props = {
   id: string;
   text: string;
   index: number;
+  done: boolean;
   onClick?:
     | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
     | undefined;
@@ -25,6 +26,7 @@ const TaskCard: React.FC<Props> = ({
   id,
   text,
   index,
+  done,
   onClick,
   onSaveCardText,
 }) => {
@@ -72,7 +74,7 @@ const TaskCard: React.FC<Props> = ({
         }}
       />
     ) : (
-      <StyledCardText>{text}</StyledCardText>
+      <StyledCardText done={done}>{text}</StyledCardText>
     );
 
   const renderActionButton = () =>

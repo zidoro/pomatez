@@ -26,6 +26,7 @@ import {
   LockSVG,
   HandSVG,
   ChevronDownSVG,
+  OptionYSVG,
 } from "assets/icons";
 
 export type SVGTypes = {
@@ -35,6 +36,7 @@ export type SVGTypes = {
     | "cafe"
     | "config"
     | "option-x"
+    | "option-y"
     | "pause"
     | "play"
     | "progress"
@@ -70,6 +72,8 @@ const SVG: React.FC<SVGTypes> = ({ name }) => {
       return <ConfigSVG />;
     case "option-x":
       return <OptionXSVG />;
+    case "option-y":
+      return <OptionYSVG />;
     case "pause":
       return <PauseSVG />;
     case "play":

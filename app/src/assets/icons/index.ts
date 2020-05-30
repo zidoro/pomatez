@@ -22,6 +22,7 @@ export { ReactComponent as ExternalSVG } from "./external.svg";
 export { ReactComponent as AddSVG } from "./add.svg";
 
 export { ReactComponent as OptionXSVG } from "./option-x.svg";
+export { ReactComponent as OptionYSVG } from "./option-y.svg";
 export { ReactComponent as PencilSVG } from "./pencil.svg";
 export { ReactComponent as SaveSVG } from "./save.svg";
 
