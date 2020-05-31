@@ -34,64 +34,70 @@
 
 This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) added with some features that might help you a lot.
 
+> **Useful Blogs About Pomodoro Technique**:
+
+> **Topic**: [The pomodoro technique](https://www.focusboosterapp.com/the-pomodoro-technique)
+
+> **Topic**: [Productivity 101: An Introduction to The Pomodoro Technique](https://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730)
+
+> **Topic**: [Do more and have fun with time management](https://francescocirillo.com/pages/pomodoro-technique)
+
 ## Features
 
 - Always On Top
 
-  > It make the app always on top of all other apps running on your Operating System.
+  > It make the app always on top of all other apps running on your Operating System. `( default: disabled )`
 
 - Notifications
 
   > Shows some notification from time to time if necessary.
 
+  > **NOTE**: Notification Property is divided into three category.
+
+  1. **NONE** - No notification will appear.
+  2. **NORMAL** - Necessary notification will only appear.
+  3. **EXTRA** - `( default )` Warn you _30 seconds_ before your _WORK TIME FINISH_, _60 seconds_ before your _SHORT BREAK FINISH_, _LONG BREAK FINISH_ and _SPECIAL BREAK FINISH_.
+
 - Special Breaks
 
   > Allows you to set some special time when you really need to take a break.
 
-  > **Example**: Lunch Break, Dinner Break and etc...
+  > **Example**: Lunch Break, Dinner Break and etc... `( default: enabled )`
 
-- Strict Mode
+* Strict Mode
 
   > **NOTE**: Full Screen On Break feature of `version 1` is being moved here due to some request of users.
 
-  > If **Enabled**: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break.
+  > If **Enabled**: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break. `( default: enabled )`
 
-- Dark Theme
+* Dark Theme
 
-  > Enable to use `Dark Mode` version of the app to reduce strain.
+  > Enable to use `Dark Mode` version of the app to reduce strain. `( default: depends on your operating system prefered color scheme )`
 
-- Lock Settings
+* Lock Settings
 
-  > If **Enabled**: Your settings that you had set will be locked.
-
-  > **NOTE**: This feature is not yet fully implemented. There's a lot of functionalities of it that has not been develop and implemented.
+  > If **Enabled**: Your settings that you had set will be locked. `( default: disabled )`
 
 - Built-in Task List
 
-  > Allow you to create a list of task that you want to accomplish.
-
-  > **NOTE**: This feature will be improve soon.
+  > Allows you to create a list of task that you want to accomplish.
 
 ## Road Map
 
 - Add web blocker feature.
-- Add password to Lock Settings feature.
-- Add option to switch between native titlebar.
-- Improve task list feature to make it more useful.
-- Create official website that include documentations.
+- Add option to switch to native titlebar.
+- Create official website that includes documentation.
 - Add productivity report requested. Feature request mentioned here [#68](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/68).
-- Separate toggles for alarm sounds, basic narration and extra narration. Feature request mentioned here [#69](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/69).
 
 ## Development
+
+**For Contributors**
 
 PRODUCTIVITY TIMER is built with [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
 
 ### Setup
 
 ```bash
-# go to app sub-folder
-cd app
-
 # install all dependencies
 yarn install
 
@@ -101,19 +107,17 @@ yarn develop
 # start electron
 yarn electron
 
+# runs `yarn develop` and `yarn electron` concurrently
+yarn start:app
+
 # build window installer
 yarn build:win
 
-# build linux installer
-yarn build:linux
-
 # build mac installer
-# note: edit package.json and add your custom config for mac
 yarn build:mac
 
-# build multiple platform
-# note: edit package.json and add your custom config for mac
-yarn build:mwl
+# build linux installer
+yarn build:linux
 ```
 
 ## Download
