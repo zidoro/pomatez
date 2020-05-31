@@ -34,13 +34,13 @@
 
 This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) added with some features that might help you a lot.
 
-> **Useful Blogs About Pomodoro Technique**:
+**Useful Blogs About Pomodoro Technique**:
 
-> **Topic**: [The pomodoro technique](https://www.focusboosterapp.com/the-pomodoro-technique)
+- [The pomodoro technique](https://www.focusboosterapp.com/the-pomodoro-technique)
 
-> **Topic**: [Productivity 101: An Introduction to The Pomodoro Technique](https://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730)
+- [Productivity 101: An Introduction to The Pomodoro Technique](https://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730)
 
-> **Topic**: [Do more and have fun with time management](https://francescocirillo.com/pages/pomodoro-technique)
+- [Do more and have fun with time management](https://francescocirillo.com/pages/pomodoro-technique)
 
 ## Features
 
