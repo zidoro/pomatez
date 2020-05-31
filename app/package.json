@@ -13,6 +13,7 @@
   "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
   "homepage": "./",
   "scripts": {
+    "prepare": "yarn build:dir",
     "clean": "rm -rf build/ dist/",
     "develop": "react-scripts start",
     "gen:tts": "node tts-generator.js",
@@ -95,7 +96,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/uuid": "^8.0.0",
-    "electron": "^9.0.0",
+    "electron": "^8.3.0",
     "electron-builder": "^22.6.1",
     "say": "^0.16.0",
     "semantic-release": "^17.0.7",
