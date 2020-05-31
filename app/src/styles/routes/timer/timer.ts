@@ -52,7 +52,8 @@ export const StyledTimerNoteOption = styled.button`
 
   transition: ${themes.transition};
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-primary);
   }
 
