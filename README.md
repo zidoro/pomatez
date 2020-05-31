@@ -64,19 +64,25 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
   > **Example**: Lunch Break, Dinner Break and etc... `( default: enabled )`
 
-* Strict Mode
+- Strict Mode
 
   > **NOTE**: Full Screen On Break feature of `version 1` is being moved here due to some request of users.
 
   > If **Enabled**: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break. `( default: enabled )`
 
-* Dark Theme
+- Dark Theme
 
   > Enable to use `Dark Mode` version of the app to reduce strain. `( default: depends on your operating system prefered color scheme )`
 
-* Lock Settings
+- Lock Settings
 
   > If **Enabled**: Your settings that you had set will be locked. `( default: disabled )`
+
+- Timer Animation
+
+  > Allows you to toggle timer progress animation if you laptop / pc has a low specs and experiencing `High CPU Usage`.
+
+  > If **Enabled**: It will reduce CPU Usage of the app up to 99% of its original usage.
 
 - Built-in Task List
 
