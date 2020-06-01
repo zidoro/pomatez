@@ -82,7 +82,7 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
   > Allows you to toggle timer progress animation if you laptop / pc has a low specs and experiencing `High CPU Usage`.
 
-  > If **Enabled**: It will reduce CPU Usage of the app up to 99% of its original usage.
+  > If **Enabled**: It will reduce CPU Usage of the app up to 99% and to the least of its original usage.
 
 - Built-in Task List
 
