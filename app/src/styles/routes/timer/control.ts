@@ -19,8 +19,7 @@ const ControlButton = css`
 
   transition: ${themes.transition};
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: currentColor;
   }
 `;
