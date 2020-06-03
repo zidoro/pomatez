@@ -11,11 +11,6 @@ export const StyledTogglerWrapper = styled.div`
 
   position: relative;
 
-  &:focus-within label,
-  &:active label {
-    color: var(--color-primary);
-  }
-
   &::after {
     content: "";
     position: absolute;
