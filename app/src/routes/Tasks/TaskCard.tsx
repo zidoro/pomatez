@@ -7,6 +7,8 @@ import {
   StyledCardEditButton,
   StyledCardSaveButton,
   StyledCardTextArea,
+  StyledCardActionWrapper,
+  StyledCardDeleteButton,
 } from "styles";
 import { SVG } from "components";
 import { useTargetOutside } from "hooks";
@@ -20,6 +22,7 @@ type Props = {
     | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
     | undefined;
   onSaveCardText?: (text: string) => void;
+  onDeleteCard?: () => void;
 };
 
 const TaskCard: React.FC<Props> = ({
@@ -28,6 +31,7 @@ const TaskCard: React.FC<Props> = ({
   index,
   done,
   onClick,
+  onDeleteCard,
   onSaveCardText,
 }) => {
   const areaRef = useRef<HTMLTextAreaElement>(null);
@@ -50,6 +54,15 @@ const TaskCard: React.FC<Props> = ({
   ) => {
     e.stopPropagation();
     setEditing(true);
+  };
+
+  const onDeleteCardAction = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    if (onDeleteCard) {
+      onDeleteCard();
+    }
   };
 
   const onSaveCardAction = (
@@ -83,9 +96,14 @@ const TaskCard: React.FC<Props> = ({
         <SVG name="save" />
       </StyledCardSaveButton>
     ) : (
-      <StyledCardEditButton onClick={onEditCardAction}>
-        <SVG name="pencil" />
-      </StyledCardEditButton>
+      <StyledCardActionWrapper>
+        <StyledCardEditButton onClick={onEditCardAction}>
+          <SVG name="pencil" />
+        </StyledCardEditButton>
+        <StyledCardDeleteButton onClick={onDeleteCardAction}>
+          <SVG name="trash" />
+        </StyledCardDeleteButton>
+      </StyledCardActionWrapper>
     );
 
   return (

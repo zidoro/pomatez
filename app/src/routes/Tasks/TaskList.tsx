@@ -9,6 +9,7 @@ import {
   removeTaskList,
   setTaskListPriority,
   setTaskListDone,
+  removeTaskCard,
 } from "store";
 import { StyledTaskSectionItem, StyledCardWrapper } from "styles";
 
@@ -102,6 +103,9 @@ const TaskList: React.FC<Props> = ({
                         }}
                         onSaveCardText={(text) =>
                           dispatch(editTaskCardText(listId, _id, text))
+                        }
+                        onDeleteCard={() =>
+                          dispatch(removeTaskCard(listId, _id))
                         }
                       />
                     ))}

@@ -136,8 +136,8 @@ export const themes = {
   color: {
     close: "#f17e00",
   },
-  easing: "cubic-bezier(0.645, 0.045, 0.355, 1)",
-  transition: "all 160ms cubic-bezier(0.645, 0.045, 0.355, 1)",
+  easing: "ease",
+  transition: "all 140ms ease",
   enterFromLeft,
   enterFromRight,
 };
