@@ -9,7 +9,6 @@ import {
   RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
-  LOCK_SETTINGS,
   ENABLE_TIMER_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
 } from "./types";
@@ -23,7 +22,6 @@ const defaultSettings: SettingTypes = {
   enableStrictMode: true,
   enableWebBlocker: true,
   enableDarkTheme: isPreferredDark(),
-  isSettingLock: false,
   enableTimerAnimation: true,
   notificationProperty: "extra",
 };
@@ -103,16 +101,6 @@ export const settingReducer = (
       const newState = {
         ...state,
         enableWebBlocker: action.payload,
-      };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case LOCK_SETTINGS: {
-      const newState = {
-        ...state,
-        isSettingLock: action.payload,
       };
 
       saveToStorage("settings", newState);

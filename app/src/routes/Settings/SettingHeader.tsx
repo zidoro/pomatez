@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { restoreDefaultSettings, AppStateTypes, SettingTypes } from "store";
+import { restoreDefaultSettings } from "store";
+import { useDispatch } from "react-redux";
 
 import { Header } from "components";
 import { StyledHeaderButton } from "styles";
@@ -8,19 +8,13 @@ import { StyledHeaderButton } from "styles";
 const SettingHeader: React.FC = () => {
   const dispatch = useDispatch();
 
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
-
   const [success, setSuccess] = useState(false);
 
   const restoreSettings = useCallback(() => {
-    if (!settings.isSettingLock) {
-      setSuccess(true);
-      dispatch(restoreDefaultSettings());
-      setTimeout(() => setSuccess(false), 1000);
-    }
-  }, [dispatch, settings.isSettingLock]);
+    setSuccess(true);
+    dispatch(restoreDefaultSettings());
+    setTimeout(() => setSuccess(false), 1000);
+  }, [dispatch]);
 
   return (
     <Header heading="Settings">

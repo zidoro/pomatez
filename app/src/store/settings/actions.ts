@@ -9,7 +9,6 @@ import {
   RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
-  LOCK_SETTINGS,
   ENABLE_TIMER_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
 } from "./types";
@@ -71,15 +70,6 @@ export const setEnableWebBlocker = (
   return {
     type: ENABLE_WEB_BLOCKER,
     payload: enableWebBlocker,
-  };
-};
-
-export const lockSettings = (
-  isSettingLock: SettingTypes["isSettingLock"]
-): SettingActionTypes => {
-  return {
-    type: LOCK_SETTINGS,
-    payload: isSettingLock,
   };
 };
 

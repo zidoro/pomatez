@@ -17,7 +17,6 @@ import {
   StyledControl,
   StyledControlMain,
   StyledStrictIndicator,
-  StyledLockIndicator,
 } from "styles";
 import { SVG } from "components";
 
@@ -120,16 +119,10 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
         />
       </StyledControlMain>
 
-      {settings.enableStrictMode && !settings.isSettingLock && (
+      {settings.enableStrictMode && (
         <StyledStrictIndicator>
           <SVG name="hand" />
         </StyledStrictIndicator>
-      )}
-
-      {settings.isSettingLock && (
-        <StyledLockIndicator>
-          <SVG name="lock" />
-        </StyledLockIndicator>
       )}
     </StyledControl>
   );

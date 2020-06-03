@@ -8,7 +8,6 @@ export type SettingTypes = {
   enableStickyNotes: boolean;
   enableStrictMode: boolean;
   enableWebBlocker: boolean;
-  isSettingLock: boolean;
   enableTimerAnimation: boolean;
   notificationProperty: "none" | "normal" | "extra";
 };
@@ -21,8 +20,6 @@ export const ENABLE_DARK_THEME = `${settings} ENABLE_DARK_THEME`;
 
 export const ENABLE_STRICT_MODE = `${settings} ENABLE_STRICT_MODE`;
 export const ENABLE_WEB_BLOCKER = `${settings} ENABLE_WEB_BLOCKER`;
-
-export const LOCK_SETTINGS = `${settings} LOCK_SETTINGS`;
 
 export const ENABLE_TIMER_ANIMATION = `${settings} ENABLE_TIMER_ANIMATION`;
 export const SET_NOTIFICATION_PROPERTY = `${settings} SET_NOTIFICATION_PROPERTY`;
@@ -64,11 +61,6 @@ interface SetEnableWebBlocker {
   payload: SettingTypes["enableWebBlocker"];
 }
 
-interface LockSettings {
-  type: typeof LOCK_SETTINGS;
-  payload: SettingTypes["isSettingLock"];
-}
-
 interface SetEnableTimerAnimation {
   type: typeof ENABLE_TIMER_ANIMATION;
   payload: SettingTypes["enableTimerAnimation"];
@@ -87,6 +79,5 @@ export type SettingActionTypes =
   | SetEnableWebBlocker
   | SetEnableDarkTheme
   | TogglenotificationSoundOn
-  | LockSettings
   | SetEnableTimerAnimation
   | SetNotificationProperty;
