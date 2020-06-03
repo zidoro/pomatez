@@ -4,17 +4,17 @@ import ReactMarkdown from "react-markdown";
 
 type Props = {
   description?: string;
-  onDoubleClick?:
+  onClick?:
     | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
     | undefined;
 };
 
-const MDPreviewer: React.FC<Props> = ({ description, onDoubleClick }) => {
+const MDPreviewer: React.FC<Props> = ({ description, onClick }) => {
   return (
     <StyledDescriptionPreviewer
       className="md-previewer"
       hasValue={description != null}
-      onDoubleClick={onDoubleClick}
+      onClick={onClick}
     >
       <ReactMarkdown
         escapeHtml={false}

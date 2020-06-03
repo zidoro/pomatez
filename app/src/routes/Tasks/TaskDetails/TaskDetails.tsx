@@ -173,7 +173,11 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
                   <SubmitButton />
                   <CancelButton onClick={dontEditDescriptionCallback} />
 
-                  <StyledDescriptionFormatHelp href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
+                  <StyledDescriptionFormatHelp
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
+                  >
                     Formatting Help
                   </StyledDescriptionFormatHelp>
                 </>
@@ -182,7 +186,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
           ) : (
             <MDPreviewer
               description={description}
-              onDoubleClick={editDescriptionCallback}
+              onClick={editDescriptionCallback}
             />
           )}
         </StyledDescriptionWrappper>
