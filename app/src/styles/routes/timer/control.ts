@@ -166,22 +166,3 @@ export const StyledStrictIndicator = styled.div`
     fill: currentColor;
   }
 `;
-
-export const StyledLockIndicator = styled.div`
-  width: 3.2rem;
-  height: 3.2rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: var(--color-body-text);
-  border-radius: 50%;
-
-  & > svg {
-    width: 2rem;
-    height: 2rem;
-
-    fill: currentColor;
-  }
-`;

@@ -5,7 +5,6 @@ import {
   setEnableSpecialBreaks,
   setEnableStrictMode,
   AppStateTypes,
-  lockSettings,
   setEnableTimerAnimation,
   SettingTypes,
   setNotificationProperty,
@@ -30,58 +29,43 @@ const FeatureSection: React.FC = () => {
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onChange: useCallback(() => {
-        if (!settings.isSettingLock) {
-          dispatch(setAlwaysOnTop(!settings.alwaysOnTop));
-        }
-      }, [dispatch, settings.alwaysOnTop, settings.isSettingLock]),
+        dispatch(setAlwaysOnTop(!settings.alwaysOnTop));
+      }, [dispatch, settings.alwaysOnTop]),
     },
     {
       id: "special-breaks",
       label: "Special Breaks",
       checked: settings.enableSpecialBreaks,
       onChange: useCallback(() => {
-        if (!settings.isSettingLock) {
-          dispatch(setEnableSpecialBreaks(!settings.enableSpecialBreaks));
-        }
-      }, [dispatch, settings.enableSpecialBreaks, settings.isSettingLock]),
+        dispatch(setEnableSpecialBreaks(!settings.enableSpecialBreaks));
+      }, [dispatch, settings.enableSpecialBreaks]),
     },
     {
       id: "strict-mode",
       label: "Strict Mode",
       checked: settings.enableStrictMode,
       onChange: useCallback(() => {
-        if (!settings.isSettingLock) {
-          dispatch(setEnableStrictMode(!settings.enableStrictMode));
-        }
-      }, [dispatch, settings.enableStrictMode, settings.isSettingLock]),
+        dispatch(setEnableStrictMode(!settings.enableStrictMode));
+      }, [dispatch, settings.enableStrictMode]),
     },
     {
       id: "dark-theme",
       label: "Dark Theme",
       checked: isDarkMode,
       onChange: () => {
-        if (!settings.isSettingLock && toggleThemeAction) {
+        if (toggleThemeAction) {
           toggleThemeAction();
         }
       },
     },
-    {
-      id: "lock-settings",
-      label: "Lock Settings",
-      checked: settings.isSettingLock,
-      onChange: useCallback(() => {
-        dispatch(lockSettings(!settings.isSettingLock));
-      }, [dispatch, settings.isSettingLock]),
-    },
+
     {
       id: "timer-animation",
       label: "Timer Animation",
       checked: settings.enableTimerAnimation,
       onChange: useCallback(() => {
-        if (!settings.isSettingLock) {
-          dispatch(setEnableTimerAnimation(!settings.enableTimerAnimation));
-        }
-      }, [dispatch, settings.enableTimerAnimation, settings.isSettingLock]),
+        dispatch(setEnableTimerAnimation(!settings.enableTimerAnimation));
+      }, [dispatch, settings.enableTimerAnimation]),
     },
   ];
 
