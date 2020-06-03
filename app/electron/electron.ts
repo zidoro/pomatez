@@ -156,34 +156,30 @@ if (!onlySingleIntance) {
             break;
 
           case ACTIONS.FULL_SCREEN:
-            win.setSkipTaskbar(data.payload);
-            win.setFullScreen(data.payload);
-            win.setVisibleOnAllWorkspaces(data.payload);
+            const { isFullScreen, alwaysOnTop } = data.payload;
 
-            if (data.payload === false) {
-              if (win.isFullScreen()) {
-                win.setFullScreen(false);
+            if (isFullScreen) {
+              if (!win.isVisible()) {
+                win.show();
+                win.focus();
               }
-            } else {
-              if (!win.isFullScreen()) {
-                win.setFullScreen(true);
+
+              if (!alwaysOnTop) {
+                win.setAlwaysOnTop(true, "screen-saver");
               }
-            }
 
-            if (!win.isVisible()) {
-              win.show();
-              win.focus();
-            }
+              win.setSkipTaskbar(true);
+              win.setFullScreen(true);
+              win.setVisibleOnAllWorkspaces(true);
 
-            if (!win.isAlwaysOnTop()) {
-              win.setAlwaysOnTop(data.payload, "screen-saver");
-            } else {
-              win.setAlwaysOnTop(true, "screen-saver");
-            }
-
-            if (win.isFullScreen()) {
               globalShortcut.unregister("Alt+Shift+H");
             } else {
+              win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+
+              win.setSkipTaskbar(false);
+              win.setFullScreen(false);
+              win.setVisibleOnAllWorkspaces(false);
+
               globalShortcut.register("Alt+Shift+H", () => {
                 win?.hide();
               });

@@ -134,33 +134,25 @@ else {
                         win.hide();
                         break;
                     case helpers_1.ACTIONS.FULL_SCREEN:
-                        win.setSkipTaskbar(data.payload);
-                        win.setFullScreen(data.payload);
-                        win.setVisibleOnAllWorkspaces(data.payload);
-                        if (data.payload === false) {
-                            if (win.isFullScreen()) {
-                                win.setFullScreen(false);
+                        var _a = data.payload, isFullScreen = _a.isFullScreen, alwaysOnTop = _a.alwaysOnTop;
+                        if (isFullScreen) {
+                            if (!win.isVisible()) {
+                                win.show();
+                                win.focus();
                             }
-                        }
-                        else {
-                            if (!win.isFullScreen()) {
-                                win.setFullScreen(true);
+                            if (!alwaysOnTop) {
+                                win.setAlwaysOnTop(true, "screen-saver");
                             }
-                        }
-                        if (!win.isVisible()) {
-                            win.show();
-                            win.focus();
-                        }
-                        if (!win.isAlwaysOnTop()) {
-                            win.setAlwaysOnTop(data.payload, "screen-saver");
-                        }
-                        else {
-                            win.setAlwaysOnTop(true, "screen-saver");
-                        }
-                        if (win.isFullScreen()) {
+                            win.setSkipTaskbar(true);
+                            win.setFullScreen(true);
+                            win.setVisibleOnAllWorkspaces(true);
                             electron_1.globalShortcut.unregister("Alt+Shift+H");
                         }
                         else {
+                            win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+                            win.setSkipTaskbar(false);
+                            win.setFullScreen(false);
+                            win.setVisibleOnAllWorkspaces(false);
                             electron_1.globalShortcut.register("Alt+Shift+H", function () {
                                 win === null || win === void 0 ? void 0 : win.hide();
                             });

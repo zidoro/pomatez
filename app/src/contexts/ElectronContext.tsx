@@ -42,15 +42,18 @@ const ElectronProvider: React.FC = ({ children }) => {
   );
 
   const shouldFullscreenCallback = useCallback(
-    (isFullscreen: boolean) => {
+    (isFullScreen: boolean) => {
       if (isElectron()) {
         electron.send(CHANNELS.TO_MAIN, {
           type: ACTIONS.FULL_SCREEN,
-          payload: isFullscreen,
+          payload: {
+            isFullScreen,
+            alwaysOnTop: settings.alwaysOnTop,
+          },
         });
       }
     },
-    [electron]
+    [electron, settings.alwaysOnTop]
   );
 
   const onMinimizeCallback = useCallback(() => {
