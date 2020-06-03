@@ -2,7 +2,11 @@ import styled, { css } from "styled-components/macro";
 import { StyledButton, StyledButtonPrimary } from "styles";
 
 export const StyledCardText = styled.p<{ done?: boolean }>`
+  min-height: 2.4rem;
+  margin-right: 5px;
+
   display: flex;
+  align-items: center;
 
   ${(p) =>
     p.done &&
@@ -39,10 +43,27 @@ const ButtonCardStyles = css`
   }
 `;
 
+export const StyledCardActionWrapper = styled.div`
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 export const StyledCardEditButton = styled(StyledButton)`
   ${ButtonCardStyles};
   color: transparent;
   background-color: transparent;
+`;
+
+export const StyledCardDeleteButton = styled(StyledButton)`
+  ${ButtonCardStyles};
+  color: transparent;
+  background-color: transparent;
+
+  &:hover {
+    color: var(--color-pink) !important;
+  }
 `;
 
 export const StyledCardSaveButton = styled(StyledButtonPrimary)`
@@ -64,10 +85,9 @@ export const StyledCard = styled.div<CardProps>`
   padding-left: 1rem;
   margin-bottom: 0.8rem;
 
-  display: grid;
-  column-gap: 0.5rem;
-  align-items: center;
-  grid-template-columns: 1fr max-content;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 
   border-radius: 3px;
   border: 1px solid var(--color-border-input-primary);
@@ -96,7 +116,7 @@ export const StyledCard = styled.div<CardProps>`
   &:active {
     background-color: var(--color-bg-task-card-hover);
 
-    ${StyledCardEditButton} {
+    ${StyledCardEditButton}, ${StyledCardDeleteButton} {
       color: var(--color-body-text);
     }
   }
