@@ -28,7 +28,7 @@ type ControlProps = { type?: TimerTypes["timerType"] };
 
 export const StyledControl = styled.div<ControlProps>`
   width: 100%;
-  height: 100%;
+  height: 9.2rem;
 
   padding: 0.8rem 1.6rem;
 
