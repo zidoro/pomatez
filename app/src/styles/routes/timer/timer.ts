@@ -8,7 +8,7 @@ export const StyledTimer = styled.main`
   padding-top: 1.2rem;
 
   display: grid;
-  grid-template-rows: 1fr 5.6rem 9.2rem;
+  grid-template-rows: 1fr;
   align-items: end;
 
   animation: enterFromBottom 160ms ease;

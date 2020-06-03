@@ -42,21 +42,50 @@ const TimerNote: React.FC = () => {
   const [showOptions, setShowOptions] = useTargetOutside({ ref: optionRef });
 
   const setTaskCardDoneCallback = () => {
-    if (isObjectEmpty(priorityCard)) return;
-    dispatch(setTaskCardDone(priorityList?._id, priorityCard?._id));
+    if (!isObjectEmpty(priorityCard)) {
+      dispatch(setTaskCardDone(priorityList?._id, priorityCard?._id));
+    }
     setShowOptions(false);
   };
 
   const skipTaskCardCallback = () => {
-    if (isObjectEmpty(priorityCard)) return;
-    dispatch(skipTaskCard(priorityList?._id));
+    if (!isObjectEmpty(priorityCard)) {
+      dispatch(skipTaskCard(priorityList?._id));
+    }
     setShowOptions(false);
   };
 
   const deleteTaskCardCallback = () => {
-    if (isObjectEmpty(priorityCard)) return;
-    dispatch(removeTaskCard(priorityList?._id, priorityCard?._id));
+    if (!isObjectEmpty(priorityCard)) {
+      dispatch(removeTaskCard(priorityList?._id, priorityCard?._id));
+    }
     setShowOptions(false);
+  };
+
+  const getTaskNoteHeading = () => {
+    if (isObjectEmpty(priorityList)) {
+      return "No priority list has been created yet.";
+    } else {
+      if (priorityCard?.text) {
+        return priorityCard?.text.truncate(36);
+      }
+      return "No task item on your priority list.";
+    }
+  };
+
+  const getTaskNoteDescription = () => {
+    if (isObjectEmpty(priorityList)) {
+      return "Create a priority list and add task items on it.";
+    } else {
+      if (isObjectEmpty(priorityCard)) {
+        return "Add at least one item on your priority list.";
+      } else {
+        if (priorityCard?.description) {
+          return priorityCard?.description.truncate(43);
+        }
+        return "There's no description yet added on this card.";
+      }
+    }
   };
 
   return (
@@ -98,14 +127,10 @@ const TimerNote: React.FC = () => {
 
         <StyledTimerNoteHeader>
           <StyledTimerNoteHeading>
-            {priorityCard?.text
-              ? priorityCard?.text.truncate(36)
-              : "No card inside of your priority list"}
+            {getTaskNoteHeading()}
           </StyledTimerNoteHeading>
           <StyledTimerNoteDescription>
-            {priorityCard?.description
-              ? priorityCard?.description.truncate(43)
-              : "No description yet. Add by clicking the card"}
+            {getTaskNoteDescription()}
           </StyledTimerNoteDescription>
         </StyledTimerNoteHeader>
       </StyledTimerNoteWrapper>
