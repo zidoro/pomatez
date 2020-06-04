@@ -12,13 +12,11 @@ export type TaskTypes = {
   title: string;
   cards: CardTypes[];
   priority: boolean;
-  done: boolean;
 };
 
 export const ADD_TASK_LIST = `${tasks} ADD_TASK_LIST`;
 export const REMOVE_TASK_LIST = `${tasks} REMOVE_TASK_LIST`;
 export const SET_TASK_LIST_PRIORITY = `${tasks} SET_TASK_LIST_PRIORITY`;
-export const SET_TASK_LIST_DONE = `${tasks} SET_TASK_LIST_DONE`;
 
 export const EDIT_TASK_TITLE = `${tasks} EDIT_TASK_TITLE`;
 
@@ -45,11 +43,6 @@ interface RemoveTaskList {
 
 interface SetTaskListPriority {
   type: typeof SET_TASK_LIST_PRIORITY;
-  payload: any;
-}
-
-interface SetTaskListDone {
-  type: typeof SET_TASK_LIST_DONE;
   payload: any;
 }
 
@@ -103,6 +96,5 @@ export type TasksActionTypes =
   | EditTaskCard
   | RemoveTaskCard
   | SetTaskListPriority
-  | SetTaskListDone
   | SetTaskCardDone
   | SkipTaskCard;

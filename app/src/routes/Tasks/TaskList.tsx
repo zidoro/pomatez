@@ -8,7 +8,6 @@ import {
   editTaskCardText,
   removeTaskList,
   setTaskListPriority,
-  setTaskListDone,
   removeTaskCard,
 } from "store";
 import { StyledTaskSectionItem, StyledCardWrapper } from "styles";
@@ -20,7 +19,6 @@ import TaskCard from "./TaskCard";
 
 type Props = {
   priority: boolean;
-  done: boolean;
   listId: string;
   title: string;
   cards: TaskTypes["cards"];
@@ -29,7 +27,6 @@ type Props = {
 
 const TaskList: React.FC<Props> = ({
   priority,
-  done,
   title,
   cards,
   listId,
@@ -59,10 +56,6 @@ const TaskList: React.FC<Props> = ({
     dispatch(setTaskListPriority(listId));
   };
 
-  const onSetListDoneAction = () => {
-    dispatch(setTaskListDone(listId));
-  };
-
   return (
     <>
       <Draggable draggableId={listId} index={index}>
@@ -79,14 +72,12 @@ const TaskList: React.FC<Props> = ({
                   isDragging={snapshot.isDragging}
                   ref={dropProvided.innerRef}
                   priority={priority}
-                  done={done}
                 >
                   <TaskHeader
                     title={title}
                     onEditTitle={onEditListTitle}
                     onRemoveList={onRemoveListAction}
                     onMakeListPriority={onSetListPriorityAction}
-                    onMakeListDone={onSetListDoneAction}
                   />
 
                   <StyledCardWrapper>

@@ -10,13 +10,12 @@ type Props = {
 const TaskInnerList: React.FC<Props> = ({ tasks }) => {
   return (
     <StyledTaskSection>
-      {tasks.map(({ _id, title, cards, priority, done }, index) => (
+      {tasks.map(({ _id, title, cards, priority }, index) => (
         <TaskList
           listId={_id}
           title={title}
           cards={cards}
           priority={priority}
-          done={done}
           key={_id}
           index={index}
         />

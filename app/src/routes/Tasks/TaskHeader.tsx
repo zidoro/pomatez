@@ -9,7 +9,6 @@ import {
   StyledPopperHeader,
   StyledOptionDelete,
   StyledOptionPriority,
-  StyledOptionDone,
 } from "styles";
 import { SVG } from "components";
 import { useTargetOutside } from "hooks";
@@ -20,7 +19,6 @@ type Props = {
   onEditTitle?: (title: string) => void;
   onRemoveList?: () => void;
   onMakeListPriority?: () => void;
-  onMakeListDone?: () => void;
 };
 
 const TaskHeader: React.FC<Props> = ({
@@ -28,7 +26,6 @@ const TaskHeader: React.FC<Props> = ({
   onEditTitle,
   onRemoveList,
   onMakeListPriority,
-  onMakeListDone,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const optionRef = useRef<HTMLDivElement>(null);
@@ -106,15 +103,6 @@ const TaskHeader: React.FC<Props> = ({
             >
               Priority List
             </StyledOptionPriority>
-
-            <StyledOptionDone
-              onClick={() => {
-                if (onMakeListDone) onMakeListDone();
-                setShowOptions(false);
-              }}
-            >
-              Done List
-            </StyledOptionDone>
 
             <StyledOptionDelete
               onClick={() => {

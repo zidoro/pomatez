@@ -11,7 +11,6 @@ import {
   REMOVE_TASK_CARD,
   REMOVE_TASK_LIST,
   SET_TASK_LIST_PRIORITY,
-  SET_TASK_LIST_DONE,
   SET_TASK_CARD_DONE,
   SKIP_TASK_CARD,
 } from "./types";
@@ -35,13 +34,6 @@ export const setTaskListPriority = (
 ): TasksActionTypes => {
   return {
     type: SET_TASK_LIST_PRIORITY,
-    payload: { listId },
-  };
-};
-
-export const setTaskListDone = (listId: TaskTypes["_id"]): TasksActionTypes => {
-  return {
-    type: SET_TASK_LIST_DONE,
     payload: { listId },
   };
 };
