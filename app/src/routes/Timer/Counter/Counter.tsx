@@ -45,7 +45,8 @@ const Counter: React.FC = () => {
 
   useEffect(() => {
     if (shouldFullscreenCallback) {
-      shouldFullscreenCallback(shouldFullscreen());
+      const isFullScreen = shouldFullscreen();
+      shouldFullscreenCallback(isFullScreen);
     }
   }, [shouldFullscreen, shouldFullscreenCallback]);
 
