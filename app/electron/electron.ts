@@ -75,20 +75,19 @@ if (!onlySingleIntance) {
       icon: trayIconDark,
       template: [
         {
-          label: "Hide",
-          accelerator: "Alt+Shift+H",
+          label: "Show",
           click: () => {
             if (!win?.isVisible()) {
-              win?.hide();
+              win?.show();
             }
           },
         },
         {
-          label: "Show",
-          accelerator: "Alt+Shift+S",
+          label: "Hide",
           click: () => {
-            if (!win?.isVisible()) {
-              win?.show();
+            if (win?.isFullScreen()) return;
+            if (win?.isVisible()) {
+              win?.hide();
             }
           },
         },
@@ -103,7 +102,9 @@ if (!onlySingleIntance) {
       if (!win?.isVisible()) {
         win?.show();
       } else {
-        win?.hide();
+        if (!win?.isFullScreen()) {
+          win?.hide();
+        }
       }
     });
 
@@ -217,3 +218,5 @@ app.on("will-quit", () => {
 
 app.setLoginItemSettings({ openAtLogin: true });
 app.setAppUserModelId("electron.app.PRODUCTIVITY_TIMER");
+
+app.allowRendererProcessReuse = true;
