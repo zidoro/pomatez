@@ -26,14 +26,14 @@ export const StyledTimer = styled.main`
   }
 `;
 
-export const StyledTimerNoteContainer = styled.div`
+export const StyledPriorityCardContainer = styled.div`
   width: 100%;
   height: 5.6rem;
 
   padding: 0 1.6rem;
 `;
 
-export const StyledTimerNoteOption = styled.button`
+export const StyledPriorityCardOption = styled.button`
   position: absolute;
   top: 0;
   right: 0;
@@ -64,7 +64,7 @@ export const StyledTimerNoteOption = styled.button`
   }
 `;
 
-export const StyledTimerNoteWrapper = styled.div`
+export const StyledPriorityCardWrapper = styled.div`
   position: relative;
 
   width: 100%;
@@ -82,14 +82,14 @@ export const StyledTimerNoteWrapper = styled.div`
   background-color: var(--color-bg-secondary);
 `;
 
-export const StyledTimerNoteHeader = styled.header``;
+export const StyledPriorityCardHeader = styled.header``;
 
-export const StyledTimerNoteHeading = styled.h4`
+export const StyledPriorityCardHeading = styled.h4`
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--color-heading-text);
 `;
 
-export const StyledTimerNoteDescription = styled.p`
+export const StyledPriorityCardDescription = styled.p`
   color: var(--color-body-text);
 `;

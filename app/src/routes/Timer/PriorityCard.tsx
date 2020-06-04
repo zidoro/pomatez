@@ -9,12 +9,12 @@ import {
 } from "store";
 
 import {
-  StyledTimerNoteContainer,
-  StyledTimerNoteWrapper,
-  StyledTimerNoteHeading,
-  StyledTimerNoteDescription,
-  StyledTimerNoteHeader,
-  StyledTimerNoteOption,
+  StyledPriorityCardContainer,
+  StyledPriorityCardWrapper,
+  StyledPriorityCardHeading,
+  StyledPriorityCardDescription,
+  StyledPriorityCardHeader,
+  StyledPriorityCardOption,
   StyledPopperContent,
   StyledPopperHeader,
   StyledOptionList,
@@ -26,7 +26,7 @@ import { SVG } from "components";
 import { useTargetOutside } from "hooks";
 import { isObjectEmpty } from "utils";
 
-const TimerNote: React.FC = () => {
+const PriorityCard: React.FC = () => {
   const tasks: TaskTypes[] = useSelector((state: AppStateTypes) => state.tasks);
 
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ const TimerNote: React.FC = () => {
       return "No priority list has been created yet.";
     } else {
       if (priorityCard?.text) {
-        return priorityCard?.text.truncate(36);
+        return priorityCard?.text.truncate(34);
       }
       return "No task item on your priority list.";
     }
@@ -89,11 +89,11 @@ const TimerNote: React.FC = () => {
   };
 
   return (
-    <StyledTimerNoteContainer>
-      <StyledTimerNoteWrapper>
-        <StyledTimerNoteOption onClick={() => setShowOptions(true)}>
+    <StyledPriorityCardContainer>
+      <StyledPriorityCardWrapper>
+        <StyledPriorityCardOption onClick={() => setShowOptions(true)}>
           <SVG name="option-y" />
-        </StyledTimerNoteOption>
+        </StyledPriorityCardOption>
 
         {showOptions && (
           <StyledPopperContent
@@ -125,17 +125,17 @@ const TimerNote: React.FC = () => {
           </StyledPopperContent>
         )}
 
-        <StyledTimerNoteHeader>
-          <StyledTimerNoteHeading>
+        <StyledPriorityCardHeader>
+          <StyledPriorityCardHeading>
             {getTaskNoteHeading()}
-          </StyledTimerNoteHeading>
-          <StyledTimerNoteDescription>
+          </StyledPriorityCardHeading>
+          <StyledPriorityCardDescription>
             {getTaskNoteDescription()}
-          </StyledTimerNoteDescription>
-        </StyledTimerNoteHeader>
-      </StyledTimerNoteWrapper>
-    </StyledTimerNoteContainer>
+          </StyledPriorityCardDescription>
+        </StyledPriorityCardHeader>
+      </StyledPriorityCardWrapper>
+    </StyledPriorityCardContainer>
   );
 };
 
-export default React.memo(TimerNote);
+export default React.memo(PriorityCard);
