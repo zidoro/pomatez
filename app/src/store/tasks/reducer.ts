@@ -12,7 +12,6 @@ import {
   REMOVE_TASK_CARD,
   REMOVE_TASK_LIST,
   SET_TASK_LIST_PRIORITY,
-  SET_TASK_LIST_DONE,
   CardTypes,
   SET_TASK_CARD_DONE,
   SKIP_TASK_CARD,
@@ -34,7 +33,6 @@ export const tasksReducer = (
         title: action.payload.trim().toUpperCase(),
         cards: [],
         priority: isPriority,
-        done: false,
       };
 
       const newState = [...state, newList];
@@ -70,14 +68,6 @@ export const tasksReducer = (
     case SET_TASK_LIST_PRIORITY: {
       const newState = state.map((list) => {
         if (list._id === action.payload.listId) {
-          if (list.done) {
-            return {
-              ...list,
-              priority: true,
-              done: false,
-            };
-          }
-
           return { ...list, priority: true };
         }
 
@@ -85,22 +75,6 @@ export const tasksReducer = (
       });
 
       newState.sort((a, b) => (a.priority > b.priority ? -1 : 1));
-
-      saveToStorage("tasks", newState);
-
-      return newState;
-    }
-    case SET_TASK_LIST_DONE: {
-      const newState = state.map((list) => {
-        if (list._id === action.payload.listId) {
-          return {
-            ...list,
-            priority: false,
-            done: true,
-          };
-        }
-        return { ...list, done: false };
-      });
 
       saveToStorage("tasks", newState);
 

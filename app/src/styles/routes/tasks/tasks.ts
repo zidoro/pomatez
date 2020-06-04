@@ -43,7 +43,6 @@ export const StyledTaskSection = styled.section`
 type SectionTypes = {
   isDragging?: boolean;
   priority?: boolean;
-  done?: boolean;
 };
 
 export const StyledTaskSectionItem = styled.div<SectionTypes>`
@@ -55,10 +54,7 @@ export const StyledTaskSectionItem = styled.div<SectionTypes>`
 
   border-radius: 1px;
   border-bottom: 2px solid
-    ${(p) =>
-      (p.priority && "var(--color-yellow)") ||
-      (p.done && "var(--color-green)") ||
-      "var(--color-primary)"};
+    ${(p) => (p.priority && "var(--color-yellow)") || "var(--color-primary)"};
 
   background-color: var(--color-bg-task-list);
   box-shadow: 0 0px 0px var(--color-shadow-primary);
