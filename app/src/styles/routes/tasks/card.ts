@@ -20,6 +20,9 @@ export const StyledCardTextArea = styled.textarea`
   resize: none;
   border: none;
   background-color: transparent;
+
+  flex-grow: 2;
+  margin-right: 5px;
 `;
 
 const ButtonCardStyles = css`
@@ -44,10 +47,11 @@ const ButtonCardStyles = css`
 `;
 
 export const StyledCardActionWrapper = styled.div`
+  width: max-content;
   height: 100%;
 
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
 `;
 
 export const StyledCardEditButton = styled(StyledButton)`
