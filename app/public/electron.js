@@ -62,20 +62,20 @@ else {
             icon: trayIconDark,
             template: [
                 {
-                    label: "Hide",
-                    accelerator: "Alt+Shift+H",
+                    label: "Show",
                     click: function () {
                         if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
-                            win === null || win === void 0 ? void 0 : win.hide();
+                            win === null || win === void 0 ? void 0 : win.show();
                         }
                     },
                 },
                 {
-                    label: "Show",
-                    accelerator: "Alt+Shift+S",
+                    label: "",
                     click: function () {
-                        if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
-                            win === null || win === void 0 ? void 0 : win.show();
+                        if (win === null || win === void 0 ? void 0 : win.isFullScreen())
+                            return;
+                        if (win === null || win === void 0 ? void 0 : win.isVisible()) {
+                            win === null || win === void 0 ? void 0 : win.hide();
                         }
                     },
                 },
@@ -90,7 +90,9 @@ else {
                 win === null || win === void 0 ? void 0 : win.show();
             }
             else {
-                win === null || win === void 0 ? void 0 : win.hide();
+                if (!(win === null || win === void 0 ? void 0 : win.isFullScreen())) {
+                    win === null || win === void 0 ? void 0 : win.hide();
+                }
             }
         });
         if (win && onProduction) {
@@ -184,3 +186,4 @@ electron_1.app.on("will-quit", function () {
 });
 electron_1.app.setLoginItemSettings({ openAtLogin: true });
 electron_1.app.setAppUserModelId("electron.app.PRODUCTIVITY_TIMER");
+electron_1.app.allowRendererProcessReuse = true;
