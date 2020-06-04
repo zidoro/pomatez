@@ -162,9 +162,6 @@ if (!onlySingleIntance) {
               if (!win.isVisible()) {
                 win.show();
                 win.focus();
-              }
-
-              if (!alwaysOnTop) {
                 win.setAlwaysOnTop(true, "screen-saver");
               }
 
