@@ -96,7 +96,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/uuid": "^8.0.0",
-    "electron": "^9.0.2",
+    "electron": "^8.2.5",
     "electron-builder": "^22.6.1",
     "say": "^0.16.0",
     "semantic-release": "^17.0.7",
