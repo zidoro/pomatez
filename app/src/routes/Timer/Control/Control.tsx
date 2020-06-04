@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   AppStateTypes,
@@ -17,8 +17,11 @@ import {
   StyledControl,
   StyledControlMain,
   StyledStrictIndicator,
+  StyledStrictSnackbar,
 } from "styles";
 import { SVG } from "components";
+
+import WarningBell from "assets/audios/warning-bell.wav";
 
 import Sessions from "./Sessions";
 import ResetButton from "./ResetButton";
@@ -31,6 +34,8 @@ type Props = {
 };
 
 const Control: React.FC<Props> = ({ resetTimerAction }) => {
+  const warnSound = new Audio(WarningBell);
+
   const { timer, config } = useSelector((state: AppStateTypes) => ({
     timer: state.timer,
     config: state.config,
@@ -42,22 +47,51 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 
   const dispatch = useDispatch();
 
+  const [warn, setWarn] = useState(false);
+
+  const activateWarning = useCallback(() => {
+    setWarn(true);
+    warnSound.play();
+
+    const timeout = setTimeout(() => {
+      setWarn(false);
+    }, 3000);
+
+    if (warn) {
+      clearTimeout(timeout);
+    }
+  }, [warn, warnSound]);
+
   const onResetCallback = useCallback(() => {
-    if (timer.playing && settings.enableStrictMode) return;
+    if (timer.playing && settings.enableStrictMode) {
+      activateWarning();
+      return;
+    }
     resetTimerAction();
-  }, [resetTimerAction, timer.playing, settings.enableStrictMode]);
+  }, [
+    resetTimerAction,
+    activateWarning,
+    timer.playing,
+    settings.enableStrictMode,
+  ]);
 
   const onPlayCallback = useCallback(() => {
-    if (timer.playing && settings.enableStrictMode) return;
+    if (timer.playing && settings.enableStrictMode) {
+      activateWarning();
+      return;
+    }
     dispatch(setPlay());
-  }, [dispatch, timer.playing, settings.enableStrictMode]);
+  }, [dispatch, activateWarning, timer.playing, settings.enableStrictMode]);
 
   const onNotifacationSoundCallback = useCallback(() => {
     dispatch(togglenotificationSoundOn());
   }, [dispatch]);
 
   const onSkipAction = useCallback(() => {
-    if (timer.playing && settings.enableStrictMode) return;
+    if (timer.playing && settings.enableStrictMode) {
+      activateWarning();
+      return;
+    }
 
     switch (timer.timerType) {
       case STAY_FOCUS:
@@ -93,6 +127,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     timer.timerType,
     settings.enableStrictMode,
     config.sessionRounds,
+    activateWarning,
   ]);
 
   const onResetSessionCallback = useCallback(() => {
@@ -120,8 +155,12 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
       </StyledControlMain>
 
       {settings.enableStrictMode && (
-        <StyledStrictIndicator>
-          <SVG name="hand" />
+        <StyledStrictIndicator warn={warn}>
+          <SVG name="alert" />
+
+          <StyledStrictSnackbar warn={warn}>
+            You are currently on <span>Strict Mode!</span>
+          </StyledStrictSnackbar>
         </StyledStrictIndicator>
       )}
     </StyledControl>

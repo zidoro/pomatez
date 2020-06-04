@@ -92,7 +92,7 @@ const SpecialField: React.FC<Props> = ({
         setSuccess(true);
         onFieldSubmit(values);
 
-        setTimeout(() => setSuccess(false), 1000);
+        setTimeout(() => setSuccess(false), 2000);
       }
     },
     [onFieldSubmit, values]
@@ -111,7 +111,7 @@ const SpecialField: React.FC<Props> = ({
         setValues(newValues);
         onFieldSubmit(newValues);
 
-        setTimeout(() => setSuccess(false), 1000);
+        setTimeout(() => setSuccess(false), 2000);
       }
     },
     [onFieldSubmit, disabled]
