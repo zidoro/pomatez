@@ -23,10 +23,9 @@ import {
   CloseSVG,
   FastFoodSVG,
   RefreshSVG,
-  LockSVG,
-  HandSVG,
   ChevronDownSVG,
   OptionYSVG,
+  AlertSVG,
 } from "assets/icons";
 
 export type SVGTypes = {
@@ -55,8 +54,7 @@ export type SVGTypes = {
     | "close"
     | "fast-food"
     | "refresh"
-    | "lock"
-    | "hand"
+    | "alert"
     | "chevron-down";
 };
 
@@ -110,10 +108,8 @@ const SVG: React.FC<SVGTypes> = ({ name }) => {
       return <FastFoodSVG />;
     case "refresh":
       return <RefreshSVG />;
-    case "lock":
-      return <LockSVG />;
-    case "hand":
-      return <HandSVG />;
+    case "alert":
+      return <AlertSVG />;
     case "chevron-down":
       return <ChevronDownSVG />;
     default:

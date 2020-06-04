@@ -30,8 +30,6 @@ export { ReactComponent as TrashSVG } from "./trash.svg";
 export { ReactComponent as CloseSVG } from "./close.svg";
 
 export { ReactComponent as RefreshSVG } from "./refresh.svg";
-export { ReactComponent as LockSVG } from "./lock.svg";
-
-export { ReactComponent as HandSVG } from "./hand.svg";
+export { ReactComponent as AlertSVG } from "./alert.svg";
 
 export { ReactComponent as ChevronDownSVG } from "./chevron-down.svg";

@@ -183,8 +183,8 @@ export const StyledSpecialField = styled.div<SpecialBreakProps>`
       box-shadow: 0 0 0 6px rgba(var(--color-green-rgb), 0);
     }
     100% {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.16);
+      border-color: var(--color-border-primary);
+      box-shadow: 0 0 0 2px rgba(var(--color-green-rgb), 0);
     }
   }
 `;

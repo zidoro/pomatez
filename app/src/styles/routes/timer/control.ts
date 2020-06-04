@@ -146,23 +146,89 @@ export const StyledVolumeButton = styled.button`
   ${ControlButton};
 `;
 
-export const StyledStrictIndicator = styled.div`
-  width: 3.2rem;
-  height: 3.2rem;
+export const StyledStrictIndicator = styled.div<{ warn?: boolean }>`
+  width: 2.8rem;
+  height: 2.8rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-top: 4px;
-
   color: var(--color-body-text);
+  background-color: var(--color-bg-secondary);
+
   border-radius: 50%;
+  border: 1px solid var(--color-border-primary);
+  box-shadow: 0 0 0 0 rgba(var(--color-yellow-rgb), 0.16);
+
+  position: relative;
+
+  ${(p) =>
+    p.warn &&
+    css`
+      animation: warning 1s ease;
+    `}
 
   & > svg {
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
 
-    fill: currentColor;
+  @keyframes warning {
+    0% {
+      color: var(--color-yellow);
+      border-color: var(--color-yellow);
+      box-shadow: 0 0 0 0 rgba(var(--color-yellow-rgb), 0.24);
+    }
+    50% {
+      color: var(--color-yellow);
+      border-color: var(--color-yellow);
+      box-shadow: 0 0 0 12px rgba(var(--color-yellow-rgb), 0);
+    }
+    100% {
+      color: var(--color-body-text);
+      border-color: var(--color-border-primary);
+      box-shadow: 0 0 0 0 rgba(var(--color-yellow-rgb), 0);
+    }
+  }
+`;
+
+export const StyledStrictSnackbar = styled.div<{ warn?: boolean }>`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  margin-top: -57%;
+  margin-right: 6.8rem;
+
+  width: 16rem;
+  height: 5.6rem;
+
+  padding: 0.7rem 1.2rem;
+
+  text-align: center;
+
+  color: var(--color-body-text);
+
+  border-radius: 10rem;
+  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-primary);
+  transition: ${themes.transition};
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6rem);
+
+  ${(p) =>
+    p.warn &&
+    css`
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    `}
+
+  & > span {
+    font-weight: 500;
+    color: var(--color-yellow);
   }
 `;
