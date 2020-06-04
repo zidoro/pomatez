@@ -4,7 +4,7 @@ import { CounterContext } from "contexts";
 import { StyledTimer } from "styles";
 
 import Counter from "./Counter";
-import TimerNote from "./TimerNote";
+import PriorityCard from "./PriorityCard";
 import Control from "./Control";
 
 type Props = {} & RouteComponentProps;
@@ -19,7 +19,7 @@ const Timer: React.FC<Props> = () => {
   return (
     <StyledTimer>
       <Counter />
-      <TimerNote />
+      <PriorityCard />
       <Control resetTimerAction={onResetCallback} />
     </StyledTimer>
   );
