@@ -70,7 +70,7 @@ else {
                     },
                 },
                 {
-                    label: "",
+                    label: "Hide",
                     click: function () {
                         if (win === null || win === void 0 ? void 0 : win.isFullScreen())
                             return;
