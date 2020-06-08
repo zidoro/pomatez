@@ -7,7 +7,7 @@
 <h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Wonderful opensource app that will help boost your productivity
+  Wonderful open source app that will help boost your productivity
    <br>
   <br>
   <a href="#overview">Overview</a>
