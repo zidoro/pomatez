@@ -7,7 +7,7 @@
 <h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Wonderful app that will help boost your productivity
+  Wonderful opensource app that will help boost your productivity
    <br>
   <br>
   <a href="#overview">Overview</a>
@@ -32,7 +32,7 @@
 
 ## Overview
 
-This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) added with some features that might help you a lot.
+This app is based on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) added some features that might help users a lot.
 
 **Useful Blogs About Pomodoro Technique**:
 
@@ -46,7 +46,7 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
 - Always On Top
 
-  > It make the app always on top of all other apps running on your Operating System. `( default: disabled )`
+  > It make the app always on top of all other apps running on users Operating System. `( default: disabled )`
 
 - Notifications
 
@@ -56,11 +56,11 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
   1. **NONE** - No notification will appear.
   2. **NORMAL** - Necessary notification will only appear.
-  3. **EXTRA** - `( default )` Warn you _30 seconds_ before your _WORK TIME FINISH_, _60 seconds_ before your _SHORT BREAK FINISH_, _LONG BREAK FINISH_ and _SPECIAL BREAK FINISH_.
+  3. **EXTRA** - `( default )` Warn users _30 seconds_ before _WORK TIME FINISH_, _60 seconds_ before _SHORT BREAK FINISH_, _LONG BREAK FINISH_ and _SPECIAL BREAK FINISH_.
 
 - Special Breaks
 
-  > Allows you to set some special time when you really need to take a break.
+  > Allows users to set some special time when they really need to take a break.
 
   > **Example**: Lunch Break, Dinner Break and etc... `( default: enabled )`
 
@@ -68,25 +68,21 @@ This app is base on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_
 
   > **NOTE**: Full Screen On Break feature of `version 1` is being moved here due to some request of users.
 
-  > If **Enabled**: It will strictly follows what you had set on your configuration and it will make every break fullscreen so that you will force to take a break. `( default: enabled )`
+  > If **Enabled**: It will strictly follows what users had set on thier configuration and it will make every break fullscreen so that users will force to take a break. `( default: enabled )`
 
 - Dark Theme
 
-  > Enable to use `Dark Mode` version of the app to reduce strain. `( default: depends on your operating system prefered color scheme )`
-
-- Lock Settings
-
-  > If **Enabled**: Your settings that you had set will be locked. `( default: disabled )`
+  > Enable to use `Dark Mode` version of the app to reduce strain. `( default: depends on users operating system prefered color scheme )`
 
 - Timer Animation
 
-  > Allows you to toggle timer progress animation if you laptop / pc has a low specs and experiencing `High CPU Usage`.
+  > Allows users to toggle timer progress animation if their laptop / pc has a low specs and experiencing `High CPU Usage`.
 
   > If **Enabled**: It will reduce CPU Usage of the app up to 99% and to the least of its original usage.
 
 - Built-in Task List
 
-  > Allows you to create a list of task that you want to accomplish.
+  > Allows users to create a list of task that they want to accomplish.
 
 ## Road Map
 
@@ -130,11 +126,12 @@ yarn build:linux
 
 Available for Window, Mac, and Linux.
 
+Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases).
+
 > For linux users. You can directly install it from SnapStore.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases).
 
 ## License
 
