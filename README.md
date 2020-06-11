@@ -89,7 +89,8 @@ This app is based on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro
 - Add web blocker feature.
 - Add option to switch to native titlebar.
 - Create official website that includes documentation.
-- Add productivity report requested. Feature request mentioned here [#68](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/68).
+- Add productivity report requested. Feature request mentioned here [#68](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/68) and [#75](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/75).
+- Make the keyboard shortcut customizable. Feature request mentioned here [#74](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/74).
 
 ## Development
 
