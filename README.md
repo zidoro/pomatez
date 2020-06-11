@@ -7,7 +7,7 @@
 <h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Wonderful open source app that will help boost your productivity
+  This open source app is based on Pomodoro Technique that will help boost your productivity.
    <br>
   <br>
   <a href="#overview">Overview</a>
