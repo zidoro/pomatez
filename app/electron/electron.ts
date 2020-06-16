@@ -1,14 +1,15 @@
-import { BrowserWindow, app, ipcMain, globalShortcut } from "electron";
+import { BrowserWindow, app, ipcMain, globalShortcut, Menu } from "electron";
 import path from "path";
-
 import {
   activateGlobalShortcuts,
+  activateAutoUpdate,
   blockShortcutKeys,
   createSystemTray,
-  activateAutoUpdate,
-} from "./functions";
-
-import { CHANNELS, ACTIONS, getIcon } from "./helpers";
+  getIcon,
+  CHANNELS,
+  ACTIONS,
+} from "./helpers";
+import store from "./store";
 
 import "v8-compile-cache";
 
@@ -21,6 +22,10 @@ const onlySingleIntance = app.requestSingleInstanceLock();
 
 let win: BrowserWindow | null;
 
+Menu.setApplicationMenu(null);
+
+const hasFrame: boolean = store.get("useNativeTitlebar") || false;
+
 function createMainWindow() {
   win = new BrowserWindow({
     width: 340,
@@ -28,7 +33,7 @@ function createMainWindow() {
     resizable: false,
     maximizable: false,
     show: false,
-    frame: false,
+    frame: hasFrame,
     icon: getIcon(),
     webPreferences: {
       contextIsolation: true,
@@ -186,6 +191,14 @@ if (!onlySingleIntance) {
 
           case ACTIONS.ALWAYS_ON_TOP:
             win.setAlwaysOnTop(data.payload);
+            break;
+
+          case ACTIONS.NATIVE_TITLEBAR:
+            if (hasFrame !== data.payload) {
+              store.set("useNativeTitlebar", data.payload);
+              app.relaunch();
+              app.exit();
+            }
             break;
 
           case ACTIONS.QUIT_INSTALL_UPDATES:

@@ -1,6 +1,9 @@
 import styled from "styled-components/macro";
 
 export const StyledLoaderContainer = styled.div`
+  width: 100%;
+  height: 41.2rem;
+
   display: flex;
   align-items: center;
   justify-content: center;

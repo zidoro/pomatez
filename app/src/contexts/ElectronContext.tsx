@@ -1,20 +1,21 @@
 import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { AppStateTypes, SettingTypes } from "store";
-
 import isElectron from "is-electron";
 
-export enum CHANNELS {
+import { AppStateTypes, SettingTypes } from "store";
+
+enum CHANNELS {
   TO_MAIN = "TO_MAIN",
   FROM_MAIN = "FROM_MAIN",
 }
 
-export enum ACTIONS {
+enum ACTIONS {
   ALWAYS_ON_TOP = "ALWAYS_ON_TOP",
   FULL_SCREEN = "FULL_SCREEN",
   MINIMIZE = "MINIMIZE",
   HIDE = "HIDE",
   SET_THEME = "SET_THEME",
+  NATIVE_TITLEBAR = "NATIVE_TITLEBAR",
   QUIT_INSTALL_UPDATES = "QUIT_INSTALL_UPDATES",
 }
 
@@ -115,6 +116,15 @@ const ElectronProvider: React.FC = ({ children }) => {
       });
     }
   }, [electron, settings.enableDarkTheme]);
+
+  useEffect(() => {
+    if (isElectron()) {
+      electron.send(CHANNELS.TO_MAIN, {
+        type: ACTIONS.NATIVE_TITLEBAR,
+        payload: settings.useNativeTitlebar,
+      });
+    }
+  }, [electron, settings.useNativeTitlebar]);
 
   return (
     <ElectronContext.Provider

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.activateGlobalShortcuts = void 0;
 var electron_1 = require("electron");
 function activateGlobalShortcuts(shortcuts) {
     shortcuts.map(function (_a) {

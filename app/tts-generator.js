@@ -1,7 +1,7 @@
 const say = require("say");
 const fs = require("fs");
 
-const exportDir = "src/assets/audios";
+const exportDir = "assets/audios";
 
 if (!fs.existsSync(exportDir)) {
   fs.mkdirSync(exportDir);

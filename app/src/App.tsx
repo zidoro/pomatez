@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider, CounterProvider, ElectronProvider } from "contexts";
 import { Layout, Preloader } from "components";
-import { routes } from "config";
+import { routes } from "configurations";
 
 export default () => {
   return (
