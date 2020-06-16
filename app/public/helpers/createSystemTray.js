@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createSystemTray = void 0;
 var electron_1 = require("electron");
 var tray;
 function createSystemTray(_a) {
     var icon = _a.icon, tooltip = _a.tooltip, template = _a.template;
     tray = new electron_1.Tray(icon);
     var contextMenu = electron_1.Menu.buildFromTemplate(template);
-    tray.setToolTip(tooltip);
+    if (tooltip)
+        tray.setToolTip(tooltip);
     tray.setContextMenu(contextMenu);
     return tray;
 }

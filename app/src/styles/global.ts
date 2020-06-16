@@ -1,7 +1,10 @@
 import { createGlobalStyle } from "styled-components/macro";
 import { darkTheme, lightTheme } from "./themes";
 
-type GlobalTypes = { isDarkMode?: boolean };
+type GlobalTypes = {
+  isDarkMode?: boolean;
+  useNativeTitlebar?: boolean;
+};
 
 export const GlobalStyles = createGlobalStyle<GlobalTypes>`
 
@@ -52,11 +55,13 @@ export const GlobalStyles = createGlobalStyle<GlobalTypes>`
     font-size: 1.3rem;
     font-weight: 400;
     color: var(--color-body-text);
-
+    
     width: 340px;
-    height: 500px;
-    border: 1px solid var(--color-border-window);
-    box-shadow: 0 1px 16px -4px rgba(0, 0, 0, 0.5);
+    height: max-content;
+    border: ${(p) =>
+      !p.useNativeTitlebar ? "1px solid var(--color-border-window)" : "none"} ;
+    box-shadow: ${(p) =>
+      !p.useNativeTitlebar && "0 1px 16px -4px rgba(0, 0, 0, 0.5)"};
     box-sizing: border-box;
   }
 

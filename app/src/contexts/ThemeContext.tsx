@@ -31,7 +31,10 @@ const ThemeProvider: React.FC = ({ children }) => {
         toggleThemeAction,
       }}
     >
-      <GlobalStyles isDarkMode={settings.enableDarkTheme} />
+      <GlobalStyles
+        isDarkMode={settings.enableDarkTheme}
+        useNativeTitlebar={settings.useNativeTitlebar}
+      />
       {children}
     </ThemeContext.Provider>
   );

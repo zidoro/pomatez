@@ -5,14 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var path_1 = __importDefault(require("path"));
-var functions_1 = require("./functions");
 var helpers_1 = require("./helpers");
+var store_1 = __importDefault(require("./store"));
 require("v8-compile-cache");
 var onProduction = electron_1.app.isPackaged;
 var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray.png");
 var trayIconDark = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
 var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
 var win;
+electron_1.Menu.setApplicationMenu(null);
+var hasFrame = store_1.default.get("useNativeTitlebar") || false;
 function createMainWindow() {
     win = new electron_1.BrowserWindow({
         width: 340,
@@ -20,7 +22,7 @@ function createMainWindow() {
         resizable: false,
         maximizable: false,
         show: false,
-        frame: false,
+        frame: hasFrame,
         icon: helpers_1.getIcon(),
         webPreferences: {
             contextIsolation: true,
@@ -58,7 +60,7 @@ else {
     });
     electron_1.app.on("ready", function () {
         createMainWindow();
-        var tray = functions_1.createSystemTray({
+        var tray = helpers_1.createSystemTray({
             icon: trayIconDark,
             template: [
                 {
@@ -102,9 +104,9 @@ else {
                 "CommandOrControl+Alt+Q",
                 "F11",
             ];
-            functions_1.blockShortcutKeys(win, blockKeys);
+            helpers_1.blockShortcutKeys(win, blockKeys);
         }
-        functions_1.activateGlobalShortcuts([
+        helpers_1.activateGlobalShortcuts([
             {
                 key: "Alt+Shift+H",
                 callback: function () {
@@ -118,7 +120,7 @@ else {
                 },
             },
         ]);
-        var autoUpdater = functions_1.activateAutoUpdate({});
+        var autoUpdater = helpers_1.activateAutoUpdate({});
         electron_1.ipcMain.on(helpers_1.CHANNELS.TO_MAIN, function (event, data) {
             if (win) {
                 switch (data.type) {
@@ -160,6 +162,13 @@ else {
                         break;
                     case helpers_1.ACTIONS.ALWAYS_ON_TOP:
                         win.setAlwaysOnTop(data.payload);
+                        break;
+                    case helpers_1.ACTIONS.NATIVE_TITLEBAR:
+                        if (hasFrame !== data.payload) {
+                            store_1.default.set("useNativeTitlebar", data.payload);
+                            electron_1.app.relaunch();
+                            electron_1.app.exit();
+                        }
                         break;
                     case helpers_1.ACTIONS.QUIT_INSTALL_UPDATES:
                         autoUpdater.quitAndInstall();

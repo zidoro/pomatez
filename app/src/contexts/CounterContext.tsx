@@ -107,7 +107,7 @@ const CounterProvider: React.FC = ({ children }) => {
       fourthBreak,
     } = config.specialBreaks;
 
-    if (settings.enableSpecialBreaks && timer.playing) {
+    if (timer.playing) {
       interval = setTimeout(() => {
         const d = new Date();
         const ct = d.getHours() + ":" + d.getMinutes();
@@ -156,12 +156,11 @@ const CounterProvider: React.FC = ({ children }) => {
         } else {
           return clearInterval(interval);
         }
-      }, 1000);
+      }, 500);
     }
 
     return () => clearInterval(interval);
   }, [
-    settings.enableSpecialBreaks,
     config.specialBreaks,
     timer.timerType,
     timer.playing,

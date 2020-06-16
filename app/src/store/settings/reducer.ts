@@ -2,27 +2,27 @@ import {
   SettingTypes,
   SettingActionTypes,
   ALWAYS_ON_TOP,
-  ENABLE_SPECIAL_BREAKS,
-  ENABLE_STICKY_NOTES,
   ENABLE_STRICT_MODE,
-  ENABLE_WEB_BLOCKER,
   RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
   ENABLE_TIMER_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
+  ENABLE_FULLSCREEN_BREAK,
+  USE_NATIVE_TITLE_BAR,
+  ENABLE_AUTO_UPDATES,
 } from "./types";
 import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
-  notificationSoundOn: true,
-  enableSpecialBreaks: true,
-  enableStickyNotes: false,
+  enableFullscreenBreak: true,
   enableStrictMode: true,
-  enableWebBlocker: true,
   enableDarkTheme: isPreferredDark(),
   enableTimerAnimation: true,
+  useNativeTitlebar: false,
+  enableAutoUpdates: true,
+  notificationSoundOn: true,
   notificationProperty: "extra",
 };
 
@@ -57,20 +57,10 @@ export const settingReducer = (
 
       return newState;
     }
-    case ENABLE_SPECIAL_BREAKS: {
+    case ENABLE_FULLSCREEN_BREAK: {
       const newState = {
         ...state,
-        enableSpecialBreaks: action.payload,
-      };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_STICKY_NOTES: {
-      const newState = {
-        ...state,
-        enableStickyNotes: action.payload,
+        enableFullscreenBreak: action.payload,
       };
 
       saveToStorage("settings", newState);
@@ -97,20 +87,30 @@ export const settingReducer = (
 
       return newState;
     }
-    case ENABLE_WEB_BLOCKER: {
+    case ENABLE_TIMER_ANIMATION: {
       const newState = {
         ...state,
-        enableWebBlocker: action.payload,
+        enableTimerAnimation: action.payload,
       };
 
       saveToStorage("settings", newState);
 
       return newState;
     }
-    case ENABLE_TIMER_ANIMATION: {
+    case USE_NATIVE_TITLE_BAR: {
       const newState = {
         ...state,
-        enableTimerAnimation: action.payload,
+        useNativeTitlebar: action.payload,
+      };
+
+      saveToStorage("settings", newState);
+
+      return newState;
+    }
+    case ENABLE_AUTO_UPDATES: {
+      const newState = {
+        ...state,
+        enableAutoUpdates: action.payload,
       };
 
       saveToStorage("settings", newState);

@@ -63,10 +63,12 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 
   return (
     <StyledLayout noTransition={noTransition}>
-      <Titlebar
-        darkMode={settings.enableDarkTheme}
-        timerType={timer.timerType}
-      />
+      {!settings.useNativeTitlebar && (
+        <Titlebar
+          darkMode={settings.enableDarkTheme}
+          timerType={timer.timerType}
+        />
+      )}
       <Navigation timerType={timer.timerType} />
       {children}
     </StyledLayout>

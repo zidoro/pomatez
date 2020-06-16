@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BLOCKER = exports.UPDATES = exports.ACTIONS = exports.CHANNELS = void 0;
+exports.UPDATES = exports.ACTIONS = exports.CHANNELS = void 0;
 var CHANNELS;
 (function (CHANNELS) {
     CHANNELS["TO_MAIN"] = "TO_MAIN";
@@ -13,6 +13,7 @@ var ACTIONS;
     ACTIONS["MINIMIZE"] = "MINIMIZE";
     ACTIONS["HIDE"] = "HIDE";
     ACTIONS["SET_THEME"] = "SET_THEME";
+    ACTIONS["NATIVE_TITLEBAR"] = "NATIVE_TITLEBAR";
     ACTIONS["QUIT_INSTALL_UPDATES"] = "QUIT_INSTALL_UPDATES";
 })(ACTIONS = exports.ACTIONS || (exports.ACTIONS = {}));
 var UPDATES;
@@ -21,8 +22,3 @@ var UPDATES;
     UPDATES["DOWNLOADING"] = "DOWNLOADING";
     UPDATES["DOWNLOADED"] = "DOWNLOADED";
 })(UPDATES = exports.UPDATES || (exports.UPDATES = {}));
-var BLOCKER;
-(function (BLOCKER) {
-    BLOCKER["DOMAINS_START"] = "###BLOCKED_DOMAINS_START";
-    BLOCKER["DOMAINS_END"] = "###BLOCKED_DOMAINS_END";
-})(BLOCKER = exports.BLOCKER || (exports.BLOCKER = {}));
