@@ -61,7 +61,7 @@ else {
     electron_1.app.on("ready", function () {
         createMainWindow();
         var tray = helpers_1.createSystemTray({
-            icon: trayIconDark,
+            icon: trayIcon,
             template: [
                 {
                     label: "Show",

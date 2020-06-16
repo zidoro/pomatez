@@ -77,7 +77,7 @@ if (!onlySingleIntance) {
     createMainWindow();
 
     const tray = createSystemTray({
-      icon: trayIconDark,
+      icon: trayIcon,
       template: [
         {
           label: "Show",

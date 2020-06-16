@@ -8,11 +8,11 @@ var path_1 = __importDefault(require("path"));
 function getIcon() {
     switch (process.platform) {
         case "darwin":
-            return path_1.default.join(__dirname, "../../src/assets/logos/logo-dark@2x.png");
+            return path_1.default.join(__dirname, "../../src/assets/logos/logo-transparent@2x.png");
         case "linux":
-            return path_1.default.join(__dirname, "../../src/assets/logos/logo-dark.png");
+            return path_1.default.join(__dirname, "../../src/assets/logos/logo-transparent.png");
         default:
-            return path_1.default.join(__dirname, "../../src/assets/logos/logo-dark.ico");
+            return path_1.default.join(__dirname, "../../src/assets/logos/logo-transparent.ico");
     }
 }
 exports.getIcon = getIcon;
