@@ -1,4 +1,10 @@
-import React, { useEffect, useContext, useCallback, useState } from "react";
+import React, {
+  useEffect,
+  useContext,
+  useCallback,
+  useState,
+  useRef,
+} from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -26,6 +32,8 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
   const { toggleThemeAction } = useContext(ThemeContext);
 
   const [noTransition, setNoTransition] = useState(false);
+
+  const useNativeTitlebar = useRef(settings.useNativeTitlebar);
 
   const registerKey = useCallback(
     (e: KeyboardEvent) => {
@@ -63,7 +71,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 
   return (
     <StyledLayout noTransition={noTransition}>
-      {!settings.useNativeTitlebar && (
+      {!useNativeTitlebar.current && (
         <Titlebar
           darkMode={settings.enableDarkTheme}
           timerType={timer.timerType}
