@@ -53,7 +53,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
   }, [registerKey]);
 
   useEffect(() => {
-    if (settings.enableStrictMode) {
+    if (settings.enableFullscreenBreak) {
       if (
         timer.timerType === SHORT_BREAK ||
         timer.timerType === LONG_BREAK ||
@@ -67,7 +67,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
         setNoTransition(false);
       }
     }
-  }, [timer.timerType, location, history, settings.enableStrictMode]);
+  }, [timer.timerType, location, history, settings.enableFullscreenBreak]);
 
   return (
     <StyledLayout noTransition={noTransition}>

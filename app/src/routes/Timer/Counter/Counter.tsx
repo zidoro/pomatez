@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { CounterContext, ElectronContext } from "contexts";
-import { AppStateTypes, SettingTypes } from "store";
+import { AppStateTypes, SettingTypes, STAY_FOCUS } from "store";
 
 import {
   StyledCounterContainer,
@@ -28,25 +28,15 @@ const Counter: React.FC = () => {
   const dashOffset = (duration - count) * (674 / duration);
 
   const shouldFullscreen = useCallback(() => {
-    if (settings.enableStrictMode) {
-      switch (timerType) {
-        case "SHORT_BREAK":
-          return true;
-        case "LONG_BREAK":
-          return true;
-        case "SPECIAL_BREAK":
-          return true;
-        default:
-          return false;
-      }
+    if (settings.enableFullscreenBreak && timerType !== STAY_FOCUS) {
+      return true;
     }
     return false;
-  }, [settings.enableStrictMode, timerType]);
+  }, [settings.enableFullscreenBreak, timerType]);
 
   useEffect(() => {
     if (shouldFullscreenCallback) {
-      const isFullScreen = shouldFullscreen();
-      shouldFullscreenCallback(isFullScreen);
+      shouldFullscreenCallback(shouldFullscreen());
     }
   }, [shouldFullscreen, shouldFullscreenCallback]);
 
