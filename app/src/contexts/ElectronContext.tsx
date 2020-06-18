@@ -1,36 +1,21 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import isElectron from "is-electron";
 
 import { AppStateTypes, SettingTypes } from "store";
+import { CounterContext } from "./CounterContext";
 
-enum CHANNELS {
-  TO_MAIN = "TO_MAIN",
-  FROM_MAIN = "FROM_MAIN",
-}
-
-enum ACTIONS {
-  ALWAYS_ON_TOP = "ALWAYS_ON_TOP",
-  FULL_SCREEN = "FULL_SCREEN",
-  MINIMIZE = "MINIMIZE",
-  HIDE = "HIDE",
-  SET_THEME = "SET_THEME",
-  NATIVE_TITLEBAR = "NATIVE_TITLEBAR",
-  QUIT_INSTALL_UPDATES = "QUIT_INSTALL_UPDATES",
-}
-
-export enum UPDATES {
-  AVAILABLE = "AVAILABLE",
-  DOWNLOADING = "DOWNLOADING",
-  DOWNLOADED = "DOWNLOADED",
-}
+export const SET_ALWAYS_ON_TOP = "SET_ALWAYS_ON_TOP";
+export const SET_FULLSCREEN_BREAK = "SET_FULLSCREEN_BREAK";
+export const SET_NATIVE_TITLEBAR = "SET_NATIVE_TITLEBAR";
+export const SET_UI_THEME = "SET_UI_THEME";
+export const SET_MINIMIZE = "SET_MINIMIZE";
+export const SET_HIDE = "SET_HIDE";
 
 type ElectronProps = {
-  shouldFullscreenCallback?: (isFullscreen: boolean) => void;
   onMinimizeCallback?: () => void;
   onExitCallback?: () => void;
   openExternalCallback?: () => void;
-  onQuitAndInstallUpdates?: () => void;
 };
 
 const ElectronContext = React.createContext<ElectronProps>({});
@@ -42,42 +27,17 @@ const ElectronProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
-  const shouldFullscreenCallback = useCallback(
-    (isFullScreen: boolean) => {
-      if (isElectron()) {
-        electron.send(CHANNELS.TO_MAIN, {
-          type: ACTIONS.FULL_SCREEN,
-          payload: {
-            isFullScreen,
-            alwaysOnTop: settings.alwaysOnTop,
-          },
-        });
-      }
-    },
-    [electron, settings.alwaysOnTop]
-  );
+  const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
     if (isElectron()) {
-      electron.send(CHANNELS.TO_MAIN, {
-        type: ACTIONS.MINIMIZE,
-      });
+      electron.send(SET_MINIMIZE);
     }
   }, [electron]);
 
   const onExitCallback = useCallback(() => {
     if (isElectron()) {
-      electron.send(CHANNELS.TO_MAIN, {
-        type: ACTIONS.HIDE,
-      });
-    }
-  }, [electron]);
-
-  const onQuitAndInstallUpdates = useCallback(() => {
-    if (isElectron()) {
-      electron.send(CHANNELS.TO_MAIN, {
-        type: ACTIONS.QUIT_INSTALL_UPDATES,
-      });
+      electron.send(SET_HIDE);
     }
   }, [electron]);
 
@@ -99,29 +59,33 @@ const ElectronProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (isElectron()) {
-      electron.send(CHANNELS.TO_MAIN, {
-        type: ACTIONS.ALWAYS_ON_TOP,
-        payload: settings.alwaysOnTop,
+      electron.send(SET_ALWAYS_ON_TOP, {
+        alwaysOnTop: settings.alwaysOnTop,
       });
     }
   }, [electron, settings.alwaysOnTop]);
 
   useEffect(() => {
     if (isElectron()) {
-      electron.send(CHANNELS.TO_MAIN, {
-        type: ACTIONS.SET_THEME,
-        payload: {
-          darkTheme: settings.enableDarkTheme,
-        },
+      electron.send(SET_FULLSCREEN_BREAK, {
+        shouldFullscreen,
+        alwaysOnTop: settings.alwaysOnTop,
+      });
+    }
+  }, [electron, settings.alwaysOnTop, shouldFullscreen]);
+
+  useEffect(() => {
+    if (isElectron()) {
+      electron.send(SET_UI_THEME, {
+        isDarkMode: settings.enableDarkTheme,
       });
     }
   }, [electron, settings.enableDarkTheme]);
 
   useEffect(() => {
     if (isElectron()) {
-      electron.send(CHANNELS.TO_MAIN, {
-        type: ACTIONS.NATIVE_TITLEBAR,
-        payload: settings.useNativeTitlebar,
+      electron.send(SET_NATIVE_TITLEBAR, {
+        useNativeTitlebar: settings.useNativeTitlebar,
       });
     }
   }, [electron, settings.useNativeTitlebar]);
@@ -129,11 +93,9 @@ const ElectronProvider: React.FC = ({ children }) => {
   return (
     <ElectronContext.Provider
       value={{
-        shouldFullscreenCallback,
         onMinimizeCallback,
         onExitCallback,
         openExternalCallback,
-        onQuitAndInstallUpdates,
       }}
     >
       {children}

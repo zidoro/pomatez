@@ -9,8 +9,7 @@ var helpers_1 = require("./helpers");
 var store_1 = __importDefault(require("./store"));
 require("v8-compile-cache");
 var onProduction = electron_1.app.isPackaged;
-var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray.png");
-var trayIconDark = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
+var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
 var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
 var win;
 electron_1.Menu.setApplicationMenu(null);
@@ -64,24 +63,6 @@ else {
             icon: trayIcon,
             template: [
                 {
-                    label: "Show",
-                    click: function () {
-                        if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
-                            win === null || win === void 0 ? void 0 : win.show();
-                        }
-                    },
-                },
-                {
-                    label: "Hide",
-                    click: function () {
-                        if (win === null || win === void 0 ? void 0 : win.isFullScreen())
-                            return;
-                        if (win === null || win === void 0 ? void 0 : win.isVisible()) {
-                            win === null || win === void 0 ? void 0 : win.hide();
-                        }
-                    },
-                },
-                {
                     label: "Quit",
                     role: "quit",
                 },
@@ -97,14 +78,16 @@ else {
                 }
             }
         });
-        if (win && onProduction) {
-            var blockKeys = [
-                "CommandOrControl+R",
-                "CommandOrControl+Shift+R",
-                "CommandOrControl+Alt+Q",
-                "F11",
-            ];
-            helpers_1.blockShortcutKeys(win, blockKeys);
+        if (onProduction) {
+            if (win) {
+                var blockKeys = [
+                    "CommandOrControl+R",
+                    "CommandOrControl+Shift+R",
+                    "CommandOrControl+Alt+Q",
+                    "F11",
+                ];
+                helpers_1.blockShortcutKeys(win, blockKeys);
+            }
         }
         helpers_1.activateGlobalShortcuts([
             {
@@ -121,62 +104,55 @@ else {
             },
         ]);
         var autoUpdater = helpers_1.activateAutoUpdate({});
-        electron_1.ipcMain.on(helpers_1.CHANNELS.TO_MAIN, function (event, data) {
-            if (win) {
-                switch (data.type) {
-                    case helpers_1.ACTIONS.SET_THEME:
-                        var darkTheme = data.payload.darkTheme;
-                        var backgroundColor = darkTheme ? "#141e25" : "#fff";
-                        var iconOnTray = darkTheme ? trayIconDark : trayIcon;
-                        win.setBackgroundColor(backgroundColor);
-                        tray.setImage(iconOnTray);
-                        break;
-                    case helpers_1.ACTIONS.MINIMIZE:
-                        win.minimize();
-                        break;
-                    case helpers_1.ACTIONS.HIDE:
-                        win.hide();
-                        break;
-                    case helpers_1.ACTIONS.FULL_SCREEN:
-                        var _a = data.payload, isFullScreen = _a.isFullScreen, alwaysOnTop = _a.alwaysOnTop;
-                        if (isFullScreen) {
-                            if (!win.isVisible()) {
-                                win.show();
-                                win.focus();
-                                win.setAlwaysOnTop(true, "screen-saver");
-                            }
-                            win.setSkipTaskbar(true);
-                            win.setFullScreen(true);
-                            win.setVisibleOnAllWorkspaces(true);
-                            electron_1.globalShortcut.unregister("Alt+Shift+H");
-                        }
-                        else {
-                            win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-                            win.setSkipTaskbar(false);
-                            win.setFullScreen(false);
-                            win.setVisibleOnAllWorkspaces(false);
-                            electron_1.globalShortcut.register("Alt+Shift+H", function () {
-                                win === null || win === void 0 ? void 0 : win.hide();
-                            });
-                        }
-                        break;
-                    case helpers_1.ACTIONS.ALWAYS_ON_TOP:
-                        win.setAlwaysOnTop(data.payload);
-                        break;
-                    case helpers_1.ACTIONS.NATIVE_TITLEBAR:
-                        if (hasFrame !== data.payload) {
-                            store_1.default.set("useNativeTitlebar", data.payload);
-                            electron_1.app.relaunch();
-                            electron_1.app.exit();
-                        }
-                        break;
-                    case helpers_1.ACTIONS.QUIT_INSTALL_UPDATES:
-                        autoUpdater.quitAndInstall();
-                        break;
-                    default:
-                        return data.payload;
+        electron_1.ipcMain.on(helpers_1.SET_ALWAYS_ON_TOP, function (e, _a) {
+            var alwaysOnTop = _a.alwaysOnTop;
+            win === null || win === void 0 ? void 0 : win.setAlwaysOnTop(alwaysOnTop);
+        });
+        electron_1.ipcMain.on(helpers_1.SET_FULLSCREEN_BREAK, function (e, args) {
+            var shouldFullscreen = args.shouldFullscreen, alwaysOnTop = args.alwaysOnTop;
+            if (shouldFullscreen) {
+                win === null || win === void 0 ? void 0 : win.show();
+                win === null || win === void 0 ? void 0 : win.focus();
+                win === null || win === void 0 ? void 0 : win.setAlwaysOnTop(true, "screen-saver");
+                win === null || win === void 0 ? void 0 : win.setSkipTaskbar(true);
+                win === null || win === void 0 ? void 0 : win.setFullScreen(true);
+                win === null || win === void 0 ? void 0 : win.setVisibleOnAllWorkspaces(true);
+                electron_1.globalShortcut.unregister("Alt+Shift+H");
+                if (!(win === null || win === void 0 ? void 0 : win.isVisible())) {
+                    win === null || win === void 0 ? void 0 : win.show();
+                    win === null || win === void 0 ? void 0 : win.focus();
                 }
             }
+            else {
+                win === null || win === void 0 ? void 0 : win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+                win === null || win === void 0 ? void 0 : win.setSkipTaskbar(false);
+                win === null || win === void 0 ? void 0 : win.setFullScreen(false);
+                win === null || win === void 0 ? void 0 : win.setVisibleOnAllWorkspaces(false);
+                electron_1.globalShortcut.register("Alt+Shift+H", function () {
+                    win === null || win === void 0 ? void 0 : win.hide();
+                });
+                if (win === null || win === void 0 ? void 0 : win.isFullScreen())
+                    win === null || win === void 0 ? void 0 : win.setFullScreen(false);
+            }
+        });
+        electron_1.ipcMain.on(helpers_1.SET_UI_THEME, function (e, _a) {
+            var isDarkMode = _a.isDarkMode;
+            var backgroundColor = isDarkMode ? "#141e25" : "#fff";
+            win === null || win === void 0 ? void 0 : win.setBackgroundColor(backgroundColor);
+        });
+        electron_1.ipcMain.on(helpers_1.SET_NATIVE_TITLEBAR, function (e, _a) {
+            var useNativeTitlebar = _a.useNativeTitlebar;
+            if (hasFrame !== useNativeTitlebar) {
+                store_1.default.set("useNativeTitlebar", useNativeTitlebar);
+                electron_1.app.relaunch();
+                electron_1.app.exit();
+            }
+        });
+        electron_1.ipcMain.on(helpers_1.SET_MINIMIZE, function () {
+            win === null || win === void 0 ? void 0 : win.minimize();
+        });
+        electron_1.ipcMain.on(helpers_1.SET_HIDE, function () {
+            win === null || win === void 0 ? void 0 : win.hide();
         });
     });
 }

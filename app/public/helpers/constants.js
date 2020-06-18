@@ -1,24 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UPDATES = exports.ACTIONS = exports.CHANNELS = void 0;
-var CHANNELS;
-(function (CHANNELS) {
-    CHANNELS["TO_MAIN"] = "TO_MAIN";
-    CHANNELS["FROM_MAIN"] = "FROM_MAIN";
-})(CHANNELS = exports.CHANNELS || (exports.CHANNELS = {}));
-var ACTIONS;
-(function (ACTIONS) {
-    ACTIONS["ALWAYS_ON_TOP"] = "ALWAYS_ON_TOP";
-    ACTIONS["FULL_SCREEN"] = "FULL_SCREEN";
-    ACTIONS["MINIMIZE"] = "MINIMIZE";
-    ACTIONS["HIDE"] = "HIDE";
-    ACTIONS["SET_THEME"] = "SET_THEME";
-    ACTIONS["NATIVE_TITLEBAR"] = "NATIVE_TITLEBAR";
-    ACTIONS["QUIT_INSTALL_UPDATES"] = "QUIT_INSTALL_UPDATES";
-})(ACTIONS = exports.ACTIONS || (exports.ACTIONS = {}));
-var UPDATES;
-(function (UPDATES) {
-    UPDATES["AVAILABLE"] = "AVAILABLE";
-    UPDATES["DOWNLOADING"] = "DOWNLOADING";
-    UPDATES["DOWNLOADED"] = "DOWNLOADED";
-})(UPDATES = exports.UPDATES || (exports.UPDATES = {}));
+exports.FROM_MAIN = exports.TO_MAIN = exports.SET_HIDE = exports.SET_MINIMIZE = exports.SET_UI_THEME = exports.SET_NATIVE_TITLEBAR = exports.SET_FULLSCREEN_BREAK = exports.SET_ALWAYS_ON_TOP = void 0;
+exports.SET_ALWAYS_ON_TOP = "SET_ALWAYS_ON_TOP";
+exports.SET_FULLSCREEN_BREAK = "SET_FULLSCREEN_BREAK";
+exports.SET_NATIVE_TITLEBAR = "SET_NATIVE_TITLEBAR";
+exports.SET_UI_THEME = "SET_UI_THEME";
+exports.SET_MINIMIZE = "SET_MINIMIZE";
+exports.SET_HIDE = "SET_HIDE";
+exports.TO_MAIN = [
+    exports.SET_ALWAYS_ON_TOP,
+    exports.SET_FULLSCREEN_BREAK,
+    exports.SET_NATIVE_TITLEBAR,
+    exports.SET_UI_THEME,
+    exports.SET_MINIMIZE,
+    exports.SET_HIDE,
+];
+exports.FROM_MAIN = [];

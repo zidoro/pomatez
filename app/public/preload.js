@@ -16,14 +16,12 @@ electron_1.contextBridge.exposeInMainWorld("electron", {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var validChannels = [helpers_1.CHANNELS.TO_MAIN];
-        if (validChannels.includes(channel)) {
+        if (helpers_1.TO_MAIN.includes(channel)) {
             electron_1.ipcRenderer.send.apply(electron_1.ipcRenderer, __spreadArrays([channel], args));
         }
     },
     recieve: function (channel, response) {
-        var validChannels = [helpers_1.CHANNELS.FROM_MAIN];
-        if (validChannels.includes(channel)) {
+        if (helpers_1.FROM_MAIN.includes(channel)) {
             electron_1.ipcRenderer.on(channel, function (event) {
                 var args = [];
                 for (var _i = 1; _i < arguments.length; _i++) {

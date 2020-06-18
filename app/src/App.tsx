@@ -6,9 +6,9 @@ import { routes } from "configurations";
 
 export default () => {
   return (
-    <ElectronProvider>
-      <ThemeProvider>
-        <CounterProvider>
+    <ThemeProvider>
+      <CounterProvider>
+        <ElectronProvider>
           <Router>
             <Layout>
               <Suspense fallback={<Preloader />}>
@@ -25,8 +25,8 @@ export default () => {
               </Suspense>
             </Layout>
           </Router>
-        </CounterProvider>
-      </ThemeProvider>
-    </ElectronProvider>
+        </ElectronProvider>
+      </CounterProvider>
+    </ThemeProvider>
   );
 };
