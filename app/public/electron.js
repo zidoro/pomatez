@@ -38,6 +38,10 @@ function createMainWindow() {
     win.once("ready-to-show", function () {
         win === null || win === void 0 ? void 0 : win.show();
     });
+    win.on("close", function (e) {
+        e.preventDefault();
+        win === null || win === void 0 ? void 0 : win.hide();
+    });
     win.on("closed", function () {
         win = null;
     });
@@ -66,7 +70,9 @@ else {
             template: [
                 {
                     label: "Quit",
-                    role: "quit",
+                    click: function () {
+                        electron_1.app.exit();
+                    },
                 },
             ],
         });

@@ -61,6 +61,11 @@ function createMainWindow() {
     win?.show();
   });
 
+  win.on("close", (e) => {
+    e.preventDefault();
+    win?.hide();
+  });
+
   win.on("closed", () => {
     win = null;
   });
@@ -89,7 +94,9 @@ if (!onlySingleIntance) {
       template: [
         {
           label: "Quit",
-          role: "quit",
+          click: () => {
+            app.exit();
+          },
         },
       ],
     });
