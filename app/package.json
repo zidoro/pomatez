@@ -1,6 +1,6 @@
 {
   "name": "productivity-timer",
-  "version": "2.8.0-beta",
+  "version": "2.10.0-beta",
   "private": true,
   "license": "MIT",
   "main": "public/electron.js",
@@ -42,10 +42,12 @@
       "src/assets/logos"
     ],
     "mac": {
+      "artifactName": "PRODUCTIVITY-TIMER-${version}-mac.${ext}",
       "category": "public.app-category.productivity",
       "icon": "./src/assets/logos/logo-dark@2x.png"
     },
     "win": {
+      "artifactName": "PRODUCTIVITY-TIMER-${version}-setup.${ext}",
       "target": [
         {
           "target": "nsis",
@@ -58,6 +60,7 @@
       "icon": "./src/assets/logos/logo-dark.ico"
     },
     "linux": {
+      "artifactName": "PRODUCTIVITY-TIMER-${version}-linux.${ext}",
       "target": [
         "AppImage",
         "deb",
