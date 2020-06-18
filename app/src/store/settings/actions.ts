@@ -9,7 +9,6 @@ import {
   SET_NOTIFICATION_PROPERTY,
   ENABLE_FULLSCREEN_BREAK,
   USE_NATIVE_TITLE_BAR,
-  ENABLE_AUTO_UPDATES,
   ENABLE_STRICT_MODE,
 } from "./types";
 
@@ -70,15 +69,6 @@ export const setUseNativeTitlebar = (
   return {
     type: USE_NATIVE_TITLE_BAR,
     payload: useNativeTitlebar,
-  };
-};
-
-export const setEnableAutoUpdates = (
-  enableAutoUpdates: SettingTypes["enableAutoUpdates"]
-): SettingActionTypes => {
-  return {
-    type: ENABLE_AUTO_UPDATES,
-    payload: enableAutoUpdates,
   };
 };
 

@@ -7,7 +7,6 @@ export type SettingTypes = {
   enableStrictMode: boolean;
   enableTimerAnimation: boolean;
   useNativeTitlebar: boolean;
-  enableAutoUpdates: boolean;
   notificationSoundOn: boolean;
   notificationProperty: "none" | "normal" | "extra";
 };

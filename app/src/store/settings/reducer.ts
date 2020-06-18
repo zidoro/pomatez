@@ -2,15 +2,14 @@ import {
   SettingTypes,
   SettingActionTypes,
   ALWAYS_ON_TOP,
+  ENABLE_DARK_THEME,
   ENABLE_STRICT_MODE,
   RESTORE_DEFAULT_SETTINGS,
-  ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
-  ENABLE_TIMER_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
   ENABLE_FULLSCREEN_BREAK,
+  ENABLE_TIMER_ANIMATION,
   USE_NATIVE_TITLE_BAR,
-  ENABLE_AUTO_UPDATES,
 } from "./types";
 import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 
@@ -21,7 +20,6 @@ const defaultSettings: SettingTypes = {
   enableDarkTheme: isPreferredDark(),
   enableTimerAnimation: true,
   useNativeTitlebar: false,
-  enableAutoUpdates: true,
   notificationSoundOn: true,
   notificationProperty: "extra",
 };
@@ -101,16 +99,6 @@ export const settingReducer = (
       const newState = {
         ...state,
         useNativeTitlebar: action.payload,
-      };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_AUTO_UPDATES: {
-      const newState = {
-        ...state,
-        enableAutoUpdates: action.payload,
       };
 
       saveToStorage("settings", newState);

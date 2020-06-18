@@ -1,4 +1,5 @@
 import { BrowserWindow, app, ipcMain, globalShortcut, Menu } from "electron";
+import notifier from "node-notifier";
 import path from "path";
 import {
   activateGlobalShortcuts,
@@ -20,6 +21,10 @@ import "v8-compile-cache";
 const onProduction = app.isPackaged;
 
 const trayIcon = path.join(__dirname, "../src/assets/logos/tray-dark.png");
+const notificationIcon = path.join(
+  __dirname,
+  "../src/assets/logos/notification-dark.png"
+);
 
 const onlySingleIntance = app.requestSingleInstanceLock();
 
@@ -126,7 +131,36 @@ if (!onlySingleIntance) {
       },
     ]);
 
-    const autoUpdater = activateAutoUpdate({});
+    const autoUpdater = activateAutoUpdate({
+      onUpdateAvailable: (info) => {
+        notifier.notify({
+          icon: notificationIcon,
+          title: "NEW UPDATE IS AVAILABLE",
+          message: `App version ${info.version} ready to be downloaded.`,
+          sound: true,
+          wait: true,
+        });
+      },
+      onUpdateDownloaded: (info) => {
+        notifier.notify(
+          {
+            icon: notificationIcon,
+            title: "READY TO BE INSTALLED",
+            message: "Update has been successfully downloaded.",
+            actions: ["Quit and Install", "Install it Later"],
+            sound: true,
+            wait: true,
+          },
+          (err, response) => {
+            if (!err) {
+              if (response === "quit and install") {
+                autoUpdater.quitAndInstall();
+              }
+            }
+          }
+        );
+      },
+    });
 
     ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
       win?.setAlwaysOnTop(alwaysOnTop);
