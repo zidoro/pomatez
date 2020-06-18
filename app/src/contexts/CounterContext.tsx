@@ -35,6 +35,7 @@ type CounterProps = {
   setDuration?: React.Dispatch<React.SetStateAction<number>>;
   timerType?: TimerTypes["timerType"];
   resetTimerAction?: () => void;
+  shouldFullscreen?: boolean;
 };
 
 const CounterContext = React.createContext<CounterProps>({
@@ -53,6 +54,8 @@ const CounterProvider: React.FC = ({ children }) => {
   const settings: SettingTypes = useSelector(
     (state: AppStateTypes) => state.settings
   );
+
+  const [shouldFullscreen, setShouldFullscreen] = useState(false);
 
   const notification = useNotification(
     {
@@ -293,6 +296,16 @@ const CounterProvider: React.FC = ({ children }) => {
     settings.notificationProperty,
   ]);
 
+  useEffect(() => {
+    if (settings.enableFullscreenBreak) {
+      if (timer.timerType !== STAY_FOCUS) {
+        setShouldFullscreen(true);
+      } else {
+        setShouldFullscreen(false);
+      }
+    }
+  }, [settings.enableFullscreenBreak, timer.timerType]);
+
   return (
     <CounterContext.Provider
       value={{
@@ -302,6 +315,7 @@ const CounterProvider: React.FC = ({ children }) => {
         setDuration,
         resetTimerAction,
         timerType: timer.timerType,
+        shouldFullscreen,
       }}
     >
       {children}

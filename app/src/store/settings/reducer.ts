@@ -17,7 +17,7 @@ import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
   enableFullscreenBreak: true,
-  enableStrictMode: true,
+  enableStrictMode: false,
   enableDarkTheme: isPreferredDark(),
   enableTimerAnimation: true,
   useNativeTitlebar: false,

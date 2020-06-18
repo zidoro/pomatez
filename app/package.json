@@ -43,7 +43,7 @@
     ],
     "mac": {
       "category": "public.app-category.productivity",
-      "icon": "./src/assets/logos/logo-light@2x.png"
+      "icon": "./src/assets/logos/logo-dark@2x.png"
     },
     "win": {
       "target": [
@@ -55,7 +55,7 @@
           ]
         }
       ],
-      "icon": "./src/assets/logos/logo-light.ico"
+      "icon": "./src/assets/logos/logo-dark.ico"
     },
     "linux": {
       "target": [
@@ -63,7 +63,7 @@
         "deb",
         "rpm"
       ],
-      "icon": "./src/assets/logos/logo-light.png",
+      "icon": "./src/assets/logos/logo-dark.png",
       "category": "Productivity"
     }
   },
