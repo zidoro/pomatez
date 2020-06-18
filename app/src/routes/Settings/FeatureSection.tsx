@@ -9,7 +9,6 @@ import {
   setNotificationProperty,
   setEnableFullscreenBreak,
   setUseNativeTitlebar,
-  setEnableAutoUpdates,
 } from "store";
 
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
@@ -75,14 +74,6 @@ const FeatureSection: React.FC = () => {
       onChange: useCallback(() => {
         dispatch(setEnableTimerAnimation(!settings.enableTimerAnimation));
       }, [dispatch, settings.enableTimerAnimation]),
-    },
-    {
-      id: "auto-updates",
-      label: "Auto Updates",
-      checked: settings.enableAutoUpdates,
-      onChange: useCallback(() => {
-        dispatch(setEnableAutoUpdates(!settings.enableAutoUpdates));
-      }, [dispatch, settings.enableAutoUpdates]),
     },
   ];
 

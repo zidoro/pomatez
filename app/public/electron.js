@@ -4,12 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
+var node_notifier_1 = __importDefault(require("node-notifier"));
 var path_1 = __importDefault(require("path"));
 var helpers_1 = require("./helpers");
 var store_1 = __importDefault(require("./store"));
 require("v8-compile-cache");
 var onProduction = electron_1.app.isPackaged;
 var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
+var notificationIcon = path_1.default.join(__dirname, "../src/assets/logos/notification-dark.png");
 var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
 var win;
 electron_1.Menu.setApplicationMenu(null);
@@ -103,7 +105,33 @@ else {
                 },
             },
         ]);
-        var autoUpdater = helpers_1.activateAutoUpdate({});
+        var autoUpdater = helpers_1.activateAutoUpdate({
+            onUpdateAvailable: function (info) {
+                node_notifier_1.default.notify({
+                    icon: notificationIcon,
+                    title: "NEW UPDATE IS AVAILABLE",
+                    message: "App version " + info.version + " ready to be downloaded.",
+                    sound: true,
+                    wait: true,
+                });
+            },
+            onUpdateDownloaded: function (info) {
+                node_notifier_1.default.notify({
+                    icon: notificationIcon,
+                    title: "READY TO BE INSTALLED",
+                    message: "Update has been successfully downloaded.",
+                    actions: ["Quit and Install", "Install it Later"],
+                    sound: true,
+                    wait: true,
+                }, function (err, response) {
+                    if (!err) {
+                        if (response === "quit and install") {
+                            autoUpdater.quitAndInstall();
+                        }
+                    }
+                });
+            },
+        });
         electron_1.ipcMain.on(helpers_1.SET_ALWAYS_ON_TOP, function (e, _a) {
             var alwaysOnTop = _a.alwaysOnTop;
             win === null || win === void 0 ? void 0 : win.setAlwaysOnTop(alwaysOnTop);
