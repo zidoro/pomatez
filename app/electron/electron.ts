@@ -62,7 +62,7 @@ function createMainWindow() {
     maximizable: false,
     show: false,
     frame: hasFrame,
-    icon: getIcon(isDarkMode),
+    icon: getIcon(),
     backgroundColor: isDarkMode ? "#141e25" : "#fff",
     webPreferences: {
       contextIsolation: true,
