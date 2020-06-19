@@ -13,6 +13,7 @@ import {
   SET_HIDE,
   SET_UI_THEME,
   SET_NATIVE_TITLEBAR,
+  isWindow,
 } from "./helpers";
 import store from "./store";
 
@@ -30,20 +31,39 @@ const onlySingleIntance = app.requestSingleInstanceLock();
 
 Menu.setApplicationMenu(null);
 
-const hasFrame: boolean =
-  store.get("useNativeTitlebar") || process.platform === "win32" ? false : true;
+const hasFrame: boolean = store.get("useNativeTitlebar")
+  ? store.get("useNativeTitlebar")
+  : isWindow()
+  ? false
+  : true;
+
+const isDarkMode: boolean = store.get("isDarkMode")
+  ? store.get("isDarkMode")
+  : false;
+
+const getFrameHeight = () => {
+  if (isWindow()) {
+    return 500;
+  } else {
+    if (hasFrame) {
+      return 480;
+    }
+    return 500;
+  }
+};
 
 let win: BrowserWindow | null;
 
 function createMainWindow() {
   win = new BrowserWindow({
     width: 340,
-    height: 500,
+    height: getFrameHeight(),
     resizable: false,
     maximizable: false,
     show: false,
     frame: hasFrame,
-    icon: getIcon(),
+    icon: getIcon(isDarkMode),
+    backgroundColor: isDarkMode ? "#141e25" : "#fff",
     webPreferences: {
       contextIsolation: true,
       enableRemoteModule: false,
@@ -207,8 +227,7 @@ if (!onlySingleIntance) {
     });
 
     ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
-      const backgroundColor = isDarkMode ? "#141e25" : "#fff";
-      win?.setBackgroundColor(backgroundColor);
+      store.set("isDarkMode", isDarkMode);
     });
 
     ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {

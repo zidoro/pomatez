@@ -1,21 +1,18 @@
 import path from "path";
 
-export function getIcon() {
+export function getIcon(isDarkMode: boolean) {
   switch (process.platform) {
     case "darwin":
-      return path.join(
-        __dirname,
-        "../../src/assets/logos/logo-transparent@2x.png"
-      );
+      return isDarkMode
+        ? path.join(__dirname, "../../src/assets/logos/logo-dark@2x.png")
+        : path.join(__dirname, "../../src/assets/logos/logo-light@2x.png");
     case "linux":
-      return path.join(
-        __dirname,
-        "../../src/assets/logos/logo-transparent.png"
-      );
+      return isDarkMode
+        ? path.join(__dirname, "../../src/assets/logos/logo-dark.png")
+        : path.join(__dirname, "../../src/assets/logos/logo-light.png");
     default:
-      return path.join(
-        __dirname,
-        "../../src/assets/logos/logo-transparent.ico"
-      );
+      return isDarkMode
+        ? path.join(__dirname, "../../src/assets/logos/logo-dark.ico")
+        : path.join(__dirname, "../../src/assets/logos/logo-light.ico");
   }
 }
