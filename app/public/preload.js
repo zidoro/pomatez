@@ -9,7 +9,6 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var helpers_1 = require("./helpers");
-// https://github.com/electron/electron/issues/9920#issuecomment-575839738
 electron_1.contextBridge.exposeInMainWorld("electron", {
     send: function (channel) {
         var args = [];
