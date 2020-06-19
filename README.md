@@ -7,16 +7,14 @@
 <h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  This open source app is based on Pomodoro Technique that will help boost your productivity.
+  Wonderful time management app based on Pomodoro Technique <br> that will help boost your productivity.
    <br>
   <br>
-  <a href="#overview">Overview</a>
-  .
   <a href="#features">Features</a>
   .
   <a href="#road-map">Road Map</a>
   .
-  <a href="#download">Download</a>
+  <a href="https://roldanjrcodearts9711.github.io/productivity-timer/">Download</a>
   <br>
   <br>
 </p>
@@ -30,75 +28,31 @@
 [![Version](https://img.shields.io/github/v/release/roldanjrCodeArts9711/productivity-timer)](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
 [![License](https://img.shields.io/github/license/roldanjrCodeArts9711/productivity-timer)](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/LICENSE)
 
-## Overview
+## :sparkles: Features
 
-This app is based on [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) added some features that might help users a lot.
+- **Always On Top**. If enabled, the app will always on top of other apps running on user's Operating System.
+- **Full Screen Breaks**. If enabled, the app will interrupt the user by occupying the whole screen so that the user will be force to take a break.
+- **Special Breaks**. If enabled, the user will be allowed to set some special time when the user really need to take a break.
+- **Strict Mode**. If enabled, the app will strictly follow user's configuration and prevent the user from resetting, pausing and skipping the timer when it has started.
+- **Dark Theme**. Allowing the user to use Dark Mode to reduce eye strain and improves visibility for user with low vision and those who are sensitive to bright light.
+- **Toggle Native Titlebar**. Enable user to switch between default custom titlebar to a native titlebar.
+- **Desktop Notification**. If enabled, the app will allow the user to be notified from time to time. Notification property is divided into 3 types NONE, NORMAL and EXTRA.
+- **Keyboard Shortcuts**. Provide some useful keyboard shortcuts allowing the user to use the app conveniently.
+- **Customizable Rules**. Allowing the user to modify the default rules of Pomodoro Principle to fit on their personal preference.
+- **Built-in Task List**. Allowing the user to create tasks they wanted to accomplish and enable them to mark a particular task as done showing some accomplishments.
+- **Auto Updates**. With the Automatic Updates feature, it keep the app up to date with the latest updates and enhancements. User no longer have to search for critical updates; it delivers them directly to the computer.
 
-**Useful Blogs About Pomodoro Technique**:
+## :fire: Roadmap
 
-- [The pomodoro technique](https://www.focusboosterapp.com/the-pomodoro-technique)
+- **Customizable Shortcuts**. Provide a way to make the default keyboard shortcuts customizable by the user.
+- **Website Blocker**. Enable user to block specific website while working in order to focus.
+- **Productivity Report**. Provide some useful summary about user's productivity to have some sense of accomplishments.
 
-- [Productivity 101: An Introduction to The Pomodoro Technique](https://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730)
+## :cyclone: Development
 
-- [Do more and have fun with time management](https://francescocirillo.com/pages/pomodoro-technique)
+This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
 
-## Features
-
-- Always On Top
-
-  > It make the app always on top of all other apps running on users Operating System. `( default: disabled )`
-
-- Notifications
-
-  > Shows some notification from time to time if necessary.
-
-  > **NOTE**: Notification Property is divided into three category.
-
-  1. **NONE** - No notification will appear.
-  2. **NORMAL** - Necessary notification will only appear.
-  3. **EXTRA** - `( default )` Warn users _30 seconds_ before _WORK TIME FINISH_, _60 seconds_ before _SHORT BREAK FINISH_, _LONG BREAK FINISH_ and _SPECIAL BREAK FINISH_.
-
-- Special Breaks
-
-  > Allows users to set some special time when they really need to take a break.
-
-  > **Example**: Lunch Break, Dinner Break and etc... `( default: enabled )`
-
-- Strict Mode
-
-  > **NOTE**: Full Screen On Break feature of `version 1` is being moved here due to some request of users.
-
-  > If **Enabled**: It will strictly follows what users had set on thier configuration and it will make every break fullscreen so that users will force to take a break. `( default: enabled )`
-
-- Dark Theme
-
-  > Enable to use `Dark Mode` version of the app to reduce strain. `( default: depends on users operating system prefered color scheme )`
-
-- Timer Animation
-
-  > Allows users to toggle timer progress animation if their laptop / pc has a low specs and experiencing `High CPU Usage`.
-
-  > If **Enabled**: It will reduce CPU Usage of the app up to 99% and to the least of its original usage.
-
-- Built-in Task List
-
-  > Allows users to create a list of task that they want to accomplish.
-
-## Road Map
-
-- Add web blocker feature.
-- Add option to switch to native titlebar.
-- Create official website that includes documentation.
-- Add productivity report requested. Feature request mentioned here [#68](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/68) and [#75](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/75).
-- Make the keyboard shortcut customizable. Feature request mentioned here [#74](https://github.com/roldanjrCodeArts9711/productivity-timer/issues/74).
-
-## Development
-
-**For Contributors**
-
-PRODUCTIVITY TIMER is built with [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
-
-### Setup
+### :zap: Setup
 
 ```bash
 # install all dependencies
@@ -123,16 +77,15 @@ yarn build:mac
 yarn build:linux
 ```
 
-## Download
+## :computer: Download
 
 Available for Window, Mac, and Linux.
 
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases).
+Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases) or from the :point_right: [Official Website](https://roldanjrcodearts9711.github.io/productivity-timer/) .
 
 > For linux users. You can directly install it from SnapStore.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
-
 
 ## License
 
