@@ -28,11 +28,12 @@ const notificationIcon = path.join(
 
 const onlySingleIntance = app.requestSingleInstanceLock();
 
-let win: BrowserWindow | null;
-
 Menu.setApplicationMenu(null);
 
-const hasFrame: boolean = store.get("useNativeTitlebar") || false;
+const hasFrame: boolean =
+  store.get("useNativeTitlebar") || process.platform === "win32" ? false : true;
+
+let win: BrowserWindow | null;
 
 function createMainWindow() {
   win = new BrowserWindow({

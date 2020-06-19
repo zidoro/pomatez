@@ -4,3 +4,4 @@ export * from "./padNumber";
 export * from "./storage";
 export * from "./parseTime";
 export * from "./isObjectEmpty";
+export * from "./detectOS";
