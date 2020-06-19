@@ -1,35 +1,69 @@
-import { BrowserWindow, app, ipcMain, globalShortcut } from "electron";
+import { BrowserWindow, app, ipcMain, globalShortcut, Menu } from "electron";
+import notifier from "node-notifier";
 import path from "path";
-
 import {
   activateGlobalShortcuts,
+  activateAutoUpdate,
   blockShortcutKeys,
   createSystemTray,
-  activateAutoUpdate,
-} from "./functions";
-
-import { CHANNELS, ACTIONS, getIcon } from "./helpers";
+  getIcon,
+  SET_ALWAYS_ON_TOP,
+  SET_FULLSCREEN_BREAK,
+  SET_MINIMIZE,
+  SET_HIDE,
+  SET_UI_THEME,
+  SET_NATIVE_TITLEBAR,
+  isWindow,
+} from "./helpers";
+import store from "./store";
 
 import "v8-compile-cache";
 
 const onProduction = app.isPackaged;
 
-const trayIcon = path.join(__dirname, "../src/assets/logos/tray.png");
-const trayIconDark = path.join(__dirname, "../src/assets/logos/tray-dark.png");
+const trayIcon = path.join(__dirname, "../src/assets/logos/tray-dark.png");
+const notificationIcon = path.join(
+  __dirname,
+  "../src/assets/logos/notification-dark.png"
+);
 
 const onlySingleIntance = app.requestSingleInstanceLock();
+
+Menu.setApplicationMenu(null);
+
+const hasFrame: boolean = store.get("useNativeTitlebar")
+  ? store.get("useNativeTitlebar")
+  : isWindow()
+  ? false
+  : true;
+
+const isDarkMode: boolean = store.get("isDarkMode")
+  ? store.get("isDarkMode")
+  : false;
+
+const getFrameHeight = () => {
+  if (isWindow()) {
+    return 500;
+  } else {
+    if (hasFrame) {
+      return 480;
+    }
+    return 500;
+  }
+};
 
 let win: BrowserWindow | null;
 
 function createMainWindow() {
   win = new BrowserWindow({
     width: 340,
-    height: 500,
+    height: getFrameHeight(),
     resizable: false,
     maximizable: false,
     show: false,
-    frame: false,
+    frame: hasFrame,
     icon: getIcon(),
+    backgroundColor: isDarkMode ? "#141e25" : "#fff",
     webPreferences: {
       contextIsolation: true,
       enableRemoteModule: false,
@@ -46,6 +80,11 @@ function createMainWindow() {
 
   win.once("ready-to-show", () => {
     win?.show();
+  });
+
+  win.on("close", (e) => {
+    e.preventDefault();
+    win?.hide();
   });
 
   win.on("closed", () => {
@@ -72,28 +111,13 @@ if (!onlySingleIntance) {
     createMainWindow();
 
     const tray = createSystemTray({
-      icon: trayIconDark,
+      icon: trayIcon,
       template: [
         {
-          label: "Show",
-          click: () => {
-            if (!win?.isVisible()) {
-              win?.show();
-            }
-          },
-        },
-        {
-          label: "Hide",
-          click: () => {
-            if (win?.isFullScreen()) return;
-            if (win?.isVisible()) {
-              win?.hide();
-            }
-          },
-        },
-        {
           label: "Quit",
-          role: "quit",
+          click: () => {
+            app.exit();
+          },
         },
       ],
     });
@@ -108,14 +132,16 @@ if (!onlySingleIntance) {
       }
     });
 
-    if (win && onProduction) {
-      const blockKeys = [
-        "CommandOrControl+R",
-        "CommandOrControl+Shift+R",
-        "CommandOrControl+Alt+Q",
-        "F11",
-      ];
-      blockShortcutKeys(win, blockKeys);
+    if (onProduction) {
+      if (win) {
+        const blockKeys = [
+          "CommandOrControl+R",
+          "CommandOrControl+Shift+R",
+          "CommandOrControl+Alt+Q",
+          "F11",
+        ];
+        blockShortcutKeys(win, blockKeys);
+      }
     }
 
     activateGlobalShortcuts([
@@ -133,69 +159,91 @@ if (!onlySingleIntance) {
       },
     ]);
 
-    const autoUpdater = activateAutoUpdate({});
-
-    ipcMain.on(CHANNELS.TO_MAIN, (event, data) => {
-      if (win) {
-        switch (data.type) {
-          case ACTIONS.SET_THEME:
-            const { darkTheme } = data.payload;
-
-            const backgroundColor = darkTheme ? "#141e25" : "#fff";
-            const iconOnTray = darkTheme ? trayIconDark : trayIcon;
-
-            win.setBackgroundColor(backgroundColor);
-            tray.setImage(iconOnTray);
-            break;
-
-          case ACTIONS.MINIMIZE:
-            win.minimize();
-            break;
-
-          case ACTIONS.HIDE:
-            win.hide();
-            break;
-
-          case ACTIONS.FULL_SCREEN:
-            const { isFullScreen, alwaysOnTop } = data.payload;
-
-            if (isFullScreen) {
-              if (!win.isVisible()) {
-                win.show();
-                win.focus();
-                win.setAlwaysOnTop(true, "screen-saver");
+    const autoUpdater = activateAutoUpdate({
+      onUpdateAvailable: (info) => {
+        notifier.notify({
+          icon: notificationIcon,
+          title: "NEW UPDATE IS AVAILABLE",
+          message: `App version ${info.version} ready to be downloaded.`,
+          sound: true,
+          wait: true,
+        });
+      },
+      onUpdateDownloaded: (info) => {
+        notifier.notify(
+          {
+            icon: notificationIcon,
+            title: "READY TO BE INSTALLED",
+            message: "Update has been successfully downloaded.",
+            actions: ["Quit and Install", "Install it Later"],
+            sound: true,
+            wait: true,
+          },
+          (err, response) => {
+            if (!err) {
+              if (response === "quit and install") {
+                autoUpdater.quitAndInstall();
               }
-
-              win.setSkipTaskbar(true);
-              win.setFullScreen(true);
-              win.setVisibleOnAllWorkspaces(true);
-
-              globalShortcut.unregister("Alt+Shift+H");
-            } else {
-              win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-
-              win.setSkipTaskbar(false);
-              win.setFullScreen(false);
-              win.setVisibleOnAllWorkspaces(false);
-
-              globalShortcut.register("Alt+Shift+H", () => {
-                win?.hide();
-              });
             }
-            break;
+          }
+        );
+      },
+    });
 
-          case ACTIONS.ALWAYS_ON_TOP:
-            win.setAlwaysOnTop(data.payload);
-            break;
+    ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
+      win?.setAlwaysOnTop(alwaysOnTop);
+    });
 
-          case ACTIONS.QUIT_INSTALL_UPDATES:
-            autoUpdater.quitAndInstall();
-            break;
+    ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
+      const { shouldFullscreen, alwaysOnTop } = args;
 
-          default:
-            return data.payload;
+      if (shouldFullscreen) {
+        win?.show();
+        win?.focus();
+        win?.setAlwaysOnTop(true, "screen-saver");
+        win?.setSkipTaskbar(true);
+        win?.setFullScreen(true);
+        win?.setVisibleOnAllWorkspaces(true);
+
+        globalShortcut.unregister("Alt+Shift+H");
+
+        if (!win?.isVisible()) {
+          win?.show();
+          win?.focus();
         }
+      } else {
+        win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+
+        win?.setSkipTaskbar(false);
+        win?.setFullScreen(false);
+        win?.setVisibleOnAllWorkspaces(false);
+
+        globalShortcut.register("Alt+Shift+H", () => {
+          win?.hide();
+        });
+
+        if (win?.isFullScreen()) win?.setFullScreen(false);
       }
+    });
+
+    ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
+      store.set("isDarkMode", isDarkMode);
+    });
+
+    ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
+      if (hasFrame !== useNativeTitlebar) {
+        store.set("useNativeTitlebar", useNativeTitlebar);
+        app.relaunch();
+        app.exit();
+      }
+    });
+
+    ipcMain.on(SET_MINIMIZE, () => {
+      win?.minimize();
+    });
+
+    ipcMain.on(SET_HIDE, () => {
+      win?.hide();
     });
   });
 }

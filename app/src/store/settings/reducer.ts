@@ -2,28 +2,31 @@ import {
   SettingTypes,
   SettingActionTypes,
   ALWAYS_ON_TOP,
-  ENABLE_SPECIAL_BREAKS,
-  ENABLE_STICKY_NOTES,
-  ENABLE_STRICT_MODE,
-  ENABLE_WEB_BLOCKER,
-  RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
+  ENABLE_STRICT_MODE,
+  RESTORE_DEFAULT_SETTINGS,
   TOGGLE_NOTIFICATION_SOUND,
-  ENABLE_TIMER_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
+  ENABLE_FULLSCREEN_BREAK,
+  ENABLE_TIMER_ANIMATION,
+  USE_NATIVE_TITLE_BAR,
 } from "./types";
-import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
+import {
+  saveToStorage,
+  getFromStorage,
+  isPreferredDark,
+  detectOS,
+} from "utils";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
-  notificationSoundOn: true,
-  enableSpecialBreaks: true,
-  enableStickyNotes: false,
-  enableStrictMode: true,
-  enableWebBlocker: true,
+  enableFullscreenBreak: true,
+  enableStrictMode: false,
   enableDarkTheme: isPreferredDark(),
   enableTimerAnimation: true,
+  notificationSoundOn: true,
   notificationProperty: "extra",
+  useNativeTitlebar: detectOS() === "Windows" ? false : true,
 };
 
 const settings = getFromStorage("settings")
@@ -57,20 +60,10 @@ export const settingReducer = (
 
       return newState;
     }
-    case ENABLE_SPECIAL_BREAKS: {
+    case ENABLE_FULLSCREEN_BREAK: {
       const newState = {
         ...state,
-        enableSpecialBreaks: action.payload,
-      };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_STICKY_NOTES: {
-      const newState = {
-        ...state,
-        enableStickyNotes: action.payload,
+        enableFullscreenBreak: action.payload,
       };
 
       saveToStorage("settings", newState);
@@ -97,20 +90,20 @@ export const settingReducer = (
 
       return newState;
     }
-    case ENABLE_WEB_BLOCKER: {
+    case ENABLE_TIMER_ANIMATION: {
       const newState = {
         ...state,
-        enableWebBlocker: action.payload,
+        enableTimerAnimation: action.payload,
       };
 
       saveToStorage("settings", newState);
 
       return newState;
     }
-    case ENABLE_TIMER_ANIMATION: {
+    case USE_NATIVE_TITLE_BAR: {
       const newState = {
         ...state,
-        enableTimerAnimation: action.payload,
+        useNativeTitlebar: action.payload,
       };
 
       saveToStorage("settings", newState);

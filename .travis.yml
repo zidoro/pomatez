@@ -1,5 +1,6 @@
 language: node_js
-node_js: "stable"
+node_js:
+  - "lts/*"
 
 # cache some files for faster builds
 cache:

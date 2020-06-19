@@ -2,12 +2,13 @@ import React, { useCallback, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAlwaysOnTop,
-  setEnableSpecialBreaks,
   setEnableStrictMode,
   AppStateTypes,
   setEnableTimerAnimation,
   SettingTypes,
   setNotificationProperty,
+  setEnableFullscreenBreak,
+  setUseNativeTitlebar,
 } from "store";
 
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
@@ -25,7 +26,7 @@ const FeatureSection: React.FC = () => {
 
   const featureList: TogglerProps[] = [
     {
-      id: "on-top",
+      id: "always-on-top",
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onChange: useCallback(() => {
@@ -33,12 +34,12 @@ const FeatureSection: React.FC = () => {
       }, [dispatch, settings.alwaysOnTop]),
     },
     {
-      id: "special-breaks",
-      label: "Special Breaks",
-      checked: settings.enableSpecialBreaks,
+      id: "fullscreen-break",
+      label: "Fullscreen Break",
+      checked: settings.enableFullscreenBreak,
       onChange: useCallback(() => {
-        dispatch(setEnableSpecialBreaks(!settings.enableSpecialBreaks));
-      }, [dispatch, settings.enableSpecialBreaks]),
+        dispatch(setEnableFullscreenBreak(!settings.enableFullscreenBreak));
+      }, [dispatch, settings.enableFullscreenBreak]),
     },
     {
       id: "strict-mode",
@@ -58,7 +59,14 @@ const FeatureSection: React.FC = () => {
         }
       },
     },
-
+    {
+      id: "native-titlebar",
+      label: "Native Titlebar",
+      checked: settings.useNativeTitlebar,
+      onChange: useCallback(() => {
+        dispatch(setUseNativeTitlebar(!settings.useNativeTitlebar));
+      }, [dispatch, settings.useNativeTitlebar]),
+    },
     {
       id: "timer-animation",
       label: "Timer Animation",

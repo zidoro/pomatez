@@ -1,4 +1,10 @@
-import React, { useEffect, useContext, useCallback, useState } from "react";
+import React, {
+  useEffect,
+  useContext,
+  useCallback,
+  useState,
+  useRef,
+} from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -27,6 +33,8 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 
   const [noTransition, setNoTransition] = useState(false);
 
+  const useNativeTitlebar = useRef(settings.useNativeTitlebar);
+
   const registerKey = useCallback(
     (e: KeyboardEvent) => {
       const keyCode = e.keyCode;
@@ -45,7 +53,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
   }, [registerKey]);
 
   useEffect(() => {
-    if (settings.enableStrictMode) {
+    if (settings.enableFullscreenBreak) {
       if (
         timer.timerType === SHORT_BREAK ||
         timer.timerType === LONG_BREAK ||
@@ -59,14 +67,16 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
         setNoTransition(false);
       }
     }
-  }, [timer.timerType, location, history, settings.enableStrictMode]);
+  }, [timer.timerType, location, history, settings.enableFullscreenBreak]);
 
   return (
     <StyledLayout noTransition={noTransition}>
-      <Titlebar
-        darkMode={settings.enableDarkTheme}
-        timerType={timer.timerType}
-      />
+      {!useNativeTitlebar.current && (
+        <Titlebar
+          darkMode={settings.enableDarkTheme}
+          timerType={timer.timerType}
+        />
+      )}
       <Navigation timerType={timer.timerType} />
       {children}
     </StyledLayout>

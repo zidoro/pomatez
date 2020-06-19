@@ -5,10 +5,7 @@
     "allowJs": false,
     "noEmit": false,
     "outDir": "../public",
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
+    "removeComments": true
   },
   "include": ["**/*"]
 }

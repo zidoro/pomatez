@@ -11,7 +11,7 @@ import {
   SPECIAL_BREAK,
   SettingTypes,
 } from "store";
-import { useNotification } from "hooks";
+import { useNotification, useSleepMode } from "hooks";
 
 import shortBreakStart from "assets/audios/short-break-start.wav";
 import shortBreakFinished from "assets/audios/short-break-finished.wav";
@@ -35,6 +35,7 @@ type CounterProps = {
   setDuration?: React.Dispatch<React.SetStateAction<number>>;
   timerType?: TimerTypes["timerType"];
   resetTimerAction?: () => void;
+  shouldFullscreen?: boolean;
 };
 
 const CounterContext = React.createContext<CounterProps>({
@@ -53,6 +54,10 @@ const CounterProvider: React.FC = ({ children }) => {
   const settings: SettingTypes = useSelector(
     (state: AppStateTypes) => state.settings
   );
+
+  const [shouldFullscreen, setShouldFullscreen] = useState(false);
+
+  const { preventSleep, allowSleep } = useSleepMode();
 
   const notification = useNotification(
     {
@@ -98,6 +103,14 @@ const CounterProvider: React.FC = ({ children }) => {
   ]);
 
   useEffect(() => {
+    if (timer.playing && timer.timerType !== STAY_FOCUS) {
+      preventSleep();
+    } else {
+      allowSleep();
+    }
+  }, [timer.playing, timer.timerType, preventSleep, allowSleep]);
+
+  useEffect(() => {
     let interval: number;
 
     const {
@@ -107,7 +120,7 @@ const CounterProvider: React.FC = ({ children }) => {
       fourthBreak,
     } = config.specialBreaks;
 
-    if (settings.enableSpecialBreaks && timer.playing) {
+    if (timer.playing) {
       interval = setTimeout(() => {
         const d = new Date();
         const ct = d.getHours() + ":" + d.getMinutes();
@@ -156,12 +169,11 @@ const CounterProvider: React.FC = ({ children }) => {
         } else {
           return clearInterval(interval);
         }
-      }, 1000);
+      }, 500);
     }
 
     return () => clearInterval(interval);
   }, [
-    settings.enableSpecialBreaks,
     config.specialBreaks,
     timer.timerType,
     timer.playing,
@@ -294,6 +306,16 @@ const CounterProvider: React.FC = ({ children }) => {
     settings.notificationProperty,
   ]);
 
+  useEffect(() => {
+    if (settings.enableFullscreenBreak) {
+      if (timer.timerType !== STAY_FOCUS) {
+        setShouldFullscreen(true);
+      } else {
+        setShouldFullscreen(false);
+      }
+    }
+  }, [settings.enableFullscreenBreak, timer.timerType]);
+
   return (
     <CounterContext.Provider
       value={{
@@ -303,6 +325,7 @@ const CounterProvider: React.FC = ({ children }) => {
         setDuration,
         resetTimerAction,
         timerType: timer.timerType,
+        shouldFullscreen,
       }}
     >
       {children}

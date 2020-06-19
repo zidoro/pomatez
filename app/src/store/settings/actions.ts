@@ -2,15 +2,14 @@ import {
   SettingTypes,
   SettingActionTypes,
   ALWAYS_ON_TOP,
-  ENABLE_SPECIAL_BREAKS,
-  ENABLE_STICKY_NOTES,
-  ENABLE_STRICT_MODE,
-  ENABLE_WEB_BLOCKER,
   RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
   ENABLE_TIMER_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
+  ENABLE_FULLSCREEN_BREAK,
+  USE_NATIVE_TITLE_BAR,
+  ENABLE_STRICT_MODE,
 } from "./types";
 
 export const setAlwaysOnTop = (
@@ -28,30 +27,21 @@ export const togglenotificationSoundOn = () => {
   };
 };
 
-export const setEnableSpecialBreaks = (
-  enableSpecialBreaks: SettingTypes["enableSpecialBreaks"]
-): SettingActionTypes => {
-  return {
-    type: ENABLE_SPECIAL_BREAKS,
-    payload: enableSpecialBreaks,
-  };
-};
-
-export const setEnableStickyNotes = (
-  enableStickyNotes: SettingTypes["enableStickyNotes"]
-): SettingActionTypes => {
-  return {
-    type: ENABLE_STICKY_NOTES,
-    payload: enableStickyNotes,
-  };
-};
-
 export const setEnableDarkTheme = (
   enableDarkTheme: SettingTypes["enableDarkTheme"]
 ): SettingActionTypes => {
   return {
     type: ENABLE_DARK_THEME,
     payload: enableDarkTheme,
+  };
+};
+
+export const setEnableFullscreenBreak = (
+  enableFullscreenBreak: SettingTypes["enableFullscreenBreak"]
+): SettingActionTypes => {
+  return {
+    type: ENABLE_FULLSCREEN_BREAK,
+    payload: enableFullscreenBreak,
   };
 };
 
@@ -64,21 +54,21 @@ export const setEnableStrictMode = (
   };
 };
 
-export const setEnableWebBlocker = (
-  enableWebBlocker: SettingTypes["enableWebBlocker"]
-): SettingActionTypes => {
-  return {
-    type: ENABLE_WEB_BLOCKER,
-    payload: enableWebBlocker,
-  };
-};
-
 export const setEnableTimerAnimation = (
   enableTimerAnimation: SettingTypes["enableTimerAnimation"]
 ): SettingActionTypes => {
   return {
     type: ENABLE_TIMER_ANIMATION,
     payload: enableTimerAnimation,
+  };
+};
+
+export const setUseNativeTitlebar = (
+  useNativeTitlebar: SettingTypes["useNativeTitlebar"]
+): SettingActionTypes => {
+  return {
+    type: USE_NATIVE_TITLE_BAR,
+    payload: useNativeTitlebar,
   };
 };
 

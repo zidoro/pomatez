@@ -7,7 +7,7 @@ import {
   StyledNavListItem,
   StyledNavLink,
 } from "styles";
-import { routes } from "config";
+import { routes } from "configurations";
 import SVG from "./SVG";
 
 type Props = {
