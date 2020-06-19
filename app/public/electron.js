@@ -13,9 +13,9 @@ var onProduction = electron_1.app.isPackaged;
 var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png");
 var notificationIcon = path_1.default.join(__dirname, "../src/assets/logos/notification-dark.png");
 var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
-var win;
 electron_1.Menu.setApplicationMenu(null);
-var hasFrame = store_1.default.get("useNativeTitlebar") || false;
+var hasFrame = store_1.default.get("useNativeTitlebar") || process.platform === "win32" ? false : true;
+var win;
 function createMainWindow() {
     win = new electron_1.BrowserWindow({
         width: 340,
