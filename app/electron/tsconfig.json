@@ -4,7 +4,8 @@
     "module": "commonjs",
     "allowJs": false,
     "noEmit": false,
-    "outDir": "../public"
+    "outDir": "../public",
+    "removeComments": true
   },
   "include": ["**/*"]
 }
