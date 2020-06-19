@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { isPreferredDark } from "utils";
 import { GlobalStyles } from "styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,6 +20,8 @@ const ThemeProvider: React.FC = ({ children }) => {
 
   const dispatch = useDispatch();
 
+  const useNativeTitlebar = useRef(settings.useNativeTitlebar);
+
   const toggleThemeAction = () => {
     dispatch(setEnableDarkTheme(!settings.enableDarkTheme));
   };
@@ -31,7 +33,10 @@ const ThemeProvider: React.FC = ({ children }) => {
         toggleThemeAction,
       }}
     >
-      <GlobalStyles isDarkMode={settings.enableDarkTheme} />
+      <GlobalStyles
+        isDarkMode={settings.enableDarkTheme}
+        useNativeTitlebar={useNativeTitlebar.current}
+      />
       {children}
     </ThemeContext.Provider>
   );

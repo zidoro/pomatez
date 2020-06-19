@@ -4,15 +4,15 @@ type LayoutProps = { noTransition?: boolean };
 
 export const StyledLayout = styled.div<LayoutProps>`
   width: 100%;
-  height: 500px;
+  height: max-content;
 
-  display: grid;
-  align-content: start;
-  grid-template-rows: repeat(2, max-content) 1fr;
-
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
   background-color: var(--color-bg-primary);
 
   & > main {
+    height: 41.2rem;
     animation: ${(p) => p.noTransition && "none"};
   }
 `;

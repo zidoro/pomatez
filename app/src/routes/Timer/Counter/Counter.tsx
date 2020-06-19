@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
-import { CounterContext, ElectronContext } from "contexts";
+
+import { CounterContext } from "contexts";
 import { AppStateTypes, SettingTypes } from "store";
 
 import {
@@ -18,40 +19,17 @@ const Counter: React.FC = () => {
     (state: AppStateTypes) => state.settings
   );
 
-  const { shouldFullscreenCallback } = useContext(ElectronContext);
-
-  const { count, duration, timerType } = useContext(CounterContext);
+  const { count, duration, timerType, shouldFullscreen } = useContext(
+    CounterContext
+  );
 
   const minutes = Math.floor(count / 60);
   const seconds = count % 60;
 
   const dashOffset = (duration - count) * (674 / duration);
 
-  const shouldFullscreen = useCallback(() => {
-    if (settings.enableStrictMode) {
-      switch (timerType) {
-        case "SHORT_BREAK":
-          return true;
-        case "LONG_BREAK":
-          return true;
-        case "SPECIAL_BREAK":
-          return true;
-        default:
-          return false;
-      }
-    }
-    return false;
-  }, [settings.enableStrictMode, timerType]);
-
-  useEffect(() => {
-    if (shouldFullscreenCallback) {
-      const isFullScreen = shouldFullscreen();
-      shouldFullscreenCallback(isFullScreen);
-    }
-  }, [shouldFullscreen, shouldFullscreenCallback]);
-
   return (
-    <StyledCounterContainer fullscreen={shouldFullscreen()}>
+    <StyledCounterContainer fullscreen={shouldFullscreen}>
       <StyledCounterProgress
         offset={dashOffset}
         type={timerType}

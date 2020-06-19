@@ -1,5 +1,8 @@
 
-# Created by https://www.gitignore.io/api/osx,vim,node,windows,visualstudiocode
+public/helpers
+public/store
+public/electron.js
+public/preload.js
 
 ### Node ###
 # Logs

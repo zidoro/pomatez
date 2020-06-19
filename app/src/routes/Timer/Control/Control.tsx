@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   AppStateTypes,
@@ -52,15 +52,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   const activateWarning = useCallback(() => {
     setWarn(true);
     warnSound.play();
-
-    const timeout = setTimeout(() => {
-      setWarn(false);
-    }, 3000);
-
-    if (warn) {
-      clearTimeout(timeout);
-    }
-  }, [warn, warnSound]);
+  }, [warnSound]);
 
   const onResetCallback = useCallback(() => {
     if (timer.playing && settings.enableStrictMode) {
@@ -134,6 +126,18 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     dispatch(setTimerType("STAY_FOCUS"));
     dispatch(setRound(1));
   }, [dispatch]);
+
+  useEffect(() => {
+    let timeout: number;
+
+    if (warn) {
+      timeout = setTimeout(() => {
+        setWarn(false);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [warn]);
 
   return (
     <StyledControl type={timer.timerType}>

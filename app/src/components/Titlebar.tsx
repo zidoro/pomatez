@@ -11,7 +11,7 @@ import {
 } from "styles";
 import Json from "../../package.json";
 import { ElectronContext } from "contexts";
-import { APP_NAME } from "config";
+import { APP_NAME } from "configurations";
 
 import appIcon from "assets/logos/tray.png";
 import appIconDark from "assets/logos/tray-dark.png";
