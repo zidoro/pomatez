@@ -11,7 +11,7 @@ import {
   SPECIAL_BREAK,
   SettingTypes,
 } from "store";
-import { useNotification } from "hooks";
+import { useNotification, useSleepMode } from "hooks";
 
 import shortBreakStart from "assets/audios/short-break-start.wav";
 import shortBreakFinished from "assets/audios/short-break-finished.wav";
@@ -57,6 +57,8 @@ const CounterProvider: React.FC = ({ children }) => {
 
   const [shouldFullscreen, setShouldFullscreen] = useState(false);
 
+  const { preventSleep, allowSleep } = useSleepMode();
+
   const notification = useNotification(
     {
       icon: settings.enableDarkTheme ? notificationIconDark : notificationIcon,
@@ -99,6 +101,14 @@ const CounterProvider: React.FC = ({ children }) => {
     setDuration,
     setTimerDuration,
   ]);
+
+  useEffect(() => {
+    if (timer.playing && timer.timerType !== STAY_FOCUS) {
+      preventSleep();
+    } else {
+      allowSleep();
+    }
+  }, [timer.playing, timer.timerType, preventSleep, allowSleep]);
 
   useEffect(() => {
     let interval: number;
