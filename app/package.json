@@ -26,6 +26,7 @@
     "build:mac": "yarn build:app && electron-builder --mac",
     "build:linux": "yarn build:app && electron-builder --linux",
     "release": "yarn build:app && electron-builder --publish always",
+    "postinstall": "electron-builder install-app-deps",
     "semantic-release": "semantic-release"
   },
   "babelMacros": {
