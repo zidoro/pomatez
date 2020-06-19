@@ -94,6 +94,7 @@
     "@types/autosize": "^3.0.7",
     "@types/jest": "^25.2.3",
     "@types/node": "^14.0.4",
+    "@types/node-notifier": "^6.0.1",
     "@types/react": "^16.9.35",
     "@types/react-beautiful-dnd": "^12.1.2",
     "@types/react-dom": "^16.9.7",

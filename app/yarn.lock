@@ -1680,6 +1680,13 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.0.tgz#69a23a3ad29caf0097f06eda59b361ee2f0639f6"
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
+"@types/node-notifier@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@types/node-notifier/-/node-notifier-6.0.1.tgz#282bb8c37d69be3343c359efc8b9c97fad46a0e9"
+  integrity sha512-PBkKwgjxu2aA24zh5Rng8FlL03R4zopZbTtzeKbWLfF+AMeHBMk3Ls12K/yZchYhe/riuiarPXcRJGUBLGb15w==
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*", "@types/node@>= 8", "@types/node@^14.0.4":
   version "14.0.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.4.tgz#43a63fc5edce226bed106b31b875165256271107"
