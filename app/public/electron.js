@@ -14,17 +14,36 @@ var trayIcon = path_1.default.join(__dirname, "../src/assets/logos/tray-dark.png
 var notificationIcon = path_1.default.join(__dirname, "../src/assets/logos/notification-dark.png");
 var onlySingleIntance = electron_1.app.requestSingleInstanceLock();
 electron_1.Menu.setApplicationMenu(null);
-var hasFrame = store_1.default.get("useNativeTitlebar") || process.platform === "win32" ? false : true;
+var hasFrame = store_1.default.get("useNativeTitlebar")
+    ? store_1.default.get("useNativeTitlebar")
+    : helpers_1.isWindow()
+        ? false
+        : true;
+var isDarkMode = store_1.default.get("isDarkMode")
+    ? store_1.default.get("isDarkMode")
+    : false;
+var getFrameHeight = function () {
+    if (helpers_1.isWindow()) {
+        return 500;
+    }
+    else {
+        if (hasFrame) {
+            return 480;
+        }
+        return 500;
+    }
+};
 var win;
 function createMainWindow() {
     win = new electron_1.BrowserWindow({
         width: 340,
-        height: 500,
+        height: getFrameHeight(),
         resizable: false,
         maximizable: false,
         show: false,
         frame: hasFrame,
-        icon: helpers_1.getIcon(),
+        icon: helpers_1.getIcon(isDarkMode),
+        backgroundColor: isDarkMode ? "#141e25" : "#fff",
         webPreferences: {
             contextIsolation: true,
             enableRemoteModule: false,
@@ -171,8 +190,7 @@ else {
         });
         electron_1.ipcMain.on(helpers_1.SET_UI_THEME, function (e, _a) {
             var isDarkMode = _a.isDarkMode;
-            var backgroundColor = isDarkMode ? "#141e25" : "#fff";
-            win === null || win === void 0 ? void 0 : win.setBackgroundColor(backgroundColor);
+            store_1.default.set("isDarkMode", isDarkMode);
         });
         electron_1.ipcMain.on(helpers_1.SET_NATIVE_TITLEBAR, function (e, _a) {
             var useNativeTitlebar = _a.useNativeTitlebar;

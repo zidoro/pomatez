@@ -15,4 +15,5 @@ __exportStar(require("./globalShortcuts"), exports);
 __exportStar(require("./createSystemTray"), exports);
 __exportStar(require("./autoUpdater"), exports);
 __exportStar(require("./constants"), exports);
+__exportStar(require("./isWindow"), exports);
 __exportStar(require("./getIcon"), exports);
