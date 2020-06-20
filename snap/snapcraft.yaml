@@ -31,7 +31,7 @@ apps:
 
 parts:
   productivity-timer:
-    source: .
+    source: app/
     plugin: nodejs
     nodejs-version: 12.18.1
 
@@ -53,7 +53,6 @@ parts:
       snapcraftctl set-version "$version"
 
     override-build: |
-      cd app/
       snapcraftctl build
       rm -rf $SNAPCRAFT_PART_INSTALL/app
       mkdir -p $SNAPCRAFT_PART_INSTALL/app
