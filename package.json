@@ -8,11 +8,11 @@
     "develop": "npm run develop --prefix=app",
     "electron": "wait-on http://localhost:3000 && npm run electron --prefix=app",
     "start:app": "concurrently \"yarn develop\" \"yarn electron\"",
-    "postinstall": "cd app && yarn install --offline",
     "build:dir": "npm run build:dir --prefix=app",
     "build:win": "npm run build:win --prefix=app",
     "build:mac": "npm run build:mac --prefix=app",
-    "build:linux": "npm run build:linux --prefix=app"
+    "build:linux": "npm run build:linux --prefix=app",
+    "postinstall": "cd app && yarn install"
   },
   "config": {
     "commitizen": {
