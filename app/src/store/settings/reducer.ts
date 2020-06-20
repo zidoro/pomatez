@@ -11,12 +11,7 @@ import {
   ENABLE_TIMER_ANIMATION,
   USE_NATIVE_TITLE_BAR,
 } from "./types";
-import {
-  saveToStorage,
-  getFromStorage,
-  isPreferredDark,
-  detectOS,
-} from "utils";
+import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
@@ -26,7 +21,7 @@ const defaultSettings: SettingTypes = {
   enableTimerAnimation: true,
   notificationSoundOn: true,
   notificationProperty: "extra",
-  useNativeTitlebar: detectOS() === "Windows" ? false : true,
+  useNativeTitlebar: false,
 };
 
 const settings = getFromStorage("settings")

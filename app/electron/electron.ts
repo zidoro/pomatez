@@ -13,6 +13,7 @@ import {
   SET_HIDE,
   SET_UI_THEME,
   SET_NATIVE_TITLEBAR,
+  getTrayIcon,
   isWindow,
 } from "./helpers";
 import store from "./store";
@@ -21,7 +22,6 @@ import "v8-compile-cache";
 
 const onProduction = app.isPackaged;
 
-const trayIcon = path.join(__dirname, "../src/assets/logos/tray-dark.png");
 const notificationIcon = path.join(
   __dirname,
   "../src/assets/logos/notification-dark.png"
@@ -105,7 +105,7 @@ if (!onlySingleIntance) {
     createMainWindow();
 
     const tray = createSystemTray({
-      icon: trayIcon,
+      icon: getTrayIcon(),
       template: [
         {
           label: "Quit",
