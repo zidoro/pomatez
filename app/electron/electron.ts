@@ -101,7 +101,7 @@ if (!onlySingleIntance) {
     }
   });
 
-  app.on("ready", () => {
+  app.whenReady().then(() => {
     createMainWindow();
 
     const tray = createSystemTray({
@@ -253,7 +253,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-  if (win === null) {
+  if (BrowserWindow.getAllWindows().length === 0) {
     createMainWindow();
   }
 });
