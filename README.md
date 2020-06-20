@@ -10,9 +10,9 @@
   Wonderful time management app based on Pomodoro Technique <br> that will help boost your productivity.
    <br>
   <br>
-  <a href="#features">Features</a>
+  <a href="#sparkles-features">Features</a>
   .
-  <a href="#road-map">Road Map</a>
+  <a href="#fire-roadmap">Road Map</a>
   .
   <a href="https://roldanjrcodearts9711.github.io/productivity-timer/">Download</a>
   <br>
@@ -22,7 +22,6 @@
 ![App Preview](/assets/Preview.png)
 
 [![productivity-timer](https://snapcraft.io//productivity-timer/badge.svg)](https://snapcraft.io/productivity-timer)
-[![Snap Status](https://build.snapcraft.io/badge/roldanjrCodeArts9711/productivity-timer.svg)](https://build.snapcraft.io/user/roldanjrCodeArts9711/productivity-timer)
 [![Build Status](https://travis-ci.com/roldanjrCodeArts9711/productivity-timer.svg?branch=master)](https://travis-ci.com/roldanjrCodeArts9711/productivity-timer)
 [![Total Downloads](https://img.shields.io/github/downloads/roldanjrCodeArts9711/productivity-timer/total)](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
 [![Version](https://img.shields.io/github/v/release/roldanjrCodeArts9711/productivity-timer)](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
@@ -31,15 +30,25 @@
 ## :sparkles: Features
 
 - **Always On Top**. If enabled, the app will always on top of other apps running on user's Operating System.
+
 - **Full Screen Breaks**. If enabled, the app will interrupt the user by occupying the whole screen so that the user will be force to take a break.
+
 - **Special Breaks**. If enabled, the user will be allowed to set some special time when the user really need to take a break.
+
 - **Strict Mode**. If enabled, the app will strictly follow user's configuration and prevent the user from resetting, pausing and skipping the timer when it has started.
+
 - **Dark Theme**. Allowing the user to use Dark Mode to reduce eye strain and improves visibility for user with low vision and those who are sensitive to bright light.
+
 - **Toggle Native Titlebar**. Enable user to switch between default custom titlebar to a native titlebar.
+
 - **Desktop Notification**. If enabled, the app will allow the user to be notified from time to time. Notification property is divided into 3 types NONE, NORMAL and EXTRA.
+
 - **Keyboard Shortcuts**. Provide some useful keyboard shortcuts allowing the user to use the app conveniently.
+
 - **Customizable Rules**. Allowing the user to modify the default rules of Pomodoro Principle to fit on their personal preference.
+
 - **Built-in Task List**. Allowing the user to create tasks they wanted to accomplish and enable them to mark a particular task as done showing some accomplishments.
+
 - **Auto Updates**. With the Automatic Updates feature, it keep the app up to date with the latest updates and enhancements. User no longer have to search for critical updates; it delivers them directly to the computer.
 
 ## :fire: Roadmap

@@ -12,6 +12,7 @@
     "build:win": "npm run build:win --prefix=app",
     "build:mac": "npm run build:mac --prefix=app",
     "build:linux": "npm run build:linux --prefix=app",
+    "build:snap": "npm run build:snap --prefix=app",
     "postinstall": "cd app && yarn install"
   },
   "config": {

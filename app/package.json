@@ -9,8 +9,7 @@
     "email": "roldanjrmontilla@gmail.com",
     "url": "https://github.com/roldanjrCodeArts9711"
   },
-  "description": "Wonderful app that will help boost your productivity.",
-  "repository": "https://github.com/roldanjrCodeArts9711/productivity-timer",
+  "description": "Wonderful time management app based on Pomodoro Technique that will help boost your productivity.",
   "homepage": "./",
   "scripts": {
     "prepare": "yarn build:dir",
@@ -25,6 +24,7 @@
     "build:win": "yarn build:app && electron-builder --win",
     "build:mac": "yarn build:app && electron-builder --mac",
     "build:linux": "yarn build:app && electron-builder --linux",
+    "build:snap": "yarn build:app && electron-builder --linux snap",
     "release": "yarn build:app && electron-builder --publish always",
     "postinstall": "electron-builder install-app-deps",
     "semantic-release": "semantic-release"
@@ -43,12 +43,12 @@
       "src/assets/logos"
     ],
     "mac": {
-      "artifactName": "PRODUCTIVITY-TIMER-${version}-mac.${ext}",
+      "artifactName": "PRODUCTIVITY-TIMER-v${version}-mac.${ext}",
       "category": "public.app-category.productivity",
       "icon": "./src/assets/logos/logo-dark@2x.png"
     },
     "win": {
-      "artifactName": "PRODUCTIVITY-TIMER-${version}-setup.${ext}",
+      "artifactName": "PRODUCTIVITY-TIMER-v${version}-setup.${ext}",
       "target": [
         {
           "target": "nsis",
@@ -61,7 +61,7 @@
       "icon": "./src/assets/logos/logo-dark.ico"
     },
     "linux": {
-      "artifactName": "PRODUCTIVITY-TIMER-${version}-linux.${ext}",
+      "artifactName": "PRODUCTIVITY-TIMER-v${version}-linux.${ext}",
       "target": [
         "AppImage",
         "deb",

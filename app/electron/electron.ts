@@ -31,21 +31,11 @@ const onlySingleIntance = app.requestSingleInstanceLock();
 
 Menu.setApplicationMenu(null);
 
-const hasFrame: boolean = store.get("useNativeTitlebar")
-  ? store.get("useNativeTitlebar")
-  : isWindow()
-  ? false
-  : true;
-
-const isDarkMode: boolean = store.get("isDarkMode")
-  ? store.get("isDarkMode")
-  : false;
-
 const getFrameHeight = () => {
   if (isWindow()) {
     return 500;
   } else {
-    if (hasFrame) {
+    if (store.get("useNativeTitlebar")) {
       return 480;
     }
     return 500;
@@ -54,6 +44,8 @@ const getFrameHeight = () => {
 
 let win: BrowserWindow | null;
 
+let isFullScreen: boolean = false;
+
 function createMainWindow() {
   win = new BrowserWindow({
     width: 340,
@@ -61,9 +53,9 @@ function createMainWindow() {
     resizable: false,
     maximizable: false,
     show: false,
-    frame: hasFrame,
+    frame: store.get("useNativeTitlebar"),
     icon: getIcon(),
-    backgroundColor: isDarkMode ? "#141e25" : "#fff",
+    backgroundColor: store.get("isDarkMode") ? "#141e25" : "#fff",
     webPreferences: {
       contextIsolation: true,
       enableRemoteModule: false,
@@ -84,7 +76,9 @@ function createMainWindow() {
 
   win.on("close", (e) => {
     e.preventDefault();
-    win?.hide();
+    if (!isFullScreen) {
+      win?.hide();
+    }
   });
 
   win.on("closed", () => {
@@ -211,6 +205,8 @@ if (!onlySingleIntance) {
           win?.show();
           win?.focus();
         }
+
+        isFullScreen = shouldFullscreen;
       } else {
         win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
 
@@ -223,19 +219,13 @@ if (!onlySingleIntance) {
         });
 
         if (win?.isFullScreen()) win?.setFullScreen(false);
+
+        isFullScreen = shouldFullscreen;
       }
     });
 
     ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
       store.set("isDarkMode", isDarkMode);
-    });
-
-    ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
-      if (hasFrame !== useNativeTitlebar) {
-        store.set("useNativeTitlebar", useNativeTitlebar);
-        app.relaunch();
-        app.exit();
-      }
     });
 
     ipcMain.on(SET_MINIMIZE, () => {
@@ -247,6 +237,14 @@ if (!onlySingleIntance) {
     });
   });
 }
+
+ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
+  if (store.get("useNativeTitlebar") !== useNativeTitlebar) {
+    store.set("useNativeTitlebar", useNativeTitlebar);
+    app.relaunch();
+    app.exit();
+  }
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
