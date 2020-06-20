@@ -20,5 +20,7 @@ export function createSystemTray({
   if (tooltip) tray.setToolTip(tooltip);
   tray.setContextMenu(contextMenu);
 
+  tray.setToolTip("PRODUCTIVITY TIMER");
+
   return tray;
 }
