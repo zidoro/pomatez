@@ -59,18 +59,6 @@
 
 - **Productivity Report**. Provide some useful summary about user's productivity to have some sense of accomplishments.
 
-## :computer: Installation
-
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
-
-or from the :point_right: [Official Website](https://roldanjrcodearts9711.github.io/productivity-timer/) .
-
-Available for Window, Mac, and Linux.
-
-> For linux users. You can directly install it from SnapStore.
-
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
-
 ## :cyclone: Development
 
 This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
@@ -99,6 +87,18 @@ yarn build:mac
 # build linux installer
 yarn build:linux
 ```
+
+## :computer: Installation
+
+Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
+
+or from the :point_right: [Official Website](https://roldanjrcodearts9711.github.io/productivity-timer/) .
+
+Available for Window, Mac, and Linux.
+
+> For linux users. You can directly install it from SnapStore.
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
 ## License
 
