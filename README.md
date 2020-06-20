@@ -54,7 +54,9 @@
 ## :fire: Roadmap
 
 - **Customizable Shortcuts**. Provide a way to make the default keyboard shortcuts customizable by the user.
+
 - **Website Blocker**. Enable user to block specific website while working in order to focus.
+
 - **Productivity Report**. Provide some useful summary about user's productivity to have some sense of accomplishments.
 
 ## :cyclone: Development
