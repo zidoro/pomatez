@@ -7,7 +7,7 @@
 <h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Wonderful time management app based on Pomodoro Technique <br> that will help boost your productivity.
+  Multi-platform time management app based on Pomodoro Technique <br> that will help boost your productivity.
    <br>
   <br>
   <a href="#sparkles-features">Features</a>
