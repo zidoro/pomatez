@@ -1,4 +1,11 @@
-import { BrowserWindow, app, ipcMain, globalShortcut, Menu } from "electron";
+import {
+  BrowserWindow,
+  app,
+  ipcMain,
+  globalShortcut,
+  Menu,
+  Tray,
+} from "electron";
 import notifier from "node-notifier";
 import path from "path";
 import {
@@ -42,6 +49,8 @@ const getFrameHeight = () => {
   }
 };
 
+let tray: Tray | null = null;
+
 let win: BrowserWindow | null;
 
 let isFullScreen: boolean = false;
@@ -84,6 +93,40 @@ function createMainWindow() {
   win.on("closed", () => {
     win = null;
   });
+
+  win.on("show", () => {
+    tray?.destroy();
+  });
+
+  win.on("hide", () => {
+    tray = createSystemTray({
+      icon: getTrayIcon(),
+      template: [
+        {
+          label: "Show the app",
+          click: () => {
+            win?.show();
+          },
+        },
+        {
+          label: "Quit",
+          click: () => {
+            app.exit();
+          },
+        },
+      ],
+    });
+
+    tray?.on("click", () => {
+      if (!win?.isVisible()) {
+        win?.show();
+      } else {
+        if (!win?.isFullScreen()) {
+          win?.hide();
+        }
+      }
+    });
+  });
 }
 
 if (!onlySingleIntance) {
@@ -103,28 +146,6 @@ if (!onlySingleIntance) {
 
   app.whenReady().then(() => {
     createMainWindow();
-
-    const tray = createSystemTray({
-      icon: getTrayIcon(),
-      template: [
-        {
-          label: "Quit",
-          click: () => {
-            app.exit();
-          },
-        },
-      ],
-    });
-
-    tray.on("click", () => {
-      if (!win?.isVisible()) {
-        win?.show();
-      } else {
-        if (!win?.isFullScreen()) {
-          win?.hide();
-        }
-      }
-    });
 
     if (onProduction) {
       if (win) {
@@ -183,60 +204,60 @@ if (!onlySingleIntance) {
         );
       },
     });
-
-    ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
-      win?.setAlwaysOnTop(alwaysOnTop);
-    });
-
-    ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
-      const { shouldFullscreen, alwaysOnTop } = args;
-
-      if (shouldFullscreen) {
-        win?.show();
-        win?.focus();
-        win?.setAlwaysOnTop(true, "screen-saver");
-        win?.setSkipTaskbar(true);
-        win?.setFullScreen(true);
-        win?.setVisibleOnAllWorkspaces(true);
-
-        globalShortcut.unregister("Alt+Shift+H");
-
-        if (!win?.isVisible()) {
-          win?.show();
-          win?.focus();
-        }
-
-        isFullScreen = shouldFullscreen;
-      } else {
-        win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-
-        win?.setSkipTaskbar(false);
-        win?.setFullScreen(false);
-        win?.setVisibleOnAllWorkspaces(false);
-
-        globalShortcut.register("Alt+Shift+H", () => {
-          win?.hide();
-        });
-
-        if (win?.isFullScreen()) win?.setFullScreen(false);
-
-        isFullScreen = shouldFullscreen;
-      }
-    });
-
-    ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
-      store.set("isDarkMode", isDarkMode);
-    });
-
-    ipcMain.on(SET_MINIMIZE, () => {
-      win?.minimize();
-    });
-
-    ipcMain.on(SET_HIDE, () => {
-      win?.hide();
-    });
   });
 }
+
+ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
+  win?.setAlwaysOnTop(alwaysOnTop);
+});
+
+ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
+  const { shouldFullscreen, alwaysOnTop } = args;
+
+  if (shouldFullscreen) {
+    win?.show();
+    win?.focus();
+    win?.setAlwaysOnTop(true, "screen-saver");
+    win?.setSkipTaskbar(true);
+    win?.setFullScreen(true);
+    win?.setVisibleOnAllWorkspaces(true);
+
+    globalShortcut.unregister("Alt+Shift+H");
+
+    if (!win?.isVisible()) {
+      win?.show();
+      win?.focus();
+    }
+
+    isFullScreen = shouldFullscreen;
+  } else {
+    win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+
+    win?.setSkipTaskbar(false);
+    win?.setFullScreen(false);
+    win?.setVisibleOnAllWorkspaces(false);
+
+    globalShortcut.register("Alt+Shift+H", () => {
+      win?.hide();
+    });
+
+    if (win?.isFullScreen()) win?.setFullScreen(false);
+
+    isFullScreen = shouldFullscreen;
+  }
+});
+
+ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
+  store.set("isDarkMode", isDarkMode);
+});
+
+ipcMain.on(SET_MINIMIZE, () => {
+  win?.minimize();
+});
+
+ipcMain.on(SET_HIDE, () => {
+  win?.hide();
+});
 
 ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
   if (store.get("useNativeTitlebar") !== useNativeTitlebar) {
