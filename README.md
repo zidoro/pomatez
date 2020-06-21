@@ -43,6 +43,8 @@
 
 - **Desktop Notification**. If enabled, the app will allow the user to be notified from time to time. Notification property is divided into 3 types NONE, NORMAL and EXTRA.
 
+- **Close to Tray**. The app will create a system tray icon with a context menu when the app is being hide or closed.
+
 - **Keyboard Shortcuts**. Provide some useful keyboard shortcuts allowing the user to use the app conveniently.
 
 - **Customizable Rules**. Allowing the user to modify the default rules of Pomodoro Principle to fit on their personal preference.
