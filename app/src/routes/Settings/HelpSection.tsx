@@ -15,8 +15,8 @@ const HelpSection: React.FC = () => {
   return (
     <SettingSection heading="Need Help ?">
       <Help
-        label="Documentation"
-        link="https://github.com/roldanjrCodeArts9711/productivity-timer"
+        label="Official Website"
+        link="https://roldanjrcodearts9711.github.io/productivity-timer/"
       />
       <Help
         label="Open an issue"

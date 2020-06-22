@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="#">
+  <a href="https://roldanjrcodearts9711.github.io/productivity-timer/">
     <img src="assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
   </a>
 </p>
