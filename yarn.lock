@@ -70,18 +70,6 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@types/node-notifier@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@types/node-notifier/-/node-notifier-6.0.1.tgz#282bb8c37d69be3343c359efc8b9c97fad46a0e9"
-  integrity sha512-PBkKwgjxu2aA24zh5Rng8FlL03R4zopZbTtzeKbWLfF+AMeHBMk3Ls12K/yZchYhe/riuiarPXcRJGUBLGb15w==
-  dependencies:
-    "@types/node" "*"
-
-"@types/node@*":
-  version "14.0.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.4.tgz#43a63fc5edce226bed106b31b875165256271107"
-  integrity sha512-k3NqigXWRzQZVBDS5D1U70A5E8Qk4Kh+Ha/x4M8Bt9pF0X05eggfnC9+63Usc9Q928hRUIpIhTQaXsZwZBl4Ew==
-
 ansi-escapes@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
