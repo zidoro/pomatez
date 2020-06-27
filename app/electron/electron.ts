@@ -12,7 +12,6 @@ import {
   activateGlobalShortcuts,
   activateAutoUpdate,
   blockShortcutKeys,
-  createSystemTray,
   getIcon,
   SET_ALWAYS_ON_TOP,
   SET_FULLSCREEN_BREAK,
@@ -99,9 +98,10 @@ function createMainWindow() {
   });
 
   win.on("hide", () => {
-    tray = createSystemTray({
-      icon: getTrayIcon(),
-      template: [
+    tray = new Tray(getTrayIcon());
+    tray.setToolTip("PRODUCTIVITY TIMER");
+    tray.setContextMenu(
+      Menu.buildFromTemplate([
         {
           label: "Show the app",
           click: () => {
@@ -114,8 +114,8 @@ function createMainWindow() {
             app.exit();
           },
         },
-      ],
-    });
+      ])
+    );
 
     tray?.on("click", () => {
       if (!win?.isVisible()) {
