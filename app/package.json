@@ -1,6 +1,6 @@
 {
   "name": "productivity-timer",
-  "version": "2.10.4-beta",
+  "version": "2.10.5-beta",
   "private": true,
   "license": "MIT",
   "main": "public/electron.js",
