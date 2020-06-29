@@ -22,6 +22,7 @@ import {
   getTrayIcon,
   isWindow,
   getFromStorage,
+  SET_SHOW,
 } from "./helpers";
 import store from "./store";
 
@@ -283,6 +284,12 @@ ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
 });
 
 ipcMain.on(SET_MINIMIZE, () => win?.minimize());
+
+ipcMain.on(SET_SHOW, () => {
+  if (!win?.isVisible()) {
+    win?.show();
+  }
+});
 
 ipcMain.on(SET_CLOSE, () => app.quit());
 
