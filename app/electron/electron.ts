@@ -288,6 +288,8 @@ ipcMain.on(SET_MINIMIZE, () => win?.minimize());
 ipcMain.on(SET_SHOW, () => {
   if (!win?.isVisible()) {
     win?.show();
+  } else {
+    win?.focus();
   }
 });
 
