@@ -10,6 +10,9 @@ import {
   ENABLE_FULLSCREEN_BREAK,
   ENABLE_TIMER_ANIMATION,
   USE_NATIVE_TITLE_BAR,
+  CLOSE_TO_TRAY,
+  MINIMIZE_TO_TRAY,
+  AUTO_START_WORK_TIME,
 } from "./types";
 import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
 
@@ -20,8 +23,11 @@ const defaultSettings: SettingTypes = {
   enableDarkTheme: isPreferredDark(),
   enableTimerAnimation: true,
   notificationSoundOn: true,
-  notificationProperty: "extra",
+  notificationProperty: "normal",
   useNativeTitlebar: false,
+  closeToTray: true,
+  minimizeToTray: false,
+  autoStartWorkTime: true,
 };
 
 const settings = getFromStorage("settings")
@@ -109,6 +115,36 @@ export const settingReducer = (
       const newState = {
         ...state,
         notificationProperty: action.payload,
+      };
+
+      saveToStorage("settings", newState);
+
+      return newState;
+    }
+    case CLOSE_TO_TRAY: {
+      const newState = {
+        ...state,
+        closeToTray: action.payload,
+      };
+
+      saveToStorage("settings", newState);
+
+      return newState;
+    }
+    case MINIMIZE_TO_TRAY: {
+      const newState = {
+        ...state,
+        minimizeToTray: action.payload,
+      };
+
+      saveToStorage("settings", newState);
+
+      return newState;
+    }
+    case AUTO_START_WORK_TIME: {
+      const newState = {
+        ...state,
+        autoStartWorkTime: action.payload,
       };
 
       saveToStorage("settings", newState);

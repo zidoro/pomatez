@@ -16,11 +16,12 @@ import {
   SET_ALWAYS_ON_TOP,
   SET_FULLSCREEN_BREAK,
   SET_MINIMIZE,
-  SET_HIDE,
+  SET_CLOSE,
   SET_UI_THEME,
   SET_NATIVE_TITLEBAR,
   getTrayIcon,
   isWindow,
+  getFromStorage,
 } from "./helpers";
 import store from "./store";
 
@@ -82,10 +83,38 @@ function createMainWindow() {
     win?.show();
   });
 
-  win.on("close", (e) => {
+  win.on("minimize", async () => {
+    try {
+      if (win) {
+        const data = await getFromStorage(win, "settings");
+        if (data.minimizeToTray) {
+          if (!isFullScreen) {
+            win?.hide();
+            tray = createSystemTray();
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  win.on("close", async (e) => {
     e.preventDefault();
-    if (!isFullScreen) {
-      win?.hide();
+    try {
+      if (win) {
+        const data = await getFromStorage(win, "settings");
+        if (!data.closeToTray) {
+          app.exit();
+        } else {
+          if (!isFullScreen) {
+            win?.hide();
+            tray = createSystemTray();
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   });
 
@@ -96,37 +125,39 @@ function createMainWindow() {
   win.on("show", () => {
     tray?.destroy();
   });
+}
 
-  win.on("hide", () => {
-    tray = new Tray(getTrayIcon());
-    tray.setToolTip("PRODUCTIVITY TIMER");
-    tray.setContextMenu(
-      Menu.buildFromTemplate([
-        {
-          label: "Show the app",
-          click: () => {
-            win?.show();
-          },
+function createSystemTray() {
+  const tray = new Tray(getTrayIcon());
+  tray.setToolTip("PRODUCTIVITY TIMER");
+  tray.setContextMenu(
+    Menu.buildFromTemplate([
+      {
+        label: "Show the app",
+        click: () => {
+          win?.show();
         },
-        {
-          label: "Quit",
-          click: () => {
-            app.exit();
-          },
+      },
+      {
+        label: "Quit",
+        click: () => {
+          app.exit();
         },
-      ])
-    );
+      },
+    ])
+  );
 
-    tray?.on("click", () => {
-      if (!win?.isVisible()) {
-        win?.show();
-      } else {
-        if (!win?.isFullScreen()) {
-          win?.hide();
-        }
+  tray?.on("click", () => {
+    if (!win?.isVisible()) {
+      win?.show();
+    } else {
+      if (!win?.isFullScreen()) {
+        win?.hide();
       }
-    });
+    }
   });
+
+  return tray;
 }
 
 if (!onlySingleIntance) {
@@ -251,13 +282,9 @@ ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
   store.set("isDarkMode", isDarkMode);
 });
 
-ipcMain.on(SET_MINIMIZE, () => {
-  win?.minimize();
-});
+ipcMain.on(SET_MINIMIZE, () => win?.minimize());
 
-ipcMain.on(SET_HIDE, () => {
-  win?.hide();
-});
+ipcMain.on(SET_CLOSE, () => app.quit());
 
 ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
   if (store.get("useNativeTitlebar") !== useNativeTitlebar) {

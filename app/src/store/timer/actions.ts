@@ -7,9 +7,10 @@ import {
   SKIP_TIMER,
 } from "./types";
 
-export const setPlay = (): TimerActionTypes => {
+export const setPlay = (playing: TimerTypes["playing"]): TimerActionTypes => {
   return {
     type: SET_PLAY,
+    payload: playing,
   };
 };
 

@@ -9,6 +9,9 @@ import {
   setNotificationProperty,
   setEnableFullscreenBreak,
   setUseNativeTitlebar,
+  setAutoStartWorkTime,
+  setMinimizeToTray,
+  setCloseToTray,
 } from "store";
 
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
@@ -74,6 +77,30 @@ const FeatureSection: React.FC = () => {
       onChange: useCallback(() => {
         dispatch(setEnableTimerAnimation(!settings.enableTimerAnimation));
       }, [dispatch, settings.enableTimerAnimation]),
+    },
+    {
+      id: "auto-start-work-time",
+      label: "Auto-start Work Time",
+      checked: settings.autoStartWorkTime,
+      onChange: useCallback(() => {
+        dispatch(setAutoStartWorkTime(!settings.autoStartWorkTime));
+      }, [dispatch, settings.autoStartWorkTime]),
+    },
+    {
+      id: "minimize-to-tray",
+      label: "Minimize To Tray",
+      checked: settings.minimizeToTray,
+      onChange: useCallback(() => {
+        dispatch(setMinimizeToTray(!settings.minimizeToTray));
+      }, [dispatch, settings.minimizeToTray]),
+    },
+    {
+      id: "close-to-tray",
+      label: "Close To Tray",
+      checked: settings.closeToTray,
+      onChange: useCallback(() => {
+        dispatch(setCloseToTray(!settings.closeToTray));
+      }, [dispatch, settings.closeToTray]),
     },
   ];
 

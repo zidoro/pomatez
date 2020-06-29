@@ -10,7 +10,7 @@ export const SET_FULLSCREEN_BREAK = "SET_FULLSCREEN_BREAK";
 export const SET_NATIVE_TITLEBAR = "SET_NATIVE_TITLEBAR";
 export const SET_UI_THEME = "SET_UI_THEME";
 export const SET_MINIMIZE = "SET_MINIMIZE";
-export const SET_HIDE = "SET_HIDE";
+export const SET_CLOSE = "SET_CLOSE";
 
 type ElectronProps = {
   onMinimizeCallback?: () => void;
@@ -37,7 +37,7 @@ const ElectronProvider: React.FC = ({ children }) => {
 
   const onExitCallback = useCallback(() => {
     if (isElectron()) {
-      electron.send(SET_HIDE);
+      electron.send(SET_CLOSE);
     }
   }, [electron]);
 

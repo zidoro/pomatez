@@ -1,6 +1,5 @@
 import Store from "electron-store";
 import { systemPreferences } from "electron";
-import { isWindow } from "../helpers";
 
 type StoreProps = {
   isDarkMode: boolean;

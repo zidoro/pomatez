@@ -8,6 +8,9 @@ export type SettingTypes = {
   enableTimerAnimation: boolean;
   useNativeTitlebar: boolean;
   notificationSoundOn: boolean;
+  closeToTray: boolean;
+  minimizeToTray: boolean;
+  autoStartWorkTime: boolean;
   notificationProperty: "none" | "normal" | "extra";
 };
 
@@ -24,6 +27,10 @@ export const ENABLE_AUTO_UPDATES = `${settings} ENABLE_AUTO_UPDATES`;
 
 export const TOGGLE_NOTIFICATION_SOUND = `${settings} TOGGLE_NOTIFICATION_SOUND`;
 export const SET_NOTIFICATION_PROPERTY = `${settings} SET_NOTIFICATION_PROPERTY`;
+
+export const CLOSE_TO_TRAY = `${settings} CLOSE_TO_TRAY`;
+export const MINIMIZE_TO_TRAY = `${settings} MINIMIZE_TO_TRAY`;
+export const AUTO_START_WORK_TIME = `${settings} AUTO_START_WORK_TIME`;
 
 export const RESTORE_DEFAULT_SETTINGS = `${settings} RESTORE_DEFAULT_SETTINGS`;
 

@@ -10,6 +10,7 @@ import {
   TimerTypes,
   SPECIAL_BREAK,
   SettingTypes,
+  setPlay,
 } from "store";
 import { useNotification, useSleepMode } from "hooks";
 
@@ -264,6 +265,11 @@ const CounterProvider: React.FC = ({ children }) => {
             case SHORT_BREAK:
               dispatch(setTimerType("STAY_FOCUS"));
               dispatch(setRound(timer.round + 1));
+
+              if (!settings.autoStartWorkTime) {
+                dispatch(setPlay(false));
+              }
+
               notification(
                 "Short Break Finished",
                 { body: "It is time to focus and work again." },
@@ -274,6 +280,11 @@ const CounterProvider: React.FC = ({ children }) => {
             case LONG_BREAK:
               dispatch(setTimerType("STAY_FOCUS"));
               dispatch(setRound(1));
+
+              if (!settings.autoStartWorkTime) {
+                dispatch(setPlay(false));
+              }
+
               notification(
                 "Long Break Finished",
                 { body: "It is time to focus and work again." },
@@ -283,6 +294,11 @@ const CounterProvider: React.FC = ({ children }) => {
 
             case SPECIAL_BREAK:
               dispatch(setTimerType("STAY_FOCUS"));
+
+              if (!settings.autoStartWorkTime) {
+                dispatch(setPlay(false));
+              }
+
               notification(
                 "Special Break Finished",
                 { body: "It is time to focus and work again." },
@@ -304,6 +320,7 @@ const CounterProvider: React.FC = ({ children }) => {
     notification,
     config.sessionRounds,
     settings.notificationProperty,
+    settings.autoStartWorkTime,
   ]);
 
   useEffect(() => {

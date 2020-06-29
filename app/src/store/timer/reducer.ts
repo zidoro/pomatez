@@ -21,7 +21,7 @@ export const timerReducer = (
     case SET_PLAY:
       return {
         ...state,
-        playing: !state.playing,
+        playing: action.payload,
       };
     case SET_TIMER_TYPE:
       return {

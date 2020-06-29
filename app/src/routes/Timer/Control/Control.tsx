@@ -72,7 +72,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
       activateWarning();
       return;
     }
-    dispatch(setPlay());
+    dispatch(setPlay(!timer.playing));
   }, [dispatch, activateWarning, timer.playing, settings.enableStrictMode]);
 
   const onNotifacationSoundCallback = useCallback(() => {
@@ -92,24 +92,24 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
         } else {
           dispatch(skipTimer("LONG_BREAK"));
         }
-        if (!timer.playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
       case SHORT_BREAK:
         dispatch(skipTimer("STAY_FOCUS"));
         dispatch(setRound(timer.round + 1));
-        if (!timer.playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
       case LONG_BREAK:
         dispatch(skipTimer("STAY_FOCUS"));
         dispatch(setRound(1));
-        if (!timer.playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
       case SPECIAL_BREAK:
         dispatch(skipTimer("STAY_FOCUS"));
-        if (!timer.playing) dispatch(setPlay());
+        if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
     }
   }, [
