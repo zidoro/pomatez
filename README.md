@@ -43,7 +43,11 @@
 
 - **Desktop Notification**. If enabled, the app will allow the user to be notified from time to time. Notification property is divided into 3 types NONE, NORMAL and EXTRA.
 
-- **Close to Tray**. The app will create a system tray icon with a context menu when the app is being hide or closed.
+- **Auto-start Work Time**. If enabled, the app will automatically start after the timer ends. It is useful when the user did not want to always start the timer manually from time to time.
+
+- **Minimize to Tray**. If enabled, clicking the minimize button will not minimize the app. It will be hidden and being send to Tray instead of minimizing on the Taskbar.
+
+- **Close to Tray**. If enabled, clicking the close button will not quit the app. It will be hidden and being send to Tray instead of closing and quitting the app.
 
 - **Keyboard Shortcuts**. Provide some useful keyboard shortcuts allowing the user to use the app conveniently.
 
