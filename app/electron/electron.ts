@@ -7,6 +7,7 @@ import {
   Tray,
 } from "electron";
 import notifier from "node-notifier";
+import debounce from "lodash.debounce";
 import path from "path";
 import {
   activateGlobalShortcuts,
@@ -84,40 +85,54 @@ function createMainWindow() {
     win?.show();
   });
 
-  win.on("minimize", async () => {
-    try {
-      if (win) {
-        const data = await getFromStorage(win, "settings");
-        if (data.minimizeToTray) {
-          if (!isFullScreen) {
-            win?.hide();
-            tray = createSystemTray();
+  win.on(
+    "minimize",
+    debounce(
+      async () => {
+        try {
+          if (win) {
+            const data = await getFromStorage(win, "settings");
+            if (data.minimizeToTray) {
+              if (!isFullScreen) {
+                win?.hide();
+                tray = createSystemTray();
+              }
+            }
           }
+        } catch (error) {
+          console.log(error);
         }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  });
+      },
+      300,
+      { leading: true }
+    )
+  );
 
-  win.on("close", async (e) => {
-    e.preventDefault();
-    try {
-      if (win) {
-        const data = await getFromStorage(win, "settings");
-        if (!data.closeToTray) {
-          app.exit();
-        } else {
-          if (!isFullScreen) {
-            win?.hide();
-            tray = createSystemTray();
+  win.on(
+    "close",
+    debounce(
+      async (e) => {
+        e.preventDefault();
+        try {
+          if (win) {
+            const data = await getFromStorage(win, "settings");
+            if (!data.closeToTray) {
+              app.exit();
+            } else {
+              if (!isFullScreen) {
+                win?.hide();
+                tray = createSystemTray();
+              }
+            }
           }
+        } catch (error) {
+          console.log(error);
         }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  });
+      },
+      300,
+      { leading: true }
+    )
+  );
 
   win.on("closed", () => {
     win = null;
@@ -130,7 +145,9 @@ function createMainWindow() {
 
 function createSystemTray() {
   const tray = new Tray(getTrayIcon());
+
   tray.setToolTip("PRODUCTIVITY TIMER");
+
   tray.setContextMenu(
     Menu.buildFromTemplate([
       {
