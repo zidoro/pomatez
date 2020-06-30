@@ -6,8 +6,8 @@ import {
   Menu,
   Tray,
 } from "electron";
-import notifier from "node-notifier";
 import debounce from "lodash.debounce";
+import notifier from "node-notifier";
 import path from "path";
 import {
   activateGlobalShortcuts,
