@@ -78,6 +78,7 @@
     "electron-store": "^5.2.0",
     "electron-updater": "^4.3.1",
     "is-electron": "^2.2.0",
+    "lodash.debounce": "^4.0.8",
     "node-notifier": "^7.0.1",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
@@ -95,6 +96,7 @@
   "devDependencies": {
     "@types/autosize": "^3.0.7",
     "@types/jest": "^25.2.3",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^14.0.4",
     "@types/node-notifier": "^6.0.1",
     "@types/react": "^16.9.35",
