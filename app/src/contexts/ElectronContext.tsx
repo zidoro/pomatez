@@ -34,15 +34,19 @@ const ElectronProvider: React.FC = ({ children }) => {
 
   const onMinimizeCallback = useCallback(() => {
     if (isElectron()) {
-      electron.send(SET_MINIMIZE);
+      electron.send(SET_MINIMIZE, {
+        minimizeToTray: settings.minimizeToTray,
+      });
     }
-  }, [electron]);
+  }, [electron, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
     if (isElectron()) {
-      electron.send(SET_CLOSE);
+      electron.send(SET_CLOSE, {
+        closeToTray: settings.closeToTray,
+      });
     }
-  }, [electron]);
+  }, [electron, settings.closeToTray]);
 
   const openExternalCallback = useCallback(() => {
     if (isElectron()) {

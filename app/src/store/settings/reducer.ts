@@ -23,7 +23,7 @@ const defaultSettings: SettingTypes = {
   enableDarkTheme: isPreferredDark(),
   enableTimerAnimation: true,
   notificationSoundOn: true,
-  notificationProperty: "normal",
+  notificationProperty: "extra",
   useNativeTitlebar: false,
   closeToTray: true,
   minimizeToTray: false,
