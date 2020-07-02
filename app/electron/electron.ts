@@ -148,18 +148,20 @@ function createMainWindow() {
 function createSystemTray() {
   const tray = new Tray(getTrayIcon());
 
-  tray.setToolTip("PRODUCTIVITY TIMER");
+  tray.setToolTip(
+    `PRODUCTIVITY TIMER v${app.getVersion()}\n👉 Just Click to RESTORE`
+  );
 
   tray.setContextMenu(
     Menu.buildFromTemplate([
       {
-        label: "Show the app",
+        label: "Restore the app",
         click: () => {
           win?.show();
         },
       },
       {
-        label: "Quit",
+        label: "Exit",
         click: () => {
           app.exit();
         },
