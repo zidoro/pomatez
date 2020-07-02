@@ -99,6 +99,9 @@ function createMainWindow() {
             if (data.minimizeToTray) {
               if (!isFullScreen) {
                 win?.hide();
+                if (tray === null && data.minimizeToTray) {
+                  createSystemTray();
+                }
               }
             }
           }
@@ -124,6 +127,9 @@ function createMainWindow() {
             } else {
               if (!isFullScreen) {
                 win?.hide();
+                if (tray === null && data.closeToTray) {
+                  createSystemTray();
+                }
               }
             }
           }
