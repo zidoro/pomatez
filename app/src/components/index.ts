@@ -24,3 +24,4 @@ export { default as Collapse } from "./Collapse";
 
 export * from "./Popper";
 export * from "./Preloader";
+export * from "./TraySVG";

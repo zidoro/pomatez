@@ -6,6 +6,7 @@ import {
   Menu,
   Tray,
   shell,
+  nativeImage,
 } from "electron";
 import debounce from "lodash.debounce";
 import notifier from "node-notifier";
@@ -26,6 +27,7 @@ import {
   getFromStorage,
   SET_SHOW,
   RELEASED_NOTES_LINK,
+  TRAY_ICON_UPDATE,
 } from "./helpers";
 import store from "./store";
 
@@ -332,6 +334,11 @@ ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
     app.relaunch();
     app.exit();
   }
+});
+
+ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
+  const image = nativeImage.createFromDataURL(dataUrl);
+  tray?.setImage(image);
 });
 
 app.on("window-all-closed", () => {

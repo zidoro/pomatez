@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/macro";
 import { SHORT_BREAK, LONG_BREAK, SPECIAL_BREAK } from "store";
 import { ProgressSVG } from "assets/icons";
 
-type ProgressProps = { offset: number; animate: "true" | "false" };
+export type ProgressProps = { offset: number; animate: "true" | "false" };
 
 export const StyledCounterProgress = styled(ProgressSVG)<ProgressProps>`
   #progress {
