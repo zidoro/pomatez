@@ -4,10 +4,13 @@ import isElectron from "is-electron";
 
 import { AppStateTypes, SettingTypes } from "store";
 import { CounterContext } from "./CounterContext";
+import { TraySVG } from "components";
+import { encodeSvg } from "utils";
 
 const SET_ALWAYS_ON_TOP = "SET_ALWAYS_ON_TOP";
 const SET_FULLSCREEN_BREAK = "SET_FULLSCREEN_BREAK";
 const SET_NATIVE_TITLEBAR = "SET_NATIVE_TITLEBAR";
+const TRAY_ICON_UPDATE = "TRAY_ICON_UPDATE";
 const SET_UI_THEME = "SET_UI_THEME";
 const SET_MINIMIZE = "SET_MINIMIZE";
 const SET_CLOSE = "SET_CLOSE";
@@ -30,7 +33,10 @@ const ElectronProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
-  const { shouldFullscreen } = useContext(CounterContext);
+  const { count, duration, timerType, shouldFullscreen } = useContext(
+    CounterContext
+  );
+  const dashOffset = (duration - count) * (64 / duration);
 
   const onMinimizeCallback = useCallback(() => {
     if (isElectron()) {
@@ -102,6 +108,30 @@ const ElectronProvider: React.FC = ({ children }) => {
       });
     }
   }, [electron, settings.useNativeTitlebar]);
+
+  useEffect(() => {
+    if (isElectron() && timer.playing) {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = 32;
+      canvas.height = 32;
+
+      let svgXML = encodeSvg(
+        <TraySVG timerType={timerType} dashOffset={dashOffset} />
+      );
+
+      const img = new Image();
+      img.src = svgXML;
+
+      img.onload = function () {
+        ctx?.drawImage(img, 0, 0);
+        const dataUrl = canvas.toDataURL("image/png");
+
+        electron.send(TRAY_ICON_UPDATE, dataUrl);
+      };
+    }
+  }, [electron, timer.playing, timerType, dashOffset]);
 
   return (
     <ElectronContext.Provider
