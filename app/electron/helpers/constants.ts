@@ -17,3 +17,6 @@ export const TO_MAIN: string[] = [
 ];
 
 export const FROM_MAIN: string[] = [];
+
+export const RELEASED_NOTES_LINK =
+  "https://github.com/roldanjrCodeArts9711/productivity-timer/releases/latest";
