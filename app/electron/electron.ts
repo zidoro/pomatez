@@ -97,7 +97,6 @@ function createMainWindow() {
             if (data.minimizeToTray) {
               if (!isFullScreen) {
                 win?.hide();
-                tray = createSystemTray();
               }
             }
           }
@@ -123,7 +122,6 @@ function createMainWindow() {
             } else {
               if (!isFullScreen) {
                 win?.hide();
-                tray = createSystemTray();
               }
             }
           }
@@ -139,14 +137,10 @@ function createMainWindow() {
   win.on("closed", () => {
     win = null;
   });
-
-  win.on("show", () => {
-    tray?.destroy();
-  });
 }
 
 function createSystemTray() {
-  const tray = new Tray(getTrayIcon());
+  tray = new Tray(getTrayIcon());
 
   tray.setToolTip(
     `PRODUCTIVITY TIMER v${app.getVersion()}\n👉 Just Click to RESTORE`
@@ -178,8 +172,6 @@ function createSystemTray() {
       }
     }
   });
-
-  return tray;
 }
 
 if (!onlySingleIntance) {
@@ -312,8 +304,6 @@ ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
   store.set("isDarkMode", isDarkMode);
 });
 
-ipcMain.on(SET_MINIMIZE, () => win?.minimize());
-
 ipcMain.on(SET_SHOW, () => {
   if (!win?.isVisible()) {
     win?.show();
@@ -322,7 +312,19 @@ ipcMain.on(SET_SHOW, () => {
   }
 });
 
-ipcMain.on(SET_CLOSE, () => app.quit());
+ipcMain.on(SET_MINIMIZE, (e, { minimizeToTray }) => {
+  win?.minimize();
+  if (tray === null && minimizeToTray) {
+    createSystemTray();
+  }
+});
+
+ipcMain.on(SET_CLOSE, (e, { closeToTray }) => {
+  app.quit();
+  if (tray === null && closeToTray) {
+    createSystemTray();
+  }
+});
 
 ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
   if (store.get("useNativeTitlebar") !== useNativeTitlebar) {
