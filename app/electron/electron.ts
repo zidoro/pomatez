@@ -5,6 +5,7 @@ import {
   globalShortcut,
   Menu,
   Tray,
+  shell,
 } from "electron";
 import debounce from "lodash.debounce";
 import notifier from "node-notifier";
@@ -24,6 +25,7 @@ import {
   isWindow,
   getFromStorage,
   SET_SHOW,
+  RELEASED_NOTES_LINK,
 } from "./helpers";
 import store from "./store";
 
@@ -225,13 +227,21 @@ if (!onlySingleIntance) {
 
     const autoUpdater = activateAutoUpdate({
       onUpdateAvailable: (info) => {
-        notifier.notify({
-          icon: notificationIcon,
-          title: "NEW UPDATE IS AVAILABLE",
-          message: `App version ${info.version} ready to be downloaded.`,
-          sound: true,
-          wait: true,
-        });
+        notifier.notify(
+          {
+            icon: notificationIcon,
+            title: "NEW UPDATE IS AVAILABLE",
+            message: `App version ${info.version} ready to be downloaded.`,
+            actions: ["View Released Notes"],
+            sound: true,
+            wait: true,
+          },
+          (err, response) => {
+            if (!err) {
+              shell.openExternal(RELEASED_NOTES_LINK);
+            }
+          }
+        );
       },
       onUpdateDownloaded: (info) => {
         notifier.notify(
