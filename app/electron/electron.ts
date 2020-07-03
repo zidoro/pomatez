@@ -22,7 +22,6 @@ import {
   SET_CLOSE,
   SET_UI_THEME,
   SET_NATIVE_TITLEBAR,
-  getTrayIcon,
   isWindow,
   getFromStorage,
   SET_SHOW,
@@ -39,6 +38,8 @@ const notificationIcon = path.join(
   __dirname,
   "../src/assets/logos/notification-dark.png"
 );
+
+const trayIcon = path.join(__dirname, "../src/assets/logos/tray-dark.png");
 
 const onlySingleIntance = app.requestSingleInstanceLock();
 
@@ -109,7 +110,7 @@ function createMainWindow() {
           console.log(error);
         }
       },
-      300,
+      1000,
       { leading: true }
     )
   );
@@ -137,7 +138,7 @@ function createMainWindow() {
           console.log(error);
         }
       },
-      300,
+      1000,
       { leading: true }
     )
   );
@@ -148,7 +149,7 @@ function createMainWindow() {
 }
 
 function createSystemTray() {
-  tray = new Tray(getTrayIcon());
+  tray = new Tray(trayIcon);
 
   tray.setToolTip(
     `PRODUCTIVITY TIMER v${app.getVersion()}\n👉 Just Click to RESTORE`
