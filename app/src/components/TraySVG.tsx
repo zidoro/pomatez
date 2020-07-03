@@ -2,7 +2,7 @@ import React from "react";
 import { TimerTypes } from "store";
 
 type Props = {
-  dashOffset: number;
+  dashOffset?: number;
   timerType?: TimerTypes["timerType"];
 };
 
@@ -21,40 +21,40 @@ export const TraySVG: React.FC<Props> = ({ timerType, dashOffset }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
       style={{
         transform: "rotateY(-180deg) rotateZ(-90deg)",
       }}
     >
-      <g transform="translate(-345 -920)">
+      <g transform="translate(-353 -961)">
         <g
-          transform="translate(345 920)"
+          transform="translate(353 961)"
           fill="#141e25"
           stroke={getProgressColor(0.75)}
-          strokeWidth="3.2"
+          strokeWidth="1"
         >
-          <rect width="32" height="32" rx="10" stroke="none" />
-          <rect x="1" y="1" width="30" height="30" rx="9" fill="none" />
+          <rect width="16" height="16" rx="4" stroke="none" />
+          <rect x="0.5" y="0.5" width="15" height="15" rx="3.5" fill="none" />
         </g>
         <circle
-          cx="9"
-          cy="9"
-          r="9"
-          transform="translate(352 927)"
+          cx="4"
+          cy="4"
+          r="4"
+          transform="translate(357 965)"
           fill="transparent"
           stroke="rgba(255, 255, 255, 0.12)"
-          strokeWidth="4"
+          strokeWidth="2"
         />
         <circle
-          cx="9"
-          cy="9"
-          r="9"
-          transform="translate(352 927)"
+          cx="4"
+          cy="4"
+          r="4"
+          transform="translate(357 965)"
           fill="transparent"
-          strokeWidth="4"
-          strokeDasharray="64"
+          strokeWidth="2"
+          strokeDasharray="24"
           strokeLinecap="round"
           strokeDashoffset={`${dashOffset}`}
           stroke={getProgressColor()}
@@ -62,4 +62,9 @@ export const TraySVG: React.FC<Props> = ({ timerType, dashOffset }) => {
       </g>
     </svg>
   );
+};
+
+TraySVG.defaultProps = {
+  dashOffset: 0,
+  timerType: "STAY_FOCUS",
 };
