@@ -49,6 +49,8 @@
 
 - **Close to Tray**. If enabled, clicking the close button will not quit the app. It will be hidden and being send to Tray instead of closing and quitting the app.
 
+- **Progress on Tray**. The app will show progress animation on tray. Useful when the timer is being hidden.
+
 - **Keyboard Shortcuts**. Provide some useful keyboard shortcuts allowing the user to use the app conveniently.
 
 - **Customizable Rules**. Allowing the user to modify the default rules of Pomodoro Principle to fit on their personal preference.
@@ -69,38 +71,59 @@
 
 This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
 
-### :zap: Setup
+### :zap: Quick Setup
 
-```bash
-# install all dependencies
-yarn install
+1. Install all app dependencies.
 
-# start the react app
-yarn develop
+   ```sh
+   yarn install or npm install
+   ```
 
-# start electron
-yarn electron
+2. Start the development server.
 
-# runs `yarn develop` and `yarn electron` concurrently
-yarn start:app
+   ```sh
+   yarn develop or npm run develop
+   ```
 
-# build window installer
-yarn build:win
+3. Start the electron.
 
-# build mac installer
-yarn build:mac
+   ```sh
+   yarn electron or npm run electron
+   ```
 
-# build linux installer
-yarn build:linux
-```
+4. If you want to run `yarn develop` and `yarn electron` concurrently.
+
+   ```sh
+   yarn start:app or npm run start:app
+   ```
+
+### 🛠 Building for Production
+
+1. Build Windows installer.
+
+   ```sh
+   yarn build:win or npm run build:win
+   ```
+
+2. Build macOS installer.
+
+   ```sh
+   yarn build:mac or npm run build:mac
+   ```
+
+3. Build Linux installer.
+
+   ```sh
+   yarn build:linux or npm run build:linux
+   ```
 
 ## :computer: Installation
 
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
+Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases/latest)
 
 or from the :point_right: [Official Website](https://roldanjrcodearts9711.github.io/productivity-timer/) .
 
-Available for Window, Mac, and Linux.
+Available for Windows, macOS, and Linux.
 
 > For linux users. You can directly install it from SnapStore.
 
