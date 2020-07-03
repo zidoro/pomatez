@@ -121,7 +121,7 @@ const CounterProvider: React.FC = ({ children }) => {
     } = config.specialBreaks;
 
     if (timer.playing) {
-      interval = setTimeout(() => {
+      interval = setInterval(() => {
         const d = new Date();
         const ct = d.getHours() + ":" + d.getMinutes();
 
