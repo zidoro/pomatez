@@ -110,7 +110,7 @@ function createMainWindow() {
           console.log(error);
         }
       },
-      300,
+      1000,
       { leading: true }
     )
   );
@@ -138,7 +138,7 @@ function createMainWindow() {
           console.log(error);
         }
       },
-      300,
+      1000,
       { leading: true }
     )
   );
