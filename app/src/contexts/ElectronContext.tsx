@@ -36,7 +36,7 @@ const ElectronProvider: React.FC = ({ children }) => {
   const { count, duration, timerType, shouldFullscreen } = useContext(
     CounterContext
   );
-  const dashOffset = (duration - count) * (64 / duration);
+  const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
     if (isElectron()) {
@@ -114,8 +114,8 @@ const ElectronProvider: React.FC = ({ children }) => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
-      canvas.width = 32;
-      canvas.height = 32;
+      canvas.width = 16;
+      canvas.height = 16;
 
       let svgXML = encodeSvg(
         <TraySVG timerType={timerType} dashOffset={dashOffset} />
