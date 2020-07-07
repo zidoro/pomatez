@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import { CounterContext } from "contexts";
 import { AppStateTypes, SettingTypes } from "store";
+import { useTime } from "hooks";
 
 import {
   StyledCounterContainer,
@@ -23,10 +24,9 @@ const Counter: React.FC = () => {
     CounterContext
   );
 
-  const minutes = Math.floor(count / 60);
-  const seconds = count % 60;
-
   const dashOffset = (duration - count) * (674 / duration);
+
+  const { minutes, seconds } = useTime(count);
 
   return (
     <StyledCounterContainer fullscreen={shouldFullscreen}>

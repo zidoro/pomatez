@@ -151,9 +151,7 @@ function createMainWindow() {
 function createSystemTray() {
   tray = new Tray(trayIcon);
 
-  tray.setToolTip(
-    `PRODUCTIVITY TIMER v${app.getVersion()}\n👉 Just Click to RESTORE`
-  );
+  tray.setToolTip("Just click to restore.");
 
   tray.setContextMenu(
     Menu.buildFromTemplate([
