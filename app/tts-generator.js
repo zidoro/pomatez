@@ -1,7 +1,7 @@
 const say = require("say");
 const fs = require("fs");
 
-const exportDir = "assets/audios";
+const exportDir = "src/assets/audios";
 
 if (!fs.existsSync(exportDir)) {
   fs.mkdirSync(exportDir);
@@ -34,7 +34,7 @@ const textToGenerateList = [
     filename: "long-break-finished",
   },
   {
-    text: "Special Break. It is time to take your special break.",
+    text: "Special Break. You can now do the things you really want to do at this moment.",
     filename: "special-break-start",
   },
   {
