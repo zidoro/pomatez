@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "autosize": "^4.0.2",
-    "electron-log": "^4.1.3",
+    "electron-log": "^4.2.2",
     "electron-store": "^5.2.0",
     "electron-updater": "^4.3.1",
     "is-electron": "^2.2.0",
@@ -89,30 +89,30 @@
     "react-scripts": "^3.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "styled-components": "^5.1.0",
+    "styled-components": "^5.1.1",
     "universal-analytics": "^0.4.23",
     "uuid": "^8.2.0",
-    "v8-compile-cache": "^2.1.0"
+    "v8-compile-cache": "^2.1.1"
   },
   "devDependencies": {
     "@types/autosize": "^3.0.7",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.4",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/node": "^14.0.4",
+    "@types/node": "^14.0.20",
     "@types/node-notifier": "^6.0.1",
-    "@types/react": "^16.9.35",
-    "@types/react-beautiful-dnd": "^12.1.2",
-    "@types/react-dom": "^16.9.7",
-    "@types/react-redux": "^7.1.7",
+    "@types/react": "^16.9.41",
+    "@types/react-beautiful-dnd": "^13.0.0",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
-    "@types/styled-components": "^5.1.0",
+    "@types/styled-components": "^5.1.1",
     "@types/universal-analytics": "^0.4.4",
     "@types/uuid": "^8.0.0",
-    "electron": "^9.0.4",
-    "electron-builder": "^22.6.1",
+    "electron": "^9.1.0",
+    "electron-builder": "^22.7.0",
     "say": "^0.16.0",
-    "semantic-release": "^17.0.7",
-    "typescript": "^3.9.3"
+    "semantic-release": "^17.1.1",
+    "typescript": "^3.9.6"
   },
   "browserslist": {
     "production": [
