@@ -132,7 +132,10 @@ const CounterProvider: React.FC = ({ children }) => {
               setTimerDuration(firstBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your special break." },
+                {
+                  body:
+                    "You can now do the things you really want to do at this moment.",
+                },
                 specialBreakStart
               );
               break;
@@ -141,7 +144,10 @@ const CounterProvider: React.FC = ({ children }) => {
               setTimerDuration(secondBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your special break." },
+                {
+                  body:
+                    "You can now do the things you really want to do at this moment.",
+                },
                 specialBreakStart
               );
               break;
@@ -150,7 +156,10 @@ const CounterProvider: React.FC = ({ children }) => {
               setTimerDuration(thirdBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your special break." },
+                {
+                  body:
+                    "You can now do the things you really want to do at this moment.",
+                },
                 specialBreakStart
               );
               break;
@@ -159,7 +168,10 @@ const CounterProvider: React.FC = ({ children }) => {
               setTimerDuration(fourthBreak.duration);
               notification(
                 "Special Break",
-                { body: "It is time to take your this break with joy." },
+                {
+                  body:
+                    "You can now do the things you really want to do at this moment.",
+                },
                 specialBreakStart
               );
               break;
@@ -169,7 +181,7 @@ const CounterProvider: React.FC = ({ children }) => {
         } else {
           return clearInterval(interval);
         }
-      }, 500);
+      }, 300);
     }
 
     return () => clearInterval(interval);
