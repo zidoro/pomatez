@@ -14,7 +14,12 @@ import {
   MINIMIZE_TO_TRAY,
   AUTO_START_WORK_TIME,
 } from "./types";
-import { saveToStorage, getFromStorage, isPreferredDark } from "utils";
+import {
+  saveToStorage,
+  getFromStorage,
+  isPreferredDark,
+  detectOS,
+} from "utils";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
@@ -24,10 +29,10 @@ const defaultSettings: SettingTypes = {
   enableTimerAnimation: true,
   notificationSoundOn: true,
   notificationProperty: "extra",
-  useNativeTitlebar: false,
   closeToTray: true,
   minimizeToTray: false,
   autoStartWorkTime: true,
+  useNativeTitlebar: detectOS() === "Windows" ? false : true,
 };
 
 const settings = getFromStorage("settings")

@@ -1,5 +1,6 @@
 import Store from "electron-store";
 import { systemPreferences } from "electron";
+import { isWindow } from "../helpers";
 
 type StoreProps = {
   userId: string;
@@ -14,7 +15,7 @@ if (store.get("isDarkMode") == null) {
 }
 
 if (store.get("useNativeTitlebar") == null) {
-  store.set("useNativeTitlebar", false);
+  store.set("useNativeTitlebar", isWindow() ? false : true);
 }
 
 export default store;
