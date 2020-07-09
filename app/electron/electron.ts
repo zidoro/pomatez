@@ -28,6 +28,7 @@ import {
   RELEASED_NOTES_LINK,
   TRAY_ICON_UPDATE,
 } from "./helpers";
+import { activateUser } from "./helpers/analytics";
 import store from "./store";
 
 import "v8-compile-cache";
@@ -265,6 +266,7 @@ if (!onlySingleIntance) {
       },
     });
   });
+  activateUser();
 }
 
 ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
@@ -364,5 +366,3 @@ app.on("will-quit", () => {
 
 app.setLoginItemSettings({ openAtLogin: true });
 app.setAppUserModelId("electron.app.PRODUCTIVITY_TIMER");
-
-app.allowRendererProcessReuse = true;

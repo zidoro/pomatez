@@ -2,6 +2,7 @@ import Store from "electron-store";
 import { systemPreferences } from "electron";
 
 type StoreProps = {
+  userId: string;
   isDarkMode: boolean;
   useNativeTitlebar: boolean;
 };

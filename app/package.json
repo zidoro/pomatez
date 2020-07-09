@@ -90,7 +90,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "styled-components": "^5.1.0",
-    "uuid": "^8.1.0",
+    "universal-analytics": "^0.4.23",
+    "uuid": "^8.2.0",
     "v8-compile-cache": "^2.1.0"
   },
   "devDependencies": {
@@ -105,6 +106,7 @@
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
+    "@types/universal-analytics": "^0.4.4",
     "@types/uuid": "^8.0.0",
     "electron": "^9.0.4",
     "electron-builder": "^22.6.1",
