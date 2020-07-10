@@ -13,6 +13,7 @@ import {
   setPlay,
 } from "store";
 import { useNotification, useSleepMode } from "hooks";
+import { padNum } from "utils";
 
 import shortBreakStart from "assets/audios/short-break-start.wav";
 import shortBreakFinished from "assets/audios/short-break-finished.wav";
@@ -27,13 +28,10 @@ import sixtySecondsLeftLongBreak from "assets/audios/sixty-seconds-left-long-bre
 import thirtySecondsLeftToWork from "assets/audios/thirty-seconds-left-to-work.wav";
 
 import notificationIconDark from "assets/logos/notification-dark.png";
-import { padNum } from "utils";
 
 type CounterProps = {
   count: number;
-  setCount?: React.Dispatch<React.SetStateAction<number>>;
   duration: number;
-  setDuration?: React.Dispatch<React.SetStateAction<number>>;
   timerType?: TimerTypes["timerType"];
   resetTimerAction?: () => void;
   shouldFullscreen?: boolean;
@@ -56,8 +54,6 @@ const CounterProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
-  const [shouldFullscreen, setShouldFullscreen] = useState(false);
-
   const { preventSleep, allowSleep } = useSleepMode();
 
   const notification = useNotification(
@@ -67,6 +63,8 @@ const CounterProvider: React.FC = ({ children }) => {
     },
     settings.notificationProperty !== "none"
   );
+
+  const [shouldFullscreen, setShouldFullscreen] = useState(false);
 
   const [count, setCount] = useState(config.stayFocus * 60);
 
@@ -216,113 +214,128 @@ const CounterProvider: React.FC = ({ children }) => {
   ]);
 
   useEffect(() => {
-    let interval: number;
-    let counter = count;
+    let timerInterval: number;
 
     if (timer.playing) {
-      interval = setInterval(() => {
-        counter--;
-        setCount(counter);
-
-        if (settings.notificationProperty === "extra") {
-          if (counter === 60) {
-            if (timer.timerType === SHORT_BREAK) {
-              notification(
-                "60 Seconds Left for Short Break",
-                { body: "Please prepare yourself getting  back to work." },
-                sixtySecondsLeftShortBreak
-              );
-            } else if (timer.timerType === LONG_BREAK) {
-              notification(
-                "60 Seconds Left for Long Break",
-                { body: "Please prepare yourself getting  back to work." },
-                sixtySecondsLeftLongBreak
-              );
-            } else if (timer.timerType === SPECIAL_BREAK) {
-              notification(
-                "60 Seconds Left for Special Break",
-                { body: "Please prepare yourself getting  back to work." },
-                sixtySecondsLeftSpecialBreak
-              );
-            }
-          } else if (counter === 30 && timer.timerType === STAY_FOCUS) {
-            notification(
-              "30 Seconds Left to Work",
-              { body: "Please pause all media playing if there's one." },
-              thirtySecondsLeftToWork
-            );
-          }
-        }
-
-        if (counter === 0) {
-          switch (timer.timerType) {
-            case STAY_FOCUS:
-              if (timer.round < config.sessionRounds) {
-                dispatch(setTimerType("SHORT_BREAK"));
-                notification(
-                  "Work Time Finished",
-                  { body: "It is time to take a short break." },
-                  shortBreakStart
-                );
-              } else {
-                dispatch(setTimerType("LONG_BREAK"));
-                notification(
-                  "Session Rounds Completed",
-                  { body: "It is time to take a long break." },
-                  longBreakStart
-                );
-              }
-              break;
-
-            case SHORT_BREAK:
-              dispatch(setTimerType("STAY_FOCUS"));
-              dispatch(setRound(timer.round + 1));
-
-              if (!settings.autoStartWorkTime) {
-                dispatch(setPlay(false));
-              }
-
-              notification(
-                "Short Break Finished",
-                { body: "It is time to focus and work again." },
-                shortBreakFinished
-              );
-              break;
-
-            case LONG_BREAK:
-              dispatch(setTimerType("STAY_FOCUS"));
-              dispatch(setRound(1));
-
-              if (!settings.autoStartWorkTime) {
-                dispatch(setPlay(false));
-              }
-
-              notification(
-                "Long Break Finished",
-                { body: "It is time to focus and work again." },
-                longBreakFinished
-              );
-              break;
-
-            case SPECIAL_BREAK:
-              dispatch(setTimerType("STAY_FOCUS"));
-
-              if (!settings.autoStartWorkTime) {
-                dispatch(setPlay(false));
-              }
-
-              notification(
-                "Special Break Finished",
-                { body: "It is time to focus and work again." },
-                specialBreakFinished
-              );
-              break;
-          }
-        }
+      timerInterval = setInterval(() => {
+        setCount((prevState) => {
+          let remaining = prevState - 1;
+          return remaining;
+        });
       }, 1000);
     }
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timerInterval);
+  }, [timer.playing]);
+
+  useEffect(() => {
+    if (settings.notificationProperty === "extra") {
+      if (count === 61) {
+        if (timer.timerType === SHORT_BREAK) {
+          notification(
+            "60 Seconds Left for Short Break",
+            { body: "Please prepare yourself getting  back to work." },
+            sixtySecondsLeftShortBreak
+          );
+        } else if (timer.timerType === LONG_BREAK) {
+          notification(
+            "60 Seconds Left for Long Break",
+            { body: "Please prepare yourself getting  back to work." },
+            sixtySecondsLeftLongBreak
+          );
+        } else if (timer.timerType === SPECIAL_BREAK) {
+          notification(
+            "60 Seconds Left for Special Break",
+            { body: "Please prepare yourself getting  back to work." },
+            sixtySecondsLeftSpecialBreak
+          );
+        }
+      } else if (count === 31 && timer.timerType === STAY_FOCUS) {
+        notification(
+          "30 Seconds Left to Work",
+          { body: "Please pause all media playing if there's one." },
+          thirtySecondsLeftToWork
+        );
+      }
+    }
+
+    if (count === 0) {
+      switch (timer.timerType) {
+        case STAY_FOCUS:
+          if (timer.round < config.sessionRounds) {
+            setTimeout(() => {
+              notification(
+                "Work Time Finished",
+                { body: "It is time to take a short break." },
+                shortBreakStart
+              );
+
+              dispatch(setTimerType("SHORT_BREAK"));
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              notification(
+                "Session Rounds Completed",
+                { body: "It is time to take a long break." },
+                longBreakStart
+              );
+
+              dispatch(setTimerType("LONG_BREAK"));
+            }, 1000);
+          }
+          break;
+
+        case SHORT_BREAK:
+          setTimeout(() => {
+            notification(
+              "Short Break Finished",
+              { body: "It is time to focus and work again." },
+              shortBreakFinished
+            );
+
+            dispatch(setTimerType("STAY_FOCUS"));
+            dispatch(setRound(timer.round + 1));
+
+            if (!settings.autoStartWorkTime) {
+              dispatch(setPlay(false));
+            }
+          }, 1000);
+          break;
+
+        case LONG_BREAK:
+          setTimeout(() => {
+            notification(
+              "Long Break Finished",
+              { body: "It is time to focus and work again." },
+              longBreakFinished
+            );
+
+            dispatch(setTimerType("STAY_FOCUS"));
+            dispatch(setRound(1));
+
+            if (!settings.autoStartWorkTime) {
+              dispatch(setPlay(false));
+            }
+          }, 1000);
+          break;
+
+        case SPECIAL_BREAK:
+          setTimeout(() => {
+            notification(
+              "Special Break Finished",
+              { body: "It is time to focus and work again." },
+              specialBreakFinished
+            );
+
+            dispatch(setTimerType("STAY_FOCUS"));
+
+            if (!settings.autoStartWorkTime) {
+              dispatch(setPlay(false));
+            }
+          }, 1000);
+          break;
+      }
+    }
   }, [
     count,
     timer.round,
@@ -349,12 +362,10 @@ const CounterProvider: React.FC = ({ children }) => {
     <CounterContext.Provider
       value={{
         count,
-        setCount,
         duration,
-        setDuration,
         resetTimerAction,
-        timerType: timer.timerType,
         shouldFullscreen,
+        timerType: timer.timerType,
       }}
     >
       {children}
