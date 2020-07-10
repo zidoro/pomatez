@@ -27,6 +27,7 @@ import sixtySecondsLeftLongBreak from "assets/audios/sixty-seconds-left-long-bre
 import thirtySecondsLeftToWork from "assets/audios/thirty-seconds-left-to-work.wav";
 
 import notificationIconDark from "assets/logos/notification-dark.png";
+import { padNum } from "utils";
 
 type CounterProps = {
   count: number;
@@ -123,7 +124,7 @@ const CounterProvider: React.FC = ({ children }) => {
     if (timer.playing) {
       interval = setInterval(() => {
         const d = new Date();
-        const ct = d.getHours() + ":" + d.getMinutes();
+        const ct = padNum(d.getHours()) + ":" + padNum(d.getMinutes());
 
         if (timer.timerType !== SPECIAL_BREAK) {
           switch (ct) {
@@ -181,7 +182,7 @@ const CounterProvider: React.FC = ({ children }) => {
         } else {
           return clearInterval(interval);
         }
-      }, 300);
+      }, 1000);
     }
 
     return () => clearInterval(interval);
