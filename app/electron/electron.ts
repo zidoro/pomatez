@@ -149,27 +149,27 @@ function createMainWindow() {
   });
 }
 
+const contextMenu = Menu.buildFromTemplate([
+  {
+    label: "Restore the app",
+    click: () => {
+      win?.show();
+    },
+  },
+  {
+    label: "Exit",
+    click: () => {
+      app.exit();
+    },
+  },
+]);
+
 function createSystemTray() {
   tray = new Tray(trayIcon);
 
   tray.setToolTip("Just click to restore.");
 
-  tray.setContextMenu(
-    Menu.buildFromTemplate([
-      {
-        label: "Restore the app",
-        click: () => {
-          win?.show();
-        },
-      },
-      {
-        label: "Exit",
-        click: () => {
-          app.exit();
-        },
-      },
-    ])
-  );
+  tray.setContextMenu(contextMenu);
 
   tray?.on("click", () => {
     if (!win?.isVisible()) {
@@ -346,6 +346,8 @@ ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
 ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
   const image = nativeImage.createFromDataURL(dataUrl);
   tray?.setImage(image);
+
+  tray?.setContextMenu(isFullScreen ? null : contextMenu);
 });
 
 app.on("window-all-closed", () => {
