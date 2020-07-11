@@ -149,6 +149,8 @@ function createMainWindow() {
   });
 }
 
+const trayTooltip = "Just click to restore.";
+
 const contextMenu = Menu.buildFromTemplate([
   {
     label: "Restore the app",
@@ -167,8 +169,7 @@ const contextMenu = Menu.buildFromTemplate([
 function createSystemTray() {
   tray = new Tray(trayIcon);
 
-  tray.setToolTip("Just click to restore.");
-
+  tray.setToolTip(trayTooltip);
   tray.setContextMenu(contextMenu);
 
   tray?.on("click", () => {
@@ -292,6 +293,15 @@ ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
     }
 
     isFullScreen = shouldFullscreen;
+
+    tray?.setToolTip("");
+    tray?.setContextMenu(
+      Menu.buildFromTemplate([
+        {
+          label: "Please wait for your break to end.",
+        },
+      ])
+    );
   } else {
     win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
 
@@ -306,6 +316,9 @@ ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
     if (win?.isFullScreen()) win?.setFullScreen(false);
 
     isFullScreen = shouldFullscreen;
+
+    tray?.setToolTip(trayTooltip);
+    tray?.setContextMenu(contextMenu);
   }
 });
 
@@ -346,8 +359,6 @@ ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
 ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
   const image = nativeImage.createFromDataURL(dataUrl);
   tray?.setImage(image);
-
-  tray?.setContextMenu(isFullScreen ? null : contextMenu);
 });
 
 app.on("window-all-closed", () => {
