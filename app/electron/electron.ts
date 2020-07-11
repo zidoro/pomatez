@@ -7,6 +7,7 @@ import {
   Tray,
   shell,
   nativeImage,
+  MenuItem,
 } from "electron";
 import debounce from "lodash.debounce";
 import notifier from "node-notifier";
@@ -27,6 +28,7 @@ import {
   SET_SHOW,
   RELEASED_NOTES_LINK,
   TRAY_ICON_UPDATE,
+  createContextMenu,
 } from "./helpers";
 import { activateUser } from "./helpers/analytics";
 import store from "./store";
@@ -147,6 +149,8 @@ function createMainWindow() {
   win.on("closed", () => {
     win = null;
   });
+
+  createContextMenu(win);
 }
 
 const trayTooltip = "Just click to restore.";

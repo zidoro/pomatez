@@ -6,3 +6,4 @@ export * from "./constants";
 export * from "./isWindow";
 export * from "./getIcon";
 export * from "./getFromStorage";
+export * from "./contextMenu";
