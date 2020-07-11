@@ -15,8 +15,8 @@ const Settings: React.FC<Props> = () => {
     <StyledSettings>
       <SettingHeader />
       <FeatureSection />
-      <HelpSection />
       <ShortcutSection />
+      <HelpSection />
       <StickySection />
     </StyledSettings>
   );
