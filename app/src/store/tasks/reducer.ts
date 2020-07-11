@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { saveToStorage, getFromStorage } from "utils";
+import { getFromStorage } from "utils";
 import {
   TaskTypes,
   TasksActionTypes,
@@ -16,15 +16,13 @@ import {
   SET_TASK_CARD_DONE,
   SKIP_TASK_CARD,
 } from "./types";
+import undoable from "redux-undo";
 
-const tasks = getFromStorage("tasks") ? getFromStorage("tasks") : [];
+const tasks = (getFromStorage("state") && getFromStorage("state").tasks) || [];
 
 const initialState: TaskTypes[] = tasks;
 
-export const tasksReducer = (
-  state = initialState,
-  action: TasksActionTypes
-) => {
+const tasksReducer = (state = initialState, action: TasksActionTypes) => {
   switch (action.type) {
     case ADD_TASK_LIST: {
       const isPriority = state.length === 0 ? true : false;
@@ -37,16 +35,12 @@ export const tasksReducer = (
 
       const newState = [...state, newList];
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     case REMOVE_TASK_LIST: {
       const newState = state.filter((list) => {
         return list._id !== action.payload;
       });
-
-      saveToStorage("tasks", newState);
 
       return newState;
     }
@@ -61,8 +55,6 @@ export const tasksReducer = (
         return list;
       });
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     case SET_TASK_LIST_PRIORITY: {
@@ -75,8 +67,6 @@ export const tasksReducer = (
       });
 
       newState.sort((a, b) => (a.priority > b.priority ? -1 : 1));
-
-      saveToStorage("tasks", newState);
 
       return newState;
     }
@@ -98,8 +88,6 @@ export const tasksReducer = (
         return list;
       });
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     case EDIT_TASK_CARD_TEXT: {
@@ -118,8 +106,6 @@ export const tasksReducer = (
         }
         return list;
       });
-
-      saveToStorage("tasks", newState);
 
       return newState;
     }
@@ -140,8 +126,6 @@ export const tasksReducer = (
         return list;
       });
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     case REMOVE_TASK_CARD: {
@@ -154,8 +138,6 @@ export const tasksReducer = (
         }
         return list;
       });
-
-      saveToStorage("tasks", newState);
 
       return newState;
     }
@@ -182,8 +164,6 @@ export const tasksReducer = (
         return list;
       });
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     case SKIP_TASK_CARD: {
@@ -207,8 +187,6 @@ export const tasksReducer = (
         return list;
       });
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     case DRAG_LIST: {
@@ -229,8 +207,6 @@ export const tasksReducer = (
         if (list) {
           newState.splice(destinationIndex, 0, ...list);
         }
-
-        saveToStorage("tasks", newState);
 
         return newState;
       }
@@ -259,13 +235,13 @@ export const tasksReducer = (
         }
       }
 
-      saveToStorage("tasks", newState);
-
       return newState;
     }
     default:
-      saveToStorage("tasks", state);
-
       return state;
   }
 };
+
+export const undoableTasksReducer = undoable<TaskTypes[], TasksActionTypes>(
+  tasksReducer as any
+);

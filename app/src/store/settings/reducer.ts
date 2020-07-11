@@ -1,3 +1,4 @@
+import { getFromStorage, isPreferredDark, detectOS } from "utils";
 import {
   SettingTypes,
   SettingActionTypes,
@@ -14,12 +15,6 @@ import {
   MINIMIZE_TO_TRAY,
   AUTO_START_WORK_TIME,
 } from "./types";
-import {
-  saveToStorage,
-  getFromStorage,
-  isPreferredDark,
-  detectOS,
-} from "utils";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
@@ -35,9 +30,9 @@ const defaultSettings: SettingTypes = {
   useNativeTitlebar: detectOS() === "Windows" ? false : true,
 };
 
-const settings = getFromStorage("settings")
-  ? getFromStorage("settings")
-  : defaultSettings;
+const settings =
+  (getFromStorage("state") && getFromStorage("state").settings) ||
+  defaultSettings;
 
 const initialState: SettingTypes = settings;
 
@@ -46,123 +41,64 @@ export const settingReducer = (
   action: SettingActionTypes
 ) => {
   switch (action.type) {
-    case ALWAYS_ON_TOP: {
-      const newState = {
+    case ALWAYS_ON_TOP:
+      return {
         ...state,
         alwaysOnTop: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case TOGGLE_NOTIFICATION_SOUND: {
-      const newState = {
+    case TOGGLE_NOTIFICATION_SOUND:
+      return {
         ...state,
         notificationSoundOn: !state.notificationSoundOn,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_FULLSCREEN_BREAK: {
-      const newState = {
+    case ENABLE_FULLSCREEN_BREAK:
+      return {
         ...state,
         enableFullscreenBreak: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_DARK_THEME: {
-      const newState = {
+    case ENABLE_DARK_THEME:
+      return {
         ...state,
         enableDarkTheme: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_STRICT_MODE: {
-      const newState = {
+    case ENABLE_STRICT_MODE:
+      return {
         ...state,
         enableStrictMode: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case ENABLE_TIMER_ANIMATION: {
-      const newState = {
+    case ENABLE_TIMER_ANIMATION:
+      return {
         ...state,
         enableTimerAnimation: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case USE_NATIVE_TITLE_BAR: {
-      const newState = {
+    case USE_NATIVE_TITLE_BAR:
+      return {
         ...state,
         useNativeTitlebar: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case SET_NOTIFICATION_PROPERTY: {
-      const newState = {
+    case SET_NOTIFICATION_PROPERTY:
+      return {
         ...state,
         notificationProperty: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case CLOSE_TO_TRAY: {
-      const newState = {
+    case CLOSE_TO_TRAY:
+      return {
         ...state,
         closeToTray: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case MINIMIZE_TO_TRAY: {
-      const newState = {
+    case MINIMIZE_TO_TRAY:
+      return {
         ...state,
         minimizeToTray: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
-    case AUTO_START_WORK_TIME: {
-      const newState = {
+    case AUTO_START_WORK_TIME:
+      return {
         ...state,
         autoStartWorkTime: action.payload,
       };
-
-      saveToStorage("settings", newState);
-
-      return newState;
-    }
     case RESTORE_DEFAULT_SETTINGS:
-      saveToStorage("settings", defaultSettings);
-
       return defaultSettings;
     default:
-      saveToStorage("settings", state);
-
       return state;
   }
 };

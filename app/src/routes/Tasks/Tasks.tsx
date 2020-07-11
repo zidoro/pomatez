@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ActionCreators as UndoActionCreator } from "redux-undo";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import {
   StyledTaskContainer,
@@ -7,13 +8,13 @@ import {
   StyledTaskWrapper,
   StyledTaskMain,
 } from "styles";
-import { AppStateTypes, addTaskList, TaskTypes, dragList } from "store";
+import { AppStateTypes, addTaskList, dragList } from "store";
 
 import TaskFormButton from "./TaskFormButton";
 import TaskInnerList from "./TaskInnerList";
 
 export const Tasks: React.FC = () => {
-  const tasks: TaskTypes[] = useSelector((state: AppStateTypes) => state.tasks);
+  const tasks = useSelector((state: AppStateTypes) => state.tasks);
 
   const dispatch = useDispatch();
 
@@ -38,6 +39,29 @@ export const Tasks: React.FC = () => {
     );
   };
 
+  useEffect(() => {
+    function registerUndoRedoKeys(e: KeyboardEvent) {
+      const activeElement = document.activeElement?.tagName;
+
+      if (activeElement !== "INPUT" && activeElement !== "TEXTAREA") {
+        if (e.ctrlKey && e.key === "z") {
+          if (tasks.past.length > 0) {
+            dispatch(UndoActionCreator.undo());
+          }
+        }
+
+        if (e.ctrlKey && e.key === "Z") {
+          if (tasks.future.length > 0) {
+            dispatch(UndoActionCreator.redo());
+          }
+        }
+      }
+    }
+
+    document.addEventListener("keydown", registerUndoRedoKeys);
+    return () => document.removeEventListener("keydown", registerUndoRedoKeys);
+  }, [dispatch, tasks.past.length, tasks.future.length]);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <StyledTaskMain>
@@ -48,7 +72,7 @@ export const Tasks: React.FC = () => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                <TaskInnerList tasks={tasks} />
+                <TaskInnerList tasks={tasks.present} />
 
                 {provided.placeholder}
 

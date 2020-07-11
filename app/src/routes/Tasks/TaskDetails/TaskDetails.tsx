@@ -8,7 +8,6 @@ import React, {
 import { useSelector, useDispatch } from "react-redux";
 import {
   AppStateTypes,
-  TaskTypes,
   editTaskCard,
   editTaskCardText,
   removeTaskCard,
@@ -46,9 +45,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 
     const dispatch = useDispatch();
 
-    const tasks: TaskTypes[] = useSelector(
-      (state: AppStateTypes) => state.tasks
-    );
+    const tasks = useSelector((state: AppStateTypes) => state.tasks.present);
 
     const { openExternalCallback } = useContext(ElectronContext);
 
