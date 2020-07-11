@@ -9,7 +9,7 @@ import {
   TOGGLE_NOTIFICATION_SOUND,
   SET_NOTIFICATION_PROPERTY,
   ENABLE_FULLSCREEN_BREAK,
-  ENABLE_TIMER_ANIMATION,
+  ENABLE_PROGRESS_ANIMATION,
   USE_NATIVE_TITLE_BAR,
   CLOSE_TO_TRAY,
   MINIMIZE_TO_TRAY,
@@ -21,7 +21,7 @@ const defaultSettings: SettingTypes = {
   enableFullscreenBreak: true,
   enableStrictMode: false,
   enableDarkTheme: isPreferredDark(),
-  enableTimerAnimation: true,
+  enableProgressAnimation: true,
   notificationSoundOn: true,
   notificationProperty: "extra",
   closeToTray: true,
@@ -66,10 +66,10 @@ export const settingReducer = (
         ...state,
         enableStrictMode: action.payload,
       };
-    case ENABLE_TIMER_ANIMATION:
+    case ENABLE_PROGRESS_ANIMATION:
       return {
         ...state,
-        enableTimerAnimation: action.payload,
+        enableProgressAnimation: action.payload,
       };
     case USE_NATIVE_TITLE_BAR:
       return {

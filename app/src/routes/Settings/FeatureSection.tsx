@@ -4,7 +4,7 @@ import {
   setAlwaysOnTop,
   setEnableStrictMode,
   AppStateTypes,
-  setEnableTimerAnimation,
+  setEnableProgressAnimation,
   SettingTypes,
   setNotificationProperty,
   setEnableFullscreenBreak,
@@ -71,12 +71,12 @@ const FeatureSection: React.FC = () => {
       }, [dispatch, settings.useNativeTitlebar]),
     },
     {
-      id: "timer-animation",
-      label: "Timer Animation",
-      checked: settings.enableTimerAnimation,
+      id: "progress-animation",
+      label: "Progress Animation",
+      checked: settings.enableProgressAnimation,
       onChange: useCallback(() => {
-        dispatch(setEnableTimerAnimation(!settings.enableTimerAnimation));
-      }, [dispatch, settings.enableTimerAnimation]),
+        dispatch(setEnableProgressAnimation(!settings.enableProgressAnimation));
+      }, [dispatch, settings.enableProgressAnimation]),
     },
     {
       id: "auto-start-work-time",
