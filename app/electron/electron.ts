@@ -355,8 +355,10 @@ ipcMain.on(SET_CLOSE, (e, { closeToTray }) => {
 ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
   if (store.get("useNativeTitlebar") !== useNativeTitlebar) {
     store.set("useNativeTitlebar", useNativeTitlebar);
-    app.relaunch();
-    app.exit();
+    setTimeout(() => {
+      app.relaunch();
+      app.exit();
+    }, 1000);
   }
 });
 

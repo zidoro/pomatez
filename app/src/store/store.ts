@@ -26,7 +26,7 @@ store.subscribe(
       settings: store.getState().settings,
       tasks: store.getState().tasks.present,
     });
-  }, 300)
+  }, 1000)
 );
 
 export default store;
