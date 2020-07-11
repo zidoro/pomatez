@@ -1,20 +1,32 @@
 import { createStore, combineReducers } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
+import debounce from "lodash.debounce";
 
+import { saveToStorage } from "utils";
 import { configReducer } from "./config";
 import { settingReducer } from "./settings";
 import { timerReducer } from "./timer";
-import { tasksReducer } from "./tasks";
+import { undoableTasksReducer } from "./tasks";
 
 const rootReducer = combineReducers({
   config: configReducer,
   settings: settingReducer,
   timer: timerReducer,
-  tasks: tasksReducer,
+  tasks: undoableTasksReducer,
 });
 
 export type AppStateTypes = ReturnType<typeof rootReducer>;
 
 const store = createStore(rootReducer, devToolsEnhancer({}));
+
+store.subscribe(
+  debounce(() => {
+    saveToStorage("state", {
+      config: store.getState().config,
+      settings: store.getState().settings,
+      tasks: store.getState().tasks.present,
+    });
+  }, 300)
+);
 
 export default store;

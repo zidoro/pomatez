@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   AppStateTypes,
-  TaskTypes,
   setTaskCardDone,
   skipTaskCard,
   removeTaskCard,
@@ -27,7 +26,7 @@ import { useTargetOutside } from "hooks";
 import { isObjectEmpty } from "utils";
 
 const PriorityCard: React.FC = () => {
-  const tasks: TaskTypes[] = useSelector((state: AppStateTypes) => state.tasks);
+  const tasks = useSelector((state: AppStateTypes) => state.tasks.present);
 
   const dispatch = useDispatch();
 

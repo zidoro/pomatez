@@ -31,70 +31,7 @@ export const EDIT_TASK_CARD_DESCRIPTION = `${tasks} EDIT_TASK_CARD_DESCRIPTION`;
 export const SET_TASK_CARD_DONE = `${tasks} SET_TASK_CARD_DONE`;
 export const SKIP_TASK_CARD = `${tasks} SKIP_TASK_CARD`;
 
-interface AddTaskList {
-  type: typeof ADD_TASK_LIST;
-  payload: any;
-}
-
-interface RemoveTaskList {
-  type: typeof REMOVE_TASK_LIST;
-  payload: any;
-}
-
-interface SetTaskListPriority {
-  type: typeof SET_TASK_LIST_PRIORITY;
-  payload: any;
-}
-
-interface EditTaskTitle {
-  type: typeof EDIT_TASK_TITLE;
-  payload: any;
-}
-
-interface AddTaskCard {
-  type: typeof ADD_TASK_CARD;
-  payload: any;
-}
-
-interface EditTaskCardText {
-  type: typeof EDIT_TASK_CARD_TEXT;
-  payload: any;
-}
-
-interface DragList {
-  type: typeof DRAG_LIST;
-  payload: any;
-}
-
-interface EditTaskCard {
-  type: typeof EDIT_TASK_CARD_DESCRIPTION;
-  payload: any;
-}
-
-interface RemoveTaskCard {
-  type: typeof REMOVE_TASK_CARD;
-  payload: any;
-}
-
-interface SetTaskCardDone {
-  type: typeof SET_TASK_CARD_DONE;
-  payload: any;
-}
-
-interface SkipTaskCard {
+export type TasksActionTypes = {
   type: typeof SKIP_TASK_CARD;
   payload: any;
-}
-
-export type TasksActionTypes =
-  | AddTaskList
-  | RemoveTaskList
-  | AddTaskCard
-  | DragList
-  | EditTaskTitle
-  | EditTaskCardText
-  | EditTaskCard
-  | RemoveTaskCard
-  | SetTaskListPriority
-  | SetTaskCardDone
-  | SkipTaskCard;
+};

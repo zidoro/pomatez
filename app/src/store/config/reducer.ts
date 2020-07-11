@@ -1,3 +1,4 @@
+import { getFromStorage } from "utils";
 import {
   ConfigTypes,
   ConfigActionTypes,
@@ -11,7 +12,6 @@ import {
   SET_THIRD_SPECIAL_BREAK,
   SET_FOUTH_SPECIAL_BREAK,
 } from "./types";
-import { getFromStorage, saveToStorage } from "utils";
 
 const defaultConfig: ConfigTypes = {
   stayFocus: 25,
@@ -42,9 +42,8 @@ const defaultConfig: ConfigTypes = {
   },
 };
 
-const config = getFromStorage("config")
-  ? getFromStorage("config")
-  : defaultConfig;
+const config =
+  (getFromStorage("state") && getFromStorage("state").config) || defaultConfig;
 
 const initialState: ConfigTypes = config;
 
@@ -53,105 +52,61 @@ export const configReducer = (
   action: ConfigActionTypes
 ) => {
   switch (action.type) {
-    case SET_STAY_FOCUS: {
-      const newState = {
+    case SET_STAY_FOCUS:
+      return {
         ...state,
         stayFocus: action.payload,
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_SHORT_BREAK: {
-      const newState = {
+    case SET_SHORT_BREAK:
+      return {
         ...state,
         shortBreak: action.payload,
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_LONG_BREAK: {
-      const newState = {
+    case SET_LONG_BREAK:
+      return {
         ...state,
         longBreak: action.payload,
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_SESSION_ROUNDS: {
-      const newState = {
+    case SET_SESSION_ROUNDS:
+      return {
         ...state,
         sessionRounds: action.payload,
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_FIRST_SPECIAL_BREAK: {
-      const newState = {
+    case SET_FIRST_SPECIAL_BREAK:
+      return {
         ...state,
         specialBreaks: {
           ...state.specialBreaks,
           firstBreak: action.payload,
         },
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_SECOND_SPECIAL_BREAK: {
-      const newState = {
+    case SET_SECOND_SPECIAL_BREAK:
+      return {
         ...state,
         specialBreaks: {
           ...state.specialBreaks,
           secondBreak: action.payload,
         },
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_THIRD_SPECIAL_BREAK: {
-      const newState = {
+    case SET_THIRD_SPECIAL_BREAK:
+      return {
         ...state,
         specialBreaks: {
           ...state.specialBreaks,
           thirdBreak: action.payload,
         },
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
-    case SET_FOUTH_SPECIAL_BREAK: {
-      const newState = {
+    case SET_FOUTH_SPECIAL_BREAK:
+      return {
         ...state,
         specialBreaks: {
           ...state.specialBreaks,
           fourthBreak: action.payload,
         },
       };
-
-      saveToStorage("config", newState);
-
-      return newState;
-    }
     case RESTORE_DEFAULT_CONFIG:
-      saveToStorage("config", defaultConfig);
-
       return defaultConfig;
     default:
-      saveToStorage("config", state);
-
       return state;
   }
 };

@@ -99,11 +99,11 @@ function createMainWindow() {
       async () => {
         try {
           if (win) {
-            const data = await getFromStorage(win, "settings");
-            if (data.minimizeToTray) {
+            const data = await getFromStorage(win, "state");
+            if (data.settings.minimizeToTray) {
               if (!isFullScreen) {
                 win?.hide();
-                if (tray === null && data.minimizeToTray) {
+                if (tray === null && data.settings.minimizeToTray) {
                   createSystemTray();
                 }
               }
@@ -125,13 +125,13 @@ function createMainWindow() {
         e.preventDefault();
         try {
           if (win) {
-            const data = await getFromStorage(win, "settings");
-            if (!data.closeToTray) {
+            const data = await getFromStorage(win, "state");
+            if (!data.settings.closeToTray) {
               app.exit();
             } else {
               if (!isFullScreen) {
                 win?.hide();
-                if (tray === null && data.closeToTray) {
+                if (tray === null && data.settings.closeToTray) {
                   createSystemTray();
                 }
               }
