@@ -24,7 +24,6 @@
     "commitizen": "^4.1.2",
     "concurrently": "^5.2.0",
     "cz-conventional-changelog": "^3.2.0",
-    "prettier": "^2.0.5",
     "wait-on": "^5.0.0"
   }
 }
