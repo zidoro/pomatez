@@ -27,8 +27,7 @@
     "build:linux": "yarn build:app && electron-builder --linux",
     "build:snap": "yarn build:app && electron-builder --linux snap",
     "release": "yarn build:app && electron-builder --publish always",
-    "postinstall": "electron-builder install-app-deps",
-    "semantic-release": "semantic-release"
+    "postinstall": "electron-builder install-app-deps"
   },
   "babelMacros": {
     "styledComponents": {
@@ -112,7 +111,6 @@
     "electron": "^9.1.0",
     "electron-builder": "^22.7.0",
     "say": "^0.16.0",
-    "semantic-release": "^17.1.1",
     "typescript": "^3.9.6"
   },
   "browserslist": {
