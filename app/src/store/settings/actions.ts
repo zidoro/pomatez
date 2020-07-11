@@ -5,7 +5,7 @@ import {
   RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
   TOGGLE_NOTIFICATION_SOUND,
-  ENABLE_TIMER_ANIMATION,
+  ENABLE_PROGRESS_ANIMATION,
   SET_NOTIFICATION_PROPERTY,
   ENABLE_FULLSCREEN_BREAK,
   USE_NATIVE_TITLE_BAR,
@@ -57,12 +57,12 @@ export const setEnableStrictMode = (
   };
 };
 
-export const setEnableTimerAnimation = (
-  enableTimerAnimation: SettingTypes["enableTimerAnimation"]
+export const setEnableProgressAnimation = (
+  enableProgressAnimation: SettingTypes["enableProgressAnimation"]
 ): SettingActionTypes => {
   return {
-    type: ENABLE_TIMER_ANIMATION,
-    payload: enableTimerAnimation,
+    type: ENABLE_PROGRESS_ANIMATION,
+    payload: enableProgressAnimation,
   };
 };
 

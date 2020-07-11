@@ -33,7 +33,7 @@ const Counter: React.FC = () => {
       <StyledCounterProgress
         offset={dashOffset}
         type={timerType}
-        animate={settings.enableTimerAnimation ? "true" : "false"}
+        animate={settings.enableProgressAnimation ? "true" : "false"}
       />
 
       <StyledCounterWrapper>

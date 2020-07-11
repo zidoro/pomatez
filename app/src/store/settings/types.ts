@@ -5,7 +5,7 @@ export type SettingTypes = {
   enableFullscreenBreak: boolean;
   enableDarkTheme: boolean;
   enableStrictMode: boolean;
-  enableTimerAnimation: boolean;
+  enableProgressAnimation: boolean;
   useNativeTitlebar: boolean;
   notificationSoundOn: boolean;
   closeToTray: boolean;
@@ -20,7 +20,7 @@ export const ENABLE_DARK_THEME = `${settings} ENABLE_DARK_THEME`;
 export const ENABLE_FULLSCREEN_BREAK = `${settings} ENABLE_FULLSCREEN_BREAK`;
 export const ENABLE_STRICT_MODE = `${settings} ENABLE_STRICT_MODE`;
 
-export const ENABLE_TIMER_ANIMATION = `${settings} ENABLE_TIMER_ANIMATION`;
+export const ENABLE_PROGRESS_ANIMATION = `${settings} ENABLE_PROGRESS_ANIMATION`;
 
 export const USE_NATIVE_TITLE_BAR = `${settings} USE_NATIVE_TITLE_BAR`;
 export const ENABLE_AUTO_UPDATES = `${settings} ENABLE_AUTO_UPDATES`;
