@@ -15,6 +15,7 @@ import {
   CardTypes,
   SET_TASK_CARD_DONE,
   SKIP_TASK_CARD,
+  SET_TASK_CARD_NOT_DONE,
 } from "./types";
 import undoable from "redux-undo";
 
@@ -160,6 +161,26 @@ const tasksReducer = (state = initialState, action: TasksActionTypes) => {
             ...list,
             cards: [...cards, firstCard],
           };
+        }
+        return list;
+      });
+
+      return newState;
+    }
+    case SET_TASK_CARD_NOT_DONE: {
+      const newState = state.map((list) => {
+        if (list._id === action.payload.listId) {
+          const cards = list.cards.map((card) => {
+            if (card._id === action.payload.cardId) {
+              return {
+                ...card,
+                done: false,
+              };
+            }
+            return card;
+          });
+
+          return { ...list, cards };
         }
         return list;
       });

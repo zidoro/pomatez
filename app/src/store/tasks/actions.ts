@@ -13,6 +13,7 @@ import {
   SET_TASK_LIST_PRIORITY,
   SET_TASK_CARD_DONE,
   SKIP_TASK_CARD,
+  SET_TASK_CARD_NOT_DONE,
 } from "./types";
 
 export const addTaskList = (title: TaskTypes["title"]): TasksActionTypes => {
@@ -96,6 +97,16 @@ export const setTaskCardDone = (
 ): TasksActionTypes => {
   return {
     type: SET_TASK_CARD_DONE,
+    payload: { listId, cardId },
+  };
+};
+
+export const setTaskCardNotDone = (
+  listId?: TaskTypes["_id"],
+  cardId?: CardTypes["_id"]
+): TasksActionTypes => {
+  return {
+    type: SET_TASK_CARD_NOT_DONE,
     payload: { listId, cardId },
   };
 };
