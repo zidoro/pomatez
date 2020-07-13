@@ -11,6 +11,8 @@ import {
   editTaskCard,
   editTaskCardText,
   removeTaskCard,
+  setTaskCardDone,
+  setTaskCardNotDone,
 } from "store";
 import { ElectronContext } from "contexts";
 import autoSize from "autosize";
@@ -21,6 +23,7 @@ import {
   StyledDescriptionWrappper,
   StyledDescriptionFormatHelp,
 } from "styles";
+import { Checkbox } from "components";
 
 import CloseButton from "./CloseButton";
 import DeleteButton from "./DeleteButton";
@@ -113,6 +116,17 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
       []
     );
 
+    const setTaskCardDoneCallback = useCallback(
+      (e) => {
+        if (e.currentTarget.checked) {
+          dispatch(setTaskCardDone(listId, card?._id));
+        } else {
+          dispatch(setTaskCardNotDone(listId, card?._id));
+        }
+      },
+      [dispatch, listId, card]
+    );
+
     const editDescriptionCallback = useCallback(
       () => setEditingDescription(true),
       []
@@ -186,6 +200,11 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
               onClick={editDescriptionCallback}
             />
           )}
+          <Checkbox
+            label="Done"
+            checked={card?.done}
+            onChange={setTaskCardDoneCallback}
+          />
         </StyledDescriptionWrappper>
 
         <DeleteButton onClick={onCardDeleteAction} />

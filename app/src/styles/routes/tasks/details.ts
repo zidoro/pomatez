@@ -118,6 +118,7 @@ export const StyledDescriptionArea = styled(StyledTextArea)`
   grid-column: 1 / -1;
 
   min-height: 7.2rem;
+  max-height: 15.4rem;
   background-color: var(--color-bg-secondary);
 `;
 
@@ -141,6 +142,7 @@ export const StyledDescriptionFormatHelp = styled.a`
 export const StyledDescriptionPreviewer = styled.div<{ hasValue?: boolean }>`
   width: 100%;
   min-height: 7.2rem;
+  max-height: 20rem;
 
   padding: 0.5rem 1rem;
   padding-bottom: 1rem;

@@ -29,6 +29,7 @@ export const EDIT_TASK_CARD_TEXT = `${tasks} EDIT_TASK_CARD_TEXT`;
 export const EDIT_TASK_CARD_DESCRIPTION = `${tasks} EDIT_TASK_CARD_DESCRIPTION`;
 
 export const SET_TASK_CARD_DONE = `${tasks} SET_TASK_CARD_DONE`;
+export const SET_TASK_CARD_NOT_DONE = `${tasks} SET_TASK_CARD_NOT_DONE`;
 export const SKIP_TASK_CARD = `${tasks} SKIP_TASK_CARD`;
 
 export type TasksActionTypes = {
