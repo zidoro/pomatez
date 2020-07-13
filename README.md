@@ -41,6 +41,8 @@
 
 - **Toggle Native Titlebar**. Enable user to switch between default custom titlebar to a native titlebar.
 
+- **Progress Animation**. Allowing the user to disable timer progress animation to reduce the CPU usage to the app least required. It is really useful for some people.
+
 - **Desktop Notification**. If enabled, the app will allow the user to be notified from time to time. Notification property is divided into 3 types NONE, NORMAL and EXTRA.
 
 - **Auto-start Work Time**. If enabled, the app will automatically start after the timer ends. It is useful when the user did not want to always start the timer manually from time to time.
