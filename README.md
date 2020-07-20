@@ -141,7 +141,7 @@ Available for Windows, macOS, and Linux.
 
 ## Privacy
 
-This app has analytics that will track number of users([analytics.ts](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
+This app has analytics that will track number of users ([analytics.ts](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
 
 ## License
 
