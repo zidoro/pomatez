@@ -96,11 +96,11 @@
   },
   "devDependencies": {
     "@types/autosize": "^3.0.7",
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.5",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/node": "^14.0.20",
+    "@types/node": "^14.0.23",
     "@types/node-notifier": "^6.0.1",
-    "@types/react": "^16.9.41",
+    "@types/react": "^16.9.43",
     "@types/react-beautiful-dnd": "^13.0.0",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
@@ -111,7 +111,7 @@
     "electron": "^9.1.0",
     "electron-builder": "^22.7.0",
     "say": "^0.16.0",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "browserslist": {
     "production": [
