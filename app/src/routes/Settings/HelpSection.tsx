@@ -24,7 +24,7 @@ const HelpSection: React.FC = () => {
       />
       <Help
         label="Release notes"
-        link="https://github.com/roldanjrCodeArts9711/productivity-timer/releases"
+        link="https://github.com/roldanjrCodeArts9711/productivity-timer/releases/latest"
       />
       <Help
         label="Support the app"
