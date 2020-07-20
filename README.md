@@ -15,6 +15,14 @@
   <a href="#fire-roadmap">Road Map</a>
   .
   <a href="https://roldanjrcodearts9711.github.io/productivity-timer/">Download</a>
+  .
+  <a href="#cyclone-development">Development</a>
+  .
+  <a href="#computer-installation">Installation</a>
+  .
+  <a href="#privacy">Privacy</a>
+  .
+  <a href="#license">License</a>
   <br>
   <br>
 </p>
@@ -130,6 +138,10 @@ Available for Windows, macOS, and Linux.
 > For linux users. You can directly install it from SnapStore.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
+
+## Privacy
+
+This app has analytics that will track number of users([analytics.ts](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
 
 ## License
 
