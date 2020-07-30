@@ -13,6 +13,7 @@ import {
   CLOSE_TO_TRAY,
   MINIMIZE_TO_TRAY,
   AUTO_START_WORK_TIME,
+  ENABLE_VOICE_ASSISTANCE,
 } from "./types";
 
 export const setAlwaysOnTop = (
@@ -63,6 +64,15 @@ export const setEnableProgressAnimation = (
   return {
     type: ENABLE_PROGRESS_ANIMATION,
     payload: enableProgressAnimation,
+  };
+};
+
+export const setEnableVoiceAssistance = (
+  enableVoiceAssistance: SettingTypes["enableVoiceAssistance"]
+): SettingActionTypes => {
+  return {
+    type: ENABLE_VOICE_ASSISTANCE,
+    payload: enableVoiceAssistance,
   };
 };
 

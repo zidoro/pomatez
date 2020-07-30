@@ -235,26 +235,26 @@ const CounterProvider: React.FC = ({ children }) => {
           notification(
             "60 Seconds Left for Short Break",
             { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftShortBreak
+            settings.enableVoiceAssistance && sixtySecondsLeftShortBreak
           );
         } else if (timer.timerType === LONG_BREAK) {
           notification(
             "60 Seconds Left for Long Break",
             { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftLongBreak
+            settings.enableVoiceAssistance && sixtySecondsLeftLongBreak
           );
         } else if (timer.timerType === SPECIAL_BREAK) {
           notification(
             "60 Seconds Left for Special Break",
             { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftSpecialBreak
+            settings.enableVoiceAssistance && sixtySecondsLeftSpecialBreak
           );
         }
       } else if (count === 31 && timer.timerType === STAY_FOCUS) {
         notification(
           "30 Seconds Left to Work",
           { body: "Please pause all media playing if there's one." },
-          thirtySecondsLeftToWork
+          settings.enableVoiceAssistance && thirtySecondsLeftToWork
         );
       }
     }
@@ -267,7 +267,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Work Time Finished",
                 { body: "It is time to take a short break." },
-                shortBreakStart
+                settings.enableVoiceAssistance && shortBreakStart
               );
 
               dispatch(setTimerType("SHORT_BREAK"));
@@ -277,7 +277,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Session Rounds Completed",
                 { body: "It is time to take a long break." },
-                longBreakStart
+                settings.enableVoiceAssistance && longBreakStart
               );
 
               dispatch(setTimerType("LONG_BREAK"));
@@ -290,7 +290,7 @@ const CounterProvider: React.FC = ({ children }) => {
             notification(
               "Short Break Finished",
               { body: "It is time to focus and work again." },
-              shortBreakFinished
+              settings.enableVoiceAssistance && shortBreakFinished
             );
 
             dispatch(setTimerType("STAY_FOCUS"));
@@ -307,7 +307,7 @@ const CounterProvider: React.FC = ({ children }) => {
             notification(
               "Long Break Finished",
               { body: "It is time to focus and work again." },
-              longBreakFinished
+              settings.enableVoiceAssistance && longBreakFinished
             );
 
             dispatch(setTimerType("STAY_FOCUS"));
@@ -324,7 +324,7 @@ const CounterProvider: React.FC = ({ children }) => {
             notification(
               "Special Break Finished",
               { body: "It is time to focus and work again." },
-              specialBreakFinished
+              settings.enableVoiceAssistance && specialBreakFinished
             );
 
             dispatch(setTimerType("STAY_FOCUS"));
@@ -346,6 +346,7 @@ const CounterProvider: React.FC = ({ children }) => {
     config.sessionRounds,
     settings.notificationProperty,
     settings.autoStartWorkTime,
+    settings.enableVoiceAssistance,
   ]);
 
   useEffect(() => {
