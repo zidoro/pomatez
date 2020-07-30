@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import { themes } from "styles/themes";
 
 export const StyledCheckboxBox = styled.span`
@@ -43,15 +43,28 @@ export const StyledCheckboxLabel = styled.span`
   transition: ${themes.transition};
 `;
 
-export const StyledCheckbox = styled.label<{ disabled?: boolean }>`
+export const StyledCheckbox = styled.label<{
+  disabled?: boolean;
+  asPrimary?: boolean;
+}>`
   & > input {
     width: 0;
     height: 0;
   }
 
+  & > input + ${StyledCheckboxBox} {
+    ${(p) =>
+      p.asPrimary &&
+      css`
+        box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.16);
+      `}
+  }
+
   & > input:checked + ${StyledCheckboxBox} {
-    border-color: var(--color-green);
-    background-color: var(--color-green);
+    border-color: ${(p) =>
+      p.asPrimary ? "var(--color-primary)" : "var(--color-green)"};
+    background-color: ${(p) =>
+      p.asPrimary ? "var(--color-primary)" : "var(--color-green)"};
   }
 
   & > input:checked + ${StyledCheckboxBox}::after {
@@ -60,26 +73,37 @@ export const StyledCheckbox = styled.label<{ disabled?: boolean }>`
   }
 
   & > input:checked ~ ${StyledCheckboxLabel} {
-    color: var(--color-green);
+    color: ${(p) =>
+      p.asPrimary ? "var(--color-primary)" : "var(--color-green)"};
   }
 
   &:hover ${StyledCheckboxBox} {
     box-shadow: ${(p) =>
       p.disabled
-        ? "0 0 0 0.2rem rgba(var(--color-green-rgb), 0)"
-        : "0 0 0 0.2rem rgba(var(--color-green-rgb), 0.16)"};
+        ? `0 0 0 0.2rem rgba(var(--${
+            p.asPrimary ? "color-primary" : "color-green"
+          }-rgb), 0)`
+        : `0 0 0 0.2rem rgba(var(--${
+            p.asPrimary ? "color-primary" : "color-green"
+          }-rgb), 0.16)`};
   }
 
   &:active ${StyledCheckboxBox} {
     box-shadow: ${(p) =>
       p.disabled
-        ? "0 0 0 0.4rem rgba(var(--color-green-rgb), 0)"
-        : "0 0 0 0.4rem rgba(var(--color-green-rgb), 0.16)"};
+        ? `0 0 0 0.4rem rgba(var(--${
+            p.asPrimary ? "color-primary" : "color-green"
+          }-rgb), 0)`
+        : `0 0 0 0.4rem rgba(var(--${
+            p.asPrimary ? "color-primary" : "color-green"
+          }-rgb), 0.16)`};
   }
 
   &:hover ${StyledCheckboxLabel}, &:focus ${StyledCheckboxLabel} {
     color: ${(p) =>
-      p.disabled ? "var(--color-disabled-text)" : "var(--color-green)"};
+      p.disabled
+        ? "var(--color-disabled-text)"
+        : `var(--${p.asPrimary ? "color-primary" : "color-green"})`};
   }
 
   ${StyledCheckboxLabel} {
