@@ -30,8 +30,6 @@ export const StyledTogglerLabel = styled.label`
 
   display: flex;
   align-items: center;
-
-  text-transform: capitalize;
 `;
 
 export const StyledTogglerSwitch = styled.input`
