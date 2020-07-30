@@ -29,8 +29,6 @@ export const StyledShortcutName = styled.label`
 
   display: flex;
   align-items: center;
-
-  text-transform: capitalize;
 `;
 
 export const StyledShortcutKey = styled.input`
