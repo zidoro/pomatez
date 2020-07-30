@@ -6,6 +6,7 @@ export type SettingTypes = {
   enableDarkTheme: boolean;
   enableStrictMode: boolean;
   enableProgressAnimation: boolean;
+  enableVoiceAssistance: boolean;
   useNativeTitlebar: boolean;
   notificationSoundOn: boolean;
   closeToTray: boolean;
@@ -21,6 +22,7 @@ export const ENABLE_FULLSCREEN_BREAK = `${settings} ENABLE_FULLSCREEN_BREAK`;
 export const ENABLE_STRICT_MODE = `${settings} ENABLE_STRICT_MODE`;
 
 export const ENABLE_PROGRESS_ANIMATION = `${settings} ENABLE_PROGRESS_ANIMATION`;
+export const ENABLE_VOICE_ASSISTANCE = `${settings} ENABLE_VOICE_ASSISTANCE`;
 
 export const USE_NATIVE_TITLE_BAR = `${settings} USE_NATIVE_TITLE_BAR`;
 export const ENABLE_AUTO_UPDATES = `${settings} ENABLE_AUTO_UPDATES`;

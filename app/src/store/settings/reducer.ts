@@ -14,6 +14,7 @@ import {
   CLOSE_TO_TRAY,
   MINIMIZE_TO_TRAY,
   AUTO_START_WORK_TIME,
+  ENABLE_VOICE_ASSISTANCE,
 } from "./types";
 
 const defaultSettings: SettingTypes = {
@@ -22,6 +23,7 @@ const defaultSettings: SettingTypes = {
   enableStrictMode: false,
   enableDarkTheme: isPreferredDark(),
   enableProgressAnimation: true,
+  enableVoiceAssistance: true,
   notificationSoundOn: true,
   notificationProperty: "extra",
   closeToTray: true,
@@ -70,6 +72,11 @@ export const settingReducer = (
       return {
         ...state,
         enableProgressAnimation: action.payload,
+      };
+    case ENABLE_VOICE_ASSISTANCE:
+      return {
+        ...state,
+        enableVoiceAssistance: action.payload,
       };
     case USE_NATIVE_TITLE_BAR:
       return {

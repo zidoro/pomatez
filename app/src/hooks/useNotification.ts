@@ -17,12 +17,14 @@ export const useNotification = (
   // Making sure that notification sound the same
   // in all Operating System
 
-  new Audio(bell).play();
+  if (!constantOptions?.mute) {
+    new Audio(bell).play();
 
-  if (audioSrc && !constantOptions?.mute) {
-    setTimeout(() => {
-      new Audio(audioSrc).play();
-    }, 1500);
+    if (audioSrc) {
+      setTimeout(() => {
+        new Audio(audioSrc).play();
+      }, 1500);
+    }
   }
 
   if (!notify) return;
