@@ -50,12 +50,12 @@ Menu.setApplicationMenu(null);
 
 const getFrameHeight = () => {
   if (isWindow()) {
-    return 500;
+    return 502;
   } else {
     if (store.get("useNativeTitlebar")) {
       return 480;
     }
-    return 500;
+    return 502;
   }
 };
 
