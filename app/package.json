@@ -29,6 +29,9 @@
     "release": "yarn build:app && electron-builder --publish always",
     "postinstall": "electron-builder install-app-deps"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "babelMacros": {
     "styledComponents": {
       "fileName": false,
