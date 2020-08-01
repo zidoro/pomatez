@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://roldanjrcodearts9711.github.io/productivity-timer/">
+  <a href="https://roldanjr.github.io/productivity-timer/">
     <img src="assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
   </a>
 </p>
@@ -14,7 +14,7 @@
   .
   <a href="#fire-roadmap">Road Map</a>
   .
-  <a href="https://roldanjrcodearts9711.github.io/productivity-timer/">Download</a>
+  <a href="https://roldanjr.github.io/productivity-timer/">Download</a>
   .
   <a href="#cyclone-development">Development</a>
   .
@@ -30,10 +30,10 @@
 ![App Preview](/assets/Preview.png)
 
 [![productivity-timer](https://snapcraft.io//productivity-timer/badge.svg)](https://snapcraft.io/productivity-timer)
-[![Build Status](https://travis-ci.com/roldanjrCodeArts9711/productivity-timer.svg?branch=master)](https://travis-ci.com/roldanjrCodeArts9711/productivity-timer)
-[![Total Downloads](https://img.shields.io/github/downloads/roldanjrCodeArts9711/productivity-timer/total)](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
-[![Version](https://img.shields.io/github/v/release/roldanjrCodeArts9711/productivity-timer)](https://github.com/roldanjrCodeArts9711/productivity-timer/releases)
-[![License](https://img.shields.io/github/license/roldanjrCodeArts9711/productivity-timer)](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/LICENSE)
+[![Build Status](https://travis-ci.com/roldanjr/productivity-timer.svg?branch=master)](https://travis-ci.com/roldanjr/productivity-timer)
+[![Total Downloads](https://img.shields.io/github/downloads/roldanjr/productivity-timer/total)](https://github.com/roldanjr/productivity-timer/releases)
+[![Version](https://img.shields.io/github/v/release/roldanjr/productivity-timer)](https://github.com/roldanjr/productivity-timer/releases)
+[![License](https://img.shields.io/github/license/roldanjr/productivity-timer)](https://github.com/roldanjr/productivity-timer/blob/master/LICENSE)
 
 ## :sparkles: Features
 
@@ -129,9 +129,9 @@ This app is built using [React](https://reactjs.org/), [Electron](https://www.el
 
 ## :computer: Installation
 
-Download the latest version from the [Releases Page](https://github.com/roldanjrCodeArts9711/productivity-timer/releases/latest)
+Download the latest version from the [Releases Page](https://github.com/roldanjr/productivity-timer/releases/latest)
 
-or from the :point_right: [Official Website](https://roldanjrcodearts9711.github.io/productivity-timer/) .
+or from the :point_right: [Official Website](https://roldanjr.github.io/productivity-timer/) .
 
 Available for Windows, macOS, and Linux.
 
@@ -141,8 +141,8 @@ Available for Windows, macOS, and Linux.
 
 ## Privacy
 
-This app has analytics that will track number of users ([analytics.ts](https://github.com/roldanjrCodeArts9711/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
+This app has analytics that will track number of users ([analytics.ts](https://github.com/roldanjr/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
 
 ## License
 
-MIT © [Roldan Montilla Jr](https://github.com/roldanjrCodeArts9711)
+MIT © [Roldan Montilla Jr](https://github.com/roldanjr)
