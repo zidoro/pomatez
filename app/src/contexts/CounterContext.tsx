@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import useStayAwake from "use-stay-awake";
 import {
   AppStateTypes,
   STAY_FOCUS,
@@ -12,7 +13,7 @@ import {
   SettingTypes,
   setPlay,
 } from "store";
-import { useNotification, useSleepMode } from "hooks";
+import { useNotification } from "hooks";
 import { padNum } from "utils";
 
 import shortBreakStart from "assets/audios/short-break-start.wav";
@@ -54,7 +55,7 @@ const CounterProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
-  const { preventSleep, allowSleep } = useSleepMode();
+  const { preventSleeping, allowSleeping } = useStayAwake();
 
   const notification = useNotification(
     {
@@ -103,11 +104,11 @@ const CounterProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (timer.playing && timer.timerType !== STAY_FOCUS) {
-      preventSleep();
+      preventSleeping();
     } else {
-      allowSleep();
+      allowSleeping();
     }
-  }, [timer.playing, timer.timerType, preventSleep, allowSleep]);
+  }, [timer.playing, timer.timerType, preventSleeping, allowSleeping]);
 
   useEffect(() => {
     let interval: number;
