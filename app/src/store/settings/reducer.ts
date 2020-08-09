@@ -19,13 +19,13 @@ import {
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
-  enableFullscreenBreak: true,
+  enableFullscreenBreak: false,
   enableStrictMode: false,
   enableDarkTheme: isPreferredDark(),
-  enableProgressAnimation: true,
-  enableVoiceAssistance: true,
+  enableProgressAnimation: false,
+  enableVoiceAssistance: false,
   notificationSoundOn: true,
-  notificationProperty: "extra",
+  notificationProperty: "normal",
   closeToTray: true,
   minimizeToTray: false,
   autoStartWorkTime: true,
