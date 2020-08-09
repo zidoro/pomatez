@@ -122,58 +122,31 @@ const CounterProvider: React.FC = ({ children }) => {
 
     if (timer.playing) {
       interval = setInterval(() => {
-        const d = new Date();
-        const ct = padNum(d.getHours()) + ":" + padNum(d.getMinutes());
+        const date = new Date();
+        const currentTime =
+          padNum(date.getHours()) + ":" + padNum(date.getMinutes());
 
         if (timer.timerType !== SPECIAL_BREAK) {
-          switch (ct) {
+          switch (currentTime) {
             case firstBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(firstBreak.duration);
-              notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
-                specialBreakStart
-              );
+              notification("Special break starts now.", specialBreakStart);
               break;
             case secondBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(secondBreak.duration);
-              notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
-                specialBreakStart
-              );
+              notification("Special break starts now.", specialBreakStart);
               break;
             case thirdBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(thirdBreak.duration);
-              notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
-                specialBreakStart
-              );
+              notification("Special break starts now.", specialBreakStart);
               break;
             case fourthBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(fourthBreak.duration);
-              notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
-                specialBreakStart
-              );
+              notification("Special break starts now.", specialBreakStart);
               break;
             default:
               return;
@@ -234,27 +207,23 @@ const CounterProvider: React.FC = ({ children }) => {
       if (count === 61) {
         if (timer.timerType === SHORT_BREAK) {
           notification(
-            "60 Seconds Left for Short Break",
-            { body: "Please prepare yourself getting  back to work." },
+            "Sixty seconds left for short break.",
             settings.enableVoiceAssistance && sixtySecondsLeftShortBreak
           );
         } else if (timer.timerType === LONG_BREAK) {
           notification(
-            "60 Seconds Left for Long Break",
-            { body: "Please prepare yourself getting  back to work." },
+            "Sixty seconds left for long break.",
             settings.enableVoiceAssistance && sixtySecondsLeftLongBreak
           );
         } else if (timer.timerType === SPECIAL_BREAK) {
           notification(
-            "60 Seconds Left for Special Break",
-            { body: "Please prepare yourself getting  back to work." },
+            "Sixty seconds left for special break.",
             settings.enableVoiceAssistance && sixtySecondsLeftSpecialBreak
           );
         }
       } else if (count === 31 && timer.timerType === STAY_FOCUS) {
         notification(
-          "30 Seconds Left to Work",
-          { body: "Please pause all media playing if there's one." },
+          "Thirty seconds left to work.",
           settings.enableVoiceAssistance && thirtySecondsLeftToWork
         );
       }
@@ -266,8 +235,7 @@ const CounterProvider: React.FC = ({ children }) => {
           if (timer.round < config.sessionRounds) {
             setTimeout(() => {
               notification(
-                "Work Time Finished",
-                { body: "It is time to take a short break." },
+                "Work time has been finished.",
                 settings.enableVoiceAssistance && shortBreakStart
               );
 
@@ -276,8 +244,7 @@ const CounterProvider: React.FC = ({ children }) => {
           } else {
             setTimeout(() => {
               notification(
-                "Session Rounds Completed",
-                { body: "It is time to take a long break." },
+                "Session rounds has completed.",
                 settings.enableVoiceAssistance && longBreakStart
               );
 
@@ -289,8 +256,7 @@ const CounterProvider: React.FC = ({ children }) => {
         case SHORT_BREAK:
           setTimeout(() => {
             notification(
-              "Short Break Finished",
-              { body: "It is time to focus and work again." },
+              "Short break has been finished.",
               settings.enableVoiceAssistance && shortBreakFinished
             );
 
@@ -306,8 +272,7 @@ const CounterProvider: React.FC = ({ children }) => {
         case LONG_BREAK:
           setTimeout(() => {
             notification(
-              "Long Break Finished",
-              { body: "It is time to focus and work again." },
+              "Long break has been finished.",
               settings.enableVoiceAssistance && longBreakFinished
             );
 
@@ -323,8 +288,7 @@ const CounterProvider: React.FC = ({ children }) => {
         case SPECIAL_BREAK:
           setTimeout(() => {
             notification(
-              "Special Break Finished",
-              { body: "It is time to focus and work again." },
+              "Special break has been finished.",
               settings.enableVoiceAssistance && specialBreakFinished
             );
 
