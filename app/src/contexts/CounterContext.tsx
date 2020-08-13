@@ -131,22 +131,34 @@ const CounterProvider: React.FC = ({ children }) => {
             case firstBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(firstBreak.duration);
-              notification("Special break starts now.", specialBreakStart);
+              notification(
+                "Special break has been started.",
+                specialBreakStart
+              );
               break;
             case secondBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(secondBreak.duration);
-              notification("Special break starts now.", specialBreakStart);
+              notification(
+                "Special break has been started.",
+                specialBreakStart
+              );
               break;
             case thirdBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(thirdBreak.duration);
-              notification("Special break starts now.", specialBreakStart);
+              notification(
+                "Special break has been started.",
+                specialBreakStart
+              );
               break;
             case fourthBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(fourthBreak.duration);
-              notification("Special break starts now.", specialBreakStart);
+              notification(
+                "Special break has been started.",
+                specialBreakStart
+              );
               break;
             default:
               return;
@@ -154,7 +166,7 @@ const CounterProvider: React.FC = ({ children }) => {
         } else {
           return clearInterval(interval);
         }
-      }, 1000);
+      }, 500);
     }
 
     return () => clearInterval(interval);
