@@ -61,6 +61,8 @@
 
 - **Progress on Tray**. The app will show progress animation on tray. This feature can be activate if Minimize to Tray of Close to Tray is enabled. Useful when the timer is being hidden.
 
+- **Voice Assistance**. Notification text to speech feature that might help some users if enabled.
+
 - **Keyboard Shortcuts**. Provide some useful keyboard shortcuts allowing the user to use the app conveniently.
 
 - **Customizable Rules**. Allowing the user to modify the default rules of Pomodoro Principle to fit on their personal preference.
