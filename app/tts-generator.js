@@ -18,47 +18,47 @@ function ttsGenerator(text, filename) {
 
 const textToGenerateList = [
   {
-    text: "Work Time Finished. It is time to take a short break.",
+    text: "Work time has been finished.",
     filename: "short-break-start",
   },
   {
-    text: "Short Break Finished. It is time to focus and work again.",
+    text: "Short break has been finished.",
     filename: "short-break-finished",
   },
   {
-    text: "Session Rounds Completed. It is time to take a long break.",
+    text: "Session rounds has completed.",
     filename: "long-break-start",
   },
   {
-    text: "Long Break Finished. It is time to focus and work again.",
+    text: "Long break has been finished.",
     filename: "long-break-finished",
   },
   {
-    text: "Special Break. You can now do the things you really want to do at this moment.",
+    text: "Sixty seconds before special break start.",
+    filename: "sixty-seconds-before-special-break",
+  },
+  {
+    text: "Special break has been started.",
     filename: "special-break-start",
   },
   {
-    text: "Special Break Finished. It is time to focus and work again.",
+    text: "Special break has been finished.",
     filename: "special-break-finished",
   },
   {
-    text:
-      "Sixty Seconds Left for Short Break. Please prepare yourself getting  back to work.",
+    text: "Sixty seconds left for short break.",
     filename: "sixty-seconds-left-short-break",
   },
   {
-    text:
-      "Sixty Seconds Left for Long Break. Please prepare yourself getting  back to work.",
+    text: "Sixty seconds left for long break.",
     filename: "sixty-seconds-left-long-break",
   },
   {
-    text:
-      "Sixty Seconds Left for Special Break. Please prepare yourself getting  back to work.",
+    text: "Sixty seconds left for special break.",
     filename: "sixty-seconds-left-special-break",
   },
   {
-    text:
-      "Thirty Seconds Left to Work. Please pause all media playing if there's one.",
+    text: "Thirty seconds left to work.",
     filename: "thirty-seconds-left-to-work",
   },
 ];

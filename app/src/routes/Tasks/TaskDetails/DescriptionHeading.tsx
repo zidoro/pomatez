@@ -8,7 +8,12 @@ const DescriptionHeading: React.FC<Props> = ({ disabled, onChange }) => {
   return (
     <StyledDescriptionHeading>
       Description
-      <Checkbox label="preview" disabled={disabled} onChange={onChange} />
+      <Checkbox
+        label="preview"
+        disabled={disabled}
+        onChange={onChange}
+        asPrimary
+      />
     </StyledDescriptionHeading>
   );
 };
