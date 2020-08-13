@@ -1,13 +1,13 @@
 <p align="center">
   <a href="https://roldanjr.github.io/productivity-timer/">
-    <img src="assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
+    <img src="assets/logo.png" alt="Productivity Timer logo" width="40" height="40">
   </a>
 </p>
 
-<h1 align="center">PRODUCTIVITY TIMER</h1>
+<h1 align="center" style="font-size: 20px">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Multi-platform time management app based on Pomodoro Technique <br> that will help boost your productivity.
+  Attractive multi-platform pomodoro timer.
    <br>
   <br>
   <a href="#sparkles-features">Features</a>
@@ -41,7 +41,7 @@
 
 - **Full Screen Breaks**. If enabled, the app will interrupt the user by occupying the whole screen so that the user will be force to take a break.
 
-- **Special Breaks**. If enabled, the user will be allowed to set some special time when the user really need to take a break.
+- **Special Breaks**. User will be allowed to set some special time when he/she really need to take a break.
 
 - **Strict Mode**. If enabled, the app will strictly follow user's configuration and prevent the user from resetting, pausing and skipping the timer when it has started.
 

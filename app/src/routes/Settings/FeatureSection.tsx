@@ -12,11 +12,12 @@ import {
   setAutoStartWorkTime,
   setMinimizeToTray,
   setCloseToTray,
+  setEnableVoiceAssistance,
 } from "store";
-
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
-import SettingSection from "./SettingSection";
 import { ThemeContext } from "contexts";
+
+import SettingSection from "./SettingSection";
 
 const FeatureSection: React.FC = () => {
   const settings: SettingTypes = useSelector(
@@ -101,6 +102,14 @@ const FeatureSection: React.FC = () => {
       onChange: useCallback(() => {
         dispatch(setCloseToTray(!settings.closeToTray));
       }, [dispatch, settings.closeToTray]),
+    },
+    {
+      id: "voice-assistance",
+      label: "Voice Assistance",
+      checked: settings.enableVoiceAssistance,
+      onChange: useCallback(() => {
+        dispatch(setEnableVoiceAssistance(!settings.enableVoiceAssistance));
+      }, [dispatch, settings.enableVoiceAssistance]),
     },
   ];
 

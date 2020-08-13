@@ -1,12 +1,16 @@
 import React from "react";
 import { StyledCheckbox, StyledCheckboxBox, StyledCheckboxLabel } from "styles";
+import { CheckboxProps } from "./Checkbox";
 
-type Props = { label?: string } & React.HTMLProps<HTMLInputElement>;
-
-export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
-  ({ id, label, name, disabled, ...props }, ref) => {
+export const Radio = React.forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ id, label, name, disabled, asPrimary, ...props }, ref) => {
     return (
-      <StyledCheckbox htmlFor={id} disabled={disabled} tabIndex={0}>
+      <StyledCheckbox
+        htmlFor={id}
+        disabled={disabled}
+        tabIndex={0}
+        asPrimary={asPrimary}
+      >
         <input
           type="radio"
           name={name}
@@ -22,4 +26,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
   }
 );
 
-export default React.memo(Checkbox);
+Radio.defaultProps = {
+  asPrimary: true,
+};
+
+export default React.memo(Radio);

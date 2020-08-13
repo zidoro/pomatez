@@ -1,12 +1,15 @@
 import React from "react";
 import { StyledCheckbox, StyledCheckboxBox, StyledCheckboxLabel } from "styles";
 
-type Props = { label?: string } & React.HTMLProps<HTMLInputElement>;
+export type CheckboxProps = {
+  label?: string;
+  asPrimary?: boolean;
+} & React.HTMLProps<HTMLInputElement>;
 
-export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
-  ({ id, label, name, disabled, ...props }, ref) => {
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+  ({ id, label, name, disabled, asPrimary, ...props }, ref) => {
     return (
-      <StyledCheckbox htmlFor={id} disabled={disabled}>
+      <StyledCheckbox htmlFor={id} disabled={disabled} asPrimary={asPrimary}>
         <input
           type="checkbox"
           name={name}

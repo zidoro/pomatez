@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import useStayAwake from "use-stay-awake";
 import {
   AppStateTypes,
   STAY_FOCUS,
@@ -12,7 +13,7 @@ import {
   SettingTypes,
   setPlay,
 } from "store";
-import { useNotification, useSleepMode } from "hooks";
+import { useNotification } from "hooks";
 import { padNum } from "utils";
 
 import shortBreakStart from "assets/audios/short-break-start.wav";
@@ -54,7 +55,7 @@ const CounterProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
-  const { preventSleep, allowSleep } = useSleepMode();
+  const { preventSleeping, allowSleeping } = useStayAwake();
 
   const notification = useNotification(
     {
@@ -103,11 +104,11 @@ const CounterProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (timer.playing && timer.timerType !== STAY_FOCUS) {
-      preventSleep();
+      preventSleeping();
     } else {
-      allowSleep();
+      allowSleeping();
     }
-  }, [timer.playing, timer.timerType, preventSleep, allowSleep]);
+  }, [timer.playing, timer.timerType, preventSleeping, allowSleeping]);
 
   useEffect(() => {
     let interval: number;
@@ -121,20 +122,17 @@ const CounterProvider: React.FC = ({ children }) => {
 
     if (timer.playing) {
       interval = setInterval(() => {
-        const d = new Date();
-        const ct = padNum(d.getHours()) + ":" + padNum(d.getMinutes());
+        const date = new Date();
+        const currentTime =
+          padNum(date.getHours()) + ":" + padNum(date.getMinutes());
 
         if (timer.timerType !== SPECIAL_BREAK) {
-          switch (ct) {
+          switch (currentTime) {
             case firstBreak.fromTime:
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(firstBreak.duration);
               notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
+                "Special break has been started.",
                 specialBreakStart
               );
               break;
@@ -142,11 +140,7 @@ const CounterProvider: React.FC = ({ children }) => {
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(secondBreak.duration);
               notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
+                "Special break has been started.",
                 specialBreakStart
               );
               break;
@@ -154,11 +148,7 @@ const CounterProvider: React.FC = ({ children }) => {
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(thirdBreak.duration);
               notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
+                "Special break has been started.",
                 specialBreakStart
               );
               break;
@@ -166,11 +156,7 @@ const CounterProvider: React.FC = ({ children }) => {
               dispatch(setTimerType("SPECIAL_BREAK"));
               setTimerDuration(fourthBreak.duration);
               notification(
-                "Special Break",
-                {
-                  body:
-                    "You can now do the things you really want to do at this moment.",
-                },
+                "Special break has been started.",
                 specialBreakStart
               );
               break;
@@ -180,7 +166,7 @@ const CounterProvider: React.FC = ({ children }) => {
         } else {
           return clearInterval(interval);
         }
-      }, 1000);
+      }, 500);
     }
 
     return () => clearInterval(interval);
@@ -233,28 +219,24 @@ const CounterProvider: React.FC = ({ children }) => {
       if (count === 61) {
         if (timer.timerType === SHORT_BREAK) {
           notification(
-            "60 Seconds Left for Short Break",
-            { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftShortBreak
+            "Sixty seconds left for short break.",
+            settings.enableVoiceAssistance && sixtySecondsLeftShortBreak
           );
         } else if (timer.timerType === LONG_BREAK) {
           notification(
-            "60 Seconds Left for Long Break",
-            { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftLongBreak
+            "Sixty seconds left for long break.",
+            settings.enableVoiceAssistance && sixtySecondsLeftLongBreak
           );
         } else if (timer.timerType === SPECIAL_BREAK) {
           notification(
-            "60 Seconds Left for Special Break",
-            { body: "Please prepare yourself getting  back to work." },
-            sixtySecondsLeftSpecialBreak
+            "Sixty seconds left for special break.",
+            settings.enableVoiceAssistance && sixtySecondsLeftSpecialBreak
           );
         }
       } else if (count === 31 && timer.timerType === STAY_FOCUS) {
         notification(
-          "30 Seconds Left to Work",
-          { body: "Please pause all media playing if there's one." },
-          thirtySecondsLeftToWork
+          "Thirty seconds left to work.",
+          settings.enableVoiceAssistance && thirtySecondsLeftToWork
         );
       }
     }
@@ -265,9 +247,8 @@ const CounterProvider: React.FC = ({ children }) => {
           if (timer.round < config.sessionRounds) {
             setTimeout(() => {
               notification(
-                "Work Time Finished",
-                { body: "It is time to take a short break." },
-                shortBreakStart
+                "Work time has been finished.",
+                settings.enableVoiceAssistance && shortBreakStart
               );
 
               dispatch(setTimerType("SHORT_BREAK"));
@@ -275,9 +256,8 @@ const CounterProvider: React.FC = ({ children }) => {
           } else {
             setTimeout(() => {
               notification(
-                "Session Rounds Completed",
-                { body: "It is time to take a long break." },
-                longBreakStart
+                "Session rounds has completed.",
+                settings.enableVoiceAssistance && longBreakStart
               );
 
               dispatch(setTimerType("LONG_BREAK"));
@@ -288,9 +268,8 @@ const CounterProvider: React.FC = ({ children }) => {
         case SHORT_BREAK:
           setTimeout(() => {
             notification(
-              "Short Break Finished",
-              { body: "It is time to focus and work again." },
-              shortBreakFinished
+              "Short break has been finished.",
+              settings.enableVoiceAssistance && shortBreakFinished
             );
 
             dispatch(setTimerType("STAY_FOCUS"));
@@ -305,9 +284,8 @@ const CounterProvider: React.FC = ({ children }) => {
         case LONG_BREAK:
           setTimeout(() => {
             notification(
-              "Long Break Finished",
-              { body: "It is time to focus and work again." },
-              longBreakFinished
+              "Long break has been finished.",
+              settings.enableVoiceAssistance && longBreakFinished
             );
 
             dispatch(setTimerType("STAY_FOCUS"));
@@ -322,9 +300,8 @@ const CounterProvider: React.FC = ({ children }) => {
         case SPECIAL_BREAK:
           setTimeout(() => {
             notification(
-              "Special Break Finished",
-              { body: "It is time to focus and work again." },
-              specialBreakFinished
+              "Special break has been finished.",
+              settings.enableVoiceAssistance && specialBreakFinished
             );
 
             dispatch(setTimerType("STAY_FOCUS"));
@@ -346,6 +323,7 @@ const CounterProvider: React.FC = ({ children }) => {
     config.sessionRounds,
     settings.notificationProperty,
     settings.autoStartWorkTime,
+    settings.enableVoiceAssistance,
   ]);
 
   useEffect(() => {

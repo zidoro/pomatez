@@ -41,12 +41,12 @@ const ShortcutSection: React.FC = () => {
       </SettingSection>
       <SettingSection heading="Global Shortcut Key">
         <Shortcut
-          name="Hide The App"
+          name="Hide the App"
           shortcutKey="Alt + Shift + H"
           id="hide-the-app"
         />
         <Shortcut
-          name="Show The App"
+          name="Show the App"
           shortcutKey="Alt + Shift + S"
           id="show-the-app"
         />
