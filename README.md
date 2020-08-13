@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://roldanjr.github.io/productivity-timer/">
-    <img src="assets/logo.png" alt="Productivity Timer logo" width="40" height="40">
+    <img src="assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
   </a>
 </p>
 
-<h1 align="center" style="font-size: 20px">PRODUCTIVITY TIMER</h1>
+<h1 align="center">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
   Attractive pomodoro timer for Windows, Mac, and Linux.
