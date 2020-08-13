@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://roldanjr.github.io/productivity-timer/">
-    <img src="assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
+    <img src=".github/assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
   </a>
 </p>
 
@@ -20,14 +20,14 @@
   .
   <a href="#computer-installation">Installation</a>
   .
-  <a href="#privacy">Privacy</a>
+  <a href="#shield-privacy">Privacy</a>
   .
-  <a href="#license">License</a>
+  <a href="#newspaper-license">License</a>
   <br>
   <br>
 </p>
 
-![App Preview](/assets/Preview.png)
+![App Preview](.github/assets/preview.png)
 
 [![productivity-timer](https://snapcraft.io//productivity-timer/badge.svg)](https://snapcraft.io/productivity-timer)
 [![Build Status](https://travis-ci.com/roldanjr/productivity-timer.svg?branch=master)](https://travis-ci.com/roldanjr/productivity-timer)
@@ -78,6 +78,8 @@
 - **Website Blocker**. Enable user to block specific website while working in order to focus.
 
 - **Productivity Report**. Provide some useful summary about user's productivity to have some sense of accomplishments.
+
+- **Time Extender**. Enable user to extend timer if needed.
 
 ## :cyclone: Development
 
@@ -141,10 +143,10 @@ Available for Windows, macOS, and Linux.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
-## Privacy
+## :shield: Privacy
 
 This app has analytics that will track number of users ([analytics.ts](https://github.com/roldanjr/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
 
-## License
+## :newspaper: License
 
 MIT © [Roldan Montilla Jr](https://github.com/roldanjr)
