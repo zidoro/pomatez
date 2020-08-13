@@ -7,7 +7,7 @@
 <h1 align="center" style="font-size: 20px">PRODUCTIVITY TIMER</h1>
 
 <p align="center">
-  Attractive multi-platform pomodoro timer.
+  Attractive pomodoro timer for Windows, Mac, and Linux.
    <br>
   <br>
   <a href="#sparkles-features">Features</a>

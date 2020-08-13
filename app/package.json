@@ -9,7 +9,7 @@
     "email": "roldanjrmontilla@gmail.com",
     "url": "https://github.com/roldanjr"
   },
-  "description": "Attractive multi-platform pomodoro timer.",
+  "description": "Attractive pomodoro timer for Windows, Mac, and Linux.",
   "repository": "https://github.com/roldanjr/productivity-timer",
   "homepage": "./",
   "scripts": {
