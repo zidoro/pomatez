@@ -14,7 +14,7 @@
   .
   <a href="#fire-roadmap">Road Map</a>
   .
-  <a href="https://roldanjr.github.io/productivity-timer/">Download</a>
+  <a href="#rocket-boosters">Boosters</a>
   .
   <a href="#cyclone-development">Development</a>
   .
@@ -71,17 +71,36 @@
 
 - **Auto Updates**. With the Automatic Updates feature, it keep the app up to date with the latest updates and enhancements. User no longer have to search for critical updates; it delivers them directly to the computer.
 
-## :fire: Roadmap
+## :world_map: Roadmap
 
 - **Customizable Shortcuts**. Provide a way to make the default keyboard shortcuts customizable by the user.
 
 - **Website Blocker**. Enable user to block specific website while working in order to focus.
 
-- **Productivity Report**. Provide some useful summary about user's productivity to have some sense of accomplishments.
+- **Productivity Report**. Useful summary about user's productivity.
 
 - **Time Extender**. Enable user to extend timer if needed.
 
-## :cyclone: Development
+- **Add to Homebrew (cask)**. App to be installable via Homebrew.
+
+- **Tasks Database**. To be able to save completed tasks to a database.
+
+## :rocket: Boosters
+
+Find exactly what you need to be more productive and regain control over your time.
+
+| Name & Description                                                                                                                                                                                                                                                                                                                                                | Image                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| <h3>[Luxafor Flag](https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25)</h3> LED availability indicator that eliminates workspace distractions. <br> <a href="https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25">See details</a>                                                                                        | ![Luxafor Flag](.github/assets/Luxafor%20Flag.jpg)                       |
+| <h3>[Luxafor Bluetooth](https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25)</h3> Wireless & software-controlled LED availability indicator that displays notifications and personal availability. <br> <a href="https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25">See details</a>                                 | ![Luxafor Bluetooth](.github/assets/Luxafor%20Bluetooth.jpg)             |
+| <h3>[Luxafor Switch](https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25)</h3> Wireless & remote-controlled availability indicator that displays meeting room and workstation availability in real-time. <br> <a href="https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25">See details</a> | ![Luxafor Switch](.github/assets/Luxafor%20Switch.jpg)                   |
+| <h3>[Luxafor Cube](https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25)</h3> Standalone LED availability indicator that displays meeting room availability. <br> <a href="https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25">See details</a>                                    | ![Luxafor Cube](.github/assets/Luxafor%20Cube.jpg)                       |
+| <h3>[Luxafor Pomodoro Timer](https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25)</h3> LED display timer that helps break down work in bite-sized chunks. <br> <a href="https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25">See details</a>                                                                                              | ![Luxafor Pomodoro Timer](.github/assets/Luxafor%20Pomodoro%20Timer.jpg) |
+| <h3>[Luxafor ANC Headphones](https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25)</h3> Wireless headphones with active noise cancelling technology. <br> <a href="https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25">See details</a>                                | ![Luxafor ANC Headphones](.github/assets/Luxafor%20ANC%20Headphones.jpg) |
+| <h3>[Office Hero Planner](https://luxafor.com/new-office-hero-planner-2020/?hello=25)</h3> Productivity planner that helps prioritize tasks and measure performance. <br> <a href="https://luxafor.com/new-office-hero-planner-2020/?hello=25">See details</a>                                                                                                    | ![Office Hero Planner](.github/assets/Office%20Hero%20Planner.jpg)       |
+| <h3>[Don't Break The Chain](https://luxafor.com/dont-break-the-chain-calendar-for-productivity-improvement-development/?hello=25)</h3> A 365-day calendar that keeps you motivated and focused on self-improvement. <br> <a href="https://luxafor.com/dont-break-the-chain-calendar-for-productivity-improvement-development/?hello=25">See details</a>           | ![Don't Break The Chain](.github/assets/Don't%20Break%20The%20Chain.jpg) |
+
+## :call_me_hand: Development
 
 This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
 
@@ -133,11 +152,11 @@ This app is built using [React](https://reactjs.org/), [Electron](https://www.el
 
 ## :computer: Installation
 
+Available for Windows, macOS, and Linux.
+
 Download the latest version from the [Releases Page](https://github.com/roldanjr/productivity-timer/releases/latest)
 
-or from the :point_right: [Official Website](https://roldanjr.github.io/productivity-timer/) .
-
-Available for Windows, macOS, and Linux.
+or from the :point_right: [Download Page](https://roldanjr.github.io/productivity-timer/) .
 
 > For linux users. You can directly install it from SnapStore.
 
