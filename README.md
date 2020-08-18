@@ -12,11 +12,11 @@
   <br>
   <a href="#sparkles-features">Features</a>
   .
-  <a href="#fire-roadmap">Road Map</a>
+  <a href="#world_map-roadmap">Road Map</a>
   .
   <a href="#rocket-boosters">Boosters</a>
   .
-  <a href="#cyclone-development">Development</a>
+  <a href="#call_me_hand-development">Development</a>
   .
   <a href="#computer-installation">Installation</a>
   .
