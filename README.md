@@ -89,20 +89,26 @@
 
 Find exactly what you need to be more productive and regain control over your time.
 
-| Name & Description                                                                                                                                                                                                                                                                                                                                                | Image                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| <h3>[Luxafor Flag](https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25)</h3> LED availability indicator that eliminates workspace distractions. <br> <a href="https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25">See details</a>                                                                                        | ![Luxafor Flag](.github/assets/Luxafor%20Flag.jpg)                       |
-| <h3>[Luxafor Bluetooth](https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25)</h3> Wireless & software-controlled LED availability indicator that displays notifications and personal availability. <br> <a href="https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25">See details</a>                                 | ![Luxafor Bluetooth](.github/assets/Luxafor%20Bluetooth.jpg)             |
-| <h3>[Luxafor Switch](https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25)</h3> Wireless & remote-controlled availability indicator that displays meeting room and workstation availability in real-time. <br> <a href="https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25">See details</a> | ![Luxafor Switch](.github/assets/Luxafor%20Switch.jpg)                   |
-| <h3>[Luxafor Cube](https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25)</h3> Standalone LED availability indicator that displays meeting room availability. <br> <a href="https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25">See details</a>                                    | ![Luxafor Cube](.github/assets/Luxafor%20Cube.jpg)                       |
-| <h3>[Luxafor Pomodoro Timer](https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25)</h3> LED display timer that helps break down work in bite-sized chunks. <br> <a href="https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25">See details</a>                                                                                              | ![Luxafor Pomodoro Timer](.github/assets/Luxafor%20Pomodoro%20Timer.jpg) |
-| <h3>[Luxafor ANC Headphones](https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25)</h3> Wireless headphones with active noise cancelling technology. <br> <a href="https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25">See details</a>                                | ![Luxafor ANC Headphones](.github/assets/Luxafor%20ANC%20Headphones.jpg) |
-| <h3>[Office Hero Planner](https://luxafor.com/new-office-hero-planner-2020/?hello=25)</h3> Productivity planner that helps prioritize tasks and measure performance. <br> <a href="https://luxafor.com/new-office-hero-planner-2020/?hello=25">See details</a>                                                                                                    | ![Office Hero Planner](.github/assets/Office%20Hero%20Planner.jpg)       |
-| <h3>[Don't Break The Chain](https://luxafor.com/dont-break-the-chain-calendar-for-productivity-improvement-development/?hello=25)</h3> A 365-day calendar that keeps you motivated and focused on self-improvement. <br> <a href="https://luxafor.com/dont-break-the-chain-calendar-for-productivity-improvement-development/?hello=25">See details</a>           | ![Don't Break The Chain](.github/assets/Don't%20Break%20The%20Chain.jpg) |
+Already used by office workers in productive companies worldwide, such as:
+
+![Google](.github/assets/companies/google.jpg) &nbsp; ![YouTube](.github/assets/companies/youtube.jpg) &nbsp; ![Logitech](.github/assets/companies/logitech.jpg) &nbsp; ![Facebook](.github/assets/companies/facebook.jpg) &nbsp; ![Microsoft](.github/assets/companies/microsoft.png) &nbsp; ![Bank of America](.github/assets/companies/bank_of_america.jpg) &nbsp; ![Thales](.github/assets/companies/thales.jpg) &nbsp; ![Ingram](.github/assets/companies/ingram.jpg) &nbsp; ![Hulu](.github/assets/companies/hulu.jpg) &nbsp; ![Etsy](.github/assets/companies/etsy.jpg) &nbsp; ![Butterball](.github/assets/companies/Butterball.png)
+
+| Name & Description                                                                                                                                                                                                                                                                                                                                                | Image                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| <h3>[Luxafor Flag](https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25)</h3> LED availability indicator that eliminates workspace distractions. <br> <a href="https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25">See details</a>                                                                                        | ![Luxafor Flag](.github/assets/boosters/Luxafor%20Flag.jpg)                       |
+| <h3>[Luxafor Bluetooth](https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25)</h3> Wireless & software-controlled LED availability indicator that displays notifications and personal availability. <br> <a href="https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25">See details</a>                                 | ![Luxafor Bluetooth](.github/assets/boosters/Luxafor%20Bluetooth.jpg)             |
+| <h3>[Luxafor Switch](https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25)</h3> Wireless & remote-controlled availability indicator that displays meeting room and workstation availability in real-time. <br> <a href="https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25">See details</a> | ![Luxafor Switch](.github/assets/boosters/Luxafor%20Switch.jpg)                   |
+| <h3>[Luxafor Cube](https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25)</h3> Standalone LED availability indicator that displays meeting room availability. <br> <a href="https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25">See details</a>                                    | ![Luxafor Cube](.github/assets/boosters/Luxafor%20Cube.jpg)                       |
+| <h3>[Luxafor Pomodoro Timer](https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25)</h3> LED display timer that helps break down work in bite-sized chunks. <br> <a href="https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25">See details</a>                                                                                              | ![Luxafor Pomodoro Timer](.github/assets/boosters/Luxafor%20Pomodoro%20Timer.jpg) |
+| <h3>[Luxafor ANC Headphones](https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25)</h3> Wireless headphones with active noise cancelling technology. <br> <a href="https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25">See details</a>                                | ![Luxafor ANC Headphones](.github/assets/boosters/Luxafor%20ANC%20Headphones.jpg) |
+| <h3>[Office Hero Planner](https://luxafor.com/new-office-hero-planner-2020/?hello=25)</h3> Productivity planner that helps prioritize tasks and measure performance. <br> <a href="https://luxafor.com/new-office-hero-planner-2020/?hello=25">See details</a>                                                                                                    | ![Office Hero Planner](.github/assets/boosters/Office%20Hero%20Planner.jpg)       |
+| <h3>[Don't Break The Chain](https://luxafor.com/dont-break-the-chain-calendar-for-productivity-improvement-development/?hello=25)</h3> A 365-day calendar that keeps you motivated and focused on self-improvement. <br> <a href="https://luxafor.com/dont-break-the-chain-calendar-for-productivity-improvement-development/?hello=25">See details</a>           | ![Don't Break The Chain](.github/assets/boosters/Don't%20Break%20The%20Chain.jpg) |
 
 ## :call_me_hand: Development
 
 This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
+
+It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) for better management.
 
 ### :zap: Quick Setup
 
@@ -112,22 +118,10 @@ This app is built using [React](https://reactjs.org/), [Electron](https://www.el
    yarn install or npm install
    ```
 
-2. Start the development server.
+2. Start the development.
 
    ```sh
-   yarn develop or npm run develop
-   ```
-
-3. Start the electron.
-
-   ```sh
-   yarn electron or npm run electron
-   ```
-
-4. If you want to run `yarn develop` and `yarn electron` concurrently.
-
-   ```sh
-   yarn start:app or npm run start:app
+   yarn start or npm run start
    ```
 
 ### 🛠 Building for Production
@@ -150,15 +144,19 @@ This app is built using [React](https://reactjs.org/), [Electron](https://www.el
    yarn build:linux or npm run build:linux
    ```
 
+4. Build macOS, Windows and Linux installer at once.
+
+   ```sh
+   yarn build:mwl or npm run build:mwl
+   ```
+
 ## :computer: Installation
 
 Available for Windows, macOS, and Linux.
 
-Download the latest version from the [Releases Page](https://github.com/roldanjr/productivity-timer/releases/latest)
+Download the latest version from the [Releases Page](https://github.com/roldanjr/productivity-timer/releases/latest) or from the :point_right: [Download Page](https://roldanjr.github.io/productivity-timer/) .
 
-or from the :point_right: [Download Page](https://roldanjr.github.io/productivity-timer/) .
-
-> For linux users. You can directly install it from SnapStore.
+> For Linux users. Recommended way to install it is using the Snap Store.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
