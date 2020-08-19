@@ -1,29 +1,41 @@
 {
-  "name": "productivity-timer",
-  "private": true,
-  "scripts": {
-    "commit": "git-cz",
-    "clean": "npm run clean --prefix=app",
-    "gen:tts": "npm run gen:tts --prefix=app",
-    "develop": "npm run develop --prefix=app",
-    "electron": "wait-on http://localhost:3000 && npm run electron --prefix=app",
-    "start:app": "concurrently \"yarn develop\" \"yarn electron\"",
-    "build:dir": "npm run build:dir --prefix=app",
-    "build:win": "npm run build:win --prefix=app",
-    "build:mac": "npm run build:mac --prefix=app",
-    "build:linux": "npm run build:linux --prefix=app",
-    "build:snap": "npm run build:snap --prefix=app",
-    "postinstall": "cd app && yarn install"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "devDependencies": {
-    "commitizen": "^4.1.2",
-    "concurrently": "^5.2.0",
-    "cz-conventional-changelog": "^3.2.0",
-    "wait-on": "^5.0.0"
-  }
+	"name": "root",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"scripts": {
+		"commit": "git-cz",
+		"sync": "lerna bootstrap",
+		"start:renderer": "lerna run start:renderer --stream",
+		"start:main": "lerna run start:main --stream",
+		"start": "lerna run start --parallel --stream",
+		"prebuild": "lerna run prepare --parallel --stream",
+		"build": "lerna run build --parallel --stream",
+		"build:mwl": "yarn build && lerna run build:mwl --stream",
+		"build:dir": "yarn build && lerna run build:dir --stream",
+		"build:win": "yarn build && lerna run build:win --stream",
+		"build:mac": "yarn build && lerna run build:mac --stream",
+		"build:linux": "yarn build && lerna run build:linux --stream",
+		"build:snap": "yarn build && lerna run build:snap --stream",
+		"release": "yarn build && lerna run release --stream",
+		"gen:tts": "lerna run gen:tts --stream",
+		"clean": "lerna exec -- rimraf build/ dist/"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	},
+	"devDependencies": {
+		"commitizen": "^4.1.2",
+		"cz-conventional-changelog": "^3.2.0",
+		"lerna": "^3.22.1",
+		"prettier": "^2.0.5",
+		"rimraf": "^3.0.2",
+		"rollup": "^2.26.4",
+		"rollup-plugin-typescript2": "^0.27.2",
+		"typescript": "^3.9.7",
+		"wait-on": "^5.0.0"
+	}
 }

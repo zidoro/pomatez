@@ -1,0 +1,12 @@
+{
+	"name": "@productivity-timer/shareables",
+	"version": "1.0.0",
+	"main": "build/index.js",
+	"source": "src/index.ts",
+	"license": "MIT",
+	"scripts": {
+		"start": "rollup -c -w",
+		"prebuild": "rimraf build/",
+		"build": "rollup -c"
+	}
+}
