@@ -160,6 +160,10 @@ Download the latest version from the [Releases Page](https://github.com/roldanjr
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
 
+Please consider starring this project to show your :blue_heart: and support.
+
+Thank you friends! :vulcan_salute:
+
 ## :shield: Privacy
 
 This app has analytics that will track number of users ([analytics.ts](https://github.com/roldanjr/productivity-timer/blob/master/app/electron/helpers/analytics.ts)).
