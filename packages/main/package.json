@@ -24,6 +24,7 @@
 		"build:mac": "electron-builder --mac",
 		"build:linux": "electron-builder --linux",
 		"build:snap": "electron-builder --linux snap",
+		"release:mw": "electron-builder --publish always --mac --win",
 		"release": "electron-builder --publish always"
 	},
 	"build": {
