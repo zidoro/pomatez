@@ -18,7 +18,7 @@
 		"build:mac": "yarn build && lerna run build:mac --stream",
 		"build:linux": "yarn build && lerna run build:linux --stream",
 		"build:snap": "yarn build && lerna run build:snap --stream",
-		"release": "yarn build && lerna run release --stream",
+		"release": "yarn build && npm run release --prefix=packages/main",
 		"gen:tts": "lerna run gen:tts --stream",
 		"clean": "lerna exec -- rimraf build/ dist/"
 	},
