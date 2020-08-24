@@ -7,7 +7,6 @@ cache:
   yarn: true
   directories:
     - node_modules
-    - app/node_modules
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
 
@@ -23,8 +22,6 @@ jobs:
     - if: tag IS present
       os: osx
       osx_image: xcode11.1
-      before_install:
-        - cd app
       script:
         - yarn release --mac --win
       before_cache:
@@ -35,8 +32,6 @@ jobs:
       dist: xenial
       before_install:
         - sudo apt-get install rpm
-        - cd app
-        - rm -r yarn.lock
       # Make apt-get update automatically on every build
       # https://docs.travis-ci.com/user/installing-dependencies/
       addons:
