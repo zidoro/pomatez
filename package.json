@@ -10,7 +10,7 @@
 		"start:renderer": "lerna run start:renderer --stream",
 		"start:main": "lerna run start:main --stream",
 		"start": "lerna run start --parallel --stream",
-		"prebuild": "lerna run prepare --parallel --stream",
+		"prebuild": "lerna run prepare --stream",
 		"build": "lerna run build --parallel --stream",
 		"build:mwl": "yarn build && lerna run build:mwl --stream",
 		"build:dir": "yarn build && lerna run build:dir --stream",
