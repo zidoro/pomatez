@@ -5,6 +5,7 @@
 	"source": "src/index.ts",
 	"license": "MIT",
 	"scripts": {
+		"prepare": "yarn build",
 		"start": "rollup -c -w",
 		"build": "rollup -c"
 	}
