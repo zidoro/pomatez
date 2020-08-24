@@ -22,6 +22,8 @@ export { default as Radio } from "./Radio";
 
 export { default as Collapse } from "./Collapse";
 
+export { default as Alert } from "./Alert";
+
 export * from "./Popper";
 export * from "./Preloader";
 export * from "./TraySVG";
