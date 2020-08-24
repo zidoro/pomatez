@@ -6,7 +6,6 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "rollup -c -w",
-		"prebuild": "rimraf build/",
 		"build": "rollup -c"
 	}
 }
