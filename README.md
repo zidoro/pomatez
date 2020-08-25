@@ -27,13 +27,23 @@
   <br>
 </p>
 
-![App Preview](.github/assets/preview.png)
+<p align="center">
+   <a href="https://snapcraft.io/productivity-timer">
+      <image src="https://snapcraft.io//productivity-timer/badge.svg" alt="Snapcraft app latest version" />
+   </a>
+   <a href="https://travis-ci.com/roldanjr/productivity-timer">
+      <image src="https://travis-ci.com/roldanjr/productivity-timer.svg?branch=master" alt="Travis CI build status" />
+   </a>
+   <image src="https://img.shields.io/github/downloads/roldanjr/productivity-timer/total" alt="Github release total downloads" />
+   <a href="https://github.com/roldanjr/productivity-timer/releases/latest">
+      <image src="https://img.shields.io/github/v/release/roldanjr/productivity-timer" alt="App latest version" />
+   </a>
+   <a href="https://github.com/roldanjr/productivity-timer/blob/master/LICENSE">
+      <image src="https://img.shields.io/github/license/roldanjr/productivity-timer" alt="App license" />
+   </a>
+</p>
 
-[![productivity-timer](https://snapcraft.io//productivity-timer/badge.svg)](https://snapcraft.io/productivity-timer)
-[![Build Status](https://travis-ci.com/roldanjr/productivity-timer.svg?branch=master)](https://travis-ci.com/roldanjr/productivity-timer)
-[![Total Downloads](https://img.shields.io/github/downloads/roldanjr/productivity-timer/total)](https://github.com/roldanjr/productivity-timer/releases)
-[![Version](https://img.shields.io/github/v/release/roldanjr/productivity-timer)](https://github.com/roldanjr/productivity-timer/releases)
-[![License](https://img.shields.io/github/license/roldanjr/productivity-timer)](https://github.com/roldanjr/productivity-timer/blob/master/LICENSE)
+![App Preview](.github/assets/preview.png)
 
 ## :sparkles: Features
 
