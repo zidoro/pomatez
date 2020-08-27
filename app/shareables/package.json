@@ -4,6 +4,9 @@
 	"main": "build/index.js",
 	"source": "src/index.ts",
 	"license": "MIT",
+	"files": [
+		"build"
+	],
 	"scripts": {
 		"prepare": "yarn build",
 		"start": "rollup -c -w",

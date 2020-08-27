@@ -14,21 +14,16 @@ import {
 	setPlay,
 } from "store";
 import { useNotification } from "hooks";
-import { padNum } from "utils";
+import { padNum, isEqualToOne } from "utils";
 
-import shortBreakStart from "assets/audios/short-break-start.wav";
-import shortBreakFinished from "assets/audios/short-break-finished.wav";
-import longBreakStart from "assets/audios/long-break-start.wav";
-import longBreakFinished from "assets/audios/long-break-finished.wav";
-import specialBreakStart from "assets/audios/special-break-start.wav";
-import specialBreakFinished from "assets/audios/special-break-finished.wav";
+import notificationIcon from "assets/logos/notification-dark.png";
 
-import sixtySecondsLeftSpecialBreak from "assets/audios/sixty-seconds-left-special-break.wav";
-import sixtySecondsLeftShortBreak from "assets/audios/sixty-seconds-left-short-break.wav";
-import sixtySecondsLeftLongBreak from "assets/audios/sixty-seconds-left-long-break.wav";
-import thirtySecondsLeftToWork from "assets/audios/thirty-seconds-left-to-work.wav";
-
-import notificationIconDark from "assets/logos/notification-dark.png";
+import breakFinishedWav from "assets/audios/break-finished.wav";
+import focusFinishedWav from "assets/audios/focus-finished.wav";
+import sessionCompletedWav from "assets/audios/session-completed.wav";
+import sixtySecondsLeftWav from "assets/audios/sixty-seconds-left.wav";
+import specialBreakStartedWav from "assets/audios/special-break-started.wav";
+import thirtySecondsLeftWav from "assets/audios/thirty-seconds-left.wav";
 
 type CounterProps = {
 	count: number;
@@ -59,7 +54,7 @@ const CounterProvider: React.FC = ({ children }) => {
 
 	const notification = useNotification(
 		{
-			icon: notificationIconDark,
+			icon: notificationIcon,
 			mute: !settings.notificationSoundOn,
 		},
 		settings.notificationProperty !== "none"
@@ -132,32 +127,56 @@ const CounterProvider: React.FC = ({ children }) => {
 							dispatch(setTimerType("SPECIAL_BREAK"));
 							setTimerDuration(firstBreak.duration);
 							notification(
-								"Special break has been started.",
-								specialBreakStart
+								"Special break started.",
+								{
+									body: `You can now start taking your ${firstBreak.duration} ${
+										isEqualToOne(firstBreak.duration) ? "minute" : "minutes"
+									} special break.`,
+								},
+								specialBreakStartedWav
 							);
 							break;
 						case secondBreak.fromTime:
 							dispatch(setTimerType("SPECIAL_BREAK"));
 							setTimerDuration(secondBreak.duration);
 							notification(
-								"Special break has been started.",
-								specialBreakStart
+								"Special break started.",
+								{
+									body: `You can now start taking your ${
+										secondBreak.duration
+									} ${
+										isEqualToOne(secondBreak.duration) ? "minute" : "minutes"
+									} special break.`,
+								},
+								specialBreakStartedWav
 							);
 							break;
 						case thirdBreak.fromTime:
 							dispatch(setTimerType("SPECIAL_BREAK"));
 							setTimerDuration(thirdBreak.duration);
 							notification(
-								"Special break has been started.",
-								specialBreakStart
+								"Special break started.",
+								{
+									body: `You can now start taking your ${thirdBreak.duration} ${
+										isEqualToOne(thirdBreak.duration) ? "minute" : "minutes"
+									} special break.`,
+								},
+								specialBreakStartedWav
 							);
 							break;
 						case fourthBreak.fromTime:
 							dispatch(setTimerType("SPECIAL_BREAK"));
 							setTimerDuration(fourthBreak.duration);
 							notification(
-								"Special break has been started.",
-								specialBreakStart
+								"Special break started.",
+								{
+									body: `You can now start taking your ${
+										fourthBreak.duration
+									} ${
+										isEqualToOne(fourthBreak.duration) ? "minute" : "minutes"
+									} special break.`,
+								},
+								specialBreakStartedWav
 							);
 							break;
 						default:
@@ -219,24 +238,28 @@ const CounterProvider: React.FC = ({ children }) => {
 			if (count === 61) {
 				if (timer.timerType === SHORT_BREAK) {
 					notification(
-						"Sixty seconds left for short break.",
-						settings.enableVoiceAssistance && sixtySecondsLeftShortBreak
+						"60 seconds left.",
+						{ body: "Please prepare yourself to stay focused again." },
+						settings.enableVoiceAssistance && sixtySecondsLeftWav
 					);
 				} else if (timer.timerType === LONG_BREAK) {
 					notification(
-						"Sixty seconds left for long break.",
-						settings.enableVoiceAssistance && sixtySecondsLeftLongBreak
+						"60 seconds left.",
+						{ body: "Please prepare yourself to stay focused again." },
+						settings.enableVoiceAssistance && sixtySecondsLeftWav
 					);
 				} else if (timer.timerType === SPECIAL_BREAK) {
 					notification(
-						"Sixty seconds left for special break.",
-						settings.enableVoiceAssistance && sixtySecondsLeftSpecialBreak
+						"60 seconds left.",
+						{ body: "Please prepare yourself to stay focused again." },
+						settings.enableVoiceAssistance && sixtySecondsLeftWav
 					);
 				}
 			} else if (count === 31 && timer.timerType === STAY_FOCUS) {
 				notification(
-					"Thirty seconds left to work.",
-					settings.enableVoiceAssistance && thirtySecondsLeftToWork
+					"30 seconds left.",
+					{ body: "Please pause all media playing if there's one." },
+					settings.enableVoiceAssistance && thirtySecondsLeftWav
 				);
 			}
 		}
@@ -247,8 +270,13 @@ const CounterProvider: React.FC = ({ children }) => {
 					if (timer.round < config.sessionRounds) {
 						setTimeout(() => {
 							notification(
-								"Work time has been finished.",
-								settings.enableVoiceAssistance && shortBreakStart
+								"Focus time finished.",
+								{
+									body: `You can now start taking your ${config.shortBreak} ${
+										isEqualToOne(config.shortBreak) ? "minute" : "minutes"
+									} short break.`,
+								},
+								settings.enableVoiceAssistance && focusFinishedWav
 							);
 
 							dispatch(setTimerType("SHORT_BREAK"));
@@ -256,8 +284,13 @@ const CounterProvider: React.FC = ({ children }) => {
 					} else {
 						setTimeout(() => {
 							notification(
-								"Session rounds has completed.",
-								settings.enableVoiceAssistance && longBreakStart
+								"Session rounds completed.",
+								{
+									body: `You can now start taking your ${config.longBreak} ${
+										isEqualToOne(config.longBreak) ? "minute" : "minutes"
+									} long break.`,
+								},
+								settings.enableVoiceAssistance && sessionCompletedWav
 							);
 
 							dispatch(setTimerType("LONG_BREAK"));
@@ -268,8 +301,13 @@ const CounterProvider: React.FC = ({ children }) => {
 				case SHORT_BREAK:
 					setTimeout(() => {
 						notification(
-							"Short break has been finished.",
-							settings.enableVoiceAssistance && shortBreakFinished
+							"Break time finished.",
+							{
+								body: `Stay focused for about ${config.stayFocus} ${
+									isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+								}.`,
+							},
+							settings.enableVoiceAssistance && breakFinishedWav
 						);
 
 						dispatch(setTimerType("STAY_FOCUS"));
@@ -284,8 +322,13 @@ const CounterProvider: React.FC = ({ children }) => {
 				case LONG_BREAK:
 					setTimeout(() => {
 						notification(
-							"Long break has been finished.",
-							settings.enableVoiceAssistance && longBreakFinished
+							"Break time finished.",
+							{
+								body: `Stay focused for about ${config.stayFocus} ${
+									isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+								}.`,
+							},
+							settings.enableVoiceAssistance && breakFinishedWav
 						);
 
 						dispatch(setTimerType("STAY_FOCUS"));
@@ -300,8 +343,13 @@ const CounterProvider: React.FC = ({ children }) => {
 				case SPECIAL_BREAK:
 					setTimeout(() => {
 						notification(
-							"Special break has been finished.",
-							settings.enableVoiceAssistance && specialBreakFinished
+							"Break time finished.",
+							{
+								body: `Stay focused for about ${config.stayFocus} ${
+									isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+								}.`,
+							},
+							settings.enableVoiceAssistance && breakFinishedWav
 						);
 
 						dispatch(setTimerType("STAY_FOCUS"));
@@ -320,6 +368,9 @@ const CounterProvider: React.FC = ({ children }) => {
 		timer.timerType,
 		dispatch,
 		notification,
+		config.stayFocus,
+		config.shortBreak,
+		config.longBreak,
 		config.sessionRounds,
 		settings.notificationProperty,
 		settings.autoStartWorkTime,

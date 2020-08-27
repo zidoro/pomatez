@@ -6,3 +6,4 @@ export * from "./parseTime";
 export * from "./isObjectEmpty";
 export * from "./detectOS";
 export * from "./encodeSvg";
+export * from "./isEqualToOne";
