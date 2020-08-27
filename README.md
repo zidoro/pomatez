@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://roldanjr.github.io/pomatez/">
-    <img src=".github/assets/logo.png" alt="Pomatez logo" width="72" height="72">
+    <img src=".github/assets/logo.png" alt="Pomatez logo" width="56" height="56">
   </a>
 </p>
 
