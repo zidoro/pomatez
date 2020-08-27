@@ -1,0 +1,12 @@
+{
+	"name": "@pomatez/shareables",
+	"version": "1.0.0",
+	"main": "build/index.js",
+	"source": "src/index.ts",
+	"license": "MIT",
+	"scripts": {
+		"prepare": "yarn build",
+		"start": "rollup -c -w",
+		"build": "rollup -c"
+	}
+}
