@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Productivity Timer
-Icon=${SNAP}/meta/gui/icon.png
-Categories=Development;Productivity;
-Exec=productivity-timer
-Terminal=false

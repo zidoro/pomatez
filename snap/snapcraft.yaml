@@ -1,5 +1,5 @@
-name: productivity-timer
-adopt-info: productivity-timer
+name: pomatez
+adopt-info: pomatez
 
 base: core18
 grade: stable
@@ -9,8 +9,8 @@ architectures:
   - build-on: amd64
 
 apps:
-  productivity-timer:
-    command: desktop-launch $SNAP/app/productivity-timer --no-sandbox
+  pomatez:
+    command: desktop-launch $SNAP/app/main/pomatez --no-sandbox
     extensions: [gnome-3-28]
     plugs:
       - audio-playback
@@ -30,8 +30,8 @@ apps:
       DISABLE_WAYLAND: 1
 
 parts:
-  productivity-timer:
-    source: app/
+  pomatez:
+    source: app/main
     plugin: nodejs
     nodejs-version: 12.18.1
 
@@ -54,8 +54,8 @@ parts:
 
     override-build: |
       snapcraftctl build
-      rm -rf $SNAPCRAFT_PART_INSTALL/app
-      mkdir -p $SNAPCRAFT_PART_INSTALL/app
-      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
+      rm -rf $SNAPCRAFT_PART_INSTALL/app/main
+      mkdir -p $SNAPCRAFT_PART_INSTALL/app/main
+      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app/main
     prime:
       - -node_modules

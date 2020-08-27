@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="https://roldanjr.github.io/productivity-timer/">
-    <img src=".github/assets/logo.png" alt="Productivity Timer logo" width="72" height="72">
+  <a href="https://roldanjr.github.io/pomatez/">
+    <img src=".github/assets/logo.png" alt="Pomatez logo" width="72" height="72">
   </a>
 </p>
 
-<h1 align="center">PRODUCTIVITY TIMER</h1>
+<h1 align="center">Pomatez</h1>
 
 <p align="center">
   Attractive pomodoro timer for Windows, Mac, and Linux.
@@ -28,18 +28,18 @@
 </p>
 
 <p align="center">
-   <a href="https://snapcraft.io/productivity-timer">
-      <image src="https://snapcraft.io//productivity-timer/badge.svg" alt="Snapcraft app latest version" />
+   <a href="https://snapcraft.io/pomatez">
+      <image src="https://snapcraft.io//pomatez/badge.svg" alt="Snapcraft app latest version" />
    </a>
-   <a href="https://travis-ci.com/roldanjr/productivity-timer">
-      <image src="https://travis-ci.com/roldanjr/productivity-timer.svg?branch=master" alt="Travis CI build status" />
+   <a href="https://travis-ci.com/roldanjr/pomatez">
+      <image src="https://travis-ci.com/roldanjr/pomatez.svg?branch=master" alt="Travis CI build status" />
    </a>
-   <image src="https://img.shields.io/github/downloads/roldanjr/productivity-timer/total" alt="Github release total downloads" />
-   <a href="https://github.com/roldanjr/productivity-timer/releases/latest">
-      <image src="https://img.shields.io/github/v/release/roldanjr/productivity-timer" alt="App latest version" />
+   <image src="https://img.shields.io/github/downloads/roldanjr/pomatez/total" alt="Github release total downloads" />
+   <a href="https://github.com/roldanjr/pomatez/releases/latest">
+      <image src="https://img.shields.io/github/v/release/roldanjr/pomatez" alt="App latest version" />
    </a>
-   <a href="https://github.com/roldanjr/productivity-timer/blob/master/LICENSE">
-      <image src="https://img.shields.io/github/license/roldanjr/productivity-timer" alt="App license" />
+   <a href="https://github.com/roldanjr/pomatez/blob/master/LICENSE">
+      <image src="https://img.shields.io/github/license/roldanjr/pomatez" alt="App license" />
    </a>
 </p>
 
@@ -164,11 +164,11 @@ It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classi
 
 Available for Windows, macOS, and Linux.
 
-Download the latest version from the [Releases Page](https://github.com/roldanjr/productivity-timer/releases/latest) or from the :point_right: [Download Page](https://roldanjr.github.io/productivity-timer/) .
+Download the latest version from the [Releases Page](https://github.com/roldanjr/pomatez/releases/latest) or from the :point_right: [Download Page](https://roldanjr.github.io/pomatez/) .
 
 > For Linux users. Recommended way to install it is using the Snap Store.
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/productivity-timer)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pomatez)
 
 Please consider starring this project to show your :blue_heart: and support.
 
@@ -176,7 +176,7 @@ Thank you friends! :vulcan_salute:
 
 ## :shield: Privacy
 
-This app has analytics that will track number of users only ([analytics.ts](https://github.com/roldanjr/productivity-timer/blob/master/packages/main/src/helpers/analytics.ts)).
+This app has analytics that will track number of users only ([analytics.ts](https://github.com/roldanjr/pomatez/blob/master/packages/main/src/helpers/analytics.ts)).
 
 ## :newspaper: License
 
