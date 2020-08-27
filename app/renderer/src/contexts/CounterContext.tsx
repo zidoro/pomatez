@@ -28,7 +28,7 @@ import sixtySecondsLeftShortBreak from "assets/audios/sixty-seconds-left-short-b
 import sixtySecondsLeftLongBreak from "assets/audios/sixty-seconds-left-long-break.wav";
 import thirtySecondsLeftToWork from "assets/audios/thirty-seconds-left-to-work.wav";
 
-import notificationIconDark from "assets/logos/notification.png";
+import notificationIconDark from "assets/logos/notification-dark.png";
 
 type CounterProps = {
 	count: number;
