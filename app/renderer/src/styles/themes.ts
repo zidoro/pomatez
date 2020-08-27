@@ -1,15 +1,17 @@
 import { css, keyframes } from "styled-components/macro";
 
 export const lightTheme = css`
-	--color-primary: #0098f7;
-	--color-primary-rgb: 44, 167, 248;
+	--color-primary: #007bc7;
+	--color-primary-rgb: 0, 123, 199;
 
-	--color-yellow: #d18305;
-	--color-yellow-rgb: 209, 131, 5;
-	--color-green: #00a678;
-	--color-green-rgb: 0, 166, 120;
-	--color-pink: #de4561;
-	--color-pink-rgb: 222, 69, 97;
+	--color-yellow: #a66703;
+	--color-yellow-rgb: 166, 103, 3;
+
+	--color-green: #00855f;
+	--color-green-rgb: 0, 133, 95;
+
+	--color-pink: #db3352;
+	--color-pink-rgb: 219, 51, 82;
 
 	--color-heading-text: #212121;
 	--color-body-text: #666666;
@@ -55,13 +57,15 @@ export const lightTheme = css`
 `;
 
 export const darkTheme = css`
-	--color-primary: #2ca7f8;
-	--color-primary-rgb: 44, 167, 248;
+	--color-primary: #0098f7;
+	--color-primary-rgb: 0, 152, 247;
 
 	--color-yellow: #d48d0a;
 	--color-yellow-rgb: 212, 141, 10;
+
 	--color-green: #07b583;
 	--color-green-rgb: 7, 181, 131;
+
 	--color-pink: #e35676;
 	--color-pink-rgb: 227, 86, 118;
 
@@ -69,12 +73,12 @@ export const darkTheme = css`
 	--color-body-text: #a7abae;
 	--color-disabled-text: #7b8185;
 
-	--color-bg-primary: #141e25;
-	--color-bg-primary-rgb: 20, 30, 37;
-	--color-bg-secondary: #1f2930;
-	--color-bg-tertiary: #232d34;
+	--color-bg-primary: #111d25;
+	--color-bg-primary-rgb: 17, 29, 37;
+	--color-bg-secondary: #1c2830;
+	--color-bg-tertiary: #202c34;
 
-	--color-bg-popper: #2d373e;
+	--color-bg-popper: #323e46;
 
 	--color-bg-code: var(--color-bg-primary);
 
@@ -82,16 +86,16 @@ export const darkTheme = css`
 	--color-bg-ripple-green: rgba(var(--color-green-rgb), 0.24);
 	--color-bg-ripple-yellow: rgba(var(--color-yellow-rgb), 0.24);
 
-	--color-bg-input: #2c363d;
-	--color-bg-input-focus: #2c363d;
+	--color-bg-input: #2a363e;
+	--color-bg-input-focus: #2a363e;
 
-	--color-primary-button: var(--color-heading-text);
-	--color-bg-button-normal: var(--color-bg-tertiary);
+	--color-primary-button: #fff;
+	--color-bg-button-normal: #2a363e;
 
 	--color-bg-task-list: var(--color-bg-secondary);
-	--color-bg-task-card: transparent;
-	--color-bg-task-card-hover: #2c363d;
-	--color-bg-task-card-focus: #2c363d;
+	--color-bg-task-card: #2a363e;
+	--color-bg-task-card-hover: #2f3b43;
+	--color-bg-task-card-focus: #323e46;
 
 	--color-titlebar-hover: rgba(255, 255, 255, 0.08);
 
@@ -102,8 +106,8 @@ export const darkTheme = css`
 	--color-border-progress: rgba(var(--color-primary-rgb), 0.16);
 	--color-border-window: #283138;
 
-	--color-border-input-primary: var(--color-border-primary);
-	--color-border-input-secondary: var(--color-border-primary);
+	--color-border-input-primary: transparent;
+	--color-border-input-secondary: transparent;
 
 	--color-shadow-primary: rgba(0, 0, 0, 0.24);
 `;
