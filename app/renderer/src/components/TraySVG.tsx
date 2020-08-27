@@ -10,11 +10,11 @@ export const TraySVG: React.FC<Props> = ({ timerType, dashOffset }) => {
 	const getProgressColor = (opacity = 1) => {
 		switch (timerType) {
 			case "STAY_FOCUS":
-				return `rgba(44, 167, 248, ${opacity})`;
+				return "#0057A3";
 			case "SHORT_BREAK":
-				return `rgba(7, 181, 131, ${opacity})`;
+				return "#006649";
 			default:
-				return `rgba(212, 141, 10, ${opacity})`;
+				return "#7C4E03";
 		}
 	};
 
@@ -32,7 +32,7 @@ export const TraySVG: React.FC<Props> = ({ timerType, dashOffset }) => {
 				<g
 					transform="translate(353 961)"
 					fill="#fff"
-					stroke={getProgressColor()}
+					stroke="#fff"
 					strokeWidth="1"
 				>
 					<rect width="16" height="16" rx="4" stroke="none" />
