@@ -37,7 +37,7 @@
 		"mac": {
 			"artifactName": "Pomatez-v${version}-mac.${ext}",
 			"category": "public.app-category.productivity",
-			"icon": "./src/assets/logo@2x.png"
+			"icon": "./src/assets/logo-dark@2x.png"
 		},
 		"win": {
 			"artifactName": "Pomatez-v${version}-setup.${ext}",
@@ -50,14 +50,14 @@
 					]
 				}
 			],
-			"icon": "./src/assets/logo.ico"
+			"icon": "./src/assets/logo-dark.ico"
 		},
 		"linux": {
 			"artifactName": "Pomatez-v${version}-linux.${ext}",
 			"target": [
 				"AppImage"
 			],
-			"icon": "./src/assets/logo.png",
+			"icon": "./src/assets/logo-dark.png",
 			"category": "Productivity"
 		}
 	},

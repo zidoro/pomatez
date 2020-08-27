@@ -38,9 +38,9 @@ import "v8-compile-cache";
 
 const onProduction = app.isPackaged;
 
-const notificationIcon = path.join(__dirname, "./assets/notification.png");
+const notificationIcon = path.join(__dirname, "./assets/notification-dark.png");
 
-const trayIcon = path.join(__dirname, "./assets/tray.png");
+const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
 
 const onlySingleIntance = app.requestSingleInstanceLock();
 
