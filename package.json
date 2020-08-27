@@ -10,9 +10,9 @@
 		"sync": "lerna bootstrap",
 		"start:renderer": "lerna run start:renderer --stream",
 		"start:main": "lerna run start:main --stream",
-		"start": "lerna run start --parallel --stream",
-		"prebuild": "lerna run prepare --stream",
-		"build": "lerna run build --parallel --stream",
+		"start:app": "lerna run start --parallel --stream --ignore '@pomatez/website'",
+		"prebuild": "lerna run prepare --stream --ignore '@pomatez/website'",
+		"build": "lerna run build --parallel --stream --ignore '@pomatez/website'",
 		"build:mwl": "yarn build && lerna run build:mwl --stream",
 		"build:dir": "yarn build && lerna run build:dir --stream",
 		"build:win": "yarn build && lerna run build:win --stream",
@@ -22,7 +22,10 @@
 		"release:mw": "yarn build && lerna run release:mw --stream",
 		"release": "yarn build && lerna run release --stream",
 		"clean": "lerna exec -- rimraf build/ dist/",
-		"gen:tts": "lerna run gen:tts --stream"
+		"gen:tts": "lerna run gen:tts --stream",
+		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
+		"build:site": "lerna run build --stream --scope '@pomatez/website'",
+		"start:site": "lerna run start --stream --scope '@pomatez/website'"
 	},
 	"config": {
 		"commitizen": {

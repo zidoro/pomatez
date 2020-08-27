@@ -118,7 +118,7 @@ Already used by **73,859** office workers in productive companies worldwide, suc
 
 This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
 
-It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) for better management.
+It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) for better project management.
 
 ### :zap: Quick Setup
 
@@ -131,7 +131,7 @@ It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classi
 2. Start the development.
 
    ```sh
-   yarn start or npm run start
+   yarn start:app or npm run start:app
    ```
 
 ### 🛠 Building for Production
