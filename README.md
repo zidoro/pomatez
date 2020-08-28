@@ -6,7 +6,7 @@
 
 <h1 align="center">Pomatez</h1>
 
-<p align="center" style="font-size: 20px">Stay Focused. Take a Break.</p>
+<h3 align="center">Stay Focused. Take a Break.</h3>
 
 <p align="center">
   <br>
