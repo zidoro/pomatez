@@ -131,7 +131,7 @@ It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classi
 2. Start the development.
 
    ```sh
-   yarn start:app or npm run start:app
+   yarn dev:app or npm run dev:app
    ```
 
 ### 🛠 Building for Production

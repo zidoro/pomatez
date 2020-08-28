@@ -14,9 +14,9 @@
 	"scripts": {
 		"prepare": "yarn build",
 		"clean": "rimraf dist/ build/",
-		"prestart:main": "wait-on http://localhost:3000",
-		"start:main": "yarn build && electron .",
-		"start": "yarn start:main",
+		"predev:main": "wait-on http://localhost:3000",
+		"dev:main": "yarn build && electron .",
+		"start": "yarn dev:main",
 		"build": "tsc && cp -r src/assets build/",
 		"build:mwl": "electron-builder -mwl",
 		"build:dir": "electron-builder --dir",
