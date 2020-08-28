@@ -8,9 +8,9 @@
 	"scripts": {
 		"commit": "git-cz",
 		"sync": "lerna bootstrap",
-		"start:renderer": "lerna run start:renderer --stream",
-		"start:main": "lerna run start:main --stream",
-		"start:app": "lerna run start --parallel --stream --ignore '@pomatez/website'",
+		"dev:renderer": "lerna run dev:renderer --stream",
+		"dev:main": "lerna run dev:main --stream",
+		"dev:app": "lerna run start --parallel --stream --ignore '@pomatez/website'",
 		"prebuild": "lerna run prepare --stream --ignore '@pomatez/website'",
 		"build": "lerna run build --parallel --stream --ignore '@pomatez/website'",
 		"build:mwl": "yarn build && lerna run build:mwl --stream",
@@ -25,7 +25,8 @@
 		"gen:tts": "lerna run gen:tts --stream",
 		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
 		"build:site": "lerna run build --stream --scope '@pomatez/website'",
-		"start:site": "lerna run start --stream --scope '@pomatez/website'"
+		"start:site": "lerna run start --stream --scope '@pomatez/website'",
+		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
 	},
 	"config": {
 		"commitizen": {

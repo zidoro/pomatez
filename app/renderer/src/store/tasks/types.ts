@@ -1,17 +1,17 @@
 const tasks = "[tasks]";
 
 export type CardTypes = {
-  _id: string;
-  text: string;
-  description: string;
-  done: boolean;
+	_id: string;
+	text: string;
+	description: string;
+	done: boolean;
 };
 
 export type TaskTypes = {
-  _id: string;
-  title: string;
-  cards: CardTypes[];
-  priority: boolean;
+	_id: string;
+	title: string;
+	cards: CardTypes[];
+	priority: boolean;
 };
 
 export const ADD_TASK_LIST = `${tasks} ADD_TASK_LIST`;
@@ -33,6 +33,6 @@ export const SET_TASK_CARD_NOT_DONE = `${tasks} SET_TASK_CARD_NOT_DONE`;
 export const SKIP_TASK_CARD = `${tasks} SKIP_TASK_CARD`;
 
 export type TasksActionTypes = {
-  type: typeof SKIP_TASK_CARD;
-  payload: any;
+	type: typeof SKIP_TASK_CARD;
+	payload: any;
 };
