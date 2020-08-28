@@ -75,6 +75,7 @@ export const darkTheme = css`
 
 	--color-bg-primary: #111d25;
 	--color-bg-primary-rgb: 17, 29, 37;
+
 	--color-bg-secondary: #1c2830;
 	--color-bg-tertiary: #202c34;
 

@@ -6,9 +6,9 @@
 
 <h1 align="center">Pomatez</h1>
 
+<p align="center" style="font-size: 20px">Stay Focused. Take a Break.</p>
+
 <p align="center">
-  Attractive pomodoro timer for Windows, Mac, and Linux.
-   <br>
   <br>
   <a href="#sparkles-features">Features</a>
   .
