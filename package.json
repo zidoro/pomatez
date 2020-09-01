@@ -2,16 +2,17 @@
 	"name": "root",
 	"private": true,
 	"workspaces": [
-		"packages/*"
+		"app/*",
+		"website"
 	],
 	"scripts": {
 		"commit": "git-cz",
 		"sync": "lerna bootstrap",
-		"start:renderer": "lerna run start:renderer --stream",
-		"start:main": "lerna run start:main --stream",
-		"start": "lerna run start --parallel --stream",
-		"prebuild": "lerna run prepare --stream",
-		"build": "lerna run build --parallel --stream",
+		"dev:renderer": "lerna run dev:renderer --stream",
+		"dev:main": "lerna run dev:main --stream",
+		"dev:app": "lerna run start --parallel --stream --ignore '@pomatez/website'",
+		"prebuild": "lerna run prepare --stream --ignore '@pomatez/website'",
+		"build": "lerna run build --parallel --stream --ignore '@pomatez/website'",
 		"build:mwl": "yarn build && lerna run build:mwl --stream",
 		"build:dir": "yarn build && lerna run build:dir --stream",
 		"build:win": "yarn build && lerna run build:win --stream",
@@ -21,17 +22,31 @@
 		"release:mw": "yarn build && lerna run release:mw --stream",
 		"release": "yarn build && lerna run release --stream",
 		"clean": "lerna exec -- rimraf build/ dist/",
-		"gen:tts": "lerna run gen:tts --stream"
+		"gen:tts": "lerna run gen:tts --stream",
+		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
+		"build:site": "lerna run build --stream --scope '@pomatez/website'"
 	},
 	"config": {
 		"commitizen": {
 			"path": "cz-conventional-changelog"
 		}
 	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,md}": [
+			"prettier --write"
+		]
+	},
 	"devDependencies": {
 		"commitizen": "^4.1.2",
-		"cz-conventional-changelog": "^3.2.0",
+		"cz-conventional-changelog": "^1.0.0",
+		"husky": "^4.2.5",
 		"lerna": "^3.22.1",
+		"lint-staged": "^10.2.13",
 		"prettier": "^2.0.5",
 		"rimraf": "^3.0.2",
 		"rollup": "^2.26.4",

@@ -1,2 +1,6 @@
-yarn.lock
-public/
+*node_modules/
+*.next/
+
+*yarn.lock
+*public/
+*build/
