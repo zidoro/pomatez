@@ -55,7 +55,9 @@
 		"linux": {
 			"artifactName": "Pomatez-v${version}-linux.${ext}",
 			"target": [
-				"AppImage"
+				"AppImage",
+				"deb",
+				"rpm"
 			],
 			"icon": "./src/assets/logo-dark.png",
 			"category": "Productivity"
