@@ -24,8 +24,7 @@
 		"clean": "lerna exec -- rimraf build/ dist/",
 		"gen:tts": "lerna run gen:tts --stream",
 		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
-		"build:site": "lerna run build --stream --scope '@pomatez/website'",
-		"start:site": "lerna run start --stream --scope '@pomatez/website'"
+		"build:site": "lerna run build --stream --scope '@pomatez/website'"
 	},
 	"config": {
 		"commitizen": {
