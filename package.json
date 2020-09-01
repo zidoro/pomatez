@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"commitizen": "^4.1.2",
-		"cz-conventional-changelog": "^3.2.0",
+		"cz-conventional-changelog": "^1.0.0",
 		"husky": "^4.2.5",
 		"lerna": "^3.22.1",
 		"lint-staged": "^10.2.13",
