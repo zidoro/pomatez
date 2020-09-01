@@ -22,13 +22,13 @@ const defaultSettings: SettingTypes = {
 	enableFullscreenBreak: false,
 	enableStrictMode: false,
 	enableDarkTheme: isPreferredDark(),
-	enableProgressAnimation: false,
+	enableProgressAnimation: true,
 	enableVoiceAssistance: false,
 	notificationSoundOn: true,
 	notificationProperty: "normal",
 	closeToTray: true,
 	minimizeToTray: false,
-	autoStartWorkTime: true,
+	autoStartWorkTime: false,
 	useNativeTitlebar: detectOS() === "Windows" ? false : true,
 };
 

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { getFromStorage, saveToStorage } from "utils";
 import { StyledSettings } from "styles";
 import { Alert } from "components";
 
@@ -9,25 +10,25 @@ import StickySection from "./StickySection";
 import SettingHeader from "./SettingHeader";
 
 export default () => {
+	const alertState = getFromStorage("alert") || null;
+
+	const [alert, setAlert] = useState(alertState);
+
 	return (
 		<StyledSettings>
 			<SettingHeader />
-			<Alert
-				heading="Announcement"
-				body={
-					<>
-						This app might no longer get an update starting on{" "}
-						<span>September 01, 2020</span>.{" "}
-						<a
-							href="https://github.com/roldanjr/pomatez/releases/tag/v3.2.0"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							See Details
-						</a>
-					</>
-				}
-			/>
+			{alert === null && (
+				<Alert
+					heading="Hello Friends,"
+					body="Please consider starring this project on GitHub to show 💙 and
+				support. It will inspire the developer to continue improving the app
+				for best user experience."
+					onClose={() => {
+						saveToStorage("alert", "hide");
+						setAlert("hide");
+					}}
+				/>
+			)}
 			<FeatureSection />
 			<ShortcutSection />
 			<HelpSection />
