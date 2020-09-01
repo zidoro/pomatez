@@ -85,13 +85,13 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 
 	const renderButton = () =>
 		forList ? (
-			<StyledButtonPrimary
+			<StyledButtonNormal
 				style={{ justifyContent: "flex-start" }}
 				onClick={showFormAction}
 			>
 				<SVG name="add" />
 				Add another list
-			</StyledButtonPrimary>
+			</StyledButtonNormal>
 		) : (
 			<StyledButton
 				style={{ justifyContent: "flex-start" }}

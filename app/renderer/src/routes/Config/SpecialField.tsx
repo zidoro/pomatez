@@ -7,7 +7,7 @@ import {
 	StyledSpecialBreakSetterSection,
 	StyledSpecialBreakDuration,
 	StyledSpecialBreakAction,
-	StyledButtonPrimary,
+	StyledButtonNormal,
 	StyledSpecialBreakDurationSpan,
 } from "styles";
 import { Time, SVG } from "components";
@@ -181,7 +181,11 @@ const SpecialField: React.FC<Props> = ({
 
 			{showSetter && (
 				<StyledSpecialBreakSetter onSubmit={onSubmit}>
-					<StyledDetailCloseButton onClick={() => setShowSetter(false)}>
+					<StyledDetailCloseButton
+						onClick={() => {
+							setShowSetter(false);
+						}}
+					>
 						<SVG name="close" />
 					</StyledDetailCloseButton>
 
@@ -223,7 +227,7 @@ const SpecialField: React.FC<Props> = ({
 					</StyledSpecialBreakSetterSection>
 
 					<StyledSpecialBreakAction>
-						<StyledButtonPrimary type="submit">Save</StyledButtonPrimary>
+						<StyledButtonNormal type="submit">Save</StyledButtonNormal>
 					</StyledSpecialBreakAction>
 				</StyledSpecialBreakSetter>
 			)}
