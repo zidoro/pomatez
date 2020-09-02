@@ -199,7 +199,7 @@ const Landing: React.FC = () => {
 				return (
 					<StyledCTADownloader
 						href="/"
-						to="download-now"
+						to="installers"
 						offset={-24}
 						duration={420}
 						smooth
@@ -212,7 +212,7 @@ const Landing: React.FC = () => {
 				return (
 					<StyledCTADownloader
 						href="/"
-						to="download-now"
+						to="installers"
 						offset={-24}
 						duration={420}
 						smooth
