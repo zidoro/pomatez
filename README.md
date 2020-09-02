@@ -29,7 +29,7 @@
 
 <p align="center">
    <a href="https://snapcraft.io/pomatez">
-      <image src="https://snapcraft.io//pomatez/badge.svg" alt="Pomatez" />
+      <image src="https://snapcraft.io/pomatez/badge.svg" alt="Pomatez" />
    </a>
    <a href="https://travis-ci.com/roldanjr/pomatez">
       <image src="https://travis-ci.com/roldanjr/pomatez.svg?branch=master" alt="Build Status" />
