@@ -13,6 +13,7 @@
 		"commit": "git-cz",
 		"clean": "gatsby clean",
 		"dev": "gatsby develop",
+		"prebuild": "yarn clean",
 		"build": "gatsby build",
 		"start": "npm run develop",
 		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",

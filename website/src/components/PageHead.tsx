@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 import { SiteMetaProps, MarkDownProps } from "../types";
-import { APP_VERSION } from "../config";
+import { APP_VERSION, pathPrefix } from "../config";
 
 type QueryProps = SiteMetaProps & MarkDownProps;
 
@@ -80,6 +80,8 @@ export const PageHead: React.FC<Props> = ({
 
 	const metaDescription = description || site.siteMetadata.description;
 
+	const websiteUrl = site.siteMetadata.siteUrl + pathPrefix;
+
 	const getMeta = () => {
 		const defaultMeta: MetaProps = [
 			{
@@ -108,7 +110,7 @@ export const PageHead: React.FC<Props> = ({
 			},
 			{
 				property: `og:url`,
-				content: site.siteMetadata.siteUrl,
+				content: websiteUrl,
 			},
 			{
 				name: `twitter:creator`,
@@ -162,7 +164,7 @@ export const PageHead: React.FC<Props> = ({
 		"@type": "SoftwareApplication",
 		name: site.siteMetadata.title,
 		image: site.siteMetadata.siteUrl + socialPreviewLight.src,
-		url: site.siteMetadata.siteUrl,
+		url: websiteUrl,
 		author: {
 			"@type": "Person",
 			name: site.siteMetadata.author,
@@ -194,7 +196,7 @@ export const PageHead: React.FC<Props> = ({
 				},
 				{
 					rel: "canonical",
-					href: site.siteMetadata.siteUrl,
+					href: websiteUrl,
 				},
 			]}
 			defer={false}

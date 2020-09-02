@@ -26,7 +26,7 @@
 		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
 		"build:site": "lerna run build --stream --scope '@pomatez/website'",
 		"deploy:site": "lerna run deploy --stream --scope '@pomatez/website'",
-		"clean:site": "lerna exec -- rimraf public/ .cache/ --scope '@pomatez/website'"
+		"clean:site": "lerna run clean --scope '@pomatez/website'"
 	},
 	"config": {
 		"commitizen": {
