@@ -19,7 +19,7 @@ type StepList = {
 
 type Image = {
 	childImageSharp: {
-		resize: {
+		original: {
 			src: string;
 			width: number;
 			height: number;

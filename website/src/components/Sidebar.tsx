@@ -15,13 +15,13 @@ type Props = {};
 
 const Sidebar: React.FC<Props> = () => {
 	const {
-		isOnDesktop,
+		isOnMobile,
 		isDarkMode,
 		themeToggler,
 		isMenuOpen,
 	} = useContextProvider();
 
-	return !isOnDesktop && isMenuOpen ? (
+	return isOnMobile && isMenuOpen ? (
 		<StyledSidebar>
 			<StyledNavButtonWrapper>
 				<StyledNavThemeToggler onClick={themeToggler}>

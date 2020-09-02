@@ -45,7 +45,7 @@ const Roadmap: React.FC = () => {
 				relativePath: { eq: "short-break-light.PNG" }
 			) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -55,7 +55,7 @@ const Roadmap: React.FC = () => {
 				relativePath: { eq: "short-break-dark.PNG" }
 			) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -65,7 +65,7 @@ const Roadmap: React.FC = () => {
 				relativePath: { eq: "long-break-light.PNG" }
 			) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -73,7 +73,7 @@ const Roadmap: React.FC = () => {
 			}
 			longBreakPreviewDark: file(relativePath: { eq: "long-break-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}

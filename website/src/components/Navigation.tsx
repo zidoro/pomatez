@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React from "react";
 import {
 	StyledNav,
 	StyledNavLinks,
@@ -50,70 +50,45 @@ export const NavLinks: React.FC = () => {
 
 export const Navigation: React.FC = () => {
 	const {
-		isOnDesktop,
 		isDarkMode,
 		themeToggler,
 		isMenuOpen,
 		toggleMenu,
 	} = useContextProvider();
 
-	const [isHome, setHome] = useState(true);
-
-	useLayoutEffect(() => {
-		setHome(window.location.pathname === "/");
-	}, []);
-
 	return (
 		<StyledNav isMenuOpen={isMenuOpen}>
 			<StyledNavHeader>
-				<Logo name={APP_NAME} isHome={isHome} />
+				<Logo name={APP_NAME} />
 
-				{isOnDesktop && (
-					<StyledNavContent>
-						{isHome && (
-							<StyledNavLinks>
-								<NavLinks />
-							</StyledNavLinks>
-						)}
+				<StyledNavContent>
+					<StyledNavLinks>
+						<NavLinks />
+					</StyledNavLinks>
 
-						<StyledNavButtonWrapper>
-							<StyledNavThemeToggler onClick={themeToggler}>
-								Mode
-								<SVG name={isDarkMode ? "moon" : "sunny"} />
-							</StyledNavThemeToggler>
+					<StyledNavButtonWrapper>
+						<StyledNavThemeToggler onClick={themeToggler}>
+							Mode
+							<SVG name={isDarkMode ? "moon" : "sunny"} />
+						</StyledNavThemeToggler>
+						<StyledNavDownloadButton
+							href="/"
+							to="installers"
+							offset={-24}
+							duration={420}
+							smooth
+						>
+							<SVG name="download" />
+							See Installers
+						</StyledNavDownloadButton>
+					</StyledNavButtonWrapper>
+				</StyledNavContent>
 
-							{isHome ? (
-								<StyledNavDownloadButton
-									href="/"
-									to="installers"
-									offset={-24}
-									duration={420}
-									smooth
-								>
-									<SVG name="download" />
-									See Installers
-								</StyledNavDownloadButton>
-							) : (
-								<StyledBackButton
-									onClick={() => {
-										window.history.back();
-									}}
-								>
-									<SVG name="arrow-back" />
-									Back
-								</StyledBackButton>
-							)}
-						</StyledNavButtonWrapper>
-					</StyledNavContent>
-				)}
-
-				{!isOnDesktop && (
-					<StyledNavMenu isMenuOpen={isMenuOpen} onClick={toggleMenu}>
-						<span>&nbsp;</span>
-						<span>&nbsp;</span>
-						<span>&nbsp;</span>
-					</StyledNavMenu>
-				)}
+				<StyledNavMenu isMenuOpen={isMenuOpen} onClick={toggleMenu}>
+					<span>&nbsp;</span>
+					<span>&nbsp;</span>
+					<span>&nbsp;</span>
+				</StyledNavMenu>
 			</StyledNavHeader>
 		</StyledNav>
 	);

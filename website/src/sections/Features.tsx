@@ -43,7 +43,7 @@ const Features: React.FC = () => {
 			}
 			tasksPreviewLight: file(relativePath: { eq: "tasks-light.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -51,7 +51,7 @@ const Features: React.FC = () => {
 			}
 			tasksPreviewDark: file(relativePath: { eq: "tasks-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -59,7 +59,7 @@ const Features: React.FC = () => {
 			}
 			configPreviewLight: file(relativePath: { eq: "config-light.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -67,7 +67,7 @@ const Features: React.FC = () => {
 			}
 			configPreviewDark: file(relativePath: { eq: "config-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
+					fluid(maxWidth: 340, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}

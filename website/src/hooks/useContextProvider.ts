@@ -8,7 +8,7 @@ export const useContextProvider = () => {
 
 	const { width } = useContext(ViewportContext);
 
-	const isOnDesktop = width > 1024;
+	const isOnMobile = width <= 1024;
 
-	return { isDarkMode, themeToggler, isOnDesktop, isMenuOpen, toggleMenu };
+	return { isDarkMode, themeToggler, isOnMobile, isMenuOpen, toggleMenu };
 };
