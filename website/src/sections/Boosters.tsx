@@ -42,7 +42,7 @@ const Boosters: React.FC<Props> = () => {
 								name
 								logo {
 									childImageSharp {
-										fluid(maxWidth: 225, quality: 100) {
+										fluid(maxWidth: 225, quality: 90) {
 											...GatsbyImageSharpFluid_withWebp_tracedSVG
 											...GatsbyImageSharpFluidLimitPresentationSize
 										}

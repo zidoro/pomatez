@@ -1,6 +1,6 @@
 export const APP_NAME = "Pomatez";
 
-export const APP_VERSION = "v3.2.0";
+export const APP_VERSION = "v1.0.0";
 
 export const INSTALLER = `https://github.com/roldanjr/pomatez/releases/download/${APP_VERSION}/Pomatez-${APP_VERSION}`;
 

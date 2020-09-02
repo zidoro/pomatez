@@ -1,12 +1,8 @@
-# Simple website for Pomatez app.
-
-[![pomatez](https://snapcraft.io//pomatez/badge.svg)](https://snapcraft.io/pomatez)
-[![Build Status](https://travis-ci.com/roldanjr/pomatez.svg?branch=master)](https://travis-ci.com/roldanjr/pomatez)
-[![Total Downloads](https://img.shields.io/github/downloads/roldanjr/pomatez/total)](https://github.com/roldanjr/pomatez/releases)
-[![Version](https://img.shields.io/github/v/release/roldanjr/pomatez)](https://github.com/roldanjr/pomatez/releases)
-[![License](https://img.shields.io/github/license/roldanjr/pomatez)](https://github.com/roldanjr/pomatez/blob/master/LICENSE)
+# Pomatez website
 
 ![Preview Light](src/assets/images/preview-light.png)
+
+![Preview Dark](src/assets/images/preview-dark.png)
 
 ## 🛠 Installation & Set Up
 
@@ -25,13 +21,13 @@
 3. Install dependencies
 
    ```sh
-   yarn
+   yarn install or npm install
    ```
 
 4. Start the development server
 
    ```sh
-   npm start
+   yarn dev or npm run dev
    ```
 
 ## 🚀 Building and Running for Production
@@ -39,13 +35,13 @@
 1. Generate a full static production build
 
    ```sh
-   npm run build
+   yarn build or npm run build
    ```
 
 1. Preview the site as it will appear once deployed
 
    ```sh
-   npm run serve
+   yarn serve or npm run serve
    ```
 
 ## License

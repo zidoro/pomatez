@@ -66,7 +66,7 @@ const Landing: React.FC = () => {
 			}
 			workTimePreviewLight: file(relativePath: { eq: "work-time-light.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
+					fluid(maxWidth: 250, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -74,7 +74,7 @@ const Landing: React.FC = () => {
 			}
 			workTimePreviewDark: file(relativePath: { eq: "work-time-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
+					fluid(maxWidth: 250, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -84,7 +84,7 @@ const Landing: React.FC = () => {
 				relativePath: { eq: "short-break-light.PNG" }
 			) {
 				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
+					fluid(maxWidth: 220, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -94,7 +94,7 @@ const Landing: React.FC = () => {
 				relativePath: { eq: "short-break-dark.PNG" }
 			) {
 				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
+					fluid(maxWidth: 220, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -104,7 +104,7 @@ const Landing: React.FC = () => {
 				relativePath: { eq: "long-break-light.PNG" }
 			) {
 				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
+					fluid(maxWidth: 200, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -112,7 +112,7 @@ const Landing: React.FC = () => {
 			}
 			longBreakPreviewDark: file(relativePath: { eq: "long-break-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
+					fluid(maxWidth: 200, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -120,7 +120,7 @@ const Landing: React.FC = () => {
 			}
 			configPreviewLight: file(relativePath: { eq: "config-light.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
+					fluid(maxWidth: 250, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -128,7 +128,7 @@ const Landing: React.FC = () => {
 			}
 			configPreviewDark: file(relativePath: { eq: "config-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
+					fluid(maxWidth: 250, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -136,7 +136,7 @@ const Landing: React.FC = () => {
 			}
 			settingsPreviewLight: file(relativePath: { eq: "settings-light.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
+					fluid(maxWidth: 220, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -144,7 +144,7 @@ const Landing: React.FC = () => {
 			}
 			settingsPreviewDark: file(relativePath: { eq: "settings-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
+					fluid(maxWidth: 220, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -152,7 +152,7 @@ const Landing: React.FC = () => {
 			}
 			tasksPreviewLight: file(relativePath: { eq: "tasks-light.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
+					fluid(maxWidth: 200, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}
@@ -160,7 +160,7 @@ const Landing: React.FC = () => {
 			}
 			tasksPreviewDark: file(relativePath: { eq: "tasks-dark.PNG" }) {
 				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
+					fluid(maxWidth: 200, quality: 90) {
 						...GatsbyImageSharpFluid_withWebp
 						...GatsbyImageSharpFluidLimitPresentationSize
 					}

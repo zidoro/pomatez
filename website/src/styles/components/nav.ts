@@ -96,6 +96,10 @@ export const StyledNavContent = styled.div`
 	${media.laptopSm} {
 		column-gap: 2.8rem;
 	}
+
+	${media.laptopXs} {
+		display: none;
+	}
 `;
 
 export const StyledNavLinks = styled.ul`
