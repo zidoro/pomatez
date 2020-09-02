@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { SectionStyle, SectionContentStyle } from "../mixins";
-import { StyledButtonPrimary } from "../components";
 import media from "../media";
 
 export const StyledDownload = styled.section`
@@ -32,25 +31,6 @@ export const StyledDownloadButtonWrapper = styled.div`
 
 	${media.tabletMd} {
 		grid-template-columns: 1fr;
-	}
-`;
-
-export const StyledDownloadButton = styled(StyledButtonPrimary)`
-	width: 100%;
-	min-height: 4.8rem;
-	font-size: 1.6rem;
-	padding: 1.2rem 2.4rem;
-	box-shadow: 0 2px 4px 0 var(--cl-shadow-secondary);
-
-	&:hover {
-		box-shadow: 0 3px 6px 0 var(--cl-shadow-secondary);
-	}
-
-	& > svg {
-		width: 2.2rem;
-		height: 2.2rem;
-		margin-right: 1rem;
-		margin-left: -0.6rem;
 	}
 `;
 

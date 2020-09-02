@@ -34,7 +34,7 @@ export const StyledFeaturedImageWrapper = styled.div`
 	margin-right: 4rem;
 
 	position: sticky;
-	top: 8.8rem;
+	top: 8rem;
 
 	${media.laptopSm} {
 		margin-right: 2rem;

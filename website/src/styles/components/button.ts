@@ -42,7 +42,7 @@ export const StyledDownloadButton = styled(Link)`
 	${ButtonStyles};
 
 	min-height: 4.8rem;
-	min-width: 20rem;
+	min-width: 24rem;
 	font-size: 1.6rem;
 	padding: 1.2rem 2.4rem;
 
@@ -61,10 +61,6 @@ export const StyledDownloadButton = styled(Link)`
 		height: 2.2rem;
 		margin-right: 1rem;
 		margin-left: -0.6rem;
-	}
-
-	${media.laptopSm} {
-		min-width: 24rem;
 	}
 `;
 
