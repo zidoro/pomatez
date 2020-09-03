@@ -1,5 +1,4 @@
 import React, { useState, useContext, useLayoutEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import Image from "gatsby-image";
 import {
 	StyledLanding,
@@ -14,26 +13,11 @@ import {
 	StyledGithubLink,
 	StyledPreviewImage,
 } from "../styles";
-import { FluidImageProps, MarkDownProps } from "../types";
 import { WINDOWS_INSTALLER, MAC_INSTALLER } from "../config";
 import { OSTypes, detectOS } from "../utils";
 import { ThemeContext } from "../contexts";
+import { LandingQuery } from "../queries";
 import { SVG } from "../components";
-
-export type LandingQueryProps = {
-	workTimePreviewLight: FluidImageProps;
-	workTimePreviewDark: FluidImageProps;
-	shortBreakPreviewLight: FluidImageProps;
-	shortBreakPreviewDark: FluidImageProps;
-	longBreakPreviewLight: FluidImageProps;
-	longBreakPreviewDark: FluidImageProps;
-	configPreviewLight: FluidImageProps;
-	configPreviewDark: FluidImageProps;
-	settingsPreviewLight: FluidImageProps;
-	settingsPreviewDark: FluidImageProps;
-	tasksPreviewLight: FluidImageProps;
-	tasksPreviewDark: FluidImageProps;
-} & MarkDownProps;
 
 const Landing: React.FC = () => {
 	const {
@@ -50,124 +34,7 @@ const Landing: React.FC = () => {
 		settingsPreviewDark,
 		tasksPreviewLight,
 		tasksPreviewDark,
-	} = useStaticQuery<LandingQueryProps>(graphql`
-		{
-			allMarkdownRemark: allMarkdownRemark(
-				filter: { fileAbsolutePath: { regex: "/landing/" } }
-			) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-						}
-					}
-				}
-			}
-			workTimePreviewLight: file(relativePath: { eq: "work-time-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			workTimePreviewDark: file(relativePath: { eq: "work-time-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			shortBreakPreviewLight: file(
-				relativePath: { eq: "short-break-light.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			shortBreakPreviewDark: file(
-				relativePath: { eq: "short-break-dark.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			longBreakPreviewLight: file(
-				relativePath: { eq: "long-break-light.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			longBreakPreviewDark: file(relativePath: { eq: "long-break-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			configPreviewLight: file(relativePath: { eq: "config-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			configPreviewDark: file(relativePath: { eq: "config-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			settingsPreviewLight: file(relativePath: { eq: "settings-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			settingsPreviewDark: file(relativePath: { eq: "settings-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			tasksPreviewLight: file(relativePath: { eq: "tasks-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			tasksPreviewDark: file(relativePath: { eq: "tasks-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 90) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-		}
-	`);
+	} = LandingQuery();
 
 	const { frontmatter } = allMarkdownRemark.edges[0].node;
 

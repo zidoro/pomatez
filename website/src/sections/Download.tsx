@@ -1,5 +1,4 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import {
 	StyledDownload,
 	StyledDownloadButtonWrapper,
@@ -11,7 +10,6 @@ import {
 	StyledLinuxInstallerWrapper,
 	StyledDownloadContent,
 } from "../styles";
-import { MarkDownProps } from "../types";
 import { Header, SVG } from "../components";
 import {
 	WINDOWS_INSTALLER,
@@ -20,23 +18,10 @@ import {
 	RPM_INSTALLER,
 	MAC_INSTALLER,
 } from "../config";
+import { DownloadQuery } from "../queries";
 
 const Download: React.FC = () => {
-	const { allMarkdownRemark } = useStaticQuery<MarkDownProps>(graphql`
-		{
-			allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/download/" } }) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-						}
-						html
-					}
-				}
-			}
-		}
-	`);
+	const { allMarkdownRemark } = DownloadQuery();
 
 	const { node } = allMarkdownRemark.edges[0];
 
