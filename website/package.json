@@ -8,7 +8,7 @@
 		"email": "roldanjrmontilla@gmail.com",
 		"url": "https://github.com/roldanjr"
 	},
-	"description": "Wonderful and helpful app to be more productive while staying healthy.",
+	"description": "Wonderful app that will help you to be more productive while staying healthy.",
 	"scripts": {
 		"commit": "git-cz",
 		"clean": "gatsby clean",
