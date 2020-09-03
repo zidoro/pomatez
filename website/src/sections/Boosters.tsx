@@ -1,5 +1,4 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import Image from "gatsby-image";
 import {
 	StyledBoosters,
@@ -11,51 +10,13 @@ import {
 	StyledCompanyWrapper,
 	StyledCompanyImage,
 } from "../styles";
-import { MarkDownProps } from "../types";
 import { Header } from "../components";
+import { BoosterQuery } from "../queries";
 
 type Props = {};
 
 const Boosters: React.FC<Props> = () => {
-	const { allMarkdownRemark } = useStaticQuery<MarkDownProps>(graphql`
-		{
-			allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/boosters/" } }) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-							boosters {
-								heading
-								description
-								link
-								image {
-									childImageSharp {
-										fixed(width: 280, height: 280) {
-											...GatsbyImageSharpFixed_withWebp
-										}
-									}
-								}
-							}
-							headline
-							companies {
-								name
-								logo {
-									childImageSharp {
-										fluid(maxWidth: 225, quality: 90) {
-											...GatsbyImageSharpFluid_withWebp_tracedSVG
-											...GatsbyImageSharpFluidLimitPresentationSize
-										}
-									}
-								}
-							}
-						}
-						html
-					}
-				}
-			}
-		}
-	`);
+	const { allMarkdownRemark } = BoosterQuery();
 
 	const { node } = allMarkdownRemark.edges[0];
 
