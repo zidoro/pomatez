@@ -4,14 +4,17 @@ import {
 	StyledLanding,
 	StyledWaterMarkLeft,
 	StyledWaterMarkRight,
-	StyledLandingCTAWrapper,
 	StyledPreviewWrapper,
 	StyledLandingContent,
 	StyledCTADownloader,
 	StyledLandingHeader,
-	StyledLandingCtaWrapper,
+	StyledLandingActionContainer,
+	StyledLandingActionWrapper,
 	StyledGithubLink,
 	StyledPreviewImage,
+	StyledLandingHeading,
+	StyledLandingDescription,
+	StyledWatermarkContainer,
 } from "../styles";
 import { WINDOWS_INSTALLER, MAC_INSTALLER } from "../config";
 import { OSTypes, detectOS } from "../utils";
@@ -94,16 +97,20 @@ const Landing: React.FC = () => {
 	return (
 		<StyledLanding id="landing">
 			<StyledLandingContent>
-				<StyledWaterMarkLeft />
-				<StyledWaterMarkRight />
+				<StyledWatermarkContainer>
+					<StyledWaterMarkLeft />
+					<StyledWaterMarkRight />
+				</StyledWatermarkContainer>
 
-				<StyledLandingCTAWrapper>
+				<StyledLandingActionContainer>
 					<StyledLandingHeader>
-						<h1>{frontmatter.title}</h1>
-						<h2>{frontmatter.subTitle}</h2>
+						<StyledLandingHeading>{frontmatter.title}</StyledLandingHeading>
+						<StyledLandingDescription>
+							{frontmatter.subTitle}
+						</StyledLandingDescription>
 					</StyledLandingHeader>
 
-					<StyledLandingCtaWrapper>
+					<StyledLandingActionWrapper>
 						{renderDownloadButton()}
 						<StyledGithubLink
 							as={"a"}
@@ -114,8 +121,8 @@ const Landing: React.FC = () => {
 							<SVG name="github" />
 							GitHub Repo
 						</StyledGithubLink>
-					</StyledLandingCtaWrapper>
-				</StyledLandingCTAWrapper>
+					</StyledLandingActionWrapper>
+				</StyledLandingActionContainer>
 
 				<StyledPreviewWrapper>
 					<StyledPreviewImage>

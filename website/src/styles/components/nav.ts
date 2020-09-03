@@ -1,15 +1,20 @@
 import styled from "styled-components";
 import { Link as ScrollLink } from "react-scroll";
-
+import { motion } from "framer-motion";
 import { ButtonStyles } from "./button";
 import { SectionContentStyle } from "../mixins";
+import { stagger, fadeFromTop } from "../animate";
 import media from "../media";
 
 type MenuProps = {
 	isMenuOpen?: boolean;
 };
 
-export const StyledNav = styled.nav<MenuProps>`
+export const StyledNav = styled(motion.nav).attrs(() => ({
+	initial: "initial",
+	animate: "animate",
+	variants: stagger,
+}))<MenuProps>`
 	width: 100%;
 	height: 6.4rem;
 
@@ -28,10 +33,6 @@ export const StyledNav = styled.nav<MenuProps>`
 		padding: 0 4rem;
 	}
 
-	${media.laptopXs} {
-		/* border-bottom: 1px solid var(--border-tertiary); */
-	}
-
 	${media.tabletSm} {
 		padding: 0 2rem;
 	}
@@ -41,7 +42,7 @@ export const StyledNav = styled.nav<MenuProps>`
 	}
 `;
 
-export const StyledNavHeader = styled.header`
+export const StyledNavHeader = styled(motion.header).attrs(() => ({}))`
 	${SectionContentStyle};
 
 	max-width: 100rem;
@@ -59,7 +60,9 @@ export const StyledNavHeader = styled.header`
 	}
 `;
 
-export const StyledNavLogo = styled.div`
+export const StyledNavLogo = styled(motion.div).attrs(() => ({
+	variants: fadeFromTop,
+}))`
 	display: flex;
 	align-items: center;
 
@@ -84,7 +87,7 @@ export const StyledNavLogo = styled.div`
 	}
 `;
 
-export const StyledNavContent = styled.div`
+export const StyledNavContent = styled(motion.div).attrs(() => ({}))`
 	display: grid;
 	align-content: start;
 	justify-items: end;
@@ -102,7 +105,7 @@ export const StyledNavContent = styled.div`
 	}
 `;
 
-export const StyledNavLinks = styled.ul`
+export const StyledNavLinks = styled(motion.ul).attrs(() => ({}))`
 	width: max-content;
 	justify-self: start;
 
@@ -143,25 +146,24 @@ export const StyledNavLinks = styled.ul`
 	}
 `;
 
+export const StyledNavLinkItem = styled(motion.li).attrs(() => ({
+	variants: fadeFromTop,
+}))``;
+
 export const StyledNavLinkAnchor = styled(ScrollLink)``;
 
-export const StyledNavDownloadButton = styled(ScrollLink)`
-	${ButtonStyles};
-	font-size: 1.4rem;
-	border-radius: 10rem;
-	color: #fff;
-	background: var(--bg-btn-primary);
-	box-shadow: 0 0 0 0 var(--cl-shadow-secondary);
-
-	&:hover {
-		background: var(--bg-btn-primary-hover);
-		box-shadow: 0 4px 16px 0 var(--cl-shadow-secondary);
-	}
+export const StyledNavButtonWrapper = styled(motion.div).attrs(() => ({}))`
+	display: grid;
+	align-items: center;
+	grid-template-columns: repeat(2, max-content);
+	column-gap: 2rem;
 
 	${media.laptopXs} {
-		margin-top: 4rem;
-		padding: 1.2rem;
+		grid-template-columns: 1fr;
+		row-gap: 2rem;
 		max-width: 92rem;
+		margin-top: 4rem;
+		margin-bottom: 0.8rem;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -171,21 +173,9 @@ export const StyledNavDownloadButton = styled(ScrollLink)`
 	}
 `;
 
-export const StyledBackButton = styled.button`
-	${ButtonStyles};
-	font-size: 1.4rem;
-	border-radius: 10rem;
-	color: #fff;
-	background: var(--bg-btn-primary);
-	box-shadow: 0 0 0 0 var(--cl-shadow-secondary);
-
-	&:hover {
-		background: var(--bg-btn-primary-hover);
-		box-shadow: 0 4px 16px 0 var(--cl-shadow-secondary);
-	}
-`;
-
-export const StyledNavThemeToggler = styled.button`
+export const StyledNavThemeToggler = styled(motion.button).attrs(() => ({
+	variants: fadeFromTop,
+}))`
 	padding: 0.8rem 1.2rem;
 
 	border: none;
@@ -222,28 +212,53 @@ export const StyledNavThemeToggler = styled.button`
 	}
 `;
 
-export const StyledNavButtonWrapper = styled.div`
-	display: grid;
-	align-items: center;
-	grid-template-columns: repeat(2, max-content);
-	column-gap: 2rem;
+export const StyledScrollToDownload = styled(motion.div).attrs(() => ({
+	variants: fadeFromTop,
+}))`
+	& > a {
+		${ButtonStyles};
+		font-size: 1.4rem;
+		border-radius: 10rem;
+		color: #fff;
+		background: var(--bg-btn-primary);
+		box-shadow: 0 0 0 0 var(--cl-shadow-secondary);
 
-	${media.laptopXs} {
-		grid-template-columns: 1fr;
-		row-gap: 2rem;
-		max-width: 92rem;
-		margin-top: 4rem;
-		margin-bottom: 0.8rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
+		&:hover {
+			background: var(--bg-btn-primary-hover);
+			box-shadow: 0 4px 16px 0 var(--cl-shadow-secondary);
+		}
 
-	${media.tabletXl} {
-		max-width: 77.6rem;
+		${media.laptopXs} {
+			margin-top: 4rem;
+			padding: 1.2rem;
+			max-width: 92rem;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		${media.tabletXl} {
+			max-width: 77.6rem;
+		}
 	}
 `;
 
-export const StyledNavMenu = styled.div<MenuProps>`
+export const StyledBackButton = styled.button`
+	${ButtonStyles};
+	font-size: 1.4rem;
+	border-radius: 10rem;
+	color: #fff;
+	background: var(--bg-btn-primary);
+	box-shadow: 0 0 0 0 var(--cl-shadow-secondary);
+
+	&:hover {
+		background: var(--bg-btn-primary-hover);
+		box-shadow: 0 4px 16px 0 var(--cl-shadow-secondary);
+	}
+`;
+
+export const StyledNavMenu = styled(motion.div).attrs(() => ({
+	variants: fadeFromTop,
+}))<MenuProps>`
 	justify-self: end;
 	border: none;
 	border-radius: 3px;

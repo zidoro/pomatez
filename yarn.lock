@@ -1454,7 +1454,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
 
-"@emotion/is-prop-valid@0.8.8", "@emotion/is-prop-valid@^0.8.1", "@emotion/is-prop-valid@^0.8.8":
+"@emotion/is-prop-valid@0.8.8", "@emotion/is-prop-valid@^0.8.1", "@emotion/is-prop-valid@^0.8.2", "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -9422,6 +9422,26 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+framer-motion@^2.6.5:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-2.6.5.tgz#a1d5288b264608b34c57ade8b433cfae3ba21fcc"
+  integrity sha512-uOzhDgS5txkm2LEpGSKf97TwMy38G2ZKBvvkOvBPvHOmjrY1YCDTmVkOyMT6NppurCFUdiHKiRvP/FdXfWg3Qw==
+  dependencies:
+    framesync "^4.0.4"
+    hey-listen "^1.0.8"
+    popmotion "9.0.0-rc.12"
+    style-value-types "^3.1.9"
+    tslib "^1.10.0"
+  optionalDependencies:
+    "@emotion/is-prop-valid" "^0.8.2"
+
+framesync@^4.0.4, framesync@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/framesync/-/framesync-4.1.0.tgz#69a8db3ca432dc70d6a76ba882684a1497ef068a"
+  integrity sha512-MmgZ4wCoeVxNbx2xp5hN/zPDCbLSKiDt4BbbslK7j/pM2lg5S0vhTNv1v8BCVb99JPIo6hXBFdwzU7Q4qcAaoQ==
+  dependencies:
+    hey-listen "^1.0.5"
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -11026,6 +11046,11 @@ hex2rgba@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/hex2rgba/-/hex2rgba-0.0.1.tgz#8701ba1c6ec02c204504158407c1c4b47a9336ed"
   integrity sha1-hwG6HG7ALCBFBBWEB8HEtHqTNu0=
+
+hey-listen@^1.0.5, hey-listen@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/hey-listen/-/hey-listen-1.0.8.tgz#8e59561ff724908de1aa924ed6ecc84a56a9aa68"
+  integrity sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==
 
 hicat@^0.7.0:
   version "0.7.0"
@@ -15802,6 +15827,16 @@ pnp-webpack-plugin@1.6.4, pnp-webpack-plugin@^1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
+popmotion@9.0.0-rc.12:
+  version "9.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-9.0.0-rc.12.tgz#c5db0d9bf7f314b7cc8789257f2902965ee9f0bf"
+  integrity sha512-wfiXZHxG9GGwgsFuw1Ssw6ZYzwxaBcm/O+7qKmeGIokUEFgpIys3YyK7BQv9O58P6gK1Ys+psTfSt9lycrItaQ==
+  dependencies:
+    framesync "^4.1.0"
+    hey-listen "^1.0.8"
+    style-value-types "^3.1.9"
+    tslib "^1.10.0"
+
 portfinder@^1.0.26:
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
@@ -19483,6 +19518,14 @@ style-to-object@^0.3.0:
   integrity sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==
   dependencies:
     inline-style-parser "0.1.1"
+
+style-value-types@^3.1.9:
+  version "3.1.9"
+  resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-3.1.9.tgz#faf7da660d3f284ed695cff61ea197d85b9122cc"
+  integrity sha512-050uqgB7WdvtgacoQKm+4EgKzJExVq0sieKBQQtJiU3Muh6MYcCp4T3M8+dfl6VOF2LR0NNwXBP1QYEed8DfIw==
+  dependencies:
+    hey-listen "^1.0.8"
+    tslib "^1.10.0"
 
 styled-components@^5.1.1:
   version "5.1.1"
