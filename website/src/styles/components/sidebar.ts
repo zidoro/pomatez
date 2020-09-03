@@ -1,8 +1,14 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { SectionContentStyle } from "../mixins";
+import { stagger } from "../animate";
 import media from "../media";
 
-export const StyledSidebar = styled.aside`
+export const StyledSidebar = styled(motion.aside).attrs(() => ({
+	initial: "initial",
+	animate: "animate",
+	variants: stagger,
+}))`
 	padding: 0 5.6rem;
 
 	background-color: var(--bg-primary);

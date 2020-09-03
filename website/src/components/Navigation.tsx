@@ -1,15 +1,16 @@
 import React from "react";
+import { Link as ScrollLink } from "react-scroll";
 import {
 	StyledNav,
 	StyledNavLinks,
 	StyledNavThemeToggler,
 	StyledNavButtonWrapper,
 	StyledNavLinkAnchor,
-	StyledNavDownloadButton,
+	StyledScrollToDownload,
 	StyledNavHeader,
 	StyledNavContent,
 	StyledNavMenu,
-	StyledBackButton,
+	StyledNavLinkItem,
 } from "../styles";
 import { navLinks, APP_NAME } from "../config";
 import { useContextProvider } from "../hooks";
@@ -24,7 +25,7 @@ export const NavLinks: React.FC = () => {
 		<>
 			{navLinks.map((nav, index) =>
 				nav.offset ? (
-					<li key={index}>
+					<StyledNavLinkItem key={index}>
 						<StyledNavLinkAnchor
 							href="/"
 							onClick={toggleMenu}
@@ -35,13 +36,13 @@ export const NavLinks: React.FC = () => {
 						>
 							{nav.label}
 						</StyledNavLinkAnchor>
-					</li>
+					</StyledNavLinkItem>
 				) : (
-					<li key={index}>
+					<StyledNavLinkItem key={index}>
 						<a href={nav.link} target="_blank" rel="noopener noreferrer">
 							{nav.label}
 						</a>
-					</li>
+					</StyledNavLinkItem>
 				)
 			)}
 		</>
@@ -71,16 +72,18 @@ export const Navigation: React.FC = () => {
 							Mode
 							<SVG name={isDarkMode ? "moon" : "sunny"} />
 						</StyledNavThemeToggler>
-						<StyledNavDownloadButton
-							href="/"
-							to="installers"
-							offset={-24}
-							duration={420}
-							smooth
-						>
-							<SVG name="download" />
-							See Installers
-						</StyledNavDownloadButton>
+						<StyledScrollToDownload>
+							<ScrollLink
+								href="/"
+								to="installers"
+								offset={-24}
+								duration={420}
+								smooth
+							>
+								<SVG name="download" />
+								See Installers
+							</ScrollLink>
+						</StyledScrollToDownload>
 					</StyledNavButtonWrapper>
 				</StyledNavContent>
 

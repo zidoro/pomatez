@@ -1,10 +1,11 @@
 import React from "react";
+import { Link as ScrollLink } from "react-scroll";
 import {
 	StyledSidebar,
 	StyledSidebarList,
 	StyledNavButtonWrapper,
 	StyledNavThemeToggler,
-	StyledNavDownloadButton,
+	StyledScrollToDownload,
 } from "../styles";
 import { NavLinks } from "./Navigation";
 import { useContextProvider } from "../hooks";
@@ -26,7 +27,7 @@ const Sidebar: React.FC<Props> = () => {
 			<StyledNavButtonWrapper>
 				<StyledNavThemeToggler onClick={themeToggler}>
 					Mode
-					<SVG name={isDarkMode ? "moon" : "sunny"} />
+					{isDarkMode ? <SVG name="moon" /> : <SVG name="sunny" />}
 				</StyledNavThemeToggler>
 			</StyledNavButtonWrapper>
 
@@ -34,16 +35,12 @@ const Sidebar: React.FC<Props> = () => {
 				<NavLinks />
 			</StyledSidebarList>
 
-			<StyledNavDownloadButton
-				href="/"
-				to="installers"
-				offset={-24}
-				duration={420}
-				smooth
-			>
-				<SVG name="download" />
-				See Installers
-			</StyledNavDownloadButton>
+			<StyledScrollToDownload>
+				<ScrollLink href="/" to="installers" offset={-24} duration={420} smooth>
+					<SVG name="download" />
+					See Installers
+				</ScrollLink>
+			</StyledScrollToDownload>
 		</StyledSidebar>
 	) : null;
 };
