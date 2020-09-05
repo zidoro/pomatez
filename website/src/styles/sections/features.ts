@@ -1,8 +1,15 @@
 import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
+
 import { SectionStyle, SectionContentStyle } from "../mixins";
+import { stagger, fadeFromLeft, fadeFromRight } from "../animate";
+
 import media from "../media";
 
-export const StyledFeatures = styled.section`
+export const StyledFeatures = styled(motion.section).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	${SectionStyle};
 `;
 
@@ -41,7 +48,9 @@ export const StyledFeaturedImageWrapper = styled.div`
 	}
 `;
 
-export const StyledFeaturedImage = styled.div`
+export const StyledFeaturedImage = styled(motion.div).attrs(() => ({
+	variants: fadeFromLeft,
+}))`
 	width: 34rem;
 	height: 48rem;
 	background-color: var(--bg-primary);
@@ -139,7 +148,9 @@ const FeatureItemStyle = css`
 	}
 `;
 
-export const StyledFeatureItem = styled.li`
+export const StyledFeatureItem = styled(motion.li).attrs(() => ({
+	variants: fadeFromRight,
+}))`
 	${FeatureItemStyle};
 
 	${media.tabletMd} {

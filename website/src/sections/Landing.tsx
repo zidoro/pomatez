@@ -1,4 +1,5 @@
 import React, { useState, useContext, useLayoutEffect } from "react";
+import { Link as ScrollLink } from "react-scroll";
 import Image from "gatsby-image";
 import {
 	StyledLanding,
@@ -53,42 +54,50 @@ const Landing: React.FC = () => {
 		switch (operatingSystem) {
 			case "Windows":
 				return (
-					<StyledCTADownloader as={"a"} href={WINDOWS_INSTALLER}>
-						<SVG name="windows" />
-						for Windows
+					<StyledCTADownloader>
+						<a href={WINDOWS_INSTALLER}>
+							<SVG name="windows" />
+							for Windows
+						</a>
 					</StyledCTADownloader>
 				);
 			case "MacOS":
 				return (
-					<StyledCTADownloader as={"a"} href={MAC_INSTALLER}>
-						<SVG name="apple" />
-						for Mac OS
+					<StyledCTADownloader>
+						<a href={MAC_INSTALLER}>
+							<SVG name="apple" />
+							for Mac OS
+						</a>
 					</StyledCTADownloader>
 				);
 			case "Linux":
 				return (
-					<StyledCTADownloader
-						href="/"
-						to="installers"
-						offset={-24}
-						duration={420}
-						smooth
-					>
-						<SVG name="tux" />
-						for Linux OS
+					<StyledCTADownloader>
+						<ScrollLink
+							href="/"
+							to="installers"
+							offset={-24}
+							duration={420}
+							smooth
+						>
+							<SVG name="tux" />
+							for Linux OS
+						</ScrollLink>
 					</StyledCTADownloader>
 				);
 			default:
 				return (
-					<StyledCTADownloader
-						href="/"
-						to="installers"
-						offset={-24}
-						duration={420}
-						smooth
-					>
-						<SVG name="download" />
-						See Installers
+					<StyledCTADownloader>
+						<ScrollLink
+							href="/"
+							to="installers"
+							offset={-24}
+							duration={420}
+							smooth
+						>
+							<SVG name="download" />
+							See Installers
+						</ScrollLink>
 					</StyledCTADownloader>
 				);
 		}

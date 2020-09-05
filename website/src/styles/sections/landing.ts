@@ -24,7 +24,7 @@ export const StyledLanding = styled(motion.section).attrs(() => ({
 	}
 `;
 
-export const StyledLandingContent = styled(motion.div).attrs(() => ({}))`
+export const StyledLandingContent = styled.div`
 	${SectionContentStyle};
 	row-gap: 10rem;
 `;

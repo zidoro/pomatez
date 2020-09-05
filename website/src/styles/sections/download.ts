@@ -1,8 +1,15 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
 import { SectionStyle, SectionContentStyle } from "../mixins";
+import { stagger, fadeFromBottom } from "../animate";
+
 import media from "../media";
 
-export const StyledDownload = styled.section`
+export const StyledDownload = styled(motion.section).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	${SectionStyle};
 
 	${media.laptopSm} {
@@ -14,7 +21,9 @@ export const StyledDownloadContent = styled.div`
 	${SectionContentStyle};
 `;
 
-export const StyledDownloadOSLogo = styled.div`
+export const StyledDownloadOSLogo = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	& > svg {
 		width: 12rem;
 		height: 12rem;
@@ -46,6 +55,10 @@ export const StyledDownloadForWindows = styled.div`
 	}
 `;
 
+export const StyledLinuxOrSpan = styled(motion.span).attrs(() => ({
+	variants: fadeFromBottom,
+}))``;
+
 export const StyledLinuxInstallerWrapper = styled.div`
 	display: grid;
 	align-items: center;
@@ -53,27 +66,23 @@ export const StyledLinuxInstallerWrapper = styled.div`
 	grid-template-columns: repeat(3, 1fr);
 	gap: 2rem;
 
-	& > a {
+	& > div > a {
 		min-width: max-content;
-	}
-
-	& > a#snap-store-btn {
-		padding: 0 1.2rem;
 	}
 
 	${media.laptopXs} {
 		grid-template-columns: repeat(2, 1fr);
 
-		& > a:nth-last-of-type(2) {
+		#app-image {
 			grid-row: 1 / 2;
 			grid-column: 2 / -1;
 		}
 
-		& > a:nth-last-of-type(3) {
+		#rpm {
 			grid-column: 1 / -1;
 		}
 
-		& > span {
+		& > div > span {
 			grid-column: 1 / -1 !important;
 		}
 	}
@@ -104,21 +113,26 @@ export const StyledLinuxInstallerWrapper = styled.div`
 		justify-self: center;
 
 		width: max-content;
-		padding: 0;
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
 
+		padding: 0 1.2rem;
+
 		overflow: hidden;
 
-		& > span {
+		& > a {
+			padding: 0 1.2rem;
+		}
+
+		& > a > span {
 			width: 0;
 			height: 0;
 			opacity: 0;
 		}
 
-		& > svg {
+		& > a > svg {
 			width: 182px;
 			height: 56px;
 			fill: transparent;

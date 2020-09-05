@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
-import { Link } from "react-scroll";
+import { motion } from "framer-motion";
+import { fadeFromBottom } from "../animate";
 import media from "../media";
 
 export const ButtonStyles = css`
@@ -38,29 +39,33 @@ export const StyledButtonPrimary = styled.button`
 	}
 `;
 
-export const StyledDownloadButton = styled(Link)`
-	${ButtonStyles};
+export const StyledDownloadButton = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
+	& > a {
+		${ButtonStyles};
 
-	min-height: 4.8rem;
-	min-width: 24rem;
-	font-size: 1.6rem;
-	padding: 1.2rem 2.4rem;
+		min-height: 4.8rem;
+		min-width: 24rem;
+		font-size: 1.6rem;
+		padding: 1.2rem 2.4rem;
 
-	color: white;
-	border-radius: 100px;
-	background: var(--bg-btn-primary);
-	box-shadow: 0 4px 16px 0 var(--cl-shadow-secondary);
+		color: white;
+		border-radius: 100px;
+		background: var(--bg-btn-primary);
+		box-shadow: 0 4px 16px 0 var(--cl-shadow-secondary);
 
-	&:hover {
-		background: var(--bg-btn-primary-hover);
-		box-shadow: 0 8px 40px 0 var(--cl-shadow-secondary);
-	}
+		&:hover {
+			background: var(--bg-btn-primary-hover);
+			box-shadow: 0 8px 40px 0 var(--cl-shadow-secondary);
+		}
 
-	& > svg {
-		width: 2.2rem;
-		height: 2.2rem;
-		margin-right: 1rem;
-		margin-left: -0.6rem;
+		& > svg {
+			width: 2.2rem;
+			height: 2.2rem;
+			margin-right: 1rem;
+			margin-left: -0.6rem;
+		}
 	}
 `;
 
