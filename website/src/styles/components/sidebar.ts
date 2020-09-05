@@ -9,7 +9,7 @@ export const StyledSidebar = styled(motion.aside).attrs(() => ({
 	animate: "animate",
 	variants: stagger,
 }))`
-	padding: 0 5.6rem;
+	padding: 4rem 5.6rem;
 
 	background-color: var(--bg-primary);
 	border-top: 1px solid var(--border-tertiary);
@@ -23,15 +23,15 @@ export const StyledSidebar = styled(motion.aside).attrs(() => ({
 	z-index: 80;
 
 	${media.laptopSm} {
-		padding: 0 4rem;
+		padding: 4rem;
 	}
 
 	${media.tabletSm} {
-		padding: 0 2rem;
+		padding: 4rem 2rem;
 	}
 
 	${media.mobileXs} {
-		padding: 0 1.6rem;
+		padding: 4rem 1.6rem;
 	}
 `;
 
