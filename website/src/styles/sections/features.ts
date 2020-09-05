@@ -144,14 +144,11 @@ export const StyledFeatureItem = styled.li`
 
 	${media.tabletMd} {
 		border-radius: 3px;
-		border: 1px solid var(--border-primary);
-		padding: 1.6rem 2.4rem;
-		padding-bottom: 2rem;
+		background-color: var(--bg-card);
+		box-shadow: 0 10px 40px -10px var(--cl-shadow-primary);
+		padding: 2rem 2.4rem;
+		padding-top: 1.8rem;
 		row-gap: 0.8rem;
-
-		&:hover {
-			box-shadow: 0 0 0 3px var(--cl-primary-variant);
-		}
 	}
 
 	& > a {

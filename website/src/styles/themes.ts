@@ -15,6 +15,8 @@ export const lightTheme = css`
 	--bg-secondary: #fafafa;
 	--bg-tertiary: #f2f2f2;
 
+	--bg-card: var(--bg-primary);
+
 	--cl-link: var(--cl-primary-variant);
 	--cl-link-hover: var(--cl-primary);
 
@@ -67,6 +69,8 @@ export const darkTheme = css`
 
 	--bg-secondary: #1c2830;
 	--bg-tertiary: #202c34;
+
+	--bg-card: var(--bg-secondary);
 
 	--cl-link: var(--cl-primary);
 	--cl-link-hover: var(--cl-primary-variant);
