@@ -1,5 +1,10 @@
 import React from "react";
-import { StyledHeader } from "../styles";
+import {
+	StyledHeader,
+	StyledHeading,
+	StyledSubHeading,
+	StyledDescription,
+} from "../styles";
 import { Edges } from "../types";
 
 type Props = {
@@ -11,11 +16,11 @@ export const Header: React.FC<Props> = ({ node }) => {
 
 	return (
 		<StyledHeader>
-			<h3 data-after={title}>
+			<StyledHeading data-after={title}>
 				<span>{title}</span>
-			</h3>
-			<h4>{subTitle}</h4>
-			<div
+			</StyledHeading>
+			<StyledSubHeading>{subTitle}</StyledSubHeading>
+			<StyledDescription
 				dangerouslySetInnerHTML={{
 					__html: node.html,
 				}}

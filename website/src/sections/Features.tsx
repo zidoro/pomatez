@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import Image from "gatsby-image";
 import {
 	StyledFeatures,
@@ -25,10 +27,20 @@ const Features: React.FC = () => {
 
 	const { isDarkMode } = useContext(ThemeContext);
 
+	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
+
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledFeatures id="features">
+		<StyledFeatures id="features" ref={ref} animate={control}>
 			<StyledFeatureContent>
 				<Header node={node} />
 

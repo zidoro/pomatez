@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import Image from "gatsby-image";
 import {
 	StyledRoadmap,
@@ -25,10 +27,20 @@ const Roadmap: React.FC = () => {
 
 	const { isDarkMode } = useContext(ThemeContext);
 
+	const [ref, inView] = useInView();
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
+
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledRoadmap id="roadmap">
+		<StyledRoadmap id="roadmap" ref={ref} animate={control}>
 			<StyledRoadmapContent>
 				<Header node={node} />
 

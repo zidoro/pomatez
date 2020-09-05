@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import Image from "gatsby-image";
 import {
 	StyledBoosters,
@@ -9,6 +11,7 @@ import {
 	StyledBoosterDescription,
 	StyledCompanyWrapper,
 	StyledCompanyImage,
+	StyledCompanyDescription,
 } from "../styles";
 import { Header } from "../components";
 import { BoosterQuery } from "../queries";
@@ -18,10 +21,20 @@ type Props = {};
 const Boosters: React.FC<Props> = () => {
 	const { allMarkdownRemark } = BoosterQuery();
 
+	const [ref, inView] = useInView();
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
+
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledBoosters id="boosters">
+		<StyledBoosters id="boosters" ref={ref} animate={control}>
 			<StyledFeatureContent>
 				<Header node={node} />
 
@@ -50,7 +63,9 @@ const Boosters: React.FC<Props> = () => {
 				</StyledBoosterList>
 
 				<StyledCompanyWrapper>
-					<h6>{node.frontmatter.headline}</h6>
+					<StyledCompanyDescription>
+						{node.frontmatter.headline}
+					</StyledCompanyDescription>
 
 					<div>
 						{node.frontmatter.companies?.map((company, index) => (
