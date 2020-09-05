@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import {
 	StyledSidebar,
@@ -20,7 +20,16 @@ const Sidebar: React.FC<Props> = () => {
 		isDarkMode,
 		themeToggler,
 		isMenuOpen,
+		toggleMenu,
 	} = useContextProvider();
+
+	useEffect(() => {
+		if (isMenuOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [isMenuOpen]);
 
 	return isOnMobile && isMenuOpen ? (
 		<StyledSidebar>
@@ -33,14 +42,21 @@ const Sidebar: React.FC<Props> = () => {
 
 			<StyledSidebarList>
 				<NavLinks />
-			</StyledSidebarList>
 
-			<StyledScrollToDownload>
-				<ScrollLink href="/" to="installers" offset={-24} duration={420} smooth>
-					<SVG name="download" />
-					See Installers
-				</ScrollLink>
-			</StyledScrollToDownload>
+				<StyledScrollToDownload>
+					<ScrollLink
+						href="/"
+						onClick={toggleMenu}
+						to="installers"
+						offset={-24}
+						duration={420}
+						smooth
+					>
+						<SVG name="download" />
+						See Installers
+					</ScrollLink>
+				</StyledScrollToDownload>
+			</StyledSidebarList>
 		</StyledSidebar>
 	) : null;
 };

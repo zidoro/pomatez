@@ -162,7 +162,6 @@ export const StyledNavButtonWrapper = styled(motion.div).attrs(() => ({}))`
 		grid-template-columns: 1fr;
 		row-gap: 2rem;
 		max-width: 92rem;
-		margin-top: 4rem;
 		margin-bottom: 0.8rem;
 		margin-left: auto;
 		margin-right: auto;
