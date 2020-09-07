@@ -2,14 +2,11 @@ import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 
 import { SectionStyle, SectionContentStyle } from "../mixins";
-import { stagger, fadeFromLeft, fadeFromRight } from "../animate";
+import { stagger, fadeFromBottom } from "../animate";
 
 import media from "../media";
 
-export const StyledFeatures = styled(motion.section).attrs(() => ({
-	initial: "initial",
-	variants: stagger,
-}))`
+export const StyledFeatures = styled.section`
 	${SectionStyle};
 `;
 
@@ -17,7 +14,10 @@ export const StyledFeatureContent = styled.div`
 	${SectionContentStyle};
 `;
 
-export const StyledFeatureContainer = styled.div`
+export const StyledFeatureContainer = styled(motion.div).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 2rem;
@@ -49,7 +49,7 @@ export const StyledFeaturedImageWrapper = styled.div`
 `;
 
 export const StyledFeaturedImage = styled(motion.div).attrs(() => ({
-	variants: fadeFromLeft,
+	variants: fadeFromBottom,
 }))`
 	width: 34rem;
 	height: 48rem;
@@ -149,7 +149,7 @@ const FeatureItemStyle = css`
 `;
 
 export const StyledFeatureItem = styled(motion.li).attrs(() => ({
-	variants: fadeFromRight,
+	variants: fadeFromBottom,
 }))`
 	${FeatureItemStyle};
 

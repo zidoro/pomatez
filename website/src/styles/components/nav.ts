@@ -1,9 +1,9 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Link as ScrollLink } from "react-scroll";
 import { motion } from "framer-motion";
 import { ButtonStyles } from "./button";
 import { SectionContentStyle } from "../mixins";
-import { stagger, fadeFromTop } from "../animate";
+import { stagger, fadeFromTop, fadeFromRight } from "../animate";
 import media from "../media";
 
 type MenuProps = {
@@ -83,6 +83,7 @@ export const StyledNavLogo = styled(motion.div).attrs(() => ({
 			margin-right: 1rem;
 			color: var(--cl-primary);
 			background-color: transparent;
+			border-radius: 0.8rem;
 		}
 	}
 `;
@@ -255,18 +256,9 @@ export const StyledBackButton = styled.button`
 	}
 `;
 
-const menuFromTop = keyframes`
-	from {
-		transform: translateY(-60px);
-		opacity: 0;
-	}
-	to {
-		transform: translateY(0);
-		opacity: 1;
-	}
-`;
-
-export const StyledNavMenu = styled.div<MenuProps>`
+export const StyledNavMenu = styled(motion.div).attrs(() => ({
+	variants: fadeFromRight,
+}))<MenuProps>`
 	justify-self: end;
 	border: none;
 	border-radius: 3px;
@@ -275,8 +267,6 @@ export const StyledNavMenu = styled.div<MenuProps>`
 	display: none;
 	row-gap: 4px;
 	align-content: center;
-
-	animation: ${menuFromTop} 1s cubic-bezier(0.6, -0.05, 0.01, 0.99);
 
 	${media.laptopXs} {
 		display: grid;

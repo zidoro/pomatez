@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import {
 	StyledHeader,
 	StyledHeading,
@@ -12,10 +14,20 @@ type Props = {
 };
 
 export const Header: React.FC<Props> = ({ node }) => {
+	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
+
 	const { title, subTitle } = node.frontmatter;
 
 	return (
-		<StyledHeader>
+		<StyledHeader ref={ref} animate={control}>
 			<StyledHeading data-after={title}>
 				<span>{title}</span>
 			</StyledHeading>

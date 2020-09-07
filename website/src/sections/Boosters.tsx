@@ -21,24 +21,27 @@ type Props = {};
 const Boosters: React.FC<Props> = () => {
 	const { allMarkdownRemark } = BoosterQuery();
 
-	const [ref, inView] = useInView();
+	const [listRef, listInView] = useInView({ triggerOnce: true });
 
-	const control = useAnimation();
+	const [companyRef, companyInView] = useInView({ triggerOnce: true });
+
+	const listControl = useAnimation();
+
+	const companyControl = useAnimation();
 
 	useEffect(() => {
-		if (inView) {
-			control.start("animate");
-		}
-	}, [control, inView]);
+		if (listInView) listControl.start("animate");
+		if (companyInView) companyControl.start("animate");
+	}, [listControl, listInView, companyControl, companyInView]);
 
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledBoosters id="boosters" ref={ref} animate={control}>
+		<StyledBoosters id="boosters">
 			<StyledFeatureContent>
 				<Header node={node} />
 
-				<StyledBoosterList>
+				<StyledBoosterList ref={listRef} animate={listControl}>
 					{node.frontmatter.boosters?.map((booster, index) => (
 						<StyledBoosterItem key={index}>
 							<StyledBoosterImage>
@@ -62,7 +65,7 @@ const Boosters: React.FC<Props> = () => {
 					))}
 				</StyledBoosterList>
 
-				<StyledCompanyWrapper>
+				<StyledCompanyWrapper ref={companyRef} animate={companyControl}>
 					<StyledCompanyDescription>
 						{node.frontmatter.headline}
 					</StyledCompanyDescription>

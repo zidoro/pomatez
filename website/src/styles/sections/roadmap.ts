@@ -10,10 +10,7 @@ import {
 } from "./features";
 import { stagger } from "../animate";
 
-export const StyledRoadmap = styled(motion.section).attrs(() => ({
-	initial: "initial",
-	variants: stagger,
-}))`
+export const StyledRoadmap = styled.section`
 	${SectionStyle}
 `;
 

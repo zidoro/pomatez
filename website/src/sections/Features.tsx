@@ -40,11 +40,11 @@ const Features: React.FC = () => {
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledFeatures id="features" ref={ref} animate={control}>
+		<StyledFeatures id="features">
 			<StyledFeatureContent>
 				<Header node={node} />
 
-				<StyledFeatureContainer>
+				<StyledFeatureContainer ref={ref} animate={control}>
 					<StyledStickyContainer>
 						<StyledFeaturedImageWrapper>
 							<StyledFeaturedImage>

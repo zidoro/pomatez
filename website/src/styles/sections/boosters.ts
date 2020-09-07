@@ -6,10 +6,7 @@ import { stagger, fadeFromBottom } from "../animate";
 
 import media from "../media";
 
-export const StyledBoosters = styled(motion.section).attrs(() => ({
-	initial: "initial",
-	variants: stagger,
-}))`
+export const StyledBoosters = styled.section`
 	${SectionStyle};
 `;
 
@@ -17,7 +14,10 @@ export const StyledBoosterContent = styled.div`
 	${SectionContentStyle};
 `;
 
-export const StyledBoosterList = styled.ul`
+export const StyledBoosterList = styled(motion.ul).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	list-style: none;
 
 	display: grid;
@@ -177,7 +177,10 @@ export const StyledCompanyImage = styled(motion.div).attrs(() => ({
 	}
 `;
 
-export const StyledCompanyWrapper = styled.div`
+export const StyledCompanyWrapper = styled(motion.div).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	display: grid;
 	justify-items: center;
 	row-gap: 2rem;
