@@ -26,7 +26,7 @@ import { DownloadQuery } from "../queries";
 const Download: React.FC = () => {
 	const { allMarkdownRemark } = DownloadQuery();
 
-	const [ref, inView] = useInView();
+	const [ref, inView] = useInView({ triggerOnce: true });
 
 	const control = useAnimation();
 
@@ -39,11 +39,11 @@ const Download: React.FC = () => {
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledDownload id="installers" ref={ref} animate={control}>
+		<StyledDownload id="installers">
 			<StyledDownloadContent>
 				<Header node={node} />
 
-				<StyledDownloadButtonWrapper>
+				<StyledDownloadButtonWrapper ref={ref} animate={control}>
 					<StyledDownloadForWindows>
 						<StyledDownloadOSLogo>
 							<SVG name="windows" />

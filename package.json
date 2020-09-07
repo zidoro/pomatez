@@ -21,7 +21,7 @@
 		"build:snap": "yarn build && lerna run build:snap --stream",
 		"release:mw": "yarn build && lerna run release:mw --stream",
 		"release": "yarn build && lerna run release --stream",
-		"clean": "lerna exec -- rimraf build/ dist/ && yarn clean:site",
+		"clean": "lerna exec -- rimraf build/ dist/",
 		"gen:tts": "lerna run gen:tts --stream",
 		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
 		"build:site": "lerna run build --stream --scope '@pomatez/website'",

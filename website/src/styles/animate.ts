@@ -1,9 +1,7 @@
-export const easing = [0.8, -0.05, 0.01, 0.99];
-
 export const stagger = {
 	animate: {
 		transition: {
-			staggerChildren: 0.2,
+			staggerChildren: 0.16,
 		},
 	},
 };
@@ -15,8 +13,7 @@ export const fadeIn = {
 	animate: {
 		opacity: 1,
 		transition: {
-			duration: 0.8,
-			ease: easing,
+			duration: 0.3,
 		},
 	},
 };
@@ -30,8 +27,7 @@ export const fadeFromTop = {
 		y: 0,
 		opacity: 1,
 		transition: {
-			duration: 0.8,
-			ease: easing,
+			duration: 0.3,
 		},
 	},
 };
@@ -45,8 +41,7 @@ export const fadeFromBottom = {
 		y: 0,
 		opacity: 1,
 		transition: {
-			duration: 0.8,
-			ease: easing,
+			duration: 0.3,
 		},
 	},
 };
@@ -60,8 +55,7 @@ export const fadeFromLeft = {
 		x: 0,
 		opacity: 1,
 		transition: {
-			duration: 0.8,
-			ease: easing,
+			duration: 0.3,
 		},
 	},
 };
@@ -75,8 +69,7 @@ export const fadeFromRight = {
 		x: 0,
 		opacity: 1,
 		transition: {
-			duration: 0.8,
-			ease: easing,
+			duration: 0.3,
 		},
 	},
 };

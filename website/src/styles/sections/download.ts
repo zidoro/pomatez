@@ -6,10 +6,7 @@ import { stagger, fadeFromBottom } from "../animate";
 
 import media from "../media";
 
-export const StyledDownload = styled(motion.section).attrs(() => ({
-	initial: "initial",
-	variants: stagger,
-}))`
+export const StyledDownload = styled.section`
 	${SectionStyle};
 
 	${media.laptopSm} {
@@ -31,7 +28,10 @@ export const StyledDownloadOSLogo = styled(motion.div).attrs(() => ({
 	}
 `;
 
-export const StyledDownloadButtonWrapper = styled.div`
+export const StyledDownloadButtonWrapper = styled(motion.div).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	display: grid;
 	align-items: start;
 	column-gap: 2rem;

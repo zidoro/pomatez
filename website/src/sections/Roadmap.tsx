@@ -27,7 +27,7 @@ const Roadmap: React.FC = () => {
 
 	const { isDarkMode } = useContext(ThemeContext);
 
-	const [ref, inView] = useInView();
+	const [ref, inView] = useInView({ triggerOnce: true });
 
 	const control = useAnimation();
 
@@ -40,11 +40,11 @@ const Roadmap: React.FC = () => {
 	const { node } = allMarkdownRemark.edges[0];
 
 	return (
-		<StyledRoadmap id="roadmap" ref={ref} animate={control}>
+		<StyledRoadmap id="roadmap">
 			<StyledRoadmapContent>
 				<Header node={node} />
 
-				<StyledRoadmapContainer>
+				<StyledRoadmapContainer ref={ref} animate={control}>
 					<StyledStickyContainer>
 						<StyledRoadmapImageWrapper>
 							<StyledRoadmapImage>

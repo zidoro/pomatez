@@ -1,7 +1,32 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { fadeFromBottom } from "../animate";
+import { stagger, fadeFromBottom } from "../animate";
 import media from "../media";
+
+export const StyledHeader = styled(motion.header).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
+	text-align: center;
+	max-width: 60rem;
+
+	margin: 0 auto;
+
+	display: grid;
+	row-gap: 2rem;
+	align-content: start;
+
+	position: relative;
+
+	&::before {
+		counter-increment: header;
+		content: "0" counter(header) ".";
+		color: var(--cl-disabled-text);
+		font-size: 3.2rem;
+		font-weight: 700;
+		opacity: 0.1;
+	}
+`;
 
 export const StyledHeading = styled(motion.h3).attrs(() => ({
 	variants: fadeFromBottom,
@@ -96,29 +121,5 @@ export const StyledDescription = styled(motion.div).attrs(() => ({
 		& > a:hover {
 			color: var(--cl-primary);
 		}
-	}
-`;
-
-export const StyledHeader = styled(motion.header).attrs(() => ({
-	variants: fadeFromBottom,
-}))`
-	text-align: center;
-	max-width: 60rem;
-
-	margin: 0 auto;
-
-	display: grid;
-	row-gap: 2rem;
-	align-content: start;
-
-	position: relative;
-
-	&::before {
-		counter-increment: header;
-		content: "0" counter(header) ".";
-		color: var(--cl-disabled-text);
-		font-size: 3.2rem;
-		font-weight: 700;
-		opacity: 0.1;
 	}
 `;
