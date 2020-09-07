@@ -1,16 +1,17 @@
 ---
 name: Bug report
 about: Create a report to help the app improve
-title: "Bug Report: Title of the Bug"
-labels: ""
-assignees: ""
+title: 'Bug Report: Title of the Bug'
+labels: ''
+assignees: ''
+
 ---
 
 **Describe the bug**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+Steps to reproduce the behavior. Example:
 
 1. Go to '...'
 2. Click on '....'
@@ -27,6 +28,7 @@ If applicable, add screenshots to help explain your problem.
 
 - OS: [e.g. Windows 10]
 - App Version [e.g. 22]
+- Installer Used [e.g Windows Installer]
 
 **Additional context**
 Add any other context about the problem here.
