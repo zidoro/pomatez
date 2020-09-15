@@ -284,6 +284,7 @@ ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
 		win?.focus();
 		win?.setAlwaysOnTop(true, "screen-saver");
 		win?.setSkipTaskbar(true);
+		win?.setResizable(true);
 		win?.setFullScreen(true);
 		win?.setVisibleOnAllWorkspaces(true);
 
@@ -309,6 +310,7 @@ ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
 
 		win?.setSkipTaskbar(false);
 		win?.setFullScreen(false);
+		win?.setResizable(false);
 		win?.setVisibleOnAllWorkspaces(false);
 
 		globalShortcut.register("Alt+Shift+H", () => {
