@@ -1,4 +1,4 @@
-import React, { createContext, useState, useLayoutEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { isSSR } from "../utils";
 
 type Props = {
@@ -13,7 +13,7 @@ const ViewportProvider: React.FC = ({ children }) => {
 
 	const [height, setHeight] = useState(!isSSR ? window.innerHeight : 0);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const handleWindowSize = () => {
 			setWidth(window.innerWidth);
 			setHeight(window.innerHeight);

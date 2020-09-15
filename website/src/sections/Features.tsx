@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import React, { useContext, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import Image from "gatsby-image";
 import {
 	StyledFeatures,
@@ -13,7 +14,7 @@ import {
 } from "../styles";
 import { Header } from "../components";
 import { ThemeContext } from "../contexts";
-import { LandingQueryProps } from "./Landing";
+import { FeatureQuery } from "../queries";
 
 const Features: React.FC = () => {
 	const {
@@ -22,61 +23,19 @@ const Features: React.FC = () => {
 		tasksPreviewDark,
 		configPreviewLight,
 		configPreviewDark,
-	} = useStaticQuery<LandingQueryProps>(graphql`
-		{
-			allMarkdownRemark: allMarkdownRemark(
-				filter: { fileAbsolutePath: { regex: "/features/" } }
-			) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-							features {
-								heading
-								description
-							}
-						}
-						html
-					}
-				}
-			}
-			tasksPreviewLight: file(relativePath: { eq: "tasks-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			tasksPreviewDark: file(relativePath: { eq: "tasks-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			configPreviewLight: file(relativePath: { eq: "config-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			configPreviewDark: file(relativePath: { eq: "config-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-		}
-	`);
+	} = FeatureQuery();
 
 	const { isDarkMode } = useContext(ThemeContext);
+
+	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
 
 	const { node } = allMarkdownRemark.edges[0];
 
@@ -85,7 +44,7 @@ const Features: React.FC = () => {
 			<StyledFeatureContent>
 				<Header node={node} />
 
-				<StyledFeatureContainer>
+				<StyledFeatureContainer ref={ref} animate={control}>
 					<StyledStickyContainer>
 						<StyledFeaturedImageWrapper>
 							<StyledFeaturedImage>

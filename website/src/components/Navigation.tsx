@@ -1,15 +1,16 @@
-import React, { useState, useLayoutEffect } from "react";
+import React from "react";
+import { Link as ScrollLink } from "react-scroll";
 import {
 	StyledNav,
 	StyledNavLinks,
 	StyledNavThemeToggler,
 	StyledNavButtonWrapper,
 	StyledNavLinkAnchor,
-	StyledNavDownloadButton,
+	StyledScrollToDownload,
 	StyledNavHeader,
 	StyledNavContent,
 	StyledNavMenu,
-	StyledBackButton,
+	StyledNavLinkItem,
 } from "../styles";
 import { navLinks, APP_NAME } from "../config";
 import { useContextProvider } from "../hooks";
@@ -24,7 +25,7 @@ export const NavLinks: React.FC = () => {
 		<>
 			{navLinks.map((nav, index) =>
 				nav.offset ? (
-					<li key={index}>
+					<StyledNavLinkItem key={index}>
 						<StyledNavLinkAnchor
 							href="/"
 							onClick={toggleMenu}
@@ -35,13 +36,13 @@ export const NavLinks: React.FC = () => {
 						>
 							{nav.label}
 						</StyledNavLinkAnchor>
-					</li>
+					</StyledNavLinkItem>
 				) : (
-					<li key={index}>
+					<StyledNavLinkItem key={index}>
 						<a href={nav.link} target="_blank" rel="noopener noreferrer">
 							{nav.label}
 						</a>
-					</li>
+					</StyledNavLinkItem>
 				)
 			)}
 		</>
@@ -50,70 +51,47 @@ export const NavLinks: React.FC = () => {
 
 export const Navigation: React.FC = () => {
 	const {
-		isOnDesktop,
 		isDarkMode,
 		themeToggler,
 		isMenuOpen,
 		toggleMenu,
 	} = useContextProvider();
 
-	const [isHome, setHome] = useState(true);
-
-	useLayoutEffect(() => {
-		setHome(window.location.pathname === "/");
-	}, []);
-
 	return (
 		<StyledNav isMenuOpen={isMenuOpen}>
 			<StyledNavHeader>
-				<Logo name={APP_NAME} isHome={isHome} />
+				<Logo name={APP_NAME} />
 
-				{isOnDesktop && (
-					<StyledNavContent>
-						{isHome && (
-							<StyledNavLinks>
-								<NavLinks />
-							</StyledNavLinks>
-						)}
+				<StyledNavContent>
+					<StyledNavLinks>
+						<NavLinks />
+					</StyledNavLinks>
 
-						<StyledNavButtonWrapper>
-							<StyledNavThemeToggler onClick={themeToggler}>
-								Mode
-								<SVG name={isDarkMode ? "moon" : "sunny"} />
-							</StyledNavThemeToggler>
+					<StyledNavButtonWrapper>
+						<StyledNavThemeToggler onClick={themeToggler}>
+							Mode
+							<SVG name={isDarkMode ? "moon" : "sunny"} />
+						</StyledNavThemeToggler>
+						<StyledScrollToDownload>
+							<ScrollLink
+								href="/"
+								to="installers"
+								offset={-24}
+								duration={420}
+								smooth
+							>
+								<SVG name="download" />
+								See Installers
+							</ScrollLink>
+						</StyledScrollToDownload>
+					</StyledNavButtonWrapper>
+				</StyledNavContent>
 
-							{isHome ? (
-								<StyledNavDownloadButton
-									href="/"
-									to="installers"
-									offset={-24}
-									duration={420}
-									smooth
-								>
-									<SVG name="download" />
-									See Installers
-								</StyledNavDownloadButton>
-							) : (
-								<StyledBackButton
-									onClick={() => {
-										window.history.back();
-									}}
-								>
-									<SVG name="arrow-back" />
-									Back
-								</StyledBackButton>
-							)}
-						</StyledNavButtonWrapper>
-					</StyledNavContent>
-				)}
-
-				{!isOnDesktop && (
-					<StyledNavMenu isMenuOpen={isMenuOpen} onClick={toggleMenu}>
-						<span>&nbsp;</span>
-						<span>&nbsp;</span>
-						<span>&nbsp;</span>
-					</StyledNavMenu>
-				)}
+				<StyledNavMenu isMenuOpen={isMenuOpen} onClick={toggleMenu}>
+					<span>&nbsp;</span>
+					<span>&nbsp;</span>
+					<span>&nbsp;</span>
+				</StyledNavMenu>
 			</StyledNavHeader>
 		</StyledNav>
 	);

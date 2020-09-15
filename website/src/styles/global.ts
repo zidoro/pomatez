@@ -46,7 +46,8 @@ export const GlobalStyle = createGlobalStyle<GlobalProps>`
     color: var(--cl-body-text);
     background: var(--bg-primary);
     
-    counter-reset: header;          
+    counter-reset: header;     
+    overflow-x: hidden;     
   }
 
   a {

@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
+
 import { SectionStyle, SectionContentStyle } from "../mixins";
+import { stagger, fadeFromBottom } from "../animate";
+
 import media from "../media";
 
 export const StyledFeatures = styled.section`
@@ -10,7 +14,10 @@ export const StyledFeatureContent = styled.div`
 	${SectionContentStyle};
 `;
 
-export const StyledFeatureContainer = styled.div`
+export const StyledFeatureContainer = styled(motion.div).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 2rem;
@@ -34,14 +41,16 @@ export const StyledFeaturedImageWrapper = styled.div`
 	margin-right: 4rem;
 
 	position: sticky;
-	top: 8.8rem;
+	top: 8rem;
 
 	${media.laptopSm} {
 		margin-right: 2rem;
 	}
 `;
 
-export const StyledFeaturedImage = styled.div`
+export const StyledFeaturedImage = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	width: 34rem;
 	height: 48rem;
 	background-color: var(--bg-primary);
@@ -139,19 +148,18 @@ const FeatureItemStyle = css`
 	}
 `;
 
-export const StyledFeatureItem = styled.li`
+export const StyledFeatureItem = styled(motion.li).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	${FeatureItemStyle};
 
 	${media.tabletMd} {
 		border-radius: 3px;
-		border: 1px solid var(--border-primary);
-		padding: 1.6rem 2.4rem;
-		padding-bottom: 2rem;
+		background-color: var(--bg-card);
+		box-shadow: 0 10px 40px -10px var(--cl-shadow-primary);
+		padding: 2rem 2.4rem;
+		padding-top: 1.8rem;
 		row-gap: 0.8rem;
-
-		&:hover {
-			box-shadow: 0 0 0 3px var(--cl-primary-variant);
-		}
 	}
 
 	& > a {

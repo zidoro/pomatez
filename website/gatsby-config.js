@@ -1,3 +1,5 @@
+const { pathPrefix } = require("./src/config");
+
 const activeEnv =
 	process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
 
@@ -6,10 +8,10 @@ require("dotenv").config({
 });
 
 module.exports = {
-	pathPrefix: "/pomatez",
+	pathPrefix,
 	siteMetadata: {
 		title: `Pomatez | Stay Focused. Take a Break.`,
-		description: `Wonderful and helpful app to be more productive while staying healthy.`,
+		description: `Wonderful app that will help you to be more productive while staying healthy.`,
 		keywords: [
 			"pomatez",
 			"tomato app",
@@ -22,7 +24,7 @@ module.exports = {
 			"time management app",
 		],
 		author: `Roldan Montilla Jr`,
-		siteUrl: `https://roldanjr.github.io/pomatez`,
+		siteUrl: `https://roldanjr.github.io`,
 		twitterUsername: `@roldan_montilla`,
 		googleVerification: `${process.env.GOOGLE_VERIFICATION}`,
 	},
@@ -60,7 +62,7 @@ module.exports = {
 		},
 		// this (optional) plugin enables Progressive Web App + Offline functionality
 		// To learn more, visit: https://gatsby.dev/offline
-		`gatsby-plugin-offline`,
+		// `gatsby-plugin-offline`,
 		{
 			resolve: `gatsby-plugin-styled-components`,
 			options: {

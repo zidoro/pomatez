@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { SectionStyle, SectionContentStyle } from "../mixins";
 import {
 	StyledFeatureList,
@@ -7,6 +8,7 @@ import {
 	StyledFeaturedImageWrapper,
 	StyledFeaturedImage,
 } from "./features";
+import { stagger } from "../animate";
 
 export const StyledRoadmap = styled.section`
 	${SectionStyle}

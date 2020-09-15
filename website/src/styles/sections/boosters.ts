@@ -1,5 +1,9 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
 import { SectionStyle, SectionContentStyle } from "../mixins";
+import { stagger, fadeFromBottom } from "../animate";
+
 import media from "../media";
 
 export const StyledBoosters = styled.section`
@@ -10,7 +14,10 @@ export const StyledBoosterContent = styled.div`
 	${SectionContentStyle};
 `;
 
-export const StyledBoosterList = styled.ul`
+export const StyledBoosterList = styled(motion.ul).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	list-style: none;
 
 	display: grid;
@@ -80,7 +87,9 @@ export const StyledBoosterImage = styled.div`
 	}
 `;
 
-export const StyledBoosterDescription = styled.div`
+export const StyledBoosterDescription = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	display: grid;
 	row-gap: 1.2rem;
 	align-content: start;
@@ -106,7 +115,9 @@ export const StyledBoosterDescription = styled.div`
 	}
 `;
 
-export const StyledBoosterItem = styled.li`
+export const StyledBoosterItem = styled(motion.li).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	max-width: 60rem;
 	height: 100%;
 
@@ -146,7 +157,9 @@ export const StyledBoosterItem = styled.li`
 	}
 `;
 
-export const StyledCompanyImage = styled.div`
+export const StyledCompanyImage = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	width: 22.5rem;
 	min-height: 7.1rem;
 	margin-top: 2rem;
@@ -164,7 +177,10 @@ export const StyledCompanyImage = styled.div`
 	}
 `;
 
-export const StyledCompanyWrapper = styled.div`
+export const StyledCompanyWrapper = styled(motion.div).attrs(() => ({
+	initial: "initial",
+	variants: stagger,
+}))`
 	display: grid;
 	justify-items: center;
 	row-gap: 2rem;
@@ -172,27 +188,29 @@ export const StyledCompanyWrapper = styled.div`
 
 	margin-top: 8rem;
 
-	& > h6 {
-		font-size: 2.4rem;
-		font-weight: 400;
-
-		max-width: 72rem;
-
-		line-height: 1.7;
-
-		${media.tabletSm} {
-			line-height: 1.5;
-		}
-
-		${media.mobileMd} {
-			font-size: 2rem;
-		}
-	}
-
 	& > div {
 		max-width: 120rem;
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
+	}
+`;
+
+export const StyledCompanyDescription = styled(motion.h6).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
+	font-size: 2.4rem;
+	font-weight: 400;
+
+	max-width: 72rem;
+
+	line-height: 1.7;
+
+	${media.tabletSm} {
+		line-height: 1.5;
+	}
+
+	${media.mobileMd} {
+		font-size: 2rem;
 	}
 `;

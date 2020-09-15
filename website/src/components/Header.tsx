@@ -1,5 +1,12 @@
-import React from "react";
-import { StyledHeader } from "../styles";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
+import {
+	StyledHeader,
+	StyledHeading,
+	StyledSubHeading,
+	StyledDescription,
+} from "../styles";
 import { Edges } from "../types";
 
 type Props = {
@@ -7,15 +14,25 @@ type Props = {
 };
 
 export const Header: React.FC<Props> = ({ node }) => {
+	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
+
 	const { title, subTitle } = node.frontmatter;
 
 	return (
-		<StyledHeader>
-			<h3 data-after={title}>
+		<StyledHeader ref={ref} animate={control}>
+			<StyledHeading data-after={title}>
 				<span>{title}</span>
-			</h3>
-			<h4>{subTitle}</h4>
-			<div
+			</StyledHeading>
+			<StyledSubHeading>{subTitle}</StyledSubHeading>
+			<StyledDescription
 				dangerouslySetInnerHTML={{
 					__html: node.html,
 				}}
