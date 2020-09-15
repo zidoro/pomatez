@@ -9,25 +9,8 @@ export const SectionStyle = css`
 
 	padding: 10rem 5.6rem;
 
-	/* &:nth-child(odd) {
-		background: var(--bg-primary);
-	} */
-
 	&:nth-child(even) {
-		/* position: relative; */
 		background: var(--bg-primary);
-		/* box-shadow: 0 1px 4px -1px var(--cl-shadow-secondary); */
-
-		/* padding-bottom: 14rem; */
-		/* z-index: 20; */
-
-		${media.laptopSm} {
-			/* padding-bottom: 10rem; */
-		}
-
-		${media.tabletSm} {
-			/* padding-bottom: 8rem; */
-		}
 	}
 
 	${media.laptopSm} {
@@ -76,8 +59,4 @@ export const SectionContentStyle = css`
 	${media.laptopXs} {
 		max-width: 90rem;
 	}
-
-	/* ${media.tabletXl} {
-		max-width: 90rem;
-	} */
 `;

@@ -1,12 +1,18 @@
 import styled, { css } from "styled-components";
-import { SectionStyle, SectionContentStyle } from "../mixins";
+import { motion } from "framer-motion";
 
 import WaterMarkLeft from "../../assets/images/watermark-left.svg";
 import WaterMarkRight from "../../assets/images/watermark-right.svg";
 
+import { SectionStyle, SectionContentStyle } from "../mixins";
+import { stagger, fadeFromBottom, fadeIn } from "../animate";
 import media from "../media";
 
-export const StyledLanding = styled.section`
+export const StyledLanding = styled(motion.section).attrs(() => ({
+	initial: "initial",
+	animate: "animate",
+	variants: stagger,
+}))`
 	${SectionStyle};
 	position: relative;
 	overflow: hidden;
@@ -21,6 +27,16 @@ export const StyledLanding = styled.section`
 export const StyledLandingContent = styled.div`
 	${SectionContentStyle};
 	row-gap: 10rem;
+`;
+
+export const StyledWatermarkContainer = styled(motion.div).attrs(() => ({
+	variants: fadeIn,
+}))`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 `;
 
 const WaterMarkStyle = css`
@@ -78,7 +94,7 @@ export const StyledWaterMarkRight = styled(WaterMarkRight)`
 	}
 `;
 
-export const StyledLandingCTAWrapper = styled.div`
+export const StyledLandingActionContainer = styled.div`
 	display: grid;
 	row-gap: 4.8rem;
 	justify-content: center;
@@ -96,49 +112,55 @@ export const StyledLandingHeader = styled.header`
 
 	display: grid;
 	row-gap: 2.4rem;
+`;
 
-	& > h1 {
-		font-size: 7.2rem;
-		font-weight: 700;
-		color: var(--cl-display-text);
+export const StyledLandingHeading = styled(motion.h1).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
+	font-size: 7.2rem;
+	font-weight: 700;
+	color: var(--cl-display-text);
 
-		${media.tabletSm} {
-			line-height: normal;
-		}
-
-		${media.mobileXl} {
-			font-size: 6.4rem;
-		}
-
-		${media.mobileLg} {
-			font-size: 5.6rem;
-		}
-
-		${media.mobileSm} {
-			font-size: 4.8rem;
-		}
-
-		${media.mobileXs} {
-			font-size: 4.2rem;
-		}
+	${media.tabletSm} {
+		line-height: normal;
 	}
 
-	& > h2 {
-		font-size: 2.2rem;
-		font-weight: 400;
-		line-height: 1.7;
+	${media.mobileXl} {
+		font-size: 6.4rem;
+	}
 
-		${media.tabletSm} {
-			line-height: 1.5;
-		}
+	${media.mobileLg} {
+		font-size: 5.6rem;
+	}
 
-		${media.mobileXl} {
-			font-size: 2rem;
-		}
+	${media.mobileSm} {
+		font-size: 4.8rem;
+	}
+
+	${media.mobileXs} {
+		font-size: 4.2rem;
 	}
 `;
 
-export const StyledLandingCtaWrapper = styled.div`
+export const StyledLandingDescription = styled(motion.h2).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
+	font-size: 2.2rem;
+	font-weight: 400;
+	line-height: 1.7;
+
+	${media.tabletSm} {
+		line-height: 1.5;
+	}
+
+	${media.mobileXl} {
+		font-size: 2rem;
+	}
+`;
+
+export const StyledLandingActionWrapper = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	display: grid;
 	grid-template-columns: repeat(2, max-content);
 	gap: 2rem;
@@ -149,7 +171,9 @@ export const StyledLandingCtaWrapper = styled.div`
 	}
 `;
 
-export const StyledPreviewWrapper = styled.div`
+export const StyledPreviewWrapper = styled(motion.div).attrs(() => ({
+	variants: fadeFromBottom,
+}))`
 	position: relative;
 	z-index: 10;
 

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link as ScrollLink } from "react-scroll";
 import {
 	StyledSidebar,
 	StyledSidebarList,
 	StyledNavButtonWrapper,
 	StyledNavThemeToggler,
-	StyledNavDownloadButton,
+	StyledScrollToDownload,
 } from "../styles";
 import { NavLinks } from "./Navigation";
 import { useContextProvider } from "../hooks";
@@ -15,35 +16,47 @@ type Props = {};
 
 const Sidebar: React.FC<Props> = () => {
 	const {
-		isOnDesktop,
+		isOnMobile,
 		isDarkMode,
 		themeToggler,
 		isMenuOpen,
+		toggleMenu,
 	} = useContextProvider();
 
-	return !isOnDesktop && isMenuOpen ? (
+	useEffect(() => {
+		if (isMenuOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [isMenuOpen]);
+
+	return isOnMobile && isMenuOpen ? (
 		<StyledSidebar>
 			<StyledNavButtonWrapper>
 				<StyledNavThemeToggler onClick={themeToggler}>
 					Mode
-					<SVG name={isDarkMode ? "moon" : "sunny"} />
+					{isDarkMode ? <SVG name="moon" /> : <SVG name="sunny" />}
 				</StyledNavThemeToggler>
 			</StyledNavButtonWrapper>
 
 			<StyledSidebarList>
 				<NavLinks />
-			</StyledSidebarList>
 
-			<StyledNavDownloadButton
-				href="/"
-				to="installers"
-				offset={-24}
-				duration={420}
-				smooth
-			>
-				<SVG name="download" />
-				See Installers
-			</StyledNavDownloadButton>
+				<StyledScrollToDownload>
+					<ScrollLink
+						href="/"
+						onClick={toggleMenu}
+						to="installers"
+						offset={-24}
+						duration={420}
+						smooth
+					>
+						<SVG name="download" />
+						See Installers
+					</ScrollLink>
+				</StyledScrollToDownload>
+			</StyledSidebarList>
 		</StyledSidebar>
 	) : null;
 };

@@ -29,17 +29,17 @@
 
 <p align="center">
    <a href="https://snapcraft.io/pomatez">
-      <image src="https://snapcraft.io//pomatez/badge.svg" alt="Snapcraft app latest version" />
+      <image src="https://snapcraft.io/pomatez/badge.svg" alt="Pomatez" />
    </a>
    <a href="https://travis-ci.com/roldanjr/pomatez">
-      <image src="https://travis-ci.com/roldanjr/pomatez.svg?branch=master" alt="Travis CI build status" />
+      <image src="https://travis-ci.com/roldanjr/pomatez.svg?branch=master" alt="Build Status" />
    </a>
-   <image src="https://img.shields.io/github/downloads/roldanjr/pomatez/total" alt="Github release total downloads" />
+   <image src="https://img.shields.io/github/downloads/roldanjr/pomatez/total" alt="Github Downloads" />
    <a href="https://github.com/roldanjr/pomatez/releases/latest">
-      <image src="https://img.shields.io/github/v/release/roldanjr/pomatez" alt="App latest version" />
+      <image src="https://img.shields.io/github/v/release/roldanjr/pomatez" alt="Latest Version" />
    </a>
    <a href="https://github.com/roldanjr/pomatez/blob/master/LICENSE">
-      <image src="https://img.shields.io/github/license/roldanjr/pomatez" alt="App license" />
+      <image src="https://img.shields.io/github/license/roldanjr/pomatez" alt="License" />
    </a>
 </p>
 

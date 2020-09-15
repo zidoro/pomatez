@@ -1,39 +1,27 @@
 import React, { useState, useContext, useLayoutEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { Link as ScrollLink } from "react-scroll";
 import Image from "gatsby-image";
 import {
 	StyledLanding,
 	StyledWaterMarkLeft,
 	StyledWaterMarkRight,
-	StyledLandingCTAWrapper,
 	StyledPreviewWrapper,
 	StyledLandingContent,
 	StyledCTADownloader,
 	StyledLandingHeader,
-	StyledLandingCtaWrapper,
+	StyledLandingActionContainer,
+	StyledLandingActionWrapper,
 	StyledGithubLink,
 	StyledPreviewImage,
+	StyledLandingHeading,
+	StyledLandingDescription,
+	StyledWatermarkContainer,
 } from "../styles";
-import { FluidImageProps, MarkDownProps } from "../types";
 import { WINDOWS_INSTALLER, MAC_INSTALLER } from "../config";
 import { OSTypes, detectOS } from "../utils";
 import { ThemeContext } from "../contexts";
+import { LandingQuery } from "../queries";
 import { SVG } from "../components";
-
-export type LandingQueryProps = {
-	workTimePreviewLight: FluidImageProps;
-	workTimePreviewDark: FluidImageProps;
-	shortBreakPreviewLight: FluidImageProps;
-	shortBreakPreviewDark: FluidImageProps;
-	longBreakPreviewLight: FluidImageProps;
-	longBreakPreviewDark: FluidImageProps;
-	configPreviewLight: FluidImageProps;
-	configPreviewDark: FluidImageProps;
-	settingsPreviewLight: FluidImageProps;
-	settingsPreviewDark: FluidImageProps;
-	tasksPreviewLight: FluidImageProps;
-	tasksPreviewDark: FluidImageProps;
-} & MarkDownProps;
 
 const Landing: React.FC = () => {
 	const {
@@ -50,124 +38,7 @@ const Landing: React.FC = () => {
 		settingsPreviewDark,
 		tasksPreviewLight,
 		tasksPreviewDark,
-	} = useStaticQuery<LandingQueryProps>(graphql`
-		{
-			allMarkdownRemark: allMarkdownRemark(
-				filter: { fileAbsolutePath: { regex: "/landing/" } }
-			) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-						}
-					}
-				}
-			}
-			workTimePreviewLight: file(relativePath: { eq: "work-time-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			workTimePreviewDark: file(relativePath: { eq: "work-time-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			shortBreakPreviewLight: file(
-				relativePath: { eq: "short-break-light.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			shortBreakPreviewDark: file(
-				relativePath: { eq: "short-break-dark.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			longBreakPreviewLight: file(
-				relativePath: { eq: "long-break-light.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			longBreakPreviewDark: file(relativePath: { eq: "long-break-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			configPreviewLight: file(relativePath: { eq: "config-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			configPreviewDark: file(relativePath: { eq: "config-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 250, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			settingsPreviewLight: file(relativePath: { eq: "settings-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			settingsPreviewDark: file(relativePath: { eq: "settings-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 220, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			tasksPreviewLight: file(relativePath: { eq: "tasks-light.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			tasksPreviewDark: file(relativePath: { eq: "tasks-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 200, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-		}
-	`);
+	} = LandingQuery();
 
 	const { frontmatter } = allMarkdownRemark.edges[0].node;
 
@@ -183,42 +54,50 @@ const Landing: React.FC = () => {
 		switch (operatingSystem) {
 			case "Windows":
 				return (
-					<StyledCTADownloader as={"a"} href={WINDOWS_INSTALLER}>
-						<SVG name="windows" />
-						for Windows
+					<StyledCTADownloader>
+						<a href={WINDOWS_INSTALLER}>
+							<SVG name="windows" />
+							for Windows
+						</a>
 					</StyledCTADownloader>
 				);
 			case "MacOS":
 				return (
-					<StyledCTADownloader as={"a"} href={MAC_INSTALLER}>
-						<SVG name="apple" />
-						for Mac OS
+					<StyledCTADownloader>
+						<a href={MAC_INSTALLER}>
+							<SVG name="apple" />
+							for Mac OS
+						</a>
 					</StyledCTADownloader>
 				);
 			case "Linux":
 				return (
-					<StyledCTADownloader
-						href="/"
-						to="download-now"
-						offset={-24}
-						duration={420}
-						smooth
-					>
-						<SVG name="tux" />
-						for Linux OS
+					<StyledCTADownloader>
+						<ScrollLink
+							href="/"
+							to="installers"
+							offset={-24}
+							duration={420}
+							smooth
+						>
+							<SVG name="tux" />
+							for Linux OS
+						</ScrollLink>
 					</StyledCTADownloader>
 				);
 			default:
 				return (
-					<StyledCTADownloader
-						href="/"
-						to="download-now"
-						offset={-24}
-						duration={420}
-						smooth
-					>
-						<SVG name="download" />
-						See Installers
+					<StyledCTADownloader>
+						<ScrollLink
+							href="/"
+							to="installers"
+							offset={-24}
+							duration={420}
+							smooth
+						>
+							<SVG name="download" />
+							See Installers
+						</ScrollLink>
 					</StyledCTADownloader>
 				);
 		}
@@ -227,16 +106,20 @@ const Landing: React.FC = () => {
 	return (
 		<StyledLanding id="landing">
 			<StyledLandingContent>
-				<StyledWaterMarkLeft />
-				<StyledWaterMarkRight />
+				<StyledWatermarkContainer>
+					<StyledWaterMarkLeft />
+					<StyledWaterMarkRight />
+				</StyledWatermarkContainer>
 
-				<StyledLandingCTAWrapper>
+				<StyledLandingActionContainer>
 					<StyledLandingHeader>
-						<h1>{frontmatter.title}</h1>
-						<h2>{frontmatter.subTitle}</h2>
+						<StyledLandingHeading>{frontmatter.title}</StyledLandingHeading>
+						<StyledLandingDescription>
+							{frontmatter.subTitle}
+						</StyledLandingDescription>
 					</StyledLandingHeader>
 
-					<StyledLandingCtaWrapper>
+					<StyledLandingActionWrapper>
 						{renderDownloadButton()}
 						<StyledGithubLink
 							as={"a"}
@@ -247,8 +130,8 @@ const Landing: React.FC = () => {
 							<SVG name="github" />
 							GitHub Repo
 						</StyledGithubLink>
-					</StyledLandingCtaWrapper>
-				</StyledLandingCTAWrapper>
+					</StyledLandingActionWrapper>
+				</StyledLandingActionContainer>
 
 				<StyledPreviewWrapper>
 					<StyledPreviewImage>

@@ -1,5 +1,6 @@
-import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import Image from "gatsby-image";
 import {
 	StyledBoosters,
@@ -10,52 +11,28 @@ import {
 	StyledBoosterDescription,
 	StyledCompanyWrapper,
 	StyledCompanyImage,
+	StyledCompanyDescription,
 } from "../styles";
-import { MarkDownProps } from "../types";
 import { Header } from "../components";
+import { BoosterQuery } from "../queries";
 
 type Props = {};
 
 const Boosters: React.FC<Props> = () => {
-	const { allMarkdownRemark } = useStaticQuery<MarkDownProps>(graphql`
-		{
-			allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/boosters/" } }) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-							boosters {
-								heading
-								description
-								link
-								image {
-									childImageSharp {
-										fixed(width: 280, height: 280) {
-											...GatsbyImageSharpFixed_withWebp
-										}
-									}
-								}
-							}
-							headline
-							companies {
-								name
-								logo {
-									childImageSharp {
-										fluid(maxWidth: 225, quality: 100) {
-											...GatsbyImageSharpFluid_withWebp_tracedSVG
-											...GatsbyImageSharpFluidLimitPresentationSize
-										}
-									}
-								}
-							}
-						}
-						html
-					}
-				}
-			}
-		}
-	`);
+	const { allMarkdownRemark } = BoosterQuery();
+
+	const [listRef, listInView] = useInView({ triggerOnce: true });
+
+	const [companyRef, companyInView] = useInView({ triggerOnce: true });
+
+	const listControl = useAnimation();
+
+	const companyControl = useAnimation();
+
+	useEffect(() => {
+		if (listInView) listControl.start("animate");
+		if (companyInView) companyControl.start("animate");
+	}, [listControl, listInView, companyControl, companyInView]);
 
 	const { node } = allMarkdownRemark.edges[0];
 
@@ -64,7 +41,7 @@ const Boosters: React.FC<Props> = () => {
 			<StyledFeatureContent>
 				<Header node={node} />
 
-				<StyledBoosterList>
+				<StyledBoosterList ref={listRef} animate={listControl}>
 					{node.frontmatter.boosters?.map((booster, index) => (
 						<StyledBoosterItem key={index}>
 							<StyledBoosterImage>
@@ -88,8 +65,10 @@ const Boosters: React.FC<Props> = () => {
 					))}
 				</StyledBoosterList>
 
-				<StyledCompanyWrapper>
-					<h6>{node.frontmatter.headline}</h6>
+				<StyledCompanyWrapper ref={companyRef} animate={companyControl}>
+					<StyledCompanyDescription>
+						{node.frontmatter.headline}
+					</StyledCompanyDescription>
 
 					<div>
 						{node.frontmatter.companies?.map((company, index) => (

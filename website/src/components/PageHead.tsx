@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 import { SiteMetaProps, MarkDownProps } from "../types";
-import { APP_VERSION } from "../config";
+import { APP_VERSION, pathPrefix } from "../config";
 
 type QueryProps = SiteMetaProps & MarkDownProps;
 
@@ -55,7 +55,7 @@ export const PageHead: React.FC<Props> = ({
 							frontmatter {
 								screenShot {
 									childImageSharp {
-										resize(width: 1600) {
+										original {
 											src
 											width
 											height
@@ -76,9 +76,11 @@ export const PageHead: React.FC<Props> = ({
 
 	const metaTitle = title || site.siteMetadata.title;
 
-	const socialPreviewLight = screenShot.childImageSharp.resize;
+	const socialPreviewLight = screenShot.childImageSharp.original;
 
 	const metaDescription = description || site.siteMetadata.description;
+
+	const websiteUrl = site.siteMetadata.siteUrl + pathPrefix;
 
 	const getMeta = () => {
 		const defaultMeta: MetaProps = [
@@ -108,7 +110,7 @@ export const PageHead: React.FC<Props> = ({
 			},
 			{
 				property: `og:url`,
-				content: site.siteMetadata.siteUrl,
+				content: websiteUrl,
 			},
 			{
 				name: `twitter:creator`,
@@ -162,7 +164,7 @@ export const PageHead: React.FC<Props> = ({
 		"@type": "SoftwareApplication",
 		name: site.siteMetadata.title,
 		image: site.siteMetadata.siteUrl + socialPreviewLight.src,
-		url: site.siteMetadata.siteUrl,
+		url: websiteUrl,
 		author: {
 			"@type": "Person",
 			name: site.siteMetadata.author,
@@ -170,7 +172,6 @@ export const PageHead: React.FC<Props> = ({
 		applicationCategory: "LifestyleApplication",
 		downloadUrl: "https://github.com/roldanjr/pomatez/releases",
 		operatingSystem: "Windows, Linux, macOS",
-		screenshot: site.siteMetadata.siteUrl + socialPreviewLight.src,
 		softwareVersion: APP_VERSION,
 	};
 
@@ -195,7 +196,7 @@ export const PageHead: React.FC<Props> = ({
 				},
 				{
 					rel: "canonical",
-					href: site.siteMetadata.siteUrl,
+					href: websiteUrl,
 				},
 			]}
 			defer={false}

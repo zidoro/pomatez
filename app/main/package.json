@@ -1,5 +1,5 @@
 {
-	"name": "@pomatez/main",
+	"name": "pomatez",
 	"version": "1.0.0",
 	"private": true,
 	"license": "MIT",
@@ -40,8 +40,14 @@
 			"icon": "./src/assets/logo-dark@2x.png"
 		},
 		"win": {
-			"artifactName": "Pomatez-v${version}-setup.${ext}",
 			"target": [
+				{
+					"target": "portable",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				},
 				{
 					"target": "nsis",
 					"arch": [
@@ -51,6 +57,12 @@
 				}
 			],
 			"icon": "./src/assets/logo-dark.ico"
+		},
+		"portable": {
+			"artifactName": "Pomatez-v${version}-portable.${ext}"
+		},
+		"nsis": {
+			"artifactName": "Pomatez-v${version}-setup.${ext}"
 		},
 		"linux": {
 			"artifactName": "Pomatez-v${version}-linux.${ext}",

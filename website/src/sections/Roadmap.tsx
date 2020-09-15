@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import React, { useContext, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 import Image from "gatsby-image";
 import {
 	StyledRoadmap,
@@ -12,8 +13,8 @@ import {
 	StyledRoadmapImage,
 } from "../styles";
 import { Header } from "../components";
-import { LandingQueryProps } from "./Landing";
 import { ThemeContext } from "../contexts";
+import { RoadmapQuery } from "../queries";
 
 const Roadmap: React.FC = () => {
 	const {
@@ -22,67 +23,19 @@ const Roadmap: React.FC = () => {
 		shortBreakPreviewDark,
 		longBreakPreviewLight,
 		longBreakPreviewDark,
-	} = useStaticQuery<LandingQueryProps>(graphql`
-		{
-			allMarkdownRemark: allMarkdownRemark(
-				filter: { fileAbsolutePath: { regex: "/roadmap/" } }
-			) {
-				edges {
-					node {
-						frontmatter {
-							title
-							subTitle
-							features {
-								heading
-								description
-							}
-						}
-						html
-					}
-				}
-			}
-			shortBreakPreviewLight: file(
-				relativePath: { eq: "short-break-light.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			shortBreakPreviewDark: file(
-				relativePath: { eq: "short-break-dark.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			longBreakPreviewLight: file(
-				relativePath: { eq: "long-break-light.PNG" }
-			) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-			longBreakPreviewDark: file(relativePath: { eq: "long-break-dark.PNG" }) {
-				childImageSharp {
-					fluid(maxWidth: 340, quality: 100) {
-						...GatsbyImageSharpFluid_withWebp
-						...GatsbyImageSharpFluidLimitPresentationSize
-					}
-				}
-			}
-		}
-	`);
+	} = RoadmapQuery();
 
 	const { isDarkMode } = useContext(ThemeContext);
+
+	const [ref, inView] = useInView({ triggerOnce: true });
+
+	const control = useAnimation();
+
+	useEffect(() => {
+		if (inView) {
+			control.start("animate");
+		}
+	}, [control, inView]);
 
 	const { node } = allMarkdownRemark.edges[0];
 
@@ -91,7 +44,7 @@ const Roadmap: React.FC = () => {
 			<StyledRoadmapContent>
 				<Header node={node} />
 
-				<StyledRoadmapContainer>
+				<StyledRoadmapContainer ref={ref} animate={control}>
 					<StyledStickyContainer>
 						<StyledRoadmapImageWrapper>
 							<StyledRoadmapImage>
