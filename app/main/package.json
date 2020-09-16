@@ -1,6 +1,6 @@
 {
 	"name": "pomatez",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"private": true,
 	"license": "MIT",
 	"main": "./build/main.js",
@@ -40,8 +40,14 @@
 			"icon": "./src/assets/logo-dark@2x.png"
 		},
 		"win": {
-			"artifactName": "Pomatez-v${version}-setup.${ext}",
 			"target": [
+				{
+					"target": "portable",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				},
 				{
 					"target": "nsis",
 					"arch": [
@@ -51,6 +57,12 @@
 				}
 			],
 			"icon": "./src/assets/logo-dark.ico"
+		},
+		"portable": {
+			"artifactName": "Pomatez-v${version}-portable.${ext}"
+		},
+		"nsis": {
+			"artifactName": "Pomatez-v${version}-setup.${ext}"
 		},
 		"linux": {
 			"artifactName": "Pomatez-v${version}-linux.${ext}",
@@ -64,7 +76,7 @@
 		}
 	},
 	"dependencies": {
-		"@pomatez/shareables": "^1.0.0",
+		"@pomatez/shareables": "^1.1.0",
 		"electron-log": "^4.2.4",
 		"electron-store": "^6.0.0",
 		"electron-updater": "^4.3.4",
@@ -78,8 +90,8 @@
 		"@types/lodash.debounce": "^4.0.6",
 		"@types/node-notifier": "^6.0.1",
 		"@types/universal-analytics": "^0.4.4",
-		"@types/uuid": "^8.0.1",
-		"electron": "9.2.0",
+		"@types/uuid": "^8.3.0",
+		"electron": "10.1.2",
 		"electron-builder": "^22.8.0"
 	}
 }
