@@ -1,6 +1,6 @@
 const APP_NAME = "Pomatez";
 
-const APP_VERSION = "v1.0.0";
+const APP_VERSION = "v1.1.0";
 
 const INSTALLER = `https://github.com/roldanjr/pomatez/releases/download/${APP_VERSION}/Pomatez-${APP_VERSION}`;
 
