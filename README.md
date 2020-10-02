@@ -166,7 +166,9 @@ Available for Windows, macOS, and Linux.
 
 Download the latest version from the [Releases Page](https://github.com/roldanjr/pomatez/releases/latest) or from the :point_right: [Download Page](https://roldanjr.github.io/pomatez/) .
 
-> For Linux users. If you want to be always updated with latest release, recommended way to install it is using the Snap Store.
+**For Linux users:**
+
+> If you want to be always updated with latest release, recommended way to install it is using the Snap Store.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pomatez)
 
