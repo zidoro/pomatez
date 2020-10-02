@@ -194,10 +194,6 @@ export const PageHead: React.FC<Props> = ({
 					type: "application/xml",
 					href: "/sitemap.xml",
 				},
-				{
-					rel: "canonical",
-					href: websiteUrl,
-				},
 			]}
 			defer={false}
 		>

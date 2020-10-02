@@ -72,6 +72,9 @@
 				"rpm"
 			],
 			"icon": "./src/assets/logo-dark.png",
+			"category": "Utility"
+		},
+		"snap": {
 			"category": "Productivity"
 		}
 	},
