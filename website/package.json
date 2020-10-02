@@ -20,7 +20,7 @@
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
 		"serve": "yarn clean && yarn build && gatsby serve",
 		"cp:sitemap": "cp sitemap.xml public",
-		"predeploy": "yarn clean && yarn build --prefix-paths && yarn cp:sitemap",
+		"predeploy": "yarn build --prefix-paths && yarn cp:sitemap",
 		"deploy": "gh-pages -d public -r https://$GH_TOKEN@github.com/roldanjr/pomatez.git"
 	},
 	"dependencies": {
