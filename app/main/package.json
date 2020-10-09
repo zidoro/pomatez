@@ -37,7 +37,7 @@
 		"mac": {
 			"artifactName": "Pomatez-v${version}-mac.${ext}",
 			"category": "public.app-category.productivity",
-			"icon": "./src/assets/logo-dark@2x.png"
+			"icon": "./build/assets/logo-dark@2x.png"
 		},
 		"win": {
 			"target": [
@@ -56,7 +56,7 @@
 					]
 				}
 			],
-			"icon": "./src/assets/logo-dark.ico"
+			"icon": "./build/assets/logo-dark.ico"
 		},
 		"portable": {
 			"artifactName": "Pomatez-v${version}-portable.${ext}"
@@ -71,7 +71,7 @@
 				"deb",
 				"rpm"
 			],
-			"icon": "./src/assets/logo-dark.png",
+			"icon": "./build/assets/logo-dark.png",
 			"category": "Utility"
 		},
 		"snap": {
