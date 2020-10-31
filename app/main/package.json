@@ -37,7 +37,7 @@
 		"mac": {
 			"artifactName": "Pomatez-v${version}-mac.${ext}",
 			"category": "public.app-category.productivity",
-			"icon": "./build/assets/logo-dark@2x.png"
+			"icon": "./build/assets/icon256x256.png"
 		},
 		"win": {
 			"target": [
@@ -71,11 +71,11 @@
 				"deb",
 				"rpm"
 			],
-			"icon": "./build/assets/logo-dark.png",
+			"icon": "./build/assets/",
 			"category": "Utility"
 		},
 		"snap": {
-			"category": "Productivity"
+			"category": "Utility"
 		}
 	},
 	"dependencies": {
