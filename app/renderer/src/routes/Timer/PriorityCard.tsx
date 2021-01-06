@@ -82,7 +82,7 @@ const PriorityCard: React.FC = () => {
 				if (priorityCard?.description) {
 					return priorityCard?.description.truncate(43);
 				}
-				return "There's no description yet added on this card.";
+				return "";
 			}
 		}
 	};
