@@ -91,8 +91,6 @@
 
 - **Time extender**. Enable user to extend timer if needed. Useful when the user wants to finish the task first before taking up a break.
 
-- **Homebrew installer**. Making the app installable via homebrew (cask) makes it easier for some Mac users to install the app on their machine.
-
 - **Tasks database**. Enable user to save completed tasks into a database. Useful when the user wants to monitor or track previews tasks.
 
 ## :rocket: Boosters
