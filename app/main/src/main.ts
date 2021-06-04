@@ -35,6 +35,7 @@ import { activateUser } from "./helpers/analytics";
 import store from "./store";
 
 import "v8-compile-cache";
+import { FullscreenState, setFullscreenBreakHandler } from "./lifecycleEventHandlers/fullScreenBreak";
 
 const onProduction = app.isPackaged;
 
@@ -61,7 +62,7 @@ let tray: Tray | null = null;
 
 let win: BrowserWindow | null;
 
-let isFullScreen: boolean = false;
+const fullscreenState: FullscreenState = { isFullscreen: false };
 
 function createMainWindow() {
 	win = new BrowserWindow({
@@ -99,7 +100,7 @@ function createMainWindow() {
 					if (win) {
 						const data = await getFromStorage(win, "state");
 						if (data.settings.minimizeToTray) {
-							if (!isFullScreen) {
+							if (!fullscreenState.isFullscreen) {
 								win?.hide();
 								if (tray === null && data.settings.minimizeToTray) {
 									createSystemTray();
@@ -127,7 +128,7 @@ function createMainWindow() {
 						if (!data.settings.closeToTray) {
 							app.exit();
 						} else {
-							if (!isFullScreen) {
+							if (!fullscreenState.isFullscreen) {
 								win?.hide();
 								if (tray === null && data.settings.closeToTray) {
 									createSystemTray();
@@ -277,53 +278,7 @@ ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
 });
 
 ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
-	const { shouldFullscreen, alwaysOnTop } = args;
-
-	if (shouldFullscreen) {
-		win?.show();
-		win?.focus();
-		win?.setAlwaysOnTop(true, "screen-saver");
-		win?.setSkipTaskbar(true);
-		win?.setResizable(true);
-		win?.setFullScreen(true);
-		win?.setVisibleOnAllWorkspaces(true);
-
-		globalShortcut.unregister("Alt+Shift+H");
-
-		if (!win?.isVisible()) {
-			win?.show();
-			win?.focus();
-		}
-
-		isFullScreen = shouldFullscreen;
-
-		tray?.setToolTip("");
-		tray?.setContextMenu(
-			Menu.buildFromTemplate([
-				{
-					label: "Please wait for your break to end.",
-				},
-			])
-		);
-	} else {
-		win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-
-		win?.setSkipTaskbar(false);
-		win?.setFullScreen(false);
-		win?.setResizable(false);
-		win?.setVisibleOnAllWorkspaces(false);
-
-		globalShortcut.register("Alt+Shift+H", () => {
-			win?.hide();
-		});
-
-		if (win?.isFullScreen()) win?.setFullScreen(false);
-
-		isFullScreen = shouldFullscreen;
-
-		tray?.setToolTip(trayTooltip);
-		tray?.setContextMenu(contextMenu);
-	}
+	setFullscreenBreakHandler(args, { tray, trayTooltip, fullscreenState, win, contextMenu});
 });
 
 ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
