@@ -29,11 +29,26 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 			if (forList) {
 				if (inputRef.current) {
 					inputRef.current.focus();
+
+					inputRef.current.onkeypress = (e: KeyboardEvent) => {
+						if (e.keyCode === 10 && inputRef.current) {
+							e.preventDefault();
+							doSubmit(inputRef.current);
+						}
+					};
 				}
 			} else {
 				if (areaRef.current) {
 					areaRef.current.focus();
 					autoSize(areaRef.current);
+
+					areaRef.current.onkeypress = (e: KeyboardEvent) => {
+						if (e.keyCode === 10 && areaRef.current) {
+							e.preventDefault();
+							if (doSubmit(areaRef.current))
+								areaRef.current.style.height = "inherit";
+						}
+					};
 				}
 			}
 		}
@@ -44,40 +59,31 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 			e.preventDefault();
 
 			if (forList) {
-				if (inputRef.current) {
-					const { value } = inputRef.current;
-
-					if (value) {
-						if (onSubmit) {
-							onSubmit(value);
-							inputRef.current.focus();
-
-							if (formRef.current) {
-								formRef.current.reset();
-							}
-						}
-					}
-				}
+				inputRef.current && doSubmit(inputRef.current);
 			} else {
-				if (areaRef.current) {
-					const { value } = areaRef.current;
-
-					if (value) {
-						if (onSubmit) {
-							onSubmit(value);
-							areaRef.current.focus();
-							areaRef.current.style.height = "inherit";
-
-							if (formRef.current) {
-								formRef.current.reset();
-							}
-						}
-					}
+				if (areaRef.current && doSubmit(areaRef.current)) {
+					areaRef.current.style.height = "inherit";
 				}
 			}
 		},
 		[forList, onSubmit]
 	);
+
+	const doSubmit = (ref: HTMLInputElement | HTMLTextAreaElement) => {
+		const { value } = ref;
+		if (!value) return false;
+
+		if (onSubmit) {
+			onSubmit(value);
+			ref.focus();
+
+			if (formRef.current) {
+				formRef.current.reset();
+			}
+		}
+
+		return true;
+	};
 
 	const showFormAction = () => setOpen && setOpen(true);
 
