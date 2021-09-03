@@ -2,6 +2,7 @@ const settings = "[settings]";
 
 export type SettingTypes = {
 	alwaysOnTop: boolean;
+	compactMode: boolean;
 	enableFullscreenBreak: boolean;
 	enableDarkTheme: boolean;
 	enableStrictMode: boolean;
@@ -18,6 +19,7 @@ export type SettingTypes = {
 export const ALWAYS_ON_TOP = `${settings} ALWAYS_ON_TOP`;
 export const ENABLE_DARK_THEME = `${settings} ENABLE_DARK_THEME`;
 
+export const ENABLE_COMPACT_MODE = `${settings} ENABLE_COMPACT_MODE`;
 export const ENABLE_FULLSCREEN_BREAK = `${settings} ENABLE_FULLSCREEN_BREAK`;
 export const ENABLE_STRICT_MODE = `${settings} ENABLE_STRICT_MODE`;
 

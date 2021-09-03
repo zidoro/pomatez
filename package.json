@@ -10,7 +10,7 @@
 		"sync": "lerna bootstrap",
 		"dev:renderer": "lerna run dev:renderer --stream",
 		"dev:main": "lerna run dev:main --stream",
-		"dev:app": "lerna run start --parallel --stream --ignore '@pomatez/website'",
+		"dev:app": "ELECTRON_ENABLE_LOGGING=1 lerna run start --parallel --stream --ignore '@pomatez/website'",
 		"prebuild": "lerna run prepare --stream --ignore '@pomatez/website'",
 		"build": "lerna run build --parallel --stream --ignore '@pomatez/website'",
 		"build:mwl": "yarn build && lerna run build:mwl --stream",

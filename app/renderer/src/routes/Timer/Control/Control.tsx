@@ -1,17 +1,20 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import WarningBell from "assets/audios/warning-bell.wav";
+import { SVG } from "components";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	AppStateTypes,
+	LONG_BREAK,
+	setEnableCompactMode,
 	setPlay,
-	skipTimer,
 	setRound,
 	setTimerType,
-	STAY_FOCUS,
-	SHORT_BREAK,
-	LONG_BREAK,
-	SPECIAL_BREAK,
-	togglenotificationSoundOn,
 	SettingTypes,
+	SHORT_BREAK,
+	skipTimer,
+	SPECIAL_BREAK,
+	STAY_FOCUS,
+	togglenotificationSoundOn,
 } from "store";
 import {
 	StyledControl,
@@ -19,13 +22,10 @@ import {
 	StyledStrictIndicator,
 	StyledStrictSnackbar,
 } from "styles";
-import { SVG } from "components";
-
-import WarningBell from "assets/audios/warning-bell.wav";
-
-import Sessions from "./Sessions";
-import ResetButton from "./ResetButton";
+import CompactModeButton from "./CompactModeButton";
 import PlayButton from "./PlayButton";
+import ResetButton from "./ResetButton";
+import Sessions from "./Sessions";
 import SkipButton from "./SkipButton";
 import VolumeButton from "./VolumeButton";
 
@@ -78,6 +78,10 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 	const onNotifacationSoundCallback = useCallback(() => {
 		dispatch(togglenotificationSoundOn());
 	}, [dispatch]);
+
+	const onToggleCompactCallback = useCallback(() => {
+		dispatch(setEnableCompactMode(!settings.compactMode));
+	}, [dispatch, settings.compactMode]);
 
 	const onSkipAction = useCallback(() => {
 		if (timer.playing && settings.enableStrictMode) {
@@ -139,6 +143,29 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 		return () => clearTimeout(timeout);
 	}, [warn]);
 
+	if (settings.compactMode) {
+		return (
+			<StyledControl className="compact" type={timer.timerType}>
+				<Sessions
+					timerType={timer.timerType}
+					round={timer.round}
+					sessionRounds={config.sessionRounds}
+					onClick={onResetSessionCallback}
+				/>
+				<StyledControlMain>
+					<ResetButton className="compact" onClick={onResetCallback} />
+					<PlayButton
+						compact
+						playing={timer.playing}
+						onClick={onPlayCallback}
+					/>
+					<SkipButton className="compact" onClick={onSkipAction} />
+					<CompactModeButton onClick={onToggleCompactCallback} />
+				</StyledControlMain>
+			</StyledControl>
+		);
+	}
+
 	return (
 		<StyledControl type={timer.timerType}>
 			<Sessions
@@ -158,7 +185,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 				/>
 			</StyledControlMain>
 
-			{settings.enableStrictMode && (
+			{settings.enableStrictMode ? (
 				<StyledStrictIndicator warn={warn}>
 					<SVG name="alert" />
 
@@ -166,6 +193,8 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 						You are currently on <span>Strict Mode!</span>
 					</StyledStrictSnackbar>
 				</StyledStrictIndicator>
+			) : (
+				<CompactModeButton flipped onClick={onToggleCompactCallback} />
 			)}
 		</StyledControl>
 	);

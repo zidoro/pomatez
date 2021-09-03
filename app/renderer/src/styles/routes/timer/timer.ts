@@ -11,6 +11,12 @@ export const StyledTimer = styled.main`
 	grid-template-rows: 1fr;
 	align-items: end;
 
+	&.compact {
+		padding-top: 0;
+		display: flex;
+		align-items: center;
+	}
+
 	animation: enterFromBottom 160ms ease;
 
 	@keyframes enterFromBottom {

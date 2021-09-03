@@ -1,12 +1,16 @@
-import React, { useContext, useCallback } from "react";
 import { CounterContext } from "contexts";
+import React, { useCallback, useContext } from "react";
+import { useSelector } from "react-redux";
+import { AppStateTypes } from "store";
 import { StyledTimer } from "styles";
-
+import Control from "./Control";
 import Counter from "./Counter";
 import PriorityCard from "./PriorityCard";
-import Control from "./Control";
 
 export default () => {
+	const compactMode = useSelector(
+		(state: AppStateTypes) => state.settings.compactMode
+	);
 	const { resetTimerAction } = useContext(CounterContext);
 
 	const onResetCallback = useCallback(() => {
@@ -14,9 +18,9 @@ export default () => {
 	}, [resetTimerAction]);
 
 	return (
-		<StyledTimer>
+		<StyledTimer className={compactMode ? "compact" : ""}>
 			<Counter />
-			<PriorityCard />
+			{compactMode ? null : <PriorityCard />}
 			<Control resetTimerAction={onResetCallback} />
 		</StyledTimer>
 	);
