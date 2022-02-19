@@ -43,7 +43,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 					autoSize(areaRef.current);
 
 					areaRef.current.onkeypress = (e: KeyboardEvent) => {
-						if (e.keyCode === 10 && areaRef.current) {
+						if (e.ctrlKey && e.key === "Enter" && areaRef.current) {
 							e.preventDefault();
 							if (doSubmit(areaRef.current))
 								areaRef.current.style.height = "inherit";
