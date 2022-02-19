@@ -70,6 +70,8 @@ export const StyledHeading = styled(motion.h3).attrs(() => ({
 		top: -2rem;
 		left: 50%;
 		transform: translateX(-50%);
+		max-width: 100%;
+		overflow-x: hidden;
 
 		${media.tabletLg} {
 			font-size: 16rem;

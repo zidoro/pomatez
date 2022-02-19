@@ -15,7 +15,7 @@
 		"dev": "gatsby develop",
 		"prebuild": "yarn clean",
 		"build": "gatsby build",
-		"start": "npm run develop",
+		"start": "npm run dev",
 		"lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
 		"serve": "yarn clean && yarn build && gatsby serve",
