@@ -38,7 +38,7 @@ export const StyledDownloadButtonWrapper = styled(motion.div).attrs(() => ({
 	row-gap: 4rem;
 	grid-template-columns: 1fr 2fr 1fr;
 
-	${media.tabletMd} {
+	${media.tabletLg} {
 		grid-template-columns: 1fr;
 	}
 `;
