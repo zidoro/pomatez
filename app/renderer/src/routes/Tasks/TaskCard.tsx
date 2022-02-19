@@ -47,7 +47,7 @@ const TaskCard: React.FC<Props> = ({
 				autoSize(areaRef.current);
 
 				areaRef.current.onkeypress = (e: KeyboardEvent) => {
-					if (e.keyCode !== 10 || !areaRef.current) return;
+					if (e.key !== "Enter" || !areaRef.current) return;
 					e.preventDefault();
 					if (onSaveCardText && areaRef.current.value) {
 						onSaveCardText(areaRef.current.value);

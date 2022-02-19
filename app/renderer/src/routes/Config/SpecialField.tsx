@@ -156,7 +156,7 @@ const SpecialField: React.FC<Props> = ({
 					}
 				}}
 				onKeyDown={(e) => {
-					if (e.keyCode === 13) {
+					if (e.key === "Enter") {
 						setShowSetter(true);
 					}
 				}}
