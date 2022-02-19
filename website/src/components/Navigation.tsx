@@ -19,7 +19,7 @@ import Logo from "./Logo";
 import SVG from "./SVG";
 
 export const NavLinks: React.FC = () => {
-	const { toggleMenu } = useContextProvider();
+	const { closeMenu } = useContextProvider();
 
 	return (
 		<>
@@ -28,7 +28,7 @@ export const NavLinks: React.FC = () => {
 					<StyledNavLinkItem key={index}>
 						<StyledNavLinkAnchor
 							href="/"
-							onClick={toggleMenu}
+							onClick={closeMenu}
 							to={nav.link}
 							offset={nav.offset}
 							duration={420}
