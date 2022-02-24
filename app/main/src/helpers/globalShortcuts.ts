@@ -1,6 +1,6 @@
 import { globalShortcut } from "electron";
 
-const EXIT_SHORTCUTS = { ESCAPE: "Esc", QUIT: "CommandOrControl+W"};
+const EXIT_SHORTCUTS = { ESCAPE: "Esc", QUIT: "CommandOrControl+W" };
 
 type ShortCut = {
 	key: string;
@@ -13,8 +13,13 @@ export function activateGlobalShortcuts(shortcuts: ShortCut[]) {
 	});
 }
 
-export function activateFullScreenShortcuts(exitFullScreenCallback: () => void) {
-	globalShortcut.registerAll([EXIT_SHORTCUTS.ESCAPE, EXIT_SHORTCUTS.QUIT], exitFullScreenCallback);
+export function activateFullScreenShortcuts(
+	exitFullScreenCallback: () => void
+) {
+	globalShortcut.registerAll(
+		[EXIT_SHORTCUTS.ESCAPE, EXIT_SHORTCUTS.QUIT],
+		exitFullScreenCallback
+	);
 }
 
 export function deactivateFullScreenSchortcuts() {
