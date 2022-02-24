@@ -28,7 +28,7 @@ features:
     description: If enabled, the app will always be on top of other apps running on your Operating System.
 
   - heading: Minimize to tray
-    description: If enabled, minimize action will not minimized the app. Instead, it will be hidden and being send to tray. Useful when you want not to be distracted while using the alt-tab on your machine.
+    description: If enabled, minimize action will not minimize the app. Instead, it will be hidden and sent to tray. Useful when you do not want to be distracted while using the alt-tab on your machine.
 
   - heading: Close to tray
     description: If enabled, close action will not quit the app. Instead, it will be hidden and being send to tray. Useful if you don't want to accidentally quit the app.
