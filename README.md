@@ -175,7 +175,7 @@ Thank you friends! :vulcan_salute:
 
 ## :shield: Privacy
 
-This app has analytics that will track number of users only ([analytics.ts](https://github.com/roldanjr/pomatez/blob/master/packages/main/src/helpers/analytics.ts)).
+This app has analytics that will track number of users only ([analytics.ts](https://github.com/roldanjr/pomatez/blob/master/app/main/src/helpers/analytics.ts)).
 
 ## :newspaper: License
 
