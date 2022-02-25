@@ -12,11 +12,15 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
+            name: linux
             yarn-task: build:linux
           - os: ubuntu-latest
+            name: snap
             yarn-task: build:snap
           - os: macos-latest
-            yarn-task: build:mac
+            name: mac
+            yarn-task: build:
+            name: win
           - os: windows-latest
             yarn-task: build:win
 
@@ -42,6 +46,6 @@ jobs:
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
       - uses: actions/upload-artifact@v2
         with:
-         name: built-app-${{ matrix.os }}
+         name: built-app-${{ matrix.name }}
          path: |
            app/main/dist/*
