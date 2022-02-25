@@ -19,7 +19,7 @@ jobs:
             yarn-task: build:snap
           - os: macos-latest
             name: mac
-            yarn-task: build:win
+            yarn-task: build:mac
           - os: windows-latest
             name: win
             yarn-task: build:win
