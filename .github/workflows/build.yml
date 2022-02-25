@@ -30,15 +30,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-      - name: Cache .yarn/cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('package.json') }}
-          restore-keys: ${{ runner.os }}-gradle
+          cache: 'yarn'
       - name: Install NPM Packages
         run: |
-          yarn install --immutable
+          yarn install --immutable --network-timeout 120000
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
