@@ -1,10 +1,10 @@
-name: Build Test
+name: Test Build
 
 on: [push]
 
 jobs:
   build:
-    name: "Can build for OS"
+    name: "Test Build"
 
     runs-on: ${{ matrix.os }}
 
