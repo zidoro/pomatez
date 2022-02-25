@@ -36,6 +36,8 @@ jobs:
         run: |
           yarn install --immutable
       - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn ${{ matrix.yarn-task }}
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
 
