@@ -33,6 +33,7 @@ import {
 } from "./helpers";
 import { activateUser } from "./helpers/analytics";
 import store from "./store";
+import isDev from "electron-is-dev";
 
 import "v8-compile-cache";
 import { FullscreenState, setFullscreenBreakHandler } from "./lifecycleEventHandlers/fullScreenBreak";
@@ -81,6 +82,9 @@ function createMainWindow() {
 			preload: path.join(__dirname, "preload.js"),
 		},
 	});
+
+	// Open the DevTools.
+	if(isDev) win.webContents.openDevTools({ mode: 'detach' });
 
 	win.loadURL(
 		!onProduction
@@ -201,7 +205,23 @@ if (!onlySingleIntance) {
 		}
 	});
 
-	app.whenReady().then(() => {
+	app.whenReady().then(async () => {
+		if (isDev) {
+			console.log("Installing devtools")
+			const extensions = [
+				"REACT_DEVELOPER_TOOLS",
+				"REDUX_DEVTOOLS"
+			];
+			const installer = await import('electron-devtools-installer');
+			console.log(installer);
+			for (const tool of extensions) {
+				try {
+					await installer.default(installer[tool], true)
+				} catch (e) {
+					console.log(e);
+				}
+			}
+		}
 		createMainWindow();
 
 		if (onProduction) {
