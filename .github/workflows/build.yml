@@ -19,9 +19,9 @@ jobs:
             yarn-task: build:snap
           - os: macos-latest
             name: mac
-            yarn-task: build:
-            name: win
+            yarn-task: build:win
           - os: windows-latest
+            name: win
             yarn-task: build:win
 
     steps:
