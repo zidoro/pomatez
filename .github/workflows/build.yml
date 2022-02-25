@@ -1,0 +1,41 @@
+name: Build Test
+
+on: [push]
+
+jobs:
+  build:
+    name: "Can build for OS"
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            yarn-task: build:linux
+          - os: ubuntu-latest
+            yarn-task: build:snap
+          - os: macos-latest
+            yarn-task: build:mac
+          - os: windows-latest
+            yarn-task: build:win
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Cache .yarn/cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('package.json') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Install NPM Packages
+        run: |
+          yarn install --immutable
+      - name: Build
+        run: yarn ${{ matrix.yarn-task }}
+      # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
+
