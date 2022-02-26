@@ -28,7 +28,7 @@ export const StyledHelpWrapper = styled.a`
 	}
 `;
 
-export const StyledHelpLabel = styled.label`
+export const StyledHelpLabel = styled.span`
 	width: 100%;
 	height: 100%;
 
