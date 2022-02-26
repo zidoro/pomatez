@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/macro";
-import { SHORT_BREAK, LONG_BREAK, SPECIAL_BREAK } from "store";
+import { LONG_BREAK, SHORT_BREAK, SPECIAL_BREAK } from "store";
 import { ProgressSVG } from "assets/icons";
 
 export type ProgressProps = { offset: number; animate: "true" | "false" };
@@ -86,6 +86,15 @@ export const StyledCounterContainer = styled.div<CounterContainerProps>`
     border-radius: 50%;
     border: 6px solid var(--color-border-primary);
   }
+
+	&.compact {
+		padding: 16px;
+		display: flex;
+		flex: 0;
+		&::before {
+			display: none;
+		}
+	}
 `;
 
 export const StyledCounterType = styled.div`
@@ -117,6 +126,13 @@ export const StyledCounterTimer = styled.h3<TimerProps>`
 
 	& > span:first-of-type {
 		justify-self: end;
+	}
+
+	&.compact {
+		font-size: 2.5rem;
+		width: unset;
+		display: flex;
+		gap: 0.25rem;
 	}
 `;
 

@@ -33,3 +33,5 @@ export { ReactComponent as RefreshSVG } from "./refresh.svg";
 export { ReactComponent as AlertSVG } from "./alert.svg";
 
 export { ReactComponent as ChevronDownSVG } from "./chevron-down.svg";
+
+export { ReactComponent as ExpandSVG } from "./expand.svg";

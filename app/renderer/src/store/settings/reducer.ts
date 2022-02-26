@@ -15,10 +15,12 @@ import {
 	MINIMIZE_TO_TRAY,
 	AUTO_START_WORK_TIME,
 	ENABLE_VOICE_ASSISTANCE,
+	ENABLE_COMPACT_MODE,
 } from "./types";
 
 const defaultSettings: SettingTypes = {
 	alwaysOnTop: false,
+	compactMode: false,
 	enableFullscreenBreak: false,
 	enableStrictMode: false,
 	enableDarkTheme: isPreferredDark(),
@@ -52,6 +54,11 @@ export const settingReducer = (
 			return {
 				...state,
 				notificationSoundOn: !state.notificationSoundOn,
+			};
+		case ENABLE_COMPACT_MODE:
+			return {
+				...state,
+				compactMode: Boolean(action.payload),
 			};
 		case ENABLE_FULLSCREEN_BREAK:
 			return {

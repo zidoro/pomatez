@@ -6,6 +6,7 @@ type StoreProps = {
 	userId: string;
 	isDarkMode: boolean;
 	useNativeTitlebar: boolean;
+	compactMode: boolean;
 };
 
 const store = new Store<StoreProps>();

@@ -10,6 +10,7 @@ import {
 	SET_UI_THEME,
 	SET_NATIVE_TITLEBAR,
 	TRAY_ICON_UPDATE,
+	SET_COMPACT_MODE,
 } from "@pomatez/shareables";
 
 import { AppStateTypes, SettingTypes } from "store";
@@ -93,6 +94,14 @@ const ElectronProvider: React.FC = ({ children }) => {
 			});
 		}
 	}, [electron, settings.alwaysOnTop, shouldFullscreen]);
+
+	useEffect(() => {
+		if (isElectron()) {
+			electron.send(SET_COMPACT_MODE, {
+				compactMode: settings.compactMode,
+			});
+		}
+	}, [electron, settings.compactMode]);
 
 	useEffect(() => {
 		if (isElectron()) {

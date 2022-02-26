@@ -5,7 +5,7 @@ import { SVG } from "components";
 
 type Props = {} & React.HTMLProps<HTMLButtonElement>;
 
-const ResetButton: React.FC<Props> = ({ onClick }) => {
+const ResetButton: React.FC<Props> = ({ onClick, className }) => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	const buttonClickAction = useRippleEffect();
@@ -21,7 +21,11 @@ const ResetButton: React.FC<Props> = ({ onClick }) => {
 	);
 
 	return (
-		<StyledResetButton ref={buttonRef} onClick={onResetAction}>
+		<StyledResetButton
+			className={className}
+			ref={buttonRef}
+			onClick={onResetAction}
+		>
 			<SVG name="reset" />
 		</StyledResetButton>
 	);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SVGProps } from "react";
 import {
 	BonfireSVG,
 	ConfigSVG,
@@ -26,9 +26,12 @@ import {
 	ChevronDownSVG,
 	OptionYSVG,
 	AlertSVG,
+	ExpandSVG,
 } from "assets/icons";
 
 export type SVGTypes = {
+	size?: number;
+	style?: SVGProps<SVGElement>["style"];
 	name:
 		| "bonfire"
 		| "headset"
@@ -55,10 +58,11 @@ export type SVGTypes = {
 		| "fast-food"
 		| "refresh"
 		| "alert"
-		| "chevron-down";
+		| "chevron-down"
+		| "expand";
 };
 
-const SVG: React.FC<SVGTypes> = ({ name }) => {
+const SVG: React.FC<SVGTypes> = ({ name, size, style }) => {
 	switch (name) {
 		case "bonfire":
 			return <BonfireSVG />;
@@ -73,9 +77,9 @@ const SVG: React.FC<SVGTypes> = ({ name }) => {
 		case "option-y":
 			return <OptionYSVG />;
 		case "pause":
-			return <PauseSVG />;
+			return <PauseSVG height={size} width={size} />;
 		case "play":
-			return <PlaySVG />;
+			return <PlaySVG height={size} width={size} />;
 		case "progress":
 			return <ProgressSVG />;
 		case "reset":
@@ -112,6 +116,8 @@ const SVG: React.FC<SVGTypes> = ({ name }) => {
 			return <AlertSVG />;
 		case "chevron-down":
 			return <ChevronDownSVG />;
+		case "expand":
+			return <ExpandSVG style={style} />;
 		default:
 			return <TimerSVG />;
 	}
