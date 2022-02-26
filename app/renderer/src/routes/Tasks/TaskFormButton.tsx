@@ -24,21 +24,24 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 
 	const [isOpen, setOpen] = useTargetOutside({ ref: formRef });
 
-	const doSubmit = useCallback((ref: HTMLInputElement | HTMLTextAreaElement) => {
-		const { value } = ref;
-		if (!value) return false;
+	const doSubmit = useCallback(
+		(ref: HTMLInputElement | HTMLTextAreaElement) => {
+			const { value } = ref;
+			if (!value) return false;
 
-		if (onSubmit) {
-			onSubmit(value);
-			ref.focus();
+			if (onSubmit) {
+				onSubmit(value);
+				ref.focus();
 
-			if (formRef.current) {
-				formRef.current.reset();
+				if (formRef.current) {
+					formRef.current.reset();
+				}
 			}
-		}
 
-		return true;
-	}, [onSubmit]);
+			return true;
+		},
+		[onSubmit]
+	);
 
 	useEffect(() => {
 		if (isOpen) {

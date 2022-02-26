@@ -88,7 +88,7 @@ function createMainWindow() {
 	});
 
 	// Open the DevTools.
-	if(isDev) win.webContents.openDevTools({ mode: 'detach' });
+	if (isDev) win.webContents.openDevTools({ mode: "detach" });
 
 	win.loadURL(
 		!onProduction
@@ -211,16 +211,13 @@ if (!onlySingleIntance) {
 
 	app.whenReady().then(async () => {
 		if (isDev) {
-			console.log("Installing devtools")
-			const extensions = [
-				"REACT_DEVELOPER_TOOLS",
-				"REDUX_DEVTOOLS"
-			];
-			const installer = await import('electron-devtools-installer');
+			console.log("Installing devtools");
+			const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];
+			const installer = await import("electron-devtools-installer");
 			console.log(installer);
 			for (const tool of extensions) {
 				try {
-					await installer.default(installer[tool], true)
+					await installer.default(installer[tool], true);
 				} catch (e) {
 					console.log(e);
 				}
