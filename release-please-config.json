@@ -1,24 +1,24 @@
 {
-  "prerelease": true,
-  "packages": {
-    ".": {
-      "release-type": "node"
-    }
-  },
-  "bootstrap-sha": "c79279b136557b39d9d94038a879e681c1065ea1",
-  "changelog-sections": [
-    { "type": "feat", "section": "Features ✨" },
-    { "type": "feature", "section": "Features ✨" },
-    { "type": "fix", "section": "Bug Fixes \uD83D\uDC1B" },
-    { "type": "perf", "section": "Performance Improvements ⚡️" },
-    { "type": "tweak", "section": "Changes to Existing Features \uD83D\uDD27" },
-    { "type": "revert", "section": "Reverts ⏪️" },
-    { "type": "docs", "section": "Documentation", "hidden": true },
-    { "type": "style", "section": "Styles", "hidden": true },
-    { "type": "chore", "section": "Miscellaneous Chores", "hidden": true },
-    { "type": "refactor", "section": "Code Refactoring", "hidden": true },
-    { "type": "test", "section": "Tests", "hidden": true },
-    { "type": "build", "section": "Build System", "hidden": true },
-    { "type": "ci", "section": "Continuous Integration", "hidden": true }
-  ]
+	"prerelease": true,
+	"packages": {
+		".": {
+			"release-type": "node"
+		}
+	},
+	"bootstrap-sha": "c79279b136557b39d9d94038a879e681c1065ea1",
+	"changelog-sections": [
+		{ "type": "feat", "section": "Features ✨" },
+		{ "type": "feature", "section": "Features ✨" },
+		{ "type": "fix", "section": "Bug Fixes \uD83D\uDC1B" },
+		{ "type": "perf", "section": "Performance Improvements ⚡️" },
+		{ "type": "tweak", "section": "Changes to Existing Features \uD83D\uDD27" },
+		{ "type": "revert", "section": "Reverts ⏪️" },
+		{ "type": "docs", "section": "Documentation", "hidden": true },
+		{ "type": "style", "section": "Styles", "hidden": true },
+		{ "type": "chore", "section": "Miscellaneous Chores", "hidden": true },
+		{ "type": "refactor", "section": "Code Refactoring", "hidden": true },
+		{ "type": "test", "section": "Tests", "hidden": true },
+		{ "type": "build", "section": "Build System", "hidden": true },
+		{ "type": "ci", "section": "Continuous Integration", "hidden": true }
+	]
 }
