@@ -43,6 +43,16 @@ export const routes: NavItemTypes[] = [
 	},
 ];
 
+export const compactRoutes: NavItemTypes[] = [
+	{
+		icon: "timer",
+		name: "Timer",
+		exact: false,
+		path: "/",
+		component: Timer,
+	},
+];
+
 export const rangeConfig: ConfigSliderProps[] = [
 	{
 		label: "Stay focus",

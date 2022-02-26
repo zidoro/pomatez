@@ -13,6 +13,7 @@ import {
 	setMinimizeToTray,
 	setCloseToTray,
 	setEnableVoiceAssistance,
+	setEnableCompactMode,
 } from "store";
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import { ThemeContext } from "contexts";
@@ -36,6 +37,14 @@ const FeatureSection: React.FC = () => {
 			onChange: useCallback(() => {
 				dispatch(setAlwaysOnTop(!settings.alwaysOnTop));
 			}, [dispatch, settings.alwaysOnTop]),
+		},
+		{
+			id: "compact-mode",
+			label: "Compact Mode",
+			checked: settings.compactMode,
+			onChange: useCallback(() => {
+				dispatch(setEnableCompactMode(!settings.compactMode));
+			}, [dispatch, settings.compactMode]),
 		},
 		{
 			id: "fullscreen-break",

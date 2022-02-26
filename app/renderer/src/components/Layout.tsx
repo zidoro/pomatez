@@ -77,7 +77,9 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 					timerType={timer.timerType}
 				/>
 			)}
-			<Navigation timerType={timer.timerType} />
+			{settings["compactMode"] ? null : (
+				<Navigation timerType={timer.timerType} />
+			)}
 			{children}
 		</StyledLayout>
 	);

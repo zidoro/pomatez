@@ -14,6 +14,7 @@ import {
 	MINIMIZE_TO_TRAY,
 	AUTO_START_WORK_TIME,
 	ENABLE_VOICE_ASSISTANCE,
+	ENABLE_COMPACT_MODE,
 } from "./types";
 
 export const setAlwaysOnTop = (
@@ -37,6 +38,15 @@ export const setEnableDarkTheme = (
 	return {
 		type: ENABLE_DARK_THEME,
 		payload: enableDarkTheme,
+	};
+};
+
+export const setEnableCompactMode = (
+	enableCompactMode: SettingTypes["compactMode"]
+): SettingActionTypes => {
+	return {
+		type: ENABLE_COMPACT_MODE,
+		payload: enableCompactMode,
 	};
 };
 

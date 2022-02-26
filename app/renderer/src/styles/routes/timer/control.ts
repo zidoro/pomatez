@@ -22,6 +22,11 @@ const ControlButton = css`
 	&:hover {
 		color: currentColor;
 	}
+
+	&.compact {
+		min-width: 2rem;
+		min-height: 2rem;
+	}
 `;
 
 type ControlProps = { type?: TimerTypes["timerType"] };
@@ -50,6 +55,11 @@ export const StyledControl = styled.div<ControlProps>`
 			(p.type === LONG_BREAK && "var(--color-bg-ripple-yellow)") ||
 			(p.type === SPECIAL_BREAK && "var(--color-bg-ripple-yellow)") ||
 			"var(--color-bg-ripple-primary)"};
+	}
+
+	&.compact {
+		height: 100%;
+		padding: 0;
 	}
 `;
 
