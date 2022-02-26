@@ -5,9 +5,15 @@ import { SVG } from "components";
 
 type Props = {
 	playing: boolean;
+	compact?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
-const PlayButton: React.FC<Props> = ({ playing, onClick }) => {
+const PlayButton: React.FC<Props> = ({
+	playing,
+	onClick,
+	className,
+	compact,
+}) => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	const buttonClickAction = useRippleEffect();
@@ -22,9 +28,19 @@ const PlayButton: React.FC<Props> = ({ playing, onClick }) => {
 		[buttonClickAction, onClick]
 	);
 
+	const size = compact ? 36 : 56;
+
 	return (
-		<StyledMainButton ref={buttonRef} onClick={onPlayAction}>
-			{playing ? <SVG name="pause" /> : <SVG name="play" />}
+		<StyledMainButton
+			className={className}
+			ref={buttonRef}
+			onClick={onPlayAction}
+		>
+			{playing ? (
+				<SVG size={size} name="pause" />
+			) : (
+				<SVG size={size} name="play" />
+			)}
 		</StyledMainButton>
 	);
 };

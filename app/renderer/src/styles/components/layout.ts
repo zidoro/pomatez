@@ -14,5 +14,8 @@ export const StyledLayout = styled.div<LayoutProps>`
 	& > main {
 		height: 41.2rem;
 		animation: ${(p) => p.noTransition && "none"};
+		&.compact {
+			height: unset;
+		}
 	}
 `;

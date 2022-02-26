@@ -1,19 +1,16 @@
+import { CounterContext } from "contexts";
+import { useTime } from "hooks";
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
-
-import { CounterContext } from "contexts";
 import { AppStateTypes, SettingTypes } from "store";
-import { useTime } from "hooks";
-
 import {
 	StyledCounterContainer,
-	StyledCounterWrapper,
 	StyledCounterProgress,
+	StyledCounterWrapper,
 } from "styles";
-
-import CounterType from "./CounterType";
 import CounterLabel from "./CounterLabel";
 import CounterTimer from "./CounterTimer";
+import CounterType from "./CounterType";
 
 const Counter: React.FC = () => {
 	const settings: SettingTypes = useSelector(
@@ -27,6 +24,18 @@ const Counter: React.FC = () => {
 	const dashOffset = (duration - count) * (674 / duration);
 
 	const { minutes, seconds } = useTime(count);
+	if (settings.compactMode) {
+		return (
+			<StyledCounterContainer className="compact" fullscreen={shouldFullscreen}>
+				<CounterTimer
+					compact
+					timerType={timerType}
+					minutes={minutes}
+					seconds={seconds}
+				/>
+			</StyledCounterContainer>
+		);
+	}
 
 	return (
 		<StyledCounterContainer fullscreen={shouldFullscreen}>

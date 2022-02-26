@@ -21,6 +21,7 @@ import {
 	SET_SHOW,
 	RELEASED_NOTES_LINK,
 	TRAY_ICON_UPDATE,
+	SET_COMPACT_MODE,
 } from "@pomatez/shareables";
 import {
 	activateGlobalShortcuts,
@@ -36,7 +37,10 @@ import store from "./store";
 import isDev from "electron-is-dev";
 
 import "v8-compile-cache";
-import { FullscreenState, setFullscreenBreakHandler } from "./lifecycleEventHandlers/fullScreenBreak";
+import {
+	FullscreenState,
+	setFullscreenBreakHandler,
+} from "./lifecycleEventHandlers/fullScreenBreak";
 
 const onProduction = app.isPackaged;
 
@@ -69,7 +73,7 @@ function createMainWindow() {
 	win = new BrowserWindow({
 		width: 340,
 		height: getFrameHeight(),
-		resizable: false,
+		resizable: true,
 		maximizable: false,
 		show: false,
 		frame: store.get("useNativeTitlebar"),
@@ -298,7 +302,23 @@ ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
 });
 
 ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
-	setFullscreenBreakHandler(args, { tray, trayTooltip, fullscreenState, win, contextMenu});
+	setFullscreenBreakHandler(args, {
+		tray,
+		trayTooltip,
+		fullscreenState,
+		win,
+		contextMenu,
+	});
+});
+
+ipcMain.on(SET_COMPACT_MODE, (e, args) => {
+	if (args.compactMode) {
+		win?.setMinimumSize(340, 100);
+		win?.setSize(340, 100);
+	} else {
+		win?.setMinimumSize(340, getFrameHeight());
+		win?.setSize(340, getFrameHeight());
+	}
 });
 
 ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
