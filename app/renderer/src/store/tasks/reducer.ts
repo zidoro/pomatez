@@ -211,13 +211,8 @@ const tasksReducer = (state = initialState, action: TasksActionTypes) => {
 			return newState;
 		}
 		case DRAG_LIST: {
-			const {
-				sourceId,
-				destinationId,
-				sourceIndex,
-				destinationIndex,
-				type,
-			} = action.payload;
+			const { sourceId, destinationId, sourceIndex, destinationIndex, type } =
+				action.payload;
 
 			const newState = [...state];
 

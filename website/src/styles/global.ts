@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle<GlobalProps>`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
     font-family: inherit;
     font-size: inherit;
 
@@ -45,9 +45,9 @@ export const GlobalStyle = createGlobalStyle<GlobalProps>`
     font-weight: normal;
     color: var(--cl-body-text);
     background: var(--bg-primary);
-    
-    counter-reset: header;     
-    overflow-x: hidden;     
+
+    counter-reset: header;
+    overflow-x: hidden;
   }
 
   a {

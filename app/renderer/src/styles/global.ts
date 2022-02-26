@@ -17,8 +17,8 @@ export const GlobalStyles = createGlobalStyle<GlobalTypes>`
 		}}
   }
 
-  *, 
-  *::before, 
+  *,
+  *::before,
   *::after {
     margin: 0;
     padding:0;
@@ -55,7 +55,7 @@ export const GlobalStyles = createGlobalStyle<GlobalTypes>`
     font-size: 1.3rem;
     font-weight: 400;
     color: var(--color-body-text);
-    
+
     width: 340px;
     height: max-content;
     border: ${(p) =>
