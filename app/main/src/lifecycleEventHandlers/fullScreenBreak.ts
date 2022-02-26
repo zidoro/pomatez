@@ -1,8 +1,11 @@
-import { activateFullScreenShortcuts, deactivateFullScreenSchortcuts } from "../helpers";
+import {
+	activateFullScreenShortcuts,
+	deactivateFullScreenSchortcuts,
+} from "../helpers";
 import { BrowserWindow, Menu, Tray } from "electron";
 
 export type FullscreenState = {
-	isFullscreen: boolean
+	isFullscreen: boolean;
 };
 
 type FullscreenArgs = {
@@ -11,14 +14,19 @@ type FullscreenArgs = {
 };
 
 type AppArgs = {
-	tray: Tray | null,
-	trayTooltip: string,
-	win: BrowserWindow | null,
-	contextMenu: Menu,
-	fullscreenState: FullscreenState
+	tray: Tray | null;
+	trayTooltip: string;
+	win: BrowserWindow | null;
+	contextMenu: Menu;
+	fullscreenState: FullscreenState;
 };
 
-const setFullScreen = (flag: boolean, alwaysOnTop: boolean, win: BrowserWindow | null, fullscreenState: FullscreenState) => {
+const setFullScreen = (
+	flag: boolean,
+	alwaysOnTop: boolean,
+	win: BrowserWindow | null,
+	fullscreenState: FullscreenState
+) => {
 	win?.show();
 	win?.focus();
 	win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
@@ -36,7 +44,10 @@ const setFullScreen = (flag: boolean, alwaysOnTop: boolean, win: BrowserWindow |
  * @param fullscreenArgs
  * @param appArgs
  */
-export const setFullscreenBreakHandler = (fullscreenArgs: FullscreenArgs, appArgs: AppArgs) => {
+export const setFullscreenBreakHandler = (
+	fullscreenArgs: FullscreenArgs,
+	appArgs: AppArgs
+) => {
 	const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
 	const { tray, trayTooltip, win, contextMenu, fullscreenState } = appArgs;
 

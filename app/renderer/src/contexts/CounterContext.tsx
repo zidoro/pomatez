@@ -108,12 +108,8 @@ const CounterProvider: React.FC = ({ children }) => {
 	useEffect(() => {
 		let interval: number;
 
-		const {
-			firstBreak,
-			secondBreak,
-			thirdBreak,
-			fourthBreak,
-		} = config.specialBreaks;
+		const { firstBreak, secondBreak, thirdBreak, fourthBreak } =
+			config.specialBreaks;
 
 		if (timer.playing) {
 			interval = setInterval(() => {

@@ -15,13 +15,8 @@ import SVG from "./SVG";
 type Props = {};
 
 const Sidebar: React.FC<Props> = () => {
-	const {
-		isOnMobile,
-		isDarkMode,
-		themeToggler,
-		isMenuOpen,
-		toggleMenu,
-	} = useContextProvider();
+	const { isOnMobile, isDarkMode, themeToggler, isMenuOpen, toggleMenu } =
+		useContextProvider();
 
 	useEffect(() => {
 		if (isMenuOpen) {

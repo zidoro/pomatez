@@ -17,9 +17,8 @@ const Counter: React.FC = () => {
 		(state: AppStateTypes) => state.settings
 	);
 
-	const { count, duration, timerType, shouldFullscreen } = useContext(
-		CounterContext
-	);
+	const { count, duration, timerType, shouldFullscreen } =
+		useContext(CounterContext);
 
 	const dashOffset = (duration - count) * (674 / duration);
 

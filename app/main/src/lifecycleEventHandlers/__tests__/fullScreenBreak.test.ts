@@ -2,30 +2,33 @@ import { setFullscreenBreakHandler } from "../fullScreenBreak";
 import { BrowserWindow, Menu, globalShortcut, Tray, app } from "electron";
 import path from "path";
 
-describe('Fullscreen break', () => {
+describe("Fullscreen break", () => {
 	const getWindowSpies = (window: BrowserWindow) => {
 		return {
-			show: jest.spyOn(window, 'show'),
-			focus: jest.spyOn(window, 'focus'),
-			setAlwaysOnTop: jest.spyOn(window, 'setAlwaysOnTop'),
-			setSkipTaskbar: jest.spyOn(window, 'setSkipTaskbar'),
-			setFullScreen: jest.spyOn(window, 'setFullScreen'),
-			setResizable: jest.spyOn(window, 'setResizable'),
-			setVisibleOnAllWorkspaces: jest.spyOn(window, 'setVisibleOnAllWorkspaces'),
+			show: jest.spyOn(window, "show"),
+			focus: jest.spyOn(window, "focus"),
+			setAlwaysOnTop: jest.spyOn(window, "setAlwaysOnTop"),
+			setSkipTaskbar: jest.spyOn(window, "setSkipTaskbar"),
+			setFullScreen: jest.spyOn(window, "setFullScreen"),
+			setResizable: jest.spyOn(window, "setResizable"),
+			setVisibleOnAllWorkspaces: jest.spyOn(
+				window,
+				"setVisibleOnAllWorkspaces"
+			),
 		};
 	};
 
-	it('should enter full screen on break', () => {
+	it("should enter full screen on break", () => {
 		const window = new BrowserWindow();
 		const tray = new Tray(path.join(__dirname, "../../assets/tray-dark.png"));
-		const trayTooltip = 'Mock tray tool tip';
+		const trayTooltip = "Mock tray tool tip";
 		const fullscreenState = { isFullscreen: false };
 
 		// Set spies
 		const windowSpies = getWindowSpies(window);
 		const traySpies = {
-			setToolTip: jest.spyOn(tray, 'setToolTip'),
-			setContextMenu: jest.spyOn(tray, 'setContextMenu'),
+			setToolTip: jest.spyOn(tray, "setToolTip"),
+			setContextMenu: jest.spyOn(tray, "setContextMenu"),
 		};
 		expect(globalShortcut.isRegistered("Esc")).toBe(false);
 		expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(false);
@@ -34,17 +37,20 @@ describe('Fullscreen break', () => {
 			{ shouldFullscreen: true, alwaysOnTop: true },
 			{
 				win: window,
-				contextMenu: Menu.buildFromTemplate([{ label: 'Mock Label'}]),
+				contextMenu: Menu.buildFromTemplate([{ label: "Mock Label" }]),
 				fullscreenState,
 				trayTooltip,
-				tray
+				tray,
 			}
-			);
+		);
 
 		// Verify that window has been setup to fullscreen
 		expect(windowSpies.show).toHaveBeenCalledTimes(1);
 		expect(windowSpies.focus).toHaveBeenCalledTimes(1);
-		expect(windowSpies.setAlwaysOnTop).toHaveBeenCalledWith(true, "screen-saver");
+		expect(windowSpies.setAlwaysOnTop).toHaveBeenCalledWith(
+			true,
+			"screen-saver"
+		);
 		expect(windowSpies.setSkipTaskbar).toHaveBeenCalledWith(true);
 		expect(windowSpies.setFullScreen).toHaveBeenCalledWith(true);
 		expect(windowSpies.setResizable).toHaveBeenCalledWith(true);
@@ -60,19 +66,19 @@ describe('Fullscreen break', () => {
 		expect(traySpies.setContextMenu).toHaveBeenCalledTimes(1);
 	});
 
-	it('should exit full screen on break', () => {
+	it("should exit full screen on break", () => {
 		const window = new BrowserWindow();
 		const tray = new Tray(path.join(__dirname, "../../assets/tray-dark.png"));
-		const trayTooltip = 'Mock tray tool tip';
+		const trayTooltip = "Mock tray tool tip";
 		const fullscreenState = { isFullscreen: true };
 
 		// Set spies
 		const windowSpies = getWindowSpies(window);
 		const traySpies = {
-			setToolTip: jest.spyOn(tray, 'setToolTip'),
-			setContextMenu: jest.spyOn(tray, 'setContextMenu'),
+			setToolTip: jest.spyOn(tray, "setToolTip"),
+			setContextMenu: jest.spyOn(tray, "setContextMenu"),
 		};
-		globalShortcut.registerAll(['Esc', 'CommandOrControl+W'], ()=>{});
+		globalShortcut.registerAll(["Esc", "CommandOrControl+W"], () => {});
 		expect(globalShortcut.isRegistered("Esc")).toBe(true);
 		expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(true);
 
@@ -80,17 +86,20 @@ describe('Fullscreen break', () => {
 			{ shouldFullscreen: false, alwaysOnTop: true },
 			{
 				win: window,
-				contextMenu: Menu.buildFromTemplate([{ label: 'Mock Label'}]),
+				contextMenu: Menu.buildFromTemplate([{ label: "Mock Label" }]),
 				fullscreenState,
 				trayTooltip,
-				tray
+				tray,
 			}
 		);
 
 		// Verify that window has been setup to fullscreen
 		expect(windowSpies.show).toHaveBeenCalledTimes(1);
 		expect(windowSpies.focus).toHaveBeenCalledTimes(1);
-		expect(windowSpies.setAlwaysOnTop).toHaveBeenCalledWith(true, "screen-saver");
+		expect(windowSpies.setAlwaysOnTop).toHaveBeenCalledWith(
+			true,
+			"screen-saver"
+		);
 		expect(windowSpies.setSkipTaskbar).toHaveBeenCalledWith(false);
 		expect(windowSpies.setFullScreen).toHaveBeenCalledWith(false);
 		expect(windowSpies.setResizable).toHaveBeenCalledWith(false);

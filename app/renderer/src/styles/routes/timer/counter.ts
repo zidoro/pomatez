@@ -40,16 +40,16 @@ type CounterContainerProps = {
 };
 
 export const StyledCounterContainer = styled.div<CounterContainerProps>`
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 
-  padding: 2rem;
+	padding: 2rem;
 
-  background-color: var(--color-bg-primary);
+	background-color: var(--color-bg-primary);
 
-  position: relative;
+	position: relative;
 
-  ${(p) =>
+	${(p) =>
 		p.fullscreen &&
 		css`
 			position: fixed !important;
@@ -69,23 +69,23 @@ export const StyledCounterContainer = styled.div<CounterContainerProps>`
 			}
 		`}
 
-  &::before,
+	&::before,
   ${StyledCounterProgress} {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateY(-180deg) rotateZ(-90deg);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotateY(-180deg) rotateZ(-90deg);
 
-    width: 22rem;
-    height: 22rem;
-  }
+		width: 22rem;
+		height: 22rem;
+	}
 
-  &::before {
-    content: "";
+	&::before {
+		content: "";
 
-    border-radius: 50%;
-    border: 6px solid var(--color-border-primary);
-  }
+		border-radius: 50%;
+		border: 6px solid var(--color-border-primary);
+	}
 
 	&.compact {
 		padding: 16px;

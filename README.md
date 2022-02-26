@@ -157,6 +157,11 @@ It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classi
    yarn build:mwl or npm run build:mwl
    ```
 
+## Pre-Commit
+
+If your pr is being rejected due to the pre-commit checks, just download pre-commit using `pip install pre-commit` or via one of the commands [here](https://pre-commit.com/#install).
+Once that is installed just running `pre-commit` should automatically fix the files.
+
 ## :computer: Installation
 
 Available for Windows, macOS, and Linux.
