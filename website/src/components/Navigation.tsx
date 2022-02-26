@@ -50,12 +50,8 @@ export const NavLinks: React.FC = () => {
 };
 
 export const Navigation: React.FC = () => {
-	const {
-		isDarkMode,
-		themeToggler,
-		isMenuOpen,
-		toggleMenu,
-	} = useContextProvider();
+	const { isDarkMode, themeToggler, isMenuOpen, toggleMenu } =
+		useContextProvider();
 
 	return (
 		<StyledNav isMenuOpen={isMenuOpen}>

@@ -35,9 +35,8 @@ const ElectronProvider: React.FC = ({ children }) => {
 		(state: AppStateTypes) => state.settings
 	);
 
-	const { count, duration, timerType, shouldFullscreen } = useContext(
-		CounterContext
-	);
+	const { count, duration, timerType, shouldFullscreen } =
+		useContext(CounterContext);
 	const dashOffset = (duration - count) * (24 / duration);
 
 	const onMinimizeCallback = useCallback(() => {

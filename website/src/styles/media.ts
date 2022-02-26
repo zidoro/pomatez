@@ -36,7 +36,7 @@ const media: MediaSizes = {
 
 Object.keys(media).forEach((key) => {
 	const query = media[key] / 16;
-	media[key] = `@media screen and 
+	media[key] = `@media screen and
                 (max-width: ${query}em)`;
 });
 
