@@ -16,6 +16,10 @@ jobs:
       - name: Install NPM Packages
         run: yarn install --immutable
       - name: Build Website
+        env:
+          PREFIX_PATHS: "true"
+          GOOGLE_VERIFICATION: "tE350sFqE19zPIz-admWd81Y-esA4VplEQYBOwS--L4"
+          GA_TRACKING_ID: "UA-172128342-1"
         run: yarn build:site
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
