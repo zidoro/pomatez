@@ -25,6 +25,7 @@
 		"gen:tts": "lerna run gen:tts --stream",
 		"dev:site": "lerna run dev --stream --scope '@pomatez/website'",
 		"build:site": "lerna run build --stream --scope '@pomatez/website'",
+		"serve:site": "lerna run serve --stream --scope '@pomatez/website'",
 		"deploy:site": "lerna run deploy --stream --scope '@pomatez/website'",
 		"clean:site": "lerna run clean --scope '@pomatez/website'"
 	},
