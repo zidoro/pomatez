@@ -1,5 +1,4 @@
 {
-	"prerelease": true,
 	"packages": {
 		".": {
 			"release-type": "node"
