@@ -60,7 +60,7 @@ const SliderSection: React.FC = () => {
 			label: "Session rounds",
 			valueType: "rounds",
 			minValue: 1,
-			maxValue: 8,
+			maxValue: 10,
 			value: sessionRounds,
 			onMouseUp: useCallback(
 				(e) => dispatch(setSessionRounds(parseInt(e.target.value))),
