@@ -1,9 +1,20 @@
 {
+	"release-type": "node",
 	"packages": {
-		".": {
-			"release-type": "node"
-		}
+		".": {}
 	},
+	"extra-files": [
+		{
+			"type": "json",
+			"path": "app/main/package.json",
+			"jsonpath": "$.version"
+		},
+		{
+			"type": "json",
+			"path": "app/renderer/package.json",
+			"jsonpath": "$.version"
+		}
+	],
 	"bootstrap-sha": "c79279b136557b39d9d94038a879e681c1065ea1",
 	"changelog-sections": [
 		{ "type": "feat", "section": "Features ✨" },
