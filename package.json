@@ -1,6 +1,7 @@
 {
 	"name": "root",
 	"private": true,
+	"version": "1.2.0",
 	"workspaces": [
 		"app/*",
 		"website"
@@ -57,6 +58,5 @@
 		"rollup-plugin-typescript2": "^0.27.2",
 		"typescript": "^3.9.7",
 		"wait-on": "^5.0.0"
-	},
-	"version": "1.2.0"
+	}
 }
