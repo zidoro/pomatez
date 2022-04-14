@@ -1,6 +1,6 @@
 {
 	"name": "pomatez",
-	"version": "1.2.1",
+	"version": "1.2.0",
 	"private": true,
 	"license": "MIT",
 	"main": "./build/main.js",
@@ -100,7 +100,7 @@
 		"@types/uuid": "^8.3.0",
 		"babel-core": "^6.26.3",
 		"babel-jest": "^26.6.3",
-		"electron": "11.5.0",
+		"electron": "10.1.2",
 		"electron-builder": "^22.8.0",
 		"regenerator-runtime": "^0.13.7",
 		"ts-jest": "^26.5.1"
