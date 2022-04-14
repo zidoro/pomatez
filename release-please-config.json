@@ -3,6 +3,7 @@
 	"packages": {
 		".": {}
 	},
+	"draft": true,
 	"extra-files": [
 		{
 			"type": "json",
