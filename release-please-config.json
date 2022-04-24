@@ -1,7 +1,9 @@
 {
 	"release-type": "node",
 	"packages": {
-		".": {}
+		".": {
+			"package-name": ""
+		}
 	},
 	"draft": true,
 	"extra-files": [
