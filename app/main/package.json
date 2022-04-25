@@ -88,7 +88,7 @@
 		"lodash.debounce": "^4.0.8",
 		"node-notifier": "^8.0.0",
 		"universal-analytics": "^0.4.23",
-		"uuid": "^8.3.0",
+		"uuid": "7.0.3",
 		"v8-compile-cache": "^2.1.1"
 	},
 	"devDependencies": {
@@ -97,7 +97,7 @@
 		"@types/lodash.debounce": "^4.0.6",
 		"@types/node-notifier": "^6.0.1",
 		"@types/universal-analytics": "^0.4.4",
-		"@types/uuid": "^8.3.0",
+		"@types/uuid": "7.0.3",
 		"babel-core": "^6.26.3",
 		"babel-jest": "^26.6.3",
 		"electron": "18.1.0",
