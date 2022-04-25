@@ -81,7 +81,6 @@ function createMainWindow() {
 		backgroundColor: store.get("isDarkMode") ? "#141e25" : "#fff",
 		webPreferences: {
 			contextIsolation: true,
-			enableRemoteModule: false,
 			backgroundThrottling: false,
 			preload: path.join(__dirname, "preload.js"),
 		},
