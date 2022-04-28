@@ -46,8 +46,6 @@ export const StyledMarkLogo = styled.img`
 
 	border-radius: 5px;
 	background-color: var(--color-bg-tertiary);
-
-	-webkit-app-region: no-drag;
 `;
 
 export const StyledMarkName = styled.h1<{ type?: string }>`
