@@ -38,7 +38,7 @@
 		"mac": {
 			"artifactName": "Pomatez-v${version}-mac.${ext}",
 			"category": "public.app-category.productivity",
-			"icon": "./build/assets/icon256x256.png"
+			"icon": "./build/assets/logo-dark@2x.png"
 		},
 		"win": {
 			"target": [
