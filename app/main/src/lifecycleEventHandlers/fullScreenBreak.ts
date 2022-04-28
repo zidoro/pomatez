@@ -35,12 +35,12 @@ const setFullScreen = (
 		win?.isFullScreenable()
 	);
 	win?.setFullScreenable(true);
-	win?.show();
-	win?.focus();
 	win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
 	win?.setSkipTaskbar(flag);
 	win?.setFullScreen(flag);
 	win?.setVisibleOnAllWorkspaces(flag);
+	win?.show();
+	win?.focus();
 
 	fullscreenState.isFullscreen = flag;
 };
