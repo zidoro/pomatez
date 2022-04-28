@@ -27,12 +27,19 @@ const setFullScreen = (
 	win: BrowserWindow | null,
 	fullscreenState: FullscreenState
 ) => {
+	console.log(
+		"Fullscreen",
+		win,
+		flag,
+		win?.isFullScreen(),
+		win?.isFullScreenable()
+	);
+	win?.setFullScreenable(true);
 	win?.show();
 	win?.focus();
 	win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
 	win?.setSkipTaskbar(flag);
 	win?.setFullScreen(flag);
-	win?.setResizable(flag);
 	win?.setVisibleOnAllWorkspaces(flag);
 
 	fullscreenState.isFullscreen = flag;
