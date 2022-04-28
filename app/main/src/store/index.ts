@@ -1,5 +1,5 @@
 import Store from "electron-store";
-import { systemPreferences } from "electron";
+import { nativeTheme } from "electron";
 import { isWindow } from "../helpers";
 
 type StoreProps = {
@@ -12,7 +12,7 @@ type StoreProps = {
 const store = new Store<StoreProps>();
 
 if (store.get("isDarkMode") == null) {
-	store.set("isDarkMode", systemPreferences.isDarkMode());
+	store.set("isDarkMode", nativeTheme.shouldUseDarkColors);
 }
 
 if (store.get("useNativeTitlebar") == null) {
