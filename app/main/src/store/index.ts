@@ -16,7 +16,7 @@ if (store.get("isDarkMode") == null) {
 }
 
 if (store.get("useNativeTitlebar") == null) {
-	store.set("useNativeTitlebar", isWindow() ? false : true);
+	store.set("useNativeTitlebar", !isWindow());
 }
 
 export default store;
