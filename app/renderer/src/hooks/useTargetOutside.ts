@@ -5,10 +5,12 @@ interface TargetOutside {
 	eventType?: string;
 }
 
-export const useTargetOutside = ({
-	ref,
-	eventType = "click",
-}: TargetOutside) => {
+/**
+ * If you want to listen to clicks outside the element set eventType to 'click'
+ * @param ref
+ * @param eventType
+ */
+export const useTargetOutside = ({ ref, eventType }: TargetOutside) => {
 	const [state, setState] = useState<any>();
 
 	useLayoutEffect(() => {
@@ -31,11 +33,11 @@ export const useTargetOutside = ({
 		}
 
 		if (state) {
-			document.addEventListener(eventType, outsideTarget);
+			if (eventType) document.addEventListener(eventType, outsideTarget);
 			document.addEventListener("keydown", closeOnEscape);
 		}
 		return () => {
-			document.removeEventListener(eventType, outsideTarget);
+			if (eventType) document.removeEventListener(eventType, outsideTarget);
 			document.removeEventListener("keydown", closeOnEscape);
 		};
 	}, [state, ref, eventType]);
