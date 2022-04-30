@@ -37,14 +37,18 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 					formRef.current.reset();
 				}
 			}
+			setOpen(false);
 
 			return true;
 		},
-		[onSubmit]
+		[onSubmit, setOpen]
 	);
 
 	useEffect(() => {
 		if (isOpen) {
+			if (!forList && formRef.current) {
+				formRef?.current?.scrollIntoView({ block: "center" });
+			}
 			if (forList) {
 				if (inputRef.current) {
 					inputRef.current.focus();
@@ -64,7 +68,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 					areaRef.current.onkeypress = (e: KeyboardEvent) => {
 						if (e.keyCode === 10 && areaRef.current) {
 							e.preventDefault();
-							if (doSubmit(areaRef.current))
+							if (doSubmit(areaRef.current) && areaRef?.current?.style?.height)
 								areaRef.current.style.height = "inherit";
 						}
 					};
