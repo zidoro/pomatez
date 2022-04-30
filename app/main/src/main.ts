@@ -89,6 +89,11 @@ function createMainWindow() {
 	// Open the DevTools.
 	if (isDev) win.webContents.openDevTools({ mode: "detach" });
 
+	win.webContents.setWindowOpenHandler((details) => {
+		shell.openExternal(details.url);
+		return { action: "deny" };
+	});
+
 	win.loadURL(
 		!onProduction
 			? "http://localhost:3000"

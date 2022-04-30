@@ -18,6 +18,7 @@ const MDPreviewer: React.FC<Props> = ({ description, onClick }) => {
 		>
 			<ReactMarkdown
 				escapeHtml={false}
+				linkTarget={"_blank"}
 				source={
 					description ? description : "Add a more detailed description..."
 				}
