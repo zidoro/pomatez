@@ -29,7 +29,6 @@ const setFullScreen = (
 ) => {
 	win?.setFullScreenable(true);
 	win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-	win?.setSkipTaskbar(flag);
 	win?.setFullScreen(flag);
 	win?.setVisibleOnAllWorkspaces(flag);
 	win?.show();
