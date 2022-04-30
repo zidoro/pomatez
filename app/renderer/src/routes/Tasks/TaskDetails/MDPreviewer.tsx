@@ -14,7 +14,13 @@ const MDPreviewer: React.FC<Props> = ({ description, onClick }) => {
 		<StyledDescriptionPreviewer
 			className="md-previewer"
 			hasValue={description != null}
-			onClick={onClick}
+			onClick={(event) => {
+				// Because it doesn't seem to let you reffer to target as HTMLDivElement, only currentElement which is wrong
+				let target: any = event?.target;
+				if (onClick && target?.tagName !== "A") {
+					onClick(event);
+				}
+			}}
 		>
 			<ReactMarkdown
 				escapeHtml={false}
