@@ -73,7 +73,7 @@ function createMainWindow() {
 	win = new BrowserWindow({
 		width: 340,
 		height: getFrameHeight(),
-		resizable: true,
+		resizable: false,
 		maximizable: false,
 		show: false,
 		frame: store.get("useNativeTitlebar"),
