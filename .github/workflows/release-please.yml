@@ -54,8 +54,6 @@ jobs:
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn ${{ matrix.yarn-task }}
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
       - uses: actions/upload-artifact@v2
