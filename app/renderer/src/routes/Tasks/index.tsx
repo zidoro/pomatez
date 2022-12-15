@@ -34,8 +34,8 @@ export default () => {
 				source.index,
 				destination.index,
 				draggableId,
-				type
-			)
+				type,
+			),
 		);
 	};
 

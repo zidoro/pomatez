@@ -20,28 +20,28 @@ const SpecialBreaks: React.FC = () => {
 		(values) => {
 			dispath(setFirstSpecialBreak(values));
 		},
-		[dispath]
+		[dispath],
 	);
 
 	const setSecondSpecialBreakCallback = useCallback(
 		(values) => {
 			dispath(setSecondSpecialBreak(values));
 		},
-		[dispath]
+		[dispath],
 	);
 
 	const setThirdSpecialBreakCallback = useCallback(
 		(values) => {
 			dispath(setThirdSpecialBreak(values));
 		},
-		[dispath]
+		[dispath],
 	);
 
 	const setFourthSpecialBreakCallback = useCallback(
 		(values) => {
 			dispath(setFourthSpecialBreak(values));
 		},
-		[dispath]
+		[dispath],
 	);
 
 	return (

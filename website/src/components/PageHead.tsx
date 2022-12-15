@@ -33,33 +33,29 @@ export const PageHead: React.FC<Props> = ({
 	meta,
 	excludeSchema,
 }) => {
-	const { site, allMarkdownRemark } = useStaticQuery<QueryProps>(
-		graphql`
-			query {
-				site {
-					siteMetadata {
-						title
-						description
-						keywords
-						author
-						siteUrl
-						twitterUsername
-						googleVerification
-					}
+	const { site, allMarkdownRemark } = useStaticQuery<QueryProps>(graphql`
+		query {
+			site {
+				siteMetadata {
+					title
+					description
+					keywords
+					author
+					siteUrl
+					twitterUsername
+					googleVerification
 				}
-				allMarkdownRemark(
-					filter: { fileAbsolutePath: { regex: "/landing/" } }
-				) {
-					edges {
-						node {
-							frontmatter {
-								screenShot {
-									childImageSharp {
-										original {
-											src
-											width
-											height
-										}
+			}
+			allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/landing/" } }) {
+				edges {
+					node {
+						frontmatter {
+							screenShot {
+								childImageSharp {
+									original {
+										src
+										width
+										height
 									}
 								}
 							}
@@ -67,8 +63,8 @@ export const PageHead: React.FC<Props> = ({
 					}
 				}
 			}
-		`
-	);
+		}
+	`);
 
 	const {
 		frontmatter: { screenShot },
@@ -149,7 +145,7 @@ export const PageHead: React.FC<Props> = ({
 							name: "twitter:card",
 							content: "summary",
 						},
-				  ]
+				  ],
 		);
 
 		if (meta) {

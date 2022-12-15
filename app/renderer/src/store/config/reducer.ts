@@ -49,7 +49,7 @@ const initialState: ConfigTypes = config;
 
 export const configReducer = (
 	state = initialState,
-	action: ConfigActionTypes
+	action: ConfigActionTypes,
 ) => {
 	switch (action.type) {
 		case SET_STAY_FOCUS:

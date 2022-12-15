@@ -23,7 +23,7 @@ export const Radio = React.forwardRef<HTMLInputElement, CheckboxProps>(
 				<StyledCheckboxLabel>{label}</StyledCheckboxLabel>
 			</StyledCheckbox>
 		);
-	}
+	},
 );
 
 Radio.defaultProps = {

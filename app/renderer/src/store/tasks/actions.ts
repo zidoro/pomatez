@@ -31,7 +31,7 @@ export const removeTaskList = (listId: TaskTypes["_id"]): TasksActionTypes => {
 };
 
 export const setTaskListPriority = (
-	listId: TaskTypes["_id"]
+	listId: TaskTypes["_id"],
 ): TasksActionTypes => {
 	return {
 		type: SET_TASK_LIST_PRIORITY,
@@ -41,7 +41,7 @@ export const setTaskListPriority = (
 
 export const editTaskTitle = (
 	listId: TaskTypes["_id"],
-	listTitle: TaskTypes["title"]
+	listTitle: TaskTypes["title"],
 ): TasksActionTypes => {
 	return {
 		type: EDIT_TASK_TITLE,
@@ -51,7 +51,7 @@ export const editTaskTitle = (
 
 export const addTaskCard = (
 	listId: TaskTypes["_id"],
-	cardText: CardTypes["text"]
+	cardText: CardTypes["text"],
 ): TasksActionTypes => {
 	return {
 		type: ADD_TASK_CARD,
@@ -62,7 +62,7 @@ export const addTaskCard = (
 export const editTaskCardText = (
 	listId: TaskTypes["_id"],
 	cardId: CardTypes["_id"],
-	cardText: CardTypes["text"]
+	cardText: CardTypes["text"],
 ): TasksActionTypes => {
 	return {
 		type: EDIT_TASK_CARD_TEXT,
@@ -73,7 +73,7 @@ export const editTaskCardText = (
 export const editTaskCard = (
 	listId: TaskTypes["_id"],
 	cardId: CardTypes["_id"],
-	description?: CardTypes["description"]
+	description?: CardTypes["description"],
 ): TasksActionTypes => {
 	return {
 		type: EDIT_TASK_CARD_DESCRIPTION,
@@ -83,7 +83,7 @@ export const editTaskCard = (
 
 export const removeTaskCard = (
 	listId?: TaskTypes["_id"],
-	cardId?: CardTypes["_id"]
+	cardId?: CardTypes["_id"],
 ): TasksActionTypes => {
 	return {
 		type: REMOVE_TASK_CARD,
@@ -93,7 +93,7 @@ export const removeTaskCard = (
 
 export const setTaskCardDone = (
 	listId?: TaskTypes["_id"],
-	cardId?: CardTypes["_id"]
+	cardId?: CardTypes["_id"],
 ): TasksActionTypes => {
 	return {
 		type: SET_TASK_CARD_DONE,
@@ -103,7 +103,7 @@ export const setTaskCardDone = (
 
 export const setTaskCardNotDone = (
 	listId?: TaskTypes["_id"],
-	cardId?: CardTypes["_id"]
+	cardId?: CardTypes["_id"],
 ): TasksActionTypes => {
 	return {
 		type: SET_TASK_CARD_NOT_DONE,
@@ -124,7 +124,7 @@ export const dragList = (
 	sourceIndex: number,
 	destinationIndex: number,
 	draggableId: string,
-	type: string
+	type: string,
 ): TasksActionTypes => {
 	return {
 		type: DRAG_LIST,

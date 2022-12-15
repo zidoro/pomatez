@@ -15,7 +15,7 @@ export const useInput = (initialState: any) => {
 			}
 			setValue(value);
 		},
-		[]
+		[],
 	);
 
 	return { value, setValue, getValueCallback };

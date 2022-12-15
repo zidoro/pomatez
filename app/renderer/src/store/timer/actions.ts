@@ -15,7 +15,7 @@ export const setPlay = (playing: TimerTypes["playing"]): TimerActionTypes => {
 };
 
 export const setTimerType = (
-	timerType: TimerTypes["timerType"]
+	timerType: TimerTypes["timerType"],
 ): TimerActionTypes => {
 	return {
 		type: SET_TIMER_TYPE,
@@ -31,7 +31,7 @@ export const setRound = (round: TimerTypes["round"]): TimerActionTypes => {
 };
 
 export const skipTimer = (
-	timerType: TimerTypes["timerType"]
+	timerType: TimerTypes["timerType"],
 ): TimerActionTypes => {
 	return {
 		type: SKIP_TIMER,

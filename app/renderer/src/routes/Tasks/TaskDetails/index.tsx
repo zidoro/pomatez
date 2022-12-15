@@ -88,7 +88,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 		const onEditCardText = useCallback(() => {
 			if (cardTextAreaRef.current && cardTextAreaRef.current.value) {
 				dispatch(
-					editTaskCardText(listId, cardId, cardTextAreaRef.current.value)
+					editTaskCardText(listId, cardId, cardTextAreaRef.current.value),
 				);
 			}
 		}, [dispatch, cardId, listId]);
@@ -99,7 +99,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 				dispatch(editTaskCard(listId, cardId, description));
 				setEditingDescription(false);
 			},
-			[dispatch, cardId, description, listId]
+			[dispatch, cardId, description, listId],
 		);
 
 		const onCardDeleteAction = useCallback(() => {
@@ -112,7 +112,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 
 		const showPreviewCallback = useCallback(
 			(e) => setShowPreview(e.currentTarget.checked),
-			[]
+			[],
 		);
 
 		const setTaskCardDoneCallback = useCallback(
@@ -123,22 +123,22 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 					dispatch(setTaskCardNotDone(listId, card?._id));
 				}
 			},
-			[dispatch, listId, card]
+			[dispatch, listId, card],
 		);
 
 		const editDescriptionCallback = useCallback(
 			() => setEditingDescription(true),
-			[]
+			[],
 		);
 
 		const dontEditDescriptionCallback = useCallback(
 			() => setEditingDescription(false),
-			[]
+			[],
 		);
 
 		const setDescriptionCallback = useCallback(
 			(e) => setDescription(e.target.value),
-			[]
+			[],
 		);
 
 		useEffect(() => {
@@ -225,7 +225,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 				</StyledDeleteButton>
 			</StyledDetailContainer>
 		);
-	}
+	},
 );
 
 export default TaskDetails;

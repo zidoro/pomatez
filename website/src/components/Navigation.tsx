@@ -43,7 +43,7 @@ export const NavLinks: React.FC = () => {
 							{nav.label}
 						</a>
 					</StyledNavLinkItem>
-				)
+				),
 			)}
 		</>
 	);

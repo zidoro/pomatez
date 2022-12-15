@@ -97,7 +97,7 @@ function createMainWindow() {
 	win.loadURL(
 		!onProduction
 			? "http://localhost:3000"
-			: `file://${path.join(__dirname, "index.html")}`
+			: `file://${path.join(__dirname, "index.html")}`,
 	);
 
 	win.once("ready-to-show", () => {
@@ -125,8 +125,8 @@ function createMainWindow() {
 				}
 			},
 			1000,
-			{ leading: true }
-		)
+			{ leading: true },
+		),
 	);
 
 	win.on(
@@ -153,8 +153,8 @@ function createMainWindow() {
 				}
 			},
 			1000,
-			{ leading: true }
-		)
+			{ leading: true },
+		),
 	);
 
 	win.on("closed", () => {
@@ -271,7 +271,7 @@ if (!onlySingleIntance) {
 						if (!err) {
 							shell.openExternal(RELEASED_NOTES_LINK);
 						}
-					}
+					},
 				);
 			},
 			onUpdateDownloaded: (info) => {
@@ -290,7 +290,7 @@ if (!onlySingleIntance) {
 								autoUpdater.quitAndInstall();
 							}
 						}
-					}
+					},
 				);
 			},
 		});

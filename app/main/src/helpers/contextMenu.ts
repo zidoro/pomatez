@@ -25,7 +25,7 @@ export const createContextMenu = (win: BrowserWindow) => {
 					click: () => {
 						win?.webContents.replaceMisspelling(suggestion);
 					},
-				})
+				}),
 			);
 		}
 
@@ -35,10 +35,10 @@ export const createContextMenu = (win: BrowserWindow) => {
 					label: "Add to dictionary",
 					click: () => {
 						win?.webContents.session.addWordToSpellCheckerDictionary(
-							props.misspelledWord
+							props.misspelledWord,
 						);
 					},
-				})
+				}),
 			);
 		}
 
