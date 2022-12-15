@@ -24,8 +24,8 @@ const ControlButton = css`
 	}
 
 	&.compact {
-		min-width: 2rem;
-		min-height: 2rem;
+		min-width: 1.6rem;
+		min-height: 1.6rem;
 	}
 `;
 
@@ -131,12 +131,13 @@ export const StyledSessions = styled.p`
 	}
 `;
 
-export const StyledControlMain = styled.div`
+export const StyledControlMain = styled.div<{ compact?: boolean }>`
 	display: grid;
 	align-items: center;
 	align-content: center;
 	grid-auto-flow: column;
 	column-gap: 1rem;
+	margin-right: ${(p) => (p.compact ? 0 : "-1rem")};
 `;
 
 export const StyledResetButton = styled.button`
@@ -145,6 +146,11 @@ export const StyledResetButton = styled.button`
 
 export const StyledMainButton = styled.button`
 	${ControlButton};
+`;
+
+export const StyledCompactButton = styled.button<{ compact?: boolean }>`
+	${ControlButton}
+	padding-right: ${(p) => (p.compact ? "1.6rem" : 0)};
 `;
 
 export const StyledSkipButton = styled.button`

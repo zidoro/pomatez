@@ -1,11 +1,18 @@
 import { SVG } from "components";
+import { CounterContext } from "contexts";
 import { useRippleEffect } from "hooks";
 import React, { useCallback, useRef } from "react";
-import { StyledMainButton } from "styles";
+import { useSelector } from "react-redux";
+import { AppStateTypes, SettingTypes } from "store";
+import { StyledCompactButton } from "styles";
 
 type Props = { flipped?: boolean } & React.HTMLProps<HTMLButtonElement>;
 
 const CompactModeButton: React.FC<Props> = ({ onClick, flipped }) => {
+	const { compactMode }: SettingTypes = useSelector(
+		(state: AppStateTypes) => state.settings
+	);
+
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	const buttonClickAction = useRippleEffect();
@@ -17,16 +24,20 @@ const CompactModeButton: React.FC<Props> = ({ onClick, flipped }) => {
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick],
+		[buttonClickAction, onClick]
 	);
 
 	return (
-		<StyledMainButton ref={buttonRef} onClick={onClickAction}>
+		<StyledCompactButton
+			ref={buttonRef}
+			onClick={onClickAction}
+			compact={compactMode}
+		>
 			<SVG
 				name="expand"
 				style={flipped ? { transform: "rotate(180deg)" } : {}}
 			/>
-		</StyledMainButton>
+		</StyledCompactButton>
 	);
 };
 
