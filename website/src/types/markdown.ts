@@ -1,57 +1,57 @@
 import { FixedImageProps, FluidImageProps } from "./image";
 
 type FeatureList = {
-	heading: string;
-	description: string;
+  heading: string;
+  description: string;
 };
 
 type BoosterList = {
-	heading: string;
-	description: string;
-	link: string;
-	image: FixedImageProps;
+  heading: string;
+  description: string;
+  link: string;
+  image: FixedImageProps;
 };
 
 type StepList = {
-	heading: string;
-	description: string;
+  heading: string;
+  description: string;
 };
 
 type Image = {
-	childImageSharp: {
-		original: {
-			src: string;
-			width: number;
-			height: number;
-		};
-	};
+  childImageSharp: {
+    original: {
+      src: string;
+      width: number;
+      height: number;
+    };
+  };
 };
 
 type CompanyList = {
-	name: string;
-	logo: FluidImageProps;
+  name: string;
+  logo: FluidImageProps;
 };
 
 export type Frontmatter = {
-	title: string;
-	subTitle?: string;
-	features?: FeatureList[];
-	boosters?: BoosterList[];
-	stepList?: StepList[];
-	headline?: string;
-	companies?: CompanyList[];
-	screenShot: Image;
+  title: string;
+  subTitle?: string;
+  features?: FeatureList[];
+  boosters?: BoosterList[];
+  stepList?: StepList[];
+  headline?: string;
+  companies?: CompanyList[];
+  screenShot: Image;
 };
 
 export type Edges = {
-	node: {
-		frontmatter: Frontmatter;
-		html: string;
-	};
+  node: {
+    frontmatter: Frontmatter;
+    html: string;
+  };
 };
 
 export type MarkDownProps = {
-	allMarkdownRemark: {
-		edges: Edges[];
-	};
+  allMarkdownRemark: {
+    edges: Edges[];
+  };
 };

@@ -2,23 +2,25 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { SectionStyle, SectionContentStyle } from "../mixins";
 import {
-	StyledFeatureList,
-	StyledFeatureItem,
-	StyledFeatureContainer,
-	StyledFeaturedImageWrapper,
-	StyledFeaturedImage,
+  StyledFeatureList,
+  StyledFeatureItem,
+  StyledFeatureContainer,
+  StyledFeaturedImageWrapper,
+  StyledFeaturedImage,
 } from "./features";
 import { stagger } from "../animate";
 
 export const StyledRoadmap = styled.section`
-	${SectionStyle}
+  ${SectionStyle}
 `;
 
 export const StyledRoadmapContent = styled.div`
-	${SectionContentStyle};
+  ${SectionContentStyle};
 `;
 
-export const StyledRoadmapImageWrapper = styled(StyledFeaturedImageWrapper)``;
+export const StyledRoadmapImageWrapper = styled(
+  StyledFeaturedImageWrapper
+)``;
 
 export const StyledRoadmapImage = styled(StyledFeaturedImage)``;
 

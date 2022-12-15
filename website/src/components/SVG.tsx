@@ -13,42 +13,42 @@ import ArrowBackSVG from "../assets/icons/arrow-back.svg";
 import { useIsBrowser } from "../hooks/useIsBrowser";
 
 type Props = {
-	name?: string;
+  name?: string;
 };
 
 export const SVG: React.FC<Props> = ({ name }) => {
-	const isBrowser = useIsBrowser();
+  const isBrowser = useIsBrowser();
 
-	if (isBrowser) {
-		switch (name) {
-			case "pomatez":
-				return <PomatezSVG />;
-			case "download":
-				return <DownloadSVG />;
-			case "sunny":
-				return <SunnySVG />;
-			case "moon":
-				return <MoonSVG />;
-			case "github":
-				return <GithubSVG />;
-			case "windows":
-				return <WindowSVG />;
-			case "apple":
-				return <AppleSVG />;
-			case "linux":
-				return <LinuxSVG />;
-			case "snap-store":
-				return <SnapStoreSVG />;
-			case "tux":
-				return <TuxSVG />;
-			case "arrow-back":
-				return <ArrowBackSVG />;
-			default:
-				return <PomatezSVG />;
-		}
-	}
+  if (isBrowser) {
+    switch (name) {
+      case "pomatez":
+        return <PomatezSVG />;
+      case "download":
+        return <DownloadSVG />;
+      case "sunny":
+        return <SunnySVG />;
+      case "moon":
+        return <MoonSVG />;
+      case "github":
+        return <GithubSVG />;
+      case "windows":
+        return <WindowSVG />;
+      case "apple":
+        return <AppleSVG />;
+      case "linux":
+        return <LinuxSVG />;
+      case "snap-store":
+        return <SnapStoreSVG />;
+      case "tux":
+        return <TuxSVG />;
+      case "arrow-back":
+        return <ArrowBackSVG />;
+      default:
+        return <PomatezSVG />;
+    }
+  }
 
-	return null;
+  return null;
 };
 
 export default React.memo(SVG);

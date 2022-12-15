@@ -1,13 +1,13 @@
 import React, { useContext, useCallback } from "react";
 import { TimerTypes } from "store";
 import {
-	StyledTitlebar,
-	StyledWindowActions,
-	StyledCloseButton,
-	StyledMinimizeButton,
-	StyledMarkWrapper,
-	StyledMarkLogo,
-	StyledMarkName,
+  StyledTitlebar,
+  StyledWindowActions,
+  StyledCloseButton,
+  StyledMinimizeButton,
+  StyledMarkWrapper,
+  StyledMarkLogo,
+  StyledMarkName,
 } from "styles";
 import { ElectronContext } from "contexts";
 import { APP_NAME } from "config";
@@ -22,41 +22,43 @@ import appIconLongBreak from "assets/logos/tray-lb.png";
 import appIconLongBreakDark from "assets/logos/tray-dark-lb.png";
 
 type Props = {
-	darkMode: boolean;
-	timerType?: TimerTypes["timerType"];
+  darkMode: boolean;
+  timerType?: TimerTypes["timerType"];
 };
 
 const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
-	const { onMinimizeCallback, onExitCallback } = useContext(ElectronContext);
+  const { onMinimizeCallback, onExitCallback } = useContext(
+    ElectronContext
+  );
 
-	const getAppIcon = useCallback(() => {
-		switch (timerType) {
-			case "STAY_FOCUS":
-				return darkMode ? appIconDark : appIcon;
-			case "SHORT_BREAK":
-				return darkMode ? appIconShortBreakDark : appIconShortBreak;
-			case "LONG_BREAK":
-				return darkMode ? appIconLongBreakDark : appIconLongBreak;
-			default:
-				return darkMode ? appIconLongBreakDark : appIconLongBreak;
-		}
-	}, [darkMode, timerType]);
+  const getAppIcon = useCallback(() => {
+    switch (timerType) {
+      case "STAY_FOCUS":
+        return darkMode ? appIconDark : appIcon;
+      case "SHORT_BREAK":
+        return darkMode ? appIconShortBreakDark : appIconShortBreak;
+      case "LONG_BREAK":
+        return darkMode ? appIconLongBreakDark : appIconLongBreak;
+      default:
+        return darkMode ? appIconLongBreakDark : appIconLongBreak;
+    }
+  }, [darkMode, timerType]);
 
-	return (
-		<StyledTitlebar>
-			<StyledMarkWrapper>
-				<StyledMarkLogo src={getAppIcon()} />
-				<StyledMarkName>
-					{APP_NAME} {Json.version && <span>v{Json.version}</span>}
-				</StyledMarkName>
-			</StyledMarkWrapper>
+  return (
+    <StyledTitlebar>
+      <StyledMarkWrapper>
+        <StyledMarkLogo src={getAppIcon()} />
+        <StyledMarkName>
+          {APP_NAME} {Json.version && <span>v{Json.version}</span>}
+        </StyledMarkName>
+      </StyledMarkWrapper>
 
-			<StyledWindowActions>
-				<StyledMinimizeButton onClick={onMinimizeCallback} />
-				<StyledCloseButton onClick={onExitCallback} />
-			</StyledWindowActions>
-		</StyledTitlebar>
-	);
+      <StyledWindowActions>
+        <StyledMinimizeButton onClick={onMinimizeCallback} />
+        <StyledCloseButton onClick={onExitCallback} />
+      </StyledWindowActions>
+    </StyledTitlebar>
+  );
 };
 
 export default React.memo(Titlebar);

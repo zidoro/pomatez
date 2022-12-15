@@ -4,3 +4,5 @@
 *yarn.lock
 *public/
 *build/
+
+*.cache/
