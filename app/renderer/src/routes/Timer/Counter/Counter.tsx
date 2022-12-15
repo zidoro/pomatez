@@ -14,24 +14,47 @@ import CounterType from "./CounterType";
 
 const Counter: React.FC = () => {
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings,
+		(state: AppStateTypes) => state.settings
 	);
 
-	const { count, duration, timerType, shouldFullscreen } =
-		useContext(CounterContext);
+	const { count, duration, timerType, shouldFullscreen } = useContext(
+		CounterContext
+	);
 
 	const dashOffset = (duration - count) * (674 / duration);
 
 	const { minutes, seconds } = useTime(count);
+
 	if (settings.compactMode) {
 		return (
 			<StyledCounterContainer className="compact" fullscreen={shouldFullscreen}>
-				<CounterTimer
-					compact
-					timerType={timerType}
-					minutes={minutes}
-					seconds={seconds}
-				/>
+				{shouldFullscreen ? (
+					<>
+						<StyledCounterProgress
+							offset={dashOffset}
+							type={timerType}
+							animate={settings.enableProgressAnimation ? "true" : "false"}
+						/>
+						<StyledCounterWrapper>
+							<CounterType timerType={timerType} />
+							<CounterTimer
+								compact
+								fullscreen={shouldFullscreen}
+								timerType={timerType}
+								minutes={minutes}
+								seconds={seconds}
+							/>
+							<CounterLabel timerType={timerType} />
+						</StyledCounterWrapper>
+					</>
+				) : (
+					<CounterTimer
+						compact
+						timerType={timerType}
+						minutes={minutes}
+						seconds={seconds}
+					/>
+				)}
 			</StyledCounterContainer>
 		);
 	}
