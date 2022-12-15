@@ -21,6 +21,7 @@ import {
 	StyledControlMain,
 	StyledStrictIndicator,
 	StyledStrictSnackbar,
+	StyledControlSpacer,
 } from "styles";
 import CompactModeButton from "./CompactModeButton";
 import PlayButton from "./PlayButton";
@@ -152,6 +153,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 					sessionRounds={config.sessionRounds}
 					onClick={onResetSessionCallback}
 				/>
+				<StyledControlSpacer className="test" />
 				<StyledControlMain>
 					<ResetButton className="compact" onClick={onResetCallback} />
 					<PlayButton
@@ -160,8 +162,9 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 						onClick={onPlayCallback}
 					/>
 					<SkipButton className="compact" onClick={onSkipAction} />
-					<CompactModeButton onClick={onToggleCompactCallback} />
 				</StyledControlMain>
+				<StyledControlSpacer className="test" />
+				<CompactModeButton onClick={onToggleCompactCallback} />
 			</StyledControl>
 		);
 	}
@@ -175,6 +178,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 				onClick={onResetSessionCallback}
 			/>
 
+			<StyledControlSpacer />
 			<StyledControlMain>
 				<ResetButton onClick={onResetCallback} />
 				<PlayButton playing={timer.playing} onClick={onPlayCallback} />
@@ -185,6 +189,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 				/>
 			</StyledControlMain>
 
+			<StyledControlSpacer />
 			{settings.enableStrictMode ? (
 				<StyledStrictIndicator warn={warn}>
 					<SVG name="alert" />

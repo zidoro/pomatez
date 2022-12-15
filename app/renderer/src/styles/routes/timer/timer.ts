@@ -5,6 +5,8 @@ export const StyledTimer = styled.main`
 	width: 100%;
 	height: 100%;
 
+	flex: 1 1;
+
 	padding-top: 1.2rem;
 
 	display: grid;

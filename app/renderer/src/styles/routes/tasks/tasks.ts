@@ -6,6 +6,7 @@ import { StyledScrollbar } from "styles/mixins";
 export const StyledTaskMain = styled.main`
 	position: relative;
 	overflow: hidden;
+	flex: 1 1;
 `;
 
 export const StyledTaskContainer = styled.div`
