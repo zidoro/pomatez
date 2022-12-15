@@ -59,14 +59,14 @@ const TaskCard: React.FC<Props> = ({
 	}, [editing, text, onSaveCardText, setEditing]);
 
 	const onEditCardAction = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
 		e.stopPropagation();
 		setEditing(true);
 	};
 
 	const onDeleteCardAction = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
 		e.stopPropagation();
 		if (onDeleteCard) {
@@ -75,7 +75,7 @@ const TaskCard: React.FC<Props> = ({
 	};
 
 	const onSaveCardAction = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
 		e.stopPropagation();
 

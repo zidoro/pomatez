@@ -17,7 +17,7 @@ const CompactModeButton: React.FC<Props> = ({ onClick, flipped }) => {
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick]
+		[buttonClickAction, onClick],
 	);
 
 	return (

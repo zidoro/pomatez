@@ -42,7 +42,7 @@ const initialState: SettingTypes = settings;
 
 export const settingReducer = (
 	state = initialState,
-	action: SettingActionTypes
+	action: SettingActionTypes,
 ) => {
 	switch (action.type) {
 		case ALWAYS_ON_TOP:

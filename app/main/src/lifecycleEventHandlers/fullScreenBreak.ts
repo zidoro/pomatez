@@ -25,7 +25,7 @@ const setFullScreen = (
 	flag: boolean,
 	alwaysOnTop: boolean,
 	win: BrowserWindow | null,
-	fullscreenState: FullscreenState
+	fullscreenState: FullscreenState,
 ) => {
 	win?.setFullScreenable(true);
 	win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
@@ -45,7 +45,7 @@ const setFullScreen = (
  */
 export const setFullscreenBreakHandler = (
 	fullscreenArgs: FullscreenArgs,
-	appArgs: AppArgs
+	appArgs: AppArgs,
 ) => {
 	const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
 	const { tray, trayTooltip, win, contextMenu, fullscreenState } = appArgs;
@@ -63,7 +63,7 @@ export const setFullscreenBreakHandler = (
 				{
 					label: "Please wait for your break to end.",
 				},
-			])
+			]),
 		);
 	} else {
 		setFullScreen(false, alwaysOnTop, win, fullscreenState);

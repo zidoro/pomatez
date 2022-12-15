@@ -6,12 +6,12 @@ type OptionProps = {
 
 export const useNotification = (
 	constantOptions?: OptionProps,
-	notify?: boolean
+	notify?: boolean,
 ) => {
 	return function (
 		title: string,
 		options: NotificationOptions,
-		audioSrc?: string
+		audioSrc?: string,
 	) {
 		const defaultOptions: NotificationOptions = {
 			...constantOptions,

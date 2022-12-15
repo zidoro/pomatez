@@ -95,7 +95,7 @@ const SpecialField: React.FC<Props> = ({
 				setTimeout(() => setSuccess(false), 2000);
 			}
 		},
-		[onFieldSubmit, values]
+		[onFieldSubmit, values],
 	);
 
 	const onClear = useCallback(
@@ -114,7 +114,7 @@ const SpecialField: React.FC<Props> = ({
 				setTimeout(() => setSuccess(false), 2000);
 			}
 		},
-		[onFieldSubmit, disabled]
+		[onFieldSubmit, disabled],
 	);
 
 	useEffect(() => {

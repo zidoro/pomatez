@@ -25,7 +25,7 @@ const PlayButton: React.FC<Props> = ({
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick]
+		[buttonClickAction, onClick],
 	);
 
 	const size = compact ? 36 : 56;

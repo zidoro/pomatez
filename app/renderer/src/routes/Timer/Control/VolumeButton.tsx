@@ -19,7 +19,7 @@ const VolumeButton: React.FC<Props> = ({ soundOn, onClick }) => {
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick]
+		[buttonClickAction, onClick],
 	);
 
 	return (

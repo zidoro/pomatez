@@ -133,7 +133,7 @@ const tasksReducer = (state = initialState, action: TasksActionTypes) => {
 			const newState = state.map((list) => {
 				if (list._id === action.payload.listId) {
 					const newCards = list.cards.filter(
-						(card) => card._id !== action.payload.cardId
+						(card) => card._id !== action.payload.cardId,
 					);
 					return { ...list, cards: newCards };
 				}
@@ -259,5 +259,5 @@ const tasksReducer = (state = initialState, action: TasksActionTypes) => {
 };
 
 export const undoableTasksReducer = undoable<TaskTypes[], TasksActionTypes>(
-	tasksReducer as any
+	tasksReducer as any,
 );

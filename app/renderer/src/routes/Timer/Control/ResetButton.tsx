@@ -17,7 +17,7 @@ const ResetButton: React.FC<Props> = ({ onClick, className }) => {
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick]
+		[buttonClickAction, onClick],
 	);
 
 	return (

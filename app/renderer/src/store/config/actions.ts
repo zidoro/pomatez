@@ -14,7 +14,7 @@ import {
 } from "./types";
 
 export const setStayFocus = (
-	stayFocus: ConfigTypes["stayFocus"]
+	stayFocus: ConfigTypes["stayFocus"],
 ): ConfigActionTypes => {
 	return {
 		type: SET_STAY_FOCUS,
@@ -23,7 +23,7 @@ export const setStayFocus = (
 };
 
 export const setShorBreak = (
-	shortBreak: ConfigTypes["shortBreak"]
+	shortBreak: ConfigTypes["shortBreak"],
 ): ConfigActionTypes => {
 	return {
 		type: SET_SHORT_BREAK,
@@ -32,7 +32,7 @@ export const setShorBreak = (
 };
 
 export const setLongBreak = (
-	longBreak: ConfigTypes["longBreak"]
+	longBreak: ConfigTypes["longBreak"],
 ): ConfigActionTypes => {
 	return {
 		type: SET_LONG_BREAK,
@@ -41,7 +41,7 @@ export const setLongBreak = (
 };
 
 export const setSessionRounds = (
-	sessionRounds: ConfigTypes["sessionRounds"]
+	sessionRounds: ConfigTypes["sessionRounds"],
 ): ConfigActionTypes => {
 	return {
 		type: SET_SESSION_ROUNDS,
@@ -54,7 +54,7 @@ export const restoreDefaultConfig = () => ({
 });
 
 export const setFirstSpecialBreak = (
-	specialBreak: SpecialBreakTypes
+	specialBreak: SpecialBreakTypes,
 ): ConfigActionTypes => {
 	return {
 		type: SET_FIRST_SPECIAL_BREAK,
@@ -63,7 +63,7 @@ export const setFirstSpecialBreak = (
 };
 
 export const setSecondSpecialBreak = (
-	specialBreak: SpecialBreakTypes
+	specialBreak: SpecialBreakTypes,
 ): ConfigActionTypes => {
 	return {
 		type: SET_SECOND_SPECIAL_BREAK,
@@ -72,7 +72,7 @@ export const setSecondSpecialBreak = (
 };
 
 export const setThirdSpecialBreak = (
-	specialBreak: SpecialBreakTypes
+	specialBreak: SpecialBreakTypes,
 ): ConfigActionTypes => {
 	return {
 		type: SET_THIRD_SPECIAL_BREAK,
@@ -81,7 +81,7 @@ export const setThirdSpecialBreak = (
 };
 
 export const setFourthSpecialBreak = (
-	specialBreak: SpecialBreakTypes
+	specialBreak: SpecialBreakTypes,
 ): ConfigActionTypes => {
 	return {
 		type: SET_FOUTH_SPECIAL_BREAK,

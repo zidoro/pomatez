@@ -13,7 +13,7 @@ describe("Fullscreen break", () => {
 			setResizable: jest.spyOn(window, "setResizable"),
 			setVisibleOnAllWorkspaces: jest.spyOn(
 				window,
-				"setVisibleOnAllWorkspaces"
+				"setVisibleOnAllWorkspaces",
 			),
 		};
 	};
@@ -41,7 +41,7 @@ describe("Fullscreen break", () => {
 				fullscreenState,
 				trayTooltip,
 				tray,
-			}
+			},
 		);
 
 		// Verify that window has been setup to fullscreen
@@ -49,7 +49,7 @@ describe("Fullscreen break", () => {
 		expect(windowSpies.focus).toHaveBeenCalledTimes(1);
 		expect(windowSpies.setAlwaysOnTop).toHaveBeenCalledWith(
 			true,
-			"screen-saver"
+			"screen-saver",
 		);
 		expect(windowSpies.setSkipTaskbar).toHaveBeenCalledWith(true);
 		expect(windowSpies.setFullScreen).toHaveBeenCalledWith(true);
@@ -90,7 +90,7 @@ describe("Fullscreen break", () => {
 				fullscreenState,
 				trayTooltip,
 				tray,
-			}
+			},
 		);
 
 		// Verify that window has been setup to fullscreen
@@ -98,7 +98,7 @@ describe("Fullscreen break", () => {
 		expect(windowSpies.focus).toHaveBeenCalledTimes(1);
 		expect(windowSpies.setAlwaysOnTop).toHaveBeenCalledWith(
 			true,
-			"screen-saver"
+			"screen-saver",
 		);
 		expect(windowSpies.setSkipTaskbar).toHaveBeenCalledWith(false);
 		expect(windowSpies.setFullScreen).toHaveBeenCalledWith(false);

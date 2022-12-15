@@ -47,7 +47,7 @@ const CounterProvider: React.FC = ({ children }) => {
 	}));
 
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const { preventSleeping, allowSleeping } = useStayAwake();
@@ -57,7 +57,7 @@ const CounterProvider: React.FC = ({ children }) => {
 			icon: notificationIcon,
 			mute: !settings.notificationSoundOn,
 		},
-		settings.notificationProperty !== "none"
+		settings.notificationProperty !== "none",
 	);
 
 	const [shouldFullscreen, setShouldFullscreen] = useState(false);
@@ -129,7 +129,7 @@ const CounterProvider: React.FC = ({ children }) => {
 										isEqualToOne(firstBreak.duration) ? "minute" : "minutes"
 									} special break.`,
 								},
-								specialBreakStartedWav
+								specialBreakStartedWav,
 							);
 							break;
 						case secondBreak.fromTime:
@@ -144,7 +144,7 @@ const CounterProvider: React.FC = ({ children }) => {
 										isEqualToOne(secondBreak.duration) ? "minute" : "minutes"
 									} special break.`,
 								},
-								specialBreakStartedWav
+								specialBreakStartedWav,
 							);
 							break;
 						case thirdBreak.fromTime:
@@ -157,7 +157,7 @@ const CounterProvider: React.FC = ({ children }) => {
 										isEqualToOne(thirdBreak.duration) ? "minute" : "minutes"
 									} special break.`,
 								},
-								specialBreakStartedWav
+								specialBreakStartedWav,
 							);
 							break;
 						case fourthBreak.fromTime:
@@ -172,7 +172,7 @@ const CounterProvider: React.FC = ({ children }) => {
 										isEqualToOne(fourthBreak.duration) ? "minute" : "minutes"
 									} special break.`,
 								},
-								specialBreakStartedWav
+								specialBreakStartedWav,
 							);
 							break;
 						default:
@@ -236,26 +236,26 @@ const CounterProvider: React.FC = ({ children }) => {
 					notification(
 						"60 seconds left.",
 						{ body: "Please prepare yourself to stay focused again." },
-						settings.enableVoiceAssistance && sixtySecondsLeftWav
+						settings.enableVoiceAssistance && sixtySecondsLeftWav,
 					);
 				} else if (timer.timerType === LONG_BREAK) {
 					notification(
 						"60 seconds left.",
 						{ body: "Please prepare yourself to stay focused again." },
-						settings.enableVoiceAssistance && sixtySecondsLeftWav
+						settings.enableVoiceAssistance && sixtySecondsLeftWav,
 					);
 				} else if (timer.timerType === SPECIAL_BREAK) {
 					notification(
 						"60 seconds left.",
 						{ body: "Please prepare yourself to stay focused again." },
-						settings.enableVoiceAssistance && sixtySecondsLeftWav
+						settings.enableVoiceAssistance && sixtySecondsLeftWav,
 					);
 				}
 			} else if (count === 31 && timer.timerType === STAY_FOCUS) {
 				notification(
 					"30 seconds left.",
 					{ body: "Please pause all media playing if there's one." },
-					settings.enableVoiceAssistance && thirtySecondsLeftWav
+					settings.enableVoiceAssistance && thirtySecondsLeftWav,
 				);
 			}
 		}
@@ -272,7 +272,7 @@ const CounterProvider: React.FC = ({ children }) => {
 										isEqualToOne(config.shortBreak) ? "minute" : "minutes"
 									} short break.`,
 								},
-								settings.enableVoiceAssistance && focusFinishedWav
+								settings.enableVoiceAssistance && focusFinishedWav,
 							);
 
 							dispatch(setTimerType("SHORT_BREAK"));
@@ -286,7 +286,7 @@ const CounterProvider: React.FC = ({ children }) => {
 										isEqualToOne(config.longBreak) ? "minute" : "minutes"
 									} long break.`,
 								},
-								settings.enableVoiceAssistance && sessionCompletedWav
+								settings.enableVoiceAssistance && sessionCompletedWav,
 							);
 
 							dispatch(setTimerType("LONG_BREAK"));
@@ -303,7 +303,7 @@ const CounterProvider: React.FC = ({ children }) => {
 									isEqualToOne(config.stayFocus) ? "minute" : "minutes"
 								}.`,
 							},
-							settings.enableVoiceAssistance && breakFinishedWav
+							settings.enableVoiceAssistance && breakFinishedWav,
 						);
 
 						dispatch(setTimerType("STAY_FOCUS"));
@@ -324,7 +324,7 @@ const CounterProvider: React.FC = ({ children }) => {
 									isEqualToOne(config.stayFocus) ? "minute" : "minutes"
 								}.`,
 							},
-							settings.enableVoiceAssistance && breakFinishedWav
+							settings.enableVoiceAssistance && breakFinishedWav,
 						);
 
 						dispatch(setTimerType("STAY_FOCUS"));
@@ -345,7 +345,7 @@ const CounterProvider: React.FC = ({ children }) => {
 									isEqualToOne(config.stayFocus) ? "minute" : "minutes"
 								}.`,
 							},
-							settings.enableVoiceAssistance && breakFinishedWav
+							settings.enableVoiceAssistance && breakFinishedWav,
 						);
 
 						dispatch(setTimerType("STAY_FOCUS"));

@@ -34,7 +34,7 @@ store.subscribe(
 			settings: store.getState().settings,
 			tasks: store.getState().tasks.present,
 		});
-	}, 1000)
+	}, 1000),
 );
 
 export default store;

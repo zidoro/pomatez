@@ -7,7 +7,7 @@ declare global {
 			recieve: (channel: string, response: Function) => void;
 			openExternal: (
 				url: string,
-				options?: Electron.OpenExternalOptions
+				options?: Electron.OpenExternalOptions,
 			) => Promise<void>;
 		};
 	}
