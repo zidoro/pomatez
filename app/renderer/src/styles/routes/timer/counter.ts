@@ -94,7 +94,7 @@ export const StyledCounterContainer = styled.div<CounterContainerProps>`
 		display: flex;
 		flex: 0;
 		&::before {
-			display: none;
+			display: ${(p) => (p.fullscreen ? "auto" : "none")} ;
 		}
 	}
 `;
@@ -105,7 +105,7 @@ export const StyledCounterType = styled.div`
 	padding-bottom: 0.8rem;
 `;
 
-type TimerProps = { type?: string };
+type TimerProps = { type?: string } & CounterContainerProps;
 
 export const StyledCounterTimer = styled.h3<TimerProps>`
 	font-size: 4rem;
@@ -131,7 +131,7 @@ export const StyledCounterTimer = styled.h3<TimerProps>`
 	}
 
 	&.compact {
-		font-size: 2.5rem;
+		font-size: ${(p) => (p.fullscreen ? "4rem" : "2.5rem")};
 		width: unset;
 		display: flex;
 		gap: 0.25rem;

@@ -7,6 +7,7 @@ type Props = {
 	minutes: string;
 	seconds: string;
 	compact?: boolean;
+	fullscreen?: boolean;
 };
 
 const CounterTimer: React.FC<Props> = ({
@@ -14,9 +15,14 @@ const CounterTimer: React.FC<Props> = ({
 	minutes,
 	seconds,
 	compact,
+	fullscreen,
 }) => {
 	return (
-		<StyledCounterTimer className={compact ? "compact" : ""} type={timerType}>
+		<StyledCounterTimer
+			type={timerType}
+			className={compact ? "compact" : ""}
+			fullscreen={fullscreen}
+		>
 			<span>{minutes}</span>
 			<span>:</span>
 			<span>{seconds}</span>

@@ -43,7 +43,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 	}));
 
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings,
+		(state: AppStateTypes) => state.settings
 	);
 
 	const dispatch = useDispatch();
@@ -154,7 +154,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 					onClick={onResetSessionCallback}
 				/>
 				<StyledControlSpacer className="test" />
-				<StyledControlMain>
+				<StyledControlMain compact={settings.compactMode}>
 					<ResetButton className="compact" onClick={onResetCallback} />
 					<PlayButton
 						compact
