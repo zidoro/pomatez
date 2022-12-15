@@ -1,19 +1,19 @@
 const settings = "[settings]";
 
 export type SettingTypes = {
-	alwaysOnTop: boolean;
-	compactMode: boolean;
-	enableFullscreenBreak: boolean;
-	enableDarkTheme: boolean;
-	enableStrictMode: boolean;
-	enableProgressAnimation: boolean;
-	enableVoiceAssistance: boolean;
-	useNativeTitlebar: boolean;
-	notificationSoundOn: boolean;
-	closeToTray: boolean;
-	minimizeToTray: boolean;
-	autoStartWorkTime: boolean;
-	notificationProperty: "none" | "normal" | "extra";
+  alwaysOnTop: boolean;
+  compactMode: boolean;
+  enableFullscreenBreak: boolean;
+  enableDarkTheme: boolean;
+  enableStrictMode: boolean;
+  enableProgressAnimation: boolean;
+  enableVoiceAssistance: boolean;
+  useNativeTitlebar: boolean;
+  notificationSoundOn: boolean;
+  closeToTray: boolean;
+  minimizeToTray: boolean;
+  autoStartWorkTime: boolean;
+  notificationProperty: "none" | "normal" | "extra";
 };
 
 export const ALWAYS_ON_TOP = `${settings} ALWAYS_ON_TOP`;
@@ -39,6 +39,6 @@ export const AUTO_START_WORK_TIME = `${settings} AUTO_START_WORK_TIME`;
 export const RESTORE_DEFAULT_SETTINGS = `${settings} RESTORE_DEFAULT_SETTINGS`;
 
 export type SettingActionTypes = {
-	type: string;
-	payload: any;
+  type: string;
+  payload: any;
 };

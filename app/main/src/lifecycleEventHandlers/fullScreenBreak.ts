@@ -1,40 +1,40 @@
 import {
-	activateFullScreenShortcuts,
-	deactivateFullScreenSchortcuts,
+  activateFullScreenShortcuts,
+  deactivateFullScreenSchortcuts,
 } from "../helpers";
 import { BrowserWindow, Menu, Tray } from "electron";
 
 export type FullscreenState = {
-	isFullscreen: boolean;
+  isFullscreen: boolean;
 };
 
 type FullscreenArgs = {
-	shouldFullscreen: boolean;
-	alwaysOnTop: boolean;
+  shouldFullscreen: boolean;
+  alwaysOnTop: boolean;
 };
 
 type AppArgs = {
-	tray: Tray | null;
-	trayTooltip: string;
-	win: BrowserWindow | null;
-	contextMenu: Menu;
-	fullscreenState: FullscreenState;
+  tray: Tray | null;
+  trayTooltip: string;
+  win: BrowserWindow | null;
+  contextMenu: Menu;
+  fullscreenState: FullscreenState;
 };
 
 const setFullScreen = (
-	flag: boolean,
-	alwaysOnTop: boolean,
-	win: BrowserWindow | null,
-	fullscreenState: FullscreenState
+  flag: boolean,
+  alwaysOnTop: boolean,
+  win: BrowserWindow | null,
+  fullscreenState: FullscreenState
 ) => {
-	win?.setFullScreenable(true);
-	win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-	win?.setFullScreen(flag);
-	win?.setVisibleOnAllWorkspaces(flag);
-	win?.show();
-	win?.focus();
+  win?.setFullScreenable(true);
+  win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+  win?.setFullScreen(flag);
+  win?.setVisibleOnAllWorkspaces(flag);
+  win?.show();
+  win?.focus();
 
-	fullscreenState.isFullscreen = flag;
+  fullscreenState.isFullscreen = flag;
 };
 
 /**
@@ -44,30 +44,36 @@ const setFullScreen = (
  * @param appArgs
  */
 export const setFullscreenBreakHandler = (
-	fullscreenArgs: FullscreenArgs,
-	appArgs: AppArgs
+  fullscreenArgs: FullscreenArgs,
+  appArgs: AppArgs
 ) => {
-	const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
-	const { tray, trayTooltip, win, contextMenu, fullscreenState } = appArgs;
+  const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
+  const {
+    tray,
+    trayTooltip,
+    win,
+    contextMenu,
+    fullscreenState,
+  } = appArgs;
 
-	if (shouldFullscreen) {
-		setFullScreen(true, alwaysOnTop, win, fullscreenState);
+  if (shouldFullscreen) {
+    setFullScreen(true, alwaysOnTop, win, fullscreenState);
 
-		activateFullScreenShortcuts(() => {});
+    activateFullScreenShortcuts(() => {});
 
-		tray?.setToolTip("");
-		tray?.setContextMenu(
-			Menu.buildFromTemplate([
-				{
-					label: "Please wait for your break to end.",
-				},
-			])
-		);
-	} else {
-		setFullScreen(false, alwaysOnTop, win, fullscreenState);
+    tray?.setToolTip("");
+    tray?.setContextMenu(
+      Menu.buildFromTemplate([
+        {
+          label: "Please wait for your break to end.",
+        },
+      ])
+    );
+  } else {
+    setFullScreen(false, alwaysOnTop, win, fullscreenState);
 
-		deactivateFullScreenSchortcuts();
-		tray?.setToolTip(trayTooltip);
-		tray?.setContextMenu(contextMenu);
-	}
+    deactivateFullScreenSchortcuts();
+    tray?.setToolTip(trayTooltip);
+    tray?.setContextMenu(contextMenu);
+  }
 };
