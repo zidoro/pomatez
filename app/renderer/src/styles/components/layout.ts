@@ -4,7 +4,7 @@ type LayoutProps = { noTransition?: boolean };
 
 export const StyledLayout = styled.div<LayoutProps>`
 	width: 100%;
-	height: max-content;
+	height: 100%;
 
 	display: flex;
 	flex-direction: column;

@@ -50,6 +50,10 @@ export const GlobalStyles = createGlobalStyle<GlobalTypes>`
 
     background-color: var(--color-bg-primary);
   }
+   
+  #app {
+    height: 100%;
+  }
 
   body {
     font-size: 1.3rem;

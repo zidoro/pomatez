@@ -31,15 +31,19 @@ const ControlButton = css`
 
 type ControlProps = { type?: TimerTypes["timerType"] };
 
+export const StyledControlSpacer = styled.div<ControlProps>`
+	flex: 1 0;
+`;
+
 export const StyledControl = styled.div<ControlProps>`
 	width: 100%;
 	height: 9.2rem;
 
 	padding: 0.8rem 1.6rem;
 
-	display: grid;
+	display: flex;
 	align-items: center;
-	justify-items: start;
+	justify-content: center;
 	grid-template-columns: 72px max-content 1fr;
 	column-gap: 1rem;
 
