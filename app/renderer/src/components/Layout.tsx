@@ -26,7 +26,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 	const timer = useSelector((state: AppStateTypes) => state.timer);
 
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const { toggleThemeAction } = useContext(ThemeContext);
@@ -44,7 +44,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 				if (toggleThemeAction) toggleThemeAction();
 			}
 		},
-		[toggleThemeAction]
+		[toggleThemeAction],
 	);
 
 	useEffect(() => {

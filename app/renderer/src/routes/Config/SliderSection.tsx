@@ -17,7 +17,7 @@ const SliderSection: React.FC = () => {
 			shortBreak: config.shortBreak,
 			longBreak: config.longBreak,
 			sessionRounds: config.sessionRounds,
-		})
+		}),
 	);
 
 	const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const SliderSection: React.FC = () => {
 			value: stayFocus,
 			onMouseUp: useCallback(
 				(e) => dispatch(setStayFocus(parseInt(e.target.value))),
-				[dispatch]
+				[dispatch],
 			),
 		},
 		{
@@ -42,7 +42,7 @@ const SliderSection: React.FC = () => {
 			value: shortBreak,
 			onMouseUp: useCallback(
 				(e) => dispatch(setShorBreak(parseInt(e.target.value))),
-				[dispatch]
+				[dispatch],
 			),
 		},
 		{
@@ -53,7 +53,7 @@ const SliderSection: React.FC = () => {
 			value: longBreak,
 			onMouseUp: useCallback(
 				(e) => dispatch(setLongBreak(parseInt(e.target.value))),
-				[dispatch]
+				[dispatch],
 			),
 		},
 		{
@@ -64,7 +64,7 @@ const SliderSection: React.FC = () => {
 			value: sessionRounds,
 			onMouseUp: useCallback(
 				(e) => dispatch(setSessionRounds(parseInt(e.target.value))),
-				[dispatch]
+				[dispatch],
 			),
 		},
 	];
@@ -82,7 +82,7 @@ const SliderSection: React.FC = () => {
 						onMouseUp={onMouseUp}
 						key={index}
 					/>
-				)
+				),
 			)}
 		</StyledConfigSliderSection>
 	);

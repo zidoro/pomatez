@@ -15,7 +15,7 @@ const ThemeContext = React.createContext<ThemeProps>({
 
 const ThemeProvider: React.FC = ({ children }) => {
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const dispatch = useDispatch();

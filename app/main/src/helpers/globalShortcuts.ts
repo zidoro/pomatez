@@ -14,11 +14,11 @@ export function activateGlobalShortcuts(shortcuts: ShortCut[]) {
 }
 
 export function activateFullScreenShortcuts(
-	exitFullScreenCallback: () => void
+	exitFullScreenCallback: () => void,
 ) {
 	globalShortcut.registerAll(
 		[EXIT_SHORTCUTS.ESCAPE, EXIT_SHORTCUTS.QUIT],
-		exitFullScreenCallback
+		exitFullScreenCallback,
 	);
 }
 

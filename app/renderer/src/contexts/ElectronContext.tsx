@@ -32,7 +32,7 @@ const ElectronProvider: React.FC = ({ children }) => {
 	const timer = useSelector((state: AppStateTypes) => state.timer);
 
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const { count, duration, timerType, shouldFullscreen } =
@@ -127,7 +127,7 @@ const ElectronProvider: React.FC = ({ children }) => {
 			canvas.height = 16;
 
 			let svgXML = encodeSvg(
-				<TraySVG timerType={timerType} dashOffset={dashOffset} />
+				<TraySVG timerType={timerType} dashOffset={dashOffset} />,
 			);
 
 			const img = new Image();

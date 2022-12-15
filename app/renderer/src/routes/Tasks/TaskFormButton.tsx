@@ -41,7 +41,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 
 			return true;
 		},
-		[onSubmit, setOpen]
+		[onSubmit, setOpen],
 	);
 
 	useEffect(() => {
@@ -89,7 +89,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 				}
 			}
 		},
-		[forList, doSubmit]
+		[forList, doSubmit],
 	);
 
 	const showFormAction = () => setOpen && setOpen(true);

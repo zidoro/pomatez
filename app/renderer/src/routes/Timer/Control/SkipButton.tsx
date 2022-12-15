@@ -17,7 +17,7 @@ const SkipButton: React.FC<Props> = ({ onClick }) => {
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick]
+		[buttonClickAction, onClick],
 	);
 
 	return (

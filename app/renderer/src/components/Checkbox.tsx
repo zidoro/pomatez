@@ -22,7 +22,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 				<StyledCheckboxLabel>{label}</StyledCheckboxLabel>
 			</StyledCheckbox>
 		);
-	}
+	},
 );
 
 export default React.memo(Checkbox);

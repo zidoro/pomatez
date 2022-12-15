@@ -15,7 +15,7 @@ const initialState: TimerTypes = {
 
 export const timerReducer = (
 	state = initialState,
-	action: TimerActionTypes
+	action: TimerActionTypes,
 ) => {
 	switch (action.type) {
 		case SET_PLAY:

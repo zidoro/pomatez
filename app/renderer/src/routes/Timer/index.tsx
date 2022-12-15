@@ -9,7 +9,7 @@ import PriorityCard from "./PriorityCard";
 
 export default () => {
 	const compactMode = useSelector(
-		(state: AppStateTypes) => state.settings.compactMode
+		(state: AppStateTypes) => state.settings.compactMode,
 	);
 	const { resetTimerAction } = useContext(CounterContext);
 

@@ -22,7 +22,7 @@ import SettingSection from "./SettingSection";
 
 const FeatureSection: React.FC = () => {
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const dispatch = useDispatch();
@@ -126,7 +126,7 @@ const FeatureSection: React.FC = () => {
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			dispatch(setNotificationProperty(e.target.value));
 		},
-		[dispatch]
+		[dispatch],
 	);
 
 	return (

@@ -2,11 +2,11 @@ import { BrowserWindow } from "electron";
 
 const getFromStorage = async (
 	win: BrowserWindow,
-	key: string
+	key: string,
 ): Promise<any> => {
 	try {
 		const data = await win.webContents.executeJavaScript(
-			`localStorage.getItem("${key}")`
+			`localStorage.getItem("${key}")`,
 		);
 		if (data === null) {
 			return undefined;
