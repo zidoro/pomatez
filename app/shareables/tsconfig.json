@@ -1,13 +1,13 @@
 {
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-		"module": "es2015",
-		"declaration": true,
-		"sourceMap": true,
-		"allowJs": false,
-		"noEmit": false,
-		"outDir": "./build",
-		"removeComments": true
-	},
-	"include": ["src"]
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "es2015",
+    "declaration": true,
+    "sourceMap": true,
+    "allowJs": false,
+    "noEmit": false,
+    "outDir": "./build",
+    "removeComments": true
+  },
+  "include": ["src"]
 }

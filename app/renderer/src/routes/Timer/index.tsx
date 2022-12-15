@@ -8,20 +8,20 @@ import Counter from "./Counter";
 import PriorityCard from "./PriorityCard";
 
 export default () => {
-	const compactMode = useSelector(
-		(state: AppStateTypes) => state.settings.compactMode,
-	);
-	const { resetTimerAction } = useContext(CounterContext);
+  const compactMode = useSelector(
+    (state: AppStateTypes) => state.settings.compactMode
+  );
+  const { resetTimerAction } = useContext(CounterContext);
 
-	const onResetCallback = useCallback(() => {
-		if (resetTimerAction) resetTimerAction();
-	}, [resetTimerAction]);
+  const onResetCallback = useCallback(() => {
+    if (resetTimerAction) resetTimerAction();
+  }, [resetTimerAction]);
 
-	return (
-		<StyledTimer className={compactMode ? "compact" : ""}>
-			<Counter />
-			{compactMode ? null : <PriorityCard />}
-			<Control resetTimerAction={onResetCallback} />
-		</StyledTimer>
-	);
+  return (
+    <StyledTimer className={compactMode ? "compact" : ""}>
+      <Counter />
+      {compactMode ? null : <PriorityCard />}
+      <Control resetTimerAction={onResetCallback} />
+    </StyledTimer>
+  );
 };

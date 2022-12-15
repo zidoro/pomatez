@@ -1,22 +1,22 @@
 const config = "[config]";
 
 export type SpecialBreakTypes = {
-	fromTime: string;
-	toTime: string;
-	duration: number;
+  fromTime: string;
+  toTime: string;
+  duration: number;
 };
 
 export type ConfigTypes = {
-	stayFocus: number;
-	shortBreak: number;
-	longBreak: number;
-	sessionRounds: number;
-	specialBreaks: {
-		firstBreak?: SpecialBreakTypes;
-		secondBreak?: SpecialBreakTypes;
-		thirdBreak?: SpecialBreakTypes;
-		fourthBreak?: SpecialBreakTypes;
-	};
+  stayFocus: number;
+  shortBreak: number;
+  longBreak: number;
+  sessionRounds: number;
+  specialBreaks: {
+    firstBreak?: SpecialBreakTypes;
+    secondBreak?: SpecialBreakTypes;
+    thirdBreak?: SpecialBreakTypes;
+    fourthBreak?: SpecialBreakTypes;
+  };
 };
 
 export const SET_STAY_FOCUS = `${config} SET_STAY_FOCUS`;
@@ -31,51 +31,51 @@ export const SET_THIRD_SPECIAL_BREAK = `${config} SET_THIRD_SPECIAL_BREAK`;
 export const SET_FOUTH_SPECIAL_BREAK = `${config} SET_FOUTH_SPECIAL_BREAK`;
 
 interface SetStayFocus {
-	type: typeof SET_STAY_FOCUS;
-	payload: ConfigTypes["stayFocus"];
+  type: typeof SET_STAY_FOCUS;
+  payload: ConfigTypes["stayFocus"];
 }
 
 interface SetShortBreak {
-	type: typeof SET_SHORT_BREAK;
-	payload: ConfigTypes["shortBreak"];
+  type: typeof SET_SHORT_BREAK;
+  payload: ConfigTypes["shortBreak"];
 }
 
 interface SetLongBreak {
-	type: typeof SET_LONG_BREAK;
-	payload: ConfigTypes["longBreak"];
+  type: typeof SET_LONG_BREAK;
+  payload: ConfigTypes["longBreak"];
 }
 
 interface SetSessionRounds {
-	type: typeof SET_SESSION_ROUNDS;
-	payload: ConfigTypes["sessionRounds"];
+  type: typeof SET_SESSION_ROUNDS;
+  payload: ConfigTypes["sessionRounds"];
 }
 
 interface SetFirstSpecialBreak {
-	type: typeof SET_FIRST_SPECIAL_BREAK;
-	payload: any;
+  type: typeof SET_FIRST_SPECIAL_BREAK;
+  payload: any;
 }
 
 interface SetSecondSpecialBreak {
-	type: typeof SET_FIRST_SPECIAL_BREAK;
-	payload: any;
+  type: typeof SET_FIRST_SPECIAL_BREAK;
+  payload: any;
 }
 
 interface SetThirdSpecialBreak {
-	type: typeof SET_FIRST_SPECIAL_BREAK;
-	payload: any;
+  type: typeof SET_FIRST_SPECIAL_BREAK;
+  payload: any;
 }
 
 interface SetFourthSpecialBreak {
-	type: typeof SET_FIRST_SPECIAL_BREAK;
-	payload: any;
+  type: typeof SET_FIRST_SPECIAL_BREAK;
+  payload: any;
 }
 
 export type ConfigActionTypes =
-	| SetStayFocus
-	| SetShortBreak
-	| SetLongBreak
-	| SetSessionRounds
-	| SetFirstSpecialBreak
-	| SetSecondSpecialBreak
-	| SetThirdSpecialBreak
-	| SetFourthSpecialBreak;
+  | SetStayFocus
+  | SetShortBreak
+  | SetLongBreak
+  | SetSessionRounds
+  | SetFirstSpecialBreak
+  | SetSecondSpecialBreak
+  | SetThirdSpecialBreak
+  | SetFourthSpecialBreak;

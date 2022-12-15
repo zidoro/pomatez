@@ -9,18 +9,18 @@ export const SET_CLOSE = "SET_CLOSE";
 export const SET_SHOW = "SET_SHOW";
 
 export const TO_MAIN: string[] = [
-	SET_ALWAYS_ON_TOP,
-	SET_FULLSCREEN_BREAK,
-	SET_COMPACT_MODE,
-	SET_NATIVE_TITLEBAR,
-	TRAY_ICON_UPDATE,
-	SET_UI_THEME,
-	SET_MINIMIZE,
-	SET_CLOSE,
-	SET_SHOW,
+  SET_ALWAYS_ON_TOP,
+  SET_FULLSCREEN_BREAK,
+  SET_COMPACT_MODE,
+  SET_NATIVE_TITLEBAR,
+  TRAY_ICON_UPDATE,
+  SET_UI_THEME,
+  SET_MINIMIZE,
+  SET_CLOSE,
+  SET_SHOW,
 ];
 
 export const FROM_MAIN: string[] = [];
 
 export const RELEASED_NOTES_LINK =
-	"https://github.com/roldanjr/pomatez/releases/latest";
+  "https://github.com/roldanjr/pomatez/releases/latest";
