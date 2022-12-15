@@ -56,8 +56,8 @@ export const GlobalStyles = createGlobalStyle<GlobalTypes>`
     font-weight: 400;
     color: var(--color-body-text);
 
-    width: 340px;
-    height: max-content;
+    width: 100%;
+    height: 100%;
     border: ${(p) =>
 			!p.useNativeTitlebar ? "1px solid var(--color-border-window)" : "none"} ;
     box-shadow: ${(p) =>
