@@ -20,7 +20,10 @@
     "gen:tts": "node tts-generator.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "@typescript-eslint/no-unused-vars": "off"
+    }
   },
   "babelMacros": {
     "styledComponents": {
@@ -47,7 +50,7 @@
     "react-markdown": "^4.3.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "4.0.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-undo": "^1.0.1",
