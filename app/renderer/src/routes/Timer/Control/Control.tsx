@@ -35,8 +35,6 @@ type Props = {
 };
 
 const Control: React.FC<Props> = ({ resetTimerAction }) => {
-  const warnSound = new Audio(WarningBell);
-
   const { timer, config } = useSelector((state: AppStateTypes) => ({
     timer: state.timer,
     config: state.config,
@@ -51,9 +49,11 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   const [warn, setWarn] = useState(false);
 
   const activateWarning = useCallback(() => {
+    const warnSound = new Audio(WarningBell);
+
     setWarn(true);
     warnSound.play();
-  }, [warnSound]);
+  }, []);
 
   const onResetCallback = useCallback(() => {
     if (timer.playing && settings.enableStrictMode) {
