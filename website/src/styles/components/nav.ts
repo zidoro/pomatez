@@ -155,9 +155,9 @@ export const StyledNavLinkItem = styled(motion.li).attrs(() => ({
 
 export const StyledNavLinkAnchor = styled(ScrollLink)``;
 
-export const StyledNavButtonWrapper = styled(
-  motion.div
-).attrs(() => ({}))`
+export const StyledNavButtonWrapper = styled(motion.div).attrs(
+  () => ({})
+)`
   display: grid;
   align-items: center;
   grid-template-columns: repeat(2, max-content);

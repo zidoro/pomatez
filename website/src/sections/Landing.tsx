@@ -42,9 +42,8 @@ const Landing: React.FC = () => {
 
   const { frontmatter } = allMarkdownRemark.edges[0].node;
 
-  const [operatingSystem, setOperatingSystem] = useState<OSTypes>(
-    "Mobile"
-  );
+  const [operatingSystem, setOperatingSystem] =
+    useState<OSTypes>("Mobile");
 
   const { isDarkMode } = useContext(ThemeContext);
 

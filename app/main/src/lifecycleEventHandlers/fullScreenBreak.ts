@@ -48,13 +48,8 @@ export const setFullscreenBreakHandler = (
   appArgs: AppArgs
 ) => {
   const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
-  const {
-    tray,
-    trayTooltip,
-    win,
-    contextMenu,
-    fullscreenState,
-  } = appArgs;
+  const { tray, trayTooltip, win, contextMenu, fullscreenState } =
+    appArgs;
 
   if (shouldFullscreen) {
     setFullScreen(true, alwaysOnTop, win, fullscreenState);
