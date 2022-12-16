@@ -10,6 +10,8 @@ export const StyledSettings = styled.main`
   padding-left: 2rem;
   padding-right: 1.4rem;
 
+  flex: 1 1;
+
   animation: 320ms ${themes.enterFromRight} ease;
 
   overflow: hidden scroll;
