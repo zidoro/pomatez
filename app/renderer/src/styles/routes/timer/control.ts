@@ -154,8 +154,8 @@ export const StyledMainButton = styled.button`
 `;
 
 export const StyledCompactButton = styled.button<{ compact?: boolean }>`
-	${ControlButton}
-	padding-right: ${(p) => (p.compact ? "1.6rem" : 0)};
+  ${ControlButton}
+  padding-right: ${(p) => (p.compact ? "1.6rem" : 0)};
 `;
 
 export const StyledSkipButton = styled.button`
