@@ -138,7 +138,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
 
     if (warn) {
       timeout = setTimeout(() => {

@@ -11,17 +11,13 @@ import { StyledConfigSliderSection } from "styles";
 import ConfigSlider, { ConfigSliderProps } from "./ConfigSlider";
 
 const SliderSection: React.FC = () => {
-  const {
-    stayFocus,
-    shortBreak,
-    longBreak,
-    sessionRounds,
-  } = useSelector(({ config }: AppStateTypes) => ({
-    stayFocus: config.stayFocus,
-    shortBreak: config.shortBreak,
-    longBreak: config.longBreak,
-    sessionRounds: config.sessionRounds,
-  }));
+  const { stayFocus, shortBreak, longBreak, sessionRounds } =
+    useSelector(({ config }: AppStateTypes) => ({
+      stayFocus: config.stayFocus,
+      shortBreak: config.shortBreak,
+      longBreak: config.longBreak,
+      sessionRounds: config.sessionRounds,
+    }));
 
   const dispatch = useDispatch();
 
