@@ -25,10 +25,20 @@ export const StyledRangeSliderFill = styled.div<FillTypes>`
   top: 0;
   left: 0;
 
-  width: ${(p) =>
-    p.maxValue >= 60 && p.value <= 6
-      ? `calc((${p.value} - ${p.minValue}) / (${p.maxValue} - ${p.minValue} - 25) * 100% )`
-      : `calc((${p.value} - ${p.minValue}) / (${p.maxValue} - ${p.minValue}) * 100%)`};
+  width: ${({ value, minValue, maxValue }) => {
+    if (maxValue >= 60 && value <= 6) {
+      const finalValue =
+        (value - minValue) / (maxValue - minValue - value);
+
+      if (value <= 3) return `calc((${finalValue} * 100%) + 16px)`;
+
+      return `calc(${finalValue} * 100%)`;
+    }
+
+    return `calc((${value - minValue} / ${
+      maxValue - minValue
+    }) * 100%)`;
+  }};
   height: 0.6rem;
 
   border-radius: 10rem;
