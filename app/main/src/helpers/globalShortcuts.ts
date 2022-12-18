@@ -22,7 +22,7 @@ export function activateFullScreenShortcuts(
   );
 }
 
-export function deactivateFullScreenSchortcuts() {
+export function deactivateFullScreenShortcuts() {
   globalShortcut.unregister(EXIT_SHORTCUTS.ESCAPE);
   globalShortcut.unregister(EXIT_SHORTCUTS.QUIT);
 }
