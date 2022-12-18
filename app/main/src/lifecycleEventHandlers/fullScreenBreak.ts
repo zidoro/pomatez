@@ -1,6 +1,6 @@
 import {
   activateFullScreenShortcuts,
-  deactivateFullScreenSchortcuts,
+  deactivateFullScreenShortcuts,
 } from "../helpers";
 import { BrowserWindow, Menu, Tray } from "electron";
 
@@ -18,14 +18,14 @@ type AppArgs = {
   trayTooltip: string;
   win: BrowserWindow | null;
   contextMenu: Menu;
-  fullscreenState: FullscreenState;
+  isFullscreen: FullscreenState["isFullscreen"];
 };
 
 const setFullScreen = (
   flag: boolean,
   alwaysOnTop: boolean,
   win: BrowserWindow | null,
-  fullscreenState: FullscreenState
+  isFullscreen: FullscreenState["isFullscreen"]
 ) => {
   win?.setFullScreenable(true);
   win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
@@ -34,7 +34,7 @@ const setFullScreen = (
   win?.show();
   win?.focus();
 
-  fullscreenState.isFullscreen = flag;
+  isFullscreen = flag;
 };
 
 /**
@@ -48,11 +48,10 @@ export const setFullscreenBreakHandler = (
   appArgs: AppArgs
 ) => {
   const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
-  const { tray, trayTooltip, win, contextMenu, fullscreenState } =
-    appArgs;
+  const { tray, trayTooltip, win, contextMenu, isFullscreen } = appArgs;
 
   if (shouldFullscreen) {
-    setFullScreen(true, alwaysOnTop, win, fullscreenState);
+    setFullScreen(true, alwaysOnTop, win, isFullscreen);
 
     activateFullScreenShortcuts(() => {});
 
@@ -65,9 +64,9 @@ export const setFullscreenBreakHandler = (
       ])
     );
   } else {
-    setFullScreen(false, alwaysOnTop, win, fullscreenState);
+    setFullScreen(false, alwaysOnTop, win, isFullscreen);
 
-    deactivateFullScreenSchortcuts();
+    deactivateFullScreenShortcuts();
     tray?.setToolTip(trayTooltip);
     tray?.setContextMenu(contextMenu);
   }

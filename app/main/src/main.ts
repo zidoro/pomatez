@@ -51,7 +51,7 @@ const notificationIcon = path.join(
 
 const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
 
-const onlySingleIntance = app.requestSingleInstanceLock();
+const onlySingleInstance = app.requestSingleInstanceLock();
 
 Menu.setApplicationMenu(null);
 
@@ -70,7 +70,14 @@ let tray: Tray | null = null;
 
 let win: BrowserWindow | null;
 
-const fullscreenState: FullscreenState = { isFullscreen: false };
+type WindowStateProps = {
+  isOnCompactMode: boolean;
+} & FullscreenState;
+
+const windowState: WindowStateProps = {
+  isFullscreen: false,
+  isOnCompactMode: false,
+};
 
 function createMainWindow() {
   win = new BrowserWindow({
@@ -115,7 +122,7 @@ function createMainWindow() {
           if (win) {
             const data = await getFromStorage(win, "state");
             if (data.settings.minimizeToTray) {
-              if (!fullscreenState.isFullscreen) {
+              if (!windowState.isFullscreen) {
                 win?.hide();
                 if (tray === null && data.settings.minimizeToTray) {
                   createSystemTray();
@@ -132,6 +139,15 @@ function createMainWindow() {
     )
   );
 
+  win.on("leave-full-screen", () => {
+    // This is a workaround of resize issue after leaving the full screen mode.
+    if (windowState.isOnCompactMode) {
+      win?.setSize(340, 100);
+    } else {
+      win?.setSize(340, getFrameHeight());
+    }
+  });
+
   win.on(
     "close",
     debounce(
@@ -143,7 +159,7 @@ function createMainWindow() {
             if (!data.settings.closeToTray) {
               app.exit();
             } else {
-              if (!fullscreenState.isFullscreen) {
+              if (!windowState.isFullscreen) {
                 win?.hide();
                 if (tray === null && data.settings.closeToTray) {
                   createSystemTray();
@@ -201,7 +217,7 @@ function createSystemTray() {
   });
 }
 
-if (!onlySingleIntance) {
+if (!onlySingleInstance) {
   app.quit();
 } else {
   app.on("second-instance", () => {
@@ -307,11 +323,11 @@ ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {
 
 ipcMain.on(SET_FULLSCREEN_BREAK, (e, args) => {
   setFullscreenBreakHandler(args, {
+    win,
     tray,
     trayTooltip,
-    fullscreenState,
-    win,
     contextMenu,
+    isFullscreen: windowState.isFullscreen,
   });
 });
 
@@ -319,9 +335,13 @@ ipcMain.on(SET_COMPACT_MODE, (e, args) => {
   if (args.compactMode) {
     win?.setMinimumSize(340, 100);
     win?.setSize(340, 100);
+    win?.setResizable(false);
+    windowState.isOnCompactMode = true;
   } else {
     win?.setMinimumSize(340, getFrameHeight());
     win?.setSize(340, getFrameHeight());
+    win?.setResizable(true);
+    windowState.isOnCompactMode = true;
   }
 });
 
