@@ -338,10 +338,10 @@ ipcMain.on(SET_COMPACT_MODE, (e, args) => {
     win?.setResizable(false);
     windowState.isOnCompactMode = true;
   } else {
-    win?.setMinimumSize(340, getFrameHeight());
-    win?.setSize(340, getFrameHeight());
     win?.setResizable(true);
     windowState.isOnCompactMode = true;
+    win?.setMinimumSize(340, getFrameHeight());
+    win?.setSize(340, getFrameHeight());
   }
 });
 
