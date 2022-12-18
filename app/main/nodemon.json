@@ -1,0 +1,4 @@
+{
+  "watch": ["src"],
+  "ext": "ts, css, png"
+}
