@@ -9,7 +9,8 @@ export const StyledTimer = styled.main`
 
   padding-top: 1.2rem;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-rows: 1fr;
   align-items: end;
 
@@ -37,7 +38,6 @@ export const StyledTimer = styled.main`
 export const StyledPriorityCardContainer = styled.div`
   width: 100%;
   height: 5.6rem;
-
   padding: 0 1.6rem;
 `;
 
@@ -90,14 +90,23 @@ export const StyledPriorityCardWrapper = styled.div`
   background-color: var(--color-bg-secondary);
 `;
 
-export const StyledPriorityCardHeader = styled.header``;
+export const StyledPriorityCardHeader = styled.header`
+  width: 100%;
+`;
 
 export const StyledPriorityCardHeading = styled.h4`
+  padding-right: 1.6rem;
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--color-heading-text);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 export const StyledPriorityCardDescription = styled.p`
   color: var(--color-body-text);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
