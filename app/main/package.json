@@ -17,7 +17,7 @@
     "predev:main": "wait-on http://localhost:3000",
     "dev:main": "nodemon --exec \"yarn build && electron .\"",
     "start": "yarn dev:main",
-    "build": "tsc && cp -r src/assets build/",
+    "build": "tsc && copyfiles \"src/assets\" build/assets",
     "build:mwl": "electron-builder -mwl",
     "build:dir": "electron-builder --dir",
     "build:win": "electron-builder --win --publish=never",
