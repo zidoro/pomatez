@@ -48,7 +48,7 @@ describe("Fullscreen break", () => {
       {
         win: window,
         contextMenu: Menu.buildFromTemplate([{ label: "Mock Label" }]),
-        fullscreenState,
+        isFullscreen: fullscreenState.isFullscreen,
         trayTooltip,
         tray,
       }
@@ -105,7 +105,7 @@ describe("Fullscreen break", () => {
       {
         win: window,
         contextMenu: Menu.buildFromTemplate([{ label: "Mock Label" }]),
-        fullscreenState,
+        isFullscreen: fullscreenState.isFullscreen,
         trayTooltip,
         tray,
       }
