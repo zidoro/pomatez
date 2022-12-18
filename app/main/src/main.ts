@@ -35,6 +35,7 @@ import {
 import { activateUser } from "./helpers/analytics";
 import store from "./store";
 import isDev from "electron-is-dev";
+const isWin = process.platform === "win32";
 
 import "v8-compile-cache";
 import {
@@ -138,13 +139,32 @@ function createMainWindow() {
       { leading: true }
     )
   );
+  /**
+   * This only exists to counteract an issue with linux where leave-full-screen triggers every time this is called on linux (when exiting fullscreen)
+   *
+   * It may be fixed in a future version of linux.
+   *
+   * If you try to set the size smaller than the minimum allowed it will also cause issues here.
+   *
+   * @param width
+   * @param height
+   */
+  function setSizeIfDiff(width: number, height: number) {
+    // Just to stop an infinite loop in the case of a bug
+    const minSize = win?.getMinimumSize();
+    width = Math.max(width, minSize?.[0] || 0);
+    height = Math.max(height, minSize?.[1] || 0);
+    const size = win?.getSize();
+    if (!size || size[0] !== width || size[1] !== height) {
+      win?.setSize(width, height);
+    }
+  }
 
   win.on("leave-full-screen", () => {
-    // This is a workaround of resize issue after leaving the full screen mode.
     if (windowState.isOnCompactMode) {
-      win?.setSize(340, 100);
+      setSizeIfDiff(340, 100);
     } else {
-      win?.setSize(340, getFrameHeight());
+      setSizeIfDiff(340, getFrameHeight());
     }
   });
 
@@ -339,7 +359,7 @@ ipcMain.on(SET_COMPACT_MODE, (e, args) => {
     windowState.isOnCompactMode = true;
   } else {
     win?.setResizable(true);
-    windowState.isOnCompactMode = true;
+    windowState.isOnCompactMode = false;
     win?.setMinimumSize(340, getFrameHeight());
     win?.setSize(340, getFrameHeight());
   }
