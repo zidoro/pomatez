@@ -72,7 +72,7 @@ const PriorityCard: React.FC = () => {
       return "No priority list has been created yet.";
     } else {
       if (priorityCard?.text) {
-        return priorityCard?.text.truncate(34);
+        return priorityCard?.text;
       }
       return "No task item on your priority list.";
     }
@@ -86,7 +86,7 @@ const PriorityCard: React.FC = () => {
         return "Add at least one item on your priority list.";
       } else {
         if (priorityCard?.description) {
-          return priorityCard?.description.truncate(43);
+          return priorityCard?.description;
         }
         return "";
       }
