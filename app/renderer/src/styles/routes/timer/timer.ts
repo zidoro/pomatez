@@ -11,12 +11,14 @@ export const StyledTimer = styled.main`
 
   display: flex;
   flex-direction: column;
-  grid-template-rows: 1fr;
   align-items: end;
 
   &.compact {
     padding-top: 0;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: start;
     align-items: center;
   }
 
