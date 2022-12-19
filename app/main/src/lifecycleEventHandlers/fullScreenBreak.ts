@@ -27,6 +27,9 @@ const setFullScreen = (
   win: BrowserWindow | null,
   isFullscreen: FullscreenState["isFullscreen"]
 ) => {
+  if (flag) {
+    win?.setResizable(true);
+  }
   win?.setFullScreenable(true);
   win?.setAlwaysOnTop(alwaysOnTop, "screen-saver");
   win?.setFullScreen(flag);
