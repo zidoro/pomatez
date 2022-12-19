@@ -2,19 +2,19 @@ import { createGlobalStyle } from "styled-components/macro";
 import { darkTheme, lightTheme } from "./themes";
 
 type GlobalTypes = {
-  isDarkMode?: boolean;
-  useNativeTitlebar?: boolean;
+	isDarkMode?: boolean;
+	useNativeTitlebar?: boolean;
 };
 
 export const GlobalStyles = createGlobalStyle<GlobalTypes>`
 
   :root {
     ${(p) => {
-      if (p.isDarkMode) {
-        return darkTheme;
-      }
-      return lightTheme;
-    }}
+			if (p.isDarkMode) {
+				return darkTheme;
+			}
+			return lightTheme;
+		}}
   }
 
   *,
@@ -63,11 +63,9 @@ export const GlobalStyles = createGlobalStyle<GlobalTypes>`
     width: 100%;
     height: 100%;
     border: ${(p) =>
-      !p.useNativeTitlebar
-        ? "1px solid var(--color-border-window)"
-        : "none"} ;
+			!p.useNativeTitlebar ? "1px solid var(--color-border-window)" : "none"} ;
     box-shadow: ${(p) =>
-      !p.useNativeTitlebar && "0 1px 16px -4px rgba(0, 0, 0, 0.5)"};
+			!p.useNativeTitlebar && "0 1px 16px -4px rgba(0, 0, 0, 0.5)"};
     box-sizing: border-box;
   }
 

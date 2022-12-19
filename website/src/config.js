@@ -11,25 +11,25 @@ const RPM_INSTALLER = `${INSTALLER}-linux.rpm`;
 const MAC_INSTALLER = `${INSTALLER}-mac.dmg`;
 
 const navLinks = [
-  { label: "Features", link: "features", offset: -24 },
-  { label: "Boosters", link: "boosters", offset: -24 },
-  { label: "Roadmap", link: "roadmap", offset: -24 },
-  {
-    label: "Released notes",
-    link: "https://github.com/roldanjr/pomatez/releases/latest",
-  },
+	{ label: "Features", link: "features", offset: -24 },
+	{ label: "Boosters", link: "boosters", offset: -24 },
+	{ label: "Roadmap", link: "roadmap", offset: -24 },
+	{
+		label: "Released notes",
+		link: "https://github.com/roldanjr/pomatez/releases/latest",
+	},
 ];
 
 const pathPrefix = "/pomatez";
 
 module.exports = {
-  pathPrefix,
-  APP_NAME,
-  APP_VERSION,
-  WINDOWS_INSTALLER,
-  DEB_INSTALLER,
-  APP_IMAGE_INSTALLER,
-  RPM_INSTALLER,
-  MAC_INSTALLER,
-  navLinks,
+	pathPrefix,
+	APP_NAME,
+	APP_VERSION,
+	WINDOWS_INSTALLER,
+	DEB_INSTALLER,
+	APP_IMAGE_INSTALLER,
+	RPM_INSTALLER,
+	MAC_INSTALLER,
+	navLinks,
 };

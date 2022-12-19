@@ -9,10 +9,10 @@ import { timerReducer } from "./timer";
 import { undoableTasksReducer } from "./tasks";
 
 const rootReducer = combineReducers({
-  config: configReducer,
-  settings: settingReducer,
-  timer: timerReducer,
-  tasks: undoableTasksReducer,
+	config: configReducer,
+	settings: settingReducer,
+	timer: timerReducer,
+	tasks: undoableTasksReducer,
 });
 
 export type AppStateTypes = ReturnType<typeof rootReducer>;
@@ -20,21 +20,21 @@ export type AppStateTypes = ReturnType<typeof rootReducer>;
 const store = createStore(rootReducer, devToolsEnhancer({}));
 
 if (!getFromStorage("state")) {
-  saveToStorage("state", {
-    config: store.getState().config,
-    settings: store.getState().settings,
-    tasks: store.getState().tasks.present,
-  });
+	saveToStorage("state", {
+		config: store.getState().config,
+		settings: store.getState().settings,
+		tasks: store.getState().tasks.present,
+	});
 }
 
 store.subscribe(
-  debounce(() => {
-    saveToStorage("state", {
-      config: store.getState().config,
-      settings: store.getState().settings,
-      tasks: store.getState().tasks.present,
-    });
-  }, 1000)
+	debounce(() => {
+		saveToStorage("state", {
+			config: store.getState().config,
+			settings: store.getState().settings,
+			tasks: store.getState().tasks.present,
+		});
+	}, 1000)
 );
 
 export default store;

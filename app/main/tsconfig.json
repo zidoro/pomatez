@@ -1,11 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "module": "commonjs",
-    "allowJs": false,
-    "noEmit": false,
-    "outDir": "./build",
-    "removeComments": true
-  },
-  "include": ["src"]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"module": "commonjs",
+		"allowJs": false,
+		"noEmit": false,
+		"outDir": "./build",
+		"removeComments": true
+	},
+	"include": ["src"]
 }

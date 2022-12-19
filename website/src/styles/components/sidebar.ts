@@ -5,62 +5,62 @@ import { stagger } from "../animate";
 import media from "../media";
 
 export const StyledSidebar = styled(motion.aside).attrs(() => ({
-  initial: "initial",
-  animate: "animate",
-  variants: stagger,
+	initial: "initial",
+	animate: "animate",
+	variants: stagger,
 }))`
-  padding: 4rem 5.6rem;
+	padding: 4rem 5.6rem;
 
-  background-color: var(--bg-primary);
-  border-top: 1px solid var(--border-tertiary);
+	background-color: var(--bg-primary);
+	border-top: 1px solid var(--border-tertiary);
 
-  position: fixed;
-  top: 6.4rem;
-  left: 0;
-  width: 100%;
-  min-height: calc(100% - 6.4rem);
+	position: fixed;
+	top: 6.4rem;
+	left: 0;
+	width: 100%;
+	min-height: calc(100% - 6.4rem);
 
-  z-index: 80;
+	z-index: 80;
 
-  ${media.laptopSm} {
-    padding: 4rem;
-  }
+	${media.laptopSm} {
+		padding: 4rem;
+	}
 
-  ${media.tabletSm} {
-    padding: 4rem 2rem;
-  }
+	${media.tabletSm} {
+		padding: 4rem 2rem;
+	}
 
-  ${media.mobileXs} {
-    padding: 4rem 1.6rem;
-  }
+	${media.mobileXs} {
+		padding: 4rem 1.6rem;
+	}
 `;
 
 export const StyledSidebarList = styled.ul`
-  ${SectionContentStyle};
+	${SectionContentStyle};
 
-  max-width: 100rem;
-  row-gap: 0 !important;
+	max-width: 100rem;
+	row-gap: 0 !important;
 
-  list-style: none;
+	list-style: none;
 
-  & > li {
-    padding: 1.6rem 0;
-    font-size: 1.7rem;
+	& > li {
+		padding: 1.6rem 0;
+		font-size: 1.7rem;
 
-    color: var(--cl-heading-text);
+		color: var(--cl-heading-text);
 
-    position: relative;
+		position: relative;
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
+		&::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
 
-      width: 100%;
-      height: 1px;
+			width: 100%;
+			height: 1px;
 
-      background-color: var(--border-secondary);
-    }
-  }
+			background-color: var(--border-secondary);
+		}
+	}
 `;
