@@ -163,6 +163,10 @@ function createMainWindow() {
   win.on("leave-full-screen", () => {
     if (windowState.isOnCompactMode) {
       setSizeIfDiff(340, 100);
+      // Windows doesn't like trying to set it as not resizeable it along with everything else that's going on
+      setTimeout(() => {
+        win?.setResizable(false);
+      });
     } else {
       setSizeIfDiff(340, getFrameHeight());
     }
