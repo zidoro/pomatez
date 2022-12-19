@@ -10,7 +10,7 @@ type Props = { flipped?: boolean } & React.HTMLProps<HTMLButtonElement>;
 
 const CompactModeButton: React.FC<Props> = ({ onClick, flipped }) => {
 	const { compactMode }: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const buttonRef = useRef<HTMLButtonElement>(null);
@@ -24,7 +24,7 @@ const CompactModeButton: React.FC<Props> = ({ onClick, flipped }) => {
 					onClick(e);
 				}
 			}),
-		[buttonClickAction, onClick]
+		[buttonClickAction, onClick],
 	);
 
 	return (

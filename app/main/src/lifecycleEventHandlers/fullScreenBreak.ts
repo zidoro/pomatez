@@ -25,7 +25,7 @@ const setFullScreen = (
 	flag: boolean,
 	alwaysOnTop: boolean,
 	win: BrowserWindow | null,
-	isFullscreen: FullscreenState["isFullscreen"]
+	isFullscreen: FullscreenState["isFullscreen"],
 ) => {
 	if (flag) {
 		win?.setResizable(true);
@@ -48,7 +48,7 @@ const setFullScreen = (
  */
 export const setFullscreenBreakHandler = (
 	fullscreenArgs: FullscreenArgs,
-	appArgs: AppArgs
+	appArgs: AppArgs,
 ) => {
 	const { shouldFullscreen, alwaysOnTop } = fullscreenArgs;
 	const { tray, trayTooltip, win, contextMenu, isFullscreen } = appArgs;
@@ -64,7 +64,7 @@ export const setFullscreenBreakHandler = (
 				{
 					label: "Please wait for your break to end.",
 				},
-			])
+			]),
 		);
 	} else {
 		setFullScreen(false, alwaysOnTop, win, isFullscreen);
