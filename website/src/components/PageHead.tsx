@@ -7,210 +7,205 @@ import { APP_VERSION, pathPrefix } from "../config";
 type QueryProps = SiteMetaProps & MarkDownProps;
 
 type MetaProps =
-  | React.DetailedHTMLProps<
-      React.MetaHTMLAttributes<HTMLMetaElement>,
-      HTMLMetaElement
-    >[]
-  | undefined;
+	| React.DetailedHTMLProps<
+			React.MetaHTMLAttributes<HTMLMetaElement>,
+			HTMLMetaElement
+	  >[]
+	| undefined;
 
 type Props = {
-  title?: string;
-  description?: string;
-  lang?: string;
-  meta?: MetaProps;
-  metaImage?: {
-    src: string;
-    width: number;
-    height: number;
-  };
-  excludeSchema?: boolean;
+	title?: string;
+	description?: string;
+	lang?: string;
+	meta?: MetaProps;
+	metaImage?: {
+		src: string;
+		width: number;
+		height: number;
+	};
+	excludeSchema?: boolean;
 };
 
 export const PageHead: React.FC<Props> = ({
-  title,
-  description,
-  lang,
-  meta,
-  excludeSchema,
+	title,
+	description,
+	lang,
+	meta,
+	excludeSchema,
 }) => {
-  const { site, allMarkdownRemark } = useStaticQuery<QueryProps>(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            keywords
-            author
-            siteUrl
-            twitterUsername
-            googleVerification
-          }
-        }
-        allMarkdownRemark(
-          filter: { fileAbsolutePath: { regex: "/landing/" } }
-        ) {
-          edges {
-            node {
-              frontmatter {
-                screenShot {
-                  childImageSharp {
-                    original {
-                      src
-                      width
-                      height
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-  );
+	const { site, allMarkdownRemark } = useStaticQuery<QueryProps>(graphql`
+		query {
+			site {
+				siteMetadata {
+					title
+					description
+					keywords
+					author
+					siteUrl
+					twitterUsername
+					googleVerification
+				}
+			}
+			allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/landing/" } }) {
+				edges {
+					node {
+						frontmatter {
+							screenShot {
+								childImageSharp {
+									original {
+										src
+										width
+										height
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	`);
 
-  const {
-    frontmatter: { screenShot },
-  } = allMarkdownRemark.edges[0].node;
+	const {
+		frontmatter: { screenShot },
+	} = allMarkdownRemark.edges[0].node;
 
-  const metaTitle = title || site.siteMetadata.title;
+	const metaTitle = title || site.siteMetadata.title;
 
-  const socialPreviewLight = screenShot.childImageSharp.original;
+	const socialPreviewLight = screenShot.childImageSharp.original;
 
-  const metaDescription = description || site.siteMetadata.description;
+	const metaDescription = description || site.siteMetadata.description;
 
-  const websiteUrl = site.siteMetadata.siteUrl + pathPrefix;
+	const websiteUrl = site.siteMetadata.siteUrl + pathPrefix;
 
-  const getMeta = () => {
-    const defaultMeta: MetaProps = [
-      {
-        name: `description`,
-        content: metaDescription,
-      },
-      {
-        name: `keywords`,
-        content: site.siteMetadata.keywords.join(", "),
-      },
-      {
-        name: `google-site-verification`,
-        content: site.siteMetadata.googleVerification,
-      },
-      {
-        property: `og:title`,
-        content: metaTitle,
-      },
-      {
-        property: `og:description`,
-        content: metaDescription,
-      },
-      {
-        property: `og:type`,
-        content: `website`,
-      },
-      {
-        property: `og:url`,
-        content: websiteUrl,
-      },
-      {
-        name: `twitter:creator`,
-        content: site.siteMetadata.author,
-      },
-      {
-        name: `twitter:title`,
-        content: metaTitle,
-      },
-      {
-        name: `twitter:description`,
-        content: metaDescription,
-      },
-    ].concat(
-      socialPreviewLight
-        ? [
-            {
-              property: "og:image",
-              content:
-                site.siteMetadata.siteUrl + socialPreviewLight.src,
-            },
-            {
-              property: "og:image:width",
-              content: `${socialPreviewLight.width}`,
-            },
-            {
-              property: "og:image:height",
-              content: `${socialPreviewLight.height}`,
-            },
-            {
-              name: "twitter:card",
-              content: "summary_large_image",
-            },
-          ]
-        : [
-            {
-              name: "twitter:card",
-              content: "summary",
-            },
-          ]
-    );
+	const getMeta = () => {
+		const defaultMeta: MetaProps = [
+			{
+				name: `description`,
+				content: metaDescription,
+			},
+			{
+				name: `keywords`,
+				content: site.siteMetadata.keywords.join(", "),
+			},
+			{
+				name: `google-site-verification`,
+				content: site.siteMetadata.googleVerification,
+			},
+			{
+				property: `og:title`,
+				content: metaTitle,
+			},
+			{
+				property: `og:description`,
+				content: metaDescription,
+			},
+			{
+				property: `og:type`,
+				content: `website`,
+			},
+			{
+				property: `og:url`,
+				content: websiteUrl,
+			},
+			{
+				name: `twitter:creator`,
+				content: site.siteMetadata.author,
+			},
+			{
+				name: `twitter:title`,
+				content: metaTitle,
+			},
+			{
+				name: `twitter:description`,
+				content: metaDescription,
+			},
+		].concat(
+			socialPreviewLight
+				? [
+						{
+							property: "og:image",
+							content: site.siteMetadata.siteUrl + socialPreviewLight.src,
+						},
+						{
+							property: "og:image:width",
+							content: `${socialPreviewLight.width}`,
+						},
+						{
+							property: "og:image:height",
+							content: `${socialPreviewLight.height}`,
+						},
+						{
+							name: "twitter:card",
+							content: "summary_large_image",
+						},
+				  ]
+				: [
+						{
+							name: "twitter:card",
+							content: "summary",
+						},
+				  ]
+		);
 
-    if (meta) {
-      defaultMeta.concat(meta);
-    }
+		if (meta) {
+			defaultMeta.concat(meta);
+		}
 
-    return defaultMeta;
-  };
+		return defaultMeta;
+	};
 
-  const schemaMarkup = {
-    "@context": "http://schema.org",
-    "@type": "SoftwareApplication",
-    name: site.siteMetadata.title,
-    image: site.siteMetadata.siteUrl + socialPreviewLight.src,
-    url: websiteUrl,
-    author: {
-      "@type": "Person",
-      name: site.siteMetadata.author,
-    },
-    applicationCategory: "LifestyleApplication",
-    downloadUrl: "https://github.com/roldanjr/pomatez/releases",
-    operatingSystem: "Windows, Linux, macOS",
-    softwareVersion: APP_VERSION,
-  };
+	const schemaMarkup = {
+		"@context": "http://schema.org",
+		"@type": "SoftwareApplication",
+		name: site.siteMetadata.title,
+		image: site.siteMetadata.siteUrl + socialPreviewLight.src,
+		url: websiteUrl,
+		author: {
+			"@type": "Person",
+			name: site.siteMetadata.author,
+		},
+		applicationCategory: "LifestyleApplication",
+		downloadUrl: "https://github.com/roldanjr/pomatez/releases",
+		operatingSystem: "Windows, Linux, macOS",
+		softwareVersion: APP_VERSION,
+	};
 
-  return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={metaTitle}
-      titleTemplate={metaTitle}
-      meta={getMeta()}
-      link={[
-        {
-          href: "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap",
-          rel: "stylesheet",
-        },
-        {
-          rel: "sitemap",
-          type: "application/xml",
-          href: "/sitemap.xml",
-        },
-      ]}
-      defer={false}
-    >
-      {!excludeSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(schemaMarkup)}
-        </script>
-      )}
-    </Helmet>
-  );
+	return (
+		<Helmet
+			htmlAttributes={{
+				lang,
+			}}
+			title={metaTitle}
+			titleTemplate={metaTitle}
+			meta={getMeta()}
+			link={[
+				{
+					href: "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap",
+					rel: "stylesheet",
+				},
+				{
+					rel: "sitemap",
+					type: "application/xml",
+					href: "/sitemap.xml",
+				},
+			]}
+			defer={false}
+		>
+			{!excludeSchema && (
+				<script type="application/ld+json">
+					{JSON.stringify(schemaMarkup)}
+				</script>
+			)}
+		</Helmet>
+	);
 };
 
 PageHead.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-  excludeSchema: false,
+	lang: `en`,
+	meta: [],
+	description: ``,
+	excludeSchema: false,
 };
 
 export default PageHead;
