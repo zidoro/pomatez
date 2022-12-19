@@ -14,7 +14,7 @@ import CounterType from "./CounterType";
 
 const Counter: React.FC = () => {
 	const settings: SettingTypes = useSelector(
-		(state: AppStateTypes) => state.settings
+		(state: AppStateTypes) => state.settings,
 	);
 
 	const { count, duration, timerType, shouldFullscreen } =
