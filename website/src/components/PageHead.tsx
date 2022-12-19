@@ -145,7 +145,7 @@ export const PageHead: React.FC<Props> = ({
 							name: "twitter:card",
 							content: "summary",
 						},
-				  ]
+				  ],
 		);
 
 		if (meta) {
