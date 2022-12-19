@@ -6,23 +6,23 @@ import { StyledHeaderButton } from "styles";
 import { Header } from "components";
 
 const ConfigHeader: React.FC = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const [success, setSuccess] = useState(false);
+	const [success, setSuccess] = useState(false);
 
-  const restoreConfig = useCallback(() => {
-    setSuccess(true);
-    dispatch(restoreDefaultConfig());
-    setTimeout(() => setSuccess(false), 1000);
-  }, [dispatch]);
+	const restoreConfig = useCallback(() => {
+		setSuccess(true);
+		dispatch(restoreDefaultConfig());
+		setTimeout(() => setSuccess(false), 1000);
+	}, [dispatch]);
 
-  return (
-    <Header heading="Rules">
-      <StyledHeaderButton success={success} onClick={restoreConfig}>
-        {success ? "Restored Successfully" : "Restore Default"}
-      </StyledHeaderButton>
-    </Header>
-  );
+	return (
+		<Header heading="Rules">
+			<StyledHeaderButton success={success} onClick={restoreConfig}>
+				{success ? "Restored Successfully" : "Restore Default"}
+			</StyledHeaderButton>
+		</Header>
+	);
 };
 
 export default React.memo(ConfigHeader);

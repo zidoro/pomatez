@@ -3,18 +3,18 @@ import { darkTheme, lightTheme } from "./themes";
 import media from "./media";
 
 type GlobalProps = {
-  isDarkMode?: boolean;
+	isDarkMode?: boolean;
 };
 
 export const GlobalStyle = createGlobalStyle<GlobalProps>`
 
   :root {
     ${(p) => {
-      if (p.isDarkMode) {
-        return darkTheme;
-      }
-      return lightTheme;
-    }}
+			if (p.isDarkMode) {
+				return darkTheme;
+			}
+			return lightTheme;
+		}}
   }
 
   *,

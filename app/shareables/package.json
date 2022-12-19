@@ -1,16 +1,16 @@
 {
-  "name": "@pomatez/shareables",
-  "version": "1.0.0",
-  "private": true,
-  "main": "build/index.js",
-  "source": "src/index.ts",
-  "license": "MIT",
-  "files": [
-    "build"
-  ],
-  "scripts": {
-    "prepare": "yarn build",
-    "start": "rollup -c -w",
-    "build": "rollup -c"
-  }
+	"name": "@pomatez/shareables",
+	"version": "1.0.0",
+	"private": true,
+	"main": "build/index.js",
+	"source": "src/index.ts",
+	"license": "MIT",
+	"files": [
+		"build"
+	],
+	"scripts": {
+		"prepare": "yarn build",
+		"start": "rollup -c -w",
+		"build": "rollup -c"
+	}
 }

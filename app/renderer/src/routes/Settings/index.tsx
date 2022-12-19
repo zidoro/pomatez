@@ -10,29 +10,29 @@ import StickySection from "./StickySection";
 import SettingHeader from "./SettingHeader";
 
 export default () => {
-  const alertState = getFromStorage("alert") || null;
+	const alertState = getFromStorage("alert") || null;
 
-  const [alert, setAlert] = useState(alertState);
+	const [alert, setAlert] = useState(alertState);
 
-  return (
-    <StyledSettings>
-      <SettingHeader />
-      {alert === null && (
-        <Alert
-          heading="Hello Friends,"
-          body="Please consider starring this project on GitHub to show 💙 and
+	return (
+		<StyledSettings>
+			<SettingHeader />
+			{alert === null && (
+				<Alert
+					heading="Hello Friends,"
+					body="Please consider starring this project on GitHub to show 💙 and
 				support. It will inspire the developer to continue improving the app
 				for best user experience."
-          onClose={() => {
-            saveToStorage("alert", "hide");
-            setAlert("hide");
-          }}
-        />
-      )}
-      <FeatureSection />
-      <ShortcutSection />
-      <HelpSection />
-      <StickySection />
-    </StyledSettings>
-  );
+					onClose={() => {
+						saveToStorage("alert", "hide");
+						setAlert("hide");
+					}}
+				/>
+			)}
+			<FeatureSection />
+			<ShortcutSection />
+			<HelpSection />
+			<StickySection />
+		</StyledSettings>
+	);
 };
