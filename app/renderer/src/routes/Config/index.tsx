@@ -8,11 +8,11 @@ import ConfigHeader from "./ConfigHeader";
 export * from "./ConfigSlider";
 
 export default () => {
-  return (
-    <StyledConfig>
-      <ConfigHeader />
-      <SliderSection />
-      <SpecialBreakMemo />
-    </StyledConfig>
-  );
+	return (
+		<StyledConfig>
+			<ConfigHeader />
+			<SliderSection />
+			<SpecialBreakMemo />
+		</StyledConfig>
+	);
 };
