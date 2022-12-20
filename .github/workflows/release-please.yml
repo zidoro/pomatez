@@ -69,7 +69,7 @@ jobs:
         with:
           upload_url: ${{ needs.release-please.outputs.upload_url }}
           asset_path: |
-            app/main/dist/*.yml
+            app/main/dist/latest*
             app/main/dist/*.deb
             app/main/dist/*.rpm
             app/main/dist/*.dmg
