@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/roldanjr/pomatez/compare/v1.2.1...v1.2.2) (2022-12-21)
+
+
+### Bug Fixes 🐛
+
+* missing app icon ([c0617bd](https://github.com/roldanjr/pomatez/commit/c0617bdee55923aad9da4fc09e1238c966f77958))
+
 ## [1.2.1](https://github.com/roldanjr/pomatez/compare/v1.2.1...v1.2.1) (2022-12-20)
 
 
