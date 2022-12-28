@@ -3,19 +3,19 @@ import styled from "styled-components/macro";
 type LayoutProps = { noTransition?: boolean };
 
 export const StyledLayout = styled.div<LayoutProps>`
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 
-	display: flex;
-	flex-direction: column;
-	justify-items: center;
-	background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  background-color: var(--color-bg-primary);
 
-	& > main {
-		height: 41.2rem;
-		animation: ${(p) => p.noTransition && "none"};
-		&.compact {
-			height: unset;
-		}
-	}
+  & > main {
+    height: 41.2rem;
+    animation: ${(p) => p.noTransition && "none"};
+    &.compact {
+      height: unset;
+    }
+  }
 `;

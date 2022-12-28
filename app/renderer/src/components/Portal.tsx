@@ -6,26 +6,26 @@ type PortalProps = { id: string; children: React.ReactNode };
 
 // https://medium.com/@jc_perez_ch/dynamic-react-portals-with-hooks-ddeb127fa516
 const DynamicPortal: React.FC<PortalProps> = ({ id, children }) => {
-	const el = useRef(
-		document.getElementById(id) || document.createElement("div")
-	);
+  const el = useRef(
+    document.getElementById(id) || document.createElement("div")
+  );
 
-	const [dynamic] = useState(!el.current.parentElement);
+  const [dynamic] = useState(!el.current.parentElement);
 
-	useEffect(() => {
-		if (dynamic) {
-			el.current.id = id;
-			document.body.appendChild(el.current);
-		}
+  useEffect(() => {
+    if (dynamic) {
+      el.current.id = id;
+      document.body.appendChild(el.current);
+    }
 
-		return () => {
-			if (dynamic && el.current.parentElement) {
-				el.current.parentElement.removeChild(el.current);
-			}
-		};
-	}, [id]);
+    return () => {
+      if (dynamic && el.current.parentElement) {
+        el.current.parentElement.removeChild(el.current);
+      }
+    };
+  }, [id]);
 
-	return ReactDOM.createPortal(children, el.current);
+  return ReactDOM.createPortal(children, el.current);
 };
 
 export default React.memo(DynamicPortal);
