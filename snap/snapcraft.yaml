@@ -10,7 +10,7 @@ architectures:
 
 apps:
   pomatez:
-    command: desktop-launch $SNAP/app/main/pomatez --no-sandbox
+    command: desktop-launch $SNAP/app/electron/pomatez --no-sandbox
     extensions: [gnome-3-28]
     plugs:
       - audio-playback
@@ -31,7 +31,7 @@ apps:
 
 parts:
   pomatez:
-    source: app/main
+    source: app/electron
     plugin: nodejs
     nodejs-version: 12.18.1
 
@@ -54,8 +54,8 @@ parts:
 
     override-build: |
       snapcraftctl build
-      rm -rf $SNAPCRAFT_PART_INSTALL/app/main
-      mkdir -p $SNAPCRAFT_PART_INSTALL/app/main
-      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app/main
+      rm -rf $SNAPCRAFT_PART_INSTALL/app/electron
+      mkdir -p $SNAPCRAFT_PART_INSTALL/app/electron
+      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app/electron
     prime:
       - -node_modules
