@@ -1,8 +1,8 @@
 import { useState, useLayoutEffect } from "react";
 
 interface TargetOutside {
-	ref: React.RefObject<HTMLElement>;
-	eventType?: string;
+  ref: React.RefObject<HTMLElement>;
+  eventType?: string;
 }
 
 /**
@@ -11,36 +11,38 @@ interface TargetOutside {
  * @param eventType
  */
 export const useTargetOutside = ({ ref, eventType }: TargetOutside) => {
-	const [state, setState] = useState<any>();
+  const [state, setState] = useState<any>();
 
-	useLayoutEffect(() => {
-		function outsideTarget(e: Event) {
-			const { current } = ref;
-			const target = e.target as HTMLElement;
+  useLayoutEffect(() => {
+    function outsideTarget(e: Event) {
+      const { current } = ref;
+      const target = e.target as HTMLElement;
 
-			if (current) {
-				if (current.contains(target)) {
-					return;
-				}
-				setState(false);
-			}
-		}
+      if (current) {
+        if (current.contains(target)) {
+          return;
+        }
+        setState(false);
+      }
+    }
 
-		function closeOnEscape(e: KeyboardEvent) {
-			if (e.keyCode === 27) {
-				setState(false);
-			}
-		}
+    function closeOnEscape(e: KeyboardEvent) {
+      if (e.keyCode === 27) {
+        setState(false);
+      }
+    }
 
-		if (state) {
-			if (eventType) document.addEventListener(eventType, outsideTarget);
-			document.addEventListener("keydown", closeOnEscape);
-		}
-		return () => {
-			if (eventType) document.removeEventListener(eventType, outsideTarget);
-			document.removeEventListener("keydown", closeOnEscape);
-		};
-	}, [state, ref, eventType]);
+    if (state) {
+      if (eventType)
+        document.addEventListener(eventType, outsideTarget);
+      document.addEventListener("keydown", closeOnEscape);
+    }
+    return () => {
+      if (eventType)
+        document.removeEventListener(eventType, outsideTarget);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [state, ref, eventType]);
 
-	return [state, setState];
+  return [state, setState];
 };
