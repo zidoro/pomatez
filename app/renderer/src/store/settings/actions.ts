@@ -1,136 +1,136 @@
 import {
-	SettingTypes,
-	SettingActionTypes,
-	ALWAYS_ON_TOP,
-	RESTORE_DEFAULT_SETTINGS,
-	ENABLE_DARK_THEME,
-	TOGGLE_NOTIFICATION_SOUND,
-	ENABLE_PROGRESS_ANIMATION,
-	SET_NOTIFICATION_PROPERTY,
-	ENABLE_FULLSCREEN_BREAK,
-	USE_NATIVE_TITLE_BAR,
-	ENABLE_STRICT_MODE,
-	CLOSE_TO_TRAY,
-	MINIMIZE_TO_TRAY,
-	AUTO_START_WORK_TIME,
-	ENABLE_VOICE_ASSISTANCE,
-	ENABLE_COMPACT_MODE,
+  SettingTypes,
+  SettingActionTypes,
+  ALWAYS_ON_TOP,
+  RESTORE_DEFAULT_SETTINGS,
+  ENABLE_DARK_THEME,
+  TOGGLE_NOTIFICATION_SOUND,
+  ENABLE_PROGRESS_ANIMATION,
+  SET_NOTIFICATION_PROPERTY,
+  ENABLE_FULLSCREEN_BREAK,
+  USE_NATIVE_TITLE_BAR,
+  ENABLE_STRICT_MODE,
+  CLOSE_TO_TRAY,
+  MINIMIZE_TO_TRAY,
+  AUTO_START_WORK_TIME,
+  ENABLE_VOICE_ASSISTANCE,
+  ENABLE_COMPACT_MODE,
 } from "./types";
 
 export const setAlwaysOnTop = (
-	alwaysOnTop: SettingTypes["alwaysOnTop"]
+  alwaysOnTop: SettingTypes["alwaysOnTop"]
 ): SettingActionTypes => {
-	return {
-		type: ALWAYS_ON_TOP,
-		payload: alwaysOnTop,
-	};
+  return {
+    type: ALWAYS_ON_TOP,
+    payload: alwaysOnTop,
+  };
 };
 
 export const togglenotificationSoundOn = () => {
-	return {
-		type: TOGGLE_NOTIFICATION_SOUND,
-	};
+  return {
+    type: TOGGLE_NOTIFICATION_SOUND,
+  };
 };
 
 export const setEnableDarkTheme = (
-	enableDarkTheme: SettingTypes["enableDarkTheme"]
+  enableDarkTheme: SettingTypes["enableDarkTheme"]
 ): SettingActionTypes => {
-	return {
-		type: ENABLE_DARK_THEME,
-		payload: enableDarkTheme,
-	};
+  return {
+    type: ENABLE_DARK_THEME,
+    payload: enableDarkTheme,
+  };
 };
 
 export const setEnableCompactMode = (
-	enableCompactMode: SettingTypes["compactMode"]
+  enableCompactMode: SettingTypes["compactMode"]
 ): SettingActionTypes => {
-	return {
-		type: ENABLE_COMPACT_MODE,
-		payload: enableCompactMode,
-	};
+  return {
+    type: ENABLE_COMPACT_MODE,
+    payload: enableCompactMode,
+  };
 };
 
 export const setEnableFullscreenBreak = (
-	enableFullscreenBreak: SettingTypes["enableFullscreenBreak"]
+  enableFullscreenBreak: SettingTypes["enableFullscreenBreak"]
 ): SettingActionTypes => {
-	return {
-		type: ENABLE_FULLSCREEN_BREAK,
-		payload: enableFullscreenBreak,
-	};
+  return {
+    type: ENABLE_FULLSCREEN_BREAK,
+    payload: enableFullscreenBreak,
+  };
 };
 
 export const setEnableStrictMode = (
-	enableStrictMode: SettingTypes["enableStrictMode"]
+  enableStrictMode: SettingTypes["enableStrictMode"]
 ): SettingActionTypes => {
-	return {
-		type: ENABLE_STRICT_MODE,
-		payload: enableStrictMode,
-	};
+  return {
+    type: ENABLE_STRICT_MODE,
+    payload: enableStrictMode,
+  };
 };
 
 export const setEnableProgressAnimation = (
-	enableProgressAnimation: SettingTypes["enableProgressAnimation"]
+  enableProgressAnimation: SettingTypes["enableProgressAnimation"]
 ): SettingActionTypes => {
-	return {
-		type: ENABLE_PROGRESS_ANIMATION,
-		payload: enableProgressAnimation,
-	};
+  return {
+    type: ENABLE_PROGRESS_ANIMATION,
+    payload: enableProgressAnimation,
+  };
 };
 
 export const setEnableVoiceAssistance = (
-	enableVoiceAssistance: SettingTypes["enableVoiceAssistance"]
+  enableVoiceAssistance: SettingTypes["enableVoiceAssistance"]
 ): SettingActionTypes => {
-	return {
-		type: ENABLE_VOICE_ASSISTANCE,
-		payload: enableVoiceAssistance,
-	};
+  return {
+    type: ENABLE_VOICE_ASSISTANCE,
+    payload: enableVoiceAssistance,
+  };
 };
 
 export const setUseNativeTitlebar = (
-	useNativeTitlebar: SettingTypes["useNativeTitlebar"]
+  useNativeTitlebar: SettingTypes["useNativeTitlebar"]
 ): SettingActionTypes => {
-	return {
-		type: USE_NATIVE_TITLE_BAR,
-		payload: useNativeTitlebar,
-	};
+  return {
+    type: USE_NATIVE_TITLE_BAR,
+    payload: useNativeTitlebar,
+  };
 };
 
 export const setNotificationProperty = (
-	notificationProperty: string
+  notificationProperty: string
 ): SettingActionTypes => {
-	return {
-		type: SET_NOTIFICATION_PROPERTY,
-		payload: notificationProperty,
-	};
+  return {
+    type: SET_NOTIFICATION_PROPERTY,
+    payload: notificationProperty,
+  };
 };
 
 export const setCloseToTray = (
-	closeToTray: SettingTypes["closeToTray"]
+  closeToTray: SettingTypes["closeToTray"]
 ): SettingActionTypes => {
-	return {
-		type: CLOSE_TO_TRAY,
-		payload: closeToTray,
-	};
+  return {
+    type: CLOSE_TO_TRAY,
+    payload: closeToTray,
+  };
 };
 
 export const setMinimizeToTray = (
-	minimizeToTray: SettingTypes["minimizeToTray"]
+  minimizeToTray: SettingTypes["minimizeToTray"]
 ): SettingActionTypes => {
-	return {
-		type: MINIMIZE_TO_TRAY,
-		payload: minimizeToTray,
-	};
+  return {
+    type: MINIMIZE_TO_TRAY,
+    payload: minimizeToTray,
+  };
 };
 
 export const setAutoStartWorkTime = (
-	autoStartWorkTime: SettingTypes["autoStartWorkTime"]
+  autoStartWorkTime: SettingTypes["autoStartWorkTime"]
 ): SettingActionTypes => {
-	return {
-		type: AUTO_START_WORK_TIME,
-		payload: autoStartWorkTime,
-	};
+  return {
+    type: AUTO_START_WORK_TIME,
+    payload: autoStartWorkTime,
+  };
 };
 
 export const restoreDefaultSettings = () => ({
-	type: RESTORE_DEFAULT_SETTINGS,
+  type: RESTORE_DEFAULT_SETTINGS,
 });

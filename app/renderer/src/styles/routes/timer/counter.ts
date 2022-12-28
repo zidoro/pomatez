@@ -3,144 +3,145 @@ import { LONG_BREAK, SHORT_BREAK, SPECIAL_BREAK } from "store";
 import { ProgressSVG } from "assets/icons";
 
 export type ProgressProps = {
-	offset: number;
-	animate: "true" | "false";
+  offset: number;
+  animate: "true" | "false";
 };
 
 export const StyledCounterProgress = styled(ProgressSVG)<ProgressProps>`
-	#progress {
-		stroke: ${(p) =>
-			(p.type === SHORT_BREAK && "var(--color-green)") ||
-			(p.type === LONG_BREAK && "var(--color-yellow)") ||
-			(p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
-			"var(--color-primary)"};
-		stroke-width: 0.6rem;
-		stroke-linecap: round;
-		stroke-dasharray: 674px;
-		stroke-dashoffset: ${(p) => `${p.offset}px`};
-		transition: ${(p) => p.animate === "true" && "stroke-dashoffset 1s linear"};
-	}
+  #progress {
+    stroke: ${(p) =>
+      (p.type === SHORT_BREAK && "var(--color-green)") ||
+      (p.type === LONG_BREAK && "var(--color-yellow)") ||
+      (p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
+      "var(--color-primary)"};
+    stroke-width: 0.6rem;
+    stroke-linecap: round;
+    stroke-dasharray: 674px;
+    stroke-dashoffset: ${(p) => `${p.offset}px`};
+    transition: ${(p) =>
+      p.animate === "true" && "stroke-dashoffset 1s linear"};
+  }
 `;
 
 export const StyledCounterWrapper = styled.div`
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 
-	position: absolute;
-	top: 0;
-	left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-	display: grid;
-	align-content: center;
-	justify-content: center;
-	justify-items: center;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
 
-	margin-top: -0.8rem;
+  margin-top: -0.8rem;
 `;
 
 type CounterContainerProps = {
-	fullscreen?: boolean;
+  fullscreen?: boolean;
 };
 
 export const StyledCounterContainer = styled.div<CounterContainerProps>`
-	width: 100%;
+  width: 100%;
 
-	flex: 1 1;
+  flex: 1 1;
 
-	padding: 2rem;
+  padding: 2rem;
 
-	background-color: var(--color-bg-primary);
+  background-color: var(--color-bg-primary);
 
-	position: relative;
+  position: relative;
 
-	${(p) =>
-		p.fullscreen &&
-		css`
-			position: fixed !important;
-			top: 0 !important;
-			left: 0 !important;
-			right: 0 !important;
-			bottom: 0 !important;
-			z-index: 1000 !important;
+  ${(p) =>
+    p.fullscreen &&
+    css`
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      z-index: 1000 !important;
 
-			&::before,
-			${StyledCounterProgress} {
-				margin-top: -2.3rem !important;
-			}
+      &::before,
+      ${StyledCounterProgress} {
+        margin-top: -2.3rem !important;
+      }
 
-			${StyledCounterWrapper} {
-				margin-top: -3.1rem !important;
-			}
-		`}
+      ${StyledCounterWrapper} {
+        margin-top: -3.1rem !important;
+      }
+    `}
 
-	&::before,
+  &::before,
   ${StyledCounterProgress} {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) rotateY(-180deg) rotateZ(-90deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateY(-180deg) rotateZ(-90deg);
 
-		width: 22rem;
-		height: 22rem;
-	}
+    width: 22rem;
+    height: 22rem;
+  }
 
-	&::before {
-		content: "";
+  &::before {
+    content: "";
 
-		border-radius: 50%;
-		border: 6px solid var(--color-border-primary);
-	}
+    border-radius: 50%;
+    border: 6px solid var(--color-border-primary);
+  }
 
-	&.compact {
-		padding: 16px;
-		display: flex;
-		flex: 0;
-		&::before {
-			display: ${(p) => (p.fullscreen ? "auto" : "none")};
-		}
-	}
+  &.compact {
+    padding: 16px;
+    display: flex;
+    flex: 0;
+    &::before {
+      display: ${(p) => (p.fullscreen ? "auto" : "none")};
+    }
+  }
 `;
 
 export const StyledCounterType = styled.div`
-	color: #666;
-	text-align: center;
-	padding-bottom: 0.8rem;
+  color: #666;
+  text-align: center;
+  padding-bottom: 0.8rem;
 `;
 
 type TimerProps = { type?: string } & CounterContainerProps;
 
 export const StyledCounterTimer = styled.h3<TimerProps>`
-	font-size: 4rem;
-	font-weight: 400;
-	color: ${(p) =>
-		(p.type === SHORT_BREAK && "var(--color-green)") ||
-		(p.type === LONG_BREAK && "var(--color-yellow)") ||
-		(p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
-		"var(--color-primary)"};
+  font-size: 4rem;
+  font-weight: 400;
+  color: ${(p) =>
+    (p.type === SHORT_BREAK && "var(--color-green)") ||
+    (p.type === LONG_BREAK && "var(--color-yellow)") ||
+    (p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
+    "var(--color-primary)"};
 
-	line-height: 1.2;
+  line-height: 1.2;
 
-	width: 20rem;
+  width: 20rem;
 
-	display: grid;
-	align-items: center;
-	justify-items: start;
-	grid-template-columns: 1fr max-content 1fr;
-	column-gap: 0.8rem;
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  grid-template-columns: 1fr max-content 1fr;
+  column-gap: 0.8rem;
 
-	& > span:first-of-type {
-		justify-self: end;
-	}
+  & > span:first-of-type {
+    justify-self: end;
+  }
 
-	&.compact {
-		font-size: ${(p) => (p.fullscreen ? "4rem" : "2.5rem")};
-		width: unset;
-		display: flex;
-		gap: 0.25rem;
-	}
+  &.compact {
+    font-size: ${(p) => (p.fullscreen ? "4rem" : "2.5rem")};
+    width: unset;
+    display: flex;
+    gap: 0.25rem;
+  }
 `;
 
 export const StyledCounterLabel = styled.p`
-	font-size: 1.8rem;
-	text-transform: capitalize;
+  font-size: 1.8rem;
+  text-transform: capitalize;
 `;
