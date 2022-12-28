@@ -12,9 +12,9 @@
   "homepage": "./",
   "scripts": {
     "clean": "rimraf build/",
-    "prebuild": "copyfiles -u 3 \"src/assets/logos/*\" ../main/src/assets",
+    "prebuild": "yarn clean && copyfiles -u 3 \"src/assets/logos/*\" ../electron/src/assets",
     "build": "react-scripts build",
-    "postbuild": "copyfiles -u 1 \"build/**/*\" ../main/build && yarn clean",
+    "postbuild": "copyfiles -u 1 \"build/**/*\" ../electron/build",
     "dev:renderer": "react-scripts start",
     "start": "yarn dev:renderer",
     "gen:tts": "node tts-generator.js"
