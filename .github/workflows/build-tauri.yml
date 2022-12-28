@@ -1,0 +1,42 @@
+name: Test Build Tauri
+
+on:
+  push:
+jobs:
+  build:
+    name: "Test Build"
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: linux
+          - os: macos-latest
+            name: mac
+          - os: windows-latest
+            name: win
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: "yarn"
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install NPM Packages
+        run: |
+          yarn install --immutable --network-timeout 120000
+      - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn build:tauri
+      # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
+      - uses: actions/upload-artifact@v2
+        with:
+          name: built-app-${{ matrix.name }}
+          path: |
+            app/electron/dist/*.*

@@ -15,6 +15,11 @@
     },
     {
       "type": "json",
+      "path": "app/tauri/tauri.conf.json",
+      "jsonpath": "$.package.version"
+    },
+    {
+      "type": "json",
       "path": "app/renderer/package.json",
       "jsonpath": "$.version"
     }
