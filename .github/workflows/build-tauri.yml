@@ -38,8 +38,9 @@ jobs:
       - name: Build
         run: yarn build:tauri
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-#      - uses: actions/upload-artifact@v2
-#        with:
-#          name: built-app-${{ matrix.name }}
-#          path: |
-#            app/electron/dist/*.*
+      - uses: actions/upload-artifact@v2
+        with:
+          name: built-app-${{ matrix.name }}
+          path: |
+            app/tauri/target/release/bundle/deb/*.deb
+            app/tauri/target/release/bundle/appimage/*.AppImage
