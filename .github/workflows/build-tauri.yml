@@ -13,10 +13,10 @@ jobs:
         include:
           - os: ubuntu-20.04
             name: linux
-#          - os: macos-latest
-#            name: mac
-#          - os: windows-latest
-#            name: win
+          - os: macos-latest
+            name: mac
+          - os: windows-latest
+            name: win
 
     steps:
       - uses: actions/checkout@v2
