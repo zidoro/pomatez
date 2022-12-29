@@ -44,3 +44,6 @@ jobs:
           path: |
             app/tauri/target/release/bundle/deb/*.deb
             app/tauri/target/release/bundle/appimage/*.AppImage
+            app/tauri/target/release/bundle/msi/*.msi
+            app/tauri/target/release/bundle/dmg/*.dmg
+            app/tauri/target/release/bundle/macos/*.app
