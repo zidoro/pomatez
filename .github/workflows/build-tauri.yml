@@ -13,10 +13,10 @@ jobs:
         include:
           - os: ubuntu-latest
             name: linux
-          - os: macos-latest
-            name: mac
-          - os: windows-latest
-            name: win
+#          - os: macos-latest
+#            name: mac
+#          - os: windows-latest
+#            name: win
 
     steps:
       - uses: actions/checkout@v2
@@ -31,12 +31,10 @@ jobs:
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn build:tauri
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-      - uses: actions/upload-artifact@v2
-        with:
-          name: built-app-${{ matrix.name }}
-          path: |
-            app/electron/dist/*.*
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: built-app-${{ matrix.name }}
+#          path: |
+#            app/electron/dist/*.*
