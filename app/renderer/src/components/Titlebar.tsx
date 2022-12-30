@@ -44,7 +44,7 @@ const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
   }, [darkMode, timerType]);
 
   return (
-    <StyledTitlebar>
+    <StyledTitlebar data-tauri-drag-region={true}>
       <StyledMarkWrapper>
         <StyledMarkLogo src={getAppIcon()} />
         <StyledMarkName>
