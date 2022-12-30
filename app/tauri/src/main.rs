@@ -18,7 +18,6 @@ fn main() {
             {
                 let window = app.get_window("main").unwrap();
                 window.open_devtools();
-                window.close_devtools();
             }
             Ok(())
         })

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import SettingSection from "./SettingSection";
-import { ElectronContext } from "contexts";
+import { ConnnectorContext } from "contexts";
 import { Help } from "components";
 
 const HelpSection: React.FC = () => {
-  const { openExternalCallback } = useContext(ElectronContext);
+  const { openExternalCallback } = useContext(ConnnectorContext);
 
   useEffect(() => {
     if (openExternalCallback) {

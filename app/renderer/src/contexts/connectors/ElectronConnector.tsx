@@ -1,34 +1,31 @@
-import React, { useCallback, useEffect, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
+import { ConnnectorContext } from "../ConnnectorContext";
 import { useSelector } from "react-redux";
+import { AppStateTypes, SettingTypes } from "../../store";
+import { CounterContext } from "../CounterContext";
 import isElectron from "is-electron";
 import {
-  SET_MINIMIZE,
-  SET_CLOSE,
-  SET_SHOW,
   SET_ALWAYS_ON_TOP,
+  SET_CLOSE,
+  SET_COMPACT_MODE,
   SET_FULLSCREEN_BREAK,
-  SET_UI_THEME,
+  SET_MINIMIZE,
   SET_NATIVE_TITLEBAR,
+  SET_SHOW,
+  SET_UI_THEME,
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
   SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
-
-import { AppStateTypes, SettingTypes } from "store";
-import { CounterContext } from "./CounterContext";
-import { TraySVG } from "components";
-import { encodeSvg } from "utils";
-
-type ElectronProps = {
-  onMinimizeCallback?: () => void;
-  onExitCallback?: () => void;
-  openExternalCallback?: () => void;
-};
+import { encodeSvg } from "../../utils";
+import { TraySVG } from "../../components";
 
 const ElectronContext = React.createContext<ElectronProps>({});
 
 const ElectronProvider: React.FC = ({ children }) => {
   const { electron } = window;
+
+  // TODO do logic to switch out the connectors based on the platform
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
@@ -152,7 +149,7 @@ const ElectronProvider: React.FC = ({ children }) => {
   }, [electron, timer.playing, timerType, dashOffset]);
 
   return (
-    <ElectronContext.Provider
+    <ConnnectorContext.Provider
       value={{
         onMinimizeCallback,
         onExitCallback,
@@ -160,8 +157,9 @@ const ElectronProvider: React.FC = ({ children }) => {
       }}
     >
       {children}
-    </ElectronContext.Provider>
+    </ConnnectorContext.Provider>
   );
 };
+
 
 export { ElectronContext, ElectronProvider };
