@@ -2,6 +2,7 @@
   "build": {
     "beforeDevCommand": "yarn dev:tauri",
     "beforeBuildCommand": "yarn build",
+    "withGlobalTauri": true,
     "devPath": "http://localhost:3000",
     "distDir": "../renderer/build"
   },
