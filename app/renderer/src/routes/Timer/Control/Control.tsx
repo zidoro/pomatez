@@ -52,7 +52,9 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     const warnSound = new Audio(WarningBell);
 
     setWarn(true);
-    warnSound.play();
+    warnSound.play().catch((e) => {
+      console.warn("There was a problem playing sound", e);
+    });
   }, []);
 
   const onResetCallback = useCallback(() => {
