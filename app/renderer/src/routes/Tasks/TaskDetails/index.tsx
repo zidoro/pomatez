@@ -14,7 +14,7 @@ import {
   setTaskCardDone,
   setTaskCardNotDone,
 } from "store";
-import { ElectronContext } from "contexts";
+import { ConnnectorContext } from "contexts";
 import autoSize from "autosize";
 
 import {
@@ -51,7 +51,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
       (state: AppStateTypes) => state.tasks.present
     );
 
-    const { openExternalCallback } = useContext(ElectronContext);
+    const { openExternalCallback } = useContext(ConnnectorContext);
 
     const card = tasks
       .find((list) => list._id === listId)

@@ -3,7 +3,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import {
   ThemeProvider,
   CounterProvider,
-  ElectronProvider,
+  ConnectorProvider,
 } from "contexts";
 import { Layout, Preloader } from "components";
 import { compactRoutes, routes } from "config";
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <CounterProvider>
-        <ElectronProvider>
+        <ConnectorProvider>
           <Router>
             <Layout>
               <Suspense fallback={<Preloader />}>
@@ -47,7 +47,7 @@ export default function App() {
               </Suspense>
             </Layout>
           </Router>
-        </ElectronProvider>
+        </ConnectorProvider>
       </CounterProvider>
     </ThemeProvider>
   );

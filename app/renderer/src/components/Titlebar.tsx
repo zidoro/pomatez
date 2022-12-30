@@ -9,7 +9,7 @@ import {
   StyledMarkLogo,
   StyledMarkName,
 } from "styles";
-import { ElectronContext } from "contexts";
+import { ConnnectorContext } from "contexts";
 import { APP_NAME } from "config";
 
 import Json from "../../package.json";
@@ -28,7 +28,7 @@ type Props = {
 
 const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
   const { onMinimizeCallback, onExitCallback } =
-    useContext(ElectronContext);
+    useContext(ConnnectorContext);
 
   const getAppIcon = useCallback(() => {
     switch (timerType) {
