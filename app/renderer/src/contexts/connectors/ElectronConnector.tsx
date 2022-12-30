@@ -38,94 +38,76 @@ const ElectronProvider: React.FC = ({ children }) => {
   const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
-    if (isElectron()) {
-      electron.send(SET_MINIMIZE, {
-        minimizeToTray: settings.minimizeToTray,
-      });
-    }
+    electron.send(SET_MINIMIZE, {
+      minimizeToTray: settings.minimizeToTray,
+    });
   }, [electron, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
-    if (isElectron()) {
-      electron.send(SET_CLOSE, {
-        closeToTray: settings.closeToTray,
-      });
-    }
+    electron.send(SET_CLOSE, {
+      closeToTray: settings.closeToTray,
+    });
   }, [electron, settings.closeToTray]);
 
   const openExternalCallback = useCallback(() => {
-    if (isElectron()) {
-      const links = document.querySelectorAll("a");
+    const links = document.querySelectorAll("a");
 
-      Array.prototype.forEach.call(links, (link: HTMLAnchorElement) => {
-        const url = link.getAttribute("href");
-        if (url?.indexOf("http") === 0) {
-          link.addEventListener("click", (e) => {
-            e.preventDefault();
-            electron.openExternal(url);
-          });
-        }
-      });
-    }
+    Array.prototype.forEach.call(links, (link: HTMLAnchorElement) => {
+      const url = link.getAttribute("href");
+      if (url?.indexOf("http") === 0) {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          electron.openExternal(url);
+        });
+      }
+    });
   }, [electron]);
 
   useEffect(() => {
-    if (isElectron() && !settings.enableFullscreenBreak) {
+    if (!settings.enableFullscreenBreak) {
       electron.send(SET_SHOW);
     }
   }, [electron, timer.timerType, settings.enableFullscreenBreak]);
 
   useEffect(() => {
-    if (isElectron()) {
-      electron.send(SET_ALWAYS_ON_TOP, {
-        alwaysOnTop: settings.alwaysOnTop,
-      });
-    }
+    electron.send(SET_ALWAYS_ON_TOP, {
+      alwaysOnTop: settings.alwaysOnTop,
+    });
   }, [electron, settings.alwaysOnTop]);
 
   useEffect(() => {
-    if (isElectron()) {
-      electron.send(SET_FULLSCREEN_BREAK, {
-        shouldFullscreen,
-        alwaysOnTop: settings.alwaysOnTop,
-      });
-    }
+    electron.send(SET_FULLSCREEN_BREAK, {
+      shouldFullscreen,
+      alwaysOnTop: settings.alwaysOnTop,
+    });
   }, [electron, settings.alwaysOnTop, shouldFullscreen]);
 
   useEffect(() => {
-    if (isElectron()) {
-      electron.send(SET_COMPACT_MODE, {
-        compactMode: settings.compactMode,
-      });
-    }
+    electron.send(SET_COMPACT_MODE, {
+      compactMode: settings.compactMode,
+    });
   }, [electron, settings.compactMode]);
 
   useEffect(() => {
-    if (isElectron()) {
-      electron.send(SET_UI_THEME, {
-        isDarkMode: settings.enableDarkTheme,
-      });
-    }
+    electron.send(SET_UI_THEME, {
+      isDarkMode: settings.enableDarkTheme,
+    });
   }, [electron, settings.enableDarkTheme]);
 
   useEffect(() => {
-    if (isElectron()) {
-      electron.send(SET_NATIVE_TITLEBAR, {
-        useNativeTitlebar: settings.useNativeTitlebar,
-      });
-    }
+    electron.send(SET_NATIVE_TITLEBAR, {
+      useNativeTitlebar: settings.useNativeTitlebar,
+    });
   }, [electron, settings.useNativeTitlebar]);
 
   useEffect(() => {
-    if (isElectron()) {
       electron.send(SET_OPEN_AT_LOGIN, {
         openAtLogin: settings.openAtLogin,
       });
-    }
   }, [electron, settings.openAtLogin]);
 
   useEffect(() => {
-    if (isElectron() && timer.playing) {
+    if (timer.playing) {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
