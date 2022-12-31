@@ -59,7 +59,9 @@
         "height": 600,
         "resizable": true,
         "title": "pomatez",
-        "width": 800
+        "width": 800,
+        "minWidth": 340,
+        "minHeight": 502
       }
     ]
   }
