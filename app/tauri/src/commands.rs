@@ -8,8 +8,48 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn my_custom_command() {
-    println!("I was invoked from JS!");
+fn set_minimize() {
+    println!("Minimize!");
+}
+
+#[tauri::command]
+fn set_close() {
+    println!("set_close!");
+}
+
+#[tauri::command]
+fn set_show() {
+    println!("set_show!");
+}
+
+#[tauri::command]
+fn set_always_on_top() {
+    println!("set_always_on_top!");
+}
+
+#[tauri::command]
+fn set_fullscreen_break() {
+    println!("set_fullscreen_break!");
+}
+
+#[tauri::command]
+fn set_compact_mode() {
+    println!("set_compact_mode!");
+}
+
+#[tauri::command]
+fn set_ui_theme() {
+    println!("set_ui_theme!");
+}
+
+#[tauri::command]
+fn set_native_titlebar() {
+    println!("set_native_titlebar!");
+}
+
+#[tauri::command]
+fn tray_icon_update() {
+    println!("tray_icon_update!");
 }
 
 /**
@@ -25,7 +65,8 @@ pub trait CommandRegister {
 
 impl CommandRegister for Builder<Wry> {
     fn register_pomatez_commands(self) -> tauri::Builder<Wry> {
-        self.invoke_handler(tauri::generate_handler![greet])
-            .invoke_handler(tauri::generate_handler![my_custom_command])
+        self.invoke_handler(tauri::generate_handler![greet, set_show, set_always_on_top,
+            set_fullscreen_break, set_compact_mode, set_ui_theme, set_native_titlebar,
+            tray_icon_update, set_close, set_minimize])
     }
 }
