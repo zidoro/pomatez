@@ -33,16 +33,19 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
+    invoke("my_custom_command");
     console.log("Minimize callback");
   }, [invoke, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
+    invoke("my_custom_command");
     console.log("onExitCallback callback");
   }, [invoke, settings.closeToTray]);
 
   const openExternalCallback = useCallback(() => {}, [invoke]);
 
   useEffect(() => {
+    invoke("my_custom_command");
     console.log("Fullscreen break", settings.enableFullscreenBreak);
   }, [timer.timerType, settings.enableFullscreenBreak]);
 
@@ -71,6 +74,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   }, [settings.useNativeTitlebar]);
 
   useEffect(() => {
+    invoke("my_custom_command");
     console.log("Tray icon update", timerType, count, duration);
     // if (isElectron() && timer.playing) {
     //   const canvas = document.createElement("canvas");

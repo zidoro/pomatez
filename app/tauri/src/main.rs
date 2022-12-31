@@ -3,13 +3,11 @@ all(not(debug_assertions), target_os = "windows"),
 windows_subsystem = "windows"
 )]
 
-use tauri::Manager;
+#[macro_use]
+mod commands;
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
+use tauri::{Manager};
+use commands::CommandRegister;
 
 fn main() {
     tauri::Builder::default()
@@ -20,8 +18,8 @@ fn main() {
                 window.open_devtools();
             }
             Ok(())
-        })
-        .invoke_handler(tauri::generate_handler![greet])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        }).register_pomatez_commands().run(tauri::generate_context!()).expect("error while running tauri application");
 }
+// fn register_commands<E>(app: Builder<Wry>) -> Builder<Wry> {
+//     app.invoke_handler(tauri::generate_handler![greet])
+// }

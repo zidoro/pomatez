@@ -1,14 +1,14 @@
 {
   "build": {
     "beforeDevCommand": "yarn dev:tauri",
-    "beforeBuildCommand": "yarn build",
+    "beforeBuildCommand": "yarn run tauri:updateversion && yarn build",
     "withGlobalTauri": true,
     "devPath": "http://localhost:3000",
     "distDir": "../renderer/build"
   },
   "package": {
     "productName": "pomatez",
-    "version": "0.0.0"
+    "version": "1.2.2"
   },
   "tauri": {
     "allowlist": {

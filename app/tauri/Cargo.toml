@@ -1,10 +1,13 @@
 [package]
 name = "pomatez"
-version = "0.0.0"
-description = "A Tauri App"
+# In the current version of release please, unless the toml file is in the root of the project it cannot be updated.
+# https://github.com/googleapis/release-please/issues/1724
+# util/cargo-version-updater.js will run to keep this value up to date before rust builds.
+version = "1.2.2"
+description = "Attractive pomodoro timer for Windows, Mac, and Linux."
 authors = ["Roldan Montilla Jr"]
 license = "MIT"
-repository = ""
+repository = "https://github.com/roldanjr/pomatez"
 edition = "2021"
 rust-version = "1.57"
 
