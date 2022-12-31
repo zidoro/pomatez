@@ -118,7 +118,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
         ctx?.drawImage(img, 0, 0);
         const dataUrl = canvas.toDataURL("image/png");
 
-        send(TRAY_ICON_UPDATE, dataUrl);
+        send(TRAY_ICON_UPDATE, { dataUrl });
       };
     }
   }, [send, timer.playing, timerType, dashOffset]);
