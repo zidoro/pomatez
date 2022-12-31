@@ -20,6 +20,18 @@ import { TraySVG } from "../../components";
 export const TauriConnectorProvider: React.FC = ({ children }) => {
   const { invoke } = window.__TAURI__;
 
+  /**
+   * Rust uses lowercase snake_case for function names so we need to convert to lower case for the calls.
+   * @param event
+   * @param payload
+   */
+  const send = useCallback(
+    (event: string, ...payload: any) => {
+      invoke(event.toLowerCase(), ...payload);
+    },
+    [invoke]
+  );
+
   // TODO do logic to switch out the connectors based on the platform
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
@@ -33,71 +45,83 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
-    invoke("my_custom_command");
+    send(SET_MINIMIZE, {
+      minimizeToTray: settings.minimizeToTray,
+    });
     console.log("Minimize callback");
-  }, [invoke, settings.minimizeToTray]);
+  }, [send, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
-    invoke("my_custom_command");
-    console.log("onExitCallback callback");
-  }, [invoke, settings.closeToTray]);
+    send(SET_CLOSE, {
+      closeToTray: settings.closeToTray,
+    });
+  }, [send, settings.closeToTray]);
 
-  const openExternalCallback = useCallback(() => {}, [invoke]);
-
-  useEffect(() => {
-    invoke("my_custom_command");
-    console.log("Fullscreen break", settings.enableFullscreenBreak);
-  }, [timer.timerType, settings.enableFullscreenBreak]);
-
-  useEffect(() => {
-    console.log("alwaysOnTop", settings.alwaysOnTop);
-  }, [settings.alwaysOnTop]);
+  /**
+   * Not needed as tauri already opens these externally.
+   */
+  const openExternalCallback = useCallback(() => {}, []);
 
   useEffect(() => {
-    console.log(
-      "Fullscreen break",
-      settings.alwaysOnTop,
-      shouldFullscreen
-    );
-  }, [settings.alwaysOnTop, shouldFullscreen]);
+    if (!settings.enableFullscreenBreak) {
+      send(SET_SHOW);
+    }
+  }, [send, timer.timerType, settings.enableFullscreenBreak]);
 
   useEffect(() => {
-    console.log("Compact mode", settings.compactMode);
-  }, [settings.compactMode]);
+    send(SET_ALWAYS_ON_TOP, {
+      alwaysOnTop: settings.alwaysOnTop,
+    });
+  }, [send, settings.alwaysOnTop]);
 
   useEffect(() => {
-    console.log("Dark theme", settings.enableDarkTheme);
-  }, [settings.enableDarkTheme]);
+    send(SET_FULLSCREEN_BREAK, {
+      shouldFullscreen,
+      alwaysOnTop: settings.alwaysOnTop,
+    });
+  }, [send, settings.alwaysOnTop, shouldFullscreen]);
 
   useEffect(() => {
-    console.log("Native titlebar", settings.useNativeTitlebar);
-  }, [settings.useNativeTitlebar]);
+    send(SET_COMPACT_MODE, {
+      compactMode: settings.compactMode,
+    });
+  }, [send, settings.compactMode]);
 
   useEffect(() => {
-    invoke("my_custom_command");
-    console.log("Tray icon update", timerType, count, duration);
-    // if (isElectron() && timer.playing) {
-    //   const canvas = document.createElement("canvas");
-    //   const ctx = canvas.getContext("2d");
-    //
-    //   canvas.width = 16;
-    //   canvas.height = 16;
-    //
-    //   let svgXML = encodeSvg(
-    //     <TraySVG timerType={timerType} dashOffset={dashOffset} />
-    //   );
-    //
-    //   const img = new Image();
-    //   img.src = svgXML;
-    //
-    //   img.onload = function () {
-    //     ctx?.drawImage(img, 0, 0);
-    //     const dataUrl = canvas.toDataURL("image/png");
-    //
-    //     electron.send(TRAY_ICON_UPDATE, dataUrl);
-    //   };
-    // }
-  }, [timer.playing, timerType, dashOffset]);
+    send(SET_UI_THEME, {
+      isDarkMode: settings.enableDarkTheme,
+    });
+  }, [send, settings.enableDarkTheme]);
+
+  useEffect(() => {
+    send(SET_NATIVE_TITLEBAR, {
+      useNativeTitlebar: settings.useNativeTitlebar,
+    });
+  }, [send, settings.useNativeTitlebar]);
+
+  useEffect(() => {
+    if (timer.playing) {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = 16;
+      canvas.height = 16;
+
+      let svgXML = encodeSvg(
+        <TraySVG timerType={timerType} dashOffset={dashOffset} />
+      );
+
+      const img = new Image();
+      img.src = svgXML;
+
+      img.onload = function () {
+        ctx?.drawImage(img, 0, 0);
+        const dataUrl = canvas.toDataURL("image/png");
+
+        send(TRAY_ICON_UPDATE, dataUrl);
+      };
+    }
+  }, [send, timer.playing, timerType, dashOffset]);
 
   return (
     <ConnnectorContext.Provider
