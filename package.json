@@ -25,7 +25,8 @@
     "gen:tts": "lerna run gen:tts --stream",
     "format": "prettier --write .",
     "tauri": "tauri",
-    "tauri:dev": "tauri dev"
+    "tauri:dev": "tauri dev",
+    "tauri:updateversion": "node ./app/tauri/util/cargo-version-updater.js"
   },
   "config": {
     "commitizen": {

@@ -1856,7 +1856,7 @@ dependencies = [
 
 [[package]]
 name = "pomatez"
-version = "0.0.0"
+version = "1.2.2"
 dependencies = [
  "serde",
  "serde_json",
