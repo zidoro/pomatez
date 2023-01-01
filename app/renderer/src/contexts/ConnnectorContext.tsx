@@ -19,7 +19,6 @@ export const ConnectorProvider: React.FC = ({ children }) => {
     Connector = ElectronConnectorProvider;
   } else if (window.__TAURI__) {
     Connector = TauriConnectorProvider;
-    console.log("Is tauri!!!");
   }
 
   return <Connector children={children} />;
