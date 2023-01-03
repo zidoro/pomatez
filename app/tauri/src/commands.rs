@@ -30,15 +30,28 @@ fn set_show<R: Runtime>(_window: tauri::Window<R>) {
 #[tauri::command]
 fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::Window<R>) {
     println!("set_always_on_top! {}", always_on_top);
+    try_set_always_on_top(always_on_top, &window);
+}
+
+#[tauri::command]
+fn set_fullscreen_break<R: Runtime>(should_fullscreen: bool, always_on_top: bool, window: tauri::Window<R>) {
+    println!("set_fullscreen_break! {} {}", should_fullscreen, always_on_top);
+    try_set_always_on_top(always_on_top, &window);
+    try_set_fullscreen(should_fullscreen, &window);
+}
+
+fn try_set_fullscreen<R: Runtime>(fullscreen: bool, window: &tauri::Window<R>) {
+    match window.set_fullscreen(fullscreen) {
+        Ok(_) => (),
+        Err(e) => println!("There was a problem setting fullscreen: {}", e),
+    }
+}
+
+fn try_set_always_on_top<R: Runtime>(always_on_top: bool, window: &tauri::Window<R>) {
     match window.set_always_on_top(always_on_top) {
         Ok(_) => (),
         Err(e) => println!("There was a problem altering always on top: {}", e),
     }
-}
-
-#[tauri::command]
-fn set_fullscreen_break<R: Runtime>(should_fullscreen: bool, always_on_top: bool, _window: tauri::Window<R>) {
-    println!("set_fullscreen_break! {} {}", should_fullscreen, always_on_top);
 }
 
 fn try_set_min_size<R: Runtime>(size: Option<PhysicalSize<u32>>, window: &tauri::Window<R>) {
