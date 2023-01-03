@@ -28,8 +28,12 @@ fn set_show<R: Runtime>(_window: tauri::Window<R>) {
 }
 
 #[tauri::command]
-fn set_always_on_top<R: Runtime>(always_on_top: bool, _window: tauri::Window<R>) {
+fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::Window<R>) {
     println!("set_always_on_top! {}", always_on_top);
+    match window.set_always_on_top(always_on_top) {
+        Ok(_) => (),
+        Err(e) => println!("There was a problem altering always on top: {}", e),
+    }
 }
 
 #[tauri::command]
