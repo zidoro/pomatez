@@ -14,8 +14,6 @@
   .
   <a href="#world_map-roadmap">Road Map</a>
   .
-  <a href="#rocket-boosters">Boosters</a>
-  .
   <a href="#call_me_hand-development">Development</a>
   .
   <a href="#computer-installation">Installation</a>
@@ -47,77 +45,59 @@
 
 ## :sparkles: Features
 
-- **Customizable rules**. You can easily modify the default rules of Pomodoro Principle to be fitted on your personal needs and likings.
+- **Customizable rules** - it allows you to modify the default Pomodoro configuration based on your personal preferences.
 
-- **Built-in task list**. Allowing you to create task lists that you want to accomplish with drag and drop feature changing your task priorities. It also allow you to mark specific task item as finish or even undo and redu some accident actions.
+- **Built-in task list** - it allows you to create a simple list of todos and mark the items done when it's done.
 
-- **Full-screen breaks**. If enabled, the app will interrupt and force you to take a break by occupying the whole screen while preventing you from working.
+- **Full-screen breaks** - once enabled, it will force you to not continue working during break time by occupying the whole screen of your desktop, but right now it doesn't support multiple monitors.
 
-- **Desktop notification**. If enabled, you will be notified from time to time. Notification property are divided into 3 types; NONE, NORMAL and EXTRA.
+- **Desktop notification** - once enabled, you will get desktop notifications from time to time depending on the notification type you selected. Supported notification types are the following;
 
-- **Special breaks**. You can set specific time wherein you really need to take a break like for example - lunch, snack, or even dinner time depending on you without having to change the rules that you have been set.
+  - _None_ - no notification will be shown.
+  - _Normal_ - will show notification in every break. `default`
+  - _Extra_ - will show notification 60 seconds before the break starts, and 30s before the break ends, and the actual break starts.
 
-- **Keyboard shortcuts**. Provide some useful keyboard shortcuts allowing you to use the app conveniently.
+- **Special breaks** - a special feature that enables you to set specific times to take important breaks like lunch, snack, dinner and etc.. without updating the Pomodoro configuration.
 
-- **Auto updates**. With this feature, it keeps the app up to date with the latest version. You don't need to download new updates; it delivers directly to your computer.
+- **Keyboard shortcuts** - might be helpful for you depending on your use case but currently, these keyboard shortcuts are not yet customizable.
 
-- **Always on top**. If enabled, the app will always on top of other apps running on your Operating System.
+- **Auto updates** - once enabled, the app will always be on top of other apps running on your Operating System.
 
-- **Minimize to tray**. If enabled, minimize action will not minimized the app. Instead, it will be hidden and being send to tray. Useful when you want not to be distracted while using the alt-tab on your machine.
+- **Always on top** - once enabled, the app will always be on top of other apps running on your Operating System.
 
-- **Close to tray**. If enabled, close action will not quit the app. Instead, it will be hidden and being send to tray. Useful if you don't want to accidentally quit the app.
+- **Minimize to tray** - once enabled, the minimize action will not minimize the app. Instead, it will be hidden and sent to the tray.
 
-- **Progress on tray**. It will show progress on your system tray. This feature can be activated if minimize to tray or close to tray feature is enabled.
+- **Close to tray** - once enabled, the close action will not quit the app. Instead, it will be hidden and sent to the tray.
 
-- **Progress animation**. Allowing you to disable timer progress animation to reduce CPU usage to the app least required.
+- **Progress on tray** - the app will show a progress indicator on your system tray. This feature can be activated if minimize to tray or close to tray feature is enabled also.
 
-- **Toggle native titlebar**. Allowing you to switch between default custom titlebar to a native one and vice versa. This feature is useful especially if you don't like the default titlebar.
+- **Progress animation** - by default, you will get a smooth timer progress animation but if you're worried about the app's memory consumption on your computer, you can disable it by the way.
 
-- **Auto-start work time**. If enabled, the app will automatically start after the timer ends. It is useful when you did not want to always start the timer manually everytime.
+- **Toggle native titlebar** - it allows you to switch between the custom title bar of the app to a native one provided by your Operating System and vice versa, depending on your personal preference.
 
-- **Voice assistance**. If enabled, desktop notification will have male voice to inform you from time to time. Useful when you are away from your computer while taking some break.
+- **Auto-start work time** - once enabled, you will no longer need to manually start the work timer again after the break ends, it will automatically start for you.
 
-- **Dark theme**. Allowing you to use dark mode helps to reduce your eye strain and improves visibility if you are a type of person with low vision and sensitive to bright light.
+- **Voice assistance** - once enabled, your desktop notification will include a male voice to inform you of things related to your Pomodoro session. Useful sometimes especially when you're away from your computer during break time.
 
-- **Strict mode**. If enabled, the app will strictly follow the rules you have set and preventing you from pausing, skipping and resetting the timer when it started.
+- **Dark theme** - it allows you to use dark mode and helps you reduce eye strain and improves visibility if you are the type of person with low vision and high sensitivity to bright light.
+
+- **Strict mode** - once enabled, the app will strictly follow the rules you have set and prevent you from pausing, skipping, and resetting the timer when it started.
+
+- **Compact Mode** - once enabled, the app will occupy less space on your screen and it will be useful if you're using a small-screen device.
 
 ## :world_map: Roadmap
 
-- **Customizable shortcuts**. Provide a way to make the default keyboard shortcuts customizable by the user.
+- **Customizable shortcuts** - provide a way to make the default keyboard shortcuts customizable by the users.
 
-- **Website Blocker**. Enable user to block specific website while working in order to stay on focus.
+- **Website Blocker** - enable users to block specific websites while working in order to stay on focus.
 
-- **Productivity report**. Provide some useful summary about user's productivity to have some sense of accomplishments.
+- **Productivity report** - provide some useful summary about the users' productivity to have some sense of accomplishments.
 
-- **Time extender**. Enable user to extend timer if needed. Useful when the user wants to finish the task first before taking up a break.
+- **Time extender** - enable the users to extend the timer if needed. Useful when they want to finish the task first before taking up a break.
 
-- **Tasks database**. Enable user to save completed tasks into a database. Useful when the user wants to monitor or track previews tasks.
+- **Tasks database** - enable users to save completed tasks into a database. Useful when the users want to monitor or track previous tasks.
 
-## :rocket: Boosters
-
-Find exactly what you need to be more productive and regain control over your time.
-
-Luxafor products already used by **73,859** office workers in productive companies worldwide, such as:
-
-![Google](.github/assets/companies/google.jpg) &nbsp; ![YouTube](.github/assets/companies/youtube.jpg) &nbsp; ![Logitech](.github/assets/companies/logitech.jpg) &nbsp; ![Facebook](.github/assets/companies/facebook.jpg) &nbsp; ![Microsoft](.github/assets/companies/microsoft.png) &nbsp; ![Bank of America](.github/assets/companies/bank_of_america.jpg) &nbsp; ![Thales](.github/assets/companies/thales.jpg) &nbsp; ![Ingram](.github/assets/companies/ingram.jpg) &nbsp; ![Hulu](.github/assets/companies/hulu.jpg) &nbsp; ![Etsy](.github/assets/companies/etsy.jpg) &nbsp; ![Butterball](.github/assets/companies/Butterball.png)
-
-| Name & Description                                                                                                                                                                                                                                                                                                                                                | Image                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| <h3>[Luxafor Flag](https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25)</h3> LED availability indicator that eliminates workspace distractions. <br> <a href="https://luxafor.com/flag-usb-busylight-availability-indicator/?hello=25">See details</a>                                                                                        | ![Luxafor Flag](.github/assets/boosters/Luxafor%20Flag.jpg)                       |
-| <h3>[Luxafor Bluetooth](https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25)</h3> Wireless & software-controlled LED availability indicator that displays notifications and personal availability. <br> <a href="https://luxafor.com/bluetooth-busy-light-availability-indicator/?hello=25">See details</a>                                 | ![Luxafor Bluetooth](.github/assets/boosters/Luxafor%20Bluetooth.jpg)             |
-| <h3>[Luxafor Switch](https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25)</h3> Wireless & remote-controlled availability indicator that displays meeting room and workstation availability in real-time. <br> <a href="https://luxafor.com/luxafor-switch-meeting-room-availability-indicator-light/?hello=25">See details</a> | ![Luxafor Switch](.github/assets/boosters/Luxafor%20Switch.jpg)                   |
-| <h3>[Luxafor Cube](https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25)</h3> Standalone LED availability indicator that displays meeting room availability. <br> <a href="https://luxafor.com/luxafor-cube-standalone-do-not-disturb-led-availability-light/?hello=25">See details</a>                                    | ![Luxafor Cube](.github/assets/boosters/Luxafor%20Cube.jpg)                       |
-| <h3>[Luxafor Pomodoro Timer](https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25)</h3> LED display timer that helps break down work in bite-sized chunks. <br> <a href="https://luxafor.com/luxafor-custom-led-pomodoro-timer/?hello=25">See details</a>                                                                                              | ![Luxafor Pomodoro Timer](.github/assets/boosters/Luxafor%20Pomodoro%20Timer.jpg) |
-| <h3>[Luxafor ANC Headphones](https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25)</h3> Wireless headphones with active noise cancelling technology. <br> <a href="https://luxafor.com/luxafor-wireless-headphones-with-active-noise-cancelling-technology/?hello=25">See details</a>                                | ![Luxafor ANC Headphones](.github/assets/boosters/Luxafor%20ANC%20Headphones.jpg) |
-| <h3>[Office Hero Planner](https://luxafor.com/new-office-hero-planner-2020/?hello=25)</h3> Productivity planner that helps prioritize tasks and measure performance. <br> <a href="https://luxafor.com/new-office-hero-planner-2020/?hello=25">See details</a>                                                                                                    | ![Office Hero Planner](.github/assets/boosters/Office%20Hero%20Planner.jpg)       |
-
-## :call_me_hand: Development
-
-This app is built using [React](https://reactjs.org/), [Electron](https://www.electronjs.org/), and [Typescript](https://www.typescriptlang.org/).
-
-It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) for better project management.
-
-### :zap: Quick Setup
+## :zap: Quick Setup
 
 1. Install all app dependencies.
 
@@ -131,7 +111,7 @@ It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classi
    yarn dev:app or npm run dev:app
    ```
 
-### 🛠 Building for Production
+## 🛠 Building for Production
 
 1. Build Windows installer.
 
@@ -157,7 +137,7 @@ It also used [Lerna](https://lerna.js.org/) and [Yarn Workspaces](https://classi
    yarn build:mwl or npm run build:mwl
    ```
 
-## Pre-Commit
+## :pencil: Pre-Commit
 
 If your pr is being rejected due to the pre-commit checks, just download pre-commit using `pip install pre-commit` or via one of the commands [here](https://pre-commit.com/#install).
 Once that is installed just running `pre-commit` should automatically fix the files.
@@ -170,17 +150,15 @@ Download the latest version from the [Releases Page](https://github.com/roldanjr
 
 **For Linux users:**
 
-> If you want to be always updated with latest release, recommended way to install it is using the Snap Store.
+> If you want to be always updated with the latest release, recommended way to install it is via Snap Store.
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pomatez)
 
-Please consider starring this project to show your :blue_heart: and support.
-
-Thank you friends! :vulcan_salute:
+Please consider starring this project to show your :blue_heart: and support. Thank you so much :bowing_man:
 
 ## :shield: Privacy
 
-This app has analytics that will track number of users only ([analytics.ts](https://github.com/roldanjr/pomatez/blob/master/app/main/src/helpers/analytics.ts)).
+This app has analytics that will track the number of users only and nothing more ([analytics.ts](https://github.com/roldanjr/pomatez/blob/master/app/main/src/helpers/analytics.ts)).
 
 ## :newspaper: License
 
