@@ -13,17 +13,17 @@ import {
   StyledFeaturedImage,
 } from "../styles";
 import { Header } from "../components";
-import { ThemeContext } from "../contexts";
-import { FeatureQuery } from "../queries";
+import { ThemeContext } from "../context";
+import { useFeatureQuery } from "../queries";
 
-const Features: React.FC = () => {
+export function Features() {
   const {
     allMarkdownRemark,
     tasksPreviewLight,
     tasksPreviewDark,
     configPreviewLight,
     configPreviewDark,
-  } = FeatureQuery();
+  } = useFeatureQuery();
 
   const { isDarkMode } = useContext(ThemeContext);
 
@@ -82,6 +82,4 @@ const Features: React.FC = () => {
       </StyledFeatureContent>
     </StyledFeatures>
   );
-};
-
-export default Features;
+}

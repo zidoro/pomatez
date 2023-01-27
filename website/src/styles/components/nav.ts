@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Link as ScrollLink } from "react-scroll";
 import { motion } from "framer-motion";
 import { ButtonStyles } from "./button";
+import { fadeFromTop, stagger } from "../animate";
 import { SectionContentStyle } from "../mixins";
-import { stagger, fadeFromTop, fadeFromRight } from "../animate";
 import media from "../media";
 
 type MenuProps = {
@@ -44,7 +44,9 @@ export const StyledNav = styled(motion.nav).attrs(() => ({
   }
 `;
 
-export const StyledNavHeader = styled(motion.header).attrs(() => ({}))`
+export const StyledNavHeader = styled(motion.header).attrs(() => ({
+  variants: fadeFromTop,
+}))`
   ${SectionContentStyle};
 
   max-width: 100rem;
@@ -62,9 +64,7 @@ export const StyledNavHeader = styled(motion.header).attrs(() => ({}))`
   }
 `;
 
-export const StyledNavLogo = styled(motion.div).attrs(() => ({
-  variants: fadeFromTop,
-}))`
+export const StyledNavLogo = styled(motion.div).attrs(() => ({}))`
   display: flex;
   align-items: center;
 
@@ -149,9 +149,7 @@ export const StyledNavLinks = styled(motion.ul).attrs(() => ({}))`
   }
 `;
 
-export const StyledNavLinkItem = styled(motion.li).attrs(() => ({
-  variants: fadeFromTop,
-}))``;
+export const StyledNavLinkItem = styled(motion.li).attrs(() => ({}))``;
 
 export const StyledNavLinkAnchor = styled(ScrollLink)``;
 
@@ -178,9 +176,7 @@ export const StyledNavButtonWrapper = styled(motion.div).attrs(
 `;
 
 export const StyledNavThemeToggler = styled(motion.button).attrs(
-  () => ({
-    variants: fadeFromTop,
-  })
+  () => ({})
 )`
   padding: 0.8rem 1.2rem;
 
@@ -218,9 +214,9 @@ export const StyledNavThemeToggler = styled(motion.button).attrs(
   }
 `;
 
-export const StyledScrollToDownload = styled(motion.div).attrs(() => ({
-  variants: fadeFromTop,
-}))`
+export const StyledScrollToDownload = styled(motion.div).attrs(
+  () => ({})
+)`
   & > a {
     ${ButtonStyles};
     font-size: 1.4rem;
@@ -262,9 +258,9 @@ export const StyledBackButton = styled.button`
   }
 `;
 
-export const StyledNavMenu = styled(motion.div).attrs(() => ({
-  variants: fadeFromRight,
-}))<MenuProps>`
+export const StyledNavMenu = styled(motion.div).attrs(
+  () => ({})
+)<MenuProps>`
   justify-self: end;
   border: none;
   border-radius: 3px;

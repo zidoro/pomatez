@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import media from "../media";
 
-export const StyledGithubLink = styled.a`
+const StyledGithubLink = styled.a`
   &:hover {
     color: var(--cl-primary-variant);
   }

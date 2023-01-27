@@ -9,9 +9,7 @@ import {
 } from "../styles";
 import { Edges } from "../types";
 
-type Props = {
-  node: Edges["node"];
-};
+type Props = { node: Edges["node"] };
 
 export const Header: React.FC<Props> = ({ node }) => {
   const [ref, inView] = useInView({ triggerOnce: true });

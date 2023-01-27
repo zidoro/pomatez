@@ -38,15 +38,6 @@ export const SectionContentStyle = css`
   align-content: start;
   animation: fadeIn ease 160ms;
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
   ${media.laptopMd} {
     max-width: 116.8rem;
   }

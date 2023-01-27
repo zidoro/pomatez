@@ -1,8 +1,8 @@
 import { useStaticQuery, graphql } from "gatsby";
-import { LandingQueryProps } from "./landing";
+import { HeroQueryProps } from "./hero";
 
-export const FeatureQuery = () =>
-  useStaticQuery<LandingQueryProps>(graphql`
+export const useFeatureQuery = () =>
+  useStaticQuery<HeroQueryProps>(graphql`
     {
       allMarkdownRemark: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/features/" } }

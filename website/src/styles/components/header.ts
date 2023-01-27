@@ -70,14 +70,21 @@ export const StyledHeading = styled(motion.h3).attrs(() => ({
     top: -2rem;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 100%;
     overflow-x: hidden;
 
-    ${media.tabletLg} {
+    ${media.tabletXl} {
       font-size: 16rem;
     }
 
+    ${media.tabletLg} {
+      font-size: 14rem;
+    }
+
     ${media.tabletMd} {
+      font-size: 12rem;
+    }
+
+    ${media.tabletSm} {
       display: none;
     }
   }
@@ -120,8 +127,11 @@ export const StyledDescription = styled(motion.div).attrs(() => ({
       line-height: 1.5;
     }
 
-    & > a:hover {
+    & > a {
       color: var(--cl-primary);
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;

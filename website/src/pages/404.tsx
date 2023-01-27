@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, PageHead, SVG } from "../components";
+import { PageLayout, SVG } from "../components";
 import {
   StyledPageNotFound,
   Styled404Header,
@@ -8,33 +8,41 @@ import {
   Styled404ActionWrapper,
   Styled404HomeLink,
   Styled404Content,
+  StyledHeroHeading,
+  StyledHeroDescription,
 } from "../styles";
 
-const NotFoundPage = () => (
-  <Layout>
-    <PageHead title="404: Page Not found" />
-    <StyledPageNotFound>
-      <Styled404Content>
-        <StyledWaterMarkLeft />
-        <StyledWaterMarkRight />
+function NotFoundPage() {
+  return (
+    <PageLayout>
+      <StyledPageNotFound>
+        <Styled404Content>
+          <StyledWaterMarkLeft />
+          <StyledWaterMarkRight />
 
-        <Styled404Header>
-          <SVG name="alert" />
-          <h1>PAGE NOT FOUND</h1>
-          <p>
-            You just hit a route that doesn&#39;t exist... the sadness.
-          </p>
-        </Styled404Header>
+          <Styled404Header>
+            <StyledHeroHeading>Not Found</StyledHeroHeading>
+            <StyledHeroDescription>
+              Sorry, we haven't found the page you are looking for.
+            </StyledHeroDescription>
+          </Styled404Header>
 
-        <Styled404ActionWrapper>
-          <Styled404HomeLink to="/">
-            <SVG name="arrow-back" />
-            Go back to Landing Page
-          </Styled404HomeLink>
-        </Styled404ActionWrapper>
-      </Styled404Content>
-    </StyledPageNotFound>
-  </Layout>
+          <Styled404ActionWrapper>
+            <Styled404HomeLink to="/">
+              <SVG name="arrow-back" />
+              Go back to Landing Page
+            </Styled404HomeLink>
+          </Styled404ActionWrapper>
+        </Styled404Content>
+      </StyledPageNotFound>
+    </PageLayout>
+  );
+}
+
+export const Head = () => (
+  <>
+    <title>404 - Page Not Found</title>
+  </>
 );
 
 export default NotFoundPage;

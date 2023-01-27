@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import { SectionStyle, SectionContentStyle } from "../mixins";
 import { ButtonStyles } from "../components";
 
-import { StyledLandingHeader } from "./landing";
+import { StyledHeroHeader } from "./hero";
 
 export const StyledPageNotFound = styled.section`
   ${SectionStyle};
@@ -19,8 +19,9 @@ export const Styled404Content = styled.div`
   justify-content: center;
 `;
 
-export const Styled404Header = styled(StyledLandingHeader)`
+export const Styled404Header = styled(StyledHeroHeader)`
   justify-items: center;
+  margin-top: 10rem;
 
   & > svg {
     width: 16rem;
