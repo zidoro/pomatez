@@ -7,7 +7,7 @@ import ConfigHeader from "./ConfigHeader";
 
 export * from "./ConfigSlider";
 
-export default () => {
+export default function Config() {
   return (
     <StyledConfig>
       <ConfigHeader />
@@ -15,4 +15,4 @@ export default () => {
       <SpecialBreakMemo />
     </StyledConfig>
   );
-};
+}
