@@ -13,7 +13,7 @@ export type SettingTypes = {
   closeToTray: boolean;
   minimizeToTray: boolean;
   autoStartWorkTime: boolean;
-  notificationProperty: "none" | "normal" | "extra";
+  notificationType: "none" | "normal" | "extra";
 };
 
 export const ALWAYS_ON_TOP = `${settings} ALWAYS_ON_TOP`;

@@ -24,7 +24,7 @@ const Collapse: React.FC<Props> = ({ children }) => {
         open={open}
         onClick={toggleCollapse}
       >
-        Notification Property
+        Notification Types
         <SVG name="chevron-down" />
       </StyledCollapseHeading>
       {open && (

@@ -53,8 +53,8 @@
 
 - **Desktop notification** - once enabled, you will get desktop notifications from time to time depending on the notification type you selected. Supported notification types are the following;
 
-  - _None_ - no notification will be shown.
-  - _Normal_ - will show notification in every break. `default`
+  - _None_ - no notification will be shown. `default`
+  - _Normal_ - will show notification in every break.
   - _Extra_ - will show notification 60 seconds before the break starts, and 30s before the break ends, and the actual break starts.
 
 - **Special breaks** - a special feature that enables you to set specific times to take important breaks like lunch, snack, dinner and etc.. without updating the Pomodoro configuration.

@@ -152,7 +152,7 @@ const FeatureSection: React.FC = () => {
           label="none"
           name="notification"
           value="none"
-          checked={settings.notificationProperty === "none"}
+          checked={settings.notificationType === "none"}
           onChange={onChangeNotificationProps}
         />
         <Radio
@@ -160,7 +160,7 @@ const FeatureSection: React.FC = () => {
           label="normal"
           name="notification"
           value="normal"
-          checked={settings.notificationProperty === "normal"}
+          checked={settings.notificationType === "normal"}
           onChange={onChangeNotificationProps}
         />
         <Radio
@@ -168,7 +168,7 @@ const FeatureSection: React.FC = () => {
           label="extra"
           name="notification"
           value="extra"
-          checked={settings.notificationProperty === "extra"}
+          checked={settings.notificationType === "extra"}
           onChange={onChangeNotificationProps}
         />
       </Collapse>

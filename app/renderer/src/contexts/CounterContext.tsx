@@ -57,7 +57,7 @@ const CounterProvider: React.FC = ({ children }) => {
       icon: notificationIcon,
       mute: !settings.notificationSoundOn,
     },
-    settings.notificationProperty !== "none"
+    settings.notificationType !== "none"
   );
 
   const [shouldFullscreen, setShouldFullscreen] = useState(false);
@@ -125,9 +125,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Special break started.",
                 {
-                  body: `You can now start taking your ${
-                    firstBreak.duration
-                  } ${
+                  body: `Enjoy your ${firstBreak.duration} ${
                     isEqualToOne(firstBreak.duration)
                       ? "minute"
                       : "minutes"
@@ -142,9 +140,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Special break started.",
                 {
-                  body: `You can now start taking your ${
-                    secondBreak.duration
-                  } ${
+                  body: `Enjoy your ${secondBreak.duration} ${
                     isEqualToOne(secondBreak.duration)
                       ? "minute"
                       : "minutes"
@@ -159,9 +155,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Special break started.",
                 {
-                  body: `You can now start taking your ${
-                    thirdBreak.duration
-                  } ${
+                  body: `Enjoy your ${thirdBreak.duration} ${
                     isEqualToOne(thirdBreak.duration)
                       ? "minute"
                       : "minutes"
@@ -176,9 +170,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Special break started.",
                 {
-                  body: `You can now start taking your ${
-                    fourthBreak.duration
-                  } ${
+                  body: `Enjoy your ${fourthBreak.duration} ${
                     isEqualToOne(fourthBreak.duration)
                       ? "minute"
                       : "minutes"
@@ -242,31 +234,31 @@ const CounterProvider: React.FC = ({ children }) => {
   }, [timer.playing]);
 
   useEffect(() => {
-    if (settings.notificationProperty === "extra") {
+    if (settings.notificationType === "extra") {
       if (count === 61) {
         if (timer.timerType === SHORT_BREAK) {
           notification(
             "60 seconds left.",
-            { body: "Please prepare yourself to stay focused again." },
+            { body: "Prepare yourself to stay focused again." },
             settings.enableVoiceAssistance && sixtySecondsLeftWav
           );
         } else if (timer.timerType === LONG_BREAK) {
           notification(
             "60 seconds left.",
-            { body: "Please prepare yourself to stay focused again." },
+            { body: "Prepare yourself to stay focused again." },
             settings.enableVoiceAssistance && sixtySecondsLeftWav
           );
         } else if (timer.timerType === SPECIAL_BREAK) {
           notification(
             "60 seconds left.",
-            { body: "Please prepare yourself to stay focused again." },
+            { body: "Prepare yourself to stay focused again." },
             settings.enableVoiceAssistance && sixtySecondsLeftWav
           );
         }
       } else if (count === 31 && timer.timerType === STAY_FOCUS) {
         notification(
           "30 seconds left.",
-          { body: "Please pause all media playing if there's one." },
+          { body: "Pause all media playing if there's one." },
           settings.enableVoiceAssistance && thirtySecondsLeftWav
         );
       }
@@ -280,9 +272,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Focus time finished.",
                 {
-                  body: `You can now start taking your ${
-                    config.shortBreak
-                  } ${
+                  body: `Enjoy your ${config.shortBreak} ${
                     isEqualToOne(config.shortBreak)
                       ? "minute"
                       : "minutes"
@@ -298,9 +288,7 @@ const CounterProvider: React.FC = ({ children }) => {
               notification(
                 "Session rounds completed.",
                 {
-                  body: `You can now start taking your ${
-                    config.longBreak
-                  } ${
+                  body: `Enjoy your ${config.longBreak} ${
                     isEqualToOne(config.longBreak)
                       ? "minute"
                       : "minutes"
@@ -319,7 +307,9 @@ const CounterProvider: React.FC = ({ children }) => {
             notification(
               "Break time finished.",
               {
-                body: `Stay focused for about ${config.stayFocus} ${
+                body: `Stay focused as much as possible for ${
+                  config.stayFocus
+                } ${
                   isEqualToOne(config.stayFocus) ? "minute" : "minutes"
                 }.`,
               },
@@ -340,7 +330,9 @@ const CounterProvider: React.FC = ({ children }) => {
             notification(
               "Break time finished.",
               {
-                body: `Stay focused for about ${config.stayFocus} ${
+                body: `Stay focused as much as possible for ${
+                  config.stayFocus
+                } ${
                   isEqualToOne(config.stayFocus) ? "minute" : "minutes"
                 }.`,
               },
@@ -361,7 +353,9 @@ const CounterProvider: React.FC = ({ children }) => {
             notification(
               "Break time finished.",
               {
-                body: `Stay focused for about ${config.stayFocus} ${
+                body: `Stay focused as much as possible for ${
+                  config.stayFocus
+                } ${
                   isEqualToOne(config.stayFocus) ? "minute" : "minutes"
                 }.`,
               },
@@ -388,7 +382,7 @@ const CounterProvider: React.FC = ({ children }) => {
     config.shortBreak,
     config.longBreak,
     config.sessionRounds,
-    settings.notificationProperty,
+    settings.notificationType,
     settings.autoStartWorkTime,
     settings.enableVoiceAssistance,
   ]);
