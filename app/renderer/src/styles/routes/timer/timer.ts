@@ -37,6 +37,12 @@ export const StyledTimer = styled.main`
   }
 `;
 
+export const StyledSectionSeparator = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border-primary);
+`;
+
 export const StyledPriorityCardContainer = styled.div`
   width: 100%;
   height: 5.6rem;

@@ -20,6 +20,7 @@ import {
   StyledOptionPriority,
   StyledOptionDone,
   StyledOptionDelete,
+  StyledSectionSeparator,
 } from "styles";
 import { SVG } from "components";
 import { useTargetOutside } from "hooks";
@@ -68,30 +69,22 @@ const PriorityCard: React.FC = () => {
   };
 
   const getTaskNoteHeading = () => {
-    if (isObjectEmpty(priorityList)) {
-      return "No priority list has been created yet.";
-    } else {
-      if (priorityCard?.text) {
-        return priorityCard?.text;
-      }
-      return "No task item on your priority list.";
+    if (priorityCard?.text) {
+      return priorityCard?.text;
     }
+    return "";
   };
 
   const getTaskNoteDescription = () => {
-    if (isObjectEmpty(priorityList)) {
-      return "Create a priority list and add task items on it.";
-    } else {
-      if (isObjectEmpty(priorityCard)) {
-        return "Add at least one item on your priority list.";
-      } else {
-        if (priorityCard?.description) {
-          return priorityCard?.description;
-        }
-        return "";
-      }
+    if (priorityCard?.description) {
+      return priorityCard?.description;
     }
+    return "";
   };
+
+  if (isObjectEmpty(priorityList)) {
+    return <StyledSectionSeparator />;
+  }
 
   return (
     <StyledPriorityCardContainer>
@@ -122,10 +115,10 @@ const PriorityCard: React.FC = () => {
 
             <StyledOptionList>
               <StyledOptionDone onClick={setTaskCardDoneCallback}>
-                Done Task
+                Done
               </StyledOptionDone>
               <StyledOptionPriority onClick={skipTaskCardCallback}>
-                Skip Task
+                Skip
               </StyledOptionPriority>
               <StyledOptionDelete onClick={deleteTaskCardCallback}>
                 Delete
