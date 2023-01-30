@@ -6,8 +6,8 @@ import { URL_PATH_PREFIX } from "../../config";
 type QueryProps = SiteMetaProps & MarkDownProps;
 
 export function PageHead() {
-  const { site, allMarkdownRemark } =
-    useStaticQuery<QueryProps>(graphql`
+  const { site, allMarkdownRemark } = useStaticQuery<QueryProps>(
+    graphql`
       query HeaderQuery {
         site {
           siteMetadata {
@@ -39,7 +39,8 @@ export function PageHead() {
           }
         }
       }
-    `);
+    `
+  );
 
   const metaTitle = site.siteMetadata.title;
   const metaDescription = site.siteMetadata.description;
