@@ -29,4 +29,5 @@ export const NAV_LINKS = [
 export const ENV = {
   GOOGLE_VERIFICATION: process.env.GOOGLE_VERIFICATION || "",
   GA_TRACKING_ID: process.env.GA_TRACKING_ID || "",
+  IS_DEV: process.env.NODE_ENV !== "production",
 };

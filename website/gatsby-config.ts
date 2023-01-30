@@ -8,7 +8,7 @@ const config: GatsbyConfig = {
     description:
       "Elegant Multi-platform Desktop App for Pomodoro Lovers.",
     author: "Roldan Montilla Jr",
-    siteUrl: `https://roldanjr.github.io`,
+    siteUrl: "https://roldanjr.github.io",
     twitterUsername: "@roldanjr_dev",
     googleVerification: ENV.GOOGLE_VERIFICATION,
   },
@@ -18,7 +18,7 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     {
-      resolve: `gatsby-plugin-google-gtag`,
+      resolve: "gatsby-plugin-google-gtag",
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
@@ -43,13 +43,13 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-plugin-styled-components`,
+      resolve: "gatsby-plugin-styled-components",
       options: {
         fileName: false,
-        pure: true,
+        displayName: ENV.IS_DEV,
       },
     },
-    "gatsby-plugin-image", // TODO: Migrate `gatsby-image` to `gatsby-plugin-image`
+    "gatsby-plugin-image", // TODO: Migrate "gatsby-image" to "gatsby-plugin-image"
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
