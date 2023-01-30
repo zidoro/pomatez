@@ -1,28 +1,16 @@
 import React from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { StyledNavLogo } from "../styles";
-import SVG from "./SVG";
+import { APP_NAME } from "../config";
+import { SVG } from "./svg";
 
-type Props = {
-  name: string;
-  isHome?: boolean;
-};
-
-export const Logo: React.FC<Props> = ({ name, isHome }) => {
+export function Logo() {
   return (
     <StyledNavLogo>
-      <ScrollLink
-        href="/"
-        to="landing"
-        offset={-64}
-        duration={420}
-        smooth
-      >
+      <ScrollLink href="/" to="hero" offset={-64} duration={420} smooth>
         <SVG name="pomatez" />
-        <label>{name}</label>
+        <p>{APP_NAME}</p>
       </ScrollLink>
     </StyledNavLogo>
   );
-};
-
-export default Logo;
+}

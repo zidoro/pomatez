@@ -9,7 +9,7 @@ import ShortcutSection from "./ShortcutSection";
 import StickySection from "./StickySection";
 import SettingHeader from "./SettingHeader";
 
-export default () => {
+export default function Settings() {
   const alertState = getFromStorage("alert") || null;
 
   const [alert, setAlert] = useState(alertState);
@@ -35,4 +35,4 @@ export default () => {
       <StickySection />
     </StyledSettings>
   );
-};
+}

@@ -10,7 +10,7 @@ import { compactRoutes, routes } from "config";
 import { useSelector } from "react-redux";
 import { AppStateTypes } from "store";
 
-export default () => {
+export default function App() {
   const settings = useSelector(
     (state: AppStateTypes) => state.settings
   );
@@ -51,4 +51,4 @@ export default () => {
       </CounterProvider>
     </ThemeProvider>
   );
-};
+}

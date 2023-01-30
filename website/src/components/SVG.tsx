@@ -1,22 +1,19 @@
-import React, { useEffect } from "react";
-import PomatezSVG from "../assets/icons/pomatez.svg";
-import DownloadSVG from "../assets/icons/download.svg";
-import SunnySVG from "../assets/icons/sunny.svg";
-import MoonSVG from "../assets/icons/moon.svg";
-import GithubSVG from "../assets/icons/github.svg";
-import WindowSVG from "../assets/icons/windows.svg";
-import AppleSVG from "../assets/icons/apple.svg";
-import LinuxSVG from "../assets/icons/linux.svg";
-import SnapStoreSVG from "../assets/icons/snap-store.svg";
-import TuxSVG from "../assets/icons/tux.svg";
-import ArrowBackSVG from "../assets/icons/arrow-back.svg";
-import { useIsBrowser } from "../hooks/useIsBrowser";
+import React from "react";
+import { useIsBrowser } from "../hooks";
 
-type Props = {
-  name?: string;
-};
+import PomatezSVG from "../../assets/icons/pomatez.svg";
+import DownloadSVG from "../../assets/icons/download.svg";
+import SunnySVG from "../../assets/icons/sunny.svg";
+import MoonSVG from "../../assets/icons/moon.svg";
+import GithubSVG from "../../assets/icons/github.svg";
+import WindowSVG from "../../assets/icons/windows.svg";
+import AppleSVG from "../../assets/icons/apple.svg";
+import LinuxSVG from "../../assets/icons/linux.svg";
+import SnapStoreSVG from "../../assets/icons/snap-store.svg";
+import TuxSVG from "../../assets/icons/tux.svg";
+import ArrowBackSVG from "../../assets/icons/arrow-back.svg";
 
-export const SVG: React.FC<Props> = ({ name }) => {
+export function SVG({ name }: { name?: string }) {
   const isBrowser = useIsBrowser();
 
   if (isBrowser) {
@@ -49,6 +46,4 @@ export const SVG: React.FC<Props> = ({ name }) => {
   }
 
   return null;
-};
-
-export default React.memo(SVG);
+}

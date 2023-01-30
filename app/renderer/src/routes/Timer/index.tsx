@@ -7,7 +7,7 @@ import Control from "./Control";
 import Counter from "./Counter";
 import PriorityCard from "./PriorityCard";
 
-export default () => {
+export default function Timer() {
   const compactMode = useSelector(
     (state: AppStateTypes) => state.settings.compactMode
   );
@@ -24,4 +24,4 @@ export default () => {
       <Control resetTimerAction={onResetCallback} />
     </StyledTimer>
   );
-};
+}

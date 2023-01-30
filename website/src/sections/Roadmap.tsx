@@ -13,17 +13,17 @@ import {
   StyledRoadmapImage,
 } from "../styles";
 import { Header } from "../components";
-import { ThemeContext } from "../contexts";
-import { RoadmapQuery } from "../queries";
+import { ThemeContext } from "../context";
+import { useRoadMapQuery } from "../queries";
 
-const Roadmap: React.FC = () => {
+export function RoadMap() {
   const {
     allMarkdownRemark,
     shortBreakPreviewLight,
     shortBreakPreviewDark,
     longBreakPreviewLight,
     longBreakPreviewDark,
-  } = RoadmapQuery();
+  } = useRoadMapQuery();
 
   const { isDarkMode } = useContext(ThemeContext);
 
@@ -82,6 +82,4 @@ const Roadmap: React.FC = () => {
       </StyledRoadmapContent>
     </StyledRoadmap>
   );
-};
-
-export default Roadmap;
+}

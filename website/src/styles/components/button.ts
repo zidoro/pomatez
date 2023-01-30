@@ -7,7 +7,7 @@ export const ButtonStyles = css`
   padding: 1rem 2rem;
 
   border: none;
-  border-radius: 3px;
+  border-radius: 100px;
 
   display: flex;
   align-items: center;

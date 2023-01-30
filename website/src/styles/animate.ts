@@ -1,7 +1,8 @@
 export const stagger = {
   animate: {
     transition: {
-      staggerChildren: 0.16,
+      delayChildren: 0.3,
+      staggerChildren: 0.3,
     },
   },
 };
@@ -20,7 +21,7 @@ export const fadeIn = {
 
 export const fadeFromTop = {
   initial: {
-    y: -60,
+    y: -10,
     opacity: 0,
   },
   animate: {
@@ -34,7 +35,7 @@ export const fadeFromTop = {
 
 export const fadeFromBottom = {
   initial: {
-    y: 60,
+    y: 10,
     opacity: 0,
   },
   animate: {
@@ -48,7 +49,7 @@ export const fadeFromBottom = {
 
 export const fadeFromLeft = {
   initial: {
-    x: -60,
+    x: -10,
     opacity: 0,
   },
   animate: {
@@ -62,7 +63,7 @@ export const fadeFromLeft = {
 
 export const fadeFromRight = {
   initial: {
-    x: 60,
+    x: 10,
     opacity: 0,
   },
   animate: {
