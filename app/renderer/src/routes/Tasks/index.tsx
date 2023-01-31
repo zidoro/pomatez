@@ -17,7 +17,7 @@ import { AppStateTypes, addTaskList, dragList } from "store";
 import TaskFormButton from "./TaskFormButton";
 import TaskInnerList from "./TaskInnerList";
 
-export default () => {
+export default function Tasks() {
   const tasks = useSelector((state: AppStateTypes) => state.tasks);
 
   const dispatch = useDispatch();
@@ -95,4 +95,4 @@ export default () => {
       </StyledTaskMain>
     </DragDropContext>
   );
-};
+}

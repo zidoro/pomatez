@@ -27,7 +27,7 @@ const defaultSettings: SettingTypes = {
   enableProgressAnimation: true,
   enableVoiceAssistance: false,
   notificationSoundOn: true,
-  notificationProperty: "normal",
+  notificationType: "none",
   closeToTray: true,
   minimizeToTray: false,
   autoStartWorkTime: false,

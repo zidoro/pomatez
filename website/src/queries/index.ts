@@ -1,5 +1,4 @@
-export * from "./landing";
+export * from "./hero";
 export * from "./features";
-export * from "./boosters";
 export * from "./roadmap";
 export * from "./download";

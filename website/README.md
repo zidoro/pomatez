@@ -1,8 +1,8 @@
 # Pomatez website
 
-![Preview Light](src/assets/images/preview-light.png)
+![Preview Light](assets/images/preview-light.png)
 
-![Preview Dark](src/assets/images/preview-dark.png)
+![Preview Dark](assets/images/preview-dark.png)
 
 ## 🛠 Installation & Set Up
 

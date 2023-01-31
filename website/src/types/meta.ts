@@ -3,7 +3,6 @@ export type SiteMetaProps = {
     siteMetadata: {
       title: string;
       description: string;
-      keywords: string[];
       author: string;
       siteUrl: string;
       twitterUsername: string;

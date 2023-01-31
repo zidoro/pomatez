@@ -1,23 +1,25 @@
 import React from "react";
 import {
+  StyledCopyrightText,
   StyledFooter,
   StyledFooterContent,
   StyledFooterNote,
-  StyledCopyrightText,
 } from "../styles";
-import { SVG } from "../components";
-import { APP_NAME } from "../config";
+import {
+  APP_NAME,
+  AUTHOR_GITHUB_URL,
+  PROJECT_GITHUB_URL,
+} from "../config";
+import { SVG } from "./svg";
 
-type Props = {};
-
-export const Footer: React.FC<Props> = () => {
+export function Footer() {
   return (
     <StyledFooter>
       <StyledFooterContent>
         <a
-          href="https://github.com/roldanjr/pomatez"
-          target="_blank"
+          href={PROJECT_GITHUB_URL}
           rel="noopener noreferrer"
+          target="_blank"
         >
           <SVG name="github" />
           <StyledCopyrightText>
@@ -28,9 +30,9 @@ export const Footer: React.FC<Props> = () => {
         <StyledFooterNote>
           Developed and Maintained by <br />
           <a
-            href="https://github.com/roldanjr"
-            target="_blank"
+            href={AUTHOR_GITHUB_URL}
             rel="noopener noreferrer"
+            target="_blank"
           >
             Roldan Montilla Jr
           </a>
@@ -38,6 +40,4 @@ export const Footer: React.FC<Props> = () => {
       </StyledFooterContent>
     </StyledFooter>
   );
-};
-
-export default React.memo(Footer);
+}

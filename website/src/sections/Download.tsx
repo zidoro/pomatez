@@ -21,10 +21,10 @@ import {
   RPM_INSTALLER,
   MAC_INSTALLER,
 } from "../config";
-import { DownloadQuery } from "../queries";
+import { useDownloadQuery } from "../queries";
 
-const Download: React.FC = () => {
-  const { allMarkdownRemark } = DownloadQuery();
+export function Download() {
+  const { allMarkdownRemark } = useDownloadQuery();
 
   const [ref, inView] = useInView({ triggerOnce: true });
 
@@ -113,6 +113,4 @@ const Download: React.FC = () => {
       </StyledDownloadContent>
     </StyledDownload>
   );
-};
-
-export default Download;
+}

@@ -7,14 +7,11 @@ import {
   StyledNavThemeToggler,
   StyledScrollToDownload,
 } from "../styles";
-import { NavLinks } from "./Navigation";
 import { useContextProvider } from "../hooks";
+import { NavLinks } from "./navigation";
+import { SVG } from "./svg";
 
-import SVG from "./SVG";
-
-type Props = {};
-
-const Sidebar: React.FC<Props> = () => {
+export function Sidebar() {
   const {
     isOnMobile,
     isDarkMode,
@@ -59,6 +56,4 @@ const Sidebar: React.FC<Props> = () => {
       </StyledSidebarList>
     </StyledSidebar>
   ) : null;
-};
-
-export default Sidebar;
+}
