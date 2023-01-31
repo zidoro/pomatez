@@ -61,7 +61,7 @@ const getFrameHeight = () => {
     return 502;
   } else {
     if (store.get("useNativeTitlebar")) {
-      return 480;
+      return 488;
     }
     return 502;
   }
