@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from "gatsby";
 import { MarkDownProps } from "../types";
 
-export const DownloadQuery = () =>
+export const useDownloadQuery = () =>
   useStaticQuery<MarkDownProps>(graphql`
     {
       allMarkdownRemark(

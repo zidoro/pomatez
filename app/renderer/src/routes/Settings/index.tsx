@@ -9,7 +9,7 @@ import ShortcutSection from "./ShortcutSection";
 import StickySection from "./StickySection";
 import SettingHeader from "./SettingHeader";
 
-export default () => {
+export default function Settings() {
   const alertState = getFromStorage("alert") || null;
 
   const [alert, setAlert] = useState(alertState);
@@ -19,10 +19,9 @@ export default () => {
       <SettingHeader />
       {alert === null && (
         <Alert
-          heading="Hello Friends,"
-          body="Please consider starring this project on GitHub to show 💙 and
-				support. It will inspire the developer to continue improving the app
-				for best user experience."
+          heading="Hi 👋,"
+          body="If you liked this app, please consider starring this project on GitHub to show your ❤️ and
+				support."
           onClose={() => {
             saveToStorage("alert", "hide");
             setAlert("hide");
@@ -35,4 +34,4 @@ export default () => {
       <StickySection />
     </StyledSettings>
   );
-};
+}

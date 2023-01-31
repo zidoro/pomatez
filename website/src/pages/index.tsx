@@ -1,22 +1,17 @@
-import React from "react";
-import { PageHead, Layout } from "../components";
-import {
-  Landing,
-  Features,
-  Boosters,
-  Roadmap,
-  Download,
-} from "../sections";
+import * as React from "react";
+import { PageHead, PageLayout } from "../components";
+import { Download, Features, Hero, RoadMap } from "../sections";
 
-export default () => {
+function IndexPage() {
   return (
-    <Layout>
-      <PageHead />
-      <Landing />
+    <PageLayout>
+      <Hero />
       <Features />
-      <Boosters />
-      <Roadmap />
+      <RoadMap />
       <Download />
-    </Layout>
+    </PageLayout>
   );
-};
+}
+
+export const Head = PageHead;
+export default IndexPage;

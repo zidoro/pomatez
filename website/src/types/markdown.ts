@@ -40,7 +40,7 @@ export type Frontmatter = {
   stepList?: StepList[];
   headline?: string;
   companies?: CompanyList[];
-  screenShot: Image;
+  image: Image;
 };
 
 export type Edges = {

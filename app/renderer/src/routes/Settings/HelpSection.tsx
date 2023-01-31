@@ -26,14 +26,6 @@ const HelpSection: React.FC = () => {
         label="Release notes"
         link="https://github.com/roldanjr/pomatez/releases/latest"
       />
-      <Help
-        label="Support the app"
-        link="https://www.paypal.me/roldanjrDevsLife2020"
-      />
-      <Help
-        label="Contact the developer"
-        link="mailto:roldanjrmontilla@gmail.com"
-      />
     </SettingSection>
   );
 };
