@@ -3,9 +3,10 @@ import { SHORT_BREAK, LONG_BREAK, SPECIAL_BREAK } from "store";
 import { NavLink } from "react-router-dom";
 import { themes } from "../themes";
 
-export const StyledNav = styled.nav`
+export const StyledNav = styled.nav<{ useNativeTitlebar: boolean }>`
   width: 100%;
-  height: 4.8rem;
+  height: ${({ useNativeTitlebar }) =>
+    useNativeTitlebar ? "5.6rem" : "4.8rem"};
   position: relative;
 
   &::before {

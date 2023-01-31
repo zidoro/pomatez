@@ -105,7 +105,13 @@ export const StyledCounterContainer = styled.div<CounterContainerProps>`
 export const StyledCounterType = styled.div`
   color: #666;
   text-align: center;
-  padding-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+
+  & > svg {
+    width: 4rem;
+    height: 4rem;
+    fill: currentColor;
+  }
 `;
 
 type TimerProps = { type?: string } & CounterContainerProps;

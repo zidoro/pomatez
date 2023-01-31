@@ -1,5 +1,6 @@
 import React from "react";
-import { TimerTypes } from "store";
+import { useSelector } from "react-redux";
+import { AppStateTypes, TimerTypes } from "store";
 import {
   StyledNav,
   StyledNavList,
@@ -14,8 +15,12 @@ type Props = {
 };
 
 const Navigation: React.FC<Props> = ({ timerType }) => {
+  const settings = useSelector(
+    (state: AppStateTypes) => state.settings
+  );
+
   return (
-    <StyledNav>
+    <StyledNav useNativeTitlebar={settings.useNativeTitlebar}>
       <StyledNavList>
         {routes.map(({ name, icon, exact, path }, index) => (
           <StyledNavListItem key={index}>

@@ -7,10 +7,10 @@ export { ReactComponent as VolumeMuteSVG } from "./volume-mute.svg";
 
 export { ReactComponent as ProgressSVG } from "./progress.svg";
 
-export { ReactComponent as BonfireSVG } from "./bonfire.svg";
-export { ReactComponent as HeadsetSVG } from "./headset.svg";
+export { ReactComponent as LaptopSVG } from "./laptop.svg";
+export { ReactComponent as MugSVG } from "./mug.svg";
+export { ReactComponent as NapSVG } from "./nap.svg";
 export { ReactComponent as FastFoodSVG } from "./fast-food.svg";
-export { ReactComponent as CafeSVG } from "./cafe.svg";
 
 export { ReactComponent as TaskSVG } from "./task.svg";
 export { ReactComponent as ConfigSVG } from "./config.svg";

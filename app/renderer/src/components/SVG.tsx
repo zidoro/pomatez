@@ -1,6 +1,5 @@
 import React, { SVGProps } from "react";
 import {
-  BonfireSVG,
   ConfigSVG,
   PauseSVG,
   PlaySVG,
@@ -14,8 +13,6 @@ import {
   VolumeOnSVG,
   ExternalSVG,
   OptionXSVG,
-  HeadsetSVG,
-  CafeSVG,
   AddSVG,
   PencilSVG,
   SaveSVG,
@@ -27,15 +24,18 @@ import {
   OptionYSVG,
   AlertSVG,
   ExpandSVG,
+  LaptopSVG,
+  NapSVG,
+  MugSVG,
 } from "assets/icons";
 
 export type SVGTypes = {
   size?: number;
   style?: SVGProps<SVGElement>["style"];
   name:
-    | "bonfire"
-    | "headset"
-    | "cafe"
+    | "laptop"
+    | "mug"
+    | "nap"
     | "config"
     | "option-x"
     | "option-y"
@@ -64,12 +64,12 @@ export type SVGTypes = {
 
 const SVG: React.FC<SVGTypes> = ({ name, size, style }) => {
   switch (name) {
-    case "bonfire":
-      return <BonfireSVG />;
-    case "headset":
-      return <HeadsetSVG />;
-    case "cafe":
-      return <CafeSVG />;
+    case "laptop":
+      return <LaptopSVG />;
+    case "mug":
+      return <MugSVG />;
+    case "nap":
+      return <NapSVG />;
     case "config":
       return <ConfigSVG />;
     case "option-x":
