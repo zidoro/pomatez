@@ -10,10 +10,10 @@ type Props = {
 const CounterType: React.FC<Props> = ({ timerType }) => {
   return (
     <StyledCounterType>
-      {(timerType === "SHORT_BREAK" && <SVG name="headset" />) ||
-        (timerType === "LONG_BREAK" && <SVG name="cafe" />) ||
+      {(timerType === "SHORT_BREAK" && <SVG name="mug" />) ||
+        (timerType === "LONG_BREAK" && <SVG name="nap" />) ||
         (timerType === "SPECIAL_BREAK" && <SVG name="fast-food" />) || (
-          <SVG name="bonfire" />
+          <SVG name="laptop" />
         )}
     </StyledCounterType>
   );
