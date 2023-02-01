@@ -1,5 +1,123 @@
 # Changelog
 
+## [1.2.1](https://github.com/roldanjr/pomatez/compare/v1.2.2...v1.2.1) (2023-02-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lock_settings:** Removed Lock Settings from app's features.
+* **notification:** Notification changed to Notification Property.
+
+### Code Refactoring
+
+* **lock_settings:** removed lock settings feature realizing it is useless on some points ([203c0e1](https://github.com/roldanjr/pomatez/commit/203c0e1532aad35a225d25cebe7d0e728a8aa11e))
+
+
+### Performance Improvements ⚡️
+
+* decreased cpu usage on break while keeping the screen awake using use-stay-awake hook" ([b491204](https://github.com/roldanjr/pomatez/commit/b49120425ae42e873f1525ed4db7e98c16d06e0a))
+* improved timer accuracy and overall app performance ([42747c5](https://github.com/roldanjr/pomatez/commit/42747c5f640b2346dabbaf7eb4f066ac71337cdc))
+
+
+### Reverts ⏪️
+
+* electron version back to v8.2.5 due to installation error building for snap ([4d2b015](https://github.com/roldanjr/pomatez/commit/4d2b01534ac81c7f98b9f047da3908c6617dfe3a))
+* lerna versioning from unified to independent ([66adcb3](https://github.com/roldanjr/pomatez/commit/66adcb329bf880d9220c8457e506ec09420d577e))
+* **task_list:** remove Done List option mention here [#63](https://github.com/roldanjr/pomatez/issues/63) ([279a34e](https://github.com/roldanjr/pomatez/commit/279a34e75ee16e645cd6c98587f6ec7a7244bda5))
+
+
+### Changes to Existing Features 🔧
+
+* increase max rounds to 10 ([#241](https://github.com/roldanjr/pomatez/issues/241)) ([70f3a8b](https://github.com/roldanjr/pomatez/commit/70f3a8bed84f3740a9c57e9038127d0b4a2a9c3f))
+
+
+### Miscellaneous Chores
+
+* this is just to try and trigger the right release version ([0356e5c](https://github.com/roldanjr/pomatez/commit/0356e5c863ce23a9391bb5f4fdb96ad4a80369aa))
+
+
+### Features ✨
+
+* added analytics that will only track number of users ([022245d](https://github.com/roldanjr/pomatez/commit/022245da52ec23d1e6195ae06b74eb2700f7fed1))
+* added Auto-Start Work Time, Minimize To Tray and Close To Tray options to the app settings ([560eea9](https://github.com/roldanjr/pomatez/commit/560eea9869b87e79a4f2be3697e2116f61431633))
+* added checkbox on card detail section enable to mark the card as DONE and UNDONE ([65b9e53](https://github.com/roldanjr/pomatez/commit/65b9e53e7cfa8b83c9c2fa5df4439ebc5d2219b9))
+* added compact mode ([#178](https://github.com/roldanjr/pomatez/issues/178)) ([75147e5](https://github.com/roldanjr/pomatez/commit/75147e54716328ce02a26ec2eab6534fc7f9f65c))
+* added context menu on fields that are editable by default ([eb59e25](https://github.com/roldanjr/pomatez/commit/eb59e259ad7fab0cfb47323edf26c9c3c1c84c2e))
+* added custom notifications for auto-updates feature ([8d8bb1c](https://github.com/roldanjr/pomatez/commit/8d8bb1c191db44c9c0801f12bdbd9b0922ce5926))
+* added progress on tray feature ([3f6f6af](https://github.com/roldanjr/pomatez/commit/3f6f6af54e3ddcc9907ca41b612d2f23e7fba062))
+* added undo && redu feature with shorcut keys while still inside on task list ([2b626ca](https://github.com/roldanjr/pomatez/commit/2b626caee6c94394dd6c59fc4e29b0b6f3228c83))
+* allow other UI to scale to the new resizeable mode ([f539abb](https://github.com/roldanjr/pomatez/commit/f539abb6b11687e04c7bf368abaf021bc5b32167))
+* allow the window to be resized and app to scale ([d597e26](https://github.com/roldanjr/pomatez/commit/d597e269615a662b0ce4ddb551f91df4995c048e))
+* **app:** add support for Windows portable version ([ccee4b7](https://github.com/roldanjr/pomatez/commit/ccee4b7cd31cdf3b09302fe71b313fbf505b273c))
+* **app:** update electron from v9.2.0 to v10.1.2 ([64d40f6](https://github.com/roldanjr/pomatez/commit/64d40f6e7c8162679b9884ff222986da7f562c0f))
+* changed project folder architecture ([576d317](https://github.com/roldanjr/pomatez/commit/576d317c1ef2b2285ff1ed9b466c084e2cc42d85))
+* **compact mode:** prevent user from resizing the window ([5381baa](https://github.com/roldanjr/pomatez/commit/5381baac7e322281e0ca124e1f251a93c1bb8674))
+* develop feature that enable to toggle default custom titlebar to a native one ([aace053](https://github.com/roldanjr/pomatez/commit/aace0535a4b74ca69de37aaca5e42ba44aee3dfe))
+* **links:** added new links inside the settings route ([c6476b7](https://github.com/roldanjr/pomatez/commit/c6476b738fe77547ce4509fa7934b74a8d88fddb))
+* **notification:** modify notification setting and add new options to choose from ([dea0f4c](https://github.com/roldanjr/pomatez/commit/dea0f4cb88dffb815d0ab61612600593ea50f46b))
+* prevent computer from going to sleep mode every breaks. Mention here [#84](https://github.com/roldanjr/pomatez/issues/84) ([4297e0f](https://github.com/roldanjr/pomatez/commit/4297e0fe8d2a08c135f80fe03c366cc7ed79637a))
+* set initial useNativeTitlebar value depending on user's Operating System ([870e3a5](https://github.com/roldanjr/pomatez/commit/870e3a5d2a8db9ecac3beaa0b36d68f5176d08e0))
+* show the app on every timer ends if hidden ([2858737](https://github.com/roldanjr/pomatez/commit/28587378c56acf5033fec63e0c7dc938815f1b20))
+* **special_break:** improve user experience setting a special break time schedule ([660c230](https://github.com/roldanjr/pomatez/commit/660c230a9da5f4568eea5c38121698f2eabc8764))
+* **timer:** add option to disable timer animation to reduce cpu usage ([5da514a](https://github.com/roldanjr/pomatez/commit/5da514a0ca80b28983a785cfd7f4f74463f0d8cd))
+* trigger animation if the section is visible in viewport ([104d4c7](https://github.com/roldanjr/pomatez/commit/104d4c76b1a77d966130040ee76ac4972741c5c7))
+* update electron to the latest version released ([465f72a](https://github.com/roldanjr/pomatez/commit/465f72a116752d649ed13e4ba0dafbe094387507))
+* **website:** added minimal animation for the hero section ([7a2aa36](https://github.com/roldanjr/pomatez/commit/7a2aa3662f478df1a9e2683bfd76bead7a3082be))
+* **website:** prevent body scroll when sidebar is open ([f9b49db](https://github.com/roldanjr/pomatez/commit/f9b49db18e0523bdfd5692046d2f2438632529f7))
+* **website:** update downloadable installer version ([e8551a2](https://github.com/roldanjr/pomatez/commit/e8551a21d3c06b21e5bd6994cae4f95e349ba49a))
+
+
+### Bug Fixes 🐛
+
+* app icon on mac ([4c4f71e](https://github.com/roldanjr/pomatez/commit/4c4f71e4ba1232565d7afb806f2d8d6d608da11a))
+* **app/renderer:** fix linter warnings that causes CI test build failing ([26edd59](https://github.com/roldanjr/pomatez/commit/26edd59b26155954208fafc0dc3d933501c11bc9))
+* **app:** invalid .desktop category mentioned here [#127](https://github.com/roldanjr/pomatez/issues/127) ([ea58f5c](https://github.com/roldanjr/pomatez/commit/ea58f5c771001a15f20a47dba665423bc54d9afc))
+* **app:** issue [#119](https://github.com/roldanjr/pomatez/issues/119) - Full screen break doesn't do anything on Ubuntu Linux ([b307eec](https://github.com/roldanjr/pomatez/commit/b307eec614e8ad6afa5d78caed51d5ee38c90167))
+* **app:** try to fix issue [#106](https://github.com/roldanjr/pomatez/issues/106) ([38c9666](https://github.com/roldanjr/pomatez/commit/38c966672791c860945284e8f668384f8eb36c99))
+* broken styles during compact mode ([5a7330a](https://github.com/roldanjr/pomatez/commit/5a7330a8ed3086e68c49a55d6817be74c2eab958))
+* bump version for main package.json (was resulting in wrong release version) ([0de3f8e](https://github.com/roldanjr/pomatez/commit/0de3f8e996f46810f9b2cf7888150462099fbe06))
+* center add card element creating started ([0fefcdc](https://github.com/roldanjr/pomatez/commit/0fefcdcb56399673a3b5b10c31db530d9c723673))
+* change help links cursor to pointer ([61aeaeb](https://github.com/roldanjr/pomatez/commit/61aeaeb270366b3533da55ee6b8875976d83d666)), closes [#167](https://github.com/roldanjr/pomatez/issues/167)
+* disable/enable voice assistance in settings tab [#108](https://github.com/roldanjr/pomatez/issues/108) ([86aea7c](https://github.com/roldanjr/pomatez/commit/86aea7cc3bd216347e2a352f51ea340ca13c75d2))
+* don't close cards when clicking as its easy to lose info ([3efcd11](https://github.com/roldanjr/pomatez/commit/3efcd11eadedfe4ccf6a2872aeb3dc67f2021747))
+* drag logic for logo on title bar ([9bad3a5](https://github.com/roldanjr/pomatez/commit/9bad3a547de83ac21321f428a37d92b569c9d117))
+* exiting fullscreen error on linux ([00b2997](https://github.com/roldanjr/pomatez/commit/00b29973af6f6640c9dbae2e2df69662284ba721))
+* explicitly define security policy to stop electron complaining ([9081047](https://github.com/roldanjr/pomatez/commit/9081047cd030c2e0d809d5a04f9417da5b02b370))
+* fixed switching titlebar bug in linux operating system ([ccb76be](https://github.com/roldanjr/pomatez/commit/ccb76bed6987822f7cd2d6addc77ce34c82798d7))
+* flag extra files for version bumps ([08746fa](https://github.com/roldanjr/pomatez/commit/08746fa3aa2ea284831a397d650ccce569bafa50))
+* fullscreen break escape key issue ([ed65f43](https://github.com/roldanjr/pomatez/commit/ed65f43292dcfe0271b4534e5827af8ce779a4a3))
+* lower electron version as bumping causes release build failures ([47ad9f5](https://github.com/roldanjr/pomatez/commit/47ad9f5dff4ca18dde8af447b9ebfcd76cf8b801))
+* lower uuid version to fix lib export issue ([d8bb58e](https://github.com/roldanjr/pomatez/commit/d8bb58ed1cd7467acd89dfc921f815ae792f7d44))
+* mac fullscreen break ([8fd653e](https://github.com/roldanjr/pomatez/commit/8fd653edc76ff868cded0b17e114abedf2344b9d))
+* **mac:** error when running on mac os ([b953234](https://github.com/roldanjr/pomatez/commit/b953234b053c62dac965bf1d28fa55b407b1f090))
+* **mac:** try to fix error when launching on Mac Operating System ([1e3fcdd](https://github.com/roldanjr/pomatez/commit/1e3fcddd3ebef8de45fbb171d28204f1c131d4bb))
+* make tasks not edit when clicking contained links ([846e6f3](https://github.com/roldanjr/pomatez/commit/846e6f34634258bbac7ce081c95ec8e05b5e0243))
+* make the settings menu vertically resize ([f44e655](https://github.com/roldanjr/pomatez/commit/f44e655772298f57d8118e410dc073d0088e4d3f))
+* min size not respected when coming out of compact mode ([e7da15c](https://github.com/roldanjr/pomatez/commit/e7da15c794a7e15c440a6dcc99ca9f5334c80d0c))
+* missing app icon ([d4b32f3](https://github.com/roldanjr/pomatez/commit/d4b32f3f60b711ead2a3dee7f6234e90215292e4))
+* multiple tray icon after clicking close multiple times in Manjaro Linux ([d5eb685](https://github.com/roldanjr/pomatez/commit/d5eb6855572d960052ad981a2f1f3f3ece13579c))
+* **narration:** fixed duplicate narration on every break ([c82fec3](https://github.com/roldanjr/pomatez/commit/c82fec363c6d1a0e944cc194a31caf91216f9364))
+* range slider visual bug on window resized ([3439ab3](https://github.com/roldanjr/pomatez/commit/3439ab3d26e91db770f3f4c760ad917c0fbeeb62))
+* re-enable resizeable as it may be causing issues on ubuntu ([15ddfab](https://github.com/roldanjr/pomatez/commit/15ddfab173313ee5dcfbbfdf7e13565f421cd4bd))
+* some website styles including sticky images ([79bea20](https://github.com/roldanjr/pomatez/commit/79bea20754e1c345c007c4d08736bdbb2462b901))
+* special break failures ([eaa41bf](https://github.com/roldanjr/pomatez/commit/eaa41bf278d44eb8632e5f36d3d13865ba5602b6))
+* styling issues with compact mode + fullscreen ([e651b7c](https://github.com/roldanjr/pomatez/commit/e651b7cce79d62241d093be670e857e03491048b))
+* task links not opening in new windows ([7d17ec1](https://github.com/roldanjr/pomatez/commit/7d17ec184f559c1cefa8d7ea59cb9006f8207e5c))
+* timer task preview size ([5065f76](https://github.com/roldanjr/pomatez/commit/5065f764a0f2d40307bb8833d916ca72056096c4))
+* **timer:** issue about incorrect timer when the app is hidden ([da913eb](https://github.com/roldanjr/pomatez/commit/da913ebf53e27d25e570c95830ff9f5778d67d5a))
+* titlebar doesn't switch on Manjaro Linux ([e41801c](https://github.com/roldanjr/pomatez/commit/e41801c85a8ccf38748e8bd4553a28f2ecaf8fe0))
+* travis build error due to incorrect @pomatez/shareables version ([9a70329](https://github.com/roldanjr/pomatez/commit/9a703292f81f7bca605ebb0d674775232a4b5ef2))
+* update to electron 18 to avoid gpu issues on certain linux distros ([543ff9a](https://github.com/roldanjr/pomatez/commit/543ff9af41b77d72d650e8c1456a182753032aa2))
+* website build error ([8a7b293](https://github.com/roldanjr/pomatez/commit/8a7b293144859f47da0785f44f0bd5fe5e09ab98))
+* **website:** force render on client-side ([#206](https://github.com/roldanjr/pomatez/issues/206)) ([9d6bf18](https://github.com/roldanjr/pomatez/commit/9d6bf187791697c880633277f3cbf089d5f22f80))
+* **website:** landing button link to download section ([7a141b3](https://github.com/roldanjr/pomatez/commit/7a141b33acd3b1b9c7e1871d2b1d1dffbcc7b6f4))
+* **website:** remove canonical link as because it's unnecessary ([0e04c2f](https://github.com/roldanjr/pomatez/commit/0e04c2f73ad3a0ed3db456f39105a6cf1164595f))
+* **website:** remove the clean script on predeploy ([0551202](https://github.com/roldanjr/pomatez/commit/05512027ad4ce0ffbebcd2dfc120665665606627))
+* **website:** scrolling issues ([82da7b1](https://github.com/roldanjr/pomatez/commit/82da7b1b4fabe934b7192da8271c263a605f0962))
+* **website:** sEO including social preview image link and website url in page head ([fe3c036](https://github.com/roldanjr/pomatez/commit/fe3c03639f1567f9f7e30c5485ba056d7e8b7cb4))
+* window randomly vanishing on mac after minimise ([d1e0e42](https://github.com/roldanjr/pomatez/commit/d1e0e422419664c4a6ab3d5cc6bcc358a29175a1))
+* windows full screen mode issues ([7e1ba3e](https://github.com/roldanjr/pomatez/commit/7e1ba3ecd214eb88a3fc51ea4d1634ae79c10696))
+
 ## [1.2.2](https://github.com/roldanjr/pomatez/compare/v1.2.1...v1.2.2) (2022-12-21)
 
 ### Bug Fixes 🐛
