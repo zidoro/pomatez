@@ -2,6 +2,13 @@ name: Test Build
 
 on:
   push:
+    branches: [master]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+  schedule:
+    - cron: "19 11 * * 2"
+
 jobs:
   build:
     name: "Test Build"

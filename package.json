@@ -1,62 +1,38 @@
 {
-  "name": "root",
-  "private": true,
+  "name": "pomatez",
   "version": "1.2.2",
+  "private": true,
   "workspaces": [
-    "app/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
-    "commit": "git-cz",
-    "sync": "lerna bootstrap",
-    "dev:renderer": "lerna run dev:renderer --stream",
-    "dev:main": "lerna run dev:main --stream",
-    "dev:app": "cross-env ELECTRON_ENABLE_LOGGING=1 lerna run start --parallel --stream",
-    "prebuild": "lerna run prepare --stream",
-    "build": "lerna run build --parallel --stream",
-    "build:mwl": "yarn build && lerna run build:mwl --stream",
-    "build:dir": "yarn build && lerna run build:dir --stream",
-    "build:win": "yarn build && lerna run build:win --stream",
-    "build:mac": "yarn build && lerna run build:mac --stream",
-    "build:linux": "yarn build && lerna run build:linux --stream",
-    "build:snap": "yarn build && lerna run build:snap --stream",
-    "release:mw": "yarn build && lerna run release:mw --stream",
-    "release": "yarn build && lerna run release --stream",
-    "clean": "lerna exec -- rimraf build/ dist/",
+    "dev": "turbo run dev --output-logs=new-only --filter=@pomatez/website",
+    "build": "turbo run build --output-logs=new-only --filter=@pomatez/website",
+    "preview": "turbo run preview --output-logs=new-only --filter=@pomatez/website",
+    "lint": "turbo run lint --output-logs=new-only --filter=@pomatez/website",
     "gen:tts": "lerna run gen:tts --stream",
-    "format": "prettier --write ."
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,md}": [
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
+    "*.{md,json,css,scss,sass}": [
       "prettier --write"
     ]
   },
   "devDependencies": {
-    "copyfiles": "2.4.1",
-    "commitizen": "^4.1.2",
-    "cz-conventional-changelog": "^1.0.0",
-    "husky": "^4.2.5",
-    "lerna": "^3.22.1",
-    "cross-env": "^7.0.3",
-    "lint-staged": "^10.2.13",
-    "prettier": "^2.0.5",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.26.4",
-    "rollup-plugin-typescript2": "^0.27.2",
-    "typescript": "^4.9.4",
-    "wait-on": "^5.0.0"
+    "@pomatez/eslint-config": "*",
+    "lint-staged": "latest",
+    "prettier": "latest",
+    "turbo": "latest",
+    "typescript": "^4.9.5",
+    "husky": "^8.0.0"
   },
-  "resolutions": {
-    "//": "Check https://github.com/facebook/create-react-app/issues/11773 to see if it has been fixed yet",
-    "react-error-overlay": "6.0.9"
-  }
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "yarn@1.22.19"
 }

@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Pomatez
-Icon=${SNAP}/meta/gui/icon.png
-Categories=Health and Fitness;Productivity;
-Exec=pomatez
-Terminal=false

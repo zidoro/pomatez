@@ -1,0 +1,8 @@
+{
+  "name": "@pomatez/design-system",
+  "version": "1.2.2",
+  "main": "index.tsx",
+  "types": "index.tsx",
+  "license": "MIT",
+  "scripts": {}
+}

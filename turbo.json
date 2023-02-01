@@ -1,0 +1,23 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".env.*", "packages/**"],
+  "pipeline": {
+    "build": {
+      "outputs": ["build/**", "dist/**", "public/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["GOOGLE_VERIFICATION", "GA_TRACKING_ID", "NODE_ENV"]
+    },
+    "lint": {},
+    "test": {
+      "dependsOn": ["lint", "build"]
+    },
+    "preview": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build"]
+    }
+  }
+}

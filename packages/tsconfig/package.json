@@ -1,0 +1,10 @@
+{
+  "name": "@pomatez/tsconfig",
+  "version": "1.2.2",
+  "private": true,
+  "files": [
+    "base.json",
+    "react-library.json",
+    "vite.json"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "@pomatez/renderer",
+  "version": "1.2.2",
+  "private": true,
+  "license": "MIT",
+  "homepage": "./",
+  "scripts": {
+    "clean": "rimraf build/",
+    "dev": "react-scripts start",
+    "prebuild": "copyfiles -u 3 \"src/assets/logos/*\" ../main/src/assets",
+    "build": "react-scripts build",
+    "postbuild": "copyfiles -u 1 \"build/**/*\" ../main/build && yarn clean",
+    "gen:tts": "node tts-generator.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  },
+  "babelMacros": {
+    "styledComponents": {
+      "fileName": false,
+      "pure": true
+    }
+  },
+  "dependencies": {
+    "@pomatez/common-config": "^1.0.0",
+    "@types/autosize": "^3.0.7",
+    "@types/jest": "^26.0.10",
+    "@types/node": "^14.6.0",
+    "@types/react": "^16.9.46",
+    "@types/react-beautiful-dnd": "^13.0.0",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.2",
+    "autosize": "^4.0.2",
+    "is-electron": "^2.2.0",
+    "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
+    "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-undo": "^1.0.1",
+    "styled-components": "^5.1.1",
+    "use-stay-awake": "^0.1.5"
+  },
+  "devDependencies": {
+    "say": "^0.16.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

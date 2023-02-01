@@ -1,0 +1,45 @@
+{
+  "name": "@pomatez/website",
+  "version": "1.2.2",
+  "private": true,
+  "scripts": {
+    "dev": "gatsby develop",
+    "prebuild": "yarn clean",
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "ts:check": "tsc --noEmit",
+    "preview": "gatsby serve",
+    "predeploy": "yarn build --prefix-paths",
+    "deploy": "gh-pages -d public -r https://$GH_TOKEN@github.com/roldanjr/pomatez.git",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\""
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^2.0.7",
+    "framer-motion": "^8.5.2",
+    "gatsby": "^5.4.2",
+    "gatsby-image": "^3.11.0",
+    "gatsby-plugin-google-gtag": "^5.4.0",
+    "gatsby-plugin-image": "^3.4.0",
+    "gatsby-plugin-manifest": "^5.4.0",
+    "gatsby-plugin-react-svg": "^3.3.0",
+    "gatsby-plugin-sharp": "^5.4.0",
+    "gatsby-plugin-sitemap": "^6.4.0",
+    "gatsby-plugin-styled-components": "^6.4.0",
+    "gatsby-source-filesystem": "^5.4.0",
+    "gatsby-transformer-remark": "^6.4.0",
+    "gatsby-transformer-sharp": "^5.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.4.1",
+    "react-scroll": "^1.8.9",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-scroll": "^1.8.6",
+    "@types/styled-components": "^5.1.26",
+    "gh-pages": "^5.0.0"
+  }
+}
