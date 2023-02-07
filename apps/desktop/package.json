@@ -1,0 +1,54 @@
+{
+  "name": "@pomatez/desktop",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./build/main/index.js",
+  "author": {
+    "name": "Roldan Montilla Jr",
+    "email": "roldanjr.dev+pomatez@gmail.com",
+    "url": "https://github.com/roldanjr"
+  },
+  "description": "Elegant Multi-platform Desktop App for Pomodoro Lovers.",
+  "homepage": "https://www.electronjs.org",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
+    "postinstall": "electron-builder install-app-deps",
+    "build:win": "npm run build && electron-builder --win --config",
+    "build:mac": "electron-vite build && electron-builder --mac --config",
+    "build:linux": "electron-vite build && electron-builder --linux --config"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^1.0.3",
+    "@electron-toolkit/utils": "^1.0.2",
+    "electron-updater": "^5.3.0"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^1.0.1",
+    "@electron/notarize": "^1.2.3",
+    "@types/node": "16.18.11",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "@vitejs/plugin-react": "^3.0.1",
+    "electron": "21.3.3",
+    "electron-builder": "^23.6.0",
+    "electron-vite": "^1.0.17",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "prettier": "^2.8.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4"
+  }
+}
