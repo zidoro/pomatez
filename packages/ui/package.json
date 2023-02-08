@@ -1,0 +1,40 @@
+{
+  "name": "@pomatez/ui",
+  "version": "1.2.2",
+  "main": "index.tsx",
+  "types": "index.tsx",
+  "license": "MIT",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "ts:check": "tsc --pretty --noEmit",
+    "eslint:fix": "TIMING=1 eslint --fix \"**/*.ts*\"",
+    "lint": "concurrently \"yarn eslint:fix\" \"yarn ts:check\"",
+    "test": "yarn test:storybook:ci",
+    "test:storybook": "test-storybook --verbose",
+    "test:storybook:ci": "concurrently -k -s first -n \"BUILDING,TESTING\" -c \"magenta,blue\" \"yarn build:storybook --quiet && npx http-server ./build_docs --port 6006 --silent\" \"wait-on tcp:6006 && yarn test:storybook\"",
+    "build:storybook": "storybook build --output-dir ./build_docs"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "@stitches/react": "^1.2.8"
+  },
+  "devDependencies": {
+    "@pomatez/tsconfig": "*",
+    "@storybook/addon-essentials": "^7.0.0-beta.44",
+    "@storybook/addon-interactions": "^7.0.0-beta.44",
+    "@storybook/addon-links": "^7.0.0-beta.44",
+    "@storybook/blocks": "^7.0.0-beta.44",
+    "@storybook/react": "^7.0.0-beta.44",
+    "@storybook/react-vite": "^7.0.0-beta.44",
+    "@storybook/testing-library": "^0.0.14-next.1",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.0-beta.44"
+  }
+}
