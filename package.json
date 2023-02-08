@@ -7,7 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo run dev --output-logs=new-only --filter=@pomatez/website",
+    "dev:app": "turbo run dev --output-logs=new-only --filter=@pomatez/desktop",
+    "dev:web": "turbo run dev --output-logs=new-only --filter=@pomatez/website",
     "build": "turbo run build --output-logs=new-only --filter=@pomatez/website",
     "preview": "turbo run preview --output-logs=new-only --filter=@pomatez/website",
     "lint": "turbo run lint --output-logs=new-only --filter=@pomatez/website",
