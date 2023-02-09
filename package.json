@@ -26,11 +26,11 @@
   },
   "devDependencies": {
     "@pomatez/eslint-config": "*",
+    "husky": "^8.0.0",
     "lint-staged": "latest",
     "prettier": "latest",
     "turbo": "latest",
-    "typescript": "^4.9.5",
-    "husky": "^8.0.0"
+    "typescript": "4.7.4"
   },
   "engines": {
     "node": ">=18.0.0"
