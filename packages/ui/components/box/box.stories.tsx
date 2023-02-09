@@ -14,3 +14,12 @@ const Template: StoryFn<typeof Box> = (args) => <Box {...args} />;
 export const Default = Template.bind({});
 
 export const WithSXProps = Template.bind({});
+WithSXProps.args = {
+  sx: {
+    color: "$primary",
+    backgroundColor: "$accents3",
+    borderRadius: "$xs",
+    px: "$5",
+    py: "$4",
+  },
+};

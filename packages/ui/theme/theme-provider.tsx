@@ -1,17 +1,23 @@
-import { createContext, ReactNode } from "react";
-import { globalStyles as applyGlobalStyles } from "./global.styles";
+import { ThemeContext } from "./theme-context";
+import { theme } from "./stitches.config";
+import { CreateTheme } from "./types";
 
-const ThemeContext = createContext(null);
+export type ThemeProviderProps = {
+  theme?: CreateTheme;
+  disableBaseline?: boolean;
+  children?: React.ReactNode;
+};
 
-type ThemeProps = { children?: ReactNode };
-
-const ThemeProvider = ({ children }: ThemeProps) => {
-  applyGlobalStyles();
+export const ThemeProvider = ({
+  theme: userTheme,
+  disableBaseline,
+  children,
+}: ThemeProviderProps) => {
   return (
-    <ThemeContext.Provider value={null}>
+    <ThemeContext.Provider
+      value={{ isDark: false, type: "light", theme: theme }}
+    >
       {children}
     </ThemeContext.Provider>
   );
 };
-
-export { ThemeContext, ThemeProvider };

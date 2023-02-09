@@ -1,6 +1,6 @@
 import { memo, ReactNode } from "react";
 import { BoxVariantProps, StyledBox } from "./box.styled";
-import { withDefaults } from "../../utils";
+import { withDefaults } from "../../utils/with-defaults";
 import { SxProps } from "../../theme";
 
 type Props = {
