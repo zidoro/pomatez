@@ -1,4 +1,3 @@
-import { BaseTheme } from "./types";
 import {
   blueDark,
   greenDark,
@@ -87,4 +86,4 @@ export default {
     lg: "drop-shadow(0 12px 24px rgb(0 0 0 / 0.15)) drop-shadow(0 12px 14px rgb(0 0 0 / 0.1))",
     xl: "drop-shadow(0 25px 34px rgb(0 0 0 / 0.35))",
   },
-} as BaseTheme;
+} as const;

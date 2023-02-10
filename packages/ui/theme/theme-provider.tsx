@@ -1,3 +1,4 @@
+import { globalStyles as applyGlobalStyles } from "./global-styles";
 import { ThemeContext } from "./theme-context";
 import { theme } from "./stitches.config";
 import { CreateTheme } from "./types";
@@ -13,6 +14,8 @@ export const ThemeProvider = ({
   disableBaseline,
   children,
 }: ThemeProviderProps) => {
+  applyGlobalStyles();
+
   return (
     <ThemeContext.Provider
       value={{ isDark: false, type: "light", theme: theme }}

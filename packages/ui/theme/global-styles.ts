@@ -1,4 +1,4 @@
-import { globalCss, keyframes } from "./stitches.config";
+import { globalCss } from "./stitches.config";
 
 import NotoSans400Woff from "../static/fonts/noto-sans/NotoSans400.woff";
 import NotoSans500Woff from "../static/fonts/noto-sans/NotoSans500.woff";
@@ -37,8 +37,6 @@ export const globalStyles = globalCss({
       margin: 0,
       padding: 0,
       boxSizing: "border-box",
-      outline: "none",
-      userSelect: "none",
       fontFamily: "inherit",
       fontSize: "inherit",
       color: "currentColor",
@@ -46,11 +44,8 @@ export const globalStyles = globalCss({
   },
 
   html: {
-    width: "100%",
-    height: "100%",
-
-    fontSize: "62.5%",
-    fontFamily: "Noto-Sans, san-serif",
+    fontSize: "10px",
+    fontFamily: "$sans",
     fontWeight: "normal",
 
     display: "flex",
@@ -59,58 +54,15 @@ export const globalStyles = globalCss({
   },
 
   "html, body": {
-    overflow: "hidden",
-    boxSizing: "inherit",
-
-    backgroundColor: "$bgPrimary",
-  },
-
-  "#app": {
+    width: "100%",
     height: "100%",
+    boxSizing: "inherit",
+    backgroundColor: "$backgroundContrast",
   },
 
   body: {
-    fontSize: "1.3rem",
+    color: "$foreground",
+    fontSize: "$sm",
     fontWeight: 400,
-    color: "$bodyText",
-
-    width: "100%",
-    height: "100%",
-    border: "1px solid $borderWindow",
-    boxShadow: "0 1px 16px -4px rgba(0, 0, 0, 0.5)",
-    boxSizing: "border-box",
-  },
-
-  a: {
-    textDecoration: "none",
-    color: "inherit",
-  },
-
-  "h1, h2, h3, h4, h5, h6": {
-    fontWeight: 500,
-    color: "$headingText",
-  },
-
-  ".ripple-hook": {
-    position: "absolute",
-
-    width: ".5rem",
-    height: ".5rem",
-
-    opacity: 0,
-
-    borderRadius: "50%",
-    backgroundColor: "$bgRipplePrimary",
-
-    animation: `${keyframes({
-      "0%": {
-        transform: "scale(1)",
-        opacity: 0.4,
-      },
-      "100%": {
-        transform: "scale(100)",
-        opacity: 0,
-      },
-    })} 1s`,
   },
 });
