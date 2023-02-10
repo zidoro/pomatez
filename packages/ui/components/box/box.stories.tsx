@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { Box } from "./box";
+import Box from "./box";
 
 export default {
   title: "Components/Layout/Box",

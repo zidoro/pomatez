@@ -1,4 +1,4 @@
-import { memo, ReactNode } from "react";
+import { HTMLAttributes, memo, ReactNode } from "react";
 import { BoxVariantProps, StyledBox } from "./box.styled";
 import { withDefaults } from "../../utils/with-defaults";
 import { SxProps } from "../../theme";
@@ -9,11 +9,11 @@ type Props = {
   children?: ReactNode;
 };
 
-type NativeAttrs = Omit<React.HTMLAttributes<any>, keyof Props>;
+type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
-type BoxProps = Props & NativeAttrs & BoxVariantProps;
+export type BoxProps = Props & NativeAttrs & BoxVariantProps;
 
-export function Box({ children, sx, ...rest }: BoxProps) {
+function Box({ children, sx, ...rest }: BoxProps) {
   return (
     <StyledBox css={sx} {...rest}>
       {children}
@@ -21,8 +21,8 @@ export function Box({ children, sx, ...rest }: BoxProps) {
   );
 }
 
-Box.toString = () => ".pomatez-box";
-
 const MemoBox = memo(Box);
+
+MemoBox.toString = () => ".pomatez-box";
 
 export default withDefaults(MemoBox, {});
