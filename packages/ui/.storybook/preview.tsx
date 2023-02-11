@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "../theme";
+import { VStack } from "../components";
 
 export const parameters = {
   backgrounds: {
@@ -17,7 +18,9 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <ThemeProvider>
-      <Story />
+      <VStack>
+        <Story />
+      </VStack>
     </ThemeProvider>
   ),
 ];
