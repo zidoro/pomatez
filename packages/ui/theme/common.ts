@@ -539,7 +539,7 @@ export const defaultThemeMap = {
 };
 
 export default {
-  prefix: "pomatez",
+  prefix: "pz",
   theme: {
     ...defaultTokens,
     colors: defaultColors,
