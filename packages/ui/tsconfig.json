@@ -1,5 +1,10 @@
 {
   "extends": "@pomatez/tsconfig/react-library.json",
+  "compilerOptions": {
+    "paths": {
+      "@/test-utils": ["./utils/test-utils"]
+    }
+  },
   "exclude": ["node_modules"],
   "include": [".", ".storybook"]
 }

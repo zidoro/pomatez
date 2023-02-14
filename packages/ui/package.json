@@ -31,13 +31,18 @@
     "@storybook/react": "^7.0.0-beta.44",
     "@storybook/react-vite": "^7.0.0-beta.44",
     "@storybook/testing-library": "^0.0.14-next.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitest/coverage-c8": "^0.28.4",
+    "jsdom": "^21.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.0-beta.44",
-    "vitest": "^0.28.4"
+    "vitest": "^0.28.4",
+    "vitest-axe": "^0.1.0"
   }
 }

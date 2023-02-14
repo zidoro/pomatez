@@ -5,9 +5,10 @@ import {
   memo,
   ReactNode,
 } from "react";
-import { BoxVariantProps, StyledBox } from "./box.styled";
 import { cx } from "../../utils/string";
-import { SxProps } from "../../theme";
+import { styled, SxProps } from "../../theme";
+
+const StyledBox = styled("div");
 
 type Props = {
   sx?: SxProps;
@@ -17,7 +18,7 @@ type Props = {
 
 type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
-export type BoxProps = Props & NativeAttrs & BoxVariantProps;
+export type BoxProps = Props & NativeAttrs;
 
 function Box(
   { children, className, sx, ...rest }: BoxProps,
