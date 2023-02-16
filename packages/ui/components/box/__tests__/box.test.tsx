@@ -4,7 +4,7 @@ import Box from "../box";
 
 describe("<Box />", () => {
   test("passes a11y test", async () => {
-    await testA11y(<Box>This is a box component.</Box>);
+    await testA11y(<Box>Box</Box>);
   });
 
   test("as - prop works correctly", () => {
