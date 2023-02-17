@@ -13,14 +13,14 @@ export default {
 
 const Template: StoryFn<typeof Stack> = (args) => {
   const boxStyles: SxProps = {
-    bg: "$accents4",
+    bg: "$accent4",
     px: "$4",
     py: "$2",
     br: "$sm",
   };
 
   return (
-    <Stack gap="$4" {...args}>
+    <Stack gap="$3" {...args}>
       <Box sx={boxStyles}>Child 1</Box>
       <Box sx={boxStyles}>Child 2</Box>
       <Box sx={boxStyles}>Child 3</Box>

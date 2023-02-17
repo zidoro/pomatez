@@ -46,7 +46,7 @@ export const globalStyles = globalCss({
   html: {
     fontSize: "10px",
     fontFamily: "$sans",
-    fontWeight: "normal",
+    fontWeight: "$normal",
 
     display: "flex",
     alignItems: "center",
@@ -63,6 +63,5 @@ export const globalStyles = globalCss({
   body: {
     color: "$foreground",
     fontSize: "$sm",
-    fontWeight: 400,
   },
 });

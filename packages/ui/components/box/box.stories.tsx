@@ -8,10 +8,10 @@ export default {
     children: "Box Component",
     sx: {
       color: "$primary",
-      backgroundColor: "$accents3",
+      backgroundColor: "$accent3",
       borderRadius: "$sm",
-      px: "$5",
-      py: "$4",
+      px: "$4",
+      py: "$2",
     },
   },
 } as Meta<typeof Box>;
