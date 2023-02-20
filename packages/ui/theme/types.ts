@@ -1,4 +1,4 @@
-import { StitchesTheme, createTheme, SxProps } from "./stitches.config";
+import { StitchesTheme, createTheme } from "./stitches.config";
 
 /** Configuration Interface */
 declare namespace ConfigType {
@@ -64,11 +64,3 @@ export type PomatezThemeContext = {
   theme?: PomatezTheme;
   isDark?: boolean;
 };
-
-// Stitches CSS Props
-export type CSSFontSize = SxProps["fontSize"];
-export type CSSColor = SxProps["color"];
-export type CSSGapUnit = SxProps["gap"];
-export type CSSFontWeight = SxProps["fontWeight"];
-export type CSSLineHeight = SxProps["lineHeight"];
-export type CSSLetterSpacing = SxProps["letterSpacing"];
