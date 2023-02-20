@@ -7,8 +7,7 @@ export default {
   args: {
     children: "Box Component",
     sx: {
-      color: "$primary",
-      backgroundColor: "$accent3",
+      backgroundColor: "$accent4",
       borderRadius: "$sm",
       px: "$4",
       py: "$2",

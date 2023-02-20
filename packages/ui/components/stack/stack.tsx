@@ -7,29 +7,24 @@ import {
 } from "react";
 import { StackVariantProps, StyledStack } from "./stack.styled";
 import { withDefaults } from "../../utils/with-defaults";
-import {
-  AlignItems,
-  FlexWrap,
-  JustifyContent,
-} from "../../utils/prop-types";
 import { cx } from "../../utils/string";
-import { CSSGapUnit, SxProps } from "../../theme";
+import { SxProps } from "../../theme";
 
 type Props = {
-  gap?: CSSGapUnit;
-  align?: AlignItems;
-  justify?: JustifyContent;
-  wrap?: FlexWrap;
+  gap?: SxProps["gap"];
+  align?: SxProps["alignItems"];
+  justify?: SxProps["justifyContent"];
+  wrap?: SxProps["flexWrap"];
   sx?: SxProps;
   as?: keyof JSX.IntrinsicElements;
   children?: ReactNode;
 };
 
-const defaultProps = {
-  gap: "$0" as CSSGapUnit,
-  align: "center" as AlignItems,
-  justify: "center" as JustifyContent,
-  wrap: "nowrap" as FlexWrap,
+const defaultProps: Props = {
+  gap: "$0",
+  align: "center",
+  justify: "center",
+  wrap: "nowrap",
 };
 
 type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
