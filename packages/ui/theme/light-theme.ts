@@ -7,7 +7,7 @@ import {
   cyan,
   pink,
   gray,
-} from "./colors";
+} from "@radix-ui/colors";
 import { addColorAlpha } from "../utils/color";
 
 export default {
@@ -29,13 +29,13 @@ export default {
     ...gray,
 
     // misc
-    textLight: addColorAlpha(gray.gray900, 0.2),
-    text: "$gray900",
-    linkLight: addColorAlpha(blue.blue600, 0.2),
-    link: "$blue600",
-    codeLight: "$pink100",
-    code: "$pink600",
-    selection: "$blue200",
+    textLight: addColorAlpha(gray.gray11, 0.2),
+    text: "$gray11",
+    linkLight: addColorAlpha(blue.blue7, 0.2),
+    link: "$blue7",
+    codeLight: "$pink2",
+    code: "$pink7",
+    selection: "$blue3",
     border: "rgba(0, 0, 0, 0.15)",
   },
   shadows: {
