@@ -1,7 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { cx } from "../cx";
 
-describe("cx - class names utility", () => {
+describe("cx - classNames helper", () => {
   it("should return empty string", () => {
     expect(cx()).toBe("");
   });

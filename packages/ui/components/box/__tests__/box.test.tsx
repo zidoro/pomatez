@@ -1,4 +1,3 @@
-import { describe, expect, test } from "vitest";
 import { render, screen, testA11y } from "@/test-utils";
 import Box from "../box";
 
