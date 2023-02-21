@@ -2,7 +2,7 @@ import { render, screen, testA11y } from "@/test-utils";
 import Grid from "../grid";
 
 describe("<Grid />", () => {
-  test("should pass a11y test", async () => {
+  test("should pass the a11y test", async () => {
     await testA11y(<Grid>Grid</Grid>);
   });
 

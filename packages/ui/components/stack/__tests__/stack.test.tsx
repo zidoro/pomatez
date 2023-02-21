@@ -2,7 +2,7 @@ import { render, screen, testA11y } from "@/test-utils";
 import Stack from "../stack";
 
 describe("Stack component", () => {
-  test("should pass a11y test", async () => {
+  test("should pass the a11y test", async () => {
     await testA11y(<Stack>Stack</Stack>);
   });
 

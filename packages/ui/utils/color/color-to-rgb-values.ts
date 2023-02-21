@@ -13,9 +13,11 @@ export const colorToRgbValues = (colorProp: string) => {
   const regArray = safeColor.match(/\((.+)\)/);
 
   if (!colorType.startsWith("rgb") || !regArray) {
-    console.warn(
-      `Pomatez: Only supports ["RGB", "RGBA", "HEX"] color.`
-    );
+    if (process.env.NODE_ENV !== "test") {
+      console.warn(
+        `Pomatez: Only supports ["RGB", "RGBA", "HEX"] color.`
+      );
+    }
 
     return [0, 0, 0];
   }

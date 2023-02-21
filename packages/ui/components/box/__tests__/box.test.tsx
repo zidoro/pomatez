@@ -2,7 +2,7 @@ import { render, screen, testA11y } from "@/test-utils";
 import Box from "../box";
 
 describe("<Box />", () => {
-  test("passes a11y test", async () => {
+  test("should pass the a11y test", async () => {
     await testA11y(<Box>Box</Box>);
   });
 
