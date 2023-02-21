@@ -31,10 +31,10 @@ export default {
     // misc
     textLight: addColorAlpha(gray.gray11, 0.2),
     text: "$gray11",
-    linkLight: addColorAlpha(blue.blue7, 0.2),
-    link: "$blue7",
+    linkLight: addColorAlpha(blue.blue11, 0.2),
+    link: "$blue11",
     codeLight: "$pink2",
-    code: "$pink7",
+    code: "$pink11",
     selection: "$blue3",
     border: "rgba(0, 0, 0, 0.15)",
   },
