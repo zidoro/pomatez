@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { SxProps } from "../../theme";
 import Grid from "./grid";
 
@@ -7,7 +7,9 @@ export default {
   component: Grid,
 } as Meta<typeof Grid>;
 
-const Template: StoryFn<typeof Grid> = (args) => {
+type Story = StoryObj<typeof Grid>;
+
+const Template: StoryFn<typeof Grid> = (props) => {
   const boxStyles: SxProps = {
     bg: "$accent4",
     px: "$4",
@@ -16,7 +18,7 @@ const Template: StoryFn<typeof Grid> = (args) => {
   };
 
   return (
-    <Grid gap="$3" {...args}>
+    <Grid gap="$3" {...props}>
       <Grid.Item sx={boxStyles}>Child 1</Grid.Item>
       <Grid.Item sx={boxStyles}>Child 2</Grid.Item>
       <Grid.Item sx={boxStyles}>Child 3</Grid.Item>
@@ -24,13 +26,17 @@ const Template: StoryFn<typeof Grid> = (args) => {
   );
 };
 
-export const Column = Template.bind({});
-Column.args = {
-  templateColumns: "repeat(3, 1fr)",
+export const Column: Story = {
+  args: {
+    templateColumns: "repeat(3, 1fr)",
+  },
+  render: Template,
 };
 
-export const Row = Template.bind({});
-Row.args = {
-  templateRows: "repeat(3, 1fr)",
-  autoFlow: "row",
+export const Row: Story = {
+  args: {
+    templateRows: "repeat(3, 1fr)",
+    autoFlow: "row",
+  },
+  render: Template,
 };

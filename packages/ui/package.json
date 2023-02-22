@@ -9,11 +9,7 @@
     "ts:check": "tsc --pretty --noEmit",
     "eslint:fix": "TIMING=1 eslint --fix \"**/*.ts*\"",
     "lint": "concurrently \"yarn eslint:fix\" \"yarn ts:check\"",
-    "test": "yarn test:storybook:ci",
-    "test:storybook": "test-storybook --verbose",
-    "test:storybook:ci": "concurrently -k -s first -n \"BUILDING,TESTING\" -c \"magenta,blue\" \"yarn build:storybook --quiet && npx http-server ./build_docs --port 6006 --silent\" \"wait-on tcp:6006 && yarn test:storybook\"",
-    "build:storybook": "storybook build --output-dir ./build_docs",
-    "test:unit": "vitest --config ./vitest.config.ts"
+    "test": "vitest --config ./vitest.config.ts"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -25,13 +21,6 @@
   },
   "devDependencies": {
     "@pomatez/tsconfig": "*",
-    "@storybook/addon-essentials": "^7.0.0-beta.44",
-    "@storybook/addon-interactions": "^7.0.0-beta.44",
-    "@storybook/addon-links": "^7.0.0-beta.44",
-    "@storybook/blocks": "^7.0.0-beta.44",
-    "@storybook/react": "^7.0.0-beta.44",
-    "@storybook/react-vite": "^7.0.0-beta.44",
-    "@storybook/testing-library": "^0.0.14-next.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -39,10 +28,6 @@
     "@types/react-dom": "^18.0.10",
     "@vitest/coverage-c8": "^0.28.4",
     "jsdom": "^21.1.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "storybook": "^7.0.0-beta.44",
     "vitest": "^0.28.4",
     "vitest-axe": "^0.1.0"
   }

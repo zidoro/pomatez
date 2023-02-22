@@ -1,9 +1,12 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import Box from "./box";
 
 export default {
   title: "Components/Layouts/Box",
   component: Box,
+} as Meta<typeof Box>;
+
+export const Default: StoryObj<typeof Box> = {
   args: {
     children: "Box Component",
     sx: {
@@ -13,8 +16,4 @@ export default {
       py: "$2",
     },
   },
-} as Meta<typeof Box>;
-
-const Template: StoryFn<typeof Box> = (args) => <Box {...args} />;
-
-export const Default = Template.bind({});
+};

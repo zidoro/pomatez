@@ -1,6 +1,5 @@
 import React from "react";
-import { ThemeProvider } from "../theme";
-import { VStack } from "../components";
+import { ThemeProvider, VStack } from "@pomatez/ui";
 
 export const parameters = {
   backgrounds: {

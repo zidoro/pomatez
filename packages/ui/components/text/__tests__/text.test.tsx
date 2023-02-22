@@ -15,7 +15,7 @@ describe("Text component", () => {
     expect(textElement.classList).toContainEqual("pomatez-text");
     expect(textElement).toMatchInlineSnapshot(`
       <span
-        class="pz-c-PJLV pz-c-PJLV-icFgFQZ-css pomatez-text"
+        class="pz-c-PJLV pz-c-PJLV-ijfcJME-css pomatez-text"
       >
         Text
       </span>

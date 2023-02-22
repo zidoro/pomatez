@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { SxProps } from "../../theme";
 import { Box } from "../box";
 import Stack from "./stack";
@@ -6,12 +6,11 @@ import Stack from "./stack";
 export default {
   title: "Components/Layouts/Stack",
   component: Stack,
-  args: {
-    direction: "column",
-  },
 } as Meta<typeof Stack>;
 
-const Template: StoryFn<typeof Stack> = (args) => {
+type Story = StoryObj<typeof Stack>;
+
+const Template: StoryFn<typeof Stack> = (props) => {
   const boxStyles: SxProps = {
     bg: "$accent4",
     px: "$4",
@@ -20,7 +19,7 @@ const Template: StoryFn<typeof Stack> = (args) => {
   };
 
   return (
-    <Stack gap="$3" {...args}>
+    <Stack gap="$3" {...props}>
       <Box sx={boxStyles}>Child 1</Box>
       <Box sx={boxStyles}>Child 2</Box>
       <Box sx={boxStyles}>Child 3</Box>
@@ -28,9 +27,16 @@ const Template: StoryFn<typeof Stack> = (args) => {
   );
 };
 
-export const Column = Template.bind({});
+export const Column: Story = {
+  args: {
+    direction: "column",
+  },
+  render: Template,
+};
 
-export const Row = Template.bind({});
-Row.args = {
-  direction: "row",
+export const Row: Story = {
+  args: {
+    direction: "row",
+  },
+  render: Template,
 };

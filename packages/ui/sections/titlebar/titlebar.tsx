@@ -1,13 +1,45 @@
 import { memo } from "react";
 import { Box, Button, HStack, Text } from "../../components";
+import { withDefaults } from "../../utils/with-defaults";
 import Logo from "../../static/logo/tray.png";
 
-type TitlebarProps = {
+type Props = {
+  /**
+   * The current state of the app
+   * @default "stay-focused"
+   * @options "stay-focused", "short-break", "long-break", "special-break"
+   */
+  appState?:
+    | "stay-focused"
+    | "short-break"
+    | "long-break"
+    | "special-break";
+  /**
+   * The current version of the app
+   * @default "0.0.0"
+   */
+  appVersion?: string;
+  /**
+   * Function to call when the minimize button is clicked
+   */
   onMinimize?: () => void;
+  /**
+   * Function to call when the close button is clicked
+   */
   onClose?: () => void;
 };
 
-function Titlebar({ onMinimize, onClose }: TitlebarProps) {
+const defaultProps: Props = {
+  appState: "stay-focused",
+  appVersion: "0.0.0",
+};
+
+function Titlebar({
+  appState,
+  appVersion,
+  onMinimize,
+  onClose,
+}: Props) {
   return (
     <HStack
       justify="space-between"
@@ -39,16 +71,18 @@ function Titlebar({ onMinimize, onClose }: TitlebarProps) {
           Pomatez
         </Text>
 
-        <Text
-          as="sup"
-          color="$blue12"
-          size="1rem"
-          weight="$bold"
-          casing="lowercase"
-          sx={{ mt: "-$2" }}
-        >
-          v2
-        </Text>
+        {Boolean(appVersion) && (
+          <Text
+            as="sup"
+            color="$blue12"
+            size="1rem"
+            weight="$bold"
+            casing="lowercase"
+            sx={{ mt: "-$2" }}
+          >
+            v{appVersion}
+          </Text>
+        )}
       </HStack>
 
       <HStack
@@ -134,4 +168,4 @@ function Titlebar({ onMinimize, onClose }: TitlebarProps) {
 
 const MemoTitlebar = memo(Titlebar);
 
-export default MemoTitlebar;
+export default withDefaults(MemoTitlebar, defaultProps);

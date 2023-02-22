@@ -16,6 +16,9 @@ type GridComponent<T, P = {}> = ForwardRefExoticComponent<
 
 const Grid = GridContainer as GridComponent<HTMLDivElement, GridProps>;
 
+Grid.displayName = "Grid";
+GridItem.displayName = "Grid.Item";
+
 Grid.Item = GridItem;
 
 export default Grid;

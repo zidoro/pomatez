@@ -14,7 +14,9 @@
     "lint": "turbo run lint --output-logs=new-only --filter=@pomatez/website",
     "gen:tts": "lerna run gen:tts --stream",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -26,14 +28,26 @@
   },
   "devDependencies": {
     "@pomatez/eslint-config": "*",
+    "@storybook/addon-essentials": "^7.0.0-beta.53",
+    "@storybook/addon-interactions": "^7.0.0-beta.53",
+    "@storybook/addon-links": "^7.0.0-beta.53",
+    "@storybook/blocks": "^7.0.0-alpha.8",
+    "@storybook/react": "^7.0.0-beta.53",
+    "@storybook/react-vite": "^7.0.0-beta.53",
+    "@storybook/testing-library": "^0.0.14-next.1",
     "husky": "^8.0.0",
     "lint-staged": "latest",
     "prettier": "latest",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.0-beta.53",
     "turbo": "latest",
     "typescript": "4.7.4"
   },
   "engines": {
     "node": ">=18.0.0"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "peerDependencies": {}
 }

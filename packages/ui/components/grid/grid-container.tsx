@@ -1,10 +1,4 @@
-import {
-  ForwardedRef,
-  forwardRef,
-  HTMLAttributes,
-  memo,
-  ReactNode,
-} from "react";
+import { forwardRef, HTMLAttributes, memo, ReactNode } from "react";
 import { cx } from "../../utils/string";
 import { SxProps } from "../../theme";
 import {
@@ -14,14 +8,45 @@ import {
 import { withDefaults } from "../../utils/with-defaults";
 
 type Props = {
+  /**
+   * Shorthand for `grid-template-columns` style property
+   */
   templateColumns?: SxProps["gridTemplateColumns"];
+  /**
+   * Shorthand for `grid-template-rows` style property
+   */
   templateRows?: SxProps["gridTemplateRows"];
+  /**
+   * Shorthand for `grid-auto-flow` style property
+   * @default "column"
+   */
   autoFlow?: SxProps["gridAutoFlow"];
+  /**
+   * Grid `gap` style property
+   * @default "$0"
+   */
   gap?: SxProps["gap"];
+  /**
+   * Shorthand for `align-items` style property
+   * @default "center"
+   */
   align?: SxProps["alignItems"];
+  /**
+   * Shorthand for `justify-content` style property
+   * @default "start"
+   */
   justify?: SxProps["justifyContent"];
+  /**
+   * For additional styles
+   */
   sx?: SxProps;
+  /**
+   * The HTML element to render
+   */
   as?: keyof JSX.IntrinsicElements;
+  /**
+   * The content of the component
+   */
   children?: ReactNode;
 };
 
@@ -38,43 +63,45 @@ export type GridContainerProps = Props &
   NativeAttrs &
   GridContainerVariantProps;
 
-function GridContainer(
-  {
-    children,
-    className,
-    align,
-    justify,
-    templateColumns,
-    templateRows,
-    autoFlow,
-    gap,
-    sx,
-    ...rest
-  }: GridContainerProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
-  const _className = cx("pomatez-grid", className);
+const GridContainer = forwardRef<HTMLDivElement, GridContainerProps>(
+  (
+    {
+      children,
+      className,
+      align,
+      justify,
+      templateColumns,
+      templateRows,
+      autoFlow,
+      gap,
+      sx,
+      ...rest
+    },
+    ref
+  ) => {
+    const _className = cx("pomatez-grid", className);
 
-  return (
-    <StyledGridContainer
-      className={_className}
-      css={{
-        alignItems: align,
-        justifyContent: justify,
-        gridTemplateColumns: templateColumns,
-        gridTemplateRows: templateRows,
-        gridAutoFlow: autoFlow,
-        gap,
-        ...sx,
-      }}
-      {...rest}
-      ref={ref}
-    >
-      {children}
-    </StyledGridContainer>
-  );
-}
+    return (
+      <StyledGridContainer
+        className={_className}
+        css={{
+          alignItems: align,
+          justifyContent: justify,
+          gridTemplateColumns: templateColumns,
+          gridTemplateRows: templateRows,
+          gridAutoFlow: autoFlow,
+          gap,
+          ...sx,
+        }}
+        {...rest}
+        ref={ref}
+      >
+        {children}
+      </StyledGridContainer>
+    );
+  }
+);
 
-const MemoGridContainer = memo(forwardRef(GridContainer));
+const MemoGridContainer = memo(GridContainer);
 
 export default withDefaults(MemoGridContainer, defaultProps);
