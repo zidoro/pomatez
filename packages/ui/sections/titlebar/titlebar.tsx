@@ -1,7 +1,6 @@
 import { memo } from "react";
-import { Box, Button, HStack, Text } from "../../components";
+import { Button, HStack, Logo, LogoProps } from "../../components";
 import { withDefaults } from "../../utils/with-defaults";
-import Logo from "../../static/logo/tray.png";
 
 type Props = {
   /**
@@ -9,16 +8,12 @@ type Props = {
    * @default "stay-focused"
    * @options "stay-focused", "short-break", "long-break", "special-break"
    */
-  appState?:
-    | "stay-focused"
-    | "short-break"
-    | "long-break"
-    | "special-break";
+  appState?: LogoProps["appState"];
   /**
    * The current version of the app
-   * @default "0.0.0"
+   * @default 0.0.0
    */
-  appVersion?: string;
+  appVersion?: LogoProps["appVersion"];
   /**
    * Function to call when the minimize button is clicked
    */
@@ -34,7 +29,7 @@ const defaultProps: Props = {
   appVersion: "0.0.0",
 };
 
-function Titlebar({
+export function Titlebar({
   appState,
   appVersion,
   onMinimize,
@@ -52,38 +47,7 @@ function Titlebar({
         pl: "$3",
       }}
     >
-      <HStack gap="$2">
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-
-            "& > img": {
-              width: "1.6rem",
-              height: "1.6rem",
-            },
-          }}
-        >
-          <img src={Logo} alt="Pomatez Logo" />
-        </Box>
-
-        <Text size="$sm" weight="$bold" color="$blue12">
-          Pomatez
-        </Text>
-
-        {Boolean(appVersion) && (
-          <Text
-            as="sup"
-            color="$blue12"
-            size="1rem"
-            weight="$bold"
-            casing="lowercase"
-            sx={{ mt: "-$2" }}
-          >
-            v{appVersion}
-          </Text>
-        )}
-      </HStack>
+      <Logo size="1.6rem" appState={appState} appVersion={appVersion} />
 
       <HStack
         sx={{
@@ -100,7 +64,7 @@ function Titlebar({
             color: "$gray11",
             transition: "all ease 160ms",
 
-            "&:hover": {
+            "&:hover, &:focus": {
               bg: "$gray4",
             },
 
@@ -130,7 +94,7 @@ function Titlebar({
             color: "$gray11",
             transition: "all ease 160ms",
 
-            "&:hover": {
+            "&:hover, &:focus": {
               bg: "$gray4",
               color: "$red9",
             },

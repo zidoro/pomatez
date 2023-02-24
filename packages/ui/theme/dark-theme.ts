@@ -7,6 +7,8 @@ import {
   cyanDark,
   pinkDark,
   grayDark,
+  orangeDark,
+  brownDark,
 } from "@radix-ui/colors";
 import { addColorAlpha } from "../utils/color";
 
@@ -26,6 +28,8 @@ export default {
     ...redDark,
     ...cyanDark,
     ...pinkDark,
+    ...orangeDark,
+    ...brownDark,
     ...grayDark,
 
     // brand colors

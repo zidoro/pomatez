@@ -7,6 +7,8 @@ import {
   cyan,
   pink,
   gray,
+  orange,
+  brown,
 } from "@radix-ui/colors";
 import { addColorAlpha } from "../utils/color";
 
@@ -26,6 +28,8 @@ export default {
     ...red,
     ...cyan,
     ...pink,
+    ...orange,
+    ...brown,
     ...gray,
 
     // misc

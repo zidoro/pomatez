@@ -15,16 +15,41 @@ const Wrapper: StoryFn<typeof Titlebar> = (props) => (
       width: "34rem",
       border: "1px solid $gray6",
       borderRadius: "$sm",
-      overflow: "hidden",
+      boxShadow: "$sm",
+      bg: "$white",
     }}
   >
     <Titlebar {...props} />
   </VStack>
 );
 
-export const Default: Story = {
+export const StayFocused: Story = {
   args: {
     appState: "stay-focused",
+    appVersion: "1.0.0",
+  },
+  render: Wrapper,
+};
+
+export const ShortBreak: Story = {
+  args: {
+    appState: "short-break",
+    appVersion: "1.0.0",
+  },
+  render: Wrapper,
+};
+
+export const LongBreak: Story = {
+  args: {
+    appState: "long-break",
+    appVersion: "1.0.0",
+  },
+  render: Wrapper,
+};
+
+export const SpecialBreak: Story = {
+  args: {
+    appState: "special-break",
     appVersion: "1.0.0",
   },
   render: Wrapper,
