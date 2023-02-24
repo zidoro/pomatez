@@ -5,6 +5,17 @@ import Titlebar from "./titlebar";
 export default {
   title: "App/Sections/Titlebar",
   component: Titlebar,
+  argTypes: {
+    appState: {
+      options: [
+        "stay-focused",
+        "short-break",
+        "long-break",
+        "special-break",
+      ],
+      control: { type: "select" },
+    },
+  },
 } as Meta<typeof Titlebar>;
 
 type Story = StoryObj<typeof Titlebar>;

@@ -27,18 +27,18 @@ export type LogoIconProps = {
   /**
    * The size of the icon, it is used for both width and height
    */
-  size: SxProps["width" | "height"];
+  iconSize: SxProps["width" | "height"];
 } & VariantProps<typeof StyledSvg>;
 
-const LogoIcon = ({ size, ...rest }: LogoIconProps) => {
+const LogoIcon = ({ iconSize, ...rest }: LogoIconProps) => {
   return (
     <StyledSvg
       viewBox="0 0 256 256"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       css={{
-        width: size,
-        height: size,
+        width: iconSize,
+        height: iconSize,
       }}
       {...rest}
     >

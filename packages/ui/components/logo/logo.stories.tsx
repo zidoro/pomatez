@@ -5,6 +5,17 @@ import Logo from "./logo";
 export default {
   title: "Components/Display/Logo",
   component: Logo,
+  argTypes: {
+    appState: {
+      options: [
+        "stay-focused",
+        "short-break",
+        "long-break",
+        "special-break",
+      ],
+      control: { type: "select" },
+    },
+  },
 } as Meta<typeof Logo>;
 
 type Story = StoryObj<typeof Logo>;
@@ -12,7 +23,7 @@ type Story = StoryObj<typeof Logo>;
 export const IconOnly: Story = {
   args: {
     appState: "stay-focused",
-    size: "8rem",
+    iconSize: "12.8rem",
   },
   render: (args) => <LogoIcon {...args} />,
 };
@@ -20,7 +31,10 @@ export const IconOnly: Story = {
 export const WithLabel: Story = {
   args: {
     appState: "stay-focused",
-    size: "1.6rem",
+    appVersion: "1.0.0",
+    iconSize: "1.6rem",
+    labelFontSize: "$sm",
   },
+
   render: (args) => <Logo {...args} />,
 };

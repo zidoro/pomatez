@@ -1,21 +1,22 @@
 import { memo } from "react";
 import { Box } from "../box";
-import { Text } from "../text";
-import { HStack } from "../stack";
+import { Text, TextProps } from "../text";
+import { HStack, StackProps } from "../stack";
 import LogoIcon, { LogoIconProps } from "./logo-icon";
 
 export type LogoProps = {
   appVersion?: string;
-} & LogoIconProps;
+  labelFontSize: TextProps["size"];
+} & StackProps &
+  LogoIconProps;
 
 export const Logo = ({
-  size,
+  iconSize,
   appState,
   appVersion,
+  labelFontSize,
   ...rest
 }: LogoProps) => {
-  // TODO: Calculate the spacing and the font size based on the size prop
-
   return (
     <HStack spacing="$2" {...rest}>
       <Box
@@ -24,10 +25,10 @@ export const Logo = ({
           alignItems: "center",
         }}
       >
-        <LogoIcon appState={appState} size={size} />
+        <LogoIcon appState={appState} iconSize={iconSize} />
       </Box>
 
-      <Text size="$sm" weight="$bold" color="$blue12">
+      <Text size={labelFontSize} weight="$bold" color="$blue12">
         Pomatez
       </Text>
 

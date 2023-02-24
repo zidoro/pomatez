@@ -47,7 +47,12 @@ export function Titlebar({
         pl: "$3",
       }}
     >
-      <Logo size="1.6rem" appState={appState} appVersion={appVersion} />
+      <Logo
+        iconSize="1.6rem"
+        appState={appState}
+        appVersion={appVersion}
+        labelFontSize="$sm"
+      />
 
       <HStack
         sx={{
