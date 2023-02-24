@@ -6,10 +6,10 @@ import { SxProps } from "../../theme";
 
 type Props = {
   /**
-   * Flex `gap` style property
+   * Shorthand for flex `gap` style property
    * @default "$0"
    */
-  gap?: SxProps["gap"];
+  spacing?: SxProps["spacing"];
   /**
    * Shorthand for `align-items` style property
    * @default "center"
@@ -40,7 +40,7 @@ type Props = {
 };
 
 const defaultProps: Props = {
-  gap: "$0",
+  spacing: "$0",
   align: "center",
   justify: "center",
   wrap: "nowrap",
@@ -50,9 +50,18 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type StackProps = Props & NativeAttrs & StackVariantProps;
 
-const Stack = forwardRef<HTMLDivElement, StackProps>(
+export const Stack = forwardRef<HTMLDivElement, StackProps>(
   (
-    { children, className, align, justify, wrap, gap, sx, ...rest },
+    {
+      children,
+      className,
+      align,
+      justify,
+      wrap,
+      spacing: gap,
+      sx,
+      ...rest
+    },
     ref
   ) => {
     const _className = cx("pomatez-stack", className);

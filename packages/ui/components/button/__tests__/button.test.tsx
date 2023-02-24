@@ -1,7 +1,7 @@
 import { render, screen, testA11y } from "@/test-utils";
 import Button from "../button";
 
-describe("Button component", () => {
+describe("<Button />", () => {
   test("should pass the a11y test", async () => {
     await testA11y(<Button>Button</Button>);
   });

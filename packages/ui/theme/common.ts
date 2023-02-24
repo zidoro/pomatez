@@ -527,6 +527,7 @@ export const defaultThemeMap = {
   minInlineSize: "space",
   maxInlineSize: "space",
   borderWidth: "borderWeights",
+  spacing: "space",
 };
 
 export default {

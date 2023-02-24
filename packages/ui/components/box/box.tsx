@@ -23,7 +23,7 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type BoxProps = Props & NativeAttrs;
 
-const Box = forwardRef<HTMLDivElement, BoxProps>(
+export const Box = forwardRef<HTMLDivElement, BoxProps>(
   ({ children, className, sx, ...rest }, ref) => {
     const _className = cx("pomatez-box", className);
 

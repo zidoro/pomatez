@@ -19,7 +19,7 @@ const Template: StoryFn<typeof Stack> = (props) => {
   };
 
   return (
-    <Stack gap="$3" {...props}>
+    <Stack spacing="$3" {...props}>
       <Box sx={boxStyles}>Child 1</Box>
       <Box sx={boxStyles}>Child 2</Box>
       <Box sx={boxStyles}>Child 3</Box>

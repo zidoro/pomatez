@@ -56,7 +56,7 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type TextProps = Props & NativeAttrs & TextVariantProps;
 
-const Text = forwardRef<HTMLParagraphElement, TextProps>(
+export const Text = forwardRef<HTMLParagraphElement, TextProps>(
   (
     {
       children,

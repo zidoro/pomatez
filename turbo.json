@@ -11,9 +11,7 @@
       "env": ["GOOGLE_VERIFICATION", "GA_TRACKING_ID", "NODE_ENV"]
     },
     "lint": {},
-    "test": {
-      "dependsOn": ["lint", "build"]
-    },
+    "test": {},
     "preview": {
       "cache": false,
       "persistent": true,

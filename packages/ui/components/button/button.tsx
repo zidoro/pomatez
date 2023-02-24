@@ -18,7 +18,7 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type ButtonProps = Props & NativeAttrs & ButtonVariantProps;
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, className, sx, ...rest }, ref) => {
     const _className = cx("pomatez-button", className);
 

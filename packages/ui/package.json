@@ -5,7 +5,6 @@
   "types": "index.tsx",
   "license": "MIT",
   "scripts": {
-    "dev": "storybook dev -p 6006",
     "ts:check": "tsc --pretty --noEmit",
     "eslint:fix": "TIMING=1 eslint --fix \"**/*.ts*\"",
     "lint": "concurrently \"yarn eslint:fix\" \"yarn ts:check\"",
