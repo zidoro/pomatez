@@ -21,4 +21,20 @@ describe("Stack component", () => {
       </main>
     `);
   });
+
+  test("direction - prop should work correctly", () => {
+    const { rerender } = render(<Stack direction="row">Stack</Stack>);
+
+    const stackElement = screen.getByText("Stack");
+
+    expect(stackElement.getAttribute("class")).toMatch(
+      /direction-row/i
+    );
+
+    rerender(<Stack direction="column">Stack</Stack>);
+
+    expect(stackElement.getAttribute("class")).toMatch(
+      /direction-column/i
+    );
+  });
 });
