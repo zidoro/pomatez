@@ -26,9 +26,9 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "@vitest/coverage-c8": "^0.28.4",
+    "@vitest/coverage-c8": "^0.29.1",
     "jsdom": "^21.1.0",
-    "vitest": "^0.28.4",
+    "vitest": "^0.29.1",
     "vitest-axe": "^0.1.0"
   }
 }
