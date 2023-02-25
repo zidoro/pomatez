@@ -11,10 +11,10 @@ const StyledSvg = styled("svg", {
         color: "$green9",
       },
       "long-break": {
-        color: "$orange9",
+        color: "$brown9",
       },
       "special-break": {
-        color: "$brown9",
+        color: "$violet9",
       },
     },
   },

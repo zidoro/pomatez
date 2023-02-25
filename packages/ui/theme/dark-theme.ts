@@ -9,6 +9,10 @@ import {
   grayDark,
   orangeDark,
   brownDark,
+  indigoDark,
+  tomatoDark,
+  amberDark,
+  violetDark,
 } from "@radix-ui/colors";
 import { addColorAlpha } from "../utils/color";
 
@@ -30,6 +34,10 @@ export default {
     ...pinkDark,
     ...orangeDark,
     ...brownDark,
+    ...indigoDark,
+    ...tomatoDark,
+    ...amberDark,
+    ...violetDark,
     ...grayDark,
 
     // brand colors

@@ -32,7 +32,7 @@ export const WithLabel: Story = {
   args: {
     appState: "stay-focused",
     appVersion: "1.0.0",
-    iconSize: "1.6rem",
+    iconSize: "$4",
     labelFontSize: "$sm",
   },
 

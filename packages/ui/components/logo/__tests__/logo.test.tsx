@@ -4,15 +4,13 @@ import Logo from "../logo";
 
 describe("<LogoIcon />", () => {
   test("should pass the a11y test", async () => {
-    await testA11y(
-      <LogoIcon iconSize="1.6rem" appState="stay-focused" />
-    );
+    await testA11y(<LogoIcon iconSize="$4" appState="stay-focused" />);
   });
 
   test("appState - prop should work correctly", () => {
     const { rerender } = render(
       <LogoIcon
-        iconSize="1.6rem"
+        iconSize="$4"
         appState="stay-focused"
         data-testid="logo-icon"
       />
@@ -26,7 +24,7 @@ describe("<LogoIcon />", () => {
 
     rerender(
       <LogoIcon
-        iconSize="1.6rem"
+        iconSize="$4"
         appState="short-break"
         data-testid="logo-icon"
       />
@@ -38,7 +36,7 @@ describe("<LogoIcon />", () => {
 
     rerender(
       <LogoIcon
-        iconSize="1.6rem"
+        iconSize="$4"
         appState="long-break"
         data-testid="logo-icon"
       />
@@ -50,7 +48,7 @@ describe("<LogoIcon />", () => {
 
     rerender(
       <LogoIcon
-        iconSize="1.6rem"
+        iconSize="$4"
         appState="special-break"
         data-testid="logo-icon"
       />
@@ -66,7 +64,7 @@ describe("<Logo />", () => {
   test("should pass the a11y test", async () => {
     await testA11y(
       <Logo
-        iconSize="1.6rem"
+        iconSize="$4"
         labelFontSize="$sm"
         appState="stay-focused"
         appVersion="1.0.0"
@@ -77,7 +75,7 @@ describe("<Logo />", () => {
   test("should match the inline snapshot", () => {
     render(
       <Logo
-        iconSize="1.6rem"
+        iconSize="$4"
         labelFontSize="$sm"
         appState="stay-focused"
         appVersion="1.0.0"
@@ -96,7 +94,7 @@ describe("<Logo />", () => {
           class="PJLV PJLV-iUazGY-css pomatez-box"
         >
           <svg
-            class="pz-c-PJLV pz-c-PJLV-gvoCjt-appState-stay-focused pz-c-PJLV-ieETfyg-css"
+            class="pz-c-PJLV pz-c-PJLV-gvoCjt-appState-stay-focused pz-c-PJLV-icVoMNQ-css"
             fill="none"
             viewBox="0 0 256 256"
             xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,7 @@
 import { memo } from "react";
 import { Button, HStack, Logo, LogoProps } from "../../components";
-import { withDefaults } from "../../utils/with-defaults";
 
-type Props = {
+type TitlebarProps = {
   /**
    * The current state of the app
    * @default "stay-focused"
@@ -24,23 +23,18 @@ type Props = {
   onClose?: () => void;
 };
 
-const defaultProps: Props = {
-  appState: "stay-focused",
-  appVersion: "0.0.0",
-};
-
 export function Titlebar({
-  appState,
-  appVersion,
+  appState = "stay-focused",
+  appVersion = "0.0.0",
   onMinimize,
   onClose,
-}: Props) {
+}: TitlebarProps) {
   return (
     <HStack
       justify="space-between"
       sx={{
         width: "100%",
-        height: "4rem",
+        height: "$10",
         "-webkit-app-region": "drag",
         cursor: "pointer",
         userSelect: "none",
@@ -48,7 +42,7 @@ export function Titlebar({
       }}
     >
       <Logo
-        iconSize="1.6rem"
+        iconSize="$4"
         appState={appState}
         appVersion={appVersion}
         labelFontSize="$sm"
@@ -135,6 +129,4 @@ export function Titlebar({
   );
 }
 
-const MemoTitlebar = memo(Titlebar);
-
-export default withDefaults(MemoTitlebar, defaultProps);
+export default memo(Titlebar);

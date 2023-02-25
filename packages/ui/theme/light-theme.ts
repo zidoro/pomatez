@@ -9,6 +9,10 @@ import {
   gray,
   orange,
   brown,
+  indigo,
+  tomato,
+  amber,
+  violet,
 } from "@radix-ui/colors";
 import { addColorAlpha } from "../utils/color";
 
@@ -30,6 +34,10 @@ export default {
     ...pink,
     ...orange,
     ...brown,
+    ...indigo,
+    ...tomato,
+    ...amber,
+    ...violet,
     ...gray,
 
     // misc
