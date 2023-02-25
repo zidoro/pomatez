@@ -17,7 +17,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <ThemeProvider>
-      <VStack>
+      <VStack sx={{ pt: "$10" }}>
         <Story />
       </VStack>
     </ThemeProvider>
