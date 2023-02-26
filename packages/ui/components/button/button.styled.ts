@@ -12,12 +12,13 @@ export const StyledButton = styled("button", {
   border: "none",
 
   fontSize: "$sm",
-  fontWeight: "$black",
+  fontWeight: "$medium",
 
   textAlign: "center",
   whiteSpace: "nowrap",
 
   cursor: "pointer",
+  transition: "$button",
 });
 
 export type ButtonVariantProps = VariantProps<typeof StyledButton>;
