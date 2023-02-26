@@ -126,11 +126,11 @@ export const defaultTokens = {
     black: "5px",
   },
   transitions: {
-    default: "all 250ms ease",
+    default: "all 200ms ease",
     button:
-      "background 0.25s ease 0s, color 0.25s ease 0s, border-color 0.25s ease 0s, box-shadow 0.25s ease 0s, transform 0.25s ease 0s, opacity 0.25s ease 0s",
-    avatar: "box-shadow 0.25s ease 0s, opacity 0.25s ease 0s",
-    card: "transform 0.25s ease 0s, filter 0.25s ease 0s, box-shadow 0.25s ease 0s",
+      "background 0.16s ease 0s, color 0.16s ease 0s, border-color 0.16s ease 0s, box-shadow 0.16s ease 0s, transform 0.16s ease 0s, opacity 0.16s ease 0s",
+    avatar: "box-shadow 0.16s ease 0s, opacity 0.16s ease 0s",
+    card: "transform 0.16s ease 0s, filter 0.16s ease 0s, box-shadow 0.16s ease 0s",
     dropdownItem:
       "background 0.12s ease, transform 0.12s ease, color 0.12s ease, box-shadow 0.12s ease 0s",
   },

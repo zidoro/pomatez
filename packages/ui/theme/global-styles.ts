@@ -61,7 +61,7 @@ export const globalStyles = globalCss({
   },
 
   body: {
-    color: "$foreground",
+    color: "$gray11",
     fontSize: "$sm",
   },
 });

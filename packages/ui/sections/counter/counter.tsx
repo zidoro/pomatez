@@ -14,7 +14,9 @@ import {
 
 type CounterProps = {} & CounterVariantProps;
 
-export function Counter({ appState = "stay-focused" }: CounterProps) {
+export const Counter = ({
+  appState = "stay-focused",
+}: CounterProps) => {
   const renderIcon = () => {
     switch (appState) {
       case "stay-focused":
@@ -119,6 +121,6 @@ export function Counter({ appState = "stay-focused" }: CounterProps) {
       </Grid.Item>
     </Grid>
   );
-}
+};
 
 export default memo(Counter);

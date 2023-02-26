@@ -23,12 +23,12 @@ type TitlebarProps = {
   onClose?: () => void;
 };
 
-export function Titlebar({
+export const Titlebar = ({
   appState = "stay-focused",
   appVersion = "0.0.0",
   onMinimize,
   onClose,
-}: TitlebarProps) {
+}: TitlebarProps) => {
   return (
     <HStack
       justify="space-between"
@@ -127,6 +127,6 @@ export function Titlebar({
       </HStack>
     </HStack>
   );
-}
+};
 
 export default memo(Titlebar);
