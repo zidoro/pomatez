@@ -57,7 +57,7 @@ export const globalStyles = globalCss({
     width: "100%",
     height: "100%",
     boxSizing: "inherit",
-    backgroundColor: "$backgroundContrast",
+    backgroundColor: "$white",
   },
 
   body: {

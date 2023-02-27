@@ -1,10 +1,6 @@
-import { IconProps } from "@renderer/components";
+import { NavLinkProps } from "@pomatez/ui";
 
-export type RouteProps = {
-  icon?: IconProps["name"];
-  label: string;
-  path: string;
-};
+export type RouteProps = NavLinkProps<{ path: string }>;
 
 export type RouteConfig = {
   [name: string]: RouteProps & {

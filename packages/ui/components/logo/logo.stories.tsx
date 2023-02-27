@@ -16,6 +16,7 @@ export default {
       control: { type: "select" },
     },
   },
+  tags: ["autodocs"],
 } as Meta<typeof Logo>;
 
 type Story = StoryObj<typeof Logo>;

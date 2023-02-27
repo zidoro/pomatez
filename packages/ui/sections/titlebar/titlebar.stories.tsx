@@ -1,5 +1,5 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { VStack } from "../../components";
+import { Meta, StoryObj } from "@storybook/react";
+import { WindowDecorator } from "../../utils/story";
 import Titlebar from "./titlebar";
 
 export default {
@@ -16,30 +16,21 @@ export default {
       control: { type: "select" },
     },
   },
+  tags: ["autodocs"],
+  render: (args) => (
+    <WindowDecorator>
+      <Titlebar {...args} />
+    </WindowDecorator>
+  ),
 } as Meta<typeof Titlebar>;
 
 type Story = StoryObj<typeof Titlebar>;
-
-const Wrapper: StoryFn<typeof Titlebar> = (props) => (
-  <VStack
-    sx={{
-      width: "34rem",
-      border: "1px solid $gray6",
-      borderRadius: "$sm",
-      boxShadow: "$sm",
-      bg: "$white",
-    }}
-  >
-    <Titlebar {...props} />
-  </VStack>
-);
 
 export const StayFocused: Story = {
   args: {
     appState: "stay-focused",
     appVersion: "1.0.0",
   },
-  render: Wrapper,
 };
 
 export const ShortBreak: Story = {
@@ -47,7 +38,6 @@ export const ShortBreak: Story = {
     appState: "short-break",
     appVersion: "1.0.0",
   },
-  render: Wrapper,
 };
 
 export const LongBreak: Story = {
@@ -55,7 +45,6 @@ export const LongBreak: Story = {
     appState: "long-break",
     appVersion: "1.0.0",
   },
-  render: Wrapper,
 };
 
 export const SpecialBreak: Story = {
@@ -63,5 +52,4 @@ export const SpecialBreak: Story = {
     appState: "special-break",
     appVersion: "1.0.0",
   },
-  render: Wrapper,
 };

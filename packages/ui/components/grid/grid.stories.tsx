@@ -5,6 +5,7 @@ import Grid from "./grid";
 export default {
   title: "Components/Layouts/Grid",
   component: Grid,
+  tags: ["autodocs"],
 } as Meta<typeof Grid>;
 
 type Story = StoryObj<typeof Grid>;

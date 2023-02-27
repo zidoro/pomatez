@@ -6,7 +6,9 @@ export const StyledNavLink = styled("a", {
 
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "flex-start",
+  flexDirection: "column",
+  paddingTop: "$1",
   gap: "$1",
 
   position: "relative",

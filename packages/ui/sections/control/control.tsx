@@ -15,6 +15,7 @@ import {
   StyledControlButton,
   StyledContainerProps,
 } from "./control.styled";
+import { withDefaults } from "../../utils/with-defaults";
 
 type ControlProps = {
   /**
@@ -55,11 +56,18 @@ type ControlProps = {
   onToggleCompact?: () => void;
 } & StyledContainerProps;
 
+const defaultProps: ControlProps = {
+  appState: "stay-focused",
+  isPlaying: false,
+  isMuted: false,
+  isCompact: false,
+};
+
 export const Control = ({
-  appState = "stay-focused",
-  isPlaying = false,
-  isMuted = false,
-  isCompact = false,
+  appState,
+  isPlaying,
+  isMuted,
+  isCompact,
   onResetCounter,
   onRestart,
   onPlayPause,
@@ -100,7 +108,7 @@ export const Control = ({
         </Grid.Item>
 
         <Grid.Item justify="center">
-          <HStack spacing="$3">
+          <HStack spacing="$4">
             <StyledControlButton
               aria-label="Restart Button"
               variant="secondary"
@@ -178,4 +186,6 @@ export const Control = ({
   );
 };
 
-export default memo(Control);
+const MemoControl = memo(Control);
+
+export default withDefaults(MemoControl, defaultProps);

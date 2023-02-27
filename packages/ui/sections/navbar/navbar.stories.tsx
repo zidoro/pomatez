@@ -1,11 +1,11 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   CountdownTimerIcon,
   GearIcon,
   MixerHorizontalIcon,
   Pencil2Icon,
 } from "@radix-ui/react-icons";
-import { VStack } from "../../components";
+import { WindowDecorator } from "../../utils/story";
 import Navbar, { NavLinkProps } from "./navbar";
 
 const navLinks: NavLinkProps[] = [
@@ -49,49 +49,36 @@ export default {
       control: { type: "select" },
     },
   },
+  tags: ["autodocs"],
+  render: (args) => (
+    <WindowDecorator sx={{ height: "$16" }}>
+      <Navbar {...args} />
+    </WindowDecorator>
+  ),
 } as Meta<typeof Navbar>;
 
 type Story = StoryObj<typeof Navbar>;
-
-const Wrapper: StoryFn<typeof Navbar> = (props) => (
-  <VStack
-    sx={{
-      width: "34rem",
-      height: "$16",
-      border: "1px solid $gray6",
-      borderRadius: "$sm",
-      boxShadow: "$sm",
-      bg: "$white",
-    }}
-  >
-    <Navbar {...props} />
-  </VStack>
-);
 
 export const StayFocused: Story = {
   args: {
     appState: "stay-focused",
   },
-  render: Wrapper,
 };
 
 export const ShortBreak: Story = {
   args: {
     appState: "short-break",
   },
-  render: Wrapper,
 };
 
 export const LongBreak: Story = {
   args: {
     appState: "long-break",
   },
-  render: Wrapper,
 };
 
 export const SpecialBreak: Story = {
   args: {
     appState: "special-break",
   },
-  render: Wrapper,
 };

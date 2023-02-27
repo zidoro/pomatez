@@ -1,26 +1,33 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  CountdownTimerIcon,
+  GearIcon,
+  MixerHorizontalIcon,
+  Pencil2Icon,
+} from "@pomatez/ui/icons";
 import { createRouteMap } from "./utils";
 import { Layout } from "./components";
 import { Timer } from "./tabs";
 
 export const routes = createRouteMap({
   tasks: {
-    icon: "tasks",
+    icon: <Pencil2Icon />,
     label: "Tasks",
     path: "/tasks",
   },
   config: {
-    icon: "config",
+    icon: <MixerHorizontalIcon />,
     label: "Config",
     path: "/config",
   },
   timer: {
-    icon: "timer",
+    icon: <CountdownTimerIcon />,
     label: "Timer",
     path: "/timer",
+    activeClassName: "active",
   },
   settings: {
-    icon: "settings",
+    icon: <GearIcon />,
     label: "Settings",
     path: "/settings",
   },

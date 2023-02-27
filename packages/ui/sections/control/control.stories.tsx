@@ -1,6 +1,6 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { VStack } from "../../components";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { WindowDecorator } from "../../utils/story";
 import Control from "./control";
 
 export default {
@@ -17,6 +17,7 @@ export default {
       control: { type: "select" },
     },
   },
+  tags: ["autodocs"],
 } as Meta<typeof Control>;
 
 type Story = StoryObj<typeof Control>;
@@ -41,16 +42,7 @@ const Wrapper: StoryFn<typeof Control> = (props) => {
   };
 
   return (
-    <VStack
-      sx={{
-        width: "34rem",
-        height: "max-content",
-        border: "1px solid $gray6",
-        borderRadius: "$sm",
-        boxShadow: "$sm",
-        bg: "$white",
-      }}
-    >
+    <WindowDecorator>
       <Control
         {...props}
         isMuted={isMuted}
@@ -60,7 +52,7 @@ const Wrapper: StoryFn<typeof Control> = (props) => {
         onToggleSound={onToggleSoundHandler}
         onToggleCompact={onToggleCompactHandler}
       />
-    </VStack>
+    </WindowDecorator>
   );
 };
 

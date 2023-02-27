@@ -1,24 +1,16 @@
-import { Box } from "@pomatez/ui";
+import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
 import { Outlet } from "react-router-dom";
 import { routes } from "@renderer/route.config";
-import { Titlebar } from "./titlebar";
-import { Navbar } from "./navbar";
 
 export function Layout() {
-  const links = Object.values(routes);
+  const links = Object.values(routes).map((route) => ({
+    icon: route.icon,
+    label: route.label,
+    to: route.path,
+  }));
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100%",
-
-        display: "flex",
-        flexDirection: "column",
-        justifyItems: "center",
-        backgroundColor: "$bgPrimary",
-      }}
-    >
+    <VStack>
       <Titlebar />
       <Navbar links={links} />
       <Box
@@ -29,6 +21,6 @@ export function Layout() {
       >
         <Outlet />
       </Box>
-    </Box>
+    </VStack>
   );
 }

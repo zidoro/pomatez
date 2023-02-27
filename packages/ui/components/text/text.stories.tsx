@@ -8,6 +8,7 @@ export default {
   args: {
     children: "Text Component",
   },
+  tags: ["autodocs"],
 } as Meta<typeof Text>;
 
 export const Sizes = () => (

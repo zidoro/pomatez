@@ -4,6 +4,7 @@ import Box from "./box";
 export default {
   title: "Components/Layouts/Box",
   component: Box,
+  tags: ["autodocs"],
 } as Meta<typeof Box>;
 
 export const Default: StoryObj<typeof Box> = {

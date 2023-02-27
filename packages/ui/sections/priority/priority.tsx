@@ -1,24 +1,24 @@
 import { memo } from "react";
-import { Box, HStack, Text } from "../../components";
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { Box, ButtonIcon, Grid, Text } from "../../components";
 
 type PriorityProps = {};
 
 export function Priority(props: PriorityProps) {
   return (
-    <Box sx={{ width: "100%", px: "$4" }}>
-      <HStack
-        justify="flex-start"
+    <Box sx={{ width: "100%", height: "$12", px: "$4" }}>
+      <Grid
+        gap="$1"
         sx={{
           bg: "$gray2",
-          border: "1px solid $gray6",
+          border: "1px solid $gray4",
           borderRadius: "$sm",
-          px: "$3",
-          py: "$3",
+          padding: "$3",
+          pr: "0.6rem",
         }}
       >
         <Text
-          size="$md"
-          weight={500}
+          size="$sm"
           color="$gray12"
           sx={{
             whiteSpace: "nowrap",
@@ -31,7 +31,30 @@ export function Priority(props: PriorityProps) {
           suscipit, doloremque maiores ad minus itaque excepturi fugiat
           iusto perspiciatis dolorum in possimus doloribus.
         </Text>
-      </HStack>
+
+        <ButtonIcon
+          aria-label="Task Option Button"
+          icon={<DotsVerticalIcon />}
+          sx={{
+            width: "$4",
+            color: "$gray11",
+            mt: "-$1",
+
+            "&:hover, &:focus": {
+              color: "$blue10",
+            },
+
+            "&:active": {
+              color: "$blue9",
+            },
+
+            "& > svg": {
+              width: "100%",
+              height: "100%",
+            },
+          }}
+        />
+      </Grid>
     </Box>
   );
 }

@@ -1,30 +1,23 @@
-import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { VStack } from "../../components";
+import { Meta, StoryObj } from "@storybook/react";
+import { WindowDecorator } from "../../utils/story";
 import Priority from "./priority";
 
 export default {
   title: "App/Sections/Priority",
   component: Priority,
+  tags: ["autodocs"],
+  render: (args) => (
+    <WindowDecorator
+      sx={{
+        height: "max-content",
+        py: "$4",
+      }}
+    >
+      <Priority {...args} />
+    </WindowDecorator>
+  ),
 } as Meta<typeof Priority>;
 
 type Story = StoryObj<typeof Priority>;
 
-const Wrapper: StoryFn<typeof Priority> = (props) => (
-  <VStack
-    sx={{
-      width: "34rem",
-      height: "max-content",
-      border: "1px solid $gray6",
-      borderRadius: "$sm",
-      boxShadow: "$sm",
-      bg: "$white",
-      py: "$4",
-    }}
-  >
-    <Priority {...props} />
-  </VStack>
-);
-
-export const Default: Story = {
-  render: Wrapper,
-};
+export const Default: Story = {};

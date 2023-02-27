@@ -6,6 +6,7 @@ import Stack from "./stack";
 export default {
   title: "Components/Layouts/Stack",
   component: Stack,
+  tags: ["autodocs"],
 } as Meta<typeof Stack>;
 
 type Story = StoryObj<typeof Stack>;

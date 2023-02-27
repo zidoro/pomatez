@@ -12,12 +12,15 @@ import {
   StyledTimeRemaining,
 } from "./counter.styled";
 import { capitalize } from "../../utils/string";
+import { withDefaults } from "../../utils/with-defaults";
 
 type CounterProps = {} & CounterVariantProps;
 
-export const Counter = ({
-  appState = "stay-focused",
-}: CounterProps) => {
+const defaultProps: CounterProps = {
+  appState: "stay-focused",
+};
+
+export const Counter = ({ appState }: CounterProps) => {
   const renderAppState = () => {
     return capitalize(appState as string, { splitter: "-" });
   };
@@ -46,6 +49,7 @@ export const Counter = ({
         height: "max-content",
         position: "relative",
         padding: "$5",
+        pb: "$4",
       }}
     >
       <Grid.Item
@@ -124,4 +128,6 @@ export const Counter = ({
   );
 };
 
-export default memo(Counter);
+const MemoCounter = memo(Counter);
+
+export default withDefaults(MemoCounter, defaultProps);

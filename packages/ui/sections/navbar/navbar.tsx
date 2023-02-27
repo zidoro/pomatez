@@ -1,5 +1,6 @@
 import { memo, ReactNode } from "react";
-import { Box, HStack, VStack } from "../../components";
+import { Box, HStack } from "../../components";
+import { withDefaults } from "../../utils/with-defaults";
 import { NavLinkVariantProps, StyledNavLink } from "./navbar.styled";
 
 export type NavLinkProps<
@@ -32,10 +33,12 @@ type NavbarProps = {
   links?: NavLinkProps[];
 } & NavLinkVariantProps;
 
-export const Navbar = ({
-  appState = "stay-focused",
-  links = [],
-}: NavbarProps) => {
+const defaultProps: NavbarProps = {
+  appState: "stay-focused",
+  links: [],
+};
+
+export const Navbar = ({ appState, links }: NavbarProps) => {
   return (
     <Box
       as="nav"
@@ -77,9 +80,9 @@ export const Navbar = ({
           },
         }}
       >
-        {links.map(
+        {links?.map(
           ({ icon, label, activeClassName, as, ...rest }, index) => (
-            <VStack as="li" key={index}>
+            <Box as="li" key={index}>
               <StyledNavLink
                 as={as}
                 className={activeClassName}
@@ -90,7 +93,7 @@ export const Navbar = ({
                 <Box as="span">{icon}</Box>
                 {label}
               </StyledNavLink>
-            </VStack>
+            </Box>
           )
         )}
       </HStack>
@@ -98,4 +101,6 @@ export const Navbar = ({
   );
 };
 
-export default memo(Navbar);
+const MemoNavbar = memo(Navbar);
+
+export default withDefaults(MemoNavbar, defaultProps);
