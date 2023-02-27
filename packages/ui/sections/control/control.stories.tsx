@@ -6,11 +6,22 @@ import Control from "./control";
 export default {
   title: "App/Sections/Control",
   component: Control,
+  argTypes: {
+    appState: {
+      options: [
+        "stay-focused",
+        "short-break",
+        "long-break",
+        "special-break",
+      ],
+      control: { type: "select" },
+    },
+  },
 } as Meta<typeof Control>;
 
 type Story = StoryObj<typeof Control>;
 
-export const Playground: StoryFn<typeof Control> = (props) => {
+const Wrapper: StoryFn<typeof Control> = (props) => {
   const [isPlaying, setIsPlaying] = useState(props.isPlaying);
 
   const [isCompact, setIsCompact] = useState(props.isCompact);
@@ -41,6 +52,7 @@ export const Playground: StoryFn<typeof Control> = (props) => {
       }}
     >
       <Control
+        {...props}
         isMuted={isMuted}
         isPlaying={isPlaying}
         isCompact={isCompact}
@@ -52,6 +64,30 @@ export const Playground: StoryFn<typeof Control> = (props) => {
   );
 };
 
-export const Default: Story = {
-  render: Playground,
+export const StayFocused: Story = {
+  args: {
+    appState: "stay-focused",
+  },
+  render: Wrapper,
+};
+
+export const ShortBreak: Story = {
+  args: {
+    appState: "short-break",
+  },
+  render: Wrapper,
+};
+
+export const LongBreak: Story = {
+  args: {
+    appState: "long-break",
+  },
+  render: Wrapper,
+};
+
+export const SpecialBreak: Story = {
+  args: {
+    appState: "special-break",
+  },
+  render: Wrapper,
 };

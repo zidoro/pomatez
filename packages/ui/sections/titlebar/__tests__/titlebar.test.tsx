@@ -14,8 +14,12 @@ describe("<Titlebar />", () => {
 
     render(<Titlebar onMinimize={onMinimizeFn} onClose={onCloseFn} />);
 
-    await userEvent.click(screen.getByLabelText(/minimize button/i));
-    await userEvent.click(screen.getByLabelText(/close button/i));
+    await userEvent.click(
+      screen.getByRole("button", { name: /minimize button/i })
+    );
+    await userEvent.click(
+      screen.getByRole("button", { name: /close button/i })
+    );
 
     expect(onMinimizeFn).toBeCalledTimes(1);
     expect(onCloseFn).toBeCalledTimes(1);

@@ -10,7 +10,11 @@ import {
   TrackNextIcon,
 } from "@radix-ui/react-icons";
 import { Button, Grid, HStack, Text, VStack } from "../../components";
-import { StyledControlButton } from "./control.styled";
+import {
+  StyledContainer,
+  StyledControlButton,
+  StyledContainerProps,
+} from "./control.styled";
 
 type ControlProps = {
   /**
@@ -49,9 +53,10 @@ type ControlProps = {
    * Function to toggle the compact mode on and off.
    */
   onToggleCompact?: () => void;
-};
+} & StyledContainerProps;
 
 export const Control = ({
+  appState = "stay-focused",
   isPlaying = false,
   isMuted = false,
   isCompact = false,
@@ -63,111 +68,113 @@ export const Control = ({
   onToggleCompact,
 }: ControlProps) => {
   return (
-    <Grid
-      templateColumns="1fr max-content 1fr"
-      justify="space-between"
-      sx={{
-        width: "100%",
-        height: "max-content",
-        padding: "$4",
-        userSelect: "none",
-      }}
-    >
-      <Grid.Item justify="left">
-        <VStack>
-          <Text>1 / 4</Text>
-          <Button
-            sx={{
-              color: "$gray11",
-              "&:hover": {
-                color: "$blue10",
-              },
-              "&:active": {
-                color: "$blue9",
-              },
-            }}
-            onClick={onResetCounter}
-          >
-            Reset
-          </Button>
-        </VStack>
-      </Grid.Item>
-
-      <Grid.Item justify="center">
-        <HStack spacing="$3">
-          <StyledControlButton
-            aria-label="Restart Button"
-            variant="secondary"
-            icon={<ReloadIcon />}
-            onClick={onRestart}
-          />
-
-          {isPlaying ? (
-            <StyledControlButton
-              aria-label="Pause Button"
-              variant="primary"
-              icon={<PauseIcon />}
-              onClick={onPlayPause}
-            />
-          ) : (
-            <StyledControlButton
-              aria-label="Play Button"
-              variant="primary"
+    <StyledContainer appState={appState} data-testid={appState}>
+      <Grid
+        templateColumns="1fr max-content 1fr"
+        justify="space-between"
+        sx={{
+          width: "100%",
+          height: "max-content",
+          userSelect: "none",
+          color: "$gray11",
+          padding: "$4",
+        }}
+      >
+        <Grid.Item justify="left">
+          <VStack>
+            <Text>1 / 4</Text>
+            <Button
               sx={{
-                "& > svg": {
-                  marginLeft: "0.38rem",
+                "&:hover": {
+                  color: "$$hoverColor",
+                },
+                "&:active": {
+                  color: "$$activeColor",
                 },
               }}
-              icon={<PlayIcon />}
-              onClick={onPlayPause}
-            />
-          )}
+              onClick={onResetCounter}
+            >
+              Reset
+            </Button>
+          </VStack>
+        </Grid.Item>
 
-          <StyledControlButton
-            aria-label="Next Button"
-            variant="secondary"
-            icon={<TrackNextIcon />}
-            onClick={onNext}
-          />
-        </HStack>
-      </Grid.Item>
+        <Grid.Item justify="center">
+          <HStack spacing="$3">
+            <StyledControlButton
+              aria-label="Restart Button"
+              variant="secondary"
+              icon={<ReloadIcon />}
+              onClick={onRestart}
+            />
 
-      <Grid.Item justify="right">
-        <HStack spacing="$3">
-          {isMuted ? (
-            <StyledControlButton
-              aria-label="Speaker Off Button"
-              variant="secondary"
-              icon={<SpeakerOffIcon />}
-              onClick={onToggleSound}
-            />
-          ) : (
-            <StyledControlButton
-              aria-label="Speaker On Button"
-              variant="secondary"
-              icon={<SpeakerLoudIcon />}
-              onClick={onToggleSound}
-            />
-          )}
+            {isPlaying ? (
+              <StyledControlButton
+                aria-label="Pause Button"
+                variant="primary"
+                icon={<PauseIcon />}
+                onClick={onPlayPause}
+              />
+            ) : (
+              <StyledControlButton
+                aria-label="Play Button"
+                variant="primary"
+                sx={{
+                  "& > svg": {
+                    marginLeft: "0.38rem",
+                  },
+                }}
+                icon={<PlayIcon />}
+                onClick={onPlayPause}
+              />
+            )}
 
-          {isCompact ? (
             <StyledControlButton
-              aria-label="Compact Mode Disable Button"
+              aria-label="Next Button"
               variant="secondary"
-              icon={<DoubleArrowDownIcon />}
-              onClick={onToggleCompact}
+              icon={<TrackNextIcon />}
+              onClick={onNext}
             />
-          ) : (
-            <StyledControlButton
-              aria-label="Compact Mode Enable Button"
-              variant="secondary"
-              icon={<DoubleArrowUpIcon />}
-              onClick={onToggleCompact}
-            />
-          )}
-        </HStack>
-      </Grid.Item>
-    </Grid>
+          </HStack>
+        </Grid.Item>
+
+        <Grid.Item justify="right">
+          <HStack spacing="$3">
+            {isMuted ? (
+              <StyledControlButton
+                aria-label="Enable Speaker Button"
+                variant="secondary"
+                icon={<SpeakerOffIcon />}
+                onClick={onToggleSound}
+              />
+            ) : (
+              <StyledControlButton
+                aria-label="Disable Speaker Button"
+                variant="secondary"
+                icon={<SpeakerLoudIcon />}
+                onClick={onToggleSound}
+              />
+            )}
+
+            {isCompact ? (
+              <StyledControlButton
+                aria-label="Disable Compact Mode Button"
+                variant="secondary"
+                icon={<DoubleArrowDownIcon />}
+                onClick={onToggleCompact}
+              />
+            ) : (
+              <StyledControlButton
+                aria-label="Enable Compact Mode Button"
+                variant="secondary"
+                icon={<DoubleArrowUpIcon />}
+                onClick={onToggleCompact}
+              />
+            )}
+          </HStack>
+        </Grid.Item>
+      </Grid>
+    </StyledContainer>
   );
 };
 

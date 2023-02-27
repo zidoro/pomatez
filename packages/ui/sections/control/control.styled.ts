@@ -1,16 +1,44 @@
 import { ButtonIcon } from "../../components";
 import { styled, VariantProps } from "../../theme";
 
+export const StyledContainer = styled("div", {
+  width: "100%",
+  height: "max-content",
+
+  variants: {
+    appState: {
+      "stay-focused": {
+        $$hoverColor: "$colors$blue10",
+        $$activeColor: "$colors$blue9",
+      },
+      "short-break": {
+        $$hoverColor: "$colors$green10",
+        $$activeColor: "$colors$green9",
+      },
+      "long-break": {
+        $$hoverColor: "$colors$brown10",
+        $$activeColor: "$colors$brown9",
+      },
+      "special-break": {
+        $$hoverColor: "$colors$violet10",
+        $$activeColor: "$colors$violet9",
+      },
+    },
+  },
+  defaultVariants: {
+    appState: "stay-focused",
+  },
+});
+
 export const StyledControlButton = styled(ButtonIcon, {
-  color: "$gray11",
   transition: "$button",
 
   "&:hover": {
-    color: "$blue10",
+    color: "$$hoverColor",
   },
 
   "&:active": {
-    color: "$blue9",
+    color: "$$activeColor",
   },
 
   variants: {
@@ -40,6 +68,4 @@ export const StyledControlButton = styled(ButtonIcon, {
   },
 });
 
-export type ControlButtonVariantProps = VariantProps<
-  typeof StyledControlButton
->;
+export type StyledContainerProps = VariantProps<typeof StyledContainer>;

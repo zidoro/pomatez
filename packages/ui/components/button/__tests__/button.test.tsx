@@ -15,7 +15,7 @@ describe("<Button />", () => {
     expect(buttonElement.classList).toContainEqual("pomatez-button");
     expect(buttonElement).toMatchInlineSnapshot(`
       <button
-        class="pz-c-fxPYyP pz-c-fxPYyP-iPJLV-css pomatez-button"
+        class="pz-c-biXVyO pz-c-biXVyO-iPJLV-css pomatez-button"
       >
         Button
       </button>

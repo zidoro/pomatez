@@ -11,27 +11,30 @@ import {
   StyledProgress,
   StyledTimeRemaining,
 } from "./counter.styled";
+import { capitalize } from "../../utils/string";
 
 type CounterProps = {} & CounterVariantProps;
 
 export const Counter = ({
   appState = "stay-focused",
 }: CounterProps) => {
+  const renderAppState = () => {
+    return capitalize(appState as string, { splitter: "-" });
+  };
+
   const renderIcon = () => {
     switch (appState) {
       case "stay-focused":
-        return <DesktopIcon data-testid={appState} />;
+        return <DesktopIcon aria-label={`${renderAppState()} Icon`} />;
       case "short-break":
-        return <LightningBoltIcon data-testid={appState} />;
+        return (
+          <LightningBoltIcon aria-label={`${renderAppState()} Icon`} />
+        );
       case "long-break":
-        return <CookieIcon data-testid={appState} />;
+        return <CookieIcon aria-label={`${renderAppState()} Icon`} />;
       case "special-break":
-        return <StarIcon data-testid={appState} />;
+        return <StarIcon aria-label={`${renderAppState()} Icon`} />;
     }
-  };
-
-  const renderAppState = () => {
-    return (appState as string).replace("-", " ");
   };
 
   return (
@@ -41,9 +44,7 @@ export const Counter = ({
       sx={{
         width: "100%",
         height: "max-content",
-
         position: "relative",
-
         padding: "$5",
       }}
     >
