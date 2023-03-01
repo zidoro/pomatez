@@ -40,12 +40,8 @@ export function Priority(props: PriorityProps) {
             color: "$gray11",
             mt: "-$1",
 
-            "&:hover, &:focus": {
+            "&:hover": {
               color: "$blue10",
-            },
-
-            "&:active": {
-              color: "$blue9",
             },
 
             "& > svg": {
