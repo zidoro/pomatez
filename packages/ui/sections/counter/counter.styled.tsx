@@ -9,7 +9,7 @@ export const StyledProgress = styled("svg", {
   strokeDasharray: "67.4rem",
   strokeDashoffset: 0,
 
-  zIndex: 1,
+  zIndex: 0,
 
   variants: {
     appState: {

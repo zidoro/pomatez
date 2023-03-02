@@ -1,4 +1,4 @@
-import { blackA, mauve, violet } from "@radix-ui/colors";
+import { blackA, blue, mauve } from "@radix-ui/colors";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { keyframes, styled } from "../../theme";
 
@@ -23,10 +23,10 @@ export const slideLeftAndFade = keyframes({
 });
 
 const contentStyles = {
-  minWidth: 220,
+  minWidth: "max-content",
   backgroundColor: "white",
-  borderRadius: 6,
-  padding: 5,
+  borderRadius: "$md",
+  padding: "0.6rem",
   boxShadow:
     "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
   animationDuration: "400ms",
@@ -55,26 +55,25 @@ export const StyledDropdownMenuArrow = styled(DropdownMenu.Arrow, {
 
 const itemStyles = {
   all: "unset",
-  fontSize: 13,
-  lineHeight: 1,
-  color: violet.violet11,
-  borderRadius: 3,
+  fontSize: "$sm",
+  color: "$gray11",
+  borderRadius: "$sm",
   display: "flex",
   alignItems: "center",
-  height: 25,
+  height: "$7",
   padding: "0 5px",
   position: "relative",
-  paddingLeft: 25,
+  paddingLeft: "$2",
   userSelect: "none",
 
   "&[data-disabled]": {
-    color: mauve.mauve8,
+    color: "$gray8",
     pointerEvents: "none",
   },
 
   "&[data-highlighted]": {
-    backgroundColor: violet.violet9,
-    color: violet.violet1,
+    backgroundColor: "$blue9",
+    color: "$blue1",
   },
 };
 
@@ -94,8 +93,8 @@ export const StyledDropdownMenuSubTrigger = styled(
   DropdownMenu.SubTrigger,
   {
     '&[data-state="open"]': {
-      backgroundColor: violet.violet4,
-      color: violet.violet11,
+      backgroundColor: blue.blue4,
+      color: blue.blue11,
     },
     ...itemStyles,
   }
@@ -112,7 +111,7 @@ export const StyledDropdownMenuSeparator = styled(
   DropdownMenu.Separator,
   {
     height: 1,
-    backgroundColor: violet.violet6,
+    backgroundColor: "$gray6",
     margin: 5,
   }
 );
@@ -146,9 +145,9 @@ export const StyledIconButton = styled("button", {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  color: violet.violet11,
+  color: blue.blue11,
   backgroundColor: "white",
   boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  "&:hover": { backgroundColor: violet.violet3 },
+  "&:hover": { backgroundColor: blue.blue3 },
   "&:focus": { boxShadow: `0 0 0 2px black` },
 });

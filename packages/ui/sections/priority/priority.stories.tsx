@@ -5,6 +5,9 @@ import Priority from "./priority";
 export default {
   title: "App/Sections/Priority",
   component: Priority,
+  args: {
+    title: "Lorem ipsum dolor sit amet",
+  },
   tags: ["autodocs"],
   render: (args) => (
     <WindowDecorator

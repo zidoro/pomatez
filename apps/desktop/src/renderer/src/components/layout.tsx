@@ -1,5 +1,5 @@
-import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
 import { Outlet } from "react-router-dom";
+import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
 import { routes } from "@renderer/route.config";
 
 export function Layout() {

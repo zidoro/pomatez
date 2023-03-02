@@ -26,7 +26,7 @@ export default function Timer() {
   return (
     <StyledContainer>
       <Counter />
-      <Priority />
+      <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
       <Control />
     </StyledContainer>
   );
