@@ -1,4 +1,4 @@
-import { blackA, blue, mauve } from "@radix-ui/colors";
+import { blackA } from "@radix-ui/colors";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { keyframes, styled } from "../../theme";
 
@@ -27,8 +27,7 @@ const contentStyles = {
   backgroundColor: "white",
   borderRadius: "$md",
   padding: "0.6rem",
-  boxShadow:
-    "0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2)",
+  boxShadow: "$xl",
   animationDuration: "400ms",
   animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
   willChange: "transform, opacity",
@@ -57,13 +56,14 @@ const itemStyles = {
   all: "unset",
   fontSize: "$sm",
   color: "$gray11",
-  borderRadius: "$sm",
+
+  position: "relative",
   display: "flex",
   alignItems: "center",
-  height: "$7",
-  padding: "0 5px",
-  position: "relative",
-  paddingLeft: "$2",
+
+  borderRadius: "$sm",
+
+  padding: "$1 $2",
   userSelect: "none",
 
   "&[data-disabled]": {
@@ -74,6 +74,14 @@ const itemStyles = {
   "&[data-highlighted]": {
     backgroundColor: "$blue9",
     color: "$blue1",
+  },
+
+  variants: {
+    isLeftPadded: {
+      true: {
+        paddingLeft: "$6",
+      },
+    },
   },
 };
 
@@ -93,26 +101,34 @@ export const StyledDropdownMenuSubTrigger = styled(
   DropdownMenu.SubTrigger,
   {
     '&[data-state="open"]': {
-      backgroundColor: blue.blue4,
-      color: blue.blue11,
+      backgroundColor: "$blue4",
+      color: "$blue11",
     },
     ...itemStyles,
   }
 );
 
 export const StyledDropdownMenuLabel = styled(DropdownMenu.Label, {
-  paddingLeft: 25,
-  fontSize: 12,
+  paddingLeft: "$2",
+  fontSize: "$xs",
   lineHeight: "25px",
-  color: mauve.mauve11,
+  color: "$gray11",
+
+  variants: {
+    isLeftPadded: {
+      true: {
+        paddingLeft: "$6",
+      },
+    },
+  },
 });
 
 export const StyledDropdownMenuSeparator = styled(
   DropdownMenu.Separator,
   {
-    height: 1,
+    height: "$px",
     backgroundColor: "$gray6",
-    margin: 5,
+    margin: "0.6rem",
   }
 );
 
@@ -121,7 +137,7 @@ export const StyledDropdownMenuItemIndicator = styled(
   {
     position: "absolute",
     left: 0,
-    width: 25,
+    width: "$6",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
@@ -130,24 +146,24 @@ export const StyledDropdownMenuItemIndicator = styled(
 
 export const StyledRightSlot = styled("div", {
   marginLeft: "auto",
-  paddingLeft: 20,
-  color: mauve.mauve11,
+  paddingLeft: "$5",
+  color: "$gray11",
   "[data-highlighted] > &": { color: "white" },
-  "[data-disabled] &": { color: mauve.mauve8 },
+  "[data-disabled] &": { color: "$gray8" },
 });
 
 export const StyledIconButton = styled("button", {
   all: "unset",
   fontFamily: "inherit",
   borderRadius: "100%",
-  height: 35,
-  width: 35,
+  height: "$9",
+  width: "$9",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  color: blue.blue11,
+  color: "$blue11",
   backgroundColor: "white",
   boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  "&:hover": { backgroundColor: blue.blue3 },
+  "&:hover": { backgroundColor: "$blue3" },
   "&:focus": { boxShadow: `0 0 0 2px black` },
 });

@@ -71,10 +71,12 @@ export type DropdownMenuItemProps =
 export type DropdownProps = {
   /**
    * Whether the dropdown menu is open.
+   * @default false
    */
   isOpen?: boolean;
   /**
    * Whether the dropdown menu is open by default.
+   * @default false
    */
   defaultOpen?: boolean;
   /**
@@ -137,6 +139,10 @@ export const Dropdown = ({
   contentProps,
   ...rest
 }: DropdownProps) => {
+  const isLeftPadded = menuItems.some(
+    (item) => item.type === "checkbox" || item.type === "radio-group"
+  );
+
   const renderMenuItem = (
     menuItem: DropdownMenuItemProps,
     index: number
@@ -144,13 +150,17 @@ export const Dropdown = ({
     switch (menuItem?.type) {
       case "label":
         return (
-          <StyledDropdownMenuLabel key={index}>
+          <StyledDropdownMenuLabel
+            isLeftPadded={isLeftPadded}
+            key={index}
+          >
             {menuItem?.value}
           </StyledDropdownMenuLabel>
         );
       case "text":
         return (
           <StyledDropdownMenuItem
+            isLeftPadded={isLeftPadded}
             onClick={menuItem?.onClick}
             disabled={menuItem?.isDisabled}
             key={index}
@@ -164,7 +174,7 @@ export const Dropdown = ({
       case "sub-menu":
         return (
           <DropdownMenu.Sub key={index}>
-            <StyledDropdownMenuSubTrigger>
+            <StyledDropdownMenuSubTrigger isLeftPadded={isLeftPadded}>
               {menuItem?.label}
               <StyledRightSlot>
                 <ChevronRightIcon />
@@ -185,6 +195,7 @@ export const Dropdown = ({
       case "checkbox":
         return (
           <StyledDropdownMenuCheckboxItem
+            isLeftPadded={isLeftPadded}
             checked={menuItem?.isChecked}
             onCheckedChange={menuItem?.onCheckedChange}
             key={index}
@@ -207,6 +218,7 @@ export const Dropdown = ({
           >
             {menuItem?.subMenu?.map((item, index) => (
               <StyledDropdownMenuRadioItem
+                isLeftPadded={isLeftPadded}
                 value={item?.value as string}
                 key={index}
               >

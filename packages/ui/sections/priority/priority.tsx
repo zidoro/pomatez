@@ -41,7 +41,6 @@ export function Priority({ title }: PriorityProps) {
         </Text>
 
         <Dropdown
-          isOpen
           trigger={
             <ButtonIcon
               aria-label="Task Option Button"
@@ -63,8 +62,6 @@ export function Priority({ title }: PriorityProps) {
             />
           }
           menuItems={[
-            { type: "text", label: "View details", shortcut: "⌘+VD" },
-            { type: "separator" },
             { type: "text", label: "Skip this task", shortcut: "⌘+S" },
             { type: "text", label: "Mark as done", shortcut: "⌘+D" },
           ]}

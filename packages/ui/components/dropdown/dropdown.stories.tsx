@@ -88,6 +88,9 @@ export const Playground = () => {
           onValueChange: setPerson,
         },
       ]}
+      contentProps={{
+        sideOffset: 8,
+      }}
     />
   );
 };
