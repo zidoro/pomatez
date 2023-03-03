@@ -2,10 +2,20 @@ import { ReactNode } from "react";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
 import { routes } from "@renderer/route.config";
 
-export function WindowDecorator({ children }: { children: ReactNode }) {
-  const links = Object.values(routes).map((route) => ({
-    ...route,
-    to: route.path,
+type Props = {
+  activeTab?: string;
+  children: ReactNode;
+};
+
+export function WindowDecorator({
+  activeTab = "timer",
+  children,
+}: Props) {
+  const links = Object.values(routes).map(({ icon, label, path }) => ({
+    icon,
+    label,
+    to: path,
+    activeClassName: path.includes(activeTab) ? "active" : "",
   }));
 
   return (

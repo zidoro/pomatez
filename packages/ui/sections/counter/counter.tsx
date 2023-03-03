@@ -92,7 +92,7 @@ export const Counter = ({ appState }: CounterProps) => {
           dflex: "center",
           width: "100%",
           height: "100%",
-          mt: "-$4",
+          mt: "-$3",
         }}
       >
         <VStack spacing="$1">

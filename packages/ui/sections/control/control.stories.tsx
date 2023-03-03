@@ -22,7 +22,7 @@ export default {
 
 type Story = StoryObj<typeof Control>;
 
-const Wrapper: StoryFn<typeof Control> = (props) => {
+const Template: StoryFn<typeof Control> = (props) => {
   const [isPlaying, setIsPlaying] = useState(props.isPlaying);
 
   const [isCompact, setIsCompact] = useState(props.isCompact);
@@ -60,26 +60,26 @@ export const StayFocused: Story = {
   args: {
     appState: "stay-focused",
   },
-  render: Wrapper,
+  render: Template,
 };
 
 export const ShortBreak: Story = {
   args: {
     appState: "short-break",
   },
-  render: Wrapper,
+  render: Template,
 };
 
 export const LongBreak: Story = {
   args: {
     appState: "long-break",
   },
-  render: Wrapper,
+  render: Template,
 };
 
 export const SpecialBreak: Story = {
   args: {
     appState: "special-break",
   },
-  render: Wrapper,
+  render: Template,
 };

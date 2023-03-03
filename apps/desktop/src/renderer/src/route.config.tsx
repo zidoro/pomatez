@@ -1,4 +1,8 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  NavLink,
+} from "react-router-dom";
 import {
   CountdownTimerIcon,
   GearIcon,
@@ -14,22 +18,25 @@ export const routes = createRouteMap({
     icon: <Pencil2Icon />,
     label: "Tasks",
     path: "/tasks",
+    as: NavLink,
   },
   config: {
     icon: <MixerHorizontalIcon />,
     label: "Config",
     path: "/config",
+    as: NavLink,
   },
   timer: {
     icon: <CountdownTimerIcon />,
     label: "Timer",
     path: "/timer",
-    activeClassName: "active",
+    as: NavLink,
   },
   settings: {
     icon: <GearIcon />,
     label: "Settings",
     path: "/settings",
+    as: NavLink,
   },
 });
 

@@ -58,6 +58,8 @@ export const globalStyles = globalCss({
     height: "100%",
     boxSizing: "inherit",
     backgroundColor: "$white",
+    overflow: "hidden",
+    dflex: "center",
   },
 
   body: {

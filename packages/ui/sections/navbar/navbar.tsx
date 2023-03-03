@@ -1,4 +1,4 @@
-import { memo, ReactNode } from "react";
+import { ComponentType, memo, ReactNode } from "react";
 import { Box, HStack } from "../../components";
 import { withDefaults } from "../../utils/with-defaults";
 import { NavLinkVariantProps, StyledNavLink } from "./navbar.styled";
@@ -26,7 +26,7 @@ export type NavLinkProps<
   /**
    * The element to be rendered.
    */
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof JSX.IntrinsicElements | ComponentType<any>;
 } & TProps;
 
 type NavbarProps = {

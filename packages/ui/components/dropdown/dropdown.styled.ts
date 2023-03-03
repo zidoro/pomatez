@@ -1,4 +1,3 @@
-import { blackA } from "@radix-ui/colors";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { keyframes, styled } from "../../theme";
 
@@ -55,6 +54,7 @@ export const StyledDropdownMenuArrow = styled(DropdownMenu.Arrow, {
 const itemStyles = {
   all: "unset",
   fontSize: "$sm",
+  fontFamily: "$sans",
   color: "$gray11",
 
   position: "relative",
@@ -111,7 +111,8 @@ export const StyledDropdownMenuSubTrigger = styled(
 export const StyledDropdownMenuLabel = styled(DropdownMenu.Label, {
   paddingLeft: "$2",
   fontSize: "$xs",
-  lineHeight: "25px",
+  fontWeight: "$medium",
+  lineHeight: "$taller",
   color: "$gray11",
 
   variants: {
@@ -163,7 +164,7 @@ export const StyledIconButton = styled("button", {
   justifyContent: "center",
   color: "$blue11",
   backgroundColor: "white",
-  boxShadow: `0 2px 10px ${blackA.blackA7}`,
+  boxShadow: `0 2px 10px $colors$blackA7`,
   "&:hover": { backgroundColor: "$blue3" },
-  "&:focus": { boxShadow: `0 0 0 2px black` },
+  "&:focus": { boxShadow: `0 0 0 2px $colors$blue12` },
 });
