@@ -3,7 +3,7 @@ import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
 import { routes } from "@renderer/route.config";
 
 type Props = {
-  activeTab?: string;
+  activeTab: string;
   children: ReactNode;
 };
 
@@ -20,8 +20,10 @@ export function WindowDecorator({
 
   return (
     <VStack
+      justify="flex-start"
       sx={{
         width: "34rem",
+        height: "48rem",
         border: "1px solid $gray6",
         borderRadius: "$sm",
         boxShadow: "$md",

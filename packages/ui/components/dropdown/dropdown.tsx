@@ -258,4 +258,6 @@ export const Dropdown = ({
 
 const MemoDropdown = memo(Dropdown);
 
+MemoDropdown.displayName = "Dropdown";
+
 export default MemoDropdown;

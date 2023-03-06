@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { withDefaults } from "../../utils/with-defaults";
 import { HStack, VStack } from "../stack";
 import { Text } from "../text";
 import {
@@ -67,7 +66,10 @@ const defaultProps: Partial<SliderProps> = {
 export const Slider = ({
   header,
   value,
-  defaultValue,
+  min = 0,
+  max = 120,
+  step = 1,
+  defaultValue = 60,
   onValueChange,
   onValueCommit,
   ...rest
@@ -88,6 +90,9 @@ export const Slider = ({
       </HStack>
 
       <StyledSliderRoot
+        min={min}
+        max={max}
+        step={step}
         value={getValidValue(value)}
         defaultValue={getValidValue(defaultValue)}
         onValueChange={(values) => {
@@ -110,4 +115,6 @@ export const Slider = ({
 
 const MemoSlider = memo(Slider);
 
-export default withDefaults(MemoSlider, defaultProps);
+MemoSlider.displayName = "Slider";
+
+export default MemoSlider;

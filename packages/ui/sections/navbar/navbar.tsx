@@ -45,7 +45,7 @@ export const Navbar = ({ appState, links }: NavbarProps) => {
       sx={{
         position: "relative",
         width: "100%",
-        height: "$12",
+        minHeight: "$12",
 
         "&::after": {
           content: "''",

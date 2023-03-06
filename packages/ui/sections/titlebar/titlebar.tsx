@@ -40,7 +40,7 @@ export const Titlebar = ({
       justify="space-between"
       sx={{
         width: "100%",
-        height: "$10",
+        minHeight: "$10",
         "-webkit-app-region": "drag",
         cursor: "pointer",
         userSelect: "none",

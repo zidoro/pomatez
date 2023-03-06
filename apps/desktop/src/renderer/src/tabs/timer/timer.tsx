@@ -3,24 +3,11 @@ import {
   Priority,
   Control,
   VStack,
-  keyframes,
   styled,
 } from "@pomatez/ui";
+import { slideUpAndFadeAnimation } from "@renderer/utils";
 
-const slideUpAndFade = keyframes({
-  "0%": {
-    opacity: 0,
-    transform: "translateY(1.2rem)",
-  },
-  "100%": {
-    opacity: 1,
-    transform: "translateY(0)",
-  },
-});
-
-const StyledContainer = styled(VStack, {
-  animation: `${slideUpAndFade} 160ms ease`,
-});
+const StyledContainer = styled(VStack, slideUpAndFadeAnimation);
 
 export default function Timer() {
   return (

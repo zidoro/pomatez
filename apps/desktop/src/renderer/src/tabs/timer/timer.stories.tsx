@@ -7,7 +7,7 @@ export default {
   component: Timer,
   decorators: [
     (Story) => (
-      <WindowDecorator>
+      <WindowDecorator activeTab="/timer">
         <Story />
       </WindowDecorator>
     ),

@@ -14,6 +14,7 @@ export function Layout() {
 
   return (
     <VStack
+      justify="flex-start"
       sx={{
         width: "34rem",
         height: "48rem",
@@ -29,6 +30,7 @@ export function Layout() {
       <Box
         as="main"
         sx={{
+          width: "100%",
           height: "42rem",
         }}
       >

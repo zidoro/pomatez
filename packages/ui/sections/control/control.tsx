@@ -91,17 +91,7 @@ export const Control = ({
         <Grid.Item justify="left">
           <VStack>
             <Text>1 / 4</Text>
-            <Button
-              sx={{
-                "&:hover": {
-                  color: "$$hoverColor",
-                },
-                "&:active": {
-                  color: "$$activeColor",
-                },
-              }}
-              onClick={onResetCounter}
-            >
+            <Button variant="link" onClick={onResetCounter}>
               Reset
             </Button>
           </VStack>

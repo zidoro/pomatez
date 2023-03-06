@@ -19,6 +19,19 @@ export const StyledButton = styled("button", {
 
   cursor: "pointer",
   transition: "$button",
+
+  variants: {
+    variant: {
+      link: {
+        "&:hover": {
+          color: "$blue10",
+        },
+        "&:active": {
+          color: "$blue9",
+        },
+      },
+    },
+  },
 });
 
 export type ButtonVariantProps = VariantProps<typeof StyledButton>;
