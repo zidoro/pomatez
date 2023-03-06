@@ -11,7 +11,7 @@ import {
 } from "@pomatez/ui/icons";
 import { createRouteMap } from "./utils";
 import { Layout } from "./components";
-import { Timer } from "./tabs";
+import { Config, Timer } from "./tabs";
 
 export const routes = createRouteMap({
   tasks: {
@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
       },
       {
         path: routes.config.path,
-        element: <div>Config</div>,
+        element: <Config />,
       },
       {
         path: routes.timer.path,
