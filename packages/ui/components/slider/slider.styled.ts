@@ -1,6 +1,6 @@
 import * as Slider from "@radix-ui/react-slider";
-import { styled, theme } from "../../theme";
 import { addColorAlpha, hslToRgb } from "../../utils/color";
+import { styled, theme } from "../../theme";
 
 export const StyledSliderRoot = styled(Slider.Root, {
   position: "relative",

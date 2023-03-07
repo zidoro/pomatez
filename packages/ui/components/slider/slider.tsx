@@ -56,13 +56,6 @@ export type SliderProps = {
   onValueCommit?(value: number): void;
 };
 
-const defaultProps: Partial<SliderProps> = {
-  min: 0,
-  max: 120,
-  step: 1,
-  defaultValue: 60,
-};
-
 export const Slider = ({
   header,
   value,
@@ -78,6 +71,22 @@ export const Slider = ({
     if (value) return [value];
   };
 
+  const calcRightPosition = (value: number) => {
+    const valuePercentage = (value / max) * 100;
+
+    let calculatedValue = 100 - (value - min) * (100 / (max - min));
+
+    if (valuePercentage < 50) {
+      calculatedValue = calculatedValue - min;
+    }
+
+    if (value <= min) {
+      calculatedValue = 100;
+    }
+
+    return `${calculatedValue}%`;
+  };
+
   return (
     <VStack
       as="form"
@@ -90,6 +99,7 @@ export const Slider = ({
       </HStack>
 
       <StyledSliderRoot
+        className="pomatez-slider"
         min={min}
         max={max}
         step={step}
@@ -104,7 +114,14 @@ export const Slider = ({
         {...rest}
       >
         <StyledSliderTrack>
-          <StyledSliderRange />
+          <StyledSliderRange
+            className="pomatez-slider--range"
+            css={{
+              right: `${calcRightPosition(
+                value ?? defaultValue ?? 0
+              )} !important`,
+            }}
+          />
         </StyledSliderTrack>
 
         <StyledSliderThumb />
