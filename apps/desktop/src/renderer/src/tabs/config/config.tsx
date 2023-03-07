@@ -3,30 +3,55 @@ import {
   Button,
   HStack,
   Slider,
-  styled,
   Text,
   VStack,
+  ToggleGroup,
 } from "@pomatez/ui";
 import { oneOrMany } from "@pomatez/ui/utils/string";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
 
-const StyledContainer = styled(VStack, slideRightAndFadeAnimation);
+type StateProps = {
+  stayFocused: number;
+  shortBreak: number;
+  longBreak: number;
+  sessionRounds: number;
+};
 
-const defaultState = {
-  focus: 25,
-  shortBreak: 5,
-  longBreak: 15,
-  sessionRounds: 4,
+const presets: Record<
+  "standard" | "extended" | "ultradian",
+  StateProps
+> = {
+  standard: {
+    stayFocused: 25,
+    shortBreak: 5,
+    longBreak: 15,
+    sessionRounds: 4,
+  },
+  extended: {
+    stayFocused: 50,
+    shortBreak: 10,
+    longBreak: 30,
+    sessionRounds: 3,
+  },
+  ultradian: {
+    stayFocused: 90,
+    shortBreak: 30,
+    longBreak: 60,
+    sessionRounds: 2,
+  },
 };
 
 export default function Config() {
-  const [state, setState] = useState(defaultState);
+  const [state, setState] = useState(presets.standard);
 
   return (
-    <StyledContainer
+    <VStack
       spacing="$4"
       align="flex-start"
-      sx={{ px: "$5", py: "$5" }}
+      sx={{
+        ...slideRightAndFadeAnimation,
+        padding: "$5",
+      }}
     >
       <HStack justify="space-between" sx={{ width: "100%" }}>
         <Text
@@ -42,7 +67,7 @@ export default function Config() {
         <Button
           variant="link"
           onClick={() => {
-            setState(defaultState);
+            setState(presets.standard);
           }}
         >
           Restore Defaults
@@ -53,13 +78,13 @@ export default function Config() {
         <Slider
           header={{
             label: "Stay focused",
-            valueInterpreter: oneOrMany(state.focus, "min"),
+            valueInterpreter: oneOrMany(state.stayFocused, "min"),
           }}
           min={1}
           max={90}
-          value={state.focus}
+          value={state.stayFocused}
           onValueChange={(value) => {
-            setState({ ...state, focus: value });
+            setState({ ...state, stayFocused: value });
           }}
         />
 
@@ -102,6 +127,47 @@ export default function Config() {
           }}
         />
       </VStack>
-    </StyledContainer>
+
+      <VStack
+        align="flex-start"
+        spacing="$4"
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Text
+          size="$xs"
+          casing="uppercase"
+          weight="$medium"
+          color="$gray9"
+        >
+          Presets
+        </Text>
+
+        <ToggleGroup
+          items={[
+            {
+              label: "Standard",
+              value: JSON.stringify(presets.standard),
+            },
+            {
+              label: "Extended",
+              value: JSON.stringify(presets.extended),
+            },
+            {
+              label: "Ultradian",
+              value: JSON.stringify(presets.ultradian),
+            },
+          ]}
+          value={JSON.stringify(state)}
+          onValueChange={(value) => {
+            setState(JSON.parse(value));
+          }}
+          sx={{
+            width: "100%",
+          }}
+        />
+      </VStack>
+    </VStack>
   );
 }
