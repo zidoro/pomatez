@@ -1,20 +1,12 @@
-import {
-  Counter,
-  Priority,
-  Control,
-  VStack,
-  styled,
-} from "@pomatez/ui";
+import { Counter, Priority, Control, VStack } from "@pomatez/ui";
 import { slideUpAndFadeAnimation } from "@renderer/utils";
-
-const StyledContainer = styled(VStack, slideUpAndFadeAnimation);
 
 export default function Timer() {
   return (
-    <StyledContainer>
+    <VStack sx={slideUpAndFadeAnimation}>
       <Counter />
       <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
       <Control />
-    </StyledContainer>
+    </VStack>
   );
 }

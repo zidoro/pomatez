@@ -85,7 +85,8 @@ export const Control = ({
           height: "max-content",
           userSelect: "none",
           color: "$gray11",
-          padding: "$4",
+          px: "$5",
+          py: "$4",
         }}
       >
         <Grid.Item justify="left">

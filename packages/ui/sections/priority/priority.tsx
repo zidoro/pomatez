@@ -14,7 +14,7 @@ type PriorityProps = {
 
 export function Priority({ title }: PriorityProps) {
   return (
-    <Box sx={{ width: "100%", height: "$12", px: "$4" }}>
+    <Box sx={{ width: "100%", height: "$12", px: "$5" }}>
       <Grid
         gap="$1"
         templateColumns="1fr max-content"
