@@ -1,5 +1,5 @@
-import { WindowDecorator } from "@renderer/utils";
 import { Meta } from "@storybook/react";
+import { WindowDecorator } from "@renderer/utils";
 import Config from "./config";
 
 export default {

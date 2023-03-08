@@ -1,14 +1,13 @@
 import { useState } from "react";
 import {
   Button,
-  HStack,
   Slider,
-  Text,
   VStack,
   ToggleGroup,
+  oneOrMany,
 } from "@pomatez/ui";
-import { oneOrMany } from "@pomatez/ui/utils/string";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
+import { SectionLayout, TabLayout } from "@renderer/layouts";
 
 type StateProps = {
   stayFocused: number;
@@ -45,25 +44,9 @@ export default function Config() {
   const [state, setState] = useState(presets.standard);
 
   return (
-    <VStack
-      spacing="$4"
-      align="flex-start"
-      sx={{
-        ...slideRightAndFadeAnimation,
-        padding: "$5",
-      }}
-    >
-      <HStack justify="space-between" sx={{ width: "100%" }}>
-        <Text
-          as="h1"
-          size="$md"
-          color="$gray12"
-          casing="uppercase"
-          weight="$medium"
-        >
-          Rules
-        </Text>
-
+    <TabLayout
+      heading="Rules"
+      action={
         <Button
           variant="link"
           onClick={() => {
@@ -72,8 +55,9 @@ export default function Config() {
         >
           Restore Defaults
         </Button>
-      </HStack>
-
+      }
+      animation={slideRightAndFadeAnimation}
+    >
       <VStack spacing="$3" sx={{ width: "100%" }}>
         <Slider
           header={{
@@ -128,22 +112,7 @@ export default function Config() {
         />
       </VStack>
 
-      <VStack
-        align="flex-start"
-        spacing="$4"
-        sx={{
-          width: "100%",
-        }}
-      >
-        <Text
-          size="$xs"
-          casing="uppercase"
-          weight="$medium"
-          color="$gray9"
-        >
-          Presets
-        </Text>
-
+      <SectionLayout heading="Presets">
         <ToggleGroup
           items={[
             {
@@ -167,7 +136,7 @@ export default function Config() {
             width: "100%",
           }}
         />
-      </VStack>
-    </VStack>
+      </SectionLayout>
+    </TabLayout>
   );
 }

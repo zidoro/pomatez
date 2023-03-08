@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
 import { routes } from "@renderer/route.config";
 
-export function Layout() {
+export function RootLayout() {
   const links = Object.values(routes).map(
     ({ icon, label, path, as }) => ({
       as,
@@ -31,7 +31,8 @@ export function Layout() {
         as="main"
         sx={{
           width: "100%",
-          height: "42rem",
+          height: "40rem",
+          overflow: "hidden",
         }}
       >
         <Outlet />

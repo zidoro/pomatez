@@ -36,7 +36,8 @@ export function WindowDecorator({
         as="main"
         sx={{
           width: "100%",
-          height: "max-content",
+          height: "40rem",
+          overflow: "hidden",
         }}
       >
         {children}
