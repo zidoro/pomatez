@@ -10,13 +10,13 @@ import {
   Pencil2Icon,
 } from "@pomatez/ui/icons";
 import { createRouteMap } from "./utils";
-import { Layout } from "./components";
-import { Config, Timer } from "./tabs";
+import { Config, Settings, Timer } from "./tabs";
+import { RootLayout } from "./layouts";
 
 export const routes = createRouteMap({
   tasks: {
     icon: <Pencil2Icon />,
-    label: "Tasks",
+    label: "Task List",
     path: "/tasks",
     as: NavLink,
   },
@@ -43,7 +43,7 @@ export const routes = createRouteMap({
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <RootLayout />,
     children: [
       {
         index: true,
@@ -63,7 +63,7 @@ export const router = createBrowserRouter([
       },
       {
         path: routes.settings.path,
-        element: <div>Settings</div>,
+        element: <Settings />,
       },
     ],
   },
