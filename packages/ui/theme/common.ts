@@ -122,7 +122,7 @@ export const defaultTokens = {
     black: "5px",
   },
   transitions: {
-    default: "all 200ms ease",
+    default: "all 20s ease",
     button:
       "background 0.16s ease 0s, color 0.16s ease 0s, border-color 0.16s ease 0s, box-shadow 0.16s ease 0s, transform 0.16s ease 0s, opacity 0.16s ease 0s",
     avatar: "box-shadow 0.16s ease 0s, opacity 0.16s ease 0s",

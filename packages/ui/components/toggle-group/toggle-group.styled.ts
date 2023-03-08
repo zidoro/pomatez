@@ -40,11 +40,20 @@ export const StyledGroupItem = styled(ToggleGroup.Item, {
   "&:focus": {
     position: "relative",
     borderColor: "$blue8",
-    boxShadow: `0 0 0 0.2rem ${addColorAlpha(
+    boxShadow: `0 0 0 0.3rem ${addColorAlpha(
       hslToRgb(theme.colors.blue10.value),
       0.16
     )}`,
-    color: "$blue11",
+    color: "$blue10",
+  },
+
+  "&:active": {
+    borderColor: "$blue8",
+    boxShadow: `0 0 0 0.3rem ${addColorAlpha(
+      hslToRgb(theme.colors.blue10.value),
+      0.16
+    )}`,
+    color: "$blue10",
   },
 
   "&[data-state=on]": {

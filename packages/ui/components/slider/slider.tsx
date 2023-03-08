@@ -88,11 +88,7 @@ export const Slider = ({
   };
 
   return (
-    <VStack
-      as="form"
-      spacing="$1"
-      sx={{ width: "100%", height: "max-content" }}
-    >
+    <VStack spacing="$1" sx={{ width: "100%", height: "max-content" }}>
       <HStack justify="space-between" sx={{ width: "100%" }}>
         <Text>{header.label}</Text>
         <Text>{header.valueInterpreter}</Text>

@@ -45,7 +45,7 @@ export const Playground = () => {
           type: "text",
           label: "New Private Window",
           shortcut: "⇧+⌘+N",
-          isDisabled: true,
+          disabled: true,
         },
         {
           type: "sub-menu",
@@ -67,13 +67,13 @@ export const Playground = () => {
           type: "checkbox",
           label: "Show Bookmarks",
           shortcut: "⌘+B",
-          isChecked: bookmarksChecked,
+          checked: bookmarksChecked,
           onCheckedChange: setBookmarksChecked,
         },
         {
           type: "checkbox",
           label: "Show Full URLs",
-          isChecked: urlsChecked,
+          checked: urlsChecked,
           onCheckedChange: setUrlsChecked,
         },
         { type: "separator" },
@@ -120,7 +120,7 @@ export const TextItemsOnly = () => {
           type: "text",
           label: "New Private Window",
           shortcut: "⇧+⌘+N",
-          isDisabled: true,
+          disabled: true,
         },
         {
           type: "sub-menu",

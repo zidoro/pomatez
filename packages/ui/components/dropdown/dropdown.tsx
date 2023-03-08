@@ -34,7 +34,7 @@ export type DropdownMenuItemProps =
       shortcut?: string;
       subMenu?: never;
       onClick?: () => void;
-      isDisabled?: boolean;
+      disabled?: boolean;
     }
   | {
       type: "checkbox";
@@ -42,7 +42,7 @@ export type DropdownMenuItemProps =
       value?: never;
       shortcut?: string;
       subMenu?: never;
-      isChecked?: boolean;
+      checked?: boolean;
       onCheckedChange?: (checked: boolean) => void;
     }
   | {
@@ -73,7 +73,7 @@ export type DropdownProps = {
    * Whether the dropdown menu is open.
    * @default false
    */
-  isOpen?: boolean;
+  open?: boolean;
   /**
    * Whether the dropdown menu is open by default.
    * @default false
@@ -133,7 +133,7 @@ export type DropdownProps = {
 };
 
 export const Dropdown = ({
-  isOpen,
+  open,
   trigger,
   menuItems = [],
   contentProps,
@@ -162,7 +162,7 @@ export const Dropdown = ({
           <StyledDropdownMenuItem
             isLeftPadded={isLeftPadded}
             onClick={menuItem?.onClick}
-            disabled={menuItem?.isDisabled}
+            disabled={menuItem?.disabled}
             key={index}
           >
             {menuItem?.label}{" "}
@@ -196,7 +196,7 @@ export const Dropdown = ({
         return (
           <StyledDropdownMenuCheckboxItem
             isLeftPadded={isLeftPadded}
-            checked={menuItem?.isChecked}
+            checked={menuItem?.checked}
             onCheckedChange={menuItem?.onCheckedChange}
             key={index}
           >
@@ -239,7 +239,7 @@ export const Dropdown = ({
   };
 
   return (
-    <DropdownMenu.Root open={isOpen} {...rest}>
+    <DropdownMenu.Root open={open} {...rest}>
       <DropdownMenu.Trigger asChild>{trigger}</DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
