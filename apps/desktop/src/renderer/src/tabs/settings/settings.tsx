@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  addColorAlpha,
-  Box,
-  Button,
-  hslToRgb,
-  Switch,
-  SwitchProps,
-  theme,
-  VStack,
-} from "@pomatez/ui";
+import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { slideLeftAndFadeAnimation } from "@renderer/utils";
 
@@ -163,34 +154,7 @@ export default function Settings() {
           left: 0,
         }}
       >
-        <Button
-          sx={{
-            width: "100%",
-            height: "$10",
-
-            bg: "$white",
-            color: "$blue9",
-            border: "1px solid $blue8",
-            borderRadius: "$sm",
-
-            "&:hover, &:focus": {
-              outline: "none",
-              color: "$blue10",
-              boxShadow: `0 0 0 0.3rem ${addColorAlpha(
-                hslToRgb(theme.colors.blue10.value),
-                0.16
-              )}`,
-            },
-
-            "&:active": {
-              color: "$blue10",
-              boxShadow: `0 0 0 0.4rem ${addColorAlpha(
-                hslToRgb(theme.colors.blue10.value),
-                0.24
-              )}`,
-            },
-          }}
-        >
+        <Button variant="outline" size="md" fullWidth>
           Start it on GitHub
         </Button>
       </Box>

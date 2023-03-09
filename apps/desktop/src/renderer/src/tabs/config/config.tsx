@@ -5,6 +5,7 @@ import {
   VStack,
   ToggleGroup,
   oneOrMany,
+  SliderProps,
 } from "@pomatez/ui";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
@@ -43,6 +44,57 @@ const presets: Record<
 export default function Config() {
   const [state, setState] = useState(presets.standard);
 
+  const sliderItems: SliderProps[] = [
+    {
+      header: {
+        label: "Stay focused",
+        valueInterpreter: oneOrMany(state.stayFocused, "min"),
+      },
+      min: 1,
+      max: 90,
+      value: state.stayFocused,
+      onValueChange: (value) => {
+        setState({ ...state, stayFocused: value });
+      },
+    },
+    {
+      header: {
+        label: "Short break",
+        valueInterpreter: oneOrMany(state.shortBreak, "min"),
+      },
+      min: 1,
+      max: 60,
+      value: state.shortBreak,
+      onValueChange: (value) => {
+        setState({ ...state, shortBreak: value });
+      },
+    },
+    {
+      header: {
+        label: "Long break",
+        valueInterpreter: oneOrMany(state.longBreak, "min"),
+      },
+      min: 1,
+      max: 60,
+      value: state.longBreak,
+      onValueChange: (value) => {
+        setState({ ...state, longBreak: value });
+      },
+    },
+    {
+      header: {
+        label: "Session rounds",
+        valueInterpreter: oneOrMany(state.sessionRounds, "round"),
+      },
+      min: 1,
+      max: 8,
+      value: state.sessionRounds,
+      onValueChange: (value) => {
+        setState({ ...state, sessionRounds: value });
+      },
+    },
+  ];
+
   return (
     <TabLayout
       heading="Rules"
@@ -59,57 +111,9 @@ export default function Config() {
       animation={slideRightAndFadeAnimation}
     >
       <VStack spacing="$3" sx={{ width: "100%" }}>
-        <Slider
-          header={{
-            label: "Stay focused",
-            valueInterpreter: oneOrMany(state.stayFocused, "min"),
-          }}
-          min={1}
-          max={90}
-          value={state.stayFocused}
-          onValueChange={(value) => {
-            setState({ ...state, stayFocused: value });
-          }}
-        />
-
-        <Slider
-          header={{
-            label: "Short break",
-            valueInterpreter: oneOrMany(state.shortBreak, "min"),
-          }}
-          min={1}
-          max={60}
-          value={state.shortBreak}
-          onValueChange={(value) => {
-            setState({ ...state, shortBreak: value });
-          }}
-        />
-
-        <Slider
-          header={{
-            label: "Long break",
-            valueInterpreter: oneOrMany(state.longBreak, "min"),
-          }}
-          min={1}
-          max={60}
-          value={state.longBreak}
-          onValueChange={(value) => {
-            setState({ ...state, longBreak: value });
-          }}
-        />
-
-        <Slider
-          header={{
-            label: "Session rounds",
-            valueInterpreter: oneOrMany(state.sessionRounds, "round"),
-          }}
-          min={1}
-          max={8}
-          value={state.sessionRounds}
-          onValueChange={(value) => {
-            setState({ ...state, sessionRounds: value });
-          }}
-        />
+        {sliderItems.map((item, index) => (
+          <Slider {...item} key={index} />
+        ))}
       </VStack>
 
       <SectionLayout heading="Presets">
