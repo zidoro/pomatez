@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { assign, createMachine } from "xstate";
+import { useMachine } from "@xstate/react";
 import {
   Button,
   Slider,
@@ -10,7 +11,7 @@ import {
 import { slideRightAndFadeAnimation } from "@renderer/utils";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 
-type StateProps = {
+type ConfigStateProps = {
   stayFocused: number;
   shortBreak: number;
   longBreak: number;
@@ -19,7 +20,7 @@ type StateProps = {
 
 const presets: Record<
   "standard" | "extended" | "ultradian",
-  StateProps
+  ConfigStateProps
 > = {
   standard: {
     stayFocused: 25,
@@ -41,56 +42,90 @@ const presets: Record<
   },
 };
 
+const configMachine = createMachine({
+  id: "config",
+  initial: "default",
+  schema: {
+    context: {} as ConfigStateProps,
+    events: {} as {
+      type: "config.change";
+      values: ConfigStateProps;
+    },
+  },
+  context: presets.standard,
+  states: {
+    default: {
+      on: {
+        "config.change": {
+          actions: assign((_, event) => event.values),
+        },
+      },
+    },
+  },
+});
+
 export default function Config() {
-  const [state, setState] = useState(presets.standard);
+  const [{ context: config }, send] = useMachine(configMachine);
 
   const sliderItems: SliderProps[] = [
     {
       header: {
         label: "Stay focused",
-        valueInterpreter: oneOrMany(state.stayFocused, "min"),
+        valueInterpreter: oneOrMany(config.stayFocused, "min"),
       },
       min: 1,
       max: 90,
-      value: state.stayFocused,
+      value: config.stayFocused,
       onValueChange: (value) => {
-        setState({ ...state, stayFocused: value });
+        send({
+          type: "config.change",
+          values: { ...config, stayFocused: value },
+        });
       },
     },
     {
       header: {
         label: "Short break",
-        valueInterpreter: oneOrMany(state.shortBreak, "min"),
+        valueInterpreter: oneOrMany(config.shortBreak, "min"),
       },
       min: 1,
       max: 60,
-      value: state.shortBreak,
+      value: config.shortBreak,
       onValueChange: (value) => {
-        setState({ ...state, shortBreak: value });
+        send({
+          type: "config.change",
+          values: { ...config, shortBreak: value },
+        });
       },
     },
     {
       header: {
         label: "Long break",
-        valueInterpreter: oneOrMany(state.longBreak, "min"),
+        valueInterpreter: oneOrMany(config.longBreak, "min"),
       },
       min: 1,
       max: 60,
-      value: state.longBreak,
+      value: config.longBreak,
       onValueChange: (value) => {
-        setState({ ...state, longBreak: value });
+        send({
+          type: "config.change",
+          values: { ...config, longBreak: value },
+        });
       },
     },
     {
       header: {
         label: "Session rounds",
-        valueInterpreter: oneOrMany(state.sessionRounds, "round"),
+        valueInterpreter: oneOrMany(config.sessionRounds, "round"),
       },
       min: 1,
       max: 8,
-      value: state.sessionRounds,
+      value: config.sessionRounds,
       onValueChange: (value) => {
-        setState({ ...state, sessionRounds: value });
+        send({
+          type: "config.change",
+          values: { ...config, sessionRounds: value },
+        });
       },
     },
   ];
@@ -102,7 +137,10 @@ export default function Config() {
         <Button
           variant="link"
           onClick={() => {
-            setState(presets.standard);
+            send({
+              type: "config.change",
+              values: presets.standard,
+            });
           }}
         >
           Restore Defaults
@@ -132,9 +170,12 @@ export default function Config() {
               value: JSON.stringify(presets.ultradian),
             },
           ]}
-          value={JSON.stringify(state)}
+          value={JSON.stringify(config)}
           onValueChange={(value) => {
-            setState(JSON.parse(value));
+            send({
+              type: "config.change",
+              values: JSON.parse(value),
+            });
           }}
           sx={{
             width: "100%",

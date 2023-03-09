@@ -38,6 +38,7 @@
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
     "@vitejs/plugin-react": "^3.0.1",
+    "@xstate/react": "^3.2.1",
     "electron": "21.3.3",
     "electron-builder": "^23.6.0",
     "electron-vite": "^1.0.17",
@@ -45,6 +46,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "vite": "^4.0.4",
-    "vite-plugin-svgr": "^2.4.0"
+    "vite-plugin-svgr": "^2.4.0",
+    "xstate": "^4.37.0"
   }
 }
