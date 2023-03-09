@@ -32,3 +32,5 @@ public/
 .turbo/
 
 gatsby-types.d.ts
+
+.dccache
