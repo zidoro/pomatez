@@ -3,19 +3,25 @@
   "globalDependencies": [".env.*", "packages/**"],
   "pipeline": {
     "build": {
-      "outputs": ["build/**", "dist/**", "public/**"]
+      "outputs": ["build/**", "dist/**", "public/**"],
+      "outputMode": "new-only"
     },
     "dev": {
       "cache": false,
       "persistent": true,
       "env": ["GOOGLE_VERIFICATION", "GA_TRACKING_ID", "NODE_ENV"]
     },
-    "lint": {},
-    "test": {},
+    "lint": {
+      "outputMode": "new-only"
+    },
+    "test": {
+      "outputMode": "new-only"
+    },
     "preview": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "outputMode": "new-only"
     }
   }
 }

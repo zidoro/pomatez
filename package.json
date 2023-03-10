@@ -7,12 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:app": "turbo run dev --output-logs=new-only --filter=@pomatez/desktop",
-    "dev:web": "turbo run dev --output-logs=new-only --filter=@pomatez/website",
-    "build": "turbo run build --output-logs=new-only --filter=@pomatez/website",
-    "preview": "turbo run preview --output-logs=new-only --filter=@pomatez/website",
-    "lint": "turbo run lint --output-logs=new-only --filter=@pomatez/website",
-    "test": "turbo run test --output-logs=new-only --filter=@pomatez/ui",
+    "dev:app": "turbo run dev --filter=@pomatez/desktop",
+    "dev:web": "turbo run dev --filter=@pomatez/website",
+    "build": "turbo run build --filter=@pomatez/website",
+    "preview": "turbo run preview --filter=@pomatez/website",
+    "lint": "turbo run lint --filter=@pomatez/website",
+    "test": "turbo run test --filter=@pomatez/ui",
     "gen:tts": "lerna run gen:tts --stream",
     "format": "prettier --write .",
     "prepare": "husky install",
