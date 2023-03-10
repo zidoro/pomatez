@@ -19,10 +19,10 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
-    "postinstall": "electron-builder install-app-deps",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "electron-vite build && electron-builder --mac --config",
-    "build:linux": "electron-vite build && electron-builder --linux --config"
+    "build:linux": "electron-vite build && electron-builder --linux --config",
+    "postinstall": "electron-builder install-app-deps && xstate typegen \"src/**/*.ts?(x)\""
   },
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.3",
@@ -39,6 +39,7 @@
     "@types/react-dom": "18.0.10",
     "@vitejs/plugin-react": "^3.0.1",
     "@xstate/react": "^3.2.1",
+    "@xstate/cli": "^0.4.2",
     "electron": "21.3.3",
     "electron-builder": "^23.6.0",
     "electron-vite": "^1.0.17",

@@ -1,107 +1,186 @@
-import { useState } from "react";
+import { useMachine } from "@xstate/react";
+import { assign, createMachine } from "xstate";
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { slideLeftAndFadeAnimation } from "@renderer/utils";
 
+type SettingsStateProps = {
+  alwaysOnTop: boolean;
+  fullscreenBreak: boolean;
+  strictMode: boolean;
+  darkMode: boolean;
+  progressAnimation: boolean;
+  autostartWork: boolean;
+  minimizeToTray: boolean;
+  closeToTray: boolean;
+};
+
+const defaultSettings: SettingsStateProps = {
+  alwaysOnTop: false,
+  fullscreenBreak: false,
+  strictMode: false,
+  darkMode: false,
+  progressAnimation: true,
+  autostartWork: false,
+  minimizeToTray: false,
+  closeToTray: false,
+};
+
+const settingMachine = createMachine(
+  {
+    id: "settings",
+    schema: {
+      context: {} as SettingsStateProps,
+      events: {} as
+        | {
+            type: "settings.change";
+            values: SettingsStateProps;
+          }
+        | {
+            type: "settings.reset";
+          },
+    },
+    tsTypes: {} as import("./settings.typegen").Typegen0,
+    context: defaultSettings,
+    states: {
+      toggledOn: {},
+      toggledOff: {},
+    },
+    on: {
+      "settings.change": {
+        actions: "updateSettings",
+      },
+      "settings.reset": {
+        actions: "resetSettings",
+      },
+    },
+  },
+  {
+    actions: {
+      updateSettings: assign((_, event) => {
+        return event.values;
+      }),
+      resetSettings: assign(() => {
+        return defaultSettings;
+      }),
+    },
+  }
+);
+
 export default function Settings() {
-  const [state, setState] = useState({
-    alwaysOnTop: false,
-    fullscreenBreak: false,
-    strictMode: false,
-    darkMode: false,
-    progressAnimation: true,
-    autostartWork: false,
-    minimizeToTray: false,
-    closeToTray: false,
-  });
+  const [{ context: settings }, send] = useMachine(settingMachine);
 
   const featureSettings: SwitchProps[] = [
     {
       id: "always-on-top",
       label: "Always On Top",
-      checked: state.alwaysOnTop,
+      checked: settings.alwaysOnTop,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          alwaysOnTop: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            alwaysOnTop: checked,
+          },
+        });
       },
     },
     {
       id: "fullscreen-break",
       label: "Fullscreen Break",
-      checked: state.fullscreenBreak,
+      checked: settings.fullscreenBreak,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          fullscreenBreak: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            fullscreenBreak: checked,
+          },
+        });
       },
     },
     {
       id: "strict-mode",
       label: "Strict Mode",
-      checked: state.strictMode,
+      checked: settings.strictMode,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          strictMode: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            strictMode: checked,
+          },
+        });
       },
     },
     {
       id: "dark-mode",
       label: "Dark Mode",
-      checked: state.darkMode,
+      checked: settings.darkMode,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          darkMode: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            darkMode: checked,
+          },
+        });
       },
     },
     {
       id: "progress-animation",
       label: "Progress Animation",
-      checked: state.progressAnimation,
+      checked: settings.progressAnimation,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          progressAnimation: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            progressAnimation: checked,
+          },
+        });
       },
     },
     {
       id: "autostart-work",
       label: "Autostart Work",
-      checked: state.autostartWork,
+      checked: settings.autostartWork,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          autostartWork: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            autostartWork: checked,
+          },
+        });
       },
     },
     {
       id: "minimize-to-tray",
       label: "Minimize To Tray",
-      checked: state.minimizeToTray,
+      checked: settings.minimizeToTray,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          minimizeToTray: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            minimizeToTray: checked,
+          },
+        });
       },
     },
     {
       id: "close-to-tray",
       label: "Close To Tray",
-      checked: state.closeToTray,
+      checked: settings.closeToTray,
       onCheckedChange: (checked) => {
-        setState((state) => ({
-          ...state,
-          closeToTray: checked,
-        }));
+        send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            closeToTray: checked,
+          },
+        });
       },
     },
   ];
@@ -109,7 +188,16 @@ export default function Settings() {
   return (
     <TabLayout
       heading="Settings"
-      action={<Button variant="link">Restore Defaults</Button>}
+      action={
+        <Button
+          variant="link"
+          onClick={() => {
+            send({ type: "settings.reset" });
+          }}
+        >
+          Restore Defaults
+        </Button>
+      }
       animation={slideLeftAndFadeAnimation}
     >
       <SectionLayout heading="Features" spacing={0}>

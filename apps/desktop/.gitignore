@@ -3,3 +3,4 @@ build
 dist
 out
 *.log*
+*.typegen.ts

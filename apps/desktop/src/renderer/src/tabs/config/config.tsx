@@ -7,6 +7,7 @@ import {
   ToggleGroup,
   oneOrMany,
   SliderProps,
+  capitalize,
 } from "@pomatez/ui";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
@@ -42,27 +43,44 @@ const presets: Record<
   },
 };
 
-const configMachine = createMachine({
-  id: "config",
-  initial: "default",
-  schema: {
-    context: {} as ConfigStateProps,
-    events: {} as {
-      type: "config.change";
-      values: ConfigStateProps;
+const defaultConfig: ConfigStateProps = presets.standard;
+
+const configMachine = createMachine(
+  {
+    id: "config",
+    schema: {
+      context: {} as ConfigStateProps,
+      events: {} as
+        | {
+            type: "config.change";
+            values: ConfigStateProps;
+          }
+        | {
+            type: "config.reset";
+          },
     },
-  },
-  context: presets.standard,
-  states: {
-    default: {
-      on: {
-        "config.change": {
-          actions: assign((_, event) => event.values),
-        },
+    tsTypes: {} as import("./config.typegen").Typegen0,
+    context: defaultConfig,
+    on: {
+      "config.change": {
+        actions: "updateConfig",
+      },
+      "config.reset": {
+        actions: "resetConfig",
       },
     },
   },
-});
+  {
+    actions: {
+      updateConfig: assign((_, event) => {
+        return event.values;
+      }),
+      resetConfig: assign(() => {
+        return defaultConfig;
+      }),
+    },
+  }
+);
 
 export default function Config() {
   const [{ context: config }, send] = useMachine(configMachine);
@@ -130,6 +148,11 @@ export default function Config() {
     },
   ];
 
+  const configPresets = Object.entries(presets).map(([key, value]) => ({
+    label: capitalize(key),
+    value: JSON.stringify(value),
+  }));
+
   return (
     <TabLayout
       heading="Rules"
@@ -137,10 +160,7 @@ export default function Config() {
         <Button
           variant="link"
           onClick={() => {
-            send({
-              type: "config.change",
-              values: presets.standard,
-            });
+            send({ type: "config.reset" });
           }}
         >
           Restore Defaults
@@ -156,20 +176,7 @@ export default function Config() {
 
       <SectionLayout heading="Presets">
         <ToggleGroup
-          items={[
-            {
-              label: "Standard",
-              value: JSON.stringify(presets.standard),
-            },
-            {
-              label: "Extended",
-              value: JSON.stringify(presets.extended),
-            },
-            {
-              label: "Ultradian",
-              value: JSON.stringify(presets.ultradian),
-            },
-          ]}
+          items={configPresets}
           value={JSON.stringify(config)}
           onValueChange={(value) => {
             send({
