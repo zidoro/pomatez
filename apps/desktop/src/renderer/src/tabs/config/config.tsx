@@ -1,5 +1,4 @@
-import { assign, createMachine } from "xstate";
-import { useMachine } from "@xstate/react";
+import { useSelector } from "@xstate/react";
 import {
   Button,
   Slider,
@@ -11,79 +10,16 @@ import {
 } from "@pomatez/ui";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
-
-type ConfigStateProps = {
-  stayFocused: number;
-  shortBreak: number;
-  longBreak: number;
-  sessionRounds: number;
-};
-
-const presets: Record<
-  "standard" | "extended" | "ultradian",
-  ConfigStateProps
-> = {
-  standard: {
-    stayFocused: 25,
-    shortBreak: 5,
-    longBreak: 15,
-    sessionRounds: 4,
-  },
-  extended: {
-    stayFocused: 50,
-    shortBreak: 10,
-    longBreak: 30,
-    sessionRounds: 3,
-  },
-  ultradian: {
-    stayFocused: 90,
-    shortBreak: 30,
-    longBreak: 60,
-    sessionRounds: 2,
-  },
-};
-
-const defaultConfig: ConfigStateProps = presets.standard;
-
-const configMachine = createMachine(
-  {
-    id: "config",
-    schema: {
-      context: {} as ConfigStateProps,
-      events: {} as
-        | {
-            type: "config.change";
-            values: ConfigStateProps;
-          }
-        | {
-            type: "config.reset";
-          },
-    },
-    tsTypes: {} as import("./config.typegen").Typegen0,
-    context: defaultConfig,
-    on: {
-      "config.change": {
-        actions: "updateConfig",
-      },
-      "config.reset": {
-        actions: "resetConfig",
-      },
-    },
-  },
-  {
-    actions: {
-      updateConfig: assign((_, event) => {
-        return event.values;
-      }),
-      resetConfig: assign(() => {
-        return defaultConfig;
-      }),
-    },
-  }
-);
+import { configPresets } from "@renderer/@data/machine";
+import { useAppMachine } from "@renderer/contexts";
 
 export default function Config() {
-  const [{ context: config }, send] = useMachine(configMachine);
+  const machineActor = useAppMachine();
+
+  const config = useSelector(
+    machineActor,
+    (state) => state.context.config
+  );
 
   const sliderItems: SliderProps[] = [
     {
@@ -95,7 +31,7 @@ export default function Config() {
       max: 90,
       value: config.stayFocused,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, stayFocused: value },
         });
@@ -110,7 +46,7 @@ export default function Config() {
       max: 60,
       value: config.shortBreak,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, shortBreak: value },
         });
@@ -125,7 +61,7 @@ export default function Config() {
       max: 60,
       value: config.longBreak,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, longBreak: value },
         });
@@ -140,7 +76,7 @@ export default function Config() {
       max: 8,
       value: config.sessionRounds,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, sessionRounds: value },
         });
@@ -148,7 +84,7 @@ export default function Config() {
     },
   ];
 
-  const configPresets = Object.entries(presets).map(([key, value]) => ({
+  const presets = Object.entries(configPresets).map(([key, value]) => ({
     label: capitalize(key),
     value: JSON.stringify(value),
   }));
@@ -160,7 +96,7 @@ export default function Config() {
         <Button
           variant="link"
           onClick={() => {
-            send({ type: "config.reset" });
+            machineActor.send("config.reset");
           }}
         >
           Restore Defaults
@@ -176,10 +112,10 @@ export default function Config() {
 
       <SectionLayout heading="Presets">
         <ToggleGroup
-          items={configPresets}
+          items={presets}
           value={JSON.stringify(config)}
           onValueChange={(value) => {
-            send({
+            machineActor.send({
               type: "config.change",
               values: JSON.parse(value),
             });

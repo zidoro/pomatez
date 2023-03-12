@@ -1,74 +1,16 @@
-import { useMachine } from "@xstate/react";
-import { assign, createMachine } from "xstate";
+import { useSelector } from "@xstate/react";
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { slideLeftAndFadeAnimation } from "@renderer/utils";
-
-type SettingsStateProps = {
-  alwaysOnTop: boolean;
-  fullscreenBreak: boolean;
-  strictMode: boolean;
-  darkMode: boolean;
-  progressAnimation: boolean;
-  autostartWork: boolean;
-  minimizeToTray: boolean;
-  closeToTray: boolean;
-};
-
-const defaultSettings: SettingsStateProps = {
-  alwaysOnTop: false,
-  fullscreenBreak: false,
-  strictMode: false,
-  darkMode: false,
-  progressAnimation: true,
-  autostartWork: false,
-  minimizeToTray: false,
-  closeToTray: false,
-};
-
-const settingMachine = createMachine(
-  {
-    id: "settings",
-    schema: {
-      context: {} as SettingsStateProps,
-      events: {} as
-        | {
-            type: "settings.change";
-            values: SettingsStateProps;
-          }
-        | {
-            type: "settings.reset";
-          },
-    },
-    tsTypes: {} as import("./settings.typegen").Typegen0,
-    context: defaultSettings,
-    states: {
-      toggledOn: {},
-      toggledOff: {},
-    },
-    on: {
-      "settings.change": {
-        actions: "updateSettings",
-      },
-      "settings.reset": {
-        actions: "resetSettings",
-      },
-    },
-  },
-  {
-    actions: {
-      updateSettings: assign((_, event) => {
-        return event.values;
-      }),
-      resetSettings: assign(() => {
-        return defaultSettings;
-      }),
-    },
-  }
-);
+import { useAppMachine } from "@renderer/contexts";
 
 export default function Settings() {
-  const [{ context: settings }, send] = useMachine(settingMachine);
+  const machineActor = useAppMachine();
+
+  const settings = useSelector(
+    machineActor,
+    (state) => state.context.settings
+  );
 
   const featureSettings: SwitchProps[] = [
     {
@@ -76,7 +18,7 @@ export default function Settings() {
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -90,7 +32,7 @@ export default function Settings() {
       label: "Fullscreen Break",
       checked: settings.fullscreenBreak,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -104,7 +46,7 @@ export default function Settings() {
       label: "Strict Mode",
       checked: settings.strictMode,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -118,7 +60,7 @@ export default function Settings() {
       label: "Dark Mode",
       checked: settings.darkMode,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -132,7 +74,7 @@ export default function Settings() {
       label: "Progress Animation",
       checked: settings.progressAnimation,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -146,7 +88,7 @@ export default function Settings() {
       label: "Autostart Work",
       checked: settings.autostartWork,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -160,7 +102,7 @@ export default function Settings() {
       label: "Minimize To Tray",
       checked: settings.minimizeToTray,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -174,7 +116,7 @@ export default function Settings() {
       label: "Close To Tray",
       checked: settings.closeToTray,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -192,7 +134,7 @@ export default function Settings() {
         <Button
           variant="link"
           onClick={() => {
-            send({ type: "settings.reset" });
+            machineActor.send("settings.reset");
           }}
         >
           Restore Defaults
