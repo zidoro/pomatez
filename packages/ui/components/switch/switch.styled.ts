@@ -4,6 +4,11 @@ import { styled, theme } from "../../theme";
 
 export const StyledSwitchLabel = styled("label", {
   width: "100%",
+  height: "100%",
+
+  display: "flex",
+  alignItems: "center",
+
   cursor: "pointer",
   userSelect: "none",
 });
