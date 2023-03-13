@@ -7,7 +7,6 @@ export const StyledProgress = styled("svg", {
   strokeWidth: "0.6rem",
   strokeLinecap: "round",
   strokeDasharray: "67.4rem",
-  strokeDashoffset: 0,
 
   zIndex: 0,
 

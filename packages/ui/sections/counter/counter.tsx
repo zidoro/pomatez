@@ -14,13 +14,16 @@ import {
 import { capitalize } from "../../utils/string";
 import { withDefaults } from "../../utils/with-defaults";
 
-type CounterProps = {} & CounterVariantProps;
+type CounterProps = {
+  offset?: number;
+} & CounterVariantProps;
 
 const defaultProps: CounterProps = {
   appState: "stay-focused",
+  offset: 0,
 };
 
-export const Counter = ({ appState }: CounterProps) => {
+export const Counter = ({ appState, offset }: CounterProps) => {
   const renderAppState = () => {
     return capitalize(appState as string, { splitter: "-" });
   };
@@ -80,6 +83,7 @@ export const Counter = ({ appState }: CounterProps) => {
           width="220"
           height="220"
           viewBox="0 0 220 220"
+          strokeDashoffset={offset + "px"}
         >
           <circle cx="110" cy="110" r="107" fill="none" />
         </StyledProgress>
