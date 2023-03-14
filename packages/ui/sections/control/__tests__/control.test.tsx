@@ -37,7 +37,7 @@ describe("<Control />", () => {
 
   test("conditional rendering of controls should work properly", () => {
     const { rerender } = render(
-      <Control isPlaying={false} isMuted={false} isCompact={false} />
+      <Control isRunning={false} isMuted={false} isCompact={false} />
     );
 
     expect(screen.getByLabelText(/play button/i)).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe("<Control />", () => {
     ).toBeInTheDocument();
 
     rerender(
-      <Control isPlaying={true} isMuted={true} isCompact={true} />
+      <Control isRunning={true} isMuted={true} isCompact={true} />
     );
 
     expect(screen.getByLabelText(/pause button/i)).toBeInTheDocument();

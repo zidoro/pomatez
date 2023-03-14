@@ -21,7 +21,7 @@ type ControlProps = {
   /**
    * Whether the timer is playing.
    */
-  isPlaying?: boolean;
+  isRunning?: boolean;
   /**
    * Whether the sound is muted.
    */
@@ -58,14 +58,14 @@ type ControlProps = {
 
 const defaultProps: ControlProps = {
   appState: "stay-focused",
-  isPlaying: false,
+  isRunning: false,
   isMuted: false,
   isCompact: false,
 };
 
 export const Control = ({
   appState,
-  isPlaying,
+  isRunning,
   isMuted,
   isCompact,
   onResetCounter,
@@ -107,7 +107,7 @@ export const Control = ({
               onClick={onRestart}
             />
 
-            {isPlaying ? (
+            {isRunning ? (
               <StyledControlButton
                 aria-label="Pause Button"
                 variant="primary"

@@ -23,7 +23,7 @@ export default {
 type Story = StoryObj<typeof Control>;
 
 const Template: StoryFn<typeof Control> = (props) => {
-  const [isPlaying, setIsPlaying] = useState(props.isPlaying);
+  const [isPlaying, setIsPlaying] = useState(props.isRunning);
 
   const [isCompact, setIsCompact] = useState(props.isCompact);
 
@@ -46,7 +46,7 @@ const Template: StoryFn<typeof Control> = (props) => {
       <Control
         {...props}
         isMuted={isMuted}
-        isPlaying={isPlaying}
+        isRunning={isPlaying}
         isCompact={isCompact}
         onPlayPause={onPlayPauseHandler}
         onToggleSound={onToggleSoundHandler}

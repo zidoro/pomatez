@@ -1,4 +1,9 @@
-import { ConfigProps, SettingsProps } from "./types";
+export type ConfigProps = {
+  stayFocused: number;
+  shortBreak: number;
+  longBreak: number;
+  sessionRounds: number;
+};
 
 export const configPresets: Record<
   "standard" | "extended" | "ultradian",
@@ -25,14 +30,3 @@ export const configPresets: Record<
 };
 
 export const defaultConfig = configPresets.standard;
-
-export const defaultSettings: SettingsProps = {
-  alwaysOnTop: false,
-  fullscreenBreak: false,
-  strictMode: false,
-  darkMode: false,
-  progressAnimation: true,
-  autostartWork: false,
-  minimizeToTray: false,
-  closeToTray: false,
-};
