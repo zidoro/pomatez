@@ -33,11 +33,11 @@ type ControlProps = {
   /**
    * Function to reset the number sessions completed.
    */
-  onResetCounter?: () => void;
+  onResetElapsed?: () => void;
   /**
    * Function to restart the current session.
    */
-  onRestart?: () => void;
+  onResetTimer?: () => void;
   /**
    * Function to play or pause the current session.
    */
@@ -68,8 +68,8 @@ export const Control = ({
   isRunning,
   isMuted,
   isCompact,
-  onResetCounter,
-  onRestart,
+  onResetElapsed,
+  onResetTimer,
   onPlayPause,
   onNext,
   onToggleSound,
@@ -92,7 +92,7 @@ export const Control = ({
         <Grid.Item justify="left">
           <VStack>
             <Text>1 / 4</Text>
-            <Button variant="link" onClick={onResetCounter}>
+            <Button variant="link" onClick={onResetElapsed}>
               Reset
             </Button>
           </VStack>
@@ -104,7 +104,7 @@ export const Control = ({
               aria-label="Restart Button"
               variant="secondary"
               icon={<ReloadIcon />}
-              onClick={onRestart}
+              onClick={onResetTimer}
             />
 
             {isRunning ? (

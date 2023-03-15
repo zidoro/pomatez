@@ -13,17 +13,22 @@ import {
 } from "./counter.styled";
 import { capitalize } from "../../utils/string";
 import { withDefaults } from "../../utils/with-defaults";
+import { useTimeFormat } from "../../hooks";
 
 type CounterProps = {
-  offset?: number;
+  timeProgress?: number;
+  timeRemaining?: number;
 } & CounterVariantProps;
 
 const defaultProps: CounterProps = {
   appState: "stay-focused",
-  offset: 0,
 };
 
-export const Counter = ({ appState, offset }: CounterProps) => {
+export const Counter = ({
+  appState,
+  timeProgress,
+  timeRemaining,
+}: CounterProps) => {
   const renderAppState = () => {
     return capitalize(appState as string, { splitter: "-" });
   };
@@ -42,6 +47,8 @@ export const Counter = ({ appState, offset }: CounterProps) => {
         return <StarIcon aria-label={`${renderAppState()} Icon`} />;
     }
   };
+
+  const { minutes, seconds } = useTimeFormat(timeRemaining || 0);
 
   return (
     <Grid
@@ -79,11 +86,11 @@ export const Counter = ({ appState, offset }: CounterProps) => {
       >
         <StyledProgress
           data-testid="progress-svg"
+          strokeDashoffset={timeProgress}
           appState={appState}
           width="220"
           height="220"
           viewBox="0 0 220 220"
-          strokeDashoffset={offset + "px"}
         >
           <circle cx="110" cy="110" r="107" fill="none" />
         </StyledProgress>
@@ -117,9 +124,9 @@ export const Counter = ({ appState, offset }: CounterProps) => {
               appState={appState}
               data-testid="time-remaining"
             >
-              <span>25</span>
+              <span>{minutes}</span>
               <span>:</span>
-              <span>00</span>
+              <span>{seconds}</span>
             </StyledTimeRemaining>
 
             <Text size="$lg" casing="capitalize" color="$gray11">

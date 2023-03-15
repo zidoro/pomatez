@@ -1,4 +1,5 @@
 import { styled, VariantProps } from "../../theme";
+import { TIMER_PROGRESS_CIRCUMFERENCE } from "../../utils";
 
 export const StyledProgress = styled("svg", {
   width: "22rem",
@@ -6,7 +7,9 @@ export const StyledProgress = styled("svg", {
 
   strokeWidth: "0.6rem",
   strokeLinecap: "round",
-  strokeDasharray: "67.4rem",
+  strokeDasharray: TIMER_PROGRESS_CIRCUMFERENCE,
+  transform: "rotateY(-180deg) rotateZ(-90deg)",
+  transition: "stroke-dashoffset 1s linear",
 
   zIndex: 0,
 

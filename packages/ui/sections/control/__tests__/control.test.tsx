@@ -71,8 +71,8 @@ describe("<Control />", () => {
 
     render(
       <Control
-        onResetCounter={onResetCounterFn}
-        onRestart={onRestartFn}
+        onResetElapsed={onResetCounterFn}
+        onResetTimer={onRestartFn}
         onPlayPause={onPlayPauseFn}
         onNext={onNextFn}
         onToggleSound={onToggleSoundFn}

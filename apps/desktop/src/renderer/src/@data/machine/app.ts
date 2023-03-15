@@ -10,7 +10,7 @@ import {
 
 export const appMachine = createMachine(
   {
-    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QAmAGwB2UgFYAzAE569aQEZpkkfRHSANCACeiACyylpMSLWKAHCM2X6SkQF9HOtJlyESpAE5wwnBmYkEDYObl5gwQQheiFSWTNJIQM1JSVJSzFtPUQ5SVJLJWSxWQMxazEDJWdXdAxYf24aWHIqGjBAvlCuHjw+KNF6AsrS9VVJNUts-WjZWQLJWWkRNPT7QpqQN3rGomafPwCmLvYeiNAopWNSOXo1VIylEunhRXiNIWWxISyi6pctnUIABXbzIcJ4VrUOjHYLdCH9YTqUiKeTFWxiK46GZKegSWQyNKfOTqdQGTbbbgAWzA3gODSOQVYpwRkWEJSklgy1mSRXUQkk2MQRQp6FI1NpPmBeDweygGAldM4OCgUAANh1Ycywr1EdE3uolgKsushAkhQhcVlTEIlJYBWkFJjRahxUQaXTvNLZTQFe7JdwsABrTpwlm6tkIVTzT4GIRcyrSAz0TIW0pxW2ZePSbNiSTkgFuN0eqUyuUYABUoe1Zz6kbt8zEijSBISIk+QjTeZtTxE1mUkjtYhdxclqGQwIaED9JeVqo11ZC4fOAmFlkbzauizMHYtuM+pCEtvKBhzxhTI9gOGlEFIsFQYGQQdpAHk8PVr3hb3P1ZqmUudRXAYlAMeJM3XK40gMdtBRyS0zUsUhxDtXEVCPSQNEvT9b3vR9n28F8CAID8b3FFVf0XeEIwuYQQLAu0IOMECYL3ZJEKeXslkHeMzBHKkcAgMBSEEggJzVTgMH4wSyPnP8TkAusaMtTIUSWSpbTxMoqksC1ygzIdYhsO0Mj4gShNwKlxywCSpKEn8Fy1ADaz1IdVOkdSrS0u1dOUUwh1xPEzwMSxnABPAzPgYI3Hk5zIwAWixOCJhEPzMgcGJFh5EdFRi1klLNC0uVAzFrAJAV6DjNJsv9T1vTlXLqNXKNZDiXEWq5Qcm1kdRYJxCrpFIDjrDKERtPSaqS3HSdIAaoDEDEMQ91iAbvieSxTzNXEQsLMUrxvWbFKagq4LSZFkKmURHmkaQsNI3Cn1fQ6qLmhAFtY-NDwmNrgpA4Lbq-O8HwegiiIOvV3IG8wYKM8xviWd6UrzQd6FKQoDD+nbXVssHI2OmZRtAzNvkHTJKjuUzpJEsTOBxpS3rgrIJDsGJKsxaRLGsCnzJwSzkGs2mmqTExzrMYL1ruWRdOTG5Ygq48VA5pxQqAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QAmAOz1S9AMwBOeiIBs0sUvoAOADQgAnsOnTSqgKzTJh46unyF8gL43NaTLkIlSAJzhhODZkhBsObl4-QQQhekNSABYFQ1Uow3kARnpRJM0dMKlSWXkhGSiooUUIuwd0DFgvbhpYcioaMB8+AK4ePD5Q4slSSRFDeiTrVSEU1UkMxBSRHMNJJKEhC0MxBLKQR0rqolr3T28mFvY24NBQpJMDXKj5kaT5eSjpSYQF9cdSbgBbMDcMCAArm5kEE8PVqHRDn5WqDOsJ5JEpLJVBc1Ep+i8RApSLE4iJpIZivQiu90J8iD8-t9fnsqgdfKxjrCQsIhgZjFEkqoRMVksUXvJVOIUUIYkkohFkiNSahyZT3AC8HgdlAMNS3J8cFAoAAbJpQxmBdpwrKqUjyejSTnEkSSSQo-EvFKyc0iLmLBJ5FYyuU0tyK5U0NUUmncLAAa2a0KZxpZCEkj1I+RuSmMCh5UXkLwJ+nuqkFFi5YlUqh96oVSpVGAAVFHDScOnGLlEcVIFlZ+pzLNmYkmi1ISwoliIyyGNahkACqhBg-LOFrdfqGf4Y6cBFMra35sUsYYu1ntFNieIhu7RZaHUIfbAcIqIKRYKgwMhw78APJ4Sq3vD3+favV1iuRprl04o5KM+ZDHEZj3FETrzJEeQXN0bqDJI17fvej7Pq+bhvgQBBfnemr-kuRzAY2Zysi20gQck-RGIYsFOsUkQLEWZiSFEIy2PYGxkl8OAQGApDCQQk46pwGCCcJJGLoBMKxlRrzchIJj9MUejxJmEyHggxjiNuYqmNIQwWD6MkibgXwTlgUmWXJAEGkBDYmkWal9ISijSNp8i6Zkcz6CKxkLLaBJ2HxeBCXAfCOORrlxgAtBcLwJi2wU8nMDxelEo6UvFzLKVxLxGPobrcsSTw5qkeV+gGKoFUp67xkopDOhKCiWHacxOvQFptRBESZokVojnxHzlhOU6QI1IGICMvUSq6XIxEKmamVe41kjed6zZRzVCM8elJEMMxIdyySZiI3K5Vtso7T+D5Pi+777Ypc0IFiLFukmESjLaEpGGN5T3ZhT04e+BF7SafQ9AiSEmH0oz5IY309GIhJDFxajendpCWdDcaHS8CRCL0CxirRMSDEkFnRaJYDiQCkmE8pX16XukTLGtCL2gspZ4w51m2ZwrPNVxSTLSWaXjKiIgvHuZoyHExK8yKAt2EAA */
     id: "app",
     schema: {
       context: {} as {
@@ -62,6 +62,7 @@ export const appMachine = createMachine(
             on: {
               "*": {
                 cond: "timerIsDone",
+                actions: "resetTimer",
                 target: "paused",
               },
               "timer.toggle": {
@@ -79,6 +80,14 @@ export const appMachine = createMachine(
                 target: "running",
               },
             },
+          },
+        },
+        on: {
+          "duration.change": {
+            actions: "updateDuration",
+          },
+          "timer.reset": {
+            actions: "resetTimer",
           },
         },
       },
@@ -130,12 +139,6 @@ export const appMachine = createMachine(
       "settings.reset": {
         cond: "isNotDefaultSettings",
         actions: "resetSettings",
-      },
-      "duration.change": {
-        actions: "updateDuration",
-      },
-      "timer.reset": {
-        actions: "resetTimer",
       },
     },
   },

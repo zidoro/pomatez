@@ -1,0 +1,1 @@
+export const TIMER_PROGRESS_CIRCUMFERENCE = 675;

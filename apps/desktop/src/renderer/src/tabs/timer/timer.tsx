@@ -1,8 +1,13 @@
 import { useActor } from "@xstate/react";
-import { Counter, Priority, Control, VStack } from "@pomatez/ui";
+import {
+  Counter,
+  Priority,
+  Control,
+  VStack,
+  TIMER_PROGRESS_CIRCUMFERENCE,
+} from "@pomatez/ui";
 import { slideUpAndFadeAnimation } from "@renderer/utils";
 import { useAppMachine } from "@renderer/contexts";
-import { useEffect } from "react";
 
 export default function Timer() {
   const machineActor = useAppMachine();
@@ -11,13 +16,16 @@ export default function Timer() {
 
   const timer = state.context.timer;
 
-  useEffect(() => {
-    console.log(timer);
-  }, [timer]);
+  const timeProgress =
+    (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;
+  const timeRemaining = timer.duration - timer.elapsed;
 
   return (
     <VStack sx={slideUpAndFadeAnimation}>
-      <Counter />
+      <Counter
+        timeProgress={timeProgress}
+        timeRemaining={timeRemaining}
+      />
 
       <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
@@ -33,6 +41,9 @@ export default function Timer() {
         }}
         onToggleCompact={() => {
           send("mode.toggle");
+        }}
+        onResetTimer={() => {
+          send("timer.reset");
         }}
       />
     </VStack>
