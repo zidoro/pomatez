@@ -6,16 +6,19 @@ import {
   defaultConfig,
   defaultSettings,
   defaultTimer,
+  SessionProps,
+  defaultSession,
 } from "./contexts";
 
 export const appMachine = createMachine(
   {
-    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QAmAOz1S9AMwBOeiIBs0sUvoAOADQgAnsOnTSqgKzTJh46unyF8gL43NaTLkIlSAJzhhODZkhBsObl4-QQQhekNSABYFQ1Uow3kARnpRJM0dMKlSWXkhGSiooUUIuwd0DFgvbhpYcioaMB8+AK4ePD5Q4slSSRFDeiTrVSEU1UkMxBSRHMNJJKEhC0MxBLKQR0rqolr3T28mFvY24NBQpJMDXKj5kaT5eSjpSYQF9cdSbgBbMDcMCAArm5kEE8PVqHRDn5WqDOsJ5JEpLJVBc1Ep+i8RApSLE4iJpIZivQiu90J8iD8-t9fnsqgdfKxjrCQsIhgZjFEkqoRMVksUXvJVOIUUIYkkohFkiNSahyZT3AC8HgdlAMNS3J8cFAoAAbJpQxmBdpwrKqUjyejSTnEkSSSQo-EvFKyc0iLmLBJ5FYyuU0tyK5U0NUUmncLAAa2a0KZxpZCEkj1I+RuSmMCh5UXkLwJ+nuqkFFi5YlUqh96oVSpVGAAVFHDScOnGLlEcVIFlZ+pzLNmYkmi1ISwoliIyyGNahkACqhBg-LOFrdfqGf4Y6cBFMra35sUsYYu1ntFNieIhu7RZaHUIfbAcIqIKRYKgwMhw78APJ4Sq3vD3+favV1iuRprl04o5KM+ZDHEZj3FETrzJEeQXN0bqDJI17fvej7Pq+bhvgQBBfnemr-kuRzAY2Zysi20gQck-RGIYsFOsUkQLEWZiSFEIy2PYGxkl8OAQGApDCQQk46pwGCCcJJGLoBMKxlRrzchIJj9MUejxJmEyHggxjiNuYqmNIQwWD6MkibgXwTlgUmWXJAEGkBDYmkWal9ISijSNp8i6Zkcz6CKxkLLaBJ2HxeBCXAfCOORrlxgAtBcLwJi2wU8nMDxelEo6UvFzLKVxLxGPobrcsSTw5qkeV+gGKoFUp67xkopDOhKCiWHacxOvQFptRBESZokVojnxHzlhOU6QI1IGICMvUSq6XIxEKmamVe41kjed6zZRzVCM8elJEMMxIdyySZiI3K5Vtso7T+D5Pi+777Ypc0IFiLFukmESjLaEpGGN5T3ZhT04e+BF7SafQ9AiSEmH0oz5IY309GIhJDFxajendpCWdDcaHS8CRCL0CxirRMSDEkFnRaJYDiQCkmE8pX16XukTLGtCL2gspZ4w51m2ZwrPNVxSTLSWaXjKiIgvHuZoyHExK8yKAt2EAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QBmAOwBOUgFYhY+gA4AbApFyhAJjmSANCACeiNWImaxQyZLGSAjGrVmAvvZ1pMuQiVIAnOGE4NmSCBsHNy8gYIIQlYALKRiIgqSqtFy8ZJqCjr6CGr0QnH0ChnyKUKqQtGOzugYsL7cNLDkVDRg-nzBXDx4fBGiaqRyIpL00RkxItHRVlmIVvQicdJWQqNq02JWylUgLrX1RI1ePn5MHexdYaB9eaQyhSNlVmLRCnKzCDY7LqTcALZgTwYCAAV08yFCeGa1DoZ0CnUhvWEIgGeVkYjUVlSViskgSHxECVICTxZTkGg0Y2+6F+RABQP+gOOdVOAVYF0R4WEmykJgUFTseS2Ig+b3ogxsChKo3oGMk1NQtPpXhBeDwhygGEZnl+OCgUAANm04eyQt0kTl5KQpaZzMoRLKkkIPvNZNaUfRcZiYmJtk5djTtSq1RqtXSmdwsABrdrwjnmrmRBSxOzRIQKUxmV5Yj6WCRbVKSKapX1iBVKpmeVXqmgYABUsdNlx6ieesQdUTUCTe4nE2j0iBei0xciG4no1jR5aDqGQILqEDDys4esNxrZQXjVwEcxexKFXaUQ3ilhdMtIVg96yUmOsanLdVgHHw+yf3VIeDA-FZ5zN24ihIumUizpOSKgjNEKhYg+cDPngr5wcyviNpuf4ttciCAQOnwZJIF62J6SheiiMFvvgpCwJwyC6AAYjgWDzpACHvp+34oQiCYYZERikLKogPLY5Lkpk2E2OIF5yM8k70OMCikYhlHUXRDELsx5GsX4Vgbhx-7chIfEOokgkUiJ2QrMMF5mJ6CxyNMowiA+OCqhAFGoGAyBRoCADy8GwE5eAuSu+pGuxW7oTuOQxHEI43nkox4tEHwWOKnZFiiNijJU-o-H5zmue5nmeF5BAELU-mBauIUmqhzYWpisQYlisWrNECVJTIErrIonpGJY8rZTSfw4BAYCkCNBBzganAYENI26sF66-rVrZDLxpgosMhRlEYiWiUoEimMWRFjGU5azaNuB-LOWDTed81rqFaEWliiwGV2Iz8iWu1mQozykGmUy+oUKRyo4-p4MNcB8C4S2clxAC0zwfOmsSSV1-LDNMH3TuGniw5xEUVB8JjEliihyuswxyDjypViGND47p3GLK6KOeioJ5nlK+G5DEXYxHickDYqM5zgujPhRE5JntE4rKLk15FLiVjyQTOmSwYYgupeixFLkCy+hkUyq+Rim0fRjEQBLdXpFIuK-W8oirOkQFWuS1gjCI8zrP11SKo+CkUDgnicAAQt4HnW4mDrGJtl5CGYhbvKJqwDLLtmaL9ihDELfsUbB74GvgUDhwVUdcTHgxxyICdJJYydmTIch3L9RZFvQ7O5wG-vleXEWGB8rUDJ2kE18o6aTI5eWwG5HneeF6sWlh2Rt4M9fSLKlhe-ewsUeV+Vz0VJV930NfWpIRRlKsybKN9iBFs3MhJBvRh4l8u-nSfmsusscQVCkkwbBGyynnO641JqcC-ggZecwih4WsCoLs5IojCjOpDcgOArrIBulAioVh3QvVxJ3eKLoijN3ZmBZBOI-SOCAA */
     id: "app",
     schema: {
       context: {} as {
         config: ConfigProps;
         settings: SettingsProps;
+        session: SessionProps;
         timer: TimerProps;
       },
 
@@ -38,7 +41,9 @@ export const appMachine = createMachine(
             type: "duration.change";
             value: number;
           }
-        | { type: "timer.reset" },
+        | { type: "timer.reset" }
+        | { type: "session.next" }
+        | { type: "session.reset" },
     },
 
     tsTypes: {} as import("./app.typegen").Typegen0,
@@ -46,6 +51,7 @@ export const appMachine = createMachine(
     context: {
       config: defaultConfig,
       settings: defaultSettings,
+      session: defaultSession,
       timer: defaultTimer,
     },
 
@@ -88,6 +94,39 @@ export const appMachine = createMachine(
           },
           "timer.reset": {
             actions: "resetTimer",
+          },
+        },
+      },
+
+      session: {
+        initial: "stayFocused",
+        states: {
+          stayFocused: {
+            on: {
+              "session.next": [
+                {
+                  cond: "isNotLastSession",
+                  target: ["shortBreak", "#app.timer.running"],
+                  actions: "resetTimer",
+                },
+                {
+                  target: ["longBreak", "#app.timer.running"],
+                  actions: "resetTimer",
+                },
+              ],
+            },
+          },
+          shortBreak: {},
+          longBreak: {},
+        },
+        on: {
+          "session.next": {
+            target: ["#app.session.stayFocused", "#app.timer.running"],
+            actions: ["resetTimer", "incrementRound"],
+          },
+          "session.reset": {
+            target: ["#app.session.stayFocused", "#app.timer.paused"],
+            actions: ["resetTimer", "resetRound"],
           },
         },
       },
@@ -162,6 +201,9 @@ export const appMachine = createMachine(
       timerIsDone: (context) => {
         return context.timer.elapsed >= context.timer.duration;
       },
+      isNotLastSession: (context) => {
+        return context.session.round < context.config.sessionRounds;
+      },
     },
 
     actions: {
@@ -212,6 +254,24 @@ export const appMachine = createMachine(
             ...context.timer,
             elapsed: 0,
           },
+        };
+      }),
+      incrementRound: assign((context) => {
+        return {
+          ...context,
+          session: {
+            ...context.session,
+            round:
+              context.session.round < context.config.sessionRounds
+                ? context.session.round + 1
+                : 1,
+          },
+        };
+      }),
+      resetRound: assign((context) => {
+        return {
+          ...context,
+          session: defaultSession,
         };
       }),
     },

@@ -6,6 +6,6 @@ export type TimerProps = {
 
 export const defaultTimer: TimerProps = {
   elapsed: 0,
-  duration: 10,
+  duration: 5,
   interval: 1,
 };

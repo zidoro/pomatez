@@ -4,6 +4,7 @@ import {
   Priority,
   Control,
   VStack,
+  CounterProps,
   TIMER_PROGRESS_CIRCUMFERENCE,
 } from "@pomatez/ui";
 import { slideUpAndFadeAnimation } from "@renderer/utils";
@@ -14,7 +15,17 @@ export default function Timer() {
 
   const [state, send] = useActor(machineActor);
 
+  const session = state.context.session;
+
+  const config = state.context.config;
+
   const timer = state.context.timer;
+
+  const sessionState = (
+    state.value as {
+      session: CounterProps["appState"];
+    }
+  ).session;
 
   const timeProgress =
     (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;
@@ -23,6 +34,7 @@ export default function Timer() {
   return (
     <VStack sx={slideUpAndFadeAnimation}>
       <Counter
+        appState={sessionState}
         timeProgress={timeProgress}
         timeRemaining={timeRemaining}
       />
@@ -30,6 +42,10 @@ export default function Timer() {
       <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
       <Control
+        session={{
+          maxRounds: config.sessionRounds,
+          currentRound: session.round,
+        }}
         isRunning={state.matches("timer.running")}
         isMuted={state.matches("sound.speakerOff")}
         isCompact={state.matches("mode.compact")}
@@ -44,6 +60,12 @@ export default function Timer() {
         }}
         onResetTimer={() => {
           send("timer.reset");
+        }}
+        onNextEvent={() => {
+          send("session.next");
+        }}
+        onResetElapsed={() => {
+          send("session.reset");
         }}
       />
     </VStack>

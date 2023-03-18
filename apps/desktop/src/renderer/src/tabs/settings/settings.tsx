@@ -84,6 +84,20 @@ export default function Settings() {
       },
     },
     {
+      id: "autostart-break",
+      label: "Autostart Break",
+      checked: settings.autostartBreak,
+      onCheckedChange: (checked) => {
+        machineActor.send({
+          type: "settings.change",
+          values: {
+            ...settings,
+            autostartBreak: checked,
+          },
+        });
+      },
+    },
+    {
       id: "autostart-work",
       label: "Autostart Work",
       checked: settings.autostartWork,
