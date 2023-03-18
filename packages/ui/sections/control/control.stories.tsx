@@ -8,12 +8,7 @@ export default {
   component: Control,
   argTypes: {
     appState: {
-      options: [
-        "stay-focused",
-        "short-break",
-        "long-break",
-        "special-break",
-      ],
+      options: ["stayFocused", "shortBreak", "longBreak"],
       control: { type: "select" },
     },
   },
@@ -58,28 +53,21 @@ const Template: StoryFn<typeof Control> = (props) => {
 
 export const StayFocused: Story = {
   args: {
-    appState: "stay-focused",
+    appState: "stayFocused",
   },
   render: Template,
 };
 
 export const ShortBreak: Story = {
   args: {
-    appState: "short-break",
+    appState: "shortBreak",
   },
   render: Template,
 };
 
 export const LongBreak: Story = {
   args: {
-    appState: "long-break",
-  },
-  render: Template,
-};
-
-export const SpecialBreak: Story = {
-  args: {
-    appState: "special-break",
+    appState: "longBreak",
   },
   render: Template,
 };

@@ -7,12 +7,7 @@ export default {
   component: Titlebar,
   argTypes: {
     appState: {
-      options: [
-        "stay-focused",
-        "short-break",
-        "long-break",
-        "special-break",
-      ],
+      options: ["stayFocused", "shortBreak", "longBreak"],
       control: { type: "select" },
     },
   },
@@ -28,28 +23,21 @@ type Story = StoryObj<typeof Titlebar>;
 
 export const StayFocused: Story = {
   args: {
-    appState: "stay-focused",
+    appState: "stayFocused",
     appVersion: "1.0.0",
   },
 };
 
 export const ShortBreak: Story = {
   args: {
-    appState: "short-break",
+    appState: "shortBreak",
     appVersion: "1.0.0",
   },
 };
 
 export const LongBreak: Story = {
   args: {
-    appState: "long-break",
-    appVersion: "1.0.0",
-  },
-};
-
-export const SpecialBreak: Story = {
-  args: {
-    appState: "special-break",
+    appState: "longBreak",
     appVersion: "1.0.0",
   },
 };

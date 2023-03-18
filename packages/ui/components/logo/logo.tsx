@@ -5,7 +5,13 @@ import LogoIcon, { LogoIconProps } from "./logo-icon";
 import { withMemo } from "../../utils";
 
 export type LogoProps = {
+  /**
+   * The version of the app
+   */
   appVersion?: string;
+  /**
+   * The logo label font size
+   */
   labelFontSize: TextProps["size"];
 } & StackProps &
   LogoIconProps;

@@ -7,7 +7,7 @@ describe("<Counter />", () => {
   });
 
   test("appState - prop should work correctly", () => {
-    const { rerender } = render(<Counter appState="stay-focused" />);
+    const { rerender } = render(<Counter appState="stayFocused" />);
 
     const progressElement = screen.getByTestId("progress-svg");
     const timeRemainingElement = screen.getByTestId("time-remaining");
@@ -15,43 +15,32 @@ describe("<Counter />", () => {
     expect(
       progressElement.getAttribute("class") &&
         timeRemainingElement.getAttribute("class")
-    ).toMatch(/appState-stay-focused/i);
+    ).toMatch(/appState-stayFocused/i);
     expect(
       screen.getByLabelText(/stay focused icon/i)
     ).toBeInTheDocument();
     expect(screen.getByText(/stay focused/i)).toBeInTheDocument();
 
-    rerender(<Counter appState="short-break" />);
+    rerender(<Counter appState="shortBreak" />);
 
     expect(
       progressElement.getAttribute("class") &&
         timeRemainingElement.getAttribute("class")
-    ).toMatch(/appState-short-break/i);
+    ).toMatch(/appState-shortBreak/i);
     expect(
       screen.getByLabelText(/short break icon/i)
     ).toBeInTheDocument();
     expect(screen.getByText(/short break/i)).toBeInTheDocument();
 
-    rerender(<Counter appState="long-break" />);
+    rerender(<Counter appState="longBreak" />);
 
     expect(
       progressElement.getAttribute("class") &&
         timeRemainingElement.getAttribute("class")
-    ).toMatch(/appState-long-break/i);
+    ).toMatch(/appState-longBreak/i);
     expect(
       screen.getByLabelText(/long break icon/i)
     ).toBeInTheDocument();
     expect(screen.getByText(/long break/i)).toBeInTheDocument();
-
-    rerender(<Counter appState="special-break" />);
-
-    expect(
-      progressElement.getAttribute("class") &&
-        timeRemainingElement.getAttribute("class")
-    ).toMatch(/appState-special-break/i);
-    expect(
-      screen.getByLabelText(/special break icon/i)
-    ).toBeInTheDocument();
-    expect(screen.getByText(/special break/i)).toBeInTheDocument();
   });
 });

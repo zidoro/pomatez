@@ -2,7 +2,7 @@ import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Box, Button, Dropdown, Grid, Text } from "../../components";
 import { withMemo } from "../../utils";
 
-type PriorityProps = {
+export type PriorityProps = {
   title?: string;
 };
 

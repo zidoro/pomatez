@@ -7,26 +7,22 @@ export const StyledContainer = styled("div", {
 
   variants: {
     appState: {
-      "stay-focused": {
+      stayFocused: {
         $$hoverColor: "$colors$blue10",
         $$activeColor: "$colors$blue9",
       },
-      "short-break": {
+      shortBreak: {
         $$hoverColor: "$colors$green10",
         $$activeColor: "$colors$green9",
       },
-      "long-break": {
+      longBreak: {
         $$hoverColor: "$colors$brown10",
         $$activeColor: "$colors$brown9",
-      },
-      "special-break": {
-        $$hoverColor: "$colors$violet10",
-        $$activeColor: "$colors$violet9",
       },
     },
   },
   defaultVariants: {
-    appState: "stay-focused",
+    appState: "stayFocused",
   },
 });
 

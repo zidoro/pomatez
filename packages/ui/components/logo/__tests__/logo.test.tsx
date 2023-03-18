@@ -4,14 +4,14 @@ import Logo from "../logo";
 
 describe("<LogoIcon />", () => {
   test("should pass the a11y test", async () => {
-    await testA11y(<LogoIcon iconSize="$4" appState="stay-focused" />);
+    await testA11y(<LogoIcon iconSize="$4" appState="stayFocused" />);
   });
 
   test("appState - prop should work correctly", () => {
     const { rerender } = render(
       <LogoIcon
         iconSize="$4"
-        appState="stay-focused"
+        appState="stayFocused"
         data-testid="logo-icon"
       />
     );
@@ -19,43 +19,31 @@ describe("<LogoIcon />", () => {
     const iconElement = screen.getByTestId("logo-icon");
 
     expect(iconElement.getAttribute("class")).toMatch(
-      /appState-stay-focused/i
+      /appState-stayFocused/i
     );
 
     rerender(
       <LogoIcon
         iconSize="$4"
-        appState="short-break"
+        appState="shortBreak"
         data-testid="logo-icon"
       />
     );
 
     expect(iconElement.getAttribute("class")).toMatch(
-      /appState-short-break/i
+      /appState-shortBreak/i
     );
 
     rerender(
       <LogoIcon
         iconSize="$4"
-        appState="long-break"
+        appState="longBreak"
         data-testid="logo-icon"
       />
     );
 
     expect(iconElement.getAttribute("class")).toMatch(
-      /appState-long-break/i
-    );
-
-    rerender(
-      <LogoIcon
-        iconSize="$4"
-        appState="special-break"
-        data-testid="logo-icon"
-      />
-    );
-
-    expect(iconElement.getAttribute("class")).toMatch(
-      /appState-special-break/i
+      /appState-longBreak/i
     );
   });
 });
@@ -66,7 +54,7 @@ describe("<Logo />", () => {
       <Logo
         iconSize="$4"
         labelFontSize="$sm"
-        appState="stay-focused"
+        appState="stayFocused"
         appVersion="1.0.0"
       />
     );
@@ -77,7 +65,7 @@ describe("<Logo />", () => {
       <Logo
         iconSize="$4"
         labelFontSize="$sm"
-        appState="stay-focused"
+        appState="stayFocused"
         appVersion="1.0.0"
         data-testid="logo"
       />
@@ -94,7 +82,7 @@ describe("<Logo />", () => {
           class="PJLV PJLV-iUazGY-css pomatez-box"
         >
           <svg
-            class="pz-c-PJLV pz-c-PJLV-gvoCjt-appState-stay-focused pz-c-PJLV-icVoMNQ-css"
+            class="pz-c-PJLV pz-c-PJLV-gvoCjt-appState-stayFocused pz-c-PJLV-icVoMNQ-css"
             fill="none"
             viewBox="0 0 256 256"
             xmlns="http://www.w3.org/2000/svg"

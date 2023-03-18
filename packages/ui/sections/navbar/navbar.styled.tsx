@@ -42,7 +42,7 @@ export const StyledNavLink = styled("a", {
 
   variants: {
     appState: {
-      "stay-focused": {
+      stayFocused: {
         "&:hover": {
           color: "$blue10",
         },
@@ -55,7 +55,7 @@ export const StyledNavLink = styled("a", {
           },
         },
       },
-      "short-break": {
+      shortBreak: {
         "&:hover": {
           color: "$green10",
         },
@@ -68,7 +68,7 @@ export const StyledNavLink = styled("a", {
           },
         },
       },
-      "long-break": {
+      longBreak: {
         "&:hover": {
           color: "$brown10",
         },
@@ -81,23 +81,10 @@ export const StyledNavLink = styled("a", {
           },
         },
       },
-      "special-break": {
-        "&:hover": {
-          color: "$violet10",
-        },
-
-        "&.active": {
-          color: "$violet9",
-
-          "&::after": {
-            bg: "$violet9",
-          },
-        },
-      },
     },
   },
   defaultVariants: {
-    appState: "stay-focused",
+    appState: "stayFocused",
   },
 });
 

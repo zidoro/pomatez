@@ -2,7 +2,6 @@ import {
   CookieIcon,
   DesktopIcon,
   LightningBoltIcon,
-  StarIcon,
 } from "@radix-ui/react-icons";
 import { Box, Grid, Text, VStack } from "../../components";
 import {
@@ -13,32 +12,30 @@ import {
 import { capitalize, withMemo } from "../../utils";
 import { useTimeFormat } from "../../hooks";
 
-type CounterProps = {
+export type CounterProps = {
   timeProgress?: number;
   timeRemaining?: number;
 } & CounterVariantProps;
 
-export const Counter = ({
-  appState = "stay-focused",
+function Counter({
+  appState = "stayFocused",
   timeProgress,
   timeRemaining,
-}: CounterProps) => {
+}: CounterProps) {
   const renderAppState = () => {
-    return capitalize(appState as string, { splitter: "-" });
+    return capitalize(appState as string, "camelCase");
   };
 
   const renderIcon = () => {
     switch (appState) {
-      case "stay-focused":
+      case "stayFocused":
         return <DesktopIcon aria-label={`${renderAppState()} Icon`} />;
-      case "short-break":
+      case "shortBreak":
         return (
           <LightningBoltIcon aria-label={`${renderAppState()} Icon`} />
         );
-      case "long-break":
+      case "longBreak":
         return <CookieIcon aria-label={`${renderAppState()} Icon`} />;
-      case "special-break":
-        return <StarIcon aria-label={`${renderAppState()} Icon`} />;
     }
   };
 
@@ -131,6 +128,6 @@ export const Counter = ({
       </Grid.Item>
     </Grid>
   );
-};
+}
 
 export default withMemo(Counter);

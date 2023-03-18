@@ -38,7 +38,7 @@ describe("<Navbar />", () => {
 
   test("appState - prop should work correctly", () => {
     const { rerender } = render(
-      <Navbar links={navLinks} appState="stay-focused" />
+      <Navbar links={navLinks} appState="stayFocused" />
     );
 
     const activeLinkElement = screen
@@ -46,25 +46,19 @@ describe("<Navbar />", () => {
       .filter((link) => link.className.includes("active"));
 
     expect(activeLinkElement[0].getAttribute("class")).toMatch(
-      /appState-stay-focused/i
+      /appState-stayFocused/i
     );
 
-    rerender(<Navbar links={navLinks} appState="short-break" />);
+    rerender(<Navbar links={navLinks} appState="shortBreak" />);
 
     expect(activeLinkElement[0].getAttribute("class")).toMatch(
-      /appState-short-break/i
+      /appState-shortBreak/i
     );
 
-    rerender(<Navbar links={navLinks} appState="long-break" />);
+    rerender(<Navbar links={navLinks} appState="longBreak" />);
 
     expect(activeLinkElement[0].getAttribute("class")).toMatch(
-      /appState-long-break/i
-    );
-
-    rerender(<Navbar links={navLinks} appState="special-break" />);
-
-    expect(activeLinkElement[0].getAttribute("class")).toMatch(
-      /appState-special-break/i
+      /appState-longBreak/i
     );
   });
 });

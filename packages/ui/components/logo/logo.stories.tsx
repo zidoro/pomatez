@@ -7,12 +7,7 @@ export default {
   component: Logo,
   argTypes: {
     appState: {
-      options: [
-        "stay-focused",
-        "short-break",
-        "long-break",
-        "special-break",
-      ],
+      options: ["stayFocused", "shortBreak", "longBreak"],
       control: { type: "select" },
     },
   },
@@ -23,7 +18,7 @@ type Story = StoryObj<typeof Logo>;
 
 export const IconOnly: Story = {
   args: {
-    appState: "stay-focused",
+    appState: "stayFocused",
     iconSize: "12.8rem",
   },
   render: (args) => <LogoIcon {...args} />,
@@ -31,7 +26,7 @@ export const IconOnly: Story = {
 
 export const WithLabel: Story = {
   args: {
-    appState: "stay-focused",
+    appState: "stayFocused",
     appVersion: "1.0.0",
     iconSize: "$4",
     labelFontSize: "$sm",

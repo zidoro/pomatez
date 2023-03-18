@@ -1,11 +1,11 @@
 import { Button, HStack, Logo, LogoProps } from "../../components";
 import { withMemo } from "../../utils";
 
-type TitlebarProps = {
+export type TitlebarProps = {
   /**
    * The current state of the app
-   * @default "stay-focused"
-   * @options "stay-focused", "short-break", "long-break", "special-break"
+   * @default "stayFocused"
+   * @options "stayFocused", "shortBreak", "longBreak"
    */
   appState?: LogoProps["appState"];
   /**
@@ -23,12 +23,12 @@ type TitlebarProps = {
   onClose?: () => void;
 };
 
-export const Titlebar = ({
-  appState = "stay-focused",
+function Titlebar({
+  appState = "stayFocused",
   appVersion = "0.0.0",
   onMinimize,
   onClose,
-}: TitlebarProps) => {
+}: TitlebarProps) {
   return (
     <HStack
       justify="space-between"
@@ -127,6 +127,6 @@ export const Titlebar = ({
       </HStack>
     </HStack>
   );
-};
+}
 
 export default withMemo(Titlebar);

@@ -4,22 +4,19 @@ import { withMemo } from "../../utils";
 const StyledSvg = styled("svg", {
   variants: {
     appState: {
-      "stay-focused": {
+      stayFocused: {
         color: "$blue9",
       },
-      "short-break": {
+      shortBreak: {
         color: "$green9",
       },
-      "long-break": {
+      longBreak: {
         color: "$brown9",
-      },
-      "special-break": {
-        color: "$violet9",
       },
     },
   },
   defaultVariants: {
-    appState: "stay-focused",
+    appState: "stayFocused",
   },
 });
 

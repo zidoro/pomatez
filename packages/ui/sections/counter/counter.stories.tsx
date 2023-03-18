@@ -7,12 +7,7 @@ export default {
   component: Counter,
   argTypes: {
     appState: {
-      options: [
-        "stay-focused",
-        "short-break",
-        "long-break",
-        "special-break",
-      ],
+      options: ["stayFocused", "shortBreak", "longBreak"],
       control: { type: "select" },
     },
   },
@@ -28,24 +23,18 @@ type Story = StoryObj<typeof Counter>;
 
 export const StayFocused: Story = {
   args: {
-    appState: "stay-focused",
+    appState: "stayFocused",
   },
 };
 
 export const ShortBreak: Story = {
   args: {
-    appState: "short-break",
+    appState: "shortBreak",
   },
 };
 
 export const LongBreak: Story = {
   args: {
-    appState: "long-break",
-  },
-};
-
-export const SpecialBreak: Story = {
-  args: {
-    appState: "special-break",
+    appState: "longBreak",
   },
 };

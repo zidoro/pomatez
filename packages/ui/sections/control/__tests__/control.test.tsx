@@ -9,30 +9,24 @@ describe("<Control />", () => {
   });
 
   test("appState - prop should work correctly", () => {
-    const { rerender } = render(<Control appState="stay-focused" />);
+    const { rerender } = render(<Control appState="stayFocused" />);
 
-    expect(screen.getByTestId("stay-focused")).toBeInTheDocument();
+    expect(screen.getByTestId("stayFocused")).toBeInTheDocument();
     expect(
-      screen.getByTestId("stay-focused").getAttribute("class")
-    ).toMatch(/appState-stay-focused/i);
+      screen.getByTestId("stayFocused").getAttribute("class")
+    ).toMatch(/appState-stayFocused/i);
 
-    rerender(<Control appState="short-break" />);
-    expect(screen.getByTestId("short-break")).toBeInTheDocument();
+    rerender(<Control appState="shortBreak" />);
+    expect(screen.getByTestId("shortBreak")).toBeInTheDocument();
     expect(
-      screen.getByTestId("short-break").getAttribute("class")
-    ).toMatch(/appState-short-break/i);
+      screen.getByTestId("shortBreak").getAttribute("class")
+    ).toMatch(/appState-shortBreak/i);
 
-    rerender(<Control appState="long-break" />);
-    expect(screen.getByTestId("long-break")).toBeInTheDocument();
+    rerender(<Control appState="longBreak" />);
+    expect(screen.getByTestId("longBreak")).toBeInTheDocument();
     expect(
-      screen.getByTestId("long-break").getAttribute("class")
-    ).toMatch(/appState-long-break/i);
-
-    rerender(<Control appState="special-break" />);
-    expect(screen.getByTestId("special-break")).toBeInTheDocument();
-    expect(
-      screen.getByTestId("special-break").getAttribute("class")
-    ).toMatch(/appState-special-break/i);
+      screen.getByTestId("longBreak").getAttribute("class")
+    ).toMatch(/appState-longBreak/i);
   });
 
   test("conditional rendering of controls should work properly", () => {
@@ -74,7 +68,7 @@ describe("<Control />", () => {
         onResetElapsed={onResetCounterFn}
         onResetTimer={onRestartFn}
         onPlayPause={onPlayPauseFn}
-        onNext={onNextFn}
+        onNextEvent={onNextFn}
         onToggleSound={onToggleSoundFn}
         onToggleCompact={onToggleCompactFn}
       />
@@ -90,7 +84,7 @@ describe("<Control />", () => {
       screen.getByRole("button", { name: /play button/i })
     );
     await userEvent.click(
-      screen.getByRole("button", { name: /next button/i })
+      screen.getByRole("button", { name: /next event button/i })
     );
     await userEvent.click(
       screen.getByRole("button", { name: /disable speaker button/i })

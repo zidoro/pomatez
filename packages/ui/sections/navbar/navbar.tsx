@@ -33,10 +33,7 @@ type NavbarProps = {
   links?: NavLinkProps[];
 } & NavLinkVariantProps;
 
-export const Navbar = ({
-  appState = "stay-focused",
-  links = [],
-}: NavbarProps) => {
+function Navbar({ appState = "stayFocused", links = [] }: NavbarProps) {
   return (
     <Box
       as="nav"
@@ -97,6 +94,6 @@ export const Navbar = ({
       </HStack>
     </Box>
   );
-};
+}
 
 export default withMemo(Navbar);

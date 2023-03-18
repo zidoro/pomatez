@@ -16,7 +16,20 @@ import {
 } from "./control.styled";
 import { withMemo } from "../../utils";
 
-type ControlProps = {
+export type ControlProps = {
+  /**
+   * The session indicator
+   */
+  session?: {
+    /**
+     * The total number of sessions.
+     */
+    maxRounds: number;
+    /**
+     * The current session round.
+     */
+    currentRound: number;
+  };
   /**
    * Whether the timer is playing.
    */
@@ -44,7 +57,7 @@ type ControlProps = {
   /**
    * Function to go to the next event.
    */
-  onNext?: () => void;
+  onNextEvent?: () => void;
   /**
    * Function to toggle the sound on and off.
    */
@@ -55,18 +68,19 @@ type ControlProps = {
   onToggleCompact?: () => void;
 } & StyledContainerProps;
 
-export const Control = ({
-  appState = "stay-focused",
+function Control({
+  session = { maxRounds: 4, currentRound: 1 },
+  appState = "stayFocused",
   isRunning = false,
   isMuted = false,
   isCompact = false,
   onResetElapsed,
   onResetTimer,
   onPlayPause,
-  onNext,
+  onNextEvent,
   onToggleSound,
   onToggleCompact,
-}: ControlProps) => {
+}: ControlProps) {
   return (
     <StyledContainer appState={appState} data-testid={appState}>
       <Grid
@@ -83,7 +97,9 @@ export const Control = ({
       >
         <Grid.Item justify="left">
           <VStack>
-            <Text>1 / 4</Text>
+            <Text>
+              {session.currentRound}&nbsp;/&nbsp;{session.maxRounds}
+            </Text>
             <Button variant="link" onClick={onResetElapsed}>
               Reset
             </Button>
@@ -121,10 +137,10 @@ export const Control = ({
             )}
 
             <StyledControlButton
-              aria-label="Next Button"
+              aria-label="Next Event Button"
               variant="secondary"
               icon={<TrackNextIcon />}
-              onClick={onNext}
+              onClick={onNextEvent}
             />
           </HStack>
         </Grid.Item>
@@ -167,6 +183,6 @@ export const Control = ({
       </Grid>
     </StyledContainer>
   );
-};
+}
 
 export default withMemo(Control);
