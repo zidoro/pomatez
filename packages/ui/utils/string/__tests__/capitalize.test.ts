@@ -1,12 +1,12 @@
 import { capitalize } from "../capitalize";
 
-describe("capitalize - string helper", () => {
-  it("should work as expected", () => {
-    expect(capitalize("foo")).toBe("Foo");
-    expect(capitalize("foo bar")).toBe("Foo Bar");
-    expect(capitalize("foo-bar-baz")).toBe("Foo-bar-baz");
-    expect(capitalize("foo-bar-baz", { splitter: "-" })).toBe(
-      "Foo Bar Baz"
-    );
+describe("capitalize", () => {
+  it("should capitalize the first letter of each word in a string", () => {
+    expect(capitalize("")).toBe("");
+    expect(capitalize("hello world")).toBe("Hello World");
+    expect(capitalize("helloWorld", "camelCase")).toBe("Hello World");
+    expect(capitalize("hello-world", "kebabCase")).toBe("Hello World");
+    expect(capitalize("HelloWorld", "pascalCase")).toBe("Hello World");
+    expect(capitalize("hello_world", "snakeCase")).toBe("Hello World");
   });
 });
