@@ -29,6 +29,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@total-typescript/ts-reset": "^0.4.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitest/coverage-c8": "^0.29.2",
