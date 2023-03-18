@@ -1,4 +1,5 @@
-import { memo, ReactNode } from "react";
+import { ReactNode } from "react";
+import { withMemo } from "../../utils";
 import {
   StyledScrollAreaCorner,
   StyledScrollAreaRoot,
@@ -18,10 +19,7 @@ export type ScrollAreaProps = {
   children?: ReactNode;
 };
 
-export const ScrollArea = ({
-  disabledScroll,
-  children,
-}: ScrollAreaProps) => {
+function ScrollArea({ disabledScroll, children }: ScrollAreaProps) {
   return (
     <StyledScrollAreaRoot>
       <StyledScrollAreaViewport>{children}</StyledScrollAreaViewport>
@@ -41,10 +39,6 @@ export const ScrollArea = ({
       <StyledScrollAreaCorner />
     </StyledScrollAreaRoot>
   );
-};
+}
 
-const MemoScrollArea = memo(ScrollArea);
-
-MemoScrollArea.displayName = "ScrollArea";
-
-export default MemoScrollArea;
+export default withMemo(ScrollArea);

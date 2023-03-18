@@ -1,12 +1,9 @@
-import { forwardRef, memo } from "react";
+import { ForwardedRef } from "react";
+import { withMemoRef } from "../../utils";
 import Stack, { StackProps } from "./stack";
 
-const HStack = forwardRef<HTMLDivElement, StackProps>((props, ref) => (
-  <Stack {...props} direction="row" ref={ref} />
-));
+function HStack(props: StackProps, ref: ForwardedRef<HTMLDivElement>) {
+  return <Stack {...props} direction="row" ref={ref} />;
+}
 
-const MemoHStack = memo(HStack);
-
-MemoHStack.displayName = "HStack";
-
-export default MemoHStack;
+export default withMemoRef(HStack);

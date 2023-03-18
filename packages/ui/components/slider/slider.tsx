@@ -1,5 +1,5 @@
-import { memo } from "react";
 import { HStack, VStack } from "../stack";
+import { withMemo } from "../../utils";
 import { Text } from "../text";
 import {
   StyledSliderRange,
@@ -56,7 +56,7 @@ export type SliderProps = {
   onValueCommit?(value: number): void;
 };
 
-export const Slider = ({
+function Slider({
   header,
   value,
   min = 0,
@@ -66,7 +66,7 @@ export const Slider = ({
   onValueChange,
   onValueCommit,
   ...rest
-}: SliderProps) => {
+}: SliderProps) {
   const getValidValue = (value?: number) => {
     if (value) return [value];
   };
@@ -124,10 +124,6 @@ export const Slider = ({
       </StyledSliderRoot>
     </VStack>
   );
-};
+}
 
-const MemoSlider = memo(Slider);
-
-MemoSlider.displayName = "Slider";
-
-export default MemoSlider;
+export default withMemo(Slider);

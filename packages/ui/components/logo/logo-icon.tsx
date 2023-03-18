@@ -1,5 +1,5 @@
-import { memo } from "react";
 import { styled, SxProps, VariantProps } from "../../theme";
+import { withMemo } from "../../utils";
 
 const StyledSvg = styled("svg", {
   variants: {
@@ -59,4 +59,4 @@ const LogoIcon = ({ iconSize, ...rest }: LogoIconProps) => {
   );
 };
 
-export default memo(LogoIcon);
+export default withMemo(LogoIcon, "Logo.Icon");

@@ -1,4 +1,4 @@
-import { ButtonIcon } from "../../components";
+import { Button } from "../../components";
 import { styled, VariantProps } from "../../theme";
 
 export const StyledContainer = styled("div", {
@@ -30,7 +30,7 @@ export const StyledContainer = styled("div", {
   },
 });
 
-export const StyledControlButton = styled(ButtonIcon, {
+export const StyledControlButton = styled(Button.Icon, {
   transition: "$button",
 
   "&:hover": {

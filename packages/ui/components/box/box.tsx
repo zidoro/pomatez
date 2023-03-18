@@ -1,6 +1,6 @@
-import { forwardRef, HTMLAttributes, memo, ReactNode } from "react";
+import { ForwardedRef, HTMLAttributes, ReactNode } from "react";
+import { withMemoRef, cx } from "../../utils";
 import { styled, SxProps } from "../../theme";
-import { cx } from "../../utils/string";
 
 const StyledBox = styled("div");
 
@@ -23,20 +23,17 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type BoxProps = Props & NativeAttrs;
 
-export const Box = forwardRef<HTMLDivElement, BoxProps>(
-  ({ children, className, sx, ...rest }, ref) => {
-    const _className = cx("pomatez-box", className);
+function Box(
+  { children, className, sx, ...rest }: BoxProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
+  const _className = cx("pomatez-box", className);
 
-    return (
-      <StyledBox className={_className} css={sx} {...rest} ref={ref}>
-        {children}
-      </StyledBox>
-    );
-  }
-);
+  return (
+    <StyledBox className={_className} css={sx} {...rest} ref={ref}>
+      {children}
+    </StyledBox>
+  );
+}
 
-const MemoBox = memo(Box);
-
-MemoBox.displayName = "Box";
-
-export default MemoBox;
+export default withMemoRef(Box);

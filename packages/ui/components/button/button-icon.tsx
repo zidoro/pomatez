@@ -1,5 +1,6 @@
-import { forwardRef, memo, ReactNode } from "react";
+import { ForwardedRef, ReactNode } from "react";
 import Button, { ButtonProps } from "./button";
+import { withMemoRef } from "../../utils";
 
 export type ButtonIconProps = {
   /**
@@ -12,19 +13,15 @@ export type ButtonIconProps = {
   icon: ReactNode;
 } & ButtonProps;
 
-export const ButtonIcon = forwardRef<
-  HTMLButtonElement,
-  ButtonIconProps
->(({ icon, ...rest }, ref) => {
+function ButtonIcon(
+  { icon, ...rest }: ButtonIconProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
   return (
     <Button {...rest} ref={ref}>
       {icon}
     </Button>
   );
-});
+}
 
-const MemoButtonIcon = memo(ButtonIcon);
-
-MemoButtonIcon.displayName = "ButtonIcon";
-
-export default MemoButtonIcon;
+export default withMemoRef(ButtonIcon, "Button.Icon");

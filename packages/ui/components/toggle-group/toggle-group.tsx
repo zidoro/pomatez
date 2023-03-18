@@ -1,5 +1,5 @@
-import { memo } from "react";
 import { SxProps } from "../../theme";
+import { withMemo } from "../../utils";
 import {
   StyledGroupItem,
   StyledToggleGroup,
@@ -34,13 +34,13 @@ export type ToggleGroupProps = {
   sx?: SxProps;
 };
 
-export const ToggleGroup = ({
+function ToggleGroup({
   value,
   defaultValue,
   onValueChange,
   items = [],
   sx,
-}: ToggleGroupProps) => {
+}: ToggleGroupProps) {
   return (
     <StyledToggleGroup
       type="single"
@@ -56,10 +56,6 @@ export const ToggleGroup = ({
       ))}
     </StyledToggleGroup>
   );
-};
+}
 
-const MemoToggleGroup = memo(ToggleGroup);
-
-MemoToggleGroup.displayName = "ToggleGroup";
-
-export default MemoToggleGroup;
+export default withMemo(ToggleGroup);

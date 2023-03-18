@@ -1,7 +1,7 @@
-import { ComponentType, memo, ReactNode } from "react";
-import { Box, HStack } from "../../components";
-import { withDefaults } from "../../utils/with-defaults";
+import { ComponentType, ReactNode } from "react";
 import { NavLinkVariantProps, StyledNavLink } from "./navbar.styled";
+import { Box, HStack } from "../../components";
+import { withMemo } from "../../utils";
 
 export type NavLinkProps<
   TProps = {
@@ -33,12 +33,10 @@ type NavbarProps = {
   links?: NavLinkProps[];
 } & NavLinkVariantProps;
 
-const defaultProps: NavbarProps = {
-  appState: "stay-focused",
-  links: [],
-};
-
-export const Navbar = ({ appState, links }: NavbarProps) => {
+export const Navbar = ({
+  appState = "stay-focused",
+  links = [],
+}: NavbarProps) => {
   return (
     <Box
       as="nav"
@@ -101,6 +99,4 @@ export const Navbar = ({ appState, links }: NavbarProps) => {
   );
 };
 
-const MemoNavbar = memo(Navbar);
-
-export default withDefaults(MemoNavbar, defaultProps);
+export default withMemo(Navbar);

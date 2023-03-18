@@ -1,7 +1,6 @@
-import { forwardRef, HTMLAttributes, memo, ReactNode } from "react";
+import { ForwardedRef, HTMLAttributes, ReactNode } from "react";
 import { StackVariantProps, StyledStack } from "./stack.styled";
-import { withDefaults } from "../../utils/with-defaults";
-import { cx } from "../../utils/string";
+import { withMemoRef, cx } from "../../utils";
 import { SxProps } from "../../theme";
 
 type Props = {
@@ -39,54 +38,41 @@ type Props = {
   children?: ReactNode;
 };
 
-const defaultProps: Props = {
-  spacing: "$0",
-  align: "center",
-  justify: "center",
-  wrap: "nowrap",
-};
-
 type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type StackProps = Props & NativeAttrs & StackVariantProps;
 
-export const Stack = forwardRef<HTMLDivElement, StackProps>(
-  (
-    {
-      children,
-      className,
-      align,
-      justify,
-      wrap,
-      spacing: gap,
-      sx,
-      ...rest
-    },
-    ref
-  ) => {
-    const _className = cx("pomatez-stack", className);
+function Stack(
+  {
+    spacing = "$0",
+    align = "center",
+    justify = "center",
+    wrap = "nowrap",
+    className,
+    children,
+    sx,
+    ...rest
+  }: StackProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
+  const _className = cx("pomatez-stack", className);
 
-    return (
-      <StyledStack
-        className={_className}
-        css={{
-          alignItems: align,
-          justifyContent: justify,
-          flexWrap: wrap,
-          gap,
-          ...sx,
-        }}
-        {...rest}
-        ref={ref}
-      >
-        {children}
-      </StyledStack>
-    );
-  }
-);
+  return (
+    <StyledStack
+      className={_className}
+      css={{
+        alignItems: align,
+        justifyContent: justify,
+        flexWrap: wrap,
+        gap: spacing,
+        ...sx,
+      }}
+      {...rest}
+      ref={ref}
+    >
+      {children}
+    </StyledStack>
+  );
+}
 
-const MemoStack = memo(Stack);
-
-MemoStack.displayName = "Stack";
-
-export default withDefaults(MemoStack, defaultProps);
+export default withMemoRef(Stack);

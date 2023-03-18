@@ -1,4 +1,4 @@
-import { memo, ReactNode } from "react";
+import { ForwardedRef, ReactNode } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   CheckIcon,
@@ -18,6 +18,7 @@ import {
   StyledDropdownMenuSubTrigger,
   StyledRightSlot,
 } from "./dropdown.styled";
+import { withMemoRef } from "../../utils";
 
 export type DropdownMenuItemProps =
   | {
@@ -132,13 +133,16 @@ export type DropdownProps = {
   };
 };
 
-export const Dropdown = ({
-  open,
-  trigger,
-  menuItems = [],
-  contentProps,
-  ...rest
-}: DropdownProps) => {
+function Dropdown(
+  {
+    open,
+    trigger,
+    menuItems = [],
+    contentProps,
+    ...rest
+  }: DropdownProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
   const isLeftPadded = menuItems.some(
     (item) => item.type === "checkbox" || item.type === "radio-group"
   );
@@ -240,7 +244,9 @@ export const Dropdown = ({
 
   return (
     <DropdownMenu.Root open={open} {...rest}>
-      <DropdownMenu.Trigger asChild>{trigger}</DropdownMenu.Trigger>
+      <DropdownMenu.Trigger asChild ref={ref}>
+        {trigger}
+      </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         {Boolean(menuItems.length) && (
@@ -254,10 +260,6 @@ export const Dropdown = ({
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
-};
+}
 
-const MemoDropdown = memo(Dropdown);
-
-MemoDropdown.displayName = "Dropdown";
-
-export default MemoDropdown;
+export default withMemoRef(Dropdown);

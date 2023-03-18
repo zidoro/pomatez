@@ -1,8 +1,8 @@
-import { memo } from "react";
 import { Box } from "../box";
 import { Text, TextProps } from "../text";
 import { HStack, StackProps } from "../stack";
 import LogoIcon, { LogoIconProps } from "./logo-icon";
+import { withMemo } from "../../utils";
 
 export type LogoProps = {
   appVersion?: string;
@@ -10,13 +10,13 @@ export type LogoProps = {
 } & StackProps &
   LogoIconProps;
 
-export const Logo = ({
+function Logo({
   iconSize,
   appState,
   appVersion,
   labelFontSize,
   ...rest
-}: LogoProps) => {
+}: LogoProps) {
   return (
     <HStack spacing="$2" {...rest}>
       <Box
@@ -46,6 +46,6 @@ export const Logo = ({
       )}
     </HStack>
   );
-};
+}
 
-export default memo(Logo);
+export default withMemo(Logo);

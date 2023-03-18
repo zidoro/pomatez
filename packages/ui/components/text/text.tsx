@@ -1,7 +1,6 @@
-import { forwardRef, HTMLAttributes, memo, ReactNode } from "react";
+import { ForwardedRef, HTMLAttributes, ReactNode } from "react";
 import { StyledText, TextVariantProps } from "./text.styled";
-import { withDefaults } from "../../utils/with-defaults";
-import { cx } from "../../utils/string";
+import { withMemoRef, cx } from "../../utils";
 import { SxProps } from "../../theme";
 
 type Props = {
@@ -46,57 +45,45 @@ type Props = {
   children?: ReactNode;
 };
 
-const defaultProps: Props = {
-  size: "$sm",
-  align: "left",
-  color: "inherit",
-};
-
 type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type TextProps = Props & NativeAttrs & TextVariantProps;
 
-export const Text = forwardRef<HTMLParagraphElement, TextProps>(
-  (
-    {
-      children,
-      className,
-      size,
-      weight,
-      align,
-      casing,
-      decoration,
-      color,
-      sx,
-      ...rest
-    },
-    ref
-  ) => {
-    const _className = cx("pomatez-text", className);
+function Text(
+  {
+    size = "$sm",
+    align = "left",
+    color = "inherit",
+    casing,
+    weight,
+    decoration,
+    className,
+    children,
+    sx,
+    ...rest
+  }: TextProps,
+  ref: ForwardedRef<HTMLParagraphElement>
+) {
+  const _className = cx("pomatez-text", className);
 
-    return (
-      <StyledText
-        className={_className}
-        css={{
-          fontSize: size,
-          fontWeight: weight,
-          textAlign: align,
-          textTransform: casing,
-          textDecoration: decoration,
-          color,
-          ...sx,
-        }}
-        {...rest}
-        ref={ref}
-      >
-        {children}
-      </StyledText>
-    );
-  }
-);
+  return (
+    <StyledText
+      className={_className}
+      css={{
+        fontSize: size,
+        fontWeight: weight,
+        textAlign: align,
+        textTransform: casing,
+        textDecoration: decoration,
+        color,
+        ...sx,
+      }}
+      {...rest}
+      ref={ref}
+    >
+      {children}
+    </StyledText>
+  );
+}
 
-const MemoText = memo(Text);
-
-MemoText.displayName = "Text";
-
-export default withDefaults(MemoText, defaultProps);
+export default withMemoRef(Text);

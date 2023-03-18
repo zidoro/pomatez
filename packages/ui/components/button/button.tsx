@@ -1,7 +1,7 @@
-import { forwardRef, HTMLAttributes, memo, ReactNode } from "react";
+import { ForwardedRef, HTMLAttributes, ReactNode } from "react";
 import { ButtonVariantProps, StyledButton } from "./button.styled";
+import { withMemoRef, cx } from "../../utils";
 import { SxProps } from "../../theme";
-import { cx } from "../../utils/string";
 
 type Props = {
   /**
@@ -18,27 +18,24 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 
 export type ButtonProps = Props & NativeAttrs & ButtonVariantProps;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, className, sx, ...rest }, ref) => {
-    const _className = cx("pomatez-button", className);
+function Button(
+  { children, className, sx, ...rest }: ButtonProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
+  const _className = cx("pomatez-button", className);
 
-    return (
-      <StyledButton
-        className={_className}
-        css={{
-          ...sx,
-        }}
-        {...rest}
-        ref={ref}
-      >
-        {children}
-      </StyledButton>
-    );
-  }
-);
+  return (
+    <StyledButton
+      className={_className}
+      css={{
+        ...sx,
+      }}
+      {...rest}
+      ref={ref}
+    >
+      {children}
+    </StyledButton>
+  );
+}
 
-const MemoButton = memo(Button);
-
-MemoButton.displayName = "Button";
-
-export default MemoButton;
+export default withMemoRef(Button);

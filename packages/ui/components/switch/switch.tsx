@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { ForwardedRef } from "react";
+import { withMemoRef } from "../../utils";
 import { HStack } from "../stack";
 import {
   StyledSwitchLabel,
@@ -46,20 +47,19 @@ export type SwitchProps = {
   value?: string;
 };
 
-export const Switch = ({ id, label, ...rest }: SwitchProps) => {
+function Switch(
+  { id, label, ...rest }: SwitchProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
   return (
     <HStack justify="space-between" sx={{ width: "100%" }}>
       <StyledSwitchLabel htmlFor={id}>{label}</StyledSwitchLabel>
 
-      <StyledSwitchRoot id={id} {...rest}>
+      <StyledSwitchRoot id={id} {...rest} ref={ref}>
         <StyledSwitchThumb />
       </StyledSwitchRoot>
     </HStack>
   );
-};
+}
 
-const MemoSwitch = memo(Switch);
-
-MemoSwitch.displayName = "Switch";
-
-export default MemoSwitch;
+export default withMemoRef(Switch);

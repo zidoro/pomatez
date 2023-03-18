@@ -1,4 +1,3 @@
-import { memo } from "react";
 import {
   DoubleArrowDownIcon,
   DoubleArrowUpIcon,
@@ -15,7 +14,7 @@ import {
   StyledControlButton,
   StyledContainerProps,
 } from "./control.styled";
-import { withDefaults } from "../../utils/with-defaults";
+import { withMemo } from "../../utils";
 
 type ControlProps = {
   /**
@@ -56,18 +55,11 @@ type ControlProps = {
   onToggleCompact?: () => void;
 } & StyledContainerProps;
 
-const defaultProps: ControlProps = {
-  appState: "stay-focused",
-  isRunning: false,
-  isMuted: false,
-  isCompact: false,
-};
-
 export const Control = ({
-  appState,
-  isRunning,
-  isMuted,
-  isCompact,
+  appState = "stay-focused",
+  isRunning = false,
+  isMuted = false,
+  isCompact = false,
   onResetElapsed,
   onResetTimer,
   onPlayPause,
@@ -177,6 +169,4 @@ export const Control = ({
   );
 };
 
-const MemoControl = memo(Control);
-
-export default withDefaults(MemoControl, defaultProps);
+export default withMemo(Control);

@@ -1,18 +1,12 @@
-import { memo } from "react";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import {
-  Box,
-  ButtonIcon,
-  Dropdown,
-  Grid,
-  Text,
-} from "../../components";
+import { Box, Button, Dropdown, Grid, Text } from "../../components";
+import { withMemo } from "../../utils";
 
 type PriorityProps = {
   title?: string;
 };
 
-export function Priority({ title }: PriorityProps) {
+function Priority({ title }: PriorityProps) {
   return (
     <Box sx={{ width: "100%", height: "$12", px: "$5" }}>
       <Grid
@@ -42,7 +36,7 @@ export function Priority({ title }: PriorityProps) {
 
         <Dropdown
           trigger={
-            <ButtonIcon
+            <Button.Icon
               aria-label="Task Option Button"
               icon={<DotsVerticalIcon />}
               sx={{
@@ -74,4 +68,4 @@ export function Priority({ title }: PriorityProps) {
   );
 }
 
-export default memo(Priority);
+export default withMemo(Priority);

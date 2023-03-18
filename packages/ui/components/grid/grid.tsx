@@ -1,5 +1,6 @@
 import {
   ForwardRefExoticComponent,
+  MemoExoticComponent,
   PropsWithoutRef,
   RefAttributes,
 } from "react";
@@ -8,19 +9,13 @@ import GridItem from "./grid-item";
 
 export type GridProps = GridContainerProps;
 
-type GridComponent<T, P = {}> = ForwardRefExoticComponent<
-  PropsWithoutRef<P> & RefAttributes<T>
+type GridComponent<T, P = {}> = MemoExoticComponent<
+  ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<T>>
 > & {
   Item: typeof GridItem;
 };
 
-export const Grid = GridContainer as GridComponent<
-  HTMLDivElement,
-  GridProps
->;
-
-Grid.displayName = "Grid";
-GridItem.displayName = "Grid.Item";
+const Grid = GridContainer as GridComponent<HTMLDivElement, GridProps>;
 
 Grid.Item = GridItem;
 

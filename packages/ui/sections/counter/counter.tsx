@@ -1,4 +1,3 @@
-import { memo } from "react";
 import {
   CookieIcon,
   DesktopIcon,
@@ -11,8 +10,7 @@ import {
   StyledProgress,
   StyledTimeRemaining,
 } from "./counter.styled";
-import { capitalize } from "../../utils/string";
-import { withDefaults } from "../../utils/with-defaults";
+import { capitalize, withMemo } from "../../utils";
 import { useTimeFormat } from "../../hooks";
 
 type CounterProps = {
@@ -20,12 +18,8 @@ type CounterProps = {
   timeRemaining?: number;
 } & CounterVariantProps;
 
-const defaultProps: CounterProps = {
-  appState: "stay-focused",
-};
-
 export const Counter = ({
-  appState,
+  appState = "stay-focused",
   timeProgress,
   timeRemaining,
 }: CounterProps) => {
@@ -139,6 +133,4 @@ export const Counter = ({
   );
 };
 
-const MemoCounter = memo(Counter);
-
-export default withDefaults(MemoCounter, defaultProps);
+export default withMemo(Counter);

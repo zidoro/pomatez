@@ -1,6 +1,5 @@
-import { memo } from "react";
 import { Button, HStack, Logo, LogoProps } from "../../components";
-import { withDefaults } from "../../utils/with-defaults";
+import { withMemo } from "../../utils";
 
 type TitlebarProps = {
   /**
@@ -24,14 +23,9 @@ type TitlebarProps = {
   onClose?: () => void;
 };
 
-const defaultProps: TitlebarProps = {
-  appState: "stay-focused",
-  appVersion: "0.0.0",
-};
-
 export const Titlebar = ({
-  appState,
-  appVersion,
+  appState = "stay-focused",
+  appVersion = "0.0.0",
   onMinimize,
   onClose,
 }: TitlebarProps) => {
@@ -135,6 +129,4 @@ export const Titlebar = ({
   );
 };
 
-const MemoTitlebar = memo(Titlebar);
-
-export default withDefaults(MemoTitlebar, defaultProps);
+export default withMemo(Titlebar);
