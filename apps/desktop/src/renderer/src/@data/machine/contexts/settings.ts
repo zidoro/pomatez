@@ -4,8 +4,8 @@ export type SettingsProps = {
   strictMode: boolean;
   darkMode: boolean;
   progressAnimation: boolean;
-  autostartBreak: boolean;
-  autostartWork: boolean;
+  autoStartBreak: boolean;
+  autoStartWork: boolean;
   minimizeToTray: boolean;
   closeToTray: boolean;
 };
@@ -16,8 +16,8 @@ export const defaultSettings: SettingsProps = {
   strictMode: false,
   darkMode: false,
   progressAnimation: true,
-  autostartBreak: true,
-  autostartWork: true,
+  autoStartBreak: true,
+  autoStartWork: true,
   minimizeToTray: false,
   closeToTray: false,
 };
