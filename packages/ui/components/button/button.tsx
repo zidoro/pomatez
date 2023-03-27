@@ -19,13 +19,20 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof Props>;
 export type ButtonProps = Props & NativeAttrs & ButtonVariantProps;
 
 function Button(
-  { children, className, sx, ...rest }: ButtonProps,
+  {
+    appState = "stayFocused",
+    children,
+    className,
+    sx,
+    ...rest
+  }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
 ) {
   const _className = cx("pomatez-button", className);
 
   return (
     <StyledButton
+      appState={appState}
       className={_className}
       css={{
         ...sx,

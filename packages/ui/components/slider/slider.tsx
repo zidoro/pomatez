@@ -2,6 +2,7 @@ import { HStack, VStack } from "../stack";
 import { withMemo } from "../../utils";
 import { Text } from "../text";
 import {
+  SliderVariantProps,
   StyledSliderRange,
   StyledSliderRoot,
   StyledSliderThumb,
@@ -54,9 +55,10 @@ export type SliderProps = {
    * Event handler called when the value changes at the end of an interaction.
    */
   onValueCommit?(value: number): void;
-};
+} & SliderVariantProps;
 
 function Slider({
+  appState = "stayFocused",
   header,
   value,
   min = 0,
@@ -96,6 +98,7 @@ function Slider({
 
       <StyledSliderRoot
         className="pomatez-slider"
+        appState={appState}
         min={min}
         max={max}
         step={step}

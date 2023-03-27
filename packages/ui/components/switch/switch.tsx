@@ -5,6 +5,7 @@ import {
   StyledSwitchLabel,
   StyledSwitchRoot,
   StyledSwitchThumb,
+  SwitchVariantProps,
 } from "./switch.styled";
 
 export type SwitchProps = {
@@ -45,17 +46,17 @@ export type SwitchProps = {
    * Value of the switch
    */
   value?: string;
-};
+} & SwitchVariantProps;
 
 function Switch(
-  { id, label, ...rest }: SwitchProps,
+  { appState = "stayFocused", id, label, ...rest }: SwitchProps,
   ref: ForwardedRef<HTMLButtonElement>
 ) {
   return (
     <HStack justify="space-between" sx={{ width: "100%" }}>
       <StyledSwitchLabel htmlFor={id}>{label}</StyledSwitchLabel>
 
-      <StyledSwitchRoot id={id} {...rest} ref={ref}>
+      <StyledSwitchRoot appState={appState} id={id} {...rest} ref={ref}>
         <StyledSwitchThumb />
       </StyledSwitchRoot>
     </HStack>

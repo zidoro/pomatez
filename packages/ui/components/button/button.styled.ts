@@ -22,29 +22,68 @@ export const StyledButton = styled("button", {
   transition: "$button",
 
   variants: {
+    appState: {
+      stayFocused: {
+        $$color: "$colors$blue9",
+        $$colorHoverFocus: "$colors$blue10",
+        $$colorActive: "$colors$blue9",
+        $$borderColor: "$colors$blue8",
+        $$shadowColorHoverFocus: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.24
+        ),
+      },
+      shortBreak: {
+        $$color: "$colors$green9",
+        $$colorHoverFocus: "$colors$green10",
+        $$colorActive: "$colors$green9",
+        $$borderColor: "$colors$green8",
+        $$shadowColorHoverFocus: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.24
+        ),
+      },
+      longBreak: {
+        $$color: "$colors$brown9",
+        $$colorHoverFocus: "$colors$brown10",
+        $$colorActive: "$colors$brown9",
+        $$borderColor: "$colors$brown8",
+        $$shadowColorHoverFocus: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.24
+        ),
+      },
+    },
+
     variant: {
       solid: {},
 
       outline: {
-        color: "$blue9",
-        border: "1px solid $blue8",
+        color: "$$color",
+        border: "1px solid $$borderColor",
         borderRadius: "$sm",
 
         "&:hover, &:focus": {
           outline: "none",
-          color: "$blue10",
-          boxShadow: `0 0 0 0.3rem ${addColorAlpha(
-            hslToRgb(theme.colors.blue10.value),
-            0.16
-          )}`,
+          color: "$$colorHoverFocus",
+          boxShadow: "0 0 0 0.3rem $$shadowColorHoverFocus",
         },
 
         "&:active": {
-          color: "$blue10",
-          boxShadow: `0 0 0 0.4rem ${addColorAlpha(
-            hslToRgb(theme.colors.blue10.value),
-            0.24
-          )}`,
+          color: "$$colorActive",
+          boxShadow: "0 0 0 0.4rem $$shadowColorActive",
         },
       },
 
@@ -52,10 +91,10 @@ export const StyledButton = styled("button", {
 
       link: {
         "&:hover": {
-          color: "$blue10",
+          color: "$$colorHoverFocus",
         },
         "&:active": {
-          color: "$blue9",
+          color: "$$colorActive",
         },
       },
     },
@@ -76,6 +115,10 @@ export const StyledButton = styled("button", {
         width: "$full",
       },
     },
+  },
+
+  defaultVariants: {
+    appState: "stayFocused",
   },
 });
 

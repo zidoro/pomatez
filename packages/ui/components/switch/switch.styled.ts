@@ -1,6 +1,6 @@
 import * as Switch from "@radix-ui/react-switch";
 import { addColorAlpha, hslToRgb } from "../../utils/color";
-import { styled, theme } from "../../theme";
+import { styled, theme, VariantProps } from "../../theme";
 
 export const StyledSwitchLabel = styled("label", {
   width: "100%",
@@ -18,7 +18,7 @@ export const StyledSwitchThumb = styled(Switch.Thumb, {
   width: "1.6rem",
   height: "1.6rem",
   borderRadius: "$pill",
-  border: "1px solid $blue9",
+  border: "1px solid $$borderThumbColor",
   backgroundColor: "$white",
 
   transition: "all 140ms ease",
@@ -41,26 +41,70 @@ export const StyledSwitchRoot = styled(Switch.Root, {
   transition: "all 160ms ease",
 
   '&[data-state="checked"]': {
-    backgroundColor: "$blue9",
+    backgroundColor: "$$bgChecked",
   },
 
   "&:hover, &:focus": {
     [`& > ${StyledSwitchThumb}`]: {
-      borderColor: "$blue10",
-      boxShadow: `0 0 0 0.3rem ${addColorAlpha(
-        hslToRgb(theme.colors.blue10.value),
-        0.16
-      )}`,
+      borderColor: "$$borderThumbColorHoverFocusActive",
+      boxShadow: "0 0 0 0.3rem $$shadowColor",
     },
   },
 
   "&:active": {
     [`& > ${StyledSwitchThumb}`]: {
-      borderColor: "$blue10",
-      boxShadow: `0 0 0 0.4rem ${addColorAlpha(
-        hslToRgb(theme.colors.blue10.value),
-        0.24
-      )}`,
+      borderColor: "$$borderThumbColorHoverFocusActive",
+      boxShadow: "0 0 0 0.4rem $$shadowColorActive",
     },
   },
+
+  variants: {
+    appState: {
+      stayFocused: {
+        $$shadowColor: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.24
+        ),
+        $$borderThumbColor: "$colors$blue9",
+        $$borderThumbColorHoverFocusActive: "$colors$blue10",
+        $$bgChecked: "$colors$blue9",
+      },
+      shortBreak: {
+        $$shadowColor: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.24
+        ),
+        $$borderThumbColor: "$colors$green9",
+        $$borderThumbColorHoverFocusActive: "$colors$green10",
+        $$bgChecked: "$colors$green9",
+      },
+      longBreak: {
+        $$shadowColor: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.24
+        ),
+        $$borderThumbColor: "$colors$brown9",
+        $$borderThumbColorHoverFocusActive: "$colors$brown10",
+        $$bgChecked: "$colors$brown9",
+      },
+    },
+  },
+
+  defaultVariants: {
+    appState: "stayFocused",
+  },
 });
+
+export type SwitchVariantProps = VariantProps<typeof StyledSwitchRoot>;

@@ -1,8 +1,17 @@
 import { Outlet } from "react-router-dom";
+import { useActor } from "@xstate/react";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
+import { useAppMachine } from "@renderer/contexts";
+import { interpretState } from "@renderer/utils";
 import { routes } from "@renderer/route.config";
 
 export function RootLayout() {
+  const machineActor = useAppMachine();
+
+  const [state] = useActor(machineActor);
+
+  const sessionState = interpretState(state.value).session;
+
   const links = Object.values(routes).map(
     ({ icon, label, path, as }) => ({
       as,
@@ -25,8 +34,10 @@ export function RootLayout() {
         bg: "$white",
       }}
     >
-      <Titlebar />
-      <Navbar links={links} />
+      <Titlebar appState={sessionState} />
+
+      <Navbar links={links} appState={sessionState} />
+
       <Box
         as="main"
         sx={{

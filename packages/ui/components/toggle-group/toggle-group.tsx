@@ -3,6 +3,7 @@ import { withMemo } from "../../utils";
 import {
   StyledGroupItem,
   StyledToggleGroup,
+  ToggleGroupVariantProps,
 } from "./toggle-group.styled";
 
 type ToggleItemProps = {
@@ -32,17 +33,19 @@ export type ToggleGroupProps = {
    * Additional styles
    */
   sx?: SxProps;
-};
+} & ToggleGroupVariantProps;
 
 function ToggleGroup({
-  value,
-  defaultValue,
-  onValueChange,
+  appState = "stayFocused",
   items = [],
+  defaultValue,
+  value,
+  onValueChange,
   sx,
 }: ToggleGroupProps) {
   return (
     <StyledToggleGroup
+      appState={appState}
       type="single"
       value={value}
       defaultValue={defaultValue}

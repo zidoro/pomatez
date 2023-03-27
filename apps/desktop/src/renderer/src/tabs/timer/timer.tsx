@@ -4,10 +4,12 @@ import {
   Priority,
   Control,
   VStack,
-  CounterProps,
   TIMER_PROGRESS_CIRCUMFERENCE,
 } from "@pomatez/ui";
-import { slideUpAndFadeAnimation } from "@renderer/utils";
+import {
+  interpretState,
+  slideUpAndFadeAnimation,
+} from "@renderer/utils";
 import { useAppMachine } from "@renderer/contexts";
 
 export default function Timer() {
@@ -21,11 +23,7 @@ export default function Timer() {
 
   const timer = state.context.timer;
 
-  const sessionState = (
-    state.value as {
-      session: CounterProps["appState"];
-    }
-  ).session;
+  const sessionState = interpretState(state.value).session;
 
   const timeProgress =
     (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;
@@ -42,6 +40,7 @@ export default function Timer() {
       <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
       <Control
+        appState={sessionState}
         session={{
           maxRounds: config.sessionRounds,
           currentRound: session.round,

@@ -1,6 +1,6 @@
 import * as Slider from "@radix-ui/react-slider";
 import { addColorAlpha, hslToRgb } from "../../utils/color";
-import { styled, theme } from "../../theme";
+import { styled, theme, VariantProps } from "../../theme";
 
 export const StyledSliderRoot = styled(Slider.Root, {
   position: "relative",
@@ -12,6 +12,50 @@ export const StyledSliderRoot = styled(Slider.Root, {
 
   userSelect: "none",
   touchAction: "none",
+
+  variants: {
+    appState: {
+      stayFocused: {
+        $$color: "$colors$blue9",
+        $$hoverColor: "$colors$blue10",
+        $$shadowColor: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.24
+        ),
+      },
+      shortBreak: {
+        $$color: "$colors$green9",
+        $$hoverColor: "$colors$green10",
+        $$shadowColor: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.24
+        ),
+      },
+      longBreak: {
+        $$color: "$colors$brown9",
+        $$hoverColor: "$colors$brown10",
+        $$shadowColor: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.16
+        ),
+        $$shadowColorActive: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.24
+        ),
+      },
+    },
+  },
+  defaultVariants: {
+    appState: "stayFocused",
+  },
 });
 
 export const StyledSliderTrack = styled(Slider.Track, {
@@ -24,9 +68,9 @@ export const StyledSliderTrack = styled(Slider.Track, {
 
 export const StyledSliderRange = styled(Slider.Range, {
   position: "absolute",
-  bg: "$blue9",
   borderRadius: "$xl",
   height: "100%",
+  bg: "$$color",
 });
 
 export const StyledSliderThumb = styled(Slider.Thumb, {
@@ -37,24 +81,20 @@ export const StyledSliderThumb = styled(Slider.Thumb, {
   bg: "$white",
   boxShadow: "none",
   borderRadius: "$pill",
-  border: "1px solid $blue9",
+  border: "1px solid $$color",
 
   transition: "all 160ms ease",
 
   "&:hover, &:focus": {
     outline: "none",
-    borderColor: "$blue10",
-    boxShadow: `0 0 0 0.3rem ${addColorAlpha(
-      hslToRgb(theme.colors.blue10.value),
-      0.16
-    )}`,
+    borderColor: "$$hoverColor",
+    boxShadow: "0 0 0 0.3rem $$shadowColor",
   },
 
   "&:active": {
-    borderColor: "$blue10",
-    boxShadow: `0 0 0 0.4rem ${addColorAlpha(
-      hslToRgb(theme.colors.blue10.value),
-      0.24
-    )}`,
+    borderColor: "$$hoverColor",
+    boxShadow: "0 0 0 0.4rem $$shadowColorActive",
   },
 });
+
+export type SliderVariantProps = VariantProps<typeof StyledSliderRoot>;

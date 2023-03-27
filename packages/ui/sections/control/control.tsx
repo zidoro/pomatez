@@ -100,7 +100,18 @@ function Control({
             <Text>
               {session.currentRound}&nbsp;/&nbsp;{session.maxRounds}
             </Text>
-            <Button variant="link" onClick={onResetElapsed}>
+            <Button
+              variant="link"
+              sx={{
+                "&:hover": {
+                  color: "$$hoverColor",
+                },
+                "&:active": {
+                  color: "$$activeColor",
+                },
+              }}
+              onClick={onResetElapsed}
+            >
               Reset
             </Button>
           </VStack>

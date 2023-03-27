@@ -1,16 +1,20 @@
-import { useSelector } from "@xstate/react";
+import { useActor } from "@xstate/react";
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
-import { slideLeftAndFadeAnimation } from "@renderer/utils";
+import {
+  interpretState,
+  slideLeftAndFadeAnimation,
+} from "@renderer/utils";
 import { useAppMachine } from "@renderer/contexts";
 
 export default function Settings() {
   const machineActor = useAppMachine();
 
-  const settings = useSelector(
-    machineActor,
-    (state) => state.context.settings
-  );
+  const [state, send] = useActor(machineActor);
+
+  const sessionState = interpretState(state.value).session;
+
+  const settings = state.context.settings;
 
   const featureSettings: SwitchProps[] = [
     {
@@ -18,7 +22,7 @@ export default function Settings() {
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -32,7 +36,7 @@ export default function Settings() {
       label: "Fullscreen Break",
       checked: settings.fullscreenBreak,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -46,7 +50,7 @@ export default function Settings() {
       label: "Strict Mode",
       checked: settings.strictMode,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -60,7 +64,7 @@ export default function Settings() {
       label: "Dark Mode",
       checked: settings.darkMode,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -74,7 +78,7 @@ export default function Settings() {
       label: "Progress Animation",
       checked: settings.progressAnimation,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -88,7 +92,7 @@ export default function Settings() {
       label: "Autostart Break",
       checked: settings.autoStartBreak,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -102,7 +106,7 @@ export default function Settings() {
       label: "Autostart Work",
       checked: settings.autoStartWork,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -116,7 +120,7 @@ export default function Settings() {
       label: "Minimize To Tray",
       checked: settings.minimizeToTray,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -130,7 +134,7 @@ export default function Settings() {
       label: "Close To Tray",
       checked: settings.closeToTray,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -146,17 +150,30 @@ export default function Settings() {
       heading="Settings"
       action={
         <Button
+          appState={sessionState}
           variant="link"
           onClick={() => {
-            machineActor.send("settings.reset");
+            send("settings.reset");
           }}
         >
           Restore Defaults
         </Button>
       }
       animation={slideLeftAndFadeAnimation}
+      sx={{
+        px: "$4",
+        "& > .tab-header": {
+          px: "$1",
+        },
+      }}
     >
-      <SectionLayout heading="Features" spacing={0}>
+      <SectionLayout
+        heading="Features"
+        spacing={0}
+        sx={{
+          px: "$1",
+        }}
+      >
         <VStack
           sx={{
             width: "100%",
@@ -179,7 +196,11 @@ export default function Settings() {
           }}
         >
           {featureSettings.map((feature) => (
-            <Switch key={feature.id} {...feature} />
+            <Switch
+              key={feature.id}
+              appState={sessionState}
+              {...feature}
+            />
           ))}
         </VStack>
       </SectionLayout>
@@ -192,13 +213,19 @@ export default function Settings() {
           dflex: "flex-start",
           bg: "$white",
           pt: "$4",
+          px: "$1",
 
           position: "sticky",
           bottom: 0,
           left: 0,
         }}
       >
-        <Button variant="outline" size="md" fullWidth>
+        <Button
+          appState={sessionState}
+          variant="outline"
+          size="md"
+          fullWidth
+        >
           Start it on GitHub
         </Button>
       </Box>

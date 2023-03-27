@@ -1,10 +1,51 @@
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
-import { styled, theme } from "../../theme";
 import { addColorAlpha, hslToRgb } from "../../utils/color";
+import { styled, theme, VariantProps } from "../../theme";
 
 export const StyledToggleGroup = styled(ToggleGroup.Root, {
   display: "flex",
   height: "$10",
+
+  variants: {
+    appState: {
+      stayFocused: {
+        $$color: "$colors$blue9",
+        $$colorSelected: "$colors$blue11",
+        $$colorFocusActive: "$colors$blue10",
+        $$bgHover: "$colors$blue4",
+        $$borderColorFocusActive: "$colors$blue8",
+        $$shadowColorFocusActive: addColorAlpha(
+          hslToRgb(theme.colors.blue9.value),
+          0.16
+        ),
+      },
+      shortBreak: {
+        $$color: "$colors$green9",
+        $$colorSelected: "$colors$green11",
+        $$colorFocusActive: "$colors$green10",
+        $$bgHover: "$colors$green4",
+        $$borderColorFocusActive: "$colors$green8",
+        $$shadowColorFocusActive: addColorAlpha(
+          hslToRgb(theme.colors.green9.value),
+          0.16
+        ),
+      },
+      longBreak: {
+        $$color: "$colors$brown9",
+        $$colorSelected: "$colors$brown11",
+        $$colorFocusActive: "$colors$brown10",
+        $$bgHover: "$colors$brown4",
+        $$borderColorFocusActive: "$colors$brown8",
+        $$shadowColorFocusActive: addColorAlpha(
+          hslToRgb(theme.colors.brown9.value),
+          0.16
+        ),
+      },
+    },
+  },
+  defaultVariants: {
+    appState: "stayFocused",
+  },
 });
 
 export const StyledGroupItem = styled(ToggleGroup.Item, {
@@ -35,29 +76,21 @@ export const StyledGroupItem = styled(ToggleGroup.Item, {
     borderLeftColor: "transparent",
   },
 
-  "&:hover": { bg: "$blue4" },
+  "&:hover": { bg: "$$bgHover" },
 
-  "&:focus": {
+  "&:focus, &:active": {
     position: "relative",
-    borderColor: "$blue8",
-    boxShadow: `0 0 0 0.3rem ${addColorAlpha(
-      hslToRgb(theme.colors.blue10.value),
-      0.16
-    )}`,
-    color: "$blue10",
-  },
-
-  "&:active": {
-    borderColor: "$blue8",
-    boxShadow: `0 0 0 0.3rem ${addColorAlpha(
-      hslToRgb(theme.colors.blue10.value),
-      0.16
-    )}`,
-    color: "$blue10",
+    borderColor: "$$borderColorFocusActive",
+    boxShadow: "0 0 0 0.3rem $$shadowColorFocusActive",
+    color: "$$colorFocusActive",
   },
 
   "&[data-state=on]": {
     backgroundColor: "$white",
-    color: "$blue11",
+    color: "$$colorSelected",
   },
 });
+
+export type ToggleGroupVariantProps = VariantProps<
+  typeof StyledToggleGroup
+>;

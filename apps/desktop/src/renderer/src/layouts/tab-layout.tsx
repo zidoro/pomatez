@@ -27,7 +27,11 @@ export function TabLayout({
         }}
         {...rest}
       >
-        <Header heading={heading} action={action} />
+        <Header
+          className="tab-header"
+          heading={heading}
+          action={action}
+        />
 
         {children}
       </VStack>
