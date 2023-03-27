@@ -61,7 +61,7 @@
 
 - **Keyboard shortcuts** - might be helpful for you depending on your use case but currently, these keyboard shortcuts are not yet customizable.
 
-- **Auto updates** - once enabled, the app will always be on top of other apps running on your Operating System.
+- **Auto updates** - the app will automatically check for updates and download them in the background. You will be notified when the update is ready to be installed.
 
 - **Always on top** - once enabled, the app will always be on top of other apps running on your Operating System.
 
