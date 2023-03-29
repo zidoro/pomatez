@@ -1,8 +1,14 @@
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 
+export type EventChannels = "minimize-window" | "close-window";
+
 // Custom APIs for renderer
-const api = {};
+const api = {
+  send: (channel: EventChannels, ...args: any[]) => {
+    ipcRenderer.send(channel, ...args);
+  },
+};
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

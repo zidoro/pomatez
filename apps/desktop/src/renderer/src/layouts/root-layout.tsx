@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useActor } from "@xstate/react";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
-import { useAppMachine } from "@renderer/contexts";
+import { useAppMachine, useElectron } from "@renderer/contexts";
 import { interpretState } from "@renderer/utils";
 import { routes } from "@renderer/route.config";
 
@@ -10,7 +10,7 @@ export function RootLayout() {
 
   const [state] = useActor(machineActor);
 
-  const sessionState = interpretState(state.value).session;
+  const { onMinimizeWindow, onCloseWindow } = useElectron();
 
   const links = Object.values(routes).map(
     ({ icon, label, path, as }) => ({
@@ -20,6 +20,8 @@ export function RootLayout() {
       to: path,
     })
   );
+
+  const sessionState = interpretState(state.value).session;
 
   return (
     <VStack
@@ -34,7 +36,11 @@ export function RootLayout() {
         bg: "$white",
       }}
     >
-      <Titlebar appState={sessionState} />
+      <Titlebar
+        appState={sessionState}
+        onMinimize={onMinimizeWindow}
+        onClose={onCloseWindow}
+      />
 
       <Navbar links={links} appState={sessionState} />
 

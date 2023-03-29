@@ -1,14 +1,17 @@
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@pomatez/ui";
-import { AppProvider } from "./contexts";
+
+import { AppProvider, ElectronProvider } from "./contexts";
 import { router } from "./route.config";
 
 function App() {
   return (
     <AppProvider>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <ElectronProvider>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </ElectronProvider>
     </AppProvider>
   );
 }

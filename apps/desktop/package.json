@@ -40,6 +40,7 @@
     "@vitejs/plugin-react": "^3.0.1",
     "@xstate/react": "^3.2.1",
     "@xstate/cli": "^0.4.2",
+    "is-electron": "^2.2.2",
     "electron": "21.3.3",
     "electron-builder": "^23.6.0",
     "electron-vite": "^1.0.17",

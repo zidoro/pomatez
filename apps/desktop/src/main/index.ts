@@ -2,6 +2,7 @@ import { join } from "path";
 import { app, shell, BrowserWindow } from "electron";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
+import { watchAppEvents } from "./handlers";
 
 function createWindow(): void {
   // Create the browser window.
@@ -36,6 +37,10 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
   }
+
+  // This function will receives all
+  // the events from the renderer process
+  watchAppEvents(mainWindow);
 }
 
 // This method will be called when Electron has finished
