@@ -17,8 +17,6 @@ export default function Timer() {
 
   const [state, send] = useActor(machineActor);
 
-  const session = state.context.session;
-
   const config = state.context.config;
 
   const timer = state.context.timer;
@@ -43,7 +41,7 @@ export default function Timer() {
         appState={sessionState}
         session={{
           maxRounds: config.sessionRounds,
-          currentRound: session.round,
+          currentRound: timer.sessionRound,
         }}
         isRunning={state.matches("timer.running")}
         isMuted={state.matches("sound.speakerOff")}

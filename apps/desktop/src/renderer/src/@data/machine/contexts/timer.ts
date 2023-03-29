@@ -1,11 +1,18 @@
+import { minutesToSeconds } from "@renderer/utils";
+import { defaultConfig } from "./config";
+
 export type TimerProps = {
+  sessionRound: number;
+  interval: number;
   elapsed: number;
   duration: number;
-  interval: number;
 };
 
+const duration = minutesToSeconds(defaultConfig.stayFocused);
+
 export const defaultTimer: TimerProps = {
-  elapsed: 0,
-  duration: 5,
+  sessionRound: 1,
   interval: 1,
+  elapsed: 0,
+  duration,
 };

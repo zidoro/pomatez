@@ -1,5 +1,5 @@
-import { assign, createMachine } from "xstate";
-import { raise } from "xstate/lib/actions";
+import { assign, createMachine, raise } from "xstate";
+import { interpretState, minutesToSeconds } from "@renderer/utils";
 import {
   ConfigProps,
   SettingsProps,
@@ -7,19 +7,16 @@ import {
   defaultConfig,
   defaultSettings,
   defaultTimer,
-  SessionProps,
-  defaultSession,
 } from "./contexts";
 
 export const appMachine = createMachine(
   {
-    /** @xstate-layout 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 */
+    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QBGAEwBWAMykh9IQE4RQgOxKAbHLEAOMQBoQAT2GqxpJRqFi59TRIAstiWNUBfZ3rSZchEqQBOcME4GZiQQNg5uXlDBBDkhTVIROQdHWzEnIVVbPUMEIQklUlUJOLkJAvoNJTFXd3QMWEDuGlhyKhowYL5wrh48PhjVTSEiobElbXyJtJzhWVIyzVtNOWLHTSVbWpAPBqaiFr8AoKZu9l6o0BiJEVsF23pFIWX7EQlNWYQ1aUsRG2LNPQgbY5NsPKRuABbMC+DBQmFHRonEKsc6RfrRYRCCxFRxKEpA+g3SqfVTKUj0aqKYyyZSKMHoCFEaGw+G+Uh4MD8ZFnCJ9AZzESfbRSLKU8TyZaqJQiBmoJksuHMhEQACuvmQ6La1Dop1CPXRfFymyktme8S0IM0tw+AmESmepHSmmGZuKIK2bh2jLZpFQ-lQyF8BygGC6+rR-MxCDNCXoqjeqnjNjeSnougMiG0JhWlKJVis2blCoR-rAgeDNDDQhRYUjlztCAKIidizUWmeQNtuWx70SxjMagkFqExd9ZYrIbDIlrBqjV0QNqKynkWnxWTk2k+cnxFLkVlEmyBExqXvBvt8qrweCnvs4OCgUAANp09ai+Q2Yps7sPxCIHRI6Z-N2iA7vQpBLFYrzSuaspnj6yrspe163ohTJYAA1uG74XBiC55LIUgaPQtgqIogErCBCA2OBcSxpam42mOaHITeVYAFTYXWH54Y22LFK2JSZMYGgaNulikGkWi3EMIj-uozEsn6yCqo0EBKkp96Pi+XFzp+iDVKopA3A80kPEk-6fDIIIUr27xlHYqzFo0sAcPgeyuX0HJcjyEY8QKBEtoCJrKOmlhmBIVnhdIQIJjIw5kiUzlwG5eAealiKBLp9a8TEfxyNIxgrMY0rVOmVmOOBthki6ZLWComjJZ5+CkLAnDIPoABiOBYKpkDpV5nLctl-nRmkhRihMdjiOUchRfGrabviHaAUoTUZW1HXdb1akDS1Q1BDWvK4QF1UjDujj7loTgTHNmZ5A6JiVFoqhJmk+4uPB8qwDgV4QK1qBgMgGEwgA8mlP1-RCD7Pq+s45QF4iFGaZTqGRKgZrkSYtkSCbqCIYX5HBdTfb9eD-bAgPA2DBAEA0ZP-VpsMjSd0ZI5J8gSGjMoY58UrGU4cTjPkIlrV9pCQjgEBgKQ0sECpT6cBgkvS9D2lw8dhrRqIaRFNamS2HJxIKFFcQLICRIFA6cmguLKsy7gkKBlgSv22rzNvtxrP4TrJiyQbRsE8kVmkXc1ViB6+IWJscFengUtwHwHia-OjaqJ8w4jI46j2CuSwuqeJMlr4Kf6QgEefCaHOG-YyQkQ8o7i+OAZBiGpe5YuxjV9YpHyBsZrCpIRQPMtDhkssjdFxeV5sVA7cBWUJhiEC8SUhMMrB-dVR67ctwWDYGyKaWKlqfP0aWDm4dmvYNfWNuaYQSCohkhdKzE968q+mA5Nnz7dhSNmIYcR3Sb1yNvWS005LDCSuLFyqVf6NgjhBSkDhQrpB3IvKyIgEwLBqukUixQxDKHWl5TaXUep9QgAgvKCgijVGUNULmlIbBKCiobYyWQVxrmqjYEhLVYAUBwL4TgAAhfwwNqFZmsNIGQgsSJJEkHdHsEcWxczNI9fuQw+F4FIE+fAUAxFAwwpI6i2IILyDTKvOImRIr3UyGYR+wlNCvQcEsZyDMTFZCdBPM0y8lglFuBnTcEFBZJGSP+COEh3FQ0pkYsGvE9IdzyKIbxroLA9wCdke6ijCobE2PiZIaZGqwIZgDOJvhQa0xMYbQoqwbRiD+FKJInwI4-nEAmAkQJVjFKLvbExMgljGQmMoYY1hxhOAqs43BEcxT7meNaYsbs5YK04P0omQzhjDLGYZKKdhJJqANkVVcn1ekJ3IDgJ2yAXb9JKIUdMXSmHWmMLsoyO4yRZCORoT6rggA */
     id: "app",
     schema: {
       context: {} as {
         config: ConfigProps;
         settings: SettingsProps;
-        session: SessionProps;
         timer: TimerProps;
       },
 
@@ -38,12 +35,9 @@ export const appMachine = createMachine(
         | { type: "sound.toggle" }
         | { type: "mode.toggle" }
         | { type: "timer.tick" }
-        | {
-            type: "duration.change";
-            value: number;
-          }
         | { type: "timer.reset" }
         | { type: "timer.next" }
+        | { type: "timer.duration.change" }
         | { type: "session.next" }
         | { type: "session.reset" },
     },
@@ -53,7 +47,6 @@ export const appMachine = createMachine(
     context: {
       config: defaultConfig,
       settings: defaultSettings,
-      session: defaultSession,
       timer: defaultTimer,
     },
 
@@ -109,14 +102,14 @@ export const appMachine = createMachine(
           },
         },
         on: {
-          "duration.change": {
-            actions: "updateDuration",
-          },
           "timer.reset": {
             actions: "resetTimer",
           },
           "timer.next": {
             target: "timer.preparing",
+          },
+          "timer.duration.change": {
+            actions: "updateDuration",
           },
         },
       },
@@ -130,11 +123,19 @@ export const appMachine = createMachine(
                 {
                   cond: "isNotLastSession",
                   target: "shortBreak",
-                  actions: ["resetTimer", "callTimerNext"],
+                  actions: [
+                    "resetTimer",
+                    "callTimerNext",
+                    "callUpdateDuration",
+                  ],
                 },
                 {
                   target: "longBreak",
-                  actions: ["resetTimer", "callTimerNext"],
+                  actions: [
+                    "resetTimer",
+                    "callTimerNext",
+                    "callUpdateDuration",
+                  ],
                 },
               ],
             },
@@ -145,7 +146,12 @@ export const appMachine = createMachine(
         on: {
           "session.next": {
             target: "session.stayFocused",
-            actions: ["resetTimer", "incrementRound", "callTimerNext"],
+            actions: [
+              "resetTimer",
+              "incrementRound",
+              "callTimerNext",
+              "callUpdateDuration",
+            ],
           },
           "session.reset": {
             target: "session.stayFocused",
@@ -189,11 +195,11 @@ export const appMachine = createMachine(
 
     on: {
       "config.change": {
-        actions: "updateConfig",
+        actions: ["updateConfig", "callUpdateDuration"],
       },
       "config.reset": {
         cond: "isNotDefaultConfig",
-        actions: "resetConfig",
+        actions: ["resetConfig", "callUpdateDuration"],
       },
       "settings.change": {
         actions: "updateSettings",
@@ -225,7 +231,9 @@ export const appMachine = createMachine(
         return context.timer.elapsed >= context.timer.duration;
       },
       isNotLastSession: (context) => {
-        return context.session.round < context.config.sessionRounds;
+        return (
+          context.timer.sessionRound < context.config.sessionRounds
+        );
       },
       shouldAutoStartBreak: (context, _, { state }) => {
         return (
@@ -242,9 +250,17 @@ export const appMachine = createMachine(
     },
 
     actions: {
-      updateConfig: assign((_, event) => {
+      updateConfig: assign((context, event) => {
         return {
+          ...context,
           config: event.values,
+          timer: {
+            ...context.timer,
+            sessionRound:
+              context.timer.sessionRound >= context.config.sessionRounds
+                ? defaultTimer.sessionRound
+                : context.timer.sessionRound,
+          },
         };
       }),
       resetConfig: assign((context) => {
@@ -253,8 +269,9 @@ export const appMachine = createMachine(
           config: defaultConfig,
         };
       }),
-      updateSettings: assign((_, event) => {
+      updateSettings: assign((context, event) => {
         return {
+          ...context,
           settings: event.values,
         };
       }),
@@ -273,12 +290,14 @@ export const appMachine = createMachine(
           },
         };
       }),
-      updateDuration: assign((context, event) => {
+      updateDuration: assign((context, _, { state }) => {
+        const sessionState = interpretState(state?.value).session;
+
         return {
           ...context,
           timer: {
             ...context.timer,
-            duration: event.value,
+            duration: minutesToSeconds(context.config[sessionState]),
           },
         };
       }),
@@ -294,23 +313,27 @@ export const appMachine = createMachine(
       incrementRound: assign((context) => {
         return {
           ...context,
-          session: {
-            ...context.session,
-            round:
-              context.session.round < context.config.sessionRounds
-                ? context.session.round + 1
-                : 1,
+          timer: {
+            ...context.timer,
+            sessionRound:
+              context.timer.sessionRound < context.config.sessionRounds
+                ? context.timer.sessionRound + 1
+                : defaultTimer.sessionRound,
           },
         };
       }),
       resetRound: assign((context) => {
         return {
           ...context,
-          session: defaultSession,
+          timer: {
+            ...context.timer,
+            sessionRound: defaultTimer.sessionRound,
+          },
         };
       }),
-      callNextSession: raise({ type: "session.next" }),
       callTimerNext: raise({ type: "timer.next" }),
+      callNextSession: raise({ type: "session.next" }),
+      callUpdateDuration: raise({ type: "timer.duration.change" }),
     },
 
     services: {
