@@ -1,11 +1,11 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
-import { EventChannels } from ".";
+import { api } from ".";
 
 declare global {
   interface Window {
     electron: ElectronAPI;
     api: {
-      send: (channel: EventChannels, ...args: any[]) => void;
+      send: typeof api.send;
     };
   }
 }

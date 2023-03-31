@@ -1,12 +1,24 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 
-export type EventChannels = "minimize-window" | "close-window";
+type BuildEventArgs<TEvent = string, TData = never> = Parameters<
+  (event: TEvent, data?: TData) => void
+>;
+
+export type EventArgs =
+  | BuildEventArgs<"minimize-window">
+  | BuildEventArgs<"close-window">
+  | BuildEventArgs<
+      "set-always-on-top",
+      {
+        alwaysOnTop: boolean;
+      }
+    >;
 
 // Custom APIs for renderer
-const api = {
-  send: (channel: EventChannels, ...args: any[]) => {
-    ipcRenderer.send(channel, ...args);
+export const api = {
+  send: (...args: EventArgs) => {
+    ipcRenderer.send(...(args as BuildEventArgs));
   },
 };
 

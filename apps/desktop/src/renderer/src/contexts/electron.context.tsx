@@ -3,8 +3,11 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
 } from "react";
+import { useSelector } from "@xstate/react";
 import { runOnElectron } from "@renderer/utils";
+import { useAppMachine } from "./app.context";
 
 type ElectronContextProps = {
   onMinimizeWindow?: () => void;
@@ -14,6 +17,13 @@ type ElectronContextProps = {
 const ElectronContext = createContext<ElectronContextProps>({});
 
 const ElectronProvider = ({ children }: { children: ReactNode }) => {
+  const machineActor = useAppMachine();
+
+  const settings = useSelector(
+    machineActor,
+    (state) => state.context.settings
+  );
+
   const onMinimizeWindow = useCallback(() => {
     runOnElectron(() => {
       window.api.send("minimize-window");
@@ -25,6 +35,14 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
       window.api.send("close-window");
     });
   }, []);
+
+  useEffect(() => {
+    runOnElectron(() => {
+      window.api.send("set-always-on-top", {
+        alwaysOnTop: settings.alwaysOnTop,
+      });
+    });
+  }, [settings.alwaysOnTop]);
 
   return (
     <ElectronContext.Provider

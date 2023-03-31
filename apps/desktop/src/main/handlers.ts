@@ -1,9 +1,9 @@
 import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
-import { EventChannels } from "../preload";
+import { EventArgs } from "../preload";
 
 const listenOn = (
-  event: EventChannels,
-  listener: (event: IpcMainEvent, ...args: any[]) => void
+  event: EventArgs extends [infer T, ...any[]] ? T : never,
+  listener: (event: IpcMainEvent, data: EventArgs[1]) => void
 ) => ipcMain.on(event, listener);
 
 export function watchAppEvents(mainWindow: BrowserWindow) {
@@ -13,5 +13,10 @@ export function watchAppEvents(mainWindow: BrowserWindow) {
 
   listenOn("close-window", () => {
     app.quit();
+  });
+
+  listenOn("set-always-on-top", (_, data) => {
+    const { alwaysOnTop = false } = data || {};
+    mainWindow.setAlwaysOnTop(alwaysOnTop);
   });
 }
