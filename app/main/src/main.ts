@@ -55,10 +55,9 @@ const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
 
 const onlySingleInstance = app.requestSingleInstanceLock();
 
-const applicationMenu = Menu.buildFromTemplate([
-  { role: isMac ? "appMenu" : "fileMenu" },
-  { role: "editMenu" },
-]);
+const applicationMenu = isMac
+  ? Menu.buildFromTemplate([{ role: "appMenu" }, { role: "editMenu" }])
+  : null;
 Menu.setApplicationMenu(applicationMenu);
 
 const getFrameHeight = () => {
