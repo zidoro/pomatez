@@ -55,6 +55,12 @@ const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
 
 const onlySingleInstance = app.requestSingleInstanceLock();
 
+const applicationMenu = Menu.buildFromTemplate([
+  { role: isMac ? "appMenu" : "fileMenu" },
+  { role: "editMenu" },
+]);
+Menu.setApplicationMenu(applicationMenu);
+
 const getFrameHeight = () => {
   if (isWindow()) {
     return 502;
@@ -203,14 +209,8 @@ function createMainWindow() {
     win = null;
   });
 
-  Menu.setApplicationMenu(applicationMenu);
   createContextMenu(win);
 }
-
-const applicationMenu = Menu.buildFromTemplate([
-  { role: isMac ? "appMenu" : "fileMenu" },
-  { role: "editMenu" },
-]);
 
 const trayTooltip = "Just click to restore.";
 
