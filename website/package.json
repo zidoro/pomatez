@@ -24,7 +24,7 @@
     "gatsby-plugin-image": "^3.4.0",
     "gatsby-plugin-manifest": "^5.4.0",
     "gatsby-plugin-react-svg": "^3.3.0",
-    "gatsby-plugin-sharp": "^5.4.0",
+    "gatsby-plugin-sharp": "^5.8.1",
     "gatsby-plugin-sitemap": "^6.4.0",
     "gatsby-plugin-styled-components": "^6.4.0",
     "gatsby-source-filesystem": "^5.4.0",
