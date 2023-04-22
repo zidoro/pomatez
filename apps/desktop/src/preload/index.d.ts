@@ -1,11 +1,9 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
-import { api } from ".";
+import { api } from "./api";
 
 declare global {
   interface Window {
     electron: ElectronAPI;
-    api: {
-      send: typeof api.send;
-    };
+    api: typeof api;
   }
 }

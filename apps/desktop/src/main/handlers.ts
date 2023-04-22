@@ -1,9 +1,18 @@
 import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
-import { EventArgs } from "../preload";
+import { SendArgs } from "../preload/api";
+
+type UnionToIntersection<U> = (
+  U extends any ? (k: U) => void : never
+) extends (k: infer I) => void
+  ? I
+  : never;
 
 const listenOn = (
-  event: EventArgs extends [infer T, ...any[]] ? T : never,
-  listener: (event: IpcMainEvent, data: EventArgs[1]) => void
+  event: SendArgs extends [infer T, ...any[]] ? T : never,
+  listener: (
+    event: IpcMainEvent,
+    payload: UnionToIntersection<SendArgs[1] & {}>
+  ) => void
 ) => ipcMain.on(event, listener);
 
 export function watchAppEvents(mainWindow: BrowserWindow) {
@@ -15,8 +24,7 @@ export function watchAppEvents(mainWindow: BrowserWindow) {
     app.quit();
   });
 
-  listenOn("set-always-on-top", (_, data) => {
-    const { alwaysOnTop = false } = data || {};
+  listenOn("set-always-on-top", (_, { alwaysOnTop = false }) => {
     mainWindow.setAlwaysOnTop(alwaysOnTop);
   });
 }
