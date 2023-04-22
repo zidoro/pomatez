@@ -15,16 +15,51 @@ const listenOn = (
   ) => void
 ) => ipcMain.on(event, listener);
 
-export function watchAppEvents(mainWindow: BrowserWindow) {
-  listenOn("minimize-window", () => {
-    mainWindow.minimize();
-  });
+export function watchWindowEvents(win: BrowserWindow) {
+  listenOn("minimize-window", () => win.minimize());
 
-  listenOn("close-window", () => {
-    app.quit();
-  });
+  listenOn("close-window", () => app.quit());
 
-  listenOn("set-always-on-top", (_, { alwaysOnTop = false }) => {
-    mainWindow.setAlwaysOnTop(alwaysOnTop);
-  });
+  listenOn(
+    "set-always-on-top",
+    (_, { alwaysOnTop, fullscreenBreak }) => {
+      console.log("fullscreen", fullscreenBreak);
+      win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+    }
+  );
+
+  listenOn(
+    "set-fullscreen-break",
+    (_, { fullscreenBreak, alwaysOnTop }) => {
+      win.setVisibleOnAllWorkspaces(fullscreenBreak);
+      win.setSimpleFullScreen(fullscreenBreak);
+      win.setFullScreen(fullscreenBreak);
+      if (fullscreenBreak) {
+        win.setAlwaysOnTop(fullscreenBreak, "screen-saver");
+      } else {
+        win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+      }
+
+      // const displays = screen.getAllDisplays();
+      // const externalDisplay = displays.find((display) => {
+      //   return display.bounds.x !== 0 || display.bounds.y !== 0;
+      // });
+
+      // let otherWindow: BrowserWindow | undefined;
+
+      // if (fullscreenBreak) {
+      //   if (externalDisplay) {
+      //     otherWindow = new BrowserWindow({
+      //       x: externalDisplay.bounds.x + 50,
+      //       y: externalDisplay.bounds.y + 50,
+      //       simpleFullscreen: true,
+      //       fullscreen: true,
+      //     });
+      //   }
+      // } else {
+      //   otherWindow?.setFullScreen(false);
+      //   otherWindow?.setSimpleFullScreen(false);
+      // }
+    }
+  );
 }

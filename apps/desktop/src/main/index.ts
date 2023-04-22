@@ -1,10 +1,17 @@
 import { join } from "path";
-import { app, shell, BrowserWindow } from "electron";
+import {
+  app,
+  shell,
+  BrowserWindow,
+  BrowserWindowConstructorOptions,
+} from "electron";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { watchAppEvents } from "./handlers";
+import { watchWindowEvents } from "./handlers";
 
-function createWindow(): void {
+function createWindow(
+  args?: Pick<BrowserWindowConstructorOptions, "x" | "y">
+): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 340,
@@ -13,11 +20,13 @@ function createWindow(): void {
     frame: false,
     resizable: false,
     autoHideMenuBar: true,
+    simpleFullscreen: true,
     ...(process.platform === "linux" ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
       sandbox: false,
     },
+    ...args,
   });
 
   mainWindow.on("ready-to-show", () => {
@@ -37,9 +46,9 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
   }
 
-  // This function will receives all
-  // the events from the renderer process
-  watchAppEvents(mainWindow);
+  // This will watch all events of
+  // the main window from the renderer process.
+  watchWindowEvents(mainWindow);
 }
 
 // This method will be called when Electron has finished
@@ -73,6 +82,3 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.

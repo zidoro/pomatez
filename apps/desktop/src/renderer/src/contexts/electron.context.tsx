@@ -44,6 +44,15 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
     });
   }, [settings.alwaysOnTop]);
 
+  useEffect(() => {
+    runOnElectron(() => {
+      window.api.send("set-fullscreen-break", {
+        fullscreenBreak: settings.fullscreenBreak,
+        alwaysOnTop: settings.alwaysOnTop,
+      });
+    });
+  }, [settings.alwaysOnTop, settings.fullscreenBreak]);
+
   return (
     <ElectronContext.Provider
       value={{ onMinimizeWindow, onCloseWindow }}
