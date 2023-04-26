@@ -1,5 +1,12 @@
-import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  IpcMainEvent,
+  screen,
+} from "electron";
 import { SendArgs } from "../preload/api";
+import { createBlockerWindow } from "./windows";
 
 type UnionToIntersection<U> = (
   U extends any ? (k: U) => void : never
@@ -15,51 +22,46 @@ const listenOn = (
   ) => void
 ) => ipcMain.on(event, listener);
 
-export function watchWindowEvents(win: BrowserWindow) {
-  listenOn("minimize-window", () => win.minimize());
+let blockerWindow: BrowserWindow | null | undefined;
 
-  listenOn("close-window", () => app.quit());
+export function watchWindowEvents(mainWindow: BrowserWindow) {
+  listenOn("minimize-window", () => mainWindow.minimize());
 
-  listenOn(
-    "set-always-on-top",
-    (_, { alwaysOnTop, fullscreenBreak }) => {
-      console.log("fullscreen", fullscreenBreak);
-      win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-    }
-  );
+  listenOn("close-window", () => app.exit());
+
+  listenOn("set-always-on-top", (_, { alwaysOnTop = false }) => {
+    mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+  });
 
   listenOn(
     "set-fullscreen-break",
-    (_, { fullscreenBreak, alwaysOnTop }) => {
-      win.setVisibleOnAllWorkspaces(fullscreenBreak);
-      win.setSimpleFullScreen(fullscreenBreak);
-      win.setFullScreen(fullscreenBreak);
+    (_, { fullscreenBreak = false, alwaysOnTop = false }) => {
+      mainWindow.setVisibleOnAllWorkspaces(fullscreenBreak);
+      mainWindow.setSimpleFullScreen(fullscreenBreak);
+      mainWindow.setFullScreen(fullscreenBreak);
+
       if (fullscreenBreak) {
-        win.setAlwaysOnTop(fullscreenBreak, "screen-saver");
+        mainWindow.setAlwaysOnTop(fullscreenBreak, "screen-saver");
       } else {
-        win.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+        mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
       }
 
-      // const displays = screen.getAllDisplays();
-      // const externalDisplay = displays.find((display) => {
-      //   return display.bounds.x !== 0 || display.bounds.y !== 0;
-      // });
+      const displays = screen.getAllDisplays();
+      const otherDisplay = displays.find((display) => {
+        return display.bounds.x !== 0 || display.bounds.y !== 0;
+      });
 
-      // let otherWindow: BrowserWindow | undefined;
-
-      // if (fullscreenBreak) {
-      //   if (externalDisplay) {
-      //     otherWindow = new BrowserWindow({
-      //       x: externalDisplay.bounds.x + 50,
-      //       y: externalDisplay.bounds.y + 50,
-      //       simpleFullscreen: true,
-      //       fullscreen: true,
-      //     });
-      //   }
-      // } else {
-      //   otherWindow?.setFullScreen(false);
-      //   otherWindow?.setSimpleFullScreen(false);
-      // }
+      if (fullscreenBreak) {
+        if (otherDisplay && !blockerWindow) {
+          blockerWindow = createBlockerWindow({
+            bounds: otherDisplay.bounds,
+          });
+        } else {
+          blockerWindow?.show();
+        }
+      } else {
+        blockerWindow?.hide();
+      }
     }
   );
 }
