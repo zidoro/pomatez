@@ -1,20 +1,12 @@
-import { useActor } from "@xstate/react";
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
+import { useAppMachine, useSyncData } from "@renderer/contexts";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
-import {
-  interpretState,
-  slideLeftAndFadeAnimation,
-} from "@renderer/utils";
-import { useAppMachine } from "@renderer/contexts";
+import { slideLeftAndFadeAnimation } from "@renderer/utils";
 
 export default function Settings() {
   const machineActor = useAppMachine();
 
-  const [state, send] = useActor(machineActor);
-
-  const sessionState = interpretState(state.value).session;
-
-  const settings = state.context.settings;
+  const { settings, timer } = useSyncData();
 
   const featureSettings: SwitchProps[] = [
     {
@@ -22,7 +14,7 @@ export default function Settings() {
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -36,7 +28,7 @@ export default function Settings() {
       label: "Fullscreen Break",
       checked: settings.fullscreenBreak,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -50,7 +42,7 @@ export default function Settings() {
       label: "Strict Mode",
       checked: settings.strictMode,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -64,7 +56,7 @@ export default function Settings() {
       label: "Dark Mode",
       checked: settings.darkMode,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -78,7 +70,7 @@ export default function Settings() {
       label: "Progress Animation",
       checked: settings.progressAnimation,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -92,7 +84,7 @@ export default function Settings() {
       label: "Autostart Break",
       checked: settings.autoStartBreak,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -106,7 +98,7 @@ export default function Settings() {
       label: "Autostart Work",
       checked: settings.autoStartWork,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -120,7 +112,7 @@ export default function Settings() {
       label: "Minimize To Tray",
       checked: settings.minimizeToTray,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -134,7 +126,7 @@ export default function Settings() {
       label: "Close To Tray",
       checked: settings.closeToTray,
       onCheckedChange: (checked) => {
-        send({
+        machineActor.send({
           type: "settings.change",
           values: {
             ...settings,
@@ -150,10 +142,10 @@ export default function Settings() {
       heading="Settings"
       action={
         <Button
-          appState={sessionState}
+          appState={timer.sessionType}
           variant="link"
           onClick={() => {
-            send("settings.reset");
+            machineActor.send("settings.reset");
           }}
         >
           Restore Defaults
@@ -198,7 +190,7 @@ export default function Settings() {
           {featureSettings.map((feature) => (
             <Switch
               key={feature.id}
-              appState={sessionState}
+              appState={timer.sessionType}
               {...feature}
             />
           ))}
@@ -221,7 +213,7 @@ export default function Settings() {
         }}
       >
         <Button
-          appState={sessionState}
+          appState={timer.sessionType}
           variant="outline"
           size="md"
           fullWidth

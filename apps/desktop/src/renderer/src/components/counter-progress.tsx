@@ -1,16 +1,8 @@
-import { useSelector } from "@xstate/react";
 import { Counter, TIMER_PROGRESS_CIRCUMFERENCE } from "@pomatez/ui";
-import { useAppMachine } from "@renderer/contexts";
-import { interpretState } from "@renderer/utils";
+import { useSyncData } from "@renderer/contexts";
 
 export function CounterProgress() {
-  const machineActor = useAppMachine();
-
-  const state = useSelector(machineActor, (state) => state);
-
-  const sessionState = interpretState(state.value).session;
-
-  const timer = state.context.timer;
+  const { timer } = useSyncData();
 
   const timeProgress =
     (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;
@@ -18,7 +10,7 @@ export function CounterProgress() {
 
   return (
     <Counter
-      appState={sessionState}
+      appState={timer.sessionType}
       timeProgress={timeProgress}
       timeRemaining={timeRemaining}
     />

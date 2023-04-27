@@ -13,6 +13,7 @@ export function useLocalStorage<ValueType>(
 
   useEffect(() => {
     if (value) {
+      setStorageValue(value);
       localStorage.setItem(key, JSON.stringify(value));
     }
   }, [key, value]);
@@ -33,7 +34,7 @@ export function useLocalStorage<ValueType>(
     return () => {
       window.removeEventListener("storage", listener);
     };
-  }, [key, defaultValue]);
+  }, [key, value]);
 
   const removeValue = () => {
     localStorage.removeItem(key);

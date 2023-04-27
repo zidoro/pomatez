@@ -1,10 +1,7 @@
 import { useActor } from "@xstate/react";
 import { Priority, Control, VStack } from "@pomatez/ui";
-import {
-  interpretState,
-  slideUpAndFadeAnimation,
-} from "@renderer/utils";
-import { useAppMachine } from "@renderer/contexts";
+import { slideUpAndFadeAnimation } from "@renderer/utils";
+import { useAppMachine, useSyncData } from "@renderer/contexts";
 import { CounterProgress } from "@renderer/components";
 
 export default function Timer() {
@@ -12,11 +9,7 @@ export default function Timer() {
 
   const [state, send] = useActor(machineActor);
 
-  const sessionState = interpretState(state.value).session;
-
-  const config = state.context.config;
-
-  const timer = state.context.timer;
+  const { config, timer } = useSyncData();
 
   return (
     <VStack sx={slideUpAndFadeAnimation}>
@@ -25,14 +18,14 @@ export default function Timer() {
       <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
       <Control
-        appState={sessionState}
+        appState={timer.sessionType}
         session={{
           maxRounds: config.sessionRounds,
           currentRound: timer.sessionRound,
         }}
-        isRunning={state.matches("timer.running")}
-        isMuted={state.matches("sound.speakerOff")}
-        isCompact={state.matches("mode.compact")}
+        isRunning={state.matches("timer.running")} // TODO: Sync this states
+        isMuted={state.matches("sound.speakerOff")} // TODO: Sync this states
+        isCompact={state.matches("mode.compact")} // TODO: Sync this states
         onPlayPause={() => {
           send("timer.toggle");
         }}

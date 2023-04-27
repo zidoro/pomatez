@@ -1,4 +1,3 @@
-import { useActor } from "@xstate/react";
 import {
   Button,
   Slider,
@@ -8,22 +7,15 @@ import {
   SliderProps,
   capitalize,
 } from "@pomatez/ui";
-import {
-  interpretState,
-  slideRightAndFadeAnimation,
-} from "@renderer/utils";
+import { slideRightAndFadeAnimation } from "@renderer/utils";
+import { useAppMachine, useSyncData } from "@renderer/contexts";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { configPresets } from "@renderer/@data/machine";
-import { useAppMachine } from "@renderer/contexts";
 
 export default function Config() {
   const machineActor = useAppMachine();
 
-  const [state, send] = useActor(machineActor);
-
-  const sessionState = interpretState(state.value).session;
-
-  const config = state.context.config;
+  const { config, timer } = useSyncData();
 
   const sliderItems: SliderProps[] = [
     {
@@ -35,7 +27,7 @@ export default function Config() {
       max: 90,
       value: config.stayFocused,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, stayFocused: value },
         });
@@ -50,7 +42,7 @@ export default function Config() {
       max: 60,
       value: config.shortBreak,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, shortBreak: value },
         });
@@ -65,7 +57,7 @@ export default function Config() {
       max: 60,
       value: config.longBreak,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, longBreak: value },
         });
@@ -80,7 +72,7 @@ export default function Config() {
       max: 8,
       value: config.sessionRounds,
       onValueChange: (value) => {
-        send({
+        machineActor.send({
           type: "config.change",
           values: { ...config, sessionRounds: value },
         });
@@ -98,10 +90,10 @@ export default function Config() {
       heading="Rules"
       action={
         <Button
-          appState={sessionState}
+          appState={timer.sessionType}
           variant="link"
           onClick={() => {
-            send("config.reset");
+            machineActor.send("config.reset");
           }}
         >
           Restore Defaults
@@ -111,16 +103,16 @@ export default function Config() {
     >
       <VStack spacing="$3" sx={{ width: "100%" }}>
         {sliderItems.map((item, index) => (
-          <Slider key={index} appState={sessionState} {...item} />
+          <Slider key={index} appState={timer.sessionType} {...item} />
         ))}
       </VStack>
 
       <SectionLayout heading="Presets">
         <ToggleGroup
-          appState={sessionState}
+          appState={timer.sessionType}
           value={JSON.stringify(config)}
           onValueChange={(value) => {
-            send({
+            machineActor.send({
               type: "config.change",
               values: JSON.parse(value),
             });

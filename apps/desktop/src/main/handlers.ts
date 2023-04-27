@@ -6,8 +6,8 @@ import {
   screen,
 } from "electron";
 import { SendArgs } from "../preload/api";
-import { createBlockerWindow } from "./windows";
 import { MAIN_WINDOW } from "./constants";
+import { createMainWindow } from "./windows";
 
 type UnionToIntersection<U> = (
   U extends any ? (k: U) => void : never
@@ -72,9 +72,34 @@ export function watchWindowEvents(mainWindow: BrowserWindow) {
           );
 
           if (otherDisplay && !blockerWindow) {
-            blockerWindow = createBlockerWindow({
+            blockerWindow = createMainWindow({
               bounds: otherDisplay.bounds,
+              show: true,
             });
+
+            const blockerWindowPositionX =
+              otherDisplay.bounds.x +
+              otherDisplay.bounds.width / 2 -
+              MAIN_WINDOW.WIDTH / 2;
+            const blockerWindowPositionY =
+              otherDisplay.bounds.y +
+              otherDisplay.bounds.height / 2 -
+              MAIN_WINDOW.HEIGHT / 2;
+
+            blockerWindow.setPosition(
+              blockerWindowPositionX,
+              blockerWindowPositionY
+            );
+            blockerWindow.setSize(
+              MAIN_WINDOW.WIDTH,
+              MAIN_WINDOW.HEIGHT
+            );
+
+            blockerWindow.setVisibleOnAllWorkspaces(
+              shouldFullScreenBreak
+            );
+            blockerWindow.setSimpleFullScreen(shouldFullScreenBreak);
+            blockerWindow.setFullScreen(shouldFullScreenBreak);
           } else {
             blockerWindow?.show();
           }

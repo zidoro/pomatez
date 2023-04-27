@@ -5,9 +5,8 @@ import {
   useContext,
   useEffect,
 } from "react";
-import { useSelector } from "@xstate/react";
 import { runOnElectron } from "@renderer/utils";
-import { useAppMachine } from "./app.context";
+import { useSyncData } from "./sync-data.context";
 
 type ElectronContextProps = {
   onMinimizeWindow?: () => void;
@@ -17,17 +16,7 @@ type ElectronContextProps = {
 const ElectronContext = createContext<ElectronContextProps>({});
 
 const ElectronProvider = ({ children }: { children: ReactNode }) => {
-  const machineActor = useAppMachine();
-
-  const settings = useSelector(
-    machineActor,
-    (state) => state.context.settings
-  );
-
-  const timer = useSelector(
-    machineActor,
-    (state) => state.context.timer
-  );
+  const { settings, timer } = useSyncData();
 
   const onMinimizeWindow = useCallback(() => {
     runOnElectron(() => {

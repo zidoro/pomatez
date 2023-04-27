@@ -9,6 +9,8 @@ import {
   defaultTimer,
 } from "./contexts";
 
+export const SYNC_DATA_STORAGE_NAME = "sync-data";
+
 export const appMachine = createMachine(
   {
     /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QBGAEwBWAMykh9IQE4RQgOxKAbHLEAOMQBoQAT2GqxpJRqFi59TRIAstiWNUBfZ3rSZchEqQBOcME4GZiQQNg5uXlDBBDkhTVIROQdHWzEnIVVbPUMEIQklUlUJOLkJAvoNJTFXd3QMWEDuGlhyKhowYL5wrh48PhjVTSEiobElbXyJtJzhWVIyzVtNOWLHTSVbWpAPBqaiFr8AoKZu9l6o0BiJEVsF23pFIWX7EQlNWYQ1aUsRG2LNPQgbY5NsPKRuABbMC+DBQmFHRonEKsc6RfrRYRCCxFRxKEpA+g3SqfVTKUj0aqKYyyZSKMHoCFEaGw+G+Uh4MD8ZFnCJ9AZzESfbRSLKU8TyZaqJQiBmoJksuHMhEQACuvmQ6La1Dop1CPXRfFymyktme8S0IM0tw+AmESmepHSmmGZuKIK2bh2jLZpFQ-lQyF8BygGC6+rR-MxCDNCXoqjeqnjNjeSnougMiG0JhWlKJVis2blCoR-rAgeDNDDQhRYUjlztCAKIidizUWmeQNtuWx70SxjMagkFqExd9ZYrIbDIlrBqjV0QNqKynkWnxWTk2k+cnxFLkVlEmyBExqXvBvt8qrweCnvs4OCgUAANp09ai+Q2Yps7sPxCIHRI6Z-N2iA7vQpBLFYrzSuaspnj6yrspe163ohTJYAA1uG74XBiC55LIUgaPQtgqIogErCBCA2OBcSxpam42mOaHITeVYAFTYXWH54Y22LFK2JSZMYGgaNulikGkWi3EMIj-uozEsn6yCqo0EBKkp96Pi+XFzp+iDVKopA3A80kPEk-6fDIIIUr27xlHYqzFo0sAcPgeyuX0HJcjyEY8QKBEtoCJrKOmlhmBIVnhdIQIJjIw5kiUzlwG5eAealiKBLp9a8TEfxyNIxgrMY0rVOmVmOOBthki6ZLWComjJZ5+CkLAnDIPoABiOBYKpkDpV5nLctl-nRmkhRihMdjiOUchRfGrabviHaAUoTUZW1HXdb1akDS1Q1BDWvK4QF1UjDujj7loTgTHNmZ5A6JiVFoqhJmk+4uPB8qwDgV4QK1qBgMgGEwgA8mlP1-RCD7Pq+s45QF4iFGaZTqGRKgZrkSYtkSCbqCIYX5HBdTfb9eD-bAgPA2DBAEA0ZP-VpsMjSd0ZI5J8gSGjMoY58UrGU4cTjPkIlrV9pCQjgEBgKQ0sECpT6cBgkvS9D2lw8dhrRqIaRFNamS2HJxIKFFcQLICRIFA6cmguLKsy7gkKBlgSv22rzNvtxrP4TrJiyQbRsE8kVmkXc1ViB6+IWJscFengUtwHwHia-OjaqJ8w4jI46j2CuSwuqeJMlr4Kf6QgEefCaHOG-YyQkQ8o7i+OAZBiGpe5YuxjV9YpHyBsZrCpIRQPMtDhkssjdFxeV5sVA7cBWUJhiEC8SUhMMrB-dVR67ctwWDYGyKaWKlqfP0aWDm4dmvYNfWNuaYQSCohkhdKzE968q+mA5Nnz7dhSNmIYcR3Sb1yNvWS005LDCSuLFyqVf6NgjhBSkDhQrpB3IvKyIgEwLBqukUixQxDKHWl5TaXUep9QgAgvKCgijVGUNULmlIbBKCiobYyWQVxrmqjYEhLVYAUBwL4TgAAhfwwNqFZmsNIGQgsSJJEkHdHsEcWxczNI9fuQw+F4FIE+fAUAxFAwwpI6i2IILyDTKvOImRIr3UyGYR+wlNCvQcEsZyDMTFZCdBPM0y8lglFuBnTcEFBZJGSP+COEh3FQ0pkYsGvE9IdzyKIbxroLA9wCdke6ijCobE2PiZIaZGqwIZgDOJvhQa0xMYbQoqwbRiD+FKJInwI4-nEAmAkQJVjFKLvbExMgljGQmMoYY1hxhOAqs43BEcxT7meNaYsbs5YK04P0omQzhjDLGYZKKdhJJqANkVVcn1ekJ3IDgJ2yAXb9JKIUdMXSmHWmMLsoyO4yRZCORoT6rggA */
@@ -44,7 +46,9 @@ export const appMachine = createMachine(
 
     tsTypes: {} as import("./app.typegen").Typegen0,
 
-    context: {
+    context: JSON.parse(
+      localStorage.getItem(SYNC_DATA_STORAGE_NAME) as any
+    ) || {
       config: defaultConfig,
       settings: defaultSettings,
       timer: defaultTimer,
@@ -311,6 +315,7 @@ export const appMachine = createMachine(
           timer: {
             ...context.timer,
             duration: minutesToSeconds(context.config[sessionState]),
+            sessionType: sessionState,
           },
         };
       }),

@@ -1,11 +1,23 @@
 import { join } from "path";
 import { is } from "@electron-toolkit/utils";
-import { shell, BrowserWindow } from "electron";
+import {
+  shell,
+  BrowserWindow,
+  BrowserWindowConstructorOptions,
+} from "electron";
 import icon from "../../../resources/icon.png?asset";
-import { watchWindowEvents } from "../handlers";
 import { MAIN_WINDOW } from "../constants";
 
-export function createMainWindow() {
+export function createMainWindow(
+  args?: {
+    bounds: {
+      x: number;
+      y: number;
+    };
+  } & BrowserWindowConstructorOptions
+) {
+  const { bounds, ...otherArgs } = args || {};
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: MAIN_WINDOW.WIDTH,
@@ -20,11 +32,16 @@ export function createMainWindow() {
       preload: join(__dirname, "../preload/index.js"),
       sandbox: false,
     },
+    x: bounds?.x,
+    y: bounds?.y,
+    ...otherArgs,
   });
 
   mainWindow.on("ready-to-show", () => {
     mainWindow.show();
   });
+
+  mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url);
@@ -39,7 +56,5 @@ export function createMainWindow() {
     mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
   }
 
-  // This will watch all events of
-  // the main window from the renderer process.
-  watchWindowEvents(mainWindow);
+  return mainWindow;
 }

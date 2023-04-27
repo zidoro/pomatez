@@ -7,6 +7,7 @@ export type TimerProps = {
   elapsed: number;
   duration: number;
   shouldFullScreenBreak: boolean;
+  sessionType: "stayFocused" | "shortBreak" | "longBreak";
 };
 
 const duration = minutesToSeconds(defaultConfig.stayFocused);
@@ -17,4 +18,5 @@ export const defaultTimer: TimerProps = {
   elapsed: 0,
   duration,
   shouldFullScreenBreak: false,
+  sessionType: "stayFocused",
 };

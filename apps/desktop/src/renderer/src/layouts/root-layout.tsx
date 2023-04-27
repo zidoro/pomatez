@@ -1,15 +1,11 @@
 import { Outlet } from "react-router-dom";
-import { useSelector } from "@xstate/react";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
-import { useAppMachine, useElectron } from "@renderer/contexts";
+import { useElectron, useSyncData } from "@renderer/contexts";
 import { CounterProgress } from "@renderer/components";
-import { interpretState } from "@renderer/utils";
 import { routes } from "@renderer/route.config";
 
 export function RootLayout() {
-  const machineActor = useAppMachine();
-
-  const state = useSelector(machineActor, (state) => state);
+  const { timer } = useSyncData();
 
   const { onMinimizeWindow, onCloseWindow } = useElectron();
 
@@ -22,9 +18,7 @@ export function RootLayout() {
     })
   );
 
-  const sessionState = interpretState(state.value).session;
-
-  if (state.context.timer.shouldFullScreenBreak) {
+  if (timer.shouldFullScreenBreak) {
     return <CounterProgress />;
   }
 
@@ -42,12 +36,12 @@ export function RootLayout() {
       }}
     >
       <Titlebar
-        appState={sessionState}
+        appState={timer.sessionType}
         onMinimize={onMinimizeWindow}
         onClose={onCloseWindow}
       />
 
-      <Navbar links={links} appState={sessionState} />
+      <Navbar links={links} appState={timer.sessionType} />
 
       <Box
         as="main"
