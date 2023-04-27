@@ -127,6 +127,7 @@ export const appMachine = createMachine(
                     "resetTimer",
                     "callTimerNext",
                     "callUpdateDuration",
+                    "setFullScreenBreak",
                   ],
                 },
                 {
@@ -135,6 +136,7 @@ export const appMachine = createMachine(
                     "resetTimer",
                     "callTimerNext",
                     "callUpdateDuration",
+                    "setFullScreenBreak",
                   ],
                 },
               ],
@@ -151,6 +153,7 @@ export const appMachine = createMachine(
               "incrementRound",
               "callTimerNext",
               "callUpdateDuration",
+              "setFullScreenBreak",
             ],
           },
           "session.reset": {
@@ -269,10 +272,20 @@ export const appMachine = createMachine(
           config: defaultConfig,
         };
       }),
-      updateSettings: assign((context, event) => {
+      updateSettings: assign((context, event, { state }) => {
+        const sessionState = interpretState(state?.value).session;
+
+        const shouldFullscreen =
+          sessionState !== "stayFocused" &&
+          event.values.fullscreenBreak;
+
         return {
           ...context,
           settings: event.values,
+          timer: {
+            ...context.timer,
+            shouldFullScreenBreak: shouldFullscreen,
+          },
         };
       }),
       resetSettings: assign((context) => {
@@ -298,6 +311,21 @@ export const appMachine = createMachine(
           timer: {
             ...context.timer,
             duration: minutesToSeconds(context.config[sessionState]),
+          },
+        };
+      }),
+      setFullScreenBreak: assign((context, _, { state }) => {
+        const sessionState = interpretState(state?.value).session;
+
+        const shouldFullscreen =
+          sessionState === "stayFocused" &&
+          context.settings.fullscreenBreak;
+
+        return {
+          ...context,
+          timer: {
+            ...context.timer,
+            shouldFullScreenBreak: shouldFullscreen,
           },
         };
       }),

@@ -12,7 +12,7 @@ export type SettingsProps = {
 
 export const defaultSettings: SettingsProps = {
   alwaysOnTop: false,
-  fullscreenBreak: false,
+  fullscreenBreak: true,
   strictMode: false,
   darkMode: false,
   progressAnimation: true,

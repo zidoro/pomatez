@@ -24,6 +24,11 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
     (state) => state.context.settings
   );
 
+  const timer = useSelector(
+    machineActor,
+    (state) => state.context.timer
+  );
+
   const onMinimizeWindow = useCallback(() => {
     runOnElectron(() => {
       window.api.send("minimize-window");
@@ -47,11 +52,11 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     runOnElectron(() => {
       window.api.send("set-fullscreen-break", {
-        fullscreenBreak: settings.fullscreenBreak,
+        shouldFullScreenBreak: timer.shouldFullScreenBreak,
         alwaysOnTop: settings.alwaysOnTop,
       });
     });
-  }, [settings.alwaysOnTop, settings.fullscreenBreak]);
+  }, [settings.alwaysOnTop, timer.shouldFullScreenBreak]);
 
   return (
     <ElectronContext.Provider

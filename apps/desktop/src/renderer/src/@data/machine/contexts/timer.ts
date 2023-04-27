@@ -6,6 +6,7 @@ export type TimerProps = {
   interval: number;
   elapsed: number;
   duration: number;
+  shouldFullScreenBreak: boolean;
 };
 
 const duration = minutesToSeconds(defaultConfig.stayFocused);
@@ -15,4 +16,5 @@ export const defaultTimer: TimerProps = {
   interval: 1,
   elapsed: 0,
   duration,
+  shouldFullScreenBreak: false,
 };

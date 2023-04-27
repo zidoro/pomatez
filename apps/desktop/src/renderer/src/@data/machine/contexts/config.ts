@@ -29,4 +29,9 @@ export const configPresets: Record<
   },
 };
 
-export const defaultConfig = configPresets.standard;
+export const defaultConfig = {
+  stayFocused: 0.25,
+  shortBreak: 0.25,
+  longBreak: 0.5,
+  sessionRounds: 2,
+};

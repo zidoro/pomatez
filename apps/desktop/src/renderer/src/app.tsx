@@ -1,6 +1,5 @@
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@pomatez/ui";
-
 import { AppProvider, ElectronProvider } from "./contexts";
 import { router } from "./route.config";
 

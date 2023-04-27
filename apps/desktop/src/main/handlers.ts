@@ -7,6 +7,7 @@ import {
 } from "electron";
 import { SendArgs } from "../preload/api";
 import { createBlockerWindow } from "./windows";
+import { MAIN_WINDOW } from "./constants";
 
 type UnionToIntersection<U> = (
   U extends any ? (k: U) => void : never
@@ -35,33 +36,53 @@ export function watchWindowEvents(mainWindow: BrowserWindow) {
 
   listenOn(
     "set-fullscreen-break",
-    (_, { fullscreenBreak = false, alwaysOnTop = false }) => {
-      mainWindow.setVisibleOnAllWorkspaces(fullscreenBreak);
-      mainWindow.setSimpleFullScreen(fullscreenBreak);
-      mainWindow.setFullScreen(fullscreenBreak);
-
-      if (fullscreenBreak) {
-        mainWindow.setAlwaysOnTop(fullscreenBreak, "screen-saver");
-      } else {
-        mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-      }
-
-      const displays = screen.getAllDisplays();
-      const otherDisplay = displays.find((display) => {
+    (_, { shouldFullScreenBreak = false, alwaysOnTop = false }) => {
+      const allDisplays = screen.getAllDisplays();
+      const mainDisplay = screen.getPrimaryDisplay();
+      const otherDisplay = allDisplays.find((display) => {
         return display.bounds.x !== 0 || display.bounds.y !== 0;
       });
 
-      if (fullscreenBreak) {
-        if (otherDisplay && !blockerWindow) {
-          blockerWindow = createBlockerWindow({
-            bounds: otherDisplay.bounds,
-          });
-        } else {
-          blockerWindow?.show();
-        }
-      } else {
-        blockerWindow?.hide();
+      if (shouldFullScreenBreak) {
+        mainWindow.hide();
       }
+
+      const mainWindowPositionX =
+        mainDisplay.bounds.x +
+        mainDisplay.bounds.width / 2 -
+        MAIN_WINDOW.WIDTH / 2;
+      const mainWindowPositionY =
+        mainDisplay.bounds.y +
+        mainDisplay.bounds.height / 2 -
+        MAIN_WINDOW.HEIGHT / 2;
+
+      mainWindow.setPosition(mainWindowPositionX, mainWindowPositionY);
+      mainWindow.setSize(MAIN_WINDOW.WIDTH, MAIN_WINDOW.HEIGHT);
+
+      setTimeout(() => {
+        mainWindow.setVisibleOnAllWorkspaces(shouldFullScreenBreak);
+        mainWindow.setSimpleFullScreen(shouldFullScreenBreak);
+        mainWindow.setFullScreen(shouldFullScreenBreak);
+        mainWindow.show();
+
+        if (shouldFullScreenBreak) {
+          mainWindow.setAlwaysOnTop(
+            shouldFullScreenBreak,
+            "screen-saver"
+          );
+
+          if (otherDisplay && !blockerWindow) {
+            blockerWindow = createBlockerWindow({
+              bounds: otherDisplay.bounds,
+            });
+          } else {
+            blockerWindow?.show();
+          }
+        } else {
+          mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+          blockerWindow?.hide();
+        }
+      }, 100);
     }
   );
 }

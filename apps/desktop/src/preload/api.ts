@@ -16,7 +16,7 @@ export type SendArgs =
   | BuildArgs<
       "set-fullscreen-break",
       {
-        fullscreenBreak: boolean;
+        shouldFullScreenBreak: boolean;
         alwaysOnTop: boolean;
       }
     >;

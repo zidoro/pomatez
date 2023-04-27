@@ -8,7 +8,6 @@ export function createBlockerWindow(args: {
 }) {
   const blockerWindow = new BrowserWindow({
     simpleFullscreen: true,
-    alwaysOnTop: true,
     fullscreen: true,
     frame: false,
     x: args.bounds.x,

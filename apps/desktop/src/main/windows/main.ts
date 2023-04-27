@@ -3,12 +3,13 @@ import { is } from "@electron-toolkit/utils";
 import { shell, BrowserWindow } from "electron";
 import icon from "../../../resources/icon.png?asset";
 import { watchWindowEvents } from "../handlers";
+import { MAIN_WINDOW } from "../constants";
 
 export function createMainWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 340,
-    height: 480,
+    width: MAIN_WINDOW.WIDTH,
+    height: MAIN_WINDOW.HEIGHT,
     show: false,
     frame: false,
     resizable: false,

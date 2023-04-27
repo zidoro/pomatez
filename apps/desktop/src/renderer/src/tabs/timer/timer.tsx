@@ -1,39 +1,26 @@
 import { useActor } from "@xstate/react";
-import {
-  Counter,
-  Priority,
-  Control,
-  VStack,
-  TIMER_PROGRESS_CIRCUMFERENCE,
-} from "@pomatez/ui";
+import { Priority, Control, VStack } from "@pomatez/ui";
 import {
   interpretState,
   slideUpAndFadeAnimation,
 } from "@renderer/utils";
 import { useAppMachine } from "@renderer/contexts";
+import { CounterProgress } from "@renderer/components";
 
 export default function Timer() {
   const machineActor = useAppMachine();
 
   const [state, send] = useActor(machineActor);
 
+  const sessionState = interpretState(state.value).session;
+
   const config = state.context.config;
 
   const timer = state.context.timer;
 
-  const sessionState = interpretState(state.value).session;
-
-  const timeProgress =
-    (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;
-  const timeRemaining = timer.duration - timer.elapsed;
-
   return (
     <VStack sx={slideUpAndFadeAnimation}>
-      <Counter
-        appState={sessionState}
-        timeProgress={timeProgress}
-        timeRemaining={timeRemaining}
-      />
+      <CounterProgress />
 
       <Priority title="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
 
