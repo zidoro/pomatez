@@ -8,6 +8,8 @@ export type SettingsProps = {
   autoStartWork: boolean;
   minimizeToTray: boolean;
   closeToTray: boolean;
+  isCompact: boolean;
+  isMuted: boolean;
 };
 
 export const defaultSettings: SettingsProps = {
@@ -20,4 +22,6 @@ export const defaultSettings: SettingsProps = {
   autoStartWork: true,
   minimizeToTray: false,
   closeToTray: false,
+  isCompact: false,
+  isMuted: false,
 };

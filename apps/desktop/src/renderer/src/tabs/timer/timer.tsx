@@ -1,15 +1,12 @@
-import { useActor } from "@xstate/react";
 import { Priority, Control, VStack } from "@pomatez/ui";
-import { slideUpAndFadeAnimation } from "@renderer/utils";
 import { useAppMachine, useSyncData } from "@renderer/contexts";
+import { slideUpAndFadeAnimation } from "@renderer/utils";
 import { CounterProgress } from "@renderer/components";
 
 export default function Timer() {
   const machineActor = useAppMachine();
 
-  const [state, send] = useActor(machineActor);
-
-  const { config, timer } = useSyncData();
+  const { config, settings, timer } = useSyncData();
 
   return (
     <VStack sx={slideUpAndFadeAnimation}>
@@ -23,26 +20,26 @@ export default function Timer() {
           maxRounds: config.sessionRounds,
           currentRound: timer.sessionRound,
         }}
-        isRunning={state.matches("timer.running")} // TODO: Sync this states
-        isMuted={state.matches("sound.speakerOff")} // TODO: Sync this states
-        isCompact={state.matches("mode.compact")} // TODO: Sync this states
+        isRunning={timer.isRunning}
+        isMuted={settings.isMuted}
+        isCompact={settings.isCompact}
         onPlayPause={() => {
-          send("timer.toggle");
+          machineActor.send("timer.toggle");
         }}
         onToggleSound={() => {
-          send("sound.toggle");
+          machineActor.send("sound.toggle");
         }}
         onToggleCompact={() => {
-          send("mode.toggle");
+          machineActor.send("mode.toggle");
         }}
         onResetTimer={() => {
-          send("timer.reset");
+          machineActor.send("timer.reset");
         }}
         onNextEvent={() => {
-          send("session.next");
+          machineActor.send("session.next");
         }}
         onResetElapsed={() => {
-          send("session.reset");
+          machineActor.send("session.reset");
         }}
       />
     </VStack>

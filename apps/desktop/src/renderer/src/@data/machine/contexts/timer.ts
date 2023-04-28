@@ -1,3 +1,4 @@
+import { SessionTypes } from "@renderer/@data/types";
 import { minutesToSeconds } from "@renderer/utils";
 import { defaultConfig } from "./config";
 
@@ -7,7 +8,8 @@ export type TimerProps = {
   elapsed: number;
   duration: number;
   shouldFullScreenBreak: boolean;
-  sessionType: "stayFocused" | "shortBreak" | "longBreak";
+  sessionType: SessionTypes;
+  isRunning: boolean;
 };
 
 const duration = minutesToSeconds(defaultConfig.stayFocused);
@@ -19,4 +21,5 @@ export const defaultTimer: TimerProps = {
   duration,
   shouldFullScreenBreak: false,
   sessionType: "stayFocused",
+  isRunning: false,
 };

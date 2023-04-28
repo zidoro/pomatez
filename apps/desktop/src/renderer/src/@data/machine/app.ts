@@ -9,18 +9,38 @@ import {
   defaultTimer,
 } from "./contexts";
 
-export const SYNC_DATA_STORAGE_NAME = "sync-data";
+type MachineContextProps = {
+  config: ConfigProps;
+  settings: SettingsProps;
+  timer: TimerProps;
+};
 
-export const appMachine = createMachine(
+const SYNC_DATA_STORAGE_NAME = "sync-data";
+
+const getContextDataSync = () => {
+  const dataSync = localStorage.getItem(SYNC_DATA_STORAGE_NAME);
+
+  const dataParsed =
+    dataSync && (JSON.parse(dataSync) as MachineContextProps);
+
+  if (dataParsed) {
+    const { config, settings } = dataParsed;
+    return { config, settings, timer: defaultTimer };
+  }
+
+  return {
+    config: defaultConfig,
+    settings: defaultSettings,
+    timer: defaultTimer,
+  };
+};
+
+const appMachine = createMachine(
   {
-    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QBGAEwBWAMykh9IQE4RQgOxKAbHLEAOMQBoQAT2GqxpJRqFi59TRIAstiWNUBfZ3rSZchEqQBOcME4GZiQQNg5uXlDBBDkhTVIROQdHWzEnIVVbPUMEIQklUlUJOLkJAvoNJTFXd3QMWEDuGlhyKhowYL5wrh48PhjVTSEiobElbXyJtJzhWVIyzVtNOWLHTSVbWpAPBqaiFr8AoKZu9l6o0BiJEVsF23pFIWX7EQlNWYQ1aUsRG2LNPQgbY5NsPKRuABbMC+DBQmFHRonEKsc6RfrRYRCCxFRxKEpA+g3SqfVTKUj0aqKYyyZSKMHoCFEaGw+G+Uh4MD8ZFnCJ9AZzESfbRSLKU8TyZaqJQiBmoJksuHMhEQACuvmQ6La1Dop1CPXRfFymyktme8S0IM0tw+AmESmepHSmmGZuKIK2bh2jLZpFQ-lQyF8BygGC6+rR-MxCDNCXoqjeqnjNjeSnougMiG0JhWlKJVis2blCoR-rAgeDNDDQhRYUjlztCAKIidizUWmeQNtuWx70SxjMagkFqExd9ZYrIbDIlrBqjV0QNqKynkWnxWTk2k+cnxFLkVlEmyBExqXvBvt8qrweCnvs4OCgUAANp09ai+Q2Yps7sPxCIHRI6Z-N2iA7vQpBLFYrzSuaspnj6yrspe163ohTJYAA1uG74XBiC55LIUgaPQtgqIogErCBCA2OBcSxpam42mOaHITeVYAFTYXWH54Y22LFK2JSZMYGgaNulikGkWi3EMIj-uozEsn6yCqo0EBKkp96Pi+XFzp+iDVKopA3A80kPEk-6fDIIIUr27xlHYqzFo0sAcPgeyuX0HJcjyEY8QKBEtoCJrKOmlhmBIVnhdIQIJjIw5kiUzlwG5eAealiKBLp9a8TEfxyNIxgrMY0rVOmVmOOBthki6ZLWComjJZ5+CkLAnDIPoABiOBYKpkDpV5nLctl-nRmkhRihMdjiOUchRfGrabviHaAUoTUZW1HXdb1akDS1Q1BDWvK4QF1UjDujj7loTgTHNmZ5A6JiVFoqhJmk+4uPB8qwDgV4QK1qBgMgGEwgA8mlP1-RCD7Pq+s45QF4iFGaZTqGRKgZrkSYtkSCbqCIYX5HBdTfb9eD-bAgPA2DBAEA0ZP-VpsMjSd0ZI5J8gSGjMoY58UrGU4cTjPkIlrV9pCQjgEBgKQ0sECpT6cBgkvS9D2lw8dhrRqIaRFNamS2HJxIKFFcQLICRIFA6cmguLKsy7gkKBlgSv22rzNvtxrP4TrJiyQbRsE8kVmkXc1ViB6+IWJscFengUtwHwHia-OjaqJ8w4jI46j2CuSwuqeJMlr4Kf6QgEefCaHOG-YyQkQ8o7i+OAZBiGpe5YuxjV9YpHyBsZrCpIRQPMtDhkssjdFxeV5sVA7cBWUJhiEC8SUhMMrB-dVR67ctwWDYGyKaWKlqfP0aWDm4dmvYNfWNuaYQSCohkhdKzE968q+mA5Nnz7dhSNmIYcR3Sb1yNvWS005LDCSuLFyqVf6NgjhBSkDhQrpB3IvKyIgEwLBqukUixQxDKHWl5TaXUep9QgAgvKCgijVGUNULmlIbBKCiobYyWQVxrmqjYEhLVYAUBwL4TgAAhfwwNqFZmsNIGQgsSJJEkHdHsEcWxczNI9fuQw+F4FIE+fAUAxFAwwpI6i2IILyDTKvOImRIr3UyGYR+wlNCvQcEsZyDMTFZCdBPM0y8lglFuBnTcEFBZJGSP+COEh3FQ0pkYsGvE9IdzyKIbxroLA9wCdke6ijCobE2PiZIaZGqwIZgDOJvhQa0xMYbQoqwbRiD+FKJInwI4-nEAmAkQJVjFKLvbExMgljGQmMoYY1hxhOAqs43BEcxT7meNaYsbs5YK04P0omQzhjDLGYZKKdhJJqANkVVcn1ekJ3IDgJ2yAXb9JKIUdMXSmHWmMLsoyO4yRZCORoT6rggA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QEMAOqDEBjA9gOwDMBLKAOiwAtk8YBtABgF1FRUdYiAXI-FkAD0QBGAEwA2ACykRADgCsYuTKEBmERLEqZAGhABPYSpWkVAdnkqhATjFj6Z+wF9HutJlyESpAE5wwnBmYkEDYObl5gwQQrESETGVMJWKs5K1MVOVNdAwQhehFpdXyZdTlrenlnV3QMWH9uGlhyKhowQL5Qrh48PiixGRl4oTlY01F+iuzEUytSRRF6JQkre1N7GSqQN1r6okafPwCmDvYuiNAotVNSOQk1iXllcyEZCSmEDRNl5ZUxIRmRvRJJs3KRuABbMDeDAQqEHOpHIKsU7hHqRYRCYZzDLpFb0ewLKzvP7XeimEZCRT0TGmWIg9BgoiQ6Gw7ykPBgfiIk5hbq9YT5d4WOYSMkiMpWB5iWn01CM5kwplwiAAV28yFRzWodGOwU6qL4OUSxgkQlNj2WJQeuii-zNNyUylNmm+svlcNQvlQyG8eygGHaepRfPRHxepCBIl+QJkagcciFcjkpBkKzWKhWK3kcjdrNInrA3t9NADQiRIWD5wEiDMUkSZueIhmIhWb30GIUhTUSl+hNMYlzSrZBaLfoDInL+pDF0Q6kGJOsSnSkis8neaWM9CsK1EiXx5hzLi2DLz3hVeDwY7znBwUCgABs2rrkbyq1FyQVyQ3MlYjCkVOu+LSHY5I2HIZi2KYg7Mj456XiW15EFgADWgYvmcaIzrk1LGCk9B3LSqgVKuQoqPQpBWGaLxLKuc7QXCZ4XmOABUaEVq+mHVrklLGKkGaUooKQpOuqSkBISZWv0IhNmIVj0cOyAqnUECKjBN53o+bFTm+0wjKQX53D+f7ge8eSZHMwzigshmJAOR6gnUsAcPgOxOd07KctyQYcfy2EFDIZISJYaxJmkv6mak1x5JGeSWH8GZuo5zl4K5yXwv4WmVpxUSyLMlJKGB0rkospkZORGgvDIfwVKY5iJXAaWwJwyB6AAYjgWBKZAqXuRyXKZT5obidckhkrGSTgRmEVAjc24JBkyhkVB9kMkl7lNS17WdcpPX4B5-VljyGG+RVFHpKkKTyNKqamWMyZbkotj4RddnVHKsA4OeECkLAqBgMgyFQgA8ilH1fWCt4Pk+k5Zb54piBGsjDH8MSWDY7wKLMAXzWmNjioln14N9v3-YD3hAwQBC1IT33qVDA3HaG8OI8oCjWFG1hiO84lSKIv7ZgktWqMtb2kOCOAQGApCSwQin3pwGDi5LEMadDR0GqGqhYkmZXiqmLyaKZdjJi8q5bmowwyitcpK1LuDgt6WAK7bKv08+7GM1hWvJjrcj5AVBumUFUgaHcTZs8smLOEeeAS3AfBuOr05cVz7YIE2eUtloEiR6uYzyUnOkILc7zGmJVG1YsAIzPJ+Zej6fqF9ls6KOXoqvGMeemomxijedQV-A8Qi14x8FQE3vm-j7+IvGS5i0pKIkjVa6jDLGCS196XUQBPoapMmryKKaOdJO365rCmkfiNY6SpiItdgETu9eyoQUpkm-SUS6i9pyky9RkkaSi05LWx+g1ZO2lm7FykAFY0-xFiRSnqZcQBQbAvFKEmO4ah6puT2htNqHVt7Py4i2Ao0oyi1XAiBWMWQ07DCSCYSQdolwaFjDgxqFAcDeE4AAIV8ADYhURsakExIsWS+EWzgSJHQ24BRfimjugkVh7D3L3nwFAPhpNBGIGUHEZQaRqQBUojxI2MxL4CSqpIbOBMvraIQJoERmMM4Z3XrQnIvwEZiCzrGfiFQgo2KJj9P6ANgacUgb5TEcRkYxGbDMVxGMZqSlEDneKSh1CvWPO9GmQTSbA0pnYpICNMi7ngTnMkJc05lAKFuIxZhEgLCqm6W2di8ivBMM8Z4FRMgKFKp8GwBFFwPBKE0uO0swCyxVPLFpqg5EdOUF08kqccjDFfmJfslINBKEXBk0ELt7aO04C0hQJohK2BiMoC5EUGHyOksHVMkZo6OCAA */
     id: "app",
     schema: {
-      context: {} as {
-        config: ConfigProps;
-        settings: SettingsProps;
-        timer: TimerProps;
-      },
+      context: {} as MachineContextProps,
 
       events: {} as
         | {
@@ -46,13 +66,7 @@ export const appMachine = createMachine(
 
     tsTypes: {} as import("./app.typegen").Typegen0,
 
-    context: JSON.parse(
-      localStorage.getItem(SYNC_DATA_STORAGE_NAME) as any
-    ) || {
-      config: defaultConfig,
-      settings: defaultSettings,
-      timer: defaultTimer,
-    },
+    context: getContextDataSync(),
 
     type: "parallel",
 
@@ -87,6 +101,7 @@ export const appMachine = createMachine(
               },
               "timer.toggle": {
                 target: "paused",
+                actions: "toggleTimer",
               },
               "timer.tick": {
                 cond: "timerNotYetDone",
@@ -98,6 +113,7 @@ export const appMachine = createMachine(
             on: {
               "timer.toggle": {
                 target: "running",
+                actions: "toggleTimer",
               },
             },
           },
@@ -172,12 +188,18 @@ export const appMachine = createMachine(
         states: {
           speakerOn: {
             on: {
-              "sound.toggle": "speakerOff",
+              "sound.toggle": {
+                target: "speakerOff",
+                actions: "toggleSpeaker",
+              },
             },
           },
           speakerOff: {
             on: {
-              "sound.toggle": "speakerOn",
+              "sound.toggle": {
+                target: "speakerOn",
+                actions: "toggleSpeaker",
+              },
             },
           },
         },
@@ -188,12 +210,18 @@ export const appMachine = createMachine(
         states: {
           default: {
             on: {
-              "mode.toggle": "compact",
+              "mode.toggle": {
+                target: "compact",
+                actions: "toggleMode",
+              },
             },
           },
           compact: {
             on: {
-              "mode.toggle": "default",
+              "mode.toggle": {
+                target: "default",
+                actions: "toggleMode",
+              },
             },
           },
         },
@@ -298,6 +326,33 @@ export const appMachine = createMachine(
           settings: defaultSettings,
         };
       }),
+      toggleSpeaker: assign((context) => {
+        return {
+          ...context,
+          settings: {
+            ...context.settings,
+            isMuted: !context.settings.isMuted,
+          },
+        };
+      }),
+      toggleMode: assign((context) => {
+        return {
+          ...context,
+          settings: {
+            ...context.settings,
+            isCompact: !context.settings.isCompact,
+          },
+        };
+      }),
+      toggleTimer: assign((context) => {
+        return {
+          ...context,
+          timer: {
+            ...context.timer,
+            isRunning: !context.timer.isRunning,
+          },
+        };
+      }),
       updateTimer: assign((context) => {
         return {
           ...context,
@@ -382,3 +437,5 @@ export const appMachine = createMachine(
     },
   }
 );
+
+export { appMachine, SYNC_DATA_STORAGE_NAME };

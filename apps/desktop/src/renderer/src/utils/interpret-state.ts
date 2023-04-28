@@ -1,5 +1,7 @@
+import { SessionTypes } from "@renderer/@data/types";
+
 type StateProps = {
-  session: "stayFocused" | "shortBreak" | "longBreak";
+  session: SessionTypes;
 };
 
 export const interpretState = <T>(state: T) =>
