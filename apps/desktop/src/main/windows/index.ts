@@ -1,2 +1,1 @@
-export * from "./main";
-export * from "./blocker";
+export * from "./app";

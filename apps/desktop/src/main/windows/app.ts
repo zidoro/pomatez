@@ -8,15 +8,22 @@ import {
 import icon from "../../../resources/icon.png?asset";
 import { MAIN_WINDOW } from "../constants";
 
-export function createMainWindow(
+export function createAppWindow(
   args?: {
     bounds: {
       x: number;
       y: number;
     };
+    showWhenReady?: boolean;
+    isMainWindow?: boolean;
   } & BrowserWindowConstructorOptions
 ) {
-  const { bounds, ...otherArgs } = args || {};
+  const {
+    bounds,
+    showWhenReady = true,
+    isMainWindow = true,
+    ...otherArgs
+  } = args || {};
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -38,10 +45,13 @@ export function createMainWindow(
   });
 
   mainWindow.on("ready-to-show", () => {
-    mainWindow.show();
+    if (showWhenReady) mainWindow.show();
   });
 
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools({
+    mode: "detach",
+    activate: isMainWindow,
+  });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url);
