@@ -23,21 +23,24 @@ const listenOn = (
   ) => void
 ) => ipcMain.on(event, listener);
 
-let blockerWindow: BrowserWindow | null | undefined;
+let otherWindows: BrowserWindow[] | null | undefined;
 
 export function watchWindowEvents(mainWindow: BrowserWindow) {
   const allDisplays = screen.getAllDisplays();
   const mainDisplay = screen.getPrimaryDisplay();
-  const otherDisplay = allDisplays.find((display) => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0;
-  });
 
-  if (otherDisplay && !blockerWindow) {
-    blockerWindow = createAppWindow({
-      bounds: otherDisplay.bounds,
-      showWhenReady: false,
-      isMainWindow: false,
-    });
+  const otherDisplays = allDisplays.filter(
+    (display) => display.id !== mainDisplay.id
+  );
+
+  if (otherDisplays.length && !otherWindows) {
+    otherWindows = otherDisplays.map((display) =>
+      createAppWindow({
+        bounds: display.bounds,
+        showWhenReady: false,
+        isMainWindow: false,
+      })
+    );
   }
 
   listenOn("minimize-window", () => mainWindow.minimize());
@@ -67,26 +70,31 @@ export function watchWindowEvents(mainWindow: BrowserWindow) {
       mainWindow.setPosition(mainWindowPositionX, mainWindowPositionY);
       mainWindow.setSize(MAIN_WINDOW.WIDTH, MAIN_WINDOW.HEIGHT);
 
-      if (otherDisplay && blockerWindow) {
-        const blockerWindowPositionX =
-          otherDisplay.bounds.x +
-          otherDisplay.bounds.width / 2 -
-          MAIN_WINDOW.WIDTH / 2;
-        const blockerWindowPositionY =
-          otherDisplay.bounds.y +
-          otherDisplay.bounds.height / 2 -
-          MAIN_WINDOW.HEIGHT / 2;
+      if (otherDisplays.length && otherWindows?.length) {
+        otherWindows.forEach((otherWindow, index) => {
+          const blockerWindowPositionX =
+            otherDisplays[index].bounds.x +
+            otherDisplays[index].bounds.width / 2 -
+            MAIN_WINDOW.WIDTH / 2;
+          const blockerWindowPositionY =
+            otherDisplays[index].bounds.y +
+            otherDisplays[index].bounds.height / 2 -
+            MAIN_WINDOW.HEIGHT / 2;
 
-        blockerWindow.setPosition(
-          blockerWindowPositionX,
-          blockerWindowPositionY
-        );
-        blockerWindow.setSize(MAIN_WINDOW.WIDTH, MAIN_WINDOW.HEIGHT);
+          otherWindow.setPosition(
+            blockerWindowPositionX,
+            blockerWindowPositionY
+          );
+          otherWindow.setSize(MAIN_WINDOW.WIDTH, MAIN_WINDOW.HEIGHT);
+        });
       }
 
       if (!shouldFullScreenBreak) {
         mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
-        blockerWindow?.hide();
+
+        otherWindows?.forEach((otherWindow) => {
+          otherWindow?.hide();
+        });
       }
 
       setTimeout(() => {
@@ -95,16 +103,24 @@ export function watchWindowEvents(mainWindow: BrowserWindow) {
         mainWindow.setFullScreen(shouldFullScreenBreak);
         mainWindow.show();
 
-        blockerWindow?.setVisibleOnAllWorkspaces(shouldFullScreenBreak);
-        blockerWindow?.setSimpleFullScreen(shouldFullScreenBreak);
-        blockerWindow?.setFullScreen(shouldFullScreenBreak);
+        otherWindows?.forEach((otherWindow) => {
+          otherWindow?.setVisibleOnAllWorkspaces(shouldFullScreenBreak);
+          otherWindow?.setSimpleFullScreen(shouldFullScreenBreak);
+          otherWindow?.setFullScreen(shouldFullScreenBreak);
+        });
 
         if (shouldFullScreenBreak) {
           mainWindow.setAlwaysOnTop(
             shouldFullScreenBreak,
             "screen-saver"
           );
-          blockerWindow?.show();
+          otherWindows?.forEach((otherWindow) => {
+            otherWindow.setAlwaysOnTop(
+              shouldFullScreenBreak,
+              "screen-saver"
+            );
+            otherWindow?.show();
+          });
         }
       }, 100);
     }

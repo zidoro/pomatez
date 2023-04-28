@@ -48,10 +48,11 @@ export function createAppWindow(
     if (showWhenReady) mainWindow.show();
   });
 
-  mainWindow.webContents.openDevTools({
-    mode: "detach",
-    activate: isMainWindow,
-  });
+  if (isMainWindow) {
+    mainWindow.webContents.openDevTools({
+      mode: "detach",
+    });
+  }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url);
