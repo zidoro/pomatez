@@ -17,7 +17,6 @@ export type SendArgs =
       "set-fullscreen-break",
       {
         shouldFullScreenBreak: boolean;
-        alwaysOnTop: boolean;
       }
     >;
 

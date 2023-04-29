@@ -42,10 +42,9 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
     runOnElectron(() => {
       window.api.send("set-fullscreen-break", {
         shouldFullScreenBreak: timer.shouldFullScreenBreak,
-        alwaysOnTop: settings.alwaysOnTop,
       });
     });
-  }, [settings.alwaysOnTop, timer.shouldFullScreenBreak]);
+  }, [timer.shouldFullScreenBreak]);
 
   return (
     <ElectronContext.Provider

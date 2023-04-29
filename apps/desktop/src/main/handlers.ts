@@ -23,6 +23,8 @@ const listenOn = (
   ) => void
 ) => ipcMain.on(event, listener);
 
+let windowAlwaysOnTop: boolean = false;
+
 let otherWindows: BrowserWindow[] | null | undefined;
 
 export function watchWindowEvents(mainWindow: BrowserWindow) {
@@ -49,11 +51,12 @@ export function watchWindowEvents(mainWindow: BrowserWindow) {
 
   listenOn("set-always-on-top", (_, { alwaysOnTop = false }) => {
     mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+    windowAlwaysOnTop = alwaysOnTop;
   });
 
   listenOn(
     "set-fullscreen-break",
-    (_, { shouldFullScreenBreak = false, alwaysOnTop = false }) => {
+    (_, { shouldFullScreenBreak = false }) => {
       if (shouldFullScreenBreak) {
         mainWindow.hide();
       }
@@ -90,7 +93,7 @@ export function watchWindowEvents(mainWindow: BrowserWindow) {
       }
 
       if (!shouldFullScreenBreak) {
-        mainWindow.setAlwaysOnTop(alwaysOnTop, "screen-saver");
+        mainWindow.setAlwaysOnTop(windowAlwaysOnTop, "screen-saver");
 
         otherWindows?.forEach((otherWindow) => {
           otherWindow?.hide();
