@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
-import { AppProvider } from "@renderer/contexts";
+import { AppProvider, SyncDataProvider } from "@renderer/contexts";
 import { routes } from "@renderer/route.config";
 
 type Props = {
@@ -21,30 +21,32 @@ export function WindowDecorator({
 
   return (
     <AppProvider>
-      <VStack
-        justify="flex-start"
-        sx={{
-          width: "34rem",
-          height: "48rem",
-          border: "1px solid $gray6",
-          borderRadius: "$sm",
-          boxShadow: "$md",
-          bg: "$white",
-        }}
-      >
-        <Titlebar />
-        <Navbar links={links} />
-        <Box
-          as="main"
+      <SyncDataProvider>
+        <VStack
+          justify="flex-start"
           sx={{
-            width: "100%",
-            height: "40rem",
-            overflow: "hidden",
+            width: "34rem",
+            height: "48rem",
+            border: "1px solid $gray6",
+            borderRadius: "$sm",
+            boxShadow: "$md",
+            bg: "$white",
           }}
         >
-          {children}
-        </Box>
-      </VStack>
+          <Titlebar />
+          <Navbar links={links} />
+          <Box
+            as="main"
+            sx={{
+              width: "100%",
+              height: "40rem",
+              overflow: "hidden",
+            }}
+          >
+            {children}
+          </Box>
+        </VStack>
+      </SyncDataProvider>
     </AppProvider>
   );
 }
