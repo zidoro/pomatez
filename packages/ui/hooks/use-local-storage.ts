@@ -7,8 +7,9 @@ export function useLocalStorage<ValueType>(
 ) {
   const [storageValue, setStorageValue] = useState(() => {
     const storedValue = localStorage.getItem(key);
-    return (defaultValue ||
-      (storedValue && JSON.parse(storedValue))) as ValueType;
+    return (
+      storedValue ? JSON.parse(storedValue) : defaultValue
+    ) as ValueType;
   });
 
   useEffect(() => {
@@ -21,9 +22,7 @@ export function useLocalStorage<ValueType>(
   useEffect(() => {
     const listener = (e: StorageEvent) => {
       if (e.storageArea === localStorage && e.key === key) {
-        const newValue = e.newValue
-          ? JSON.parse(e.newValue)
-          : e.newValue;
+        const newValue = e.newValue ? JSON.parse(e.newValue) : value;
 
         setStorageValue(newValue as ValueType);
       }
@@ -36,9 +35,5 @@ export function useLocalStorage<ValueType>(
     };
   }, [key, value]);
 
-  const removeValue = () => {
-    localStorage.removeItem(key);
-  };
-
-  return { value: storageValue, removeValue };
+  return storageValue;
 }

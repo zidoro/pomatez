@@ -1,1 +1,1 @@
-export type SessionTypes = "stayFocused" | "shortBreak" | "longBreak";
+export type SessionType = "stayFocused" | "shortBreak" | "longBreak";

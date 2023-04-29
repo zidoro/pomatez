@@ -1,4 +1,4 @@
-import { SessionTypes } from "@renderer/@data/types";
+import { SessionType } from "@renderer/@data/types";
 import { minutesToSeconds } from "@renderer/utils";
 import { defaultConfig } from "./config";
 
@@ -8,7 +8,7 @@ export type TimerProps = {
   elapsed: number;
   duration: number;
   shouldFullScreenBreak: boolean;
-  sessionType: SessionTypes;
+  sessionType: SessionType;
   isRunning: boolean;
 };
 

@@ -1,5 +1,5 @@
 import { assign, createMachine, raise } from "xstate";
-import { interpretState, minutesToSeconds } from "@renderer/utils";
+import { minutesToSeconds } from "@renderer/utils";
 import {
   ConfigProps,
   SettingsProps,
@@ -8,6 +8,7 @@ import {
   defaultSettings,
   defaultTimer,
 } from "./contexts";
+import { SessionType } from "../types";
 
 type MachineContextProps = {
   config: ConfigProps;
@@ -15,9 +16,15 @@ type MachineContextProps = {
   timer: TimerProps;
 };
 
+const defaultMachineContextData = {
+  settings: defaultSettings,
+  config: defaultConfig,
+  timer: defaultTimer,
+};
+
 const SYNC_DATA_STORAGE_NAME = "sync-data";
 
-const getContextDataSync = () => {
+const getContextDataSync = (): MachineContextProps => {
   const dataSync = localStorage.getItem(SYNC_DATA_STORAGE_NAME);
 
   const dataParsed =
@@ -25,14 +32,17 @@ const getContextDataSync = () => {
 
   if (dataParsed) {
     const { config, settings } = dataParsed;
-    return { config, settings, timer: defaultTimer };
+    return {
+      config,
+      settings,
+      timer: {
+        ...defaultTimer,
+        duration: minutesToSeconds(config.stayFocused),
+      },
+    };
   }
 
-  return {
-    config: defaultConfig,
-    settings: defaultSettings,
-    timer: defaultTimer,
-  };
+  return defaultMachineContextData;
 };
 
 const appMachine = createMachine(
@@ -64,9 +74,13 @@ const appMachine = createMachine(
         | { type: "session.reset" },
     },
 
+    context: getContextDataSync(),
+
     tsTypes: {} as import("./app.typegen").Typegen0,
 
-    context: getContextDataSync(),
+    predictableActionArguments: true,
+
+    preserveActionOrder: true,
 
     type: "parallel",
 
@@ -304,11 +318,9 @@ const appMachine = createMachine(
           config: defaultConfig,
         };
       }),
-      updateSettings: assign((context, event, { state }) => {
-        const sessionState = interpretState(state?.value).session;
-
-        const shouldFullscreen =
-          sessionState !== "stayFocused" &&
+      updateSettings: assign((context, event) => {
+        const shouldFullScreenBreak =
+          context.timer.sessionType !== "stayFocused" &&
           event.values.fullscreenBreak;
 
         return {
@@ -316,7 +328,7 @@ const appMachine = createMachine(
           settings: event.values,
           timer: {
             ...context.timer,
-            shouldFullScreenBreak: shouldFullscreen,
+            shouldFullScreenBreak,
           },
         };
       }),
@@ -362,30 +374,49 @@ const appMachine = createMachine(
           },
         };
       }),
-      updateDuration: assign((context, _, { state }) => {
-        const sessionState = interpretState(state?.value).session;
-
+      updateDuration: assign((context) => {
         return {
           ...context,
           timer: {
             ...context.timer,
-            duration: minutesToSeconds(context.config[sessionState]),
-            sessionType: sessionState,
+            elapsed: defaultTimer.elapsed,
+            duration: minutesToSeconds(
+              context.config[context.timer.sessionType]
+            ),
           },
         };
       }),
-      setFullScreenBreak: assign((context, _, { state }) => {
-        const sessionState = interpretState(state?.value).session;
+      setFullScreenBreak: assign((context) => {
+        let sessionType: SessionType;
 
-        const shouldFullscreen =
-          sessionState === "stayFocused" &&
+        switch (context.timer.sessionType) {
+          case "shortBreak":
+          case "longBreak":
+            sessionType = "stayFocused";
+            break;
+          case "stayFocused":
+            if (
+              context.timer.sessionRound < context.config.sessionRounds
+            ) {
+              sessionType = "shortBreak";
+            } else {
+              sessionType = "longBreak";
+            }
+            break;
+          default:
+            sessionType = "stayFocused";
+        }
+
+        const shouldFullScreenBreak =
+          sessionType !== "stayFocused" &&
           context.settings.fullscreenBreak;
 
         return {
           ...context,
           timer: {
             ...context.timer,
-            shouldFullScreenBreak: shouldFullscreen,
+            shouldFullScreenBreak,
+            sessionType,
           },
         };
       }),
@@ -438,4 +469,8 @@ const appMachine = createMachine(
   }
 );
 
-export { appMachine, SYNC_DATA_STORAGE_NAME };
+export {
+  appMachine,
+  SYNC_DATA_STORAGE_NAME,
+  defaultMachineContextData,
+};

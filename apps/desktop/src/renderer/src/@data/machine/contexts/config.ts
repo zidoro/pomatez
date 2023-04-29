@@ -29,9 +29,11 @@ export const configPresets: Record<
   },
 };
 
-export const defaultConfig = {
-  stayFocused: 0.1,
-  shortBreak: 0.2,
-  longBreak: 0.25,
-  sessionRounds: 2,
-};
+export const defaultConfig = import.meta.env.DEV
+  ? {
+      stayFocused: 0.1,
+      shortBreak: 0.2,
+      longBreak: 0.25,
+      sessionRounds: 2,
+    }
+  : configPresets.standard;

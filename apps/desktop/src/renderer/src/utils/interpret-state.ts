@@ -1,7 +1,7 @@
-import { SessionTypes } from "@renderer/@data/types";
+import { SessionType } from "@renderer/@data/types";
 
 type StateProps = {
-  session: SessionTypes;
+  session: SessionType;
 };
 
 export const interpretState = <T>(state: T) =>

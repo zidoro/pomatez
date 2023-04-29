@@ -3,34 +3,29 @@ import { useLocalStorage } from "@pomatez/ui";
 import { useSelector } from "@xstate/react";
 import {
   appMachine,
-  defaultConfig,
-  defaultSettings,
-  defaultTimer,
+  defaultMachineContextData,
   SYNC_DATA_STORAGE_NAME,
 } from "@renderer/@data/machine";
 import { useAppMachine } from "./app.context";
-
-const defaultSyncData = {
-  settings: defaultSettings,
-  config: defaultConfig,
-  timer: defaultTimer,
-};
 
 const SyncDataContext = createContext({} as typeof appMachine.context);
 
 const SyncDataProvider = ({ children }: { children: ReactNode }) => {
   const machineActor = useAppMachine();
 
-  const syncData = useSelector(machineActor, (state) => state.context);
+  const latestMachineContextData = useSelector(
+    machineActor,
+    (state) => state.context
+  );
 
-  const { value } = useLocalStorage(
+  const syncedStorageData = useLocalStorage(
     SYNC_DATA_STORAGE_NAME,
-    syncData,
-    defaultSyncData
+    latestMachineContextData,
+    defaultMachineContextData
   );
 
   return (
-    <SyncDataContext.Provider value={value}>
+    <SyncDataContext.Provider value={syncedStorageData}>
       {children}
     </SyncDataContext.Provider>
   );
