@@ -5,6 +5,8 @@
       "package-name": ""
     }
   },
+  "last-release-sha": "cda1eaf134c2e3298eb813bffb8faf6f748edafd",
+  "commit-search-depth": 40,
   "draft": true,
   "extra-files": [
     {
@@ -18,7 +20,6 @@
       "jsonpath": "$.version"
     }
   ],
-  "bootstrap-sha": "c79279b136557b39d9d94038a879e681c1065ea1",
   "changelog-sections": [
     { "type": "feat", "section": "Features ✨" },
     { "type": "feature", "section": "Features ✨" },

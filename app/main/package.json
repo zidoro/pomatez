@@ -9,7 +9,7 @@
     "email": "roldanjrmontilla@gmail.com",
     "url": "https://github.com/roldanjr"
   },
-  "repository": "https://github.com/roldanjr/pomatez",
+  "repository": "https://github.com/zidoro/pomatez",
   "description": "Attractive pomodoro timer for Windows, Mac, and Linux.",
   "scripts": {
     "prepare": "yarn build",
