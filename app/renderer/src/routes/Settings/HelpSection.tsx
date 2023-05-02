@@ -20,11 +20,11 @@ const HelpSection: React.FC = () => {
       />
       <Help
         label="Open an issue"
-        link="https://github.com/roldanjr/pomatez/issues"
+        link="https://github.com/zidoro/pomatez/issues"
       />
       <Help
         label="Release notes"
-        link="https://github.com/roldanjr/pomatez/releases/latest"
+        link="https://github.com/zidoro/pomatez/releases/latest"
       />
     </SettingSection>
   );
