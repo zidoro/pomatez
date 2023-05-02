@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://roldanjr.github.io/pomatez/">
+  <a href="https://zidoro.github.io/pomatez/">
     <img src=".github/assets/logo.png" alt="Pomatez logo" width="56" height="56">
   </a>
 </p>
@@ -146,7 +146,7 @@ Once that is installed just running `pre-commit` should automatically fix the fi
 
 Available for Windows, macOS, and Linux.
 
-Download the latest version from the [Releases Page](https://github.com/zidoro/pomatez/releases/latest) or from the :point_right: [Download Page](https://roldanjr.github.io/pomatez/) .
+Download the latest version from the [Releases Page](https://github.com/zidoro/pomatez/releases/latest) or from the :point_right: [Download Page](https://zidoro.github.io/pomatez/) .
 
 **For Linux users:**
 
