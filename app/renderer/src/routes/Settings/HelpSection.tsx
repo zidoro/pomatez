@@ -16,7 +16,7 @@ const HelpSection: React.FC = () => {
     <SettingSection heading="Need Help ?">
       <Help
         label="Official website"
-        link="https://roldanjr.github.io/pomatez/"
+        link="https://zidoro.github.io/pomatez/"
       />
       <Help
         label="Open an issue"
