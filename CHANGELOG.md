@@ -1,13 +1,5 @@
 # Changelog
 
-## [1.2.4](https://github.com/zidoro/pomatez/compare/v1.2.3...v1.2.4) (2023-05-03)
-
-
-### Bug Fixes 🐛
-
-* **app/renderer:** fix linter warnings that causes CI test build failing ([26edd59](https://github.com/zidoro/pomatez/commit/26edd59b26155954208fafc0dc3d933501c11bc9))
-* Set Application Menu to Fix Mac Shortcuts ([0e6d47f](https://github.com/zidoro/pomatez/commit/0e6d47f0eb166256f914494518b4ea9e63160c06))
-
 ## [1.2.3](https://github.com/zidoro/pomatez/compare/v1.2.2...v1.2.3) (2023-05-03)
 
 
