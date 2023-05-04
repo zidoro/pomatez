@@ -2,11 +2,10 @@ import {
   createContext,
   ReactNode,
   useCallback,
-  useContext,
   useEffect,
 } from "react";
 import { runOnElectron } from "@renderer/utils";
-import { useSyncData } from "./sync-data.context";
+import { useSyncData } from "@renderer/hooks";
 
 type ElectronContextProps = {
   onMinimizeWindow?: () => void;
@@ -55,6 +54,4 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const useElectron = () => useContext(ElectronContext);
-
-export { ElectronProvider, useElectron };
+export { ElectronProvider, ElectronContext };

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
-import { useElectron, useSyncData } from "@renderer/contexts";
+import { useElectron, useSyncData } from "@renderer/hooks";
 import { CounterProgress } from "@renderer/components";
 import { routes } from "@renderer/route.config";
 

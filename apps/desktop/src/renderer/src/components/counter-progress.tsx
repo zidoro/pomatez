@@ -1,5 +1,5 @@
 import { Counter, TIMER_PROGRESS_CIRCUMFERENCE } from "@pomatez/ui";
-import { useSyncData } from "@renderer/contexts";
+import { useSyncData } from "@renderer/hooks";
 
 export function CounterProgress() {
   const { timer } = useSyncData();

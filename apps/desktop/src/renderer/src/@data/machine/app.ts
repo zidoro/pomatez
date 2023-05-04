@@ -74,7 +74,7 @@ const appMachine = createMachine(
         | { type: "session.reset" },
     },
 
-    context: getContextDataSync(),
+    context: defaultMachineContextData,
 
     tsTypes: {} as import("./app.typegen").Typegen0,
 
@@ -473,4 +473,5 @@ export {
   appMachine,
   SYNC_DATA_STORAGE_NAME,
   defaultMachineContextData,
+  getContextDataSync,
 };

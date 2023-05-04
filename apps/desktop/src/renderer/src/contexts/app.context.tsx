@@ -1,23 +1,47 @@
-import { createContext, ReactNode, useContext } from "react";
-import { useInterpret } from "@xstate/react";
+import { createContext, ReactNode } from "react";
+import { useMachine } from "@xstate/react";
 import { InterpreterFrom } from "xstate";
 
-import { appMachine } from "@renderer/@data/machine";
+import {
+  appMachine,
+  defaultMachineContextData,
+  getContextDataSync,
+  SYNC_DATA_STORAGE_NAME,
+} from "@renderer/@data/machine";
+import { useLocalStorage } from "@pomatez/ui";
 
 const AppContext = createContext(
-  {} as InterpreterFrom<typeof appMachine>
+  {} as {
+    state: (typeof appMachine)["context"];
+    send: InterpreterFrom<typeof appMachine>["send"];
+  }
 );
 
+const persistedContext = getContextDataSync();
+
 const AppProvider = ({ children }: { children: ReactNode }) => {
-  const appActor = useInterpret(appMachine);
+  const [state, send] = useMachine(appMachine, {
+    state: persistedContext
+      ? {
+          ...appMachine.initialState,
+          context: persistedContext,
+        }
+      : appMachine.initialState,
+  });
+
+  const latestMachineContextData = state.context;
+
+  const syncedStorageData = useLocalStorage(
+    SYNC_DATA_STORAGE_NAME,
+    latestMachineContextData,
+    defaultMachineContextData
+  );
 
   return (
-    <AppContext.Provider value={appActor}>
+    <AppContext.Provider value={{ state: syncedStorageData, send }}>
       {children}
     </AppContext.Provider>
   );
 };
 
-const useAppMachine = () => useContext(AppContext);
-
-export { AppProvider, useAppMachine };
+export { AppProvider, AppContext };

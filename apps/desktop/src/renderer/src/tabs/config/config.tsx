@@ -8,7 +8,7 @@ import {
   capitalize,
 } from "@pomatez/ui";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
-import { useAppMachine, useSyncData } from "@renderer/contexts";
+import { useAppMachine, useSyncData } from "@renderer/hooks";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { configPresets } from "@renderer/@data/machine";
 

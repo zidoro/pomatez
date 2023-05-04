@@ -1,5 +1,5 @@
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
-import { useAppMachine, useSyncData } from "@renderer/contexts";
+import { useAppMachine, useSyncData } from "@renderer/hooks";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { slideLeftAndFadeAnimation } from "@renderer/utils";
 

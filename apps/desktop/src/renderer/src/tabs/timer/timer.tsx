@@ -1,5 +1,5 @@
 import { Priority, Control, VStack } from "@pomatez/ui";
-import { useAppMachine, useSyncData } from "@renderer/contexts";
+import { useAppMachine, useSyncData } from "@renderer/hooks";
 import { slideUpAndFadeAnimation } from "@renderer/utils";
 import { CounterProgress } from "@renderer/components";
 
