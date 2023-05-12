@@ -22,6 +22,7 @@ import {
   RELEASED_NOTES_LINK,
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
+  SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
 import {
   activateGlobalShortcuts,
@@ -29,14 +30,13 @@ import {
   blockShortcutKeys,
   getIcon,
   isWindow,
+  isMacOS,
   getFromStorage,
   createContextMenu,
 } from "./helpers";
 import { activateUser } from "./helpers/analytics";
 import store from "./store";
 import isDev from "electron-is-dev";
-const isWin = process.platform === "win32";
-const isMac = process.platform === "darwin";
 
 import "v8-compile-cache";
 import {
@@ -55,7 +55,7 @@ const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
 
 const onlySingleInstance = app.requestSingleInstanceLock();
 
-const applicationMenu = isMac
+const applicationMenu = isMacOS()
   ? Menu.buildFromTemplate([{ role: "appMenu" }, { role: "editMenu" }])
   : null;
 Menu.setApplicationMenu(applicationMenu);
@@ -204,10 +204,6 @@ function createMainWindow() {
     )
   );
 
-  win.on("closed", () => {
-    win = null;
-  });
-
   createContextMenu(win);
 }
 
@@ -221,7 +217,7 @@ const contextMenu = Menu.buildFromTemplate([
     },
   },
   {
-    label: "Exit",
+    label: "Quit",
     click: () => {
       app.exit();
     },
@@ -266,6 +262,7 @@ if (!onlySingleInstance) {
       const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];
       const installer = await import("electron-devtools-installer");
       console.log(installer);
+
       for (const tool of extensions) {
         try {
           await installer.default(installer[tool], true);
@@ -274,6 +271,7 @@ if (!onlySingleInstance) {
         }
       }
     }
+
     createMainWindow();
 
     if (onProduction) {
@@ -393,9 +391,13 @@ ipcMain.on(SET_MINIMIZE, (e, { minimizeToTray }) => {
 });
 
 ipcMain.on(SET_CLOSE, (e, { closeToTray }) => {
-  app.quit();
-  if (tray === null && closeToTray) {
-    createSystemTray();
+  if (!closeToTray) {
+    app.exit();
+  } else {
+    if (closeToTray && tray === null) {
+      createSystemTray();
+    }
+    app.quit();
   }
 });
 
@@ -414,6 +416,14 @@ ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
   tray?.setImage(image);
 });
 
+ipcMain.on(SET_OPEN_AT_LOGIN, (e, { openAtLogin }) => {
+  store.set("openAtLogin", openAtLogin);
+  app.setLoginItemSettings({
+    openAtLogin: openAtLogin,
+    openAsHidden: openAtLogin,
+  });
+});
+
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
@@ -430,5 +440,4 @@ app.on("will-quit", () => {
   globalShortcut.unregisterAll();
 });
 
-app.setLoginItemSettings({ openAtLogin: true });
 app.setAppUserModelId("com.roldanjr.pomatez");

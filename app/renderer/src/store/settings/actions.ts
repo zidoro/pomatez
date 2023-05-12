@@ -15,6 +15,7 @@ import {
   AUTO_START_WORK_TIME,
   ENABLE_VOICE_ASSISTANCE,
   ENABLE_COMPACT_MODE,
+  OPEN_AT_LOGIN,
 } from "./types";
 
 export const setAlwaysOnTop = (
@@ -128,6 +129,15 @@ export const setAutoStartWorkTime = (
   return {
     type: AUTO_START_WORK_TIME,
     payload: autoStartWorkTime,
+  };
+};
+
+export const setOpenAtLogin = (
+  openAtLogin: SettingTypes["openAtLogin"]
+): SettingActionTypes => {
+  return {
+    type: OPEN_AT_LOGIN,
+    payload: openAtLogin,
   };
 };
 

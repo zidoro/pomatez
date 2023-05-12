@@ -14,6 +14,7 @@ export type SettingTypes = {
   minimizeToTray: boolean;
   autoStartWorkTime: boolean;
   notificationType: "none" | "normal" | "extra";
+  openAtLogin: boolean;
 };
 
 export const ALWAYS_ON_TOP = `${settings} ALWAYS_ON_TOP`;
@@ -35,6 +36,8 @@ export const SET_NOTIFICATION_PROPERTY = `${settings} SET_NOTIFICATION_PROPERTY`
 export const CLOSE_TO_TRAY = `${settings} CLOSE_TO_TRAY`;
 export const MINIMIZE_TO_TRAY = `${settings} MINIMIZE_TO_TRAY`;
 export const AUTO_START_WORK_TIME = `${settings} AUTO_START_WORK_TIME`;
+
+export const OPEN_AT_LOGIN = `${settings} OPEN_AT_LOGIN`;
 
 export const RESTORE_DEFAULT_SETTINGS = `${settings} RESTORE_DEFAULT_SETTINGS`;
 

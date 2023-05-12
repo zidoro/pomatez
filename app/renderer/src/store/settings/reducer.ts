@@ -16,6 +16,7 @@ import {
   AUTO_START_WORK_TIME,
   ENABLE_VOICE_ASSISTANCE,
   ENABLE_COMPACT_MODE,
+  OPEN_AT_LOGIN,
 } from "./types";
 
 const defaultSettings: SettingTypes = {
@@ -32,6 +33,7 @@ const defaultSettings: SettingTypes = {
   minimizeToTray: false,
   autoStartWorkTime: false,
   useNativeTitlebar: detectOS() === "Windows" ? false : true,
+  openAtLogin: false,
 };
 
 const settings =
@@ -109,6 +111,11 @@ export const settingReducer = (
       return {
         ...state,
         autoStartWorkTime: action.payload,
+      };
+    case OPEN_AT_LOGIN:
+      return {
+        ...state,
+        openAtLogin: action.payload,
       };
     case RESTORE_DEFAULT_SETTINGS:
       return defaultSettings;
