@@ -82,13 +82,6 @@ const PriorityCard: React.FC = () => {
     return "";
   };
 
-  if (
-    isObjectEmpty(priorityList) ||
-    priorityList?.cards.filter((card) => !card.done).length === 0
-  ) {
-    return <StyledSectionSeparator />;
-  }
-
   return (
     <StyledPriorityCardContainer>
       <StyledPriorityCardWrapper>
