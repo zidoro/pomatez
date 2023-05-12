@@ -14,6 +14,7 @@ import {
   setCloseToTray,
   setEnableVoiceAssistance,
   setEnableCompactMode,
+  setOpenAtLogin,
 } from "store";
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import { ThemeContext } from "contexts";
@@ -125,6 +126,14 @@ const FeatureSection: React.FC = () => {
           setEnableVoiceAssistance(!settings.enableVoiceAssistance)
         );
       }, [dispatch, settings.enableVoiceAssistance]),
+    },
+    {
+      id: "open-at-login",
+      label: "Open At Login",
+      checked: settings.openAtLogin,
+      onChange: useCallback(() => {
+        dispatch(setOpenAtLogin(!settings.openAtLogin));
+      }, [dispatch, settings.openAtLogin]),
     },
   ];
 

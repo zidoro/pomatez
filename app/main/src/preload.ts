@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld("electron", {
       ipcRenderer.send(channel, ...args);
     }
   },
-  recieve: (channel: string, response: (...args: any[]) => void) => {
+  receive: (channel: string, response: (...args: any[]) => void) => {
     if (FROM_MAIN.includes(channel)) {
       ipcRenderer.on(
         channel,
