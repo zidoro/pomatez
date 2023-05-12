@@ -93,7 +93,7 @@ export const settingReducer = (
     case SET_NOTIFICATION_PROPERTY:
       return {
         ...state,
-        notificationProperty: action.payload,
+        notificationType: action.payload,
       };
     case CLOSE_TO_TRAY:
       return {

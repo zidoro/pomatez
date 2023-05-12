@@ -6,7 +6,7 @@ import {
   AppStateTypes,
   setEnableProgressAnimation,
   SettingTypes,
-  setNotificationProperty,
+  setNotificationType,
   setEnableFullscreenBreak,
   setUseNativeTitlebar,
   setAutoStartWorkTime,
@@ -130,7 +130,7 @@ const FeatureSection: React.FC = () => {
 
   const onChangeNotificationProps = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch(setNotificationProperty(e.target.value));
+      dispatch(setNotificationType(e.target.value));
     },
     [dispatch]
   );

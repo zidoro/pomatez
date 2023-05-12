@@ -26,7 +26,7 @@ export const setAlwaysOnTop = (
   };
 };
 
-export const togglenotificationSoundOn = () => {
+export const toggleNotificationSound = () => {
   return {
     type: TOGGLE_NOTIFICATION_SOUND,
   };
@@ -95,12 +95,12 @@ export const setUseNativeTitlebar = (
   };
 };
 
-export const setNotificationProperty = (
-  notificationProperty: string
+export const setNotificationType = (
+  notificationType: string
 ): SettingActionTypes => {
   return {
     type: SET_NOTIFICATION_PROPERTY,
-    payload: notificationProperty,
+    payload: notificationType,
   };
 };
 
