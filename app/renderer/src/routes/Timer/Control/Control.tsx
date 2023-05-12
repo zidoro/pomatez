@@ -14,7 +14,7 @@ import {
   skipTimer,
   SPECIAL_BREAK,
   STAY_FOCUS,
-  togglenotificationSoundOn,
+  toggleNotificationSound,
 } from "store";
 import {
   StyledControl,
@@ -82,7 +82,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   ]);
 
   const onNotifacationSoundCallback = useCallback(() => {
-    dispatch(togglenotificationSoundOn());
+    dispatch(toggleNotificationSound());
   }, [dispatch]);
 
   const onToggleCompactCallback = useCallback(() => {
