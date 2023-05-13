@@ -20,6 +20,7 @@ import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import { ThemeContext } from "contexts";
 
 import SettingSection from "./SettingSection";
+import { detectOS } from "utils";
 
 const FeatureSection: React.FC = () => {
   const settings: SettingTypes = useSelector(
@@ -134,6 +135,11 @@ const FeatureSection: React.FC = () => {
       onChange: useCallback(() => {
         dispatch(setOpenAtLogin(!settings.openAtLogin));
       }, [dispatch, settings.openAtLogin]),
+      style: {
+        ...(detectOS() === "Linux" && {
+          display: "none",
+        }),
+      },
     },
   ];
 
@@ -146,15 +152,18 @@ const FeatureSection: React.FC = () => {
 
   return (
     <SettingSection heading="App Features">
-      {featureList.map(({ id, label, checked, onChange }, index) => (
-        <Toggler
-          id={id}
-          label={label}
-          checked={checked}
-          onChange={onChange}
-          key={index}
-        />
-      ))}
+      {featureList.map(
+        ({ id, label, checked, onChange, ...rest }, index) => (
+          <Toggler
+            id={id}
+            key={index}
+            label={label}
+            checked={checked}
+            onChange={onChange}
+            {...rest}
+          />
+        )
+      )}
       <Collapse>
         <Radio
           id="none"

@@ -12,6 +12,7 @@ export type TogglerProps = {
   onChange?:
     | ((event: React.ChangeEvent<HTMLInputElement>) => void)
     | undefined;
+  style?: React.CSSProperties;
 };
 
 const Toggler: React.FC<TogglerProps> = ({
@@ -19,9 +20,10 @@ const Toggler: React.FC<TogglerProps> = ({
   label,
   checked,
   onChange,
+  style,
 }) => {
   return (
-    <StyledTogglerWrapper>
+    <StyledTogglerWrapper style={style}>
       <StyledTogglerLabel htmlFor={id}>{label}</StyledTogglerLabel>
       <StyledTogglerSwitch
         type="checkbox"
