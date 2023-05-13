@@ -35,8 +35,8 @@ import {
   createContextMenu,
 } from "./helpers";
 import { activateUser } from "./helpers/analytics";
-import store from "./store";
 import isDev from "electron-is-dev";
+import store from "./store";
 
 import "v8-compile-cache";
 import {
@@ -48,10 +48,10 @@ const onProduction = app.isPackaged;
 
 const notificationIcon = path.join(
   __dirname,
-  "./assets/notification-dark.png"
+  "assets/notification-dark.png"
 );
 
-const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
+const trayIcon = path.join(__dirname, "assets/tray-dark.png");
 
 const onlySingleInstance = app.requestSingleInstanceLock();
 
@@ -384,9 +384,13 @@ ipcMain.on(SET_SHOW, () => {
 });
 
 ipcMain.on(SET_MINIMIZE, (e, { minimizeToTray }) => {
-  win?.minimize();
-  if (tray === null && minimizeToTray) {
-    createSystemTray();
+  if (!minimizeToTray) {
+    win?.minimize();
+  } else {
+    if (tray === null) {
+      createSystemTray();
+    }
+    win?.hide();
   }
 });
 
@@ -394,10 +398,10 @@ ipcMain.on(SET_CLOSE, (e, { closeToTray }) => {
   if (!closeToTray) {
     app.exit();
   } else {
-    if (closeToTray && tray === null) {
+    if (tray === null) {
       createSystemTray();
     }
-    app.quit();
+    win?.hide();
   }
 });
 
