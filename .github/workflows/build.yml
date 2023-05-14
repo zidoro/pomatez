@@ -73,7 +73,7 @@ jobs:
           name: prepare
           path: app/main/build
       - name: Build
-        run: lerna run ${{ matrix.yarn-task }} --stream
+        run: npx lerna run ${{ matrix.yarn-task }} --stream
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
       - uses: actions/upload-artifact@v3
         with:
