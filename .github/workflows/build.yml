@@ -1,6 +1,8 @@
-name: Test Build
+name: Test build
 on:
   push:
+    branches-ignore:
+      - master
   workflow_dispatch:
   workflow_call:
 jobs:

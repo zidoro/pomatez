@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - master
-name: release-please
+name: Release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
