@@ -85,11 +85,14 @@ jobs:
           name: built-app-${{ matrix.name }}-x64
           path: |
             app/main/dist/*x64*.*
+            app/main/dist/*x86_64*.*
+            app/main/dist/*amd64*.*
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-arm64
           path: |
             app/main/dist/*arm64*.*
+            app/main/dist/*aarch64*.*
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-armv7l
