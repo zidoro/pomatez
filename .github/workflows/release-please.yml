@@ -24,7 +24,7 @@ jobs:
   build:
     name: Build
     needs: release-please
-    uses: .github/workflows/build.yml
+    uses: ./.github/workflows/build.yml
   publish:
     name: Pubish
     needs: ['release-please', 'build']
