@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: prepare
-          path: app/main/build
+          path: app/main/build/
   build:
     needs: prepare
     name: "Test Build"
@@ -60,7 +60,7 @@ jobs:
       - name: Download artifact
         uses: actions/upload-artifact@v3
         with:
-          path: app/main/build
+          path: app/main/
       - name: Build
         run: lerna run ${{ matrix.yarn-task }} --stream
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
