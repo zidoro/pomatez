@@ -54,13 +54,19 @@ jobs:
         with:
           node-version: 16.x
           cache: "yarn"
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
       - name: Install NPM Packages
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Download artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/download-artifact@v3
         with:
-          path: app/main/
+          name: prepare
+          path: app/main/build
       - name: Build
         run: lerna run ${{ matrix.yarn-task }} --stream
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
