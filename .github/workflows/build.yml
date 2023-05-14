@@ -67,7 +67,7 @@ jobs:
         with:
           name: prepare
           path: app/main/build
-      - name: Install Snapcraft (UBUNTU ONLY)
+      - name: Build Snap (Linux ONLY)
         if: matrix.name == 'linux'
         run: |
           sudo snap install snapcraft --classic
@@ -77,6 +77,26 @@ jobs:
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
       - uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}
+          name: built-app-${{ matrix.name }}-ia32
           path: |
-            app/main/dist/*.*
+            app/main/dist/*ia32*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-x64
+          path: |
+            app/main/dist/*x64*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-arm64
+          path: |
+            app/main/dist/*arm64*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-armv7l
+          path: |
+            app/main/dist/*armv7l*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-autoupdater
+          path: |
+            app/main/dist/latest*
