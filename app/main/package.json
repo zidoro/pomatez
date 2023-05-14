@@ -21,6 +21,7 @@
     "build:mwl": "electron-builder -mwl",
     "build:dir": "electron-builder --dir",
     "build:win": "electron-builder --win --publish=never",
+    "build:win-a64": "electron-builder --win --arm64 --publish=never",
     "build:mac": "electron-builder --mac --publish=never",
     "build:linux": "electron-builder --linux --publish=never",
     "build:snap": "electron-builder --linux snap",
@@ -46,14 +47,16 @@
           "target": "portable",
           "arch": [
             "x64",
-            "ia32"
+            "ia32",
+            "arm64"
           ]
         },
         {
           "target": "nsis",
           "arch": [
             "x64",
-            "ia32"
+            "ia32",
+            "arm64"
           ]
         }
       ],
