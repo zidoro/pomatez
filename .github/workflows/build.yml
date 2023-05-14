@@ -13,6 +13,11 @@ jobs:
         with:
           node-version: 16.x
           cache: "yarn"
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
       - name: Install NPM Packages
         run: |
           yarn install --immutable --network-timeout 120000
@@ -55,7 +60,7 @@ jobs:
           node-version: 16.x
           cache: "yarn"
       - name: Cache node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: 'node_modules'
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
