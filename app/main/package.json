@@ -18,9 +18,9 @@
     "dev:main": "nodemon --exec \"yarn build && electron .\"",
     "start": "yarn dev:main",
     "build": "tsc && copyfiles -u 2 \"src/assets/*\" build/assets",
-    "build:mwl": "electron-builder -mwl",
+    "build:mwl": "electron-builder -mwl --ia32 --x64 --arm64",
     "build:dir": "electron-builder --dir",
-    "build:win": "electron-builder --win --publish=never",
+    "build:win": "electron-builder --win --ia32 --x64 --publish=never",
     "build:win-a64": "electron-builder --win --arm64 --publish=never",
     "build:mac": "electron-builder --mac --publish=never",
     "build:linux": "electron-builder --linux --publish=never",
@@ -37,36 +37,26 @@
       "build"
     ],
     "mac": {
-      "artifactName": "Pomatez-v${version}-mac.${ext}",
+      "artifactName": "Pomatez-v${version}-${arch}-mac.${ext}",
       "category": "public.app-category.productivity",
       "icon": "./build/assets/logo-dark@2x.png"
     },
     "win": {
       "target": [
         {
-          "target": "portable",
-          "arch": [
-            "x64",
-            "ia32",
-            "arm64"
-          ]
+          "target": "portable"
         },
         {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32",
-            "arm64"
-          ]
+          "target": "nsis"
         }
       ],
       "icon": "./build/assets/logo-dark.ico"
     },
     "portable": {
-      "artifactName": "Pomatez-v${version}-${arch}-portable.${ext}"
+      "artifactName": "Pomatez-v${version}-${arch}-win-portable.${ext}"
     },
     "nsis": {
-      "artifactName": "Pomatez-v${version}-${arch}-setup.${ext}"
+      "artifactName": "Pomatez-v${version}-${arch}-win-setup.${ext}"
     },
     "linux": {
       "artifactName": "Pomatez-v${version}-${arch}-linux.${ext}",
