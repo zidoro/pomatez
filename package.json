@@ -16,6 +16,7 @@
     "build:mwl": "yarn build && lerna run build:mwl --stream",
     "build:dir": "yarn build && lerna run build:dir --stream",
     "build:win": "yarn build && lerna run build:win --stream",
+    "build:win-a64": "yarn build && lerna run build:win --stream",
     "build:mac": "yarn build && lerna run build:mac --stream",
     "build:linux": "yarn build && lerna run build:linux --stream",
     "build:snap": "yarn build && lerna run build:snap --stream",
