@@ -29,7 +29,7 @@ jobs:
     needs: release-please
     uses: ./.github/workflows/build.yml
   publish:
-    name: Pubish
+    name: Publish
     needs: ['release-please', 'build']
     runs-on: ubuntu-latest
     steps:
