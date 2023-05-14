@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - master
-name: release-please
+name: Release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -21,46 +21,17 @@ jobs:
           # See how to configure file https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md
           # See output info at https://github.com/google-github-actions/release-please-action#configuration for variables
           # Trigger more steps using "if: ${{ steps.release.outputs.release_created }}"
-
   build:
+    name: Build
     needs: release-please
-    name: "Build"
-
-    runs-on: ${{ matrix.os }}
-
-    if: ${{ needs.release-please.outputs.release_created }}
-
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            name: linux
-            yarn-task: build:linux
-          - os: macos-latest
-            name: mac
-            yarn-task: build:mac
-          - os: windows-latest
-            name: win
-            yarn-task: build:win
-
+    uses: ./.github/workflows/build.yml
+  publish:
+    name: Pubish
+    needs: ['release-please', 'build']
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: "yarn"
-      - name: Install NPM Packages
-        run: |
-          yarn install --immutable --network-timeout 120000
-      - name: Build
-        run: yarn ${{ matrix.yarn-task }}
-      # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-      - uses: actions/upload-artifact@v2
-        with:
-          name: built-app-${{ matrix.name }}
-          path: |
-            app/main/dist/*.*
+      - name: Download artifact
+        uses: actions/download-artifact@v3
       - name: Upload Release Asset(s)
         id: upload-release-asset
         uses: sekwah41/upload-release-assets@v1.1.0

@@ -1,46 +1,107 @@
-name: Test Build
-
+name: Test build
 on:
   push:
+    branches-ignore:
+      - master
+  workflow_dispatch:
+  workflow_call:
 jobs:
+  prepare:
+    name: "Prepare"
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: "yarn"
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-build-${{ hashFiles('yarn.lock') }}
+      - name: Install NPM Packages
+        run: |
+          yarn install --immutable --network-timeout 120000
+      - name: Build
+        run:  |
+          yarn build
+          tree
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: prepare
+          path: app/main/build/
   build:
+    needs: prepare
     name: "Test Build"
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
             name: linux
-            yarn-task: build:linux
-          - os: ubuntu-latest
-            name: snap
-            yarn-task: build:snap
+            yarn-task: build:linux-all
           - os: macos-latest
             name: mac
-            yarn-task: build:mac
+            yarn-task: build:mac-all
           - os: windows-latest
             name: win
-            yarn-task: build:win
-
+            yarn-task: build:win-all
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "yarn"
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-build-${{ hashFiles('yarn.lock') }}
       - name: Install NPM Packages
         run: |
           yarn install --immutable --network-timeout 120000
-      - name: Build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn ${{ matrix.yarn-task }}
-      # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-      - uses: actions/upload-artifact@v2
+      - name: Download artifact
+        uses: actions/download-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}
+          name: prepare
+          path: app/main/build
+      - name: Build Snap (Linux ONLY)
+        if: matrix.name == 'linux'
+        run: |
+          sudo snap install snapcraft --classic
+          npx lerna run build:snap --stream
+      - name: Build
+        run: npx lerna run ${{ matrix.yarn-task }} --stream
+      # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-ia32
           path: |
-            app/main/dist/*.*
+            app/main/dist/*ia32*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-x64
+          path: |
+            app/main/dist/*x64*.*
+            app/main/dist/*x86_64*.*
+            app/main/dist/*amd64*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-arm64
+          path: |
+            app/main/dist/*arm64*.*
+            app/main/dist/*aarch64*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-armv7l
+          path: |
+            app/main/dist/*armv7l*.*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-app-${{ matrix.name }}-autoupdater
+          path: |
+            app/main/dist/latest*
