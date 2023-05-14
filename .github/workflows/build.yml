@@ -2,6 +2,7 @@ name: Test Build
 
 on:
   push:
+  workflow_dispatch:
 jobs:
   build:
     name: "Test Build"
