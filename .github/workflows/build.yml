@@ -1,7 +1,8 @@
 name: Test Build
-
 on:
   push:
+  workflow_dispatch:
+  workflow_call:
 jobs:
   prepare:
     name: "Prepare"
@@ -39,19 +40,13 @@ jobs:
         include:
           - os: ubuntu-latest
             name: linux
-            yarn-task: build:linux
-          - os: ubuntu-latest
-            name: snap
-            yarn-task: build:snap
+            yarn-task: build:linux-all
           - os: macos-latest
             name: mac
-            yarn-task: build:mac
+            yarn-task: build:mac-all
           - os: windows-latest
             name: win
-            yarn-task: build:win
-          - os: windows-latest
-            name: win-a64
-            yarn-task: build:win-a64
+            yarn-task: build:win-all
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x

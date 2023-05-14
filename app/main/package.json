@@ -21,9 +21,19 @@
     "build:mwl": "electron-builder -mwl --ia32 --x64 --arm64",
     "build:dir": "electron-builder --dir",
     "build:win": "electron-builder --win --ia32 --x64 --publish=never",
-    "build:win-a64": "electron-builder --win --arm64 --publish=never",
+    "build:win-all": "electron-builder --win --ia32 --x64 --arm64 --publish=never",
+    "build:win-x64": "electron-builder --win --x64 --publish=never",
+    "build:win-ia32": "electron-builder --win --ia32 --publish=never",
+    "build:win-arm64": "electron-builder --win --arm64 --publish=never",
     "build:mac": "electron-builder --mac --publish=never",
+    "build:mac-all": "electron-builder --mac --x64 --arm64 --publish=never",
+    "build:mac-x64": "electron-builder --mac --x64 --publish=never",
+    "build:mac-arm64": "electron-builder --mac --arm64 --publish=never",
     "build:linux": "electron-builder --linux --publish=never",
+    "build:linux-all": "electron-builder --linux --x64 --armv7l --arm64 --publish=never",
+    "build:linux-x64": "electron-builder --linux --publish=never",
+    "build:linux-armv7l": "electron-builder --linux --armv7l --publish=never",
+    "build:linux-arm64": "electron-builder --linux --arm64 --publish=never",
     "build:snap": "electron-builder --linux snap",
     "release:mw": "electron-builder --publish always --mac --win",
     "release": "electron-builder --publish always",
@@ -61,6 +71,7 @@
     "linux": {
       "artifactName": "Pomatez-v${version}-${arch}-linux.${ext}",
       "target": [
+        "snap",
         "AppImage",
         "deb",
         "rpm"
