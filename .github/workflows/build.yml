@@ -23,6 +23,9 @@ jobs:
           - os: windows-latest
             name: win
             yarn-task: build:win
+          - os: windows-latest
+            name: win-a64
+            yarn-task: build:win-a64
 
     steps:
       - uses: actions/checkout@v2
