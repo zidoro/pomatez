@@ -13,7 +13,7 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "serve": "yarn build && gatsby serve",
     "predeploy": "yarn build --prefix-paths",
-    "deploy": "gh-pages -d public -r https://$GH_TOKEN@github.com/roldanjr/pomatez.git"
+    "deploy": "gh-pages -d public -r https://$GH_TOKEN@github.com/zidoro/pomatez.git"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",

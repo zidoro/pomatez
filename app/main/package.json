@@ -1,6 +1,6 @@
 {
   "name": "pomatez",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": true,
   "license": "MIT",
   "main": "./build/main.js",
@@ -9,7 +9,7 @@
     "email": "roldanjrmontilla@gmail.com",
     "url": "https://github.com/roldanjr"
   },
-  "repository": "https://github.com/roldanjr/pomatez",
+  "repository": "https://github.com/zidoro/pomatez",
   "description": "Attractive pomodoro timer for Windows, Mac, and Linux.",
   "scripts": {
     "prepare": "yarn build",
@@ -21,6 +21,7 @@
     "build:mwl": "electron-builder -mwl",
     "build:dir": "electron-builder --dir",
     "build:win": "electron-builder --win --publish=never",
+    "build:win-a64": "electron-builder --win --arm64 --publish=never",
     "build:mac": "electron-builder --mac --publish=never",
     "build:linux": "electron-builder --linux --publish=never",
     "build:snap": "electron-builder --linux snap",
@@ -46,14 +47,16 @@
           "target": "portable",
           "arch": [
             "x64",
-            "ia32"
+            "ia32",
+            "arm64"
           ]
         },
         {
           "target": "nsis",
           "arch": [
             "x64",
-            "ia32"
+            "ia32",
+            "arm64"
           ]
         }
       ],
