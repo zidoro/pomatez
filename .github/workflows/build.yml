@@ -62,14 +62,16 @@ jobs:
       - name: Install NPM Packages
         run: |
           yarn install --immutable --network-timeout 120000
-      - name: Install Snapcraft (UBUNTU ONLY)
-        if: matrix.name == 'linux'
-        run: sudo snap install snapcraft --classic
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: prepare
           path: app/main/build
+      - name: Install Snapcraft (UBUNTU ONLY)
+        if: matrix.name == 'linux'
+        run: |
+          sudo snap install snapcraft --classic
+          npx lerna run build:snap --stream
       - name: Build
         run: npx lerna run ${{ matrix.yarn-task }} --stream
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
