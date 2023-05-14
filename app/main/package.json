@@ -29,7 +29,7 @@
     "build:mac-all": "electron-builder --mac --x64 --arm64 --publish=never",
     "build:mac-x64": "electron-builder --mac --x64 --publish=never",
     "build:mac-arm64": "electron-builder --mac --arm64 --publish=never",
-    "build:linux": "electron-builder --linux --publish=never",
+    "build:linux": "electron-builder --linux --x64 --arm64 --publish=never",
     "build:linux-all": "electron-builder --linux --x64 --armv7l --arm64 --publish=never",
     "build:linux-x64": "electron-builder --linux --publish=never",
     "build:linux-armv7l": "electron-builder --linux --armv7l --publish=never",
@@ -71,7 +71,6 @@
     "linux": {
       "artifactName": "Pomatez-v${version}-${arch}-linux.${ext}",
       "target": [
-        "snap",
         "AppImage",
         "deb",
         "rpm"

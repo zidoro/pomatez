@@ -64,7 +64,9 @@ jobs:
           yarn install --immutable --network-timeout 120000
       - name: Install Snapcraft (UBUNTU ONLY)
         if: matrix.name == 'linux'
-        run: sudo snap install snapcraft --classic
+        run: |
+          sudo snap install snapcraft --classic
+          npx lerna run build:snap --stream
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
