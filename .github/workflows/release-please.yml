@@ -43,11 +43,11 @@ jobs:
         with:
           upload_url: ${{ needs.release-please.outputs.upload_url }}
           asset_path: |
-            latest*
-            *.deb
-            *.rpm
-            *.dmg
-            *.AppImage
-            *.zip
-            *.exe
-            *.blockmap
+            **/latest*
+            **/*.deb
+            **/*.rpm
+            **/*.dmg
+            **/*.AppImage
+            **/*.zip
+            **/*.exe
+            **/*.blockmap
