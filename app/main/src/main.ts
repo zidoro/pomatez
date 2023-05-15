@@ -36,6 +36,7 @@ import { activateUser } from "./helpers/analytics";
 import store from "./store";
 import isDev from "electron-is-dev";
 const isWin = process.platform === "win32";
+const isMac = process.platform === "darwin";
 
 import "v8-compile-cache";
 import {
@@ -54,7 +55,10 @@ const trayIcon = path.join(__dirname, "./assets/tray-dark.png");
 
 const onlySingleInstance = app.requestSingleInstanceLock();
 
-Menu.setApplicationMenu(null);
+const applicationMenu = isMac
+  ? Menu.buildFromTemplate([{ role: "appMenu" }, { role: "editMenu" }])
+  : null;
+Menu.setApplicationMenu(applicationMenu);
 
 const getFrameHeight = () => {
   if (isWindow()) {
