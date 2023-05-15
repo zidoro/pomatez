@@ -29,7 +29,7 @@ jobs:
     needs: release-please
     uses: ./.github/workflows/build.yml
   publish:
-    name: Pubish
+    name: Publish
     needs: ['release-please', 'build']
     runs-on: ubuntu-latest
     steps:
@@ -43,11 +43,11 @@ jobs:
         with:
           upload_url: ${{ needs.release-please.outputs.upload_url }}
           asset_path: |
-            latest*
-            *.deb
-            *.rpm
-            *.dmg
-            *.AppImage
-            *.zip
-            *.exe
-            *.blockmap
+            **/latest*
+            **/*.deb
+            **/*.rpm
+            **/*.dmg
+            **/*.AppImage
+            **/*.zip
+            **/*.exe
+            **/*.blockmap
