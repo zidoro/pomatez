@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.6](https://github.com/huangyinhaow/pomatez/compare/v1.4.5...v1.4.6) (2023-05-15)
+
+
+### Bug Fixes 🐛
+
+* **app/renderer:** fix linter warnings that causes CI test build failing ([26edd59](https://github.com/huangyinhaow/pomatez/commit/26edd59b26155954208fafc0dc3d933501c11bc9))
+* Set Application Menu to Fix Mac Shortcuts ([0e6d47f](https://github.com/huangyinhaow/pomatez/commit/0e6d47f0eb166256f914494518b4ea9e63160c06))
+
 ## [1.4.5](https://github.com/huangyinhaow/pomatez/compare/v1.4.4...v1.4.5) (2023-05-15)
 
 
