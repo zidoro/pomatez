@@ -84,25 +84,25 @@ jobs:
         with:
           name: built-app-${{ matrix.name }}-ia32
           path: |
-            app/main/dist/*ia32*.*
+            app/main/dist/Pomatez*ia32*.*
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-x64
           path: |
-            app/main/dist/*x64*.*
-            app/main/dist/*x86_64*.*
-            app/main/dist/*amd64*.*
+            app/main/dist/Pomatez*x64*.*
+            app/main/dist/Pomatez*x86_64*.*
+            app/main/dist/Pomatez*amd64*.*
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-arm64
           path: |
-            app/main/dist/*arm64*.*
-            app/main/dist/*aarch64*.*
+            app/main/dist/Pomatez*arm64*.*
+            app/main/dist/Pomatez*aarch64*.*
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-armv7l
           path: |
-            app/main/dist/*armv7l*.*
+            app/main/dist/Pomatez*armv7l*.*
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-autoupdater
