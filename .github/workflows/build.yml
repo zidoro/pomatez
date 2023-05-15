@@ -3,6 +3,9 @@ on:
   push:
     branches-ignore:
       - master
+    paths-ignore:
+      - "website"
+      - ".github"
   workflow_dispatch:
   workflow_call:
 jobs:
