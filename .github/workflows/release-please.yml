@@ -44,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: needs.release-please.outputs.tag
+          tag_name: ${{ needs.release-please.outputs.tag }}
           files: |
             **/latest*
             **/*.deb
