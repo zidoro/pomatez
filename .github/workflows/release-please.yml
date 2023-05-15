@@ -26,10 +26,12 @@ jobs:
           # Trigger more steps using "if: ${{ steps.release.outputs.release_created }}"
   build:
     name: Build
+    if: needs.release-please.outputs.release_created
     needs: release-please
     uses: ./.github/workflows/build.yml
   publish:
     name: Publish
+    if: needs.release-please.outputs.release_created
     needs: ['release-please', 'build']
     runs-on: ubuntu-latest
     steps:
