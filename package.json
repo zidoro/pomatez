@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "version": "1.2.3",
+  "version": "1.4.5",
   "workspaces": [
     "app/*"
   ],
