@@ -53,7 +53,7 @@ jobs:
         with:
           name: built-app-${{ matrix.name }}-all
           path: |
-            app/main/dist/Pomatez[!ai].exe
+            app/main/dist/Pomatez-v[0-9].[0-9].[0-9]-win-*.exe
       - uses: actions/upload-artifact@v3
         with:
           name: built-app-${{ matrix.name }}-ia32
