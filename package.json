@@ -12,6 +12,7 @@
     "dev:main": "lerna run dev:main --stream",
     "dev:app": "cross-env ELECTRON_ENABLE_LOGGING=1 lerna run start --parallel --stream",
     "prebuild": "lerna run prepare --stream",
+    "lerna": "lerna",
     "build": "lerna run build --parallel --stream",
     "build:mwl": "yarn build && lerna run build:mwl --stream",
     "build:dir": "yarn build && lerna run build:dir --stream",

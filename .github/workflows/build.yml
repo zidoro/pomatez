@@ -1,4 +1,4 @@
-name: Test
+name: Build
 on:
   push:
     branches-ignore:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    name: "Test"
+    name: "Build"
     strategy:
       matrix:
         include:
