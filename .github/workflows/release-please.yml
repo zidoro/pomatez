@@ -51,4 +51,5 @@ jobs:
             **/*.AppImage
             **/*.zip
             **/*.exe
+            **/*.snap
             **/*.blockmap
