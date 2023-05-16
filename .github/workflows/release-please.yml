@@ -8,6 +8,7 @@ permissions:
   pull-requests: write
 jobs:
   release-please:
+    name: Release Please
     runs-on: ubuntu-latest
     steps:
       - uses: google-github-actions/release-please-action@v3
@@ -20,6 +21,7 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       sha: ${{ steps.release.outputs.sha }}
       upload_url: ${{ steps.release.outputs.upload_url }}
+    # Need to allow GitHub Actions to create and approve pull requests.
   build:
     name: "Build"
     needs: release-please

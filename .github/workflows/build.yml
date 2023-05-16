@@ -48,37 +48,43 @@ jobs:
         run: |
           sudo snap install snapcraft --classic
           yarn lerna run build:snap --stream
-      - uses: actions/upload-artifact@v3
+      - name: Upload windows all-in-one build
+        uses: actions/upload-artifact@v3
         if: matrix.name == 'win'
         with:
-          name: built-app-${{ matrix.name }}-all
+          name: built-app-all-in-one-${{ matrix.name }}
           path: |
             app/main/dist/Pomatez-v[0-9].[0-9].[0-9]-win-*.exe
-      - uses: actions/upload-artifact@v3
+      - name: Upload ia32 builds (windows)
+        uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}-ia32
+          name: built-app-ia32-${{ matrix.name }}
           path: |
             app/main/dist/Pomatez*ia32*.*
-      - uses: actions/upload-artifact@v3
+      - name: Upload x64 builds (all)
+        uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}-x64
+          name: built-app-x64-${{ matrix.name }}
           path: |
             app/main/dist/Pomatez*x64*.*
             app/main/dist/Pomatez*x86_64*.*
             app/main/dist/Pomatez*amd64*.*
-      - uses: actions/upload-artifact@v3
+      - name: Upload arm64 builds (all)
+        uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}-arm64
+          name: built-app-arm64-${{ matrix.name }}
           path: |
             app/main/dist/Pomatez*arm64*.*
             app/main/dist/Pomatez*aarch64*.*
-      - uses: actions/upload-artifact@v3
+      - name: Upload armv7l Builds (linux)
+        uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}-armv7l
+          name: built-app-armv7l-${{ matrix.name }}
           path: |
             app/main/dist/Pomatez*armv7l*.*
-      - uses: actions/upload-artifact@v3
+      - name: Upload AutoUpdater (all)
+        uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}-autoupdater
+          name: built-app-AutoUpdater-${{ matrix.name }}
           path: |
             app/main/dist/latest*
