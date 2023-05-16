@@ -9,17 +9,17 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+          command: manifest
     outputs:
       tag: ${{ steps.release.outputs.tag_name }}
       release_created: ${{ steps.release.outputs.release_created }}
       sha: ${{ steps.release.outputs.sha }}
       upload_url: ${{ steps.release.outputs.upload_url }}
-    # https://github.com/google-github-actions/release-please-action in case more config is needed
-    steps:
-      - uses: google-github-actions/release-please-action@v3
-        id: release
-        with:
-          command: manifest
   build:
     name: "Build"
     needs: release-please
