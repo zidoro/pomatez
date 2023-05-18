@@ -1,7 +1,7 @@
 name: Deploy Website
 on:
   push:
-    branches: 
+    branches:
       - master
     paths:
       - "website"
