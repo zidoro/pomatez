@@ -47,7 +47,7 @@
       "build"
     ],
     "mac": {
-      "artifactName": "Pomatez-v${version}-${arch}-mac.${ext}",
+      "artifactName": "Pomatez-v${version}-mac-${arch}.${ext}",
       "category": "public.app-category.productivity",
       "icon": "./build/assets/logo-dark@2x.png"
     },
@@ -63,13 +63,13 @@
       "icon": "./build/assets/logo-dark.ico"
     },
     "portable": {
-      "artifactName": "Pomatez-v${version}-${arch}-win-portable.${ext}"
+      "artifactName": "Pomatez-v${version}-win-${arch}-portable.${ext}"
     },
     "nsis": {
-      "artifactName": "Pomatez-v${version}-${arch}-win-setup.${ext}"
+      "artifactName": "Pomatez-v${version}-win-${arch}-setup.${ext}"
     },
     "linux": {
-      "artifactName": "Pomatez-v${version}-${arch}-linux.${ext}",
+      "artifactName": "Pomatez-v${version}-linux-${arch}.${ext}",
       "target": [
         "AppImage",
         "deb",
