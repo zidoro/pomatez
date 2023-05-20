@@ -252,7 +252,7 @@ type NotificationProps = {
 
 function notify(props: NotificationProps) {
   // This is because it can take different types depending on the initialised OS.
-  // Just for some reason, whoever sorted the types out fo this library only really considered JS rather than TS.
+  // Just for some reason, whoever sorted the types out of this library only really considered JS rather than TS.
   const notification: WindowsToaster.Notification &
     NotificationCenter.Notification = {
     icon: notificationIcon,
