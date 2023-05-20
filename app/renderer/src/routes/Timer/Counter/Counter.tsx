@@ -22,7 +22,7 @@ const Counter: React.FC = () => {
 
   const dashOffset = (duration - count) * (674 / duration);
 
-  const { minutes, seconds } = useTime(count);
+  const { hours, minutes, seconds } = useTime(count);
 
   if (settings.compactMode) {
     return (
@@ -45,6 +45,7 @@ const Counter: React.FC = () => {
                 compact
                 fullscreen={shouldFullscreen}
                 timerType={timerType}
+                hours={hours}
                 minutes={minutes}
                 seconds={seconds}
               />
@@ -55,6 +56,7 @@ const Counter: React.FC = () => {
           <CounterTimer
             compact
             timerType={timerType}
+            hours={hours}
             minutes={minutes}
             seconds={seconds}
           />
@@ -75,6 +77,7 @@ const Counter: React.FC = () => {
         <CounterType timerType={timerType} />
 
         <CounterTimer
+          hours={hours}
           timerType={timerType}
           minutes={minutes}
           seconds={seconds}

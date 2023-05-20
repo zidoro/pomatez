@@ -114,7 +114,10 @@ export const StyledCounterType = styled.div`
   }
 `;
 
-type TimerProps = { type?: string } & CounterContainerProps;
+type TimerProps = {
+  type?: string;
+  hours: string;
+} & CounterContainerProps;
 
 export const StyledCounterTimer = styled.h3<TimerProps>`
   font-size: 4rem;
@@ -129,11 +132,20 @@ export const StyledCounterTimer = styled.h3<TimerProps>`
 
   width: 20rem;
 
-  display: grid;
-  align-items: center;
-  justify-items: start;
-  grid-template-columns: 1fr max-content 1fr;
-  column-gap: 0.8rem;
+  ${(p) =>
+    Number(p.hours) > 0
+      ? `
+        display: flex;
+        justify-content: center;
+      `
+      : `
+        display: grid;
+        align-items: center;
+        justify-items: start;
+        grid-template-columns: 1fr max-content 1fr;
+        column-gap: 0.8rem;
+      `}
+  }}
 
   & > span:first-of-type {
     justify-self: end;
