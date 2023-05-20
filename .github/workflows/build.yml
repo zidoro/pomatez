@@ -1,46 +1,89 @@
-name: Test Build
-
+name: Build
 on:
   push:
+    branches-ignore:
+      - "master"
+    paths-ignore:
+      - "website"
+  workflow_call:
+  workflow_dispatch:
 jobs:
   build:
-    name: "Test Build"
-
-    runs-on: ${{ matrix.os }}
-
+    name: "Build"
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
             name: linux
-            yarn-task: build:linux
-          - os: ubuntu-latest
-            name: snap
-            yarn-task: build:snap
+            task: build:linux-all
           - os: macos-latest
             name: mac
-            yarn-task: build:mac
+            task: build:mac-all
           - os: windows-latest
             name: win
-            yarn-task: build:win
-
+            task: build:win-all
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "yarn"
-      - name: Install NPM Packages
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: "node_modules"
+          key: ${{ runner.os }}-build-${{ hashFiles('yarn.lock') }}
+      - name: Install
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn ${{ matrix.yarn-task }}
-      # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-      - uses: actions/upload-artifact@v2
+        run: |
+          yarn build
+          yarn lerna run ${{ matrix.task }} --stream
+      - name: Build Snap
+        if: matrix.name == 'linux'
+        run: |
+          sudo snap install snapcraft --classic
+          yarn lerna run build:snap --stream
+      - name: Upload windows all-in-one build
+        uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}
+          name: built-app-all-in-one-${{ matrix.name }}
           path: |
-            app/main/dist/*.*
+            app/main/dist/Pomatez-v+([0-9]).+([0-9]).+([0-9])-win-*.exe
+      - name: Upload ia32 builds
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-app-ia32-${{ matrix.name }}
+          path: |
+            app/main/dist/Pomatez*ia32*.*
+      - name: Upload x64 builds
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-app-x64-${{ matrix.name }}
+          path: |
+            app/main/dist/Pomatez*x64*.*
+            app/main/dist/Pomatez*x86_64*.*
+            app/main/dist/Pomatez*amd64*.*
+      - name: Upload arm64 builds
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-app-arm64-${{ matrix.name }}
+          path: |
+            app/main/dist/Pomatez*arm64*.*
+            app/main/dist/Pomatez*aarch64*.*
+      - name: Upload armv7l builds
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-app-armv7l-${{ matrix.name }}
+          path: |
+            app/main/dist/Pomatez*armv7l*.*
+      - name: Upload autoupdaters
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-app-AutoUpdater-${{ matrix.name }}
+          path: |
+            app/main/dist/latest*
