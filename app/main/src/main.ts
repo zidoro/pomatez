@@ -43,6 +43,8 @@ import {
   FullscreenState,
   setFullscreenBreakHandler,
 } from "./lifecycleEventHandlers/fullScreenBreak";
+import WindowsToaster from "node-notifier/notifiers/toaster";
+import NotificationCenter from "node-notifier/notifiers/notificationcenter";
 
 const onProduction = app.isPackaged;
 
@@ -241,6 +243,32 @@ function createSystemTray() {
   });
 }
 
+type NotificationProps = {
+  title: string;
+  message: string;
+  actions: string[];
+  callback?: (err: Error | null, response: string) => void;
+};
+
+function notify(props: NotificationProps) {
+  // This is because it can take different types depending on the initialised OS.
+  // Just for some reason, whoever sorted the types out fo this library only really considered JS rather than TS.
+  const notification: WindowsToaster.Notification &
+    NotificationCenter.Notification = {
+    icon: notificationIcon,
+    title: props.title,
+    message: props.message,
+    actions: props.actions,
+    appID: "com.roldanjr.pomatez",
+    sound: true,
+    wait: true,
+  };
+
+  notifier.notify(notification, (err, response) => {
+    if (props.callback) props.callback(err, response);
+  });
+}
+
 if (!onlySingleInstance) {
   app.quit();
 } else {
@@ -303,40 +331,30 @@ if (!onlySingleInstance) {
 
     const autoUpdater = activateAutoUpdate({
       onUpdateAvailable: (info) => {
-        notifier.notify(
-          {
-            icon: notificationIcon,
-            title: "NEW UPDATE IS AVAILABLE",
-            message: `App version ${info.version} ready to be downloaded.`,
-            actions: ["View Released Notes"],
-            sound: true,
-            wait: true,
-          },
-          (err, response) => {
+        notify({
+          title: "NEW UPDATE IS AVAILABLE",
+          message: `App version ${info.version} ready to be downloaded.`,
+          actions: ["View Released Notes"],
+          callback: (err, response) => {
             if (!err) {
               shell.openExternal(RELEASED_NOTES_LINK);
             }
-          }
-        );
+          },
+        });
       },
       onUpdateDownloaded: (info) => {
-        notifier.notify(
-          {
-            icon: notificationIcon,
-            title: "READY TO BE INSTALLED",
-            message: "Update has been successfully downloaded.",
-            actions: ["Quit and Install", "Install it Later"],
-            sound: true,
-            wait: true,
-          },
-          (err, response) => {
+        notify({
+          title: "READY TO BE INSTALLED",
+          message: "Update has been successfully downloaded.",
+          actions: ["Quit and Install", "Install it Later"],
+          callback: (err, response) => {
             if (!err) {
               if (response === "quit and install") {
                 autoUpdater.quitAndInstall();
               }
             }
-          }
-        );
+          },
+        });
       },
     });
   });
