@@ -26,7 +26,7 @@ const SliderSection: React.FC = () => {
       label: "Stay focus",
       valueType: "mins",
       minValue: 1,
-      maxValue: 60,
+      maxValue: 120,
       value: stayFocus,
       onMouseUp: useCallback(
         (e) => dispatch(setStayFocus(parseInt(e.target.value))),
