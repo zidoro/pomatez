@@ -28,6 +28,7 @@ const Navigation: React.FC<Props> = ({ timerType }) => {
               exact={exact}
               to={path}
               type={timerType}
+              draggable="false"
               replace
             >
               <SVG name={icon} />
