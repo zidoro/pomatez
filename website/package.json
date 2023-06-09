@@ -18,7 +18,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",
     "framer-motion": "^8.5.2",
-    "gatsby": "^5.4.2",
+    "gatsby": "^5.9.1",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-google-gtag": "^5.4.0",
     "gatsby-plugin-image": "^3.4.0",
