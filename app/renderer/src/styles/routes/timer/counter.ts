@@ -152,7 +152,7 @@ export const StyledCounterTimer = styled.h3<TimerProps>`
   }
 
   &.compact {
-    font-size: ${(p) => (p.fullscreen ? "4rem" : "2.5rem")};
+    font-size: ${(p) => (p.fullscreen ? "4rem" : "2.3rem")};
     width: unset;
     display: flex;
     gap: 0.25rem;
