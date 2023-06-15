@@ -28,7 +28,7 @@ const CounterTimer: React.FC<Props> = ({
     >
       {Number(hours) > 0 && (
         <>
-          <span>{hours}</span>
+          <span>{compact ? hours[hours.length - 1] : hours}</span>
           <span>:</span>
         </>
       )}

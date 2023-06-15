@@ -156,6 +156,10 @@ export const StyledMainButton = styled.button`
 export const StyledCompactButton = styled.button<{ compact?: boolean }>`
   ${ControlButton}
   padding-right: ${(p) => (p.compact ? "1.6rem" : 0)};
+
+  & > svg {
+    width: ${(p) => (p.compact ? "1.6rem" : "inherit")};
+  }
 `;
 
 export const StyledSkipButton = styled.button`
