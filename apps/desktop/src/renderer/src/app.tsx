@@ -1,23 +1,15 @@
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@pomatez/ui";
-import {
-  AppProvider,
-  ElectronProvider,
-  SyncDataProvider,
-} from "./contexts";
+import { ElectronProvider } from "./contexts";
 import { router } from "./route.config";
 
 function App() {
   return (
-    <AppProvider>
-      <SyncDataProvider>
-        <ElectronProvider>
-          <ThemeProvider>
-            <RouterProvider router={router} />
-          </ThemeProvider>
-        </ElectronProvider>
-      </SyncDataProvider>
-    </AppProvider>
+    <ElectronProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </ElectronProvider>
   );
 }
 

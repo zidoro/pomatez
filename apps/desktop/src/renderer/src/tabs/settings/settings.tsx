@@ -1,12 +1,15 @@
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
-import { useAppMachine, useSyncData } from "@renderer/hooks";
-import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { slideLeftAndFadeAnimation } from "@renderer/utils";
+import { SectionLayout, TabLayout } from "@renderer/layouts";
+import { useAppMachine } from "@renderer/hooks";
 
 export default function Settings() {
-  const machineActor = useAppMachine();
-
-  const { settings, timer } = useSyncData();
+  const [
+    {
+      context: { settings, timer },
+    },
+    send,
+  ] = useAppMachine();
 
   const featureSettings: SwitchProps[] = [
     {
@@ -14,7 +17,7 @@ export default function Settings() {
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -28,7 +31,7 @@ export default function Settings() {
       label: "Fullscreen Break",
       checked: settings.fullscreenBreak,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -42,7 +45,7 @@ export default function Settings() {
       label: "Strict Mode",
       checked: settings.strictMode,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -56,7 +59,7 @@ export default function Settings() {
       label: "Dark Mode",
       checked: settings.darkMode,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -70,7 +73,7 @@ export default function Settings() {
       label: "Progress Animation",
       checked: settings.progressAnimation,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -84,7 +87,7 @@ export default function Settings() {
       label: "Autostart Break",
       checked: settings.autoStartBreak,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -98,7 +101,7 @@ export default function Settings() {
       label: "Autostart Work",
       checked: settings.autoStartWork,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -112,7 +115,7 @@ export default function Settings() {
       label: "Minimize To Tray",
       checked: settings.minimizeToTray,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -126,7 +129,7 @@ export default function Settings() {
       label: "Close To Tray",
       checked: settings.closeToTray,
       onCheckedChange: (checked) => {
-        machineActor.send({
+        send({
           type: "settings.change",
           values: {
             ...settings,
@@ -145,7 +148,7 @@ export default function Settings() {
           appState={timer.sessionType}
           variant="link"
           onClick={() => {
-            machineActor.send("settings.reset");
+            send("settings.reset");
           }}
         >
           Restore Defaults

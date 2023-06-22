@@ -21,6 +21,7 @@ const persistedContext = getContextDataSync();
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
   const [state, send] = useMachine(appMachine, {
+    devTools: true,
     state: persistedContext
       ? {
           ...appMachine.initialState,

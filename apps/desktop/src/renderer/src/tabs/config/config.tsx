@@ -8,14 +8,17 @@ import {
   capitalize,
 } from "@pomatez/ui";
 import { slideRightAndFadeAnimation } from "@renderer/utils";
-import { useAppMachine, useSyncData } from "@renderer/hooks";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { configPresets } from "@renderer/@data/machine";
+import { useAppMachine } from "@renderer/hooks";
 
 export default function Config() {
-  const machineActor = useAppMachine();
-
-  const { config, timer } = useSyncData();
+  const [
+    {
+      context: { config, timer },
+    },
+    send,
+  ] = useAppMachine();
 
   const sliderItems: SliderProps[] = [
     {
@@ -27,7 +30,7 @@ export default function Config() {
       max: 90,
       value: config.stayFocused,
       onValueChange: (value) => {
-        machineActor.send({
+        send({
           type: "config.change",
           values: { ...config, stayFocused: value },
         });
@@ -42,7 +45,7 @@ export default function Config() {
       max: 60,
       value: config.shortBreak,
       onValueChange: (value) => {
-        machineActor.send({
+        send({
           type: "config.change",
           values: { ...config, shortBreak: value },
         });
@@ -57,7 +60,7 @@ export default function Config() {
       max: 60,
       value: config.longBreak,
       onValueChange: (value) => {
-        machineActor.send({
+        send({
           type: "config.change",
           values: { ...config, longBreak: value },
         });
@@ -72,7 +75,7 @@ export default function Config() {
       max: 8,
       value: config.sessionRounds,
       onValueChange: (value) => {
-        machineActor.send({
+        send({
           type: "config.change",
           values: { ...config, sessionRounds: value },
         });
@@ -93,7 +96,7 @@ export default function Config() {
           appState={timer.sessionType}
           variant="link"
           onClick={() => {
-            machineActor.send("config.reset");
+            send("config.reset");
           }}
         >
           Restore Defaults
@@ -112,7 +115,7 @@ export default function Config() {
           appState={timer.sessionType}
           value={JSON.stringify(config)}
           onValueChange={(value) => {
-            machineActor.send({
+            send({
               type: "config.change",
               values: JSON.parse(value),
             });

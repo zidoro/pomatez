@@ -1,4 +1,6 @@
-import { useContext } from "react";
-import { AppContext } from "@renderer/contexts/app.context";
+import { useAtom, useAtomValue } from "jotai";
+import { appMachineAtom } from "@renderer/@data/machine";
 
-export const useAppMachine = () => useContext(AppContext);
+export const useAppMachine = () => useAtom(appMachineAtom);
+
+export const useAppMachineValue = () => useAtomValue(appMachineAtom);

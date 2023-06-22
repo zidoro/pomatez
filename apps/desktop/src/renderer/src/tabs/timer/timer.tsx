@@ -1,12 +1,15 @@
 import { Priority, Control, VStack } from "@pomatez/ui";
-import { useAppMachine, useSyncData } from "@renderer/hooks";
 import { slideUpAndFadeAnimation } from "@renderer/utils";
 import { CounterProgress } from "@renderer/components";
+import { useAppMachine } from "@renderer/hooks";
 
 export default function Timer() {
-  const machineActor = useAppMachine();
-
-  const { config, settings, timer } = useSyncData();
+  const [
+    {
+      context: { config, settings, timer },
+    },
+    send,
+  ] = useAppMachine();
 
   return (
     <VStack sx={slideUpAndFadeAnimation}>
@@ -24,22 +27,22 @@ export default function Timer() {
         isMuted={settings.isMuted}
         isCompact={settings.isCompact}
         onPlayPause={() => {
-          machineActor.send("timer.toggle");
+          send("timer.toggle");
         }}
         onToggleSound={() => {
-          machineActor.send("sound.toggle");
+          send("sound.toggle");
         }}
         onToggleCompact={() => {
-          machineActor.send("mode.toggle");
+          send("mode.toggle");
         }}
         onResetTimer={() => {
-          machineActor.send("timer.reset");
+          send("timer.reset");
         }}
         onNextEvent={() => {
-          machineActor.send("session.next");
+          send("session.next");
         }}
         onResetElapsed={() => {
-          machineActor.send("session.reset");
+          send("session.reset");
         }}
       />
     </VStack>

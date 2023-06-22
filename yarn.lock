@@ -5718,6 +5718,13 @@
     prettier "^2.8.7"
     xstate "^4.33.4"
 
+"@xstate/inspect@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@xstate/inspect/-/inspect-0.8.0.tgz#f99d3706cd823d4922c47ce4f4376eecac502cc7"
+  integrity sha512-wSkFeOnp+7dhn+zTThO0M4D2FEqZN9lGIWowJu5JLa2ojjtlzRwK8SkjcHZ4rLX8VnMev7kGjgQLrGs8kxy+hw==
+  dependencies:
+    fast-safe-stringify "^2.1.1"
+
 "@xstate/machine-extractor@^0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@xstate/machine-extractor/-/machine-extractor-0.10.0.tgz#4348847598359243f150e60c00d8743eda6c13f8"
@@ -9351,6 +9358,11 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   resolved "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
 
+fast-safe-stringify@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.1.1.tgz#c406a83b6e70d9e35ce3b30a81141df30aeba884"
+  integrity sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==
+
 fastest-levenshtein@^1.0.16:
   version "1.0.16"
   resolved "https://registry.npmjs.org/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz"
@@ -11857,6 +11869,16 @@ joi@^17.7.0:
     "@sideway/address" "^4.1.3"
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
+
+jotai-xstate@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/jotai-xstate/-/jotai-xstate-0.3.0.tgz#833cfb4e99943d4cc9e4ef6e04054a64bbb7bc99"
+  integrity sha512-ImMTwkT8e2Ld3KBUtisjtzTgtg4jgeAoFzwVZgDCoDkYsYgmE8NatEwBoz63BTmpg+EKOYkDxd6QmrAT9a2TBw==
+
+jotai@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.2.1.tgz#0a95b88c5f3ea4fd656b5f79af6f84e895f84f5a"
+  integrity sha512-Gz4tpbRQy9OiFgBwF9F7TieDn0UTE3C0IFSDuxHjOIvgn2tACH30UKz6p/wIlfoZROXSTCIxEvYEa7Y25WM+8g==
 
 js-sdsl@^4.1.4:
   version "4.3.0"

@@ -1,8 +1,10 @@
 import { Counter, TIMER_PROGRESS_CIRCUMFERENCE } from "@pomatez/ui";
-import { useSyncData } from "@renderer/hooks";
+import { useAppMachineValue } from "@renderer/hooks";
 
 export function CounterProgress() {
-  const { timer } = useSyncData();
+  const {
+    context: { timer },
+  } = useAppMachineValue();
 
   const timeProgress =
     (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;
