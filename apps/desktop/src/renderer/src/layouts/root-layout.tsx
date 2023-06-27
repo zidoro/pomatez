@@ -1,11 +1,14 @@
+import { useAtomValue } from "jotai";
 import { Outlet } from "react-router-dom";
 import { Box, Navbar, Titlebar, VStack } from "@pomatez/ui";
-import { useElectron, useSyncData } from "@renderer/hooks";
+
 import { CounterProgress } from "@renderer/components";
+import { timerAtom } from "@renderer/@data/atoms";
 import { routes } from "@renderer/route.config";
+import { useElectron } from "@renderer/hooks";
 
 export function RootLayout() {
-  const { timer } = useSyncData();
+  const timer = useAtomValue(timerAtom);
 
   const { onMinimizeWindow, onCloseWindow } = useElectron();
 

@@ -1,3 +1,5 @@
+import { useAtom, useAtomValue } from "jotai";
+import { RESET } from "jotai/utils";
 import {
   Button,
   Slider,
@@ -7,15 +9,19 @@ import {
   SliderProps,
   capitalize,
 } from "@pomatez/ui";
+
 import { slideRightAndFadeAnimation } from "@renderer/utils";
-import { useAppMachine, useSyncData } from "@renderer/hooks";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
-import { configPresets } from "@renderer/@data/machine";
+import {
+  configAtom,
+  configPresets,
+  timerAtom,
+} from "@renderer/@data/atoms";
 
 export default function Config() {
-  const machineActor = useAppMachine();
+  const [config, setConfig] = useAtom(configAtom);
 
-  const { config, timer } = useSyncData();
+  const timer = useAtomValue(timerAtom);
 
   const sliderItems: SliderProps[] = [
     {
@@ -27,10 +33,10 @@ export default function Config() {
       max: 90,
       value: config.stayFocused,
       onValueChange: (value) => {
-        machineActor.send({
-          type: "config.change",
-          values: { ...config, stayFocused: value },
-        });
+        setConfig((prev) => ({
+          ...prev,
+          stayFocused: value,
+        }));
       },
     },
     {
@@ -42,10 +48,10 @@ export default function Config() {
       max: 60,
       value: config.shortBreak,
       onValueChange: (value) => {
-        machineActor.send({
-          type: "config.change",
-          values: { ...config, shortBreak: value },
-        });
+        setConfig((prev) => ({
+          ...prev,
+          shortBreak: value,
+        }));
       },
     },
     {
@@ -57,10 +63,10 @@ export default function Config() {
       max: 60,
       value: config.longBreak,
       onValueChange: (value) => {
-        machineActor.send({
-          type: "config.change",
-          values: { ...config, longBreak: value },
-        });
+        setConfig((prev) => ({
+          ...prev,
+          longBreak: value,
+        }));
       },
     },
     {
@@ -72,10 +78,10 @@ export default function Config() {
       max: 8,
       value: config.sessionRounds,
       onValueChange: (value) => {
-        machineActor.send({
-          type: "config.change",
-          values: { ...config, sessionRounds: value },
-        });
+        setConfig((prev) => ({
+          ...prev,
+          sessionRounds: value,
+        }));
       },
     },
   ];
@@ -93,7 +99,7 @@ export default function Config() {
           appState={timer.sessionType}
           variant="link"
           onClick={() => {
-            machineActor.send("config.reset");
+            setConfig(RESET);
           }}
         >
           Restore Defaults
@@ -112,10 +118,7 @@ export default function Config() {
           appState={timer.sessionType}
           value={JSON.stringify(config)}
           onValueChange={(value) => {
-            machineActor.send({
-              type: "config.change",
-              values: JSON.parse(value),
-            });
+            setConfig(JSON.parse(value));
           }}
           items={presets}
           sx={{

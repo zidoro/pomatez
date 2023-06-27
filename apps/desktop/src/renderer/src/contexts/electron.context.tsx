@@ -4,8 +4,9 @@ import {
   useCallback,
   useEffect,
 } from "react";
+import { useAtomValue } from "jotai";
 import { runOnElectron } from "@renderer/utils";
-import { useSyncData } from "@renderer/hooks";
+import { settingsAtom, timerAtom } from "@renderer/@data/atoms";
 
 type ElectronContextProps = {
   onMinimizeWindow?: () => void;
@@ -15,7 +16,9 @@ type ElectronContextProps = {
 const ElectronContext = createContext<ElectronContextProps>({});
 
 const ElectronProvider = ({ children }: { children: ReactNode }) => {
-  const { settings, timer } = useSyncData();
+  const settings = useAtomValue(settingsAtom);
+
+  const timer = useAtomValue(timerAtom);
 
   const onMinimizeWindow = useCallback(() => {
     runOnElectron(() => {

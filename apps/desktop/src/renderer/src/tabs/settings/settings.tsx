@@ -1,12 +1,15 @@
+import { useAtom, useAtomValue } from "jotai";
 import { Box, Button, Switch, SwitchProps, VStack } from "@pomatez/ui";
-import { useAppMachine, useSyncData } from "@renderer/hooks";
+import { RESET } from "jotai/utils";
+
+import { settingsAtom, timerAtom } from "@renderer/@data/atoms";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import { slideLeftAndFadeAnimation } from "@renderer/utils";
 
 export default function Settings() {
-  const machineActor = useAppMachine();
+  const [settings, setSettings] = useAtom(settingsAtom);
 
-  const { settings, timer } = useSyncData();
+  const timer = useAtomValue(timerAtom);
 
   const featureSettings: SwitchProps[] = [
     {
@@ -14,13 +17,10 @@ export default function Settings() {
       label: "Always On Top",
       checked: settings.alwaysOnTop,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            alwaysOnTop: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          alwaysOnTop: checked,
+        }));
       },
     },
     {
@@ -28,13 +28,10 @@ export default function Settings() {
       label: "Fullscreen Break",
       checked: settings.fullscreenBreak,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            fullscreenBreak: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          fullscreenBreak: checked,
+        }));
       },
     },
     {
@@ -42,13 +39,10 @@ export default function Settings() {
       label: "Strict Mode",
       checked: settings.strictMode,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            strictMode: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          strictMode: checked,
+        }));
       },
     },
     {
@@ -56,13 +50,10 @@ export default function Settings() {
       label: "Dark Mode",
       checked: settings.darkMode,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            darkMode: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          darkMode: checked,
+        }));
       },
     },
     {
@@ -70,13 +61,10 @@ export default function Settings() {
       label: "Progress Animation",
       checked: settings.progressAnimation,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            progressAnimation: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          progressAnimation: checked,
+        }));
       },
     },
     {
@@ -84,13 +72,10 @@ export default function Settings() {
       label: "Autostart Break",
       checked: settings.autoStartBreak,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            autoStartBreak: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          autoStartBreak: checked,
+        }));
       },
     },
     {
@@ -98,13 +83,10 @@ export default function Settings() {
       label: "Autostart Work",
       checked: settings.autoStartWork,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            autoStartWork: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          autoStartWork: checked,
+        }));
       },
     },
     {
@@ -112,13 +94,10 @@ export default function Settings() {
       label: "Minimize To Tray",
       checked: settings.minimizeToTray,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            minimizeToTray: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          minimizeToTray: checked,
+        }));
       },
     },
     {
@@ -126,13 +105,10 @@ export default function Settings() {
       label: "Close To Tray",
       checked: settings.closeToTray,
       onCheckedChange: (checked) => {
-        machineActor.send({
-          type: "settings.change",
-          values: {
-            ...settings,
-            closeToTray: checked,
-          },
-        });
+        setSettings((prev) => ({
+          ...prev,
+          closeToTray: checked,
+        }));
       },
     },
   ];
@@ -145,7 +121,7 @@ export default function Settings() {
           appState={timer.sessionType}
           variant="link"
           onClick={() => {
-            machineActor.send("settings.reset");
+            setSettings(RESET);
           }}
         >
           Restore Defaults

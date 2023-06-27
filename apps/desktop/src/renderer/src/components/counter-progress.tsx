@@ -1,8 +1,9 @@
+import { useAtomValue } from "jotai";
 import { Counter, TIMER_PROGRESS_CIRCUMFERENCE } from "@pomatez/ui";
-import { useSyncData } from "@renderer/hooks";
+import { timerAtom } from "@renderer/@data/atoms";
 
 export function CounterProgress() {
-  const { timer } = useSyncData();
+  const timer = useAtomValue(timerAtom);
 
   const timeProgress =
     (timer.elapsed / timer.duration) * TIMER_PROGRESS_CIRCUMFERENCE;

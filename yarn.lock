@@ -11858,6 +11858,11 @@ joi@^17.7.0:
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
 
+jotai@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.2.1.tgz#0a95b88c5f3ea4fd656b5f79af6f84e895f84f5a"
+  integrity sha512-Gz4tpbRQy9OiFgBwF9F7TieDn0UTE3C0IFSDuxHjOIvgn2tACH30UKz6p/wIlfoZROXSTCIxEvYEa7Y25WM+8g==
+
 js-sdsl@^4.1.4:
   version "4.3.0"
   resolved "https://registry.npmjs.org/js-sdsl/-/js-sdsl-4.3.0.tgz"
