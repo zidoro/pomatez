@@ -1,6 +1,6 @@
 import { atomWithStorage } from "jotai/utils";
 
-export type ConfigProps = {
+type ConfigProps = {
   stayFocused: number;
   shortBreak: number;
   longBreak: number;

@@ -1,6 +1,7 @@
+import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-export type SettingsProps = {
+type SettingsProps = {
   alwaysOnTop: boolean;
   fullscreenBreak: boolean;
   strictMode: boolean;
@@ -14,7 +15,7 @@ export type SettingsProps = {
   isMuted: boolean;
 };
 
-export const defaultSettings: SettingsProps = {
+const defaultSettings: SettingsProps = {
   alwaysOnTop: false,
   fullscreenBreak: true,
   strictMode: false,
@@ -32,3 +33,21 @@ export const settingsAtom = atomWithStorage<SettingsProps>(
   "settings",
   defaultSettings
 );
+
+export const toggleSoundAtom = atom(null, (get, set) => {
+  const settings = get(settingsAtom);
+
+  set(settingsAtom, {
+    ...settings,
+    isMuted: !settings.isMuted,
+  });
+});
+
+export const toggleCompactAtom = atom(null, (get, set) => {
+  const settings = get(settingsAtom);
+
+  set(settingsAtom, {
+    ...settings,
+    isCompact: !settings.isCompact,
+  });
+});

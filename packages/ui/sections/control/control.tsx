@@ -45,7 +45,7 @@ export type ControlProps = {
   /**
    * Function to reset the number sessions completed.
    */
-  onResetElapsed?: () => void;
+  onResetRound?: () => void;
   /**
    * Function to restart the current session.
    */
@@ -74,7 +74,7 @@ function Control({
   isRunning = false,
   isMuted = false,
   isCompact = false,
-  onResetElapsed,
+  onResetRound,
   onResetTimer,
   onPlayPause,
   onNextEvent,
@@ -110,7 +110,7 @@ function Control({
                   color: "$$activeColor",
                 },
               }}
-              onClick={onResetElapsed}
+              onClick={onResetRound}
             >
               Reset
             </Button>

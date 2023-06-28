@@ -1,20 +1,32 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { Priority, Control, VStack } from "@pomatez/ui";
 
 import { slideUpAndFadeAnimation } from "@renderer/utils";
 import { CounterProgress } from "@renderer/components";
 import {
   configAtom,
+  nextSessionAtom,
+  resetRoundAtom,
+  resetTimerAtom,
   settingsAtom,
   timerAtom,
+  toggleCompactAtom,
+  toggleSoundAtom,
+  toggleTimerAtom,
 } from "@renderer/@data/atoms";
 
 export default function Timer() {
-  const [settings, setSettings] = useAtom(settingsAtom);
+  const toggleTimer = useSetAtom(toggleTimerAtom);
+  const nextSession = useSetAtom(nextSessionAtom);
+  const resetTimer = useSetAtom(resetTimerAtom);
+  const resetRound = useSetAtom(resetRoundAtom);
 
-  const [timer, setTimer] = useAtom(timerAtom);
+  const toggleSound = useSetAtom(toggleSoundAtom);
+  const toggleCompact = useSetAtom(toggleCompactAtom);
 
+  const settings = useAtomValue(settingsAtom);
   const config = useAtomValue(configAtom);
+  const timer = useAtomValue(timerAtom);
 
   return (
     <VStack sx={slideUpAndFadeAnimation}>
@@ -26,37 +38,17 @@ export default function Timer() {
         appState={timer.sessionType}
         session={{
           maxRounds: config.sessionRounds,
-          currentRound: timer.sessionRound,
+          currentRound: timer.round,
         }}
+        isCompact={settings.isCompact}
         isRunning={timer.isRunning}
         isMuted={settings.isMuted}
-        isCompact={settings.isCompact}
-        onPlayPause={() => {
-          setTimer((prev) => ({
-            ...prev,
-            isRunning: !prev.isRunning,
-          }));
-        }}
-        onToggleSound={() => {
-          setSettings((prev) => ({
-            ...prev,
-            isMuted: !prev.isMuted,
-          }));
-        }}
-        onToggleCompact={() => {
-          setSettings((prev) => ({
-            ...prev,
-            isCompact: !prev.isCompact,
-          }));
-        }}
-        onResetTimer={() => {
-          setTimer((prev) => ({
-            ...prev,
-            elapsed: 0,
-          }));
-        }}
-        onNextEvent={() => {}}
-        onResetElapsed={() => {}}
+        onPlayPause={toggleTimer}
+        onResetTimer={resetTimer}
+        onNextEvent={nextSession}
+        onResetRound={resetRound}
+        onToggleSound={toggleSound}
+        onToggleCompact={toggleCompact}
       />
     </VStack>
   );
