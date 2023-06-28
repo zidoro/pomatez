@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { RESET } from "jotai/utils";
 import {
   Button,
@@ -13,6 +13,7 @@ import {
 import { slideRightAndFadeAnimation } from "@renderer/utils";
 import { SectionLayout, TabLayout } from "@renderer/layouts";
 import {
+  changeConfigAtom,
   configAtom,
   configPresets,
   timerAtom,
@@ -20,6 +21,8 @@ import {
 
 export default function Config() {
   const [config, setConfig] = useAtom(configAtom);
+
+  const changeConfig = useSetAtom(changeConfigAtom);
 
   const timer = useAtomValue(timerAtom);
 
@@ -33,10 +36,9 @@ export default function Config() {
       max: 90,
       value: config.stayFocused,
       onValueChange: (value) => {
-        setConfig((prev) => ({
-          ...prev,
+        changeConfig({
           stayFocused: value,
-        }));
+        });
       },
     },
     {
@@ -48,10 +50,9 @@ export default function Config() {
       max: 60,
       value: config.shortBreak,
       onValueChange: (value) => {
-        setConfig((prev) => ({
-          ...prev,
+        changeConfig({
           shortBreak: value,
-        }));
+        });
       },
     },
     {
@@ -63,10 +64,9 @@ export default function Config() {
       max: 60,
       value: config.longBreak,
       onValueChange: (value) => {
-        setConfig((prev) => ({
-          ...prev,
+        changeConfig({
           longBreak: value,
-        }));
+        });
       },
     },
     {
@@ -78,10 +78,7 @@ export default function Config() {
       max: 8,
       value: config.sessionRounds,
       onValueChange: (value) => {
-        setConfig((prev) => ({
-          ...prev,
-          sessionRounds: value,
-        }));
+        changeConfig({ sessionRounds: value });
       },
     },
   ];

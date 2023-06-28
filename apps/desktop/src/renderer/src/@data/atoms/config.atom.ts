@@ -1,4 +1,7 @@
+import { minutesToSeconds } from "@renderer/utils";
+import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
+import { durationAtom, timerAtom } from "./timer.atom";
 
 type ConfigProps = {
   stayFocused: number;
@@ -43,4 +46,26 @@ export const defaultConfig = import.meta.env.DEV
 export const configAtom = atomWithStorage<ConfigProps>(
   "config",
   defaultConfig
+);
+
+export const changeConfigAtom = atom(
+  null,
+  (get, set, config: Partial<ConfigProps>) => {
+    const prev = get(configAtom);
+    const timer = get(timerAtom);
+
+    if (timer.isRunning) {
+      set(timerAtom, {
+        ...timer,
+        isRunning: false,
+      });
+    }
+
+    set(durationAtom, minutesToSeconds(get(configAtom).stayFocused));
+
+    set(configAtom, {
+      ...prev,
+      ...config,
+    });
+  }
 );

@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { TIMER_PROGRESS_CIRCUMFERENCE } from "@pomatez/ui";
-import { configAtom, defaultConfig } from "./config.atom";
 import { minutesToSeconds } from "@renderer/utils";
+import { configAtom } from "./config.atom";
 
 type SessionType = "stayFocused" | "shortBreak" | "longBreak";
 
@@ -22,12 +22,17 @@ const defaultTimer: TimerProps = {
 
 export const timerAtom = atomWithStorage("timer", defaultTimer);
 
-const durationAtom = atomWithStorage(
-  "timer.duration",
-  minutesToSeconds(defaultConfig.stayFocused)
-);
+timerAtom.onMount = (set) => () => set(defaultTimer);
+
+export const durationAtom = atomWithStorage("timer.duration", 0);
+
+// calculate duration based on session type
+durationAtom.read = (get) =>
+  minutesToSeconds(get(configAtom)[get(timerAtom).sessionType]);
 
 const elapsedAtom = atomWithStorage("timer.elapsed", 0);
+
+elapsedAtom.onMount = (set) => () => set(0);
 
 const counterAtom = atom<{
   id: NodeJS.Timeout;
@@ -95,9 +100,10 @@ export const timeRemainingAtom = atom((get) => {
 export const timeProgressAtom = atom((get) => {
   const duration = get(durationAtom);
   const elapsed = get(elapsedAtom);
+  const progress = elapsed / duration || 0;
 
   // return progress based on circle circumference
-  return (elapsed / duration) * TIMER_PROGRESS_CIRCUMFERENCE;
+  return progress * TIMER_PROGRESS_CIRCUMFERENCE;
 });
 
 export const toggleTimerAtom = atom(null, (get, set) => {
