@@ -4,9 +4,13 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { runOnElectron } from "@renderer/utils";
-import { settingsAtom, timerAtom } from "@renderer/@data/atoms";
+import {
+  resetTimerAtom,
+  settingsAtom,
+  timerAtom,
+} from "@renderer/@data/atoms";
 
 type ElectronContextProps = {
   onMinimizeWindow?: () => void;
@@ -16,6 +20,8 @@ type ElectronContextProps = {
 const ElectronContext = createContext<ElectronContextProps>({});
 
 const ElectronProvider = ({ children }: { children: ReactNode }) => {
+  const resetTimer = useSetAtom(resetTimerAtom);
+
   const settings = useAtomValue(settingsAtom);
 
   const timer = useAtomValue(timerAtom);
@@ -27,10 +33,18 @@ const ElectronProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const onCloseWindow = useCallback(() => {
+    resetTimer();
     runOnElectron(() => {
       window.api.send("close-window");
     });
-  }, []);
+  }, [resetTimer]);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", resetTimer);
+    return () => {
+      window.removeEventListener("beforeunload", resetTimer);
+    };
+  }, [resetTimer]);
 
   useEffect(() => {
     runOnElectron(() => {

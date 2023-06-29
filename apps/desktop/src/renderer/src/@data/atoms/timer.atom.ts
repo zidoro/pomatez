@@ -32,8 +32,6 @@ durationAtom.read = (get) =>
 
 const elapsedAtom = atomWithStorage("timer.elapsed", 0);
 
-elapsedAtom.onMount = (set) => () => set(0);
-
 const counterAtom = atom<{
   id: NodeJS.Timeout;
   started: number;
@@ -79,9 +77,9 @@ const invokeTimerAction = atom(
       };
       tick(); // start ticking
     } else {
-      const timer = get(counterAtom);
-      if (timer) {
-        clearTimeout(timer.id);
+      const counter = get(counterAtom);
+      if (counter) {
+        clearTimeout(counter.id);
         set(counterAtom, null);
       }
     }
