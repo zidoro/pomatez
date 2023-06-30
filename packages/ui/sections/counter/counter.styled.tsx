@@ -9,7 +9,6 @@ export const StyledProgress = styled("svg", {
   strokeLinecap: "round",
   strokeDasharray: TIMER_PROGRESS_CIRCUMFERENCE,
   transform: "rotateY(-180deg) rotateZ(-90deg)",
-  transition: "stroke-dashoffset 1s linear",
 
   zIndex: 0,
 
@@ -25,9 +24,15 @@ export const StyledProgress = styled("svg", {
         stroke: "$brown9",
       },
     },
+    animationEnabled: {
+      true: {
+        transition: "stroke-dashoffset 1s linear",
+      },
+    },
   },
   defaultVariants: {
     appState: "stayFocused",
+    animationEnabled: true,
   },
 });
 
@@ -54,6 +59,4 @@ export const StyledTimeRemaining = styled("p", {
   },
 });
 
-export type CounterVariantProps = VariantProps<
-  typeof StyledProgress | typeof StyledTimeRemaining
->;
+export type CounterVariantProps = VariantProps<typeof StyledProgress>;

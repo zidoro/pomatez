@@ -18,9 +18,10 @@ export type CounterProps = {
 } & CounterVariantProps;
 
 function Counter({
-  appState = "stayFocused",
+  appState,
   timeProgress,
   timeRemaining,
+  animationEnabled,
 }: CounterProps) {
   const renderAppState = () => {
     return capitalize(appState as string, "camelCase");
@@ -77,6 +78,7 @@ function Counter({
       >
         <StyledProgress
           data-testid="progress-svg"
+          animationEnabled={animationEnabled}
           strokeDashoffset={timeProgress}
           appState={appState}
           width="220"
