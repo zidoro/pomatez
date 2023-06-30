@@ -101,11 +101,23 @@ export const timeProgressAtom = atom((get) => {
 
 export const toggleTimerAtom = atom(null, (get, set) => {
   const timer = get(timerAtom);
+  const settings = get(settingsAtom);
+
+  let shouldFullScreenBreak = false;
+
+  if (
+    !timer.isRunning &&
+    timer.sessionType !== "stayFocused" &&
+    settings.fullscreenBreak
+  ) {
+    shouldFullScreenBreak = true;
+  }
 
   set(invokeTimerAction, timer.isRunning ? "stop" : "start");
   set(timerAtom, {
     ...timer,
     isRunning: !timer.isRunning,
+    shouldFullScreenBreak,
   });
 });
 
@@ -129,6 +141,7 @@ export const nextSessionAtom = atom(null, (get, set) => {
 
   let newSessionType = timer.sessionType;
   let newSessionRound = timer.round;
+  let shouldFullScreenBreak = false;
   let shouldAutoStart = false;
 
   switch (timer.sessionType) {
@@ -143,6 +156,10 @@ export const nextSessionAtom = atom(null, (get, set) => {
 
       if (settings.autoStartBreak) {
         shouldAutoStart = true;
+
+        if (settings.fullscreenBreak) {
+          shouldFullScreenBreak = true;
+        }
       }
       break;
     case "shortBreak":
@@ -171,6 +188,7 @@ export const nextSessionAtom = atom(null, (get, set) => {
     round: newSessionRound,
     sessionType: newSessionType,
     isRunning: shouldAutoStart,
+    shouldFullScreenBreak,
   });
   // start timer if auto start is enabled
   if (shouldAutoStart) {
