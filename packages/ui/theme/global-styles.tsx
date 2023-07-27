@@ -1,4 +1,6 @@
-import { globalCss } from "./stitches.config";
+import React from "react";
+
+import { getCssText, globalCss } from "./stitches.config";
 
 import NotoSans400Woff from "../static/fonts/noto-sans/NotoSans400.woff";
 import NotoSans500Woff from "../static/fonts/noto-sans/NotoSans500.woff";
@@ -67,3 +69,33 @@ export const globalStyles = globalCss({
     fontSize: "$sm",
   },
 });
+
+const flushCSS = () => (
+  <style
+    dangerouslySetInnerHTML={{ __html: getCssText() }}
+    id="stitches"
+  />
+);
+
+const GlobalStyles: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
+  globalStyles();
+
+  return <React.Fragment>{children}</React.Fragment>;
+};
+
+type MemoGlobalStylesComponent<P = {}> =
+  React.NamedExoticComponent<P> & {
+    flush: typeof flushCSS;
+  };
+
+const MemoGlobalStyles = React.memo(
+  GlobalStyles
+) as MemoGlobalStylesComponent<{
+  children?: React.ReactNode;
+}>;
+
+MemoGlobalStyles.flush = flushCSS;
+
+export default MemoGlobalStyles;

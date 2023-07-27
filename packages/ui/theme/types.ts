@@ -1,4 +1,5 @@
 import { StitchesTheme, createTheme } from "./stitches.config";
+import commonTheme from "./common";
 
 /** Configuration Interface */
 declare namespace ConfigType {
@@ -64,3 +65,12 @@ export type PomatezThemeContext = {
   theme?: PomatezTheme;
   isDark?: boolean;
 };
+
+export type TokenKeyName = keyof (typeof commonTheme)["theme"];
+
+export interface TokenValue {
+  token: number | string;
+  value: number | string;
+  scale: string;
+  prefix: string;
+}

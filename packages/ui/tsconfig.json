@@ -1,6 +1,7 @@
 {
   "extends": "@pomatez/tsconfig/react-library.json",
   "compilerOptions": {
+    "allowJs": true,
     "paths": {
       "@/test-utils": ["./utils/test-utils"]
     }
