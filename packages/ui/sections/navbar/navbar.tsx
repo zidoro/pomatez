@@ -82,6 +82,7 @@ function Navbar({ appState = "stayFocused", links = [] }: NavbarProps) {
                 as={as}
                 className={activeClassName}
                 appState={appState}
+                draggable={false}
                 role="link"
                 {...rest}
               >
