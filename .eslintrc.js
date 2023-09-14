@@ -1,4 +1,4 @@
 module.exports = {
-  extends: ["@pomatez/eslint-config"],
+  extends: ["@pomatez/eslint-config", "plugin:storybook/recommended"],
   root: true,
 };
