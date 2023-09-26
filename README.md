@@ -29,9 +29,6 @@
    <a href="https://snapcraft.io/pomatez">
       <image src="https://snapcraft.io/pomatez/badge.svg" alt="Pomatez" />
    </a>
-   <a href="https://travis-ci.com/zidoro/pomatez">
-      <image src="https://travis-ci.com/zidoro/pomatez.svg?branch=master" alt="Build Status" />
-   </a>
    <image src="https://img.shields.io/github/downloads/zidoro/pomatez/total" alt="Github Downloads" />
    <a href="https://github.com/zidoro/pomatez/releases/latest">
       <image src="https://img.shields.io/github/v/release/zidoro/pomatez" alt="Latest Version" />
@@ -99,42 +96,103 @@
 
 ## :zap: Quick Setup
 
+### :page_with_curl: Prerequisites
+
+1. You need to have `node` v16 and `npm` v8 installed on your machine. If you don't have it yet, you can install it by running the following command.
+
+   1. For Mac
+
+      ```bash
+      brew install node
+      ```
+
+   2. For Windows
+
+      ```bash
+      choco install nodejs
+      ```
+
+   3. For Linux
+
+      ```bash
+      sudo apt install nodejs
+      ```
+
+   4. Using [Node Version Manager](https://github.com/nvm-sh/nvm) (Recommended)
+
+      ```bash
+      # Inside the project directory
+      nvm install && nvm use
+      ```
+
+      To automatically switch to the correct node version when you enter the project directory, just follow the details [here](https://github.com/nvm-sh/nvm#deeper-shell-integration).
+
+   Or you can download it from [here](https://nodejs.org/en/download/).
+
+2. You need to have `yarn` globally installed on your machine. If you don't have it yet, you can install it by running the following command.
+
+   1. For Mac
+
+      ```bash
+      brew install yarn
+      ```
+
+   2. For Windows
+
+      ```bash
+      choco install yarn
+      ```
+
+   3. For Linux
+
+      ```bash
+      sudo apt install yarn
+      ```
+
+   4. Using npm
+
+      ```bash
+      npm install -g yarn
+      ```
+
+### :package: Installation
+
 1. Install all app dependencies.
 
    ```sh
-   yarn install or npm install
+   yarn install
    ```
 
 2. Start the development.
 
    ```sh
-   yarn dev:app or npm run dev:app
+   yarn dev:app
    ```
 
-## 🛠 Building for Production
+### 🛠 Building for Production
 
 1. Build Windows installer.
 
    ```sh
-   yarn build:win or npm run build:win
+   yarn build:win
    ```
 
 2. Build macOS installer.
 
    ```sh
-   yarn build:mac or npm run build:mac
+   yarn build:mac
    ```
 
 3. Build Linux installer.
 
    ```sh
-   yarn build:linux or npm run build:linux
+   yarn build:linux
    ```
 
 4. Build macOS, Windows and Linux installer at once.
 
    ```sh
-   yarn build:mwl or npm run build:mwl
+   yarn build:mwl
    ```
 
 ## :pencil: Pre-Commit
