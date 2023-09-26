@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.3.0](https://github.com/zidoro/pomatez/compare/v1.2.3...v1.3.0) (2023-09-26)
+
+
+### Features ✨
+
+* add support for open at login in the settings tab ([f57e133](https://github.com/zidoro/pomatez/commit/f57e1335d59938d95c6de4455b96aafcc8a878a2))
+* increase maximum focus time to 2 hours ([#383](https://github.com/zidoro/pomatez/issues/383)) ([3fc1493](https://github.com/zidoro/pomatez/commit/3fc14937ee4b08e74390fbd36eb115278f55f179))
+
+
+### Bug Fixes 🐛
+
+* compact mode layout broke with 120 minutes max timer config ([#393](https://github.com/zidoro/pomatez/issues/393)) ([c8c3c66](https://github.com/zidoro/pomatez/commit/c8c3c66460116aefe8a172b4237fa08b52583ffc))
+* disable dragging for navigation links ([#387](https://github.com/zidoro/pomatez/issues/387)) ([a5b147f](https://github.com/zidoro/pomatez/commit/a5b147fbac812b2be6e92ce218841bfebe29d790))
+* fix security issues ([bcbd65f](https://github.com/zidoro/pomatez/commit/bcbd65fa18d5f5531b20ab2ee0462b03ec766b5c)), closes [#407](https://github.com/zidoro/pomatez/issues/407)
+* notification type selection issue in settings ([04ddca1](https://github.com/zidoro/pomatez/commit/04ddca16023bfea1b6496d41769ee7715700354d))
+
 ## [1.2.3](https://github.com/zidoro/pomatez/compare/v1.2.2...v1.2.3) (2023-05-03)
 
 
