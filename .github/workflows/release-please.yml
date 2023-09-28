@@ -55,10 +55,12 @@ jobs:
     name: Publish to WinGet
     needs:
       - publish
+      - release-please
     runs-on: windows-latest
     steps:
       - uses: vedantmgoyal2009/winget-releaser@v2
         with:
           identifier: Roldanjr.Pomatez
           max-versions-to-keep: 5 # keep only latest 5 versions
+          release-tag: ${{ needs.release-please.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
