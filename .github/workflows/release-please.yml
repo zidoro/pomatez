@@ -61,6 +61,7 @@ jobs:
       - uses: vedantmgoyal2009/winget-releaser@v2
         with:
           identifier: Roldanjr.Pomatez
+          installers-regex: 'setup\.exe$'
           max-versions-to-keep: 5 # keep only latest 5 versions
           release-tag: ${{ needs.release-please.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
