@@ -51,3 +51,14 @@ jobs:
             **/*.exe
             **/*.snap
             **/*.blockmap
+  publish-to-winget:
+    name: Publish to WinGet
+    needs:
+      - publish
+    runs-on: windows-latest
+    steps:
+      - uses: vedantmgoyal2009/winget-releaser@v2
+        with:
+          identifier: Roldanjr.Pomatez
+          max-versions-to-keep: 5 # keep only latest 5 versions
+          token: ${{ secrets.GITHUB_TOKEN }}
