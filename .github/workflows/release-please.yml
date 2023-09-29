@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: vedantmgoyal2009/winget-releaser@v2
         with:
-          identifier: Roldanjr.Pomatez
+          identifier: Zidoro.Pomatez
           max-versions-to-keep: 5 # keep only latest 5 versions
           release-tag: ${{ needs.release-please.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
