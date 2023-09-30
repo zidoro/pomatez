@@ -3,7 +3,6 @@ import { ConnnectorContext } from "../ConnnectorContext";
 import { useSelector } from "react-redux";
 import { AppStateTypes, SettingTypes } from "../../store";
 import { CounterContext } from "../CounterContext";
-import isElectron from "is-electron";
 import {
   SET_ALWAYS_ON_TOP,
   SET_CLOSE,
@@ -14,15 +13,12 @@ import {
   SET_SHOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
-  SET_COMPACT_MODE,
   SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
 
-const ElectronContext = React.createContext<ElectronProps>({});
-
-const ElectronProvider: React.FC = ({ children }) => {
+export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
   // TODO do logic to switch out the connectors based on the platform
@@ -101,9 +97,9 @@ const ElectronProvider: React.FC = ({ children }) => {
   }, [electron, settings.useNativeTitlebar]);
 
   useEffect(() => {
-      electron.send(SET_OPEN_AT_LOGIN, {
-        openAtLogin: settings.openAtLogin,
-      });
+    electron.send(SET_OPEN_AT_LOGIN, {
+      openAtLogin: settings.openAtLogin,
+    });
   }, [electron, settings.openAtLogin]);
 
   useEffect(() => {
@@ -142,6 +138,3 @@ const ElectronProvider: React.FC = ({ children }) => {
     </ConnnectorContext.Provider>
   );
 };
-
-
-export { ElectronContext, ElectronProvider };
