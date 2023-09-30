@@ -346,12 +346,13 @@ if (!onlySingleInstance) {
         notify({
           title: "READY TO BE INSTALLED",
           message: "Update has been successfully downloaded.",
-          actions: ["Quit and Install", "Install it Later"],
+          // Temporarily commented out due to an issue with snoretoast https://github.com/mikaelbr/node-notifier/issues/332
+          actions: ["Quit and Install" /*, "Install it Later"*/],
           callback: (err, response) => {
             if (!err) {
-              if (response === "quit and install") {
-                autoUpdater.quitAndInstall();
-              }
+              //if (response === "quit and install") {
+              autoUpdater.quitAndInstall();
+              //}
             }
           },
         });
