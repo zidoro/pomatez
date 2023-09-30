@@ -14,7 +14,7 @@
   "scripts": {
     "prepare": "yarn build",
     "clean": "rimraf dist/ build/",
-    "predev:main": "wait-on http://localhost:3000",
+    "predev:main": "wait-on http://127.0.0.1:3000",
     "dev:main": "nodemon --exec \"yarn build && electron .\"",
     "start": "yarn dev:main",
     "build": "tsc && copyfiles -u 2 \"src/assets/*\" build/assets",
