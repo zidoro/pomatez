@@ -30,13 +30,23 @@ static HAS_DECORATIONS: Mutex<bool> = Mutex::new(true);
 static IS_COMPACT: Mutex<bool> = Mutex::new(false);
 
 #[tauri::command]
-fn set_minimize<R: Runtime>(minimize_to_tray: bool, _window: tauri::Window<R>) {
+fn set_minimize<R: Runtime>(minimize_to_tray: bool, window: tauri::Window<R>) {
     println!("Minimize! {}", minimize_to_tray.to_string().as_str());
+    if minimize_to_tray {
+        window.hide().unwrap();
+    } else {
+        window.close().unwrap();
+    }
 }
 
 #[tauri::command]
-fn set_close<R: Runtime>(close_to_tray: bool, _window: tauri::Window<R>) {
+fn set_close<R: Runtime>(close_to_tray: bool, window: tauri::Window<R>) {
     println!("set_close! {}", close_to_tray);
+    if close_to_tray {
+        window.hide().unwrap();
+    } else {
+        window.close().unwrap();
+    }
 }
 
 #[tauri::command]
@@ -203,6 +213,11 @@ impl PomatezExtras for Builder<Wry> {
             .add_item(quit);
         let tray = SystemTray::new().with_menu(tray_menu);
         self.system_tray(tray).on_system_tray_event(|app, event| match event {
+            SystemTrayEvent::LeftClick { .. } => {
+                let window = app.get_window("main").unwrap();
+                window.show().unwrap();
+                window.set_focus().unwrap();
+            }
             SystemTrayEvent::MenuItemClick { id, .. } => {
                 match id.as_str() {
                     "show" => {
