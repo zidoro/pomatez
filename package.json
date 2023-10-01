@@ -9,6 +9,7 @@
     "commit": "git-cz",
     "dev:renderer": "lerna run dev:renderer --stream",
     "dev:main": "lerna run dev:main --stream",
+    "dev:tauri": "lerna run dev:renderer --stream",
     "dev:app": "cross-env ELECTRON_ENABLE_LOGGING=1 lerna run start --parallel --stream",
     "prebuild": "lerna run prepare --stream",
     "lerna": "lerna",
@@ -19,6 +20,7 @@
     "build:mac": "yarn build && lerna run build:mac --stream",
     "build:linux": "yarn build && lerna run build:linux --stream",
     "build:snap": "yarn build && lerna run build:snap --stream",
+    "build:tauri": "tauri build",
     "release:mw": "yarn build && lerna run release:mw --stream",
     "release": "yarn build && lerna run release --stream",
     "clean": "lerna exec -- rimraf build/ dist/",
@@ -57,7 +59,7 @@
     "rollup-plugin-typescript2": "^0.27.3",
     "typescript": "4.9.4",
     "wait-on": "7.0.1",
-    "@tauri-apps/cli": "1.2.2"
+    "@tauri-apps/cli": "1.4.0"
   },
   "resolutions": {
     "//": "Check https://github.com/facebook/create-react-app/issues/11773 to see if it has been fixed yet",
