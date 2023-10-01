@@ -20,4 +20,6 @@ fs.writeFileSync(
   "utf8"
 );
 
-console.log("Setting Cargo.toml to version " + process.argv[2]);
+console.log(
+  "Setting Cargo.toml to version " + tauriConfig.package.version
+);

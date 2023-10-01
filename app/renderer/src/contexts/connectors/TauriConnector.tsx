@@ -10,15 +10,21 @@ import {
   SET_FULLSCREEN_BREAK,
   SET_MINIMIZE,
   SET_NATIVE_TITLEBAR,
+  SET_OPEN_AT_LOGIN,
   SET_SHOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
 } from "@pomatez/shareables";
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
+import { enable, disable } from "tauri-plugin-autostart-api";
 
 export const TauriConnectorProvider: React.FC = ({ children }) => {
   const { invoke } = window.__TAURI__;
+
+  const settings: SettingTypes = useSelector(
+    (state: AppStateTypes) => state.settings
+  );
 
   /**
    * Rust uses lowercase snake_case for function names so we need to convert to lower case for the calls.
@@ -32,13 +38,17 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
     [invoke]
   );
 
+  useEffect(() => {
+    if (settings.openAtLogin) {
+      enable().catch((err) => console.error(err));
+    } else {
+      disable().catch((err) => console.error(err));
+    }
+  }, [settings.openAtLogin]);
+
   // TODO do logic to switch out the connectors based on the platform
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
-
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
 
   const { count, duration, timerType, shouldFullscreen } =
     useContext(CounterContext);

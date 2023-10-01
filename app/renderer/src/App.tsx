@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import {
   ThemeProvider,
@@ -14,6 +14,23 @@ export default function App() {
   const settings = useSelector(
     (state: AppStateTypes) => state.settings
   );
+
+  useEffect(() => {
+    const contextEvent = (event: MouseEvent) => {
+      if (event.target) {
+        let target = event.target as HTMLElement;
+        if (target.tagName === "TEXTAREA") {
+          return true;
+        }
+      }
+      event.preventDefault();
+      return false;
+    };
+    document.addEventListener("contextmenu", contextEvent);
+    return () =>
+      document.removeEventListener("contextmenu", contextEvent);
+  }, []);
+
   return (
     <ThemeProvider>
       <CounterProvider>

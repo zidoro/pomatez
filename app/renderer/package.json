@@ -57,6 +57,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-undo": "^1.0.1",
     "styled-components": "^5.3.11",
+    "tauri-plugin-autostart-api": "https://github.com/tauri-apps/tauri-plugin-autostart#v1",
     "use-stay-awake": "^0.1.5"
   },
   "devDependencies": {
