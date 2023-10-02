@@ -3,9 +3,9 @@ import { v4 as uuid } from "uuid";
 
 import store from "../store";
 
-const userId = store.get("userId") || uuid();
+const userId = store.safeGet("userId") || uuid();
 
-store.set("userId", userId);
+store.safeSet("userId", userId);
 
 function activateUser() {
   const user = ua("UA-172128342-2", userId);

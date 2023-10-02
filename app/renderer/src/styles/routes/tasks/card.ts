@@ -98,7 +98,9 @@ export const StyledCard = styled.div<CardProps>`
   border-bottom-color: var(--color-border-input-secondary);
   background-color: var(--color-bg-task-card);
 
-  transition: box-shadow 320ms ease-out, background-color 320ms ease-out,
+:w  transition:
+    box-shadow 320ms ease-out,
+    background-color 320ms ease-out,
     border-color 320ms ease-out;
 
   ${(p) =>

@@ -66,7 +66,7 @@ const getFrameHeight = () => {
   if (isWindow()) {
     return 502;
   } else {
-    if (store.get("useNativeTitlebar")) {
+    if (store.safeGet("useNativeTitlebar")) {
       return 488;
     }
     return 502;
@@ -93,9 +93,9 @@ function createMainWindow() {
     resizable: true,
     maximizable: false,
     show: false,
-    frame: store.get("useNativeTitlebar"),
+    frame: store.safeGet("useNativeTitlebar"),
     icon: getIcon(),
-    backgroundColor: store.get("isDarkMode") ? "#141e25" : "#fff",
+    backgroundColor: store.safeGet("isDarkMode") ? "#141e25" : "#fff",
     webPreferences: {
       contextIsolation: true,
       backgroundThrottling: false,
@@ -337,7 +337,9 @@ if (!onlySingleInstance) {
           actions: ["View Released Notes"],
           callback: (err, response) => {
             if (!err) {
-              shell.openExternal(RELEASED_NOTES_LINK);
+              if (response === "view released notes") {
+                shell.openExternal(RELEASED_NOTES_LINK);
+              }
             }
           },
         });
@@ -391,7 +393,7 @@ ipcMain.on(SET_COMPACT_MODE, (e, args) => {
 });
 
 ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
-  store.set("isDarkMode", isDarkMode);
+  store.safeSet("isDarkMode", isDarkMode);
 });
 
 ipcMain.on(SET_SHOW, () => {
@@ -425,8 +427,8 @@ ipcMain.on(SET_CLOSE, (e, { closeToTray }) => {
 });
 
 ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
-  if (store.get("useNativeTitlebar") !== useNativeTitlebar) {
-    store.set("useNativeTitlebar", useNativeTitlebar);
+  if (store.safeGet("useNativeTitlebar") !== useNativeTitlebar) {
+    store.safeSet("useNativeTitlebar", useNativeTitlebar);
     setTimeout(() => {
       app.relaunch();
       app.exit();
@@ -440,7 +442,7 @@ ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
 });
 
 ipcMain.on(SET_OPEN_AT_LOGIN, (e, { openAtLogin }) => {
-  store.set("openAtLogin", openAtLogin);
+  store.safeSet("openAtLogin", openAtLogin);
   app.setLoginItemSettings({
     openAtLogin: openAtLogin,
     openAsHidden: openAtLogin,
