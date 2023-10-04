@@ -6,3 +6,55 @@ updates:
     schedule:
       day: saturday
       interval: weekly
+
+  # app
+  - package-ecosystem: npm
+    directory: /
+    open-pull-requests-limit: 5
+    schedule:
+      interval: daily
+    groups:
+      app-development-dependencies:
+        dependency-type: "development"
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      app-production-dependencies:
+        dependency-type: "production"
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+
+  # website
+  - package-ecosystem: npm
+    directory: /website
+    open-pull-requests-limit: 5
+    schedule:
+      interval: daily
+    groups:
+      website-development-dependencies:
+        dependency-type: "development"
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      website-production-dependencies:
+        dependency-type: "production"
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
