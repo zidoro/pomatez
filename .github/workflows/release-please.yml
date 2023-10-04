@@ -51,6 +51,24 @@ jobs:
             **/*.exe
             **/*.snap
             **/*.blockmap
+  publish-to-snapcraft:
+    name: Publish to Snapcraft
+    needs:
+      - publish
+      - release-please
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: built-app-x64-linux
+      - name: Publish to Snapcraft
+        uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_LOGIN }}
+        with:
+          snap: "*.snap"
+          release: stable
   publish-to-winget:
     name: Publish to WinGet
     needs:
