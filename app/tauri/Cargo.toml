@@ -14,14 +14,14 @@ rust-version = "1.57"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.4.0", features = [] }
+tauri-build = { version = "2.0.0-alpha.8", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.4.1", features = [ "system-tray", "api-all", "icon-png"] }
-tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
-window-shadows = "0.2.1"
+tauri = { version = "2.0.0-alpha.14", features =  ["tray-icon", "icon-png"] }
+tauri-plugin-window = "2.0.0-alpha"
+tauri-plugin-autostart = "2.0.0-alpha"
 base64 = { version = "0.21.4", features = [] }
 
 [features]

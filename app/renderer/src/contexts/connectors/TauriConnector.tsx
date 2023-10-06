@@ -17,11 +17,10 @@ import {
 } from "@pomatez/shareables";
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
-import { enable, disable } from "tauri-plugin-autostart-api";
+import { enable, disable } from "@tauri-apps/plugin-autostart";
+import { invoke } from "@tauri-apps/api/tauri";
 
 export const TauriConnectorProvider: React.FC = ({ children }) => {
-  const { invoke } = window.__TAURI__;
-
   const settings: SettingTypes = useSelector(
     (state: AppStateTypes) => state.settings
   );
@@ -31,12 +30,9 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
    * @param event
    * @param payload
    */
-  const send = useCallback(
-    (event: string, ...payload: any) => {
-      invoke(event.toLowerCase(), ...payload);
-    },
-    [invoke]
-  );
+  const send = useCallback(async (event: string, ...payload: any) => {
+    await invoke(event.toLowerCase(), ...payload);
+  }, []);
 
   useEffect(() => {
     if (settings.openAtLogin) {

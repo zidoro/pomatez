@@ -4,11 +4,11 @@
 use std::sync::Mutex;
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 use tauri::{Builder, Icon, PhysicalSize, Runtime, Wry};
-#[cfg(any(target_os = "macos", target_os = "windows"))]
-use window_shadows::set_shadow;
-use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTrayEvent};
+use tauri::{
+    menu::{MenuBuilder, MenuItemBuilder},
+    tray::{ClickType, TrayIconBuilder},
+};
 
-use tauri::SystemTray;
 use tauri::Manager;
 use base64;
 use base64::Engine;
@@ -159,11 +159,7 @@ fn set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: tauri::Win
         Ok(_) => (),
         Err(e) => println!("There was a problem setting the window decorations! {:?}", e),
     }
-    #[cfg(not(target_os = "linux"))]
-    match set_shadow(&window, true) {
-        Ok(_) => (),
-        Err(e) => println!("There was a problem setting the window shadows! {:?}", e),
-    }
+    window.start_dragging();
     println!("set_native_titlebar! {}", use_native_titlebar);
 }
 
@@ -181,7 +177,13 @@ fn tray_icon_update<R: Runtime>(data_url: String, window: tauri::Window<R>) {
     };
 
     let icon: Icon = Icon::Raw(decoded_vec);
-    let _ = window.app_handle().tray_handle().set_icon(icon);
+    let tray = window.app_handle().tray();
+
+    if let Some(tray) = tray {
+        if let Err(e) = tray.set_icon(Some(icon)) {
+            eprintln!("Error setting tray icon: {}", e);
+        }
+    }
 }
 
 /**
@@ -205,21 +207,17 @@ impl PomatezExtras for Builder<Wry> {
 
     fn set_pomatez_system_tray(self) -> tauri::Builder<Wry> {
         println!("Setting system tray");
-        let show = CustomMenuItem::new("show".to_string(), "Show");
-        let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-        let tray_menu = SystemTrayMenu::new()
-            .add_item(show)
-            .add_native_item(SystemTrayMenuItem::Separator)
-            .add_item(quit);
-        let tray = SystemTray::new().with_menu(tray_menu);
-        self.system_tray(tray).on_system_tray_event(|app, event| match event {
-            SystemTrayEvent::LeftClick { .. } => {
-                let window = app.get_window("main").unwrap();
-                window.show().unwrap();
-                window.set_focus().unwrap();
-            }
-            SystemTrayEvent::MenuItemClick { id, .. } => {
-                match id.as_str() {
+        self.setup(|app| {
+            // Was defined in tauri.config.json to start in v1
+            // That was created with an id of 1 though this gives more control
+
+            let show = MenuItemBuilder::with_id("show", "Show").build(app);
+            let quit = MenuItemBuilder::with_id("quit", "Quit").build(app);
+            let menu = MenuBuilder::new(app).items(&[&show, &quit]).build()?;
+            let tray = TrayIconBuilder::new()
+                .menu(&menu)
+                .tooltip("Pomatez")
+                .on_menu_event(move |app, event| match event.id().as_ref() {
                     "show" => {
                         let window = app.get_window("main").unwrap();
                         window.show().unwrap();
@@ -229,9 +227,18 @@ impl PomatezExtras for Builder<Wry> {
                         app.exit(0);
                     }
                     _ => {}
-                }
-            }
-            _ => {}
+                })
+                .on_tray_event(|tray, event| {
+                    if event.click_type == ClickType::Left {
+                        let app = tray.app_handle();
+                        let window = app.get_window("main").unwrap();
+                        window.show().unwrap();
+                        window.set_focus().unwrap();
+                    }
+                })
+                .icon(Icon::File("./icons/icon.png".into()))
+                .build(app)?;
+            Ok(())
         })
     }
 }

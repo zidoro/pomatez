@@ -10,9 +10,6 @@ declare global {
         options?: Electron.OpenExternalOptions
       ) => Promise<void>;
     };
-    __TAURI__: {
-      invoke: (command: string, ...args: any[]) => void;
-    };
   }
 }
 
