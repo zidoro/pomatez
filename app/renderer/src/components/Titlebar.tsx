@@ -27,8 +27,9 @@ type Props = {
 };
 
 const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
-  const { onMinimizeCallback, onExitCallback } =
-    useContext(ConnnectorContext);
+  const { onMinimizeCallback, onExitCallback } = useContext(
+    ConnnectorContext
+  );
 
   const getAppIcon = useCallback(() => {
     switch (timerType) {
@@ -44,7 +45,7 @@ const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
   }, [darkMode, timerType]);
 
   return (
-    <StyledTitlebar data-tauri-drag-region={true}>
+    <StyledTitlebar data-tauri-drag-region>
       <StyledMarkWrapper>
         <StyledMarkLogo src={getAppIcon()} />
         <StyledMarkName>
