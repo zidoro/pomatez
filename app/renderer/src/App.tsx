@@ -19,7 +19,11 @@ export default function App() {
     const contextEvent = (event: MouseEvent) => {
       if (event.target) {
         let target = event.target as HTMLElement;
-        if (target.tagName === "TEXTAREA") {
+        if (
+          target.tagName === "TEXTAREA" ||
+          (target.tagName === "INPUT" &&
+            (target as HTMLInputElement).type === "text")
+        ) {
           return true;
         }
       }
