@@ -51,6 +51,17 @@ jobs:
             **/*.exe
             **/*.snap
             **/*.blockmap
+  publish-to-homebrew-cask:
+    name: Publish to Homebrew Cask
+    needs:
+      - publish
+      - release-please
+    runs-on: macos-latest
+    steps:
+      - uses: Homebrew/actions/bump-packages@master
+        with:
+          casks: pomatez
+          token: ${{ secrets.GITHUB_TOKEN }}
   publish-to-winget:
     name: Publish to WinGet
     needs:
