@@ -22,7 +22,7 @@
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-google-gtag": "^5.12.0",
     "gatsby-plugin-image": "^3.12.0",
-    "gatsby-plugin-manifest": "^5.12.0",
+    "gatsby-plugin-manifest": "^5.12.1",
     "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-sharp": "^5.12.0",
     "gatsby-plugin-sitemap": "^6.12.0",
