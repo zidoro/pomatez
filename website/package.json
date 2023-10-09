@@ -29,7 +29,7 @@
     "gatsby-plugin-styled-components": "^6.12.0",
     "gatsby-source-filesystem": "^5.12.0",
     "gatsby-transformer-remark": "^6.12.0",
-    "gatsby-transformer-sharp": "^5.12.0",
+    "gatsby-transformer-sharp": "^5.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.5.2",
