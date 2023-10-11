@@ -21,7 +21,7 @@ export const NAV_LINKS = [
   { label: "Features", link: "features", offset: -24 },
   { label: "Roadmap", link: "roadmap", offset: -24 },
   {
-    label: "Released notes",
+    label: "Release notes",
     link: `${PROJECT_RELEASES_URL}/latest`,
   },
 ];
