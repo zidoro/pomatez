@@ -37,9 +37,9 @@
         "signingIdentity": null
       },
       "publisher": "Roldan Montilla Jr",
-      "resources": [],
+      "resources": ["icons/icon.png"],
       "shortDescription": "",
-      "targets": "all",
+      "targets": ["deb", "appimage", "msi", "dmg", "updater"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",

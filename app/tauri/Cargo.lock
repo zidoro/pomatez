@@ -1264,6 +1264,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b919933a397b79c37e33b77bb2aa3dc8eb6e165ad809e58ff75bc7db2e34574"
 
 [[package]]
+name = "global-hotkey"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08c12993a445d59000c3994fcd3d179e7da026a4234cc46db652987aa2785e4a"
+dependencies = [
+ "crossbeam-channel",
+ "keyboard-types",
+ "once_cell",
+ "thiserror",
+ "windows-sys 0.48.0",
+ "x11-dl",
+]
+
+[[package]]
 name = "gobject-sys"
 version = "0.16.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2318,6 +2332,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-autostart",
+ "tauri-plugin-global-shortcut",
  "tauri-plugin-window",
 ]
 
@@ -3216,6 +3231,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f67ab81fb8a86b98627843c00b6d2f3951d18827a02272feb5830b8ce96d9c59"
 dependencies = [
  "auto-launch",
+ "log",
+ "serde",
+ "serde_json",
+ "tauri",
+ "thiserror",
+]
+
+[[package]]
+name = "tauri-plugin-global-shortcut"
+version = "2.0.0-alpha.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b6a55e25d565b5eafaa4357ac49d52dd5826ac78c8eb0dc6a9c2d6ff60ab75ce"
+dependencies = [
+ "global-hotkey",
  "log",
  "serde",
  "serde_json",
