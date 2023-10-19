@@ -19,7 +19,7 @@ import {
   SET_UI_THEME,
   SET_NATIVE_TITLEBAR,
   SET_SHOW,
-  RELEASED_NOTES_LINK,
+  RELEASE_NOTES_LINK,
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
   SET_OPEN_AT_LOGIN,
@@ -334,11 +334,11 @@ if (!onlySingleInstance) {
         notify({
           title: "NEW UPDATE IS AVAILABLE",
           message: `App version ${info.version} ready to be downloaded.`,
-          actions: ["View Released Notes"],
+          actions: ["View Release Notes"],
           callback: (err, response) => {
             if (!err) {
-              if (response === "view released notes") {
-                shell.openExternal(RELEASED_NOTES_LINK);
+              if (response === "view release notes") {
+                shell.openExternal(RELEASE_NOTES_LINK);
               }
             }
           },

@@ -24,5 +24,5 @@ export const TO_MAIN: string[] = [
 
 export const FROM_MAIN: string[] = [];
 
-export const RELEASED_NOTES_LINK =
+export const RELEASE_NOTES_LINK =
   "https://github.com/zidoro/pomatez/releases/latest";
