@@ -24,6 +24,9 @@ tauri-plugin-window = "2.0.0-alpha"
 tauri-plugin-autostart = "2.0.0-alpha"
 base64 = { version = "0.21.4", features = [] }
 
+[target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
+tauri-plugin-global-shortcut = "2.0.0-alpha"
+
 [features]
 # by default Tauri runs in production mode
 # when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL

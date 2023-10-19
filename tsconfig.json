@@ -9,6 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,
+    "ignoreDeprecations": "5.0",
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,

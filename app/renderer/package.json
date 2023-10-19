@@ -35,6 +35,7 @@
     "@pomatez/shareables": "*",
     "@tauri-apps/api": "2.0.0-alpha.8",
     "@tauri-apps/plugin-autostart": "^2.0.0-alpha.1",
+    "@tauri-apps/plugin-global-shortcut": "^2.0.0-alpha.1",
     "@tauri-apps/plugin-window": "^2.0.0-alpha.1",
     "@types/autosize": "^3.0.7",
     "@types/jest": "^26.0.24",

@@ -9,7 +9,11 @@ use tauri_plugin_window;
 #[macro_use]
 mod commands;
 
-use commands::PomatezExtras;
+mod system_tray;
+mod global_shortcuts;
+
+use commands::PomatezCommands;
+use system_tray::PomatezTray;
 
 fn main() {
     tauri::Builder::default()
