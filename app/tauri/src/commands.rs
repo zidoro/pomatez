@@ -60,9 +60,9 @@ fn set_fullscreen_break<R: Runtime>(should_fullscreen: bool, always_on_top: bool
     if should_fullscreen {
         try_set_native_titlebar(true, &window);
     } else {
-        let decorationsMutex = HAS_DECORATIONS.lock().unwrap();
-        let decorations = *decorationsMutex;
-        drop(decorationsMutex);
+        let decorations_mutex = HAS_DECORATIONS.lock().unwrap();
+        let decorations = *decorations_mutex;
+        drop(decorations_mutex);
         try_set_native_titlebar(decorations, &window);
     }
 
