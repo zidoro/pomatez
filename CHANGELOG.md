@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.1](https://github.com/zidoro/pomatez/compare/v1.3.0...v1.3.1) (2023-10-19)
+
+
+### Bug Fixes 🐛
+
+* javascript error on launch ([#414](https://github.com/zidoro/pomatez/issues/414)) ([c6c18fb](https://github.com/zidoro/pomatez/commit/c6c18fb47b424be62a9b91ed64c7c95e8eaa41a3))
+* **lang:** Switch "released notes" with "release notes" ([#439](https://github.com/zidoro/pomatez/issues/439)) ([d9a3afa](https://github.com/zidoro/pomatez/commit/d9a3afa11f828084483c1d1e3693ff9b0dc1c8e1))
+* toast notification ([#382](https://github.com/zidoro/pomatez/issues/382)) ([25403d7](https://github.com/zidoro/pomatez/commit/25403d742d83d0d3654418a43bc5efe8316dc019))
+
 ## [1.3.0](https://github.com/zidoro/pomatez/compare/v1.2.3...v1.3.0) (2023-09-26)
 
 ### Features ✨
