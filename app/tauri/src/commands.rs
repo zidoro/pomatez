@@ -57,6 +57,15 @@ fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::Window<R>) 
 fn set_fullscreen_break<R: Runtime>(should_fullscreen: bool, always_on_top: bool, window: tauri::Window<R>) {
     println!("set_fullscreen_break! {} {}", should_fullscreen, always_on_top);
     try_set_always_on_top(always_on_top, &window);
+    if should_fullscreen {
+        try_set_native_titlebar(true, &window);
+    } else {
+        let decorationsMutex = HAS_DECORATIONS.lock().unwrap();
+        let decorations = *decorationsMutex;
+        drop(decorationsMutex);
+        try_set_native_titlebar(decorations, &window);
+    }
+
     try_set_fullscreen(should_fullscreen, &window);
 }
 
@@ -148,6 +157,10 @@ fn set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: tauri::Win
         *decorations = use_native_titlebar;
         drop(decorations);
     }
+    try_set_native_titlebar(use_native_titlebar, &window);
+}
+
+fn try_set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: &tauri::Window<R>) {
     match window.set_decorations(use_native_titlebar) {
         Ok(_) => (),
         Err(e) => println!("There was a problem setting the window decorations! {:?}", e),
