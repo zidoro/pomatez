@@ -10,7 +10,6 @@ import {
   SET_FULLSCREEN_BREAK,
   SET_MINIMIZE,
   SET_NATIVE_TITLEBAR,
-  SET_OPEN_AT_LOGIN,
   SET_SHOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
@@ -24,6 +23,22 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   const settings: SettingTypes = useSelector(
     (state: AppStateTypes) => state.settings
   );
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (
+        (event.ctrlKey && (event.key === "r" || event.key === "R")) ||
+        event.key === "F5"
+      ) {
+        event.preventDefault();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   /**
    * Rust uses lowercase snake_case for function names so we need to convert to lower case for the calls.
