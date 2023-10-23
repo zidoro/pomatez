@@ -28,7 +28,7 @@ fn set_minimize<R: Runtime>(minimize_to_tray: bool, window: tauri::Window<R>) {
     if minimize_to_tray {
         window.hide().unwrap();
     } else {
-        window.close().unwrap();
+        window.minimize().unwrap();
     }
 }
 

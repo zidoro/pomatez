@@ -22,8 +22,11 @@ serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "2.0.0-alpha.14", features =  ["tray-icon", "icon-png"] }
 tauri-plugin-window = "2.0.0-alpha"
 tauri-plugin-autostart = "2.0.0-alpha"
+lazy_static = "1.4.0"
 base64 = { version = "0.21.4", features = [] }
 
+# This one is for toying with global hotkeys from the browser mostly
+# We can use https://github.com/tauri-apps/global-hotkey directly tbh
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
 tauri-plugin-global-shortcut = "2.0.0-alpha"
 
