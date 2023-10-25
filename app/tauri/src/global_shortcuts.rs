@@ -1,5 +1,5 @@
 use lazy_static::lazy_static;
-use tauri::{Wry, Builder, Manager, AppHandle, App};
+use tauri::{Manager, AppHandle, App};
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut};
 use tauri_plugin_global_shortcut::Code;
 
@@ -17,7 +17,7 @@ impl PomatezGlobalShortcutsSetup for App {
     fn setup_global_shortcuts(&self) {
         let window = self.get_window("main").expect("Failed to get window");
         let global_shortcut_plugin = {
-            tauri_plugin_global_shortcut::Builder::with_handler(move |shortcut| {
+            tauri_plugin_global_shortcut::Builder::with_handler(move |_app_handle, shortcut| {
                 println!("Shortcut pressed: {:?}", shortcut);
                 match shortcut.id() {
                     key if SHOW_SHORTCUT.id() == key => {

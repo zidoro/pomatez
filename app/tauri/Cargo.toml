@@ -7,28 +7,31 @@ version = "1.3.0"
 description = "Attractive pomodoro timer for Windows, Mac, and Linux."
 authors = ["Roldan Montilla Jr"]
 license = "MIT"
-repository = "https://github.com/roldanjr/pomatez"
+repository = "https://github.com/zidoro/pomatez"
 edition = "2021"
 rust-version = "1.57"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-alpha.8", features = [] }
+tauri-build = { version = "2.0.0-alpha.10", features = [] }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "2.0.0-alpha.14", features =  ["tray-icon", "icon-png"] }
-tauri-plugin-window = "2.0.0-alpha"
-tauri-plugin-autostart = "2.0.0-alpha"
+url = "2.4.1"
+tauri = { version = "2.0.0-alpha.17", features =  ["tray-icon", "icon-png"] }
+reqwest = { version = "0.11.22", features = ["json"] }
+tauri-plugin-window = "2.0.0-alpha.2"
+tauri-plugin-autostart = "2.0.0-alpha.3"
 lazy_static = "1.4.0"
 base64 = { version = "0.21.4", features = [] }
 
 # This one is for toying with global hotkeys from the browser mostly
 # We can use https://github.com/tauri-apps/global-hotkey directly tbh
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
-tauri-plugin-global-shortcut = "2.0.0-alpha"
+tauri-plugin-global-shortcut = "2.0.0-alpha.3"
+tauri-plugin-updater = "2.0.0-alpha.3"
 
 [features]
 # by default Tauri runs in production mode

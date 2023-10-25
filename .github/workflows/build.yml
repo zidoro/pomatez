@@ -53,37 +53,37 @@ jobs:
         with:
           name: built-app-all-in-one-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez-v+([0-9]).+([0-9]).+([0-9])-win-*.exe
+            app/electron/dist/Pomatez-v+([0-9]).+([0-9]).+([0-9])-win-*.exe
       - name: Upload ia32 builds
         uses: actions/upload-artifact@v3
         with:
           name: built-app-ia32-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*ia32*.*
+            app/electron/dist/Pomatez*ia32*.*
       - name: Upload x64 builds
         uses: actions/upload-artifact@v3
         with:
           name: built-app-x64-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*x64*.*
-            app/main/dist/Pomatez*x86_64*.*
-            app/main/dist/Pomatez*amd64*.*
+            app/electron/dist/Pomatez*x64*.*
+            app/electron/dist/Pomatez*x86_64*.*
+            app/electron/dist/Pomatez*amd64*.*
       - name: Upload arm64 builds
         uses: actions/upload-artifact@v3
         with:
           name: built-app-arm64-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*arm64*.*
-            app/main/dist/Pomatez*aarch64*.*
+            app/electron/dist/Pomatez*arm64*.*
+            app/electron/dist/Pomatez*aarch64*.*
       - name: Upload armv7l builds
         uses: actions/upload-artifact@v3
         with:
           name: built-app-armv7l-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*armv7l*.*
+            app/electron/dist/Pomatez*armv7l*.*
       - name: Upload autoupdaters
         uses: actions/upload-artifact@v3
         with:
           name: built-app-AutoUpdater-${{ matrix.name }}
           path: |
-            app/main/dist/latest*
+            app/electron/dist/latest*

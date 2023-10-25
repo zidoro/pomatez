@@ -1,7 +1,13 @@
-name: Test Build Tauri
+name: Build Tauri
 
 on:
   push:
+    branches-ignore:
+      - "master"
+    paths-ignore:
+      - "website"
+  workflow_call:
+  workflow_dispatch:
 jobs:
   build:
     name: "Test Build"
@@ -13,20 +19,38 @@ jobs:
         include:
           - os: ubuntu-22.04
             name: linux
+            # https://tauri.app/v1/guides/building/linux#cross-compiling-tauri-applications-for-arm-based-devices
+            # Cross Compiling is also more of a pain it seems for linux atm, explore later
+            targets: "x86_64-unknown-linux-gnu"
+            tauri_target: ["x86_64-unknown-linux-gnu"]
           - os: macos-latest
             name: mac
+            targets: "aarch64-apple-darwin,x86_64-apple-darwin"
+            tauri_target: ["universal-apple-darwin"]
           - os: windows-latest
             name: win
+            targets: "aarch64-pc-windows-msvc,x86_64-pc-windows-msvc"
+            # The MSI installer is better integrated with the Add/Remove menu and feels more modern.
+            # The only real added benefit of NSIS is that the installer can have a custom logo.
+            # Also, nsis is the only one that currently works on arm64
+            # Another note is embedBootstrapper is enabled to improve support on window 7. Though windows 7 doesn't support arm64.
+            tauri_target: ["'aarch64-pc-windows-msvc --bundles nsis,updater'", "'x86_64-pc-windows-msvc --bundles msi,updater'"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js 18.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: "yarn"
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.targets }}
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './app/tauri -> target'
       - name: install dependencies (ubuntu only)
         if: matrix.os == 'ubuntu-22.04'
         run: |
@@ -36,14 +60,50 @@ jobs:
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Build
-        run: yarn build:tauri
+        shell: bash
+        run: |
+          for target in ${{ join(matrix.tauri_target, ' ') }}; do
+            yarn build:tauri --target $target --config ./app/tauri/release.conf.json
+          done
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
-          name: built-app-${{ matrix.name }}
+          name: tauri-${{ matrix.name }}
           path: |
-            app/tauri/target/release/bundle/deb/*.deb
-            app/tauri/target/release/bundle/appimage/*.AppImage
-            app/tauri/target/release/bundle/msi/*.msi
-            app/tauri/target/release/bundle/dmg/*.dmg
-            app/tauri/target/release/bundle/macos/*.app
+            app/tauri/target/*/release/bundle/**/*.AppImage
+            app/tauri/target/*/release/bundle/**/*.dmg
+            app/tauri/target/*/release/bundle/**/*.deb
+            app/tauri/target/*/release/bundle/**/msi/*.msi
+            app/tauri/target/*/release/bundle/**/nsis/*.exe
+            app/tauri/target/*/release/bundle/appimage/**/*.tar.gz
+            app/tauri/target/*/release/bundle/macos/**/*.tar.gz
+            app/tauri/target/*/release/bundle/**/*.zip
+            app/tauri/target/*/release/bundle/**/*.sig
+  generate-updater-file:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+      - name: Display structure of downloaded files
+        shell: bash
+        run: ls -R
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "yarn"
+      - name: Generate updater file
+        run: node app/tauri/release-prep/release-prep.js
+      - uses: actions/upload-artifact@v3
+        with:
+          name: tauri-release
+          path: |
+            release/*

@@ -17,7 +17,7 @@ import {
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
 import { enable, disable } from "@tauri-apps/plugin-autostart";
-import { invoke } from "@tauri-apps/api/tauri";
+import { invoke } from "@tauri-apps/api/primitives";
 
 export const TauriConnectorProvider: React.FC = ({ children }) => {
   const settings: SettingTypes = useSelector(
