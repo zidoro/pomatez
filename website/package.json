@@ -37,18 +37,18 @@
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
-    "@types/node": "^18.18.0",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/node": "^18.18.6",
+    "@types/react": "^18.2.32",
+    "@types/react-dom": "^18.2.14",
     "@types/react-scroll": "^1.8.6",
     "@types/styled-components": "^5.1.26",
-    "eslint": "^8.32.0",
+    "eslint": "^8.52.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unused-imports": "^2.0.0",
     "gh-pages": "^5.0.0",
     "prettier": "^2.8.8",
-    "typescript": "4.9.4"
+    "typescript": "4.9.5"
   }
 }
