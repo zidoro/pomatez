@@ -6,6 +6,7 @@
 
 /dist
 /build
+/artifacts/
 
 .DS_Store
 .env.local
@@ -20,3 +21,4 @@ yarn-error.log*
 .idea/
 *.iml
 /lerna-debug.log
+/release/

@@ -21,6 +21,7 @@
     "build:linux": "yarn build && lerna run build:linux --stream",
     "build:snap": "yarn build && lerna run build:snap --stream",
     "build:tauri": "tauri build",
+    "build:updaterfile": "node app/tauri/release-prep/release-prep.js",
     "release:mw": "yarn build && lerna run release:mw --stream",
     "release": "yarn build && lerna run release --stream",
     "clean": "lerna exec -- rimraf build/ dist/",
@@ -46,7 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.0.0-alpha.14",
+    "@tauri-apps/cli": "^2.0.0-alpha.17",
     "commitizen": "^4.1.2",
     "copyfiles": "2.4.1",
     "cross-env": "^7.0.3",
@@ -64,8 +65,5 @@
   "resolutions": {
     "//": "Check https://github.com/facebook/create-react-app/issues/11773 to see if it has been fixed yet",
     "react-error-overlay": "6.0.9"
-  },
-  "dependencies": {
-    "@tauri-apps/api": "^2.0.0-alpha.8"
   }
 }

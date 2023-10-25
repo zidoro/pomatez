@@ -1,5 +1,5 @@
 use std::path::PathBuf;
-use tauri::{App, Builder, Icon, Manager, Runtime, Wry};
+use tauri::{App, Icon, Manager, Runtime};
 use tauri::{
     menu::{MenuBuilder, MenuItemBuilder},
     tray::{ClickType, TrayIconBuilder},
@@ -77,7 +77,7 @@ impl PomatezTray for App {
                 }
                 _ => {}
             })
-            .on_tray_event(|tray, event| {
+            .on_tray_icon_event(|tray, event| {
                 if event.click_type == ClickType::Left {
                     let app = tray.app_handle();
                     let window = app.get_window("main").unwrap();

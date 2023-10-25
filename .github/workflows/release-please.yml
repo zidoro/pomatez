@@ -20,15 +20,21 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       sha: ${{ steps.release.outputs.sha }}
       upload_url: ${{ steps.release.outputs.upload_url }}
-  build:
-    name: "Build"
+  build-node:
+    name: "Build Node"
     needs: release-please
     if: needs.release-please.outputs.release_created
     uses: ./.github/workflows/build.yml
+  build-tauri:
+    name: "Build Tauri"
+    needs: release-please
+    if: needs.release-please.outputs.release_created
+    uses: ./.github/workflows/build-tauri.yml
   publish:
     name: Publish
     needs:
-      - build
+      - build-node
+      - build-tauri
       - release-please
     runs-on: ubuntu-latest
     steps:
@@ -42,15 +48,15 @@ jobs:
         with:
           tag_name: ${{ needs.release-please.outputs.tag }}
           files: |
-            **/latest*
-            **/*.deb
-            **/*.rpm
-            **/*.dmg
-            **/*.AppImage
-            **/*.zip
-            **/*.exe
-            **/*.snap
-            **/*.blockmap
+            built-*/latest*
+            built-*/*.deb
+            built-*/*.rpm
+            built-*/*.dmg
+            built-*/*.AppImage
+            built-*/*.zip
+            built-*/*.exe
+            built-*/*.snap
+            built-*/*.blockmap
   publish-to-homebrew-cask:
     name: Publish to Homebrew Cask
     needs:
