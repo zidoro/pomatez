@@ -95,18 +95,18 @@
     "v8-compile-cache": "^2.1.1"
   },
   "devDependencies": {
-    "nodemon": "2.0.20",
+    "nodemon": "2.0.22",
     "@jest-runner/electron": "^3.0.0",
     "electron-devtools-installer": "^3.2.0",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/node-notifier": "8.0.2",
+    "@types/node-notifier": "8.0.4",
     "@types/universal-analytics": "^0.4.4",
     "@types/uuid": "7.0.3",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.3",
-    "electron": "18.1.0",
+    "electron": "18.3.15",
     "electron-builder": "23.6.0",
-    "regenerator-runtime": "^0.13.11",
+    "regenerator-runtime": "^0.14.0",
     "electron-reload": "2.0.0-alpha.1",
     "ts-jest": "^26.5.6"
   }
