@@ -18,12 +18,12 @@ mod updater;
 use commands::PomatezCommands;
 use system_tray::PomatezTray;
 use global_shortcuts::{PomatezGlobalShortcutsSetup, PomatezGlobalShortcutsRegister};
-use crate::updater::PomatezUpdater;
 
 fn main() {
     let app = tauri::Builder::default()
         .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
         .plugin(tauri_plugin_window::init())
+        .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .register_pomatez_commands()
         .setup(|app| {
@@ -31,7 +31,6 @@ fn main() {
             {
                 app.setup_global_shortcuts();
                 app.set_pomatez_system_tray();
-                app.check_for_update();
             }
 
             Ok(())

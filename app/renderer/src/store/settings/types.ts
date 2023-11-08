@@ -1,6 +1,7 @@
 const settings = "[settings]";
 
 export type SettingTypes = {
+  ignoreUpdate: string;
   alwaysOnTop: boolean;
   compactMode: boolean;
   enableFullscreenBreak: boolean;
@@ -17,6 +18,10 @@ export type SettingTypes = {
   openAtLogin: boolean;
 };
 
+/**
+ * the reason this is stored inside the settings and not the update is because we want to actually store this and remember it
+ */
+export const IGNORE_UPDATE = `${settings} IGNORE_UPDATE`;
 export const ALWAYS_ON_TOP = `${settings} ALWAYS_ON_TOP`;
 export const ENABLE_DARK_THEME = `${settings} ENABLE_DARK_THEME`;
 

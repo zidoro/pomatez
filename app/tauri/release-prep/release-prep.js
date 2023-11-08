@@ -3,7 +3,7 @@ const release_please_manifest = require("../../../.release-please-manifest.json"
 const path = require("path");
 
 const version = `v${release_please_manifest["."]}`;
-const github_url = `https://github.com/sekwah41/pomatez/releases/download/${version}/`;
+const github_url = `https://github.com/zidoro/pomatez/releases/download/${version}/`;
 const artifactsPath = path.join(
   __dirname,
   "..",

@@ -17,11 +17,13 @@ import {
   ENABLE_VOICE_ASSISTANCE,
   ENABLE_COMPACT_MODE,
   OPEN_AT_LOGIN,
+  IGNORE_UPDATE,
 } from "./types";
 
 const defaultSettings: SettingTypes = {
   alwaysOnTop: false,
   compactMode: false,
+  ignoreUpdate: "",
   enableFullscreenBreak: false,
   enableStrictMode: false,
   enableDarkTheme: isPreferredDark(),
@@ -47,6 +49,11 @@ export const settingReducer = (
   action: SettingActionTypes
 ) => {
   switch (action.type) {
+    case IGNORE_UPDATE:
+      return {
+        ...state,
+        ignoreUpdate: action.payload,
+      };
     case ALWAYS_ON_TOP:
       return {
         ...state,

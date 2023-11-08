@@ -6,7 +6,9 @@ import {
   StyledNavList,
   StyledNavListItem,
   StyledNavLink,
+  StyledNavIconWrapper,
 } from "styles";
+import { NavNotify } from "components";
 import { routes } from "config";
 import SVG from "./SVG";
 
@@ -19,23 +21,32 @@ const Navigation: React.FC<Props> = ({ timerType }) => {
     (state: AppStateTypes) => state.settings
   );
 
+  const state = useSelector((state: AppStateTypes) => state);
+
   return (
     <StyledNav useNativeTitlebar={settings.useNativeTitlebar}>
       <StyledNavList>
-        {routes.map(({ name, icon, exact, path }, index) => (
-          <StyledNavListItem key={index}>
-            <StyledNavLink
-              exact={exact}
-              to={path}
-              type={timerType}
-              draggable="false"
-              replace
-            >
-              <SVG name={icon} />
-              {name}
-            </StyledNavLink>
-          </StyledNavListItem>
-        ))}
+        {routes(state).map(
+          ({ name, icon, exact, path, notify }, index) => {
+            return (
+              <StyledNavListItem key={index}>
+                <StyledNavLink
+                  exact={exact}
+                  to={path}
+                  type={timerType}
+                  draggable="false"
+                  replace
+                >
+                  <StyledNavIconWrapper>
+                    <SVG name={icon} />
+                    {notify && <NavNotify />}
+                  </StyledNavIconWrapper>
+                  {name}
+                </StyledNavLink>
+              </StyledNavListItem>
+            );
+          }
+        )}
       </StyledNavList>
     </StyledNav>
   );

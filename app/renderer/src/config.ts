@@ -1,6 +1,8 @@
 import { SVGTypes } from "components";
 import { TaskList, Config, Timer, Settings } from "routes";
 import { ConfigSliderProps } from "routes";
+import { AppStateTypes, SettingTypes } from "./store";
+import { DefaultRootState } from "react-redux";
 
 export const APP_NAME = "Pomatez";
 
@@ -10,15 +12,19 @@ type NavItemTypes = {
   exact: boolean;
   path: string;
   component: React.FC;
+  notify: boolean;
 };
 
-export const routes: NavItemTypes[] = [
+export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
+  state
+) => [
   {
     icon: "task",
     name: "Task List",
     exact: false,
     path: "/task-list",
     component: TaskList,
+    notify: false,
   },
   {
     icon: "config",
@@ -26,6 +32,7 @@ export const routes: NavItemTypes[] = [
     exact: true,
     path: "/config",
     component: Config,
+    notify: false,
   },
   {
     icon: "timer",
@@ -33,6 +40,7 @@ export const routes: NavItemTypes[] = [
     exact: true,
     path: "/",
     component: Timer,
+    notify: false,
   },
   {
     icon: "settings",
@@ -40,6 +48,7 @@ export const routes: NavItemTypes[] = [
     exact: true,
     path: "/settings",
     component: Settings,
+    notify: !!state?.update?.updateBody,
   },
 ];
 
@@ -50,6 +59,7 @@ export const compactRoutes: NavItemTypes[] = [
     exact: false,
     path: "/",
     component: Timer,
+    notify: false,
   },
 ];
 

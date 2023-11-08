@@ -27,9 +27,8 @@ type Props = {
 };
 
 const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
-  const { onMinimizeCallback, onExitCallback } = useContext(
-    ConnnectorContext
-  );
+  const { onMinimizeCallback, onExitCallback } =
+    useContext(ConnnectorContext);
 
   const getAppIcon = useCallback(() => {
     switch (timerType) {

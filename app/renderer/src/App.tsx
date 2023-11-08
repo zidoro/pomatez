@@ -35,6 +35,16 @@ export default function App() {
       document.removeEventListener("contextmenu", contextEvent);
   }, []);
 
+  useEffect(() => {
+    const middleMouseEvent = (event: MouseEvent) => {
+      if (event.button === 1) event.preventDefault();
+    };
+    window.addEventListener("auxclick", middleMouseEvent);
+
+    return () =>
+      window.removeEventListener("auxclick", middleMouseEvent);
+  }, []);
+
   return (
     <ThemeProvider>
       <CounterProvider>
@@ -54,7 +64,7 @@ export default function App() {
                           />
                         )
                       )
-                    : routes.map(
+                    : routes().map(
                         ({ exact, path, component }, index) => (
                           <Route
                             exact={exact}

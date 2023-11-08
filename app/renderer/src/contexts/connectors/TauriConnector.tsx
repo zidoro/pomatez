@@ -1,9 +1,10 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import { ConnnectorContext } from "../ConnnectorContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppStateTypes, SettingTypes } from "../../store";
 import { CounterContext } from "../CounterContext";
 import {
+  CHECK_FOR_UPDATES,
   SET_ALWAYS_ON_TOP,
   SET_CLOSE,
   SET_COMPACT_MODE,
@@ -13,13 +14,26 @@ import {
   SET_SHOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
+  UPDATE_AVAILABLE,
 } from "@pomatez/shareables";
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
 import { enable, disable } from "@tauri-apps/plugin-autostart";
 import { invoke } from "@tauri-apps/api/primitives";
+import { listen } from "@tauri-apps/api/event";
+import { setUpdateBody, setUpdateVersion } from "../../store/update";
+
+export const TauriInvokeConnector = {
+  send: (event: string, ...payload: any) => {
+    invoke(event.toLowerCase(), ...payload).catch((err) =>
+      console.error(err)
+    );
+  },
+};
 
 export const TauriConnectorProvider: React.FC = ({ children }) => {
+  const dispatch = useDispatch();
+
   const settings: SettingTypes = useSelector(
     (state: AppStateTypes) => state.settings
   );
@@ -41,7 +55,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   }, []);
 
   /**
-   * Rust uses lowercase snake_case for function names so we need to convert to lower case for the calls.
+   * Rust uses lowercase snake_case for function names, so we need to convert to lower case for the calls.
    * @param event
    * @param payload
    */
@@ -143,6 +157,31 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
       };
     }
   }, [send, timer.playing, timerType, dashOffset]);
+
+  // Workaround to make sure it only calls once on mount
+  const checkUpdate = useCallback(() => {
+    send(CHECK_FOR_UPDATES, {
+      ignoreVersion: settings.ignoreUpdate || "",
+    });
+  }, [send, settings.ignoreUpdate]);
+
+  useEffect(() => {
+    checkUpdate();
+  }, [checkUpdate]);
+
+  useEffect(() => {
+    const unlisten = listen<{ body: string; version: string }>(
+      UPDATE_AVAILABLE,
+      (updateInfo) => {
+        console.log("Update Info", updateInfo.payload);
+        dispatch(setUpdateVersion(updateInfo?.payload?.version));
+        dispatch(setUpdateBody(updateInfo?.payload?.body));
+      }
+    );
+    return () => {
+      unlisten.then((f) => f());
+    };
+  }, [dispatch]);
 
   return (
     <ConnnectorContext.Provider

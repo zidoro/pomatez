@@ -9,6 +9,7 @@ use tauri::{Builder, PhysicalSize, Runtime, Wry};
 struct WindowSize;
 
 use crate::system_tray;
+use crate::updater;
 
 impl WindowSize {
 
@@ -184,6 +185,8 @@ impl PomatezCommands for Builder<Wry> {
     fn register_pomatez_commands(self) -> tauri::Builder<Wry> {
         self.invoke_handler(tauri::generate_handler![set_show, set_always_on_top,
             set_fullscreen_break, set_compact_mode, set_ui_theme, set_native_titlebar,
-            system_tray::tray_icon_update, set_close, set_minimize])
+            system_tray::tray_icon_update, set_close, set_minimize, updater::check_for_updates,
+            updater::install_update
+        ])
     }
 }
