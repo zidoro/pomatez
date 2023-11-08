@@ -1,6 +1,7 @@
 import {
   SettingTypes,
   SettingActionTypes,
+  IGNORE_UPDATE,
   ALWAYS_ON_TOP,
   RESTORE_DEFAULT_SETTINGS,
   ENABLE_DARK_THEME,
@@ -17,6 +18,15 @@ import {
   ENABLE_COMPACT_MODE,
   OPEN_AT_LOGIN,
 } from "./types";
+
+export const setIgnoreUpdate = (
+  ignoreUpdate: SettingTypes["ignoreUpdate"]
+): SettingActionTypes => {
+  return {
+    type: IGNORE_UPDATE,
+    payload: ignoreUpdate,
+  };
+};
 
 export const setAlwaysOnTop = (
   alwaysOnTop: SettingTypes["alwaysOnTop"]

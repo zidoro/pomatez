@@ -1,9 +1,9 @@
 {
   "plugins": {
     "updater": {
-      "dialog": true,
+      "dialog": false,
       "endpoints": [
-        "https://api.github.com/repos/sekwah41/pomatez/this/is/not/a/valid/url/and/will/be/set/in/main/rs"
+        "https://api.github.com/repos/zidoro/pomatez/this/is/not/a/valid/url/and/will/be/set/in/rust"
       ]
     }
   },

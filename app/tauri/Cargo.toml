@@ -3,7 +3,7 @@ name = "pomatez"
 # In the current version of release please, unless the toml file is in the root of the project it cannot be updated.
 # https://github.com/googleapis/release-please/issues/1724
 # util/cargo-version-updater.js will run to keep this value up to date before rust builds.
-version = "1.3.0"
+version = "1.4.3"
 description = "Attractive pomodoro timer for Windows, Mac, and Linux."
 authors = ["Roldan Montilla Jr"]
 license = "MIT"
@@ -26,6 +26,7 @@ tauri-plugin-window = "2.0.0-alpha.2"
 tauri-plugin-autostart = "2.0.0-alpha.3"
 lazy_static = "1.4.0"
 base64 = { version = "0.21.4", features = [] }
+tauri-plugin-notification = "2.0.0-alpha.5"
 
 # This one is for toying with global hotkeys from the browser mostly
 # We can use https://github.com/tauri-apps/global-hotkey directly tbh

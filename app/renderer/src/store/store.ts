@@ -7,12 +7,14 @@ import { configReducer } from "./config";
 import { settingReducer } from "./settings";
 import { timerReducer } from "./timer";
 import { undoableTasksReducer } from "./tasks";
+import { updateReducer } from "./update";
 
 const rootReducer = combineReducers({
   config: configReducer,
   settings: settingReducer,
   timer: timerReducer,
   tasks: undoableTasksReducer,
+  update: updateReducer,
 });
 
 export type AppStateTypes = ReturnType<typeof rootReducer>;

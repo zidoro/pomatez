@@ -21,16 +21,36 @@ impl PomatezGlobalShortcutsSetup for App {
                 println!("Shortcut pressed: {:?}", shortcut);
                 match shortcut.id() {
                     key if SHOW_SHORTCUT.id() == key => {
-                        window.show().expect("Failed to show window");
-                        window.set_focus().expect("Failed to focus window");
+                        match window.show() {
+                            Ok(_) => {}
+                            Err(e) => {
+                                println!("Failed to show window: {:?}", e);
+                            }
+                        }
+                        match window.set_focus() {
+                            Ok(_) => {}
+                            Err(e) => {
+                                println!("Failed to focus window: {:?}", e);
+                            }
+                        }
                     }
                     key if HIDE_SHORTCUT.id() == key => {
-                        window.hide().expect("Failed to hide window");
+                        match window.hide() {
+                            Ok(_) => {}
+                            Err(e) => {
+                                println!("Failed to hide window: {:?}", e);
+                            }
+                        }
                     }
                     _ => println!("Shortcut pressed: {:?}", shortcut),
                 }
                 if shortcut.matches(Modifiers::ALT | Modifiers::SHIFT, Code::KeyH) {
-                    window.hide().expect("Failed to hide window");
+                    match window.hide() {
+                        Ok(_) => {}
+                        Err(e) => {
+                            println!("Failed to hide window: {:?}", e);
+                        }
+                    }
                 } else {
                     println!("Shortcut pressed: {:?}", shortcut);
                 }
@@ -38,7 +58,12 @@ impl PomatezGlobalShortcutsSetup for App {
         };
         let app_handle = self.handle();
 
-        app_handle.plugin(global_shortcut_plugin).expect("failed to register global shortcut plugin");
+        match app_handle.plugin(global_shortcut_plugin) {
+            Ok(_) => {}
+            Err(e) => {
+                println!("Failed to register global shortcut plugin: {:?}", e);
+            }
+        }
 
         println!("Registered global shortcut plugin");
     }
@@ -51,8 +76,18 @@ pub trait PomatezGlobalShortcutsRegister {
 impl PomatezGlobalShortcutsRegister for AppHandle {
     fn register_global_shortcuts(&self) {
         let global_shortcut = self.global_shortcut();
-        global_shortcut.register(SHOW_SHORTCUT.clone()).expect("failed to register global shortcut");
-        global_shortcut.register(HIDE_SHORTCUT.clone()).expect("failed to register global shortcut");
+        match global_shortcut.register(SHOW_SHORTCUT.clone()) {
+            Ok(_) => {}
+            Err(e) => {
+                println!("Failed to register global shortcut: {:?}", e);
+            }
+        };
+        match global_shortcut.register(HIDE_SHORTCUT.clone()) {
+            Ok(_) => {}
+            Err(e) => {
+                println!("Failed to register global shortcut: {:?}", e);
+            }
+        };
 
         println!("Registered global shortcuts");
     }

@@ -40,17 +40,33 @@ export const StyledNavList = styled.ul`
 export const StyledNavListItem = styled.li`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 type NavLinkProps = { type?: string };
+
+export const StyledNavIconWrapper = styled.div`
+  position: relative;
+  box-sizing: content-box;
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 14px;
+  margin-bottom: 0.4rem;
+`;
 
 export const StyledNavLink = styled(NavLink)<NavLinkProps>`
   width: 100%;
   height: 100%;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   justify-items: center;
-  row-gap: 0.4rem;
+  text-align: center;
 
   position: relative;
   cursor: pointer;

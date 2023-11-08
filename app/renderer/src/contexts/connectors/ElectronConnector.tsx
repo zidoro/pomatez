@@ -17,6 +17,15 @@ import {
 } from "@pomatez/shareables";
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
+import { InvokeConnector } from "../InvokeConnector";
+
+export const ElectronInvokeConnector: InvokeConnector = {
+  send: (event: string, ...payload: any) => {
+    const { electron } = window;
+
+    electron.send(event, ...payload);
+  },
+};
 
 export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
