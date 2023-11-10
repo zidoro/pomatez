@@ -8,9 +8,7 @@ export type ConfigSliderProps = {
   minValue: number;
   maxValue: number;
   value: number;
-  onMouseUp?:
-    | ((event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void)
-    | undefined;
+  handleConfigChange?: (value: any) => void;
 };
 
 const ConfigSlider: React.FC<ConfigSliderProps> = ({
@@ -19,12 +17,22 @@ const ConfigSlider: React.FC<ConfigSliderProps> = ({
   minValue,
   maxValue,
   value,
-  onMouseUp,
+  handleConfigChange,
 }) => {
   const [rangeValue, setRangeValue] = useState(value);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRangeValue(parseInt(e.target.value));
+
+    /*
+    Check if "handleConfigChange" exists in order to avoid typescript compile error.
+    
+    Error comes because type "ConfigSliderProps" is used in "src/config.ts" for "rangeConfig" object. But that object is not used by anything else in the app which means its unnecessary code.
+    
+    Correct solution would be to make "handleConfigChange" mandatory instead of optional in "ConfigSliderProps" type & remove/disable the "rangeConfig" object from "src/config.ts".
+    */
+
+    if (handleConfigChange) handleConfigChange(e.target.value);
   };
 
   useEffect(() => {
@@ -43,7 +51,6 @@ const ConfigSlider: React.FC<ConfigSliderProps> = ({
         minValue={minValue}
         maxValue={maxValue}
         onChange={onChange}
-        onMouseUp={onMouseUp}
       />
     </StyledRangeContainer>
   );
