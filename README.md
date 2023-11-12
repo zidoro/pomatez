@@ -188,6 +188,8 @@
 Please ensure that you have the [pre-requisites](https://beta.tauri.app/guides/prerequisites/) installed.
 
 Android or iOS may require a little more setup.
+Also, the Android dev only works on linux and iOS dev only works on macOS.
+The Android one is due to an issue compiling openssl-sys on windows and the iOS one is because Apple requires you to use a Mac to build iOS apps.
 
 And then you should just be able to run any of the tauri configurations like so
 
