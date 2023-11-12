@@ -21,6 +21,7 @@ import { TraySVG } from "../../components";
 import { enable, disable } from "@tauri-apps/plugin-autostart";
 import { invoke } from "@tauri-apps/api/primitives";
 import { listen } from "@tauri-apps/api/event";
+import { open } from "@tauri-apps/plugin-shell";
 import { setUpdateBody, setUpdateVersion } from "../../store/update";
 
 export const TauriInvokeConnector = {
@@ -55,6 +56,30 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   }, []);
 
   /**
+   * Apparently you can just use _blank as the target though it definitely isn't working on windows.
+   *
+   * This is a workaround :)
+   */
+  useEffect(() => {
+    function urlClickHandler(e: MouseEvent) {
+      const target = e.target as HTMLAnchorElement;
+      if (
+        target &&
+        target.tagName === "A" &&
+        target.href.startsWith("http") &&
+        target.target === "_blank"
+      ) {
+        e.preventDefault();
+        open(target.href); // Use Tauri's shell module to open external links
+      }
+    }
+    window.addEventListener("click", urlClickHandler);
+    return () => {
+      window.removeEventListener("click", urlClickHandler);
+    };
+  }, []);
+
+  /**
    * Rust uses lowercase snake_case for function names, so we need to convert to lower case for the calls.
    * @param event
    * @param payload
@@ -75,8 +100,9 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
-  const { count, duration, timerType, shouldFullscreen } =
-    useContext(CounterContext);
+  const { count, duration, timerType, shouldFullscreen } = useContext(
+    CounterContext
+  );
   const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
@@ -149,7 +175,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
       const img = new Image();
       img.src = svgXML;
 
-      img.onload = function () {
+      img.onload = function() {
         ctx?.drawImage(img, 0, 0);
         const dataUrl = canvas.toDataURL("image/png");
 
