@@ -115,7 +115,7 @@ function addPlatformUpdater(
  * @param {string} searchPath - The starting directory to begin the search.
  * @param {string} fileExtension - The file extension to search for.
  */
-function addReleaseFiles(searchPath, ...fileExtension) {
+function addReleaseFiles(searchPath, platform, ...fileExtension) {
   fs.readdirSync(searchPath, { withFileTypes: true }).forEach(
     (entry) => {
       const entryPath = path.join(searchPath, entry.name);
@@ -133,7 +133,7 @@ function addReleaseFiles(searchPath, ...fileExtension) {
         // TODO remove once we are set on replacing electron for some of the base files and/or are sure most of the bugs are gone
         const releaseFilePath = path.join(
           releasePath,
-          `${baseName}-tauri-beta${ext}`
+          `${baseName}-${platform}-tauri-beta${ext}`
         );
         fs.copyFileSync(entryPath, releaseFilePath);
         console.log(`Release file copied to ${releaseFilePath}`);
@@ -171,14 +171,11 @@ addPlatformUpdater(
   /\.zip$/
 );
 
-addReleaseFiles(
-  artifactsPath,
-  ".AppImage",
-  ".exe",
-  ".dmg",
-  ".msi",
-  ".deb"
-);
+addReleaseFiles(artifactsPath, "mac", ".dmg");
+
+addReleaseFiles(artifactsPath, "win", ".exe", ".msi");
+
+addReleaseFiles(artifactsPath, "linux", ".AppImage", ".deb");
 
 fs.writeFile(
   path.join(releasePath, "tauri-updater.json"),
