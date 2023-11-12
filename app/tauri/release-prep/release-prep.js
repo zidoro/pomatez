@@ -113,6 +113,7 @@ function addPlatformUpdater(
 /**
  * Recursively searches for files with the given glob pattern and copies them to the release folder.
  * @param {string} searchPath - The starting directory to begin the search.
+ * @param {string} platform - The platform flat to append to the file name.
  * @param {string} fileExtension - The file extension to search for.
  */
 function addReleaseFiles(searchPath, platform, ...fileExtension) {
@@ -121,7 +122,7 @@ function addReleaseFiles(searchPath, platform, ...fileExtension) {
       const entryPath = path.join(searchPath, entry.name);
       if (entry.isDirectory()) {
         // Recurse if entry is a directory
-        addReleaseFiles(entryPath, ...fileExtension);
+        addReleaseFiles(entryPath, platform, ...fileExtension);
       } else if (
         entry.isFile() &&
         fileExtension.find((ext) => ext === path.extname(entry.name))
