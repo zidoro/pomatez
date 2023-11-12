@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/zidoro/pomatez/compare/v1.4.1...v1.4.2) (2023-11-12)
+
+
+### Bug Fixes 🐛
+
+* **tauri:** mac ipc added to connect-src CSP ([b535250](https://github.com/zidoro/pomatez/commit/b535250f5ae720cc75ad50badee381ee7d5a4c47))
+
 ## [1.4.1](https://github.com/zidoro/pomatez/compare/v1.4.0...v1.4.1) (2023-11-12)
 
 
