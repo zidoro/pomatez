@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/zidoro/pomatez/compare/v1.4.0...v1.4.1) (2023-11-12)
+
+
+### Bug Fixes 🐛
+
+* **tauri:** links now open in the default browser ([901b824](https://github.com/zidoro/pomatez/commit/901b82481eab8da6e5aade01a97874e52a1905c4))
+
 ## [1.4.0](https://github.com/zidoro/pomatez/compare/v1.3.1...v1.4.0) (2023-11-12)
 
 ### Features ✨
