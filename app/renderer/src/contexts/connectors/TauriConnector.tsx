@@ -100,9 +100,8 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
-  const { count, duration, timerType, shouldFullscreen } = useContext(
-    CounterContext
-  );
+  const { count, duration, timerType, shouldFullscreen } =
+    useContext(CounterContext);
   const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
@@ -175,7 +174,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
       const img = new Image();
       img.src = svgXML;
 
-      img.onload = function() {
+      img.onload = function () {
         ctx?.drawImage(img, 0, 0);
         const dataUrl = canvas.toDataURL("image/png");
 
