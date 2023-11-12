@@ -59,30 +59,28 @@ jobs:
             built-*/*.snap
             built-*/*.blockmap
             tauri-release/*
-
-# Commented out just for test releases
-#  publish-to-homebrew-cask:
-#    name: Publish to Homebrew Cask
-#    needs:
-#      - publish
-#      - release-please
-#    runs-on: macos-latest
-#    steps:
-#      - uses: Homebrew/actions/bump-packages@master
-#        with:
-#          casks: pomatez
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#  publish-to-winget:
-#    name: Publish to WinGet
-#    needs:
-#      - publish
-#      - release-please
-#    runs-on: windows-latest
-#    steps:
-#      - uses: vedantmgoyal2009/winget-releaser@v2
-#        with:
-#          identifier: Zidoro.Pomatez
-#          installers-regex: 'setup\.exe$'
-#          max-versions-to-keep: 5 # keep only latest 5 versions
-#          release-tag: ${{ needs.release-please.outputs.tag }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
+  publish-to-homebrew-cask:
+    name: Publish to Homebrew Cask
+    needs:
+      - publish
+      - release-please
+    runs-on: macos-latest
+    steps:
+      - uses: Homebrew/actions/bump-packages@master
+        with:
+          casks: pomatez
+          token: ${{ secrets.GITHUB_TOKEN }}
+  publish-to-winget:
+    name: Publish to WinGet
+    needs:
+      - publish
+      - release-please
+    runs-on: windows-latest
+    steps:
+      - uses: vedantmgoyal2009/winget-releaser@v2
+        with:
+          identifier: Zidoro.Pomatez
+          installers-regex: 'setup\.exe$'
+          max-versions-to-keep: 5 # keep only latest 5 versions
+          release-tag: ${{ needs.release-please.outputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
