@@ -28,8 +28,8 @@ const SliderSection: React.FC = () => {
       minValue: 1,
       maxValue: 120,
       value: stayFocus,
-      onMouseUp: useCallback(
-        (e) => dispatch(setStayFocus(parseInt(e.target.value))),
+      handleConfigChange: useCallback(
+        (value) => dispatch(setStayFocus(parseInt(value))),
         [dispatch]
       ),
     },
@@ -39,8 +39,8 @@ const SliderSection: React.FC = () => {
       minValue: 1,
       maxValue: 60,
       value: shortBreak,
-      onMouseUp: useCallback(
-        (e) => dispatch(setShorBreak(parseInt(e.target.value))),
+      handleConfigChange: useCallback(
+        (value) => dispatch(setShorBreak(parseInt(value))),
         [dispatch]
       ),
     },
@@ -50,8 +50,8 @@ const SliderSection: React.FC = () => {
       minValue: 1,
       maxValue: 60,
       value: longBreak,
-      onMouseUp: useCallback(
-        (e) => dispatch(setLongBreak(parseInt(e.target.value))),
+      handleConfigChange: useCallback(
+        (value) => dispatch(setLongBreak(parseInt(value))),
         [dispatch]
       ),
     },
@@ -61,8 +61,8 @@ const SliderSection: React.FC = () => {
       minValue: 1,
       maxValue: 10,
       value: sessionRounds,
-      onMouseUp: useCallback(
-        (e) => dispatch(setSessionRounds(parseInt(e.target.value))),
+      handleConfigChange: useCallback(
+        (value) => dispatch(setSessionRounds(parseInt(value))),
         [dispatch]
       ),
     },
@@ -72,7 +72,14 @@ const SliderSection: React.FC = () => {
     <StyledConfigSliderSection>
       {sliderRangeList.map(
         (
-          { label, valueType, minValue, maxValue, value, onMouseUp },
+          {
+            label,
+            valueType,
+            minValue,
+            maxValue,
+            value,
+            handleConfigChange,
+          },
           index
         ) => (
           <ConfigSlider
@@ -81,7 +88,7 @@ const SliderSection: React.FC = () => {
             minValue={minValue}
             valueType={valueType}
             maxValue={maxValue}
-            onMouseUp={onMouseUp}
+            handleConfigChange={handleConfigChange}
             key={index}
           />
         )
