@@ -183,6 +183,19 @@
    yarn build:mwl
    ```
 
+### Tauri Versions
+
+Please ensure that you have the [pre-requisites](https://beta.tauri.app/guides/prerequisites/) installed.
+
+Android or iOS may require a little more setup.
+
+And then you should just be able to run any of the tauri configurations like so
+
+```bash
+yarn install
+yarn tauri:dev
+```
+
 ## :pencil: Pre-Commit
 
 If your pr is being rejected due to the pre-commit checks, just download pre-commit using `pip install pre-commit` or via one of the commands [here](https://pre-commit.com/#install).
