@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.4.0](https://github.com/zidoro/pomatez/compare/v1.3.1...v1.4.0) (2023-11-12)
+
+
+### Features ✨
+
+* add base tauri app ([8b91a3f](https://github.com/zidoro/pomatez/commit/8b91a3f898efa8f1775eb83b937f379a56d9c4da))
+* make tauri version draggable ([6202477](https://github.com/zidoro/pomatez/commit/620247715b3fb0e21c0a68b4fd77470f30f60391))
+* restructure connector in a way that allows easy switching out for platforms ([ce368dd](https://github.com/zidoro/pomatez/commit/ce368dd03b7edf3129acedbae1acabad059c2d67))
+* **tauri:** add base connector with placeholders for logging ([a989379](https://github.com/zidoro/pomatez/commit/a989379a57c66078409169d325c61860b109c8fe))
+* **tauri:** add closing logic ([5b7c749](https://github.com/zidoro/pomatez/commit/5b7c74958b216424ccb922a5e7c49df271d0f912))
+* **tauri:** add easy command interface for frontend -&gt; backend ([4483005](https://github.com/zidoro/pomatez/commit/44830057ee8a4a70c68677becab8a467c742d102))
+* **tauri:** add global show and hide shortcuts as well as block reload ([ef17d00](https://github.com/zidoro/pomatez/commit/ef17d00c5ee5fc46fef7c409734b6524edc7acdb))
+* **tauri:** add tray icon updating and a number of other commands ([61d3e2c](https://github.com/zidoro/pomatez/commit/61d3e2c00fb6c9e1a617802c7f6f283eb5793163))
+* **tauri:** added connection hooks for all of the base tauri commands ([9ad7edc](https://github.com/zidoro/pomatez/commit/9ad7edcd3d6c3e212c4273e26d6ce2df8843a0dc))
+* **tauri:** always on top command ([702f419](https://github.com/zidoro/pomatez/commit/702f4198548b0a2ba21cf1418f5849c969ff6cfb))
+* **tauri:** auto updater ([02c6d00](https://github.com/zidoro/pomatez/commit/02c6d00e38c2eeb6ce3883709ae1b97b426ebf4d))
+* **tauri:** compact mode resizing ([dc63f31](https://github.com/zidoro/pomatez/commit/dc63f31a3402aaa9b8ded51f6f804bf3607a8ae2))
+* **tauri:** debug menu in dev mode ([c5289b9](https://github.com/zidoro/pomatez/commit/c5289b9c905e40e4d6dea9912d8f9f666fba977c))
+* **tauri:** full screen mode ([d59ca69](https://github.com/zidoro/pomatez/commit/d59ca6946057360cb49427aba3584775c2c69e18))
+* **tauri:** improve installer ([f9c8eb2](https://github.com/zidoro/pomatez/commit/f9c8eb283020f269928d4b65e72a39aa80ff0d4c))
+* **tauri:** pass the data from the frontend  into the commands ([58553d8](https://github.com/zidoro/pomatez/commit/58553d8d9072de3e6d461942799b322b4bbbb3ce))
+* **tauri:** updater window ([2dfc795](https://github.com/zidoro/pomatez/commit/2dfc7952a1b46ff970a9020217e1211a6c210b2e))
+
+
+### Bug Fixes 🐛
+
+* changing time configuration with keyboard did not work - [#402](https://github.com/zidoro/pomatez/issues/402) ([#489](https://github.com/zidoro/pomatez/issues/489)) ([b9b5248](https://github.com/zidoro/pomatez/commit/b9b524863d50905a756bbb1428fd87ed7f7c73e7))
+* **tauri:** allow context menu on list titles ([a2ae285](https://github.com/zidoro/pomatez/commit/a2ae28569ea11074bc3413bda3f0085b39f7b369))
+* **tauri:** catch audio playing errors gracefully ([f4f3274](https://github.com/zidoro/pomatez/commit/f4f3274881d1bbd40eea38bff72466dd25dbb18e))
+* **tauri:** fullscreen break being resizeable ([aec8c3a](https://github.com/zidoro/pomatez/commit/aec8c3a73cf260192d1d4a33dc4071d7b592ba59))
+* **tauri:** update to tauri v2 (fixes audio) ([231a379](https://github.com/zidoro/pomatez/commit/231a37903c7ff36b15025be98eaad7db1782446d))
+
 ## [1.3.1](https://github.com/zidoro/pomatez/compare/v1.3.0...v1.3.1) (2023-10-19)
 
 ### Bug Fixes 🐛
