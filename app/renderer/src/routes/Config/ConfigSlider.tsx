@@ -26,9 +26,9 @@ const ConfigSlider: React.FC<ConfigSliderProps> = ({
 
     /*
     Check if "handleConfigChange" exists to avoid typescript compile error.
-    
+
     Error comes because type "ConfigSliderProps" is used in "src/config.ts" for "rangeConfig" object. But that object is not used by anything else in the app which means its unnecessary code.
-    
+
     Correct solution would be to make "handleConfigChange" mandatory instead of optional in "ConfigSliderProps" type & remove/disable the "rangeConfig" object from "src/config.ts".
     */
 
