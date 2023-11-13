@@ -198,6 +198,8 @@ yarn install
 yarn tauri:dev
 ```
 
+Also, when you are making changes to the rust, please run rustftm. It's not enforced for now but may be in the future.
+
 ## :pencil: Pre-Commit
 
 If your pr is being rejected due to the pre-commit checks, just download pre-commit using `pip install pre-commit` or via one of the commands [here](https://pre-commit.com/#install).
