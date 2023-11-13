@@ -3730,12 +3730,12 @@
     "@tauri-apps/cli-win32-ia32-msvc" "2.0.0-alpha.17"
     "@tauri-apps/cli-win32-x64-msvc" "2.0.0-alpha.17"
 
-"@tauri-apps/plugin-autostart@2.0.0-alpha.2":
-  version "2.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-autostart/-/plugin-autostart-2.0.0-alpha.2.tgz#adbf3b564d75b996f12cadce98a729d5d83d418b"
-  integrity sha512-BDdnmiQwOtQkFpubGL+QaZbYo71cQRCcbC5vBmlxrNXn/J4WfyJ7yoU8cvaMemWTbeVsUOcFP0lKsYffXi+t3g==
+"@tauri-apps/plugin-autostart@2.0.0-alpha.3":
+  version "2.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-autostart/-/plugin-autostart-2.0.0-alpha.3.tgz#4f7f2f9b2a1b746ff2e55e80f1868b9db91da692"
+  integrity sha512-FWXMun68YPs+czGj063B/R2ItK0lFAHz08GCY8Ez1v5qGfq48MqBVF6EB5AHqQ73Wyq3+RGgDTyxuRFzBnXr6A==
   dependencies:
-    "@tauri-apps/api" "2.0.0-alpha.9"
+    "@tauri-apps/api" "2.0.0-alpha.11"
 
 "@tauri-apps/plugin-global-shortcut@2.0.0-alpha.2":
   version "2.0.0-alpha.2"
@@ -14930,10 +14930,10 @@ react-dom@^16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-error-overlay@^6.0.11:
-  version "6.0.11"
-  resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
-  integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
+react-error-overlay@6.0.9, react-error-overlay@^6.0.11:
+  version "6.0.9"
+  resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
+  integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.6:
   version "16.13.1"
