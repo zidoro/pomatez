@@ -2568,7 +2568,7 @@ dependencies = [
 
 [[package]]
 name = "pomatez"
-version = "1.4.3"
+version = "1.4.1"
 dependencies = [
  "base64 0.21.4",
  "lazy_static",

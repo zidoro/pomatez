@@ -50,6 +50,7 @@ pub fn run() {
     let app = builder.build(tauri::generate_context!())
         .expect("error while running tauri application");
 
+    #[allow(unused_variables)]
     app.run(|app_handle, e| match e {
         RunEvent::Ready => {
             #[cfg(desktop)]
