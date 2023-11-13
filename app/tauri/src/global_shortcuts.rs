@@ -1,11 +1,13 @@
 use lazy_static::lazy_static;
-use tauri::{Manager, AppHandle, App};
-use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut};
+use tauri::{App, AppHandle, Manager};
 use tauri_plugin_global_shortcut::Code;
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut};
 
 lazy_static! {
-    static ref SHOW_SHORTCUT: Shortcut = Shortcut::new(Some(Modifiers::SHIFT | Modifiers::ALT), Code::KeyS);
-    static ref HIDE_SHORTCUT: Shortcut = Shortcut::new(Some(Modifiers::SHIFT | Modifiers::ALT), Code::KeyH);
+    static ref SHOW_SHORTCUT: Shortcut =
+        Shortcut::new(Some(Modifiers::SHIFT | Modifiers::ALT), Code::KeyS);
+    static ref HIDE_SHORTCUT: Shortcut =
+        Shortcut::new(Some(Modifiers::SHIFT | Modifiers::ALT), Code::KeyH);
     static ref REFRESH: Shortcut = Shortcut::new(None, Code::F5);
 }
 
@@ -34,14 +36,12 @@ impl PomatezGlobalShortcutsSetup for App {
                             }
                         }
                     }
-                    key if HIDE_SHORTCUT.id() == key => {
-                        match window.hide() {
-                            Ok(_) => {}
-                            Err(e) => {
-                                println!("Failed to hide window: {:?}", e);
-                            }
+                    key if HIDE_SHORTCUT.id() == key => match window.hide() {
+                        Ok(_) => {}
+                        Err(e) => {
+                            println!("Failed to hide window: {:?}", e);
                         }
-                    }
+                    },
                     _ => println!("Shortcut pressed: {:?}", shortcut),
                 }
                 if shortcut.matches(Modifiers::ALT | Modifiers::SHIFT, Code::KeyH) {
@@ -54,7 +54,8 @@ impl PomatezGlobalShortcutsSetup for App {
                 } else {
                     println!("Shortcut pressed: {:?}", shortcut);
                 }
-            }).build()
+            })
+            .build()
         };
         let app_handle = self.handle();
 

@@ -1,5 +1,5 @@
+use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
-use serde::{Serialize, Deserialize};
 use tauri::{Manager, Runtime};
 use tauri_plugin_updater::{Update, UpdaterExt};
 use url::Url;
@@ -21,13 +21,16 @@ struct Asset {
 #[derive(Serialize, Debug, Clone)]
 struct UpdateAvailable {
     version: String,
-    body: Option<String>
+    body: Option<String>,
 }
 
 #[tauri::command]
 pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Window<R>) {
-
     let handle = window.app_handle().clone();
+
+    if !handle.config().tauri.bundle.updater.active {
+        return;
+    }
 
     println!("Current version: {}", handle.package_info().version);
 
@@ -35,7 +38,8 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
         println!("Searching for update file on github.");
         // Custom configure the updater.
         // If we use this endpoint even if the url changes e.g. org name change or project name change the updates should still follow.
-        let github_releases_endpoint = "https://api.github.com/repos/zidoro/pomatez/releases/latest";
+        let github_releases_endpoint =
+            "https://api.github.com/repos/zidoro/pomatez/releases/latest";
         let github_releases_endpoint = match Url::parse(github_releases_endpoint) {
             Ok(url) => url,
             Err(e) => {
@@ -44,32 +48,45 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
             }
         };
         let client = reqwest::Client::new();
-        let req = client.get(github_releases_endpoint.clone())
+        let req = client
+            .get(github_releases_endpoint.clone())
             .header("Content-Type", "application/json")
             // If this is not set you will get a 403 forbidden error.
             .header("User-Agent", "pomatez");
         let response = match req.send().await {
             Ok(response) => response,
             Err(e) => {
-                println!("Failed to send request: {:?}. Failed to check for updates", e);
+                println!(
+                    "Failed to send request: {:?}. Failed to check for updates",
+                    e
+                );
                 return;
             }
         };
 
         if response.status() != reqwest::StatusCode::OK {
-            println!("Non OK status code: {:?}. Failed to check for updates", response.status());
+            println!(
+                "Non OK status code: {:?}. Failed to check for updates",
+                response.status()
+            );
             return;
         }
         let latest_release = match response.json::<LatestRelease>().await {
             Ok(latest_release) => latest_release,
             Err(e) => {
-                println!("Failed to parse response: {:?}. Failed to check for updates", e);
+                println!(
+                    "Failed to parse response: {:?}. Failed to check for updates",
+                    e
+                );
                 return;
             }
         };
 
         // Find an asset named "tauri-release.json".
-        let tauri_release_asset = latest_release.assets.iter().find(|asset| asset.name == "tauri-updater.json");
+        let tauri_release_asset = latest_release
+            .assets
+            .iter()
+            .find(|asset| asset.name == "tauri-updater.json");
 
         // If we found the asset, set it as the updater endpoint.
         let tauri_release_asset = match tauri_release_asset {
@@ -91,12 +108,17 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
                 return;
             }
         };
-        let updater_builder = match  handle.updater_builder()
-            .endpoints(vec!(tauri_release_endpoint))
-            .header("User-Agent", "pomatez") {
+        let updater_builder = match handle
+            .updater_builder()
+            .endpoints(vec![tauri_release_endpoint])
+            .header("User-Agent", "pomatez")
+        {
             Ok(updater_builder) => updater_builder,
             Err(e) => {
-                println!("Failed to build updater builder: {:?}. Failed to check for updates", e);
+                println!(
+                    "Failed to build updater builder: {:?}. Failed to check for updates",
+                    e
+                );
                 return;
             }
         };
@@ -104,7 +126,10 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
         let updater = match updater_builder.build() {
             Ok(updater) => updater,
             Err(e) => {
-                println!("Failed to build updater: {:?}. Failed to check for updates", e);
+                println!(
+                    "Failed to build updater: {:?}. Failed to check for updates",
+                    e
+                );
                 return;
             }
         };
@@ -123,11 +148,14 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
                 }
                 UPDATE_INFO.lock().unwrap().replace(update.clone());
 
-                match window.emit("UPDATE_AVAILABLE", Some(UpdateAvailable {
-                    version: update.version,
-                    body: update.body
-                })) {
-                    Ok(_) => {},
+                match window.emit(
+                    "UPDATE_AVAILABLE",
+                    Some(UpdateAvailable {
+                        version: update.version,
+                        body: update.body,
+                    }),
+                ) {
+                    Ok(_) => {}
                     Err(e) => {
                         println!("Failed to emit update available event: {:?}", e);
                     }
@@ -150,7 +178,7 @@ pub async fn install_update<R: Runtime>(_window: tauri::Window<R>) {
         }
     };
 
-    let install_response = update.download_and_install(|_,_| {}, || {}).await;
+    let install_response = update.download_and_install(|_, _| {}, || {}).await;
     if let Err(e) = install_response {
         println!("Failed to install update: {:?}", e);
     } else {
