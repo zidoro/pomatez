@@ -3,7 +3,7 @@
 
 use std::sync::Mutex;
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-use tauri::{Builder, PhysicalSize, Runtime, Wry};
+use tauri::{Builder, LogicalSize, Runtime, Wry};
 
 #[non_exhaustive]
 struct WindowSize;
@@ -12,13 +12,20 @@ use crate::system_tray;
 use crate::updater;
 
 impl WindowSize {
-
     // Not sure why, if its due to UI scaling or what though these values seem to size smaller than the same values on electron
-    pub const MIN: PhysicalSize<u32> = PhysicalSize { width : 420, height: 602};
-    pub const COMPACT: PhysicalSize<u32> = PhysicalSize { width : 420, height: 80};
+    pub const MIN: LogicalSize<u32> = LogicalSize {
+        width: 340,
+        height: 540,
+    };
+    pub const COMPACT: LogicalSize<u32> = LogicalSize {
+        width: 340,
+        height: 60,
+    };
 }
 
-static ORIGINAL_SIZE: Mutex<PhysicalSize<u32>> = Mutex::new(WindowSize::MIN);
+static ORIGINAL_SIZE: Mutex<LogicalSize<u32>> = Mutex::new(WindowSize::MIN);
+
+static UNDECORATED_TITLE_SIZE: u32 = 40;
 
 static HAS_DECORATIONS: Mutex<bool> = Mutex::new(true);
 static IS_COMPACT: Mutex<bool> = Mutex::new(false);
@@ -55,8 +62,16 @@ fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::Window<R>) 
 }
 
 #[tauri::command]
-fn set_fullscreen_break<R: Runtime>(should_fullscreen: bool, always_on_top: bool, window: tauri::Window<R>) {
-    println!("set_fullscreen_break! {} {}", should_fullscreen, always_on_top);
+fn set_fullscreen_break<R: Runtime>(
+    should_fullscreen: bool,
+    always_on_top: bool,
+    window: tauri::Window<R>,
+) {
+    println!(
+        "set_fullscreen_break! {} {}",
+        should_fullscreen, always_on_top
+    );
+
     try_set_always_on_top(always_on_top, &window);
     if should_fullscreen {
         try_set_native_titlebar(true, &window);
@@ -84,14 +99,15 @@ fn try_set_always_on_top<R: Runtime>(always_on_top: bool, window: &tauri::Window
     }
 }
 
-fn try_set_min_size<R: Runtime>(size: Option<PhysicalSize<u32>>, window: &tauri::Window<R>) {
-    match window.set_min_size(size) {//Some(size)) {
+fn try_set_min_size<R: Runtime>(size: Option<LogicalSize<u32>>, window: &tauri::Window<R>) {
+    match window.set_min_size(size) {
+        //Some(size)) {
         Ok(_) => (),
         Err(e) => println!("There was a problem setting min size! {:?}", e),
     }
 }
 
-fn try_set_size<R: Runtime>(size: PhysicalSize<u32>, window: &tauri::Window<R>) {
+fn try_set_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::Window<R>) {
     match window.set_size(size) {
         Ok(_) => (),
         Err(e) => println!("There was a problem setting the window size! {:?}", e),
@@ -103,26 +119,38 @@ fn try_set_resizeable<R: Runtime>(resizeable: bool, window: &tauri::Window<R>) {
     println!("Window resizeable {:?}", resizeable);
     match window.set_resizable(resizeable) {
         Ok(_) => (),
-        Err(e) => println!("There was a problem making the window resizeable {:?}", e)
+        Err(e) => println!("There was a problem making the window resizeable {:?}", e),
     }
 }
 
-// Atm resizeable seems to cause a problem where the size cannot be set smaller than a certain amount
-// https://github.com/tauri-apps/tao/issues/561, just use resizeable until this is fixed.
-fn set_window_fixed_size<R: Runtime>(size: PhysicalSize<u32>, window: &tauri::Window<R>) {
+fn set_window_fixed_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::Window<R>) {
     let decorations = HAS_DECORATIONS.lock().unwrap();
-    let new_height = size.height + (if *decorations { 0 } else { 34 });
-    let new_size = PhysicalSize { width : size.width, height: new_height};
+
+    let new_height = size.height
+        + (if *decorations {
+            0
+        } else {
+            UNDECORATED_TITLE_SIZE
+        });
+
+    let new_size = LogicalSize {
+        width: size.width,
+        height: new_height,
+    };
+
     try_set_size(new_size, window);
     try_set_resizeable(false, window);
 }
 
-fn set_window_resizeable<R: Runtime>(min_size: PhysicalSize<u32>, size: PhysicalSize<u32>, window: &tauri::Window<R>) {
+fn set_window_resizeable<R: Runtime>(
+    min_size: LogicalSize<u32>,
+    size: LogicalSize<u32>,
+    window: &tauri::Window<R>,
+) {
     try_set_resizeable(true, window);
     try_set_size(size, window);
     try_set_min_size(Some(min_size), window);
 }
-
 
 #[tauri::command]
 fn set_compact_mode<R: Runtime>(compact_mode: bool, window: tauri::Window<R>) {
@@ -134,11 +162,18 @@ fn set_compact_mode<R: Runtime>(compact_mode: bool, window: tauri::Window<R>) {
     if compact_mode {
         {
             let mut size = ORIGINAL_SIZE.lock().unwrap();
-            *size = window.outer_size().unwrap().clone();
+            *size = window
+                .outer_size()
+                .unwrap()
+                .to_logical(window.scale_factor().unwrap());
         }
         set_window_fixed_size(WindowSize::COMPACT, &window);
     } else {
-        set_window_resizeable(WindowSize::MIN, ORIGINAL_SIZE.lock().unwrap().clone(), &window);
+        set_window_resizeable(
+            WindowSize::MIN,
+            ORIGINAL_SIZE.lock().unwrap().clone(),
+            &window,
+        );
     }
 }
 
@@ -161,31 +196,52 @@ fn set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: tauri::Win
     try_set_native_titlebar(use_native_titlebar, &window);
 }
 
-fn try_set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: &tauri::Window<R>) {
+pub fn try_set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: &tauri::Window<R>) {
     match window.set_decorations(use_native_titlebar) {
         Ok(_) => (),
-        Err(e) => println!("There was a problem setting the window decorations! {:?}", e),
+        Err(e) => println!(
+            "There was a problem setting the window decorations! {:?}",
+            e
+        ),
     }
     println!("set_native_titlebar! {}", use_native_titlebar);
+
+    // Check DECORATIONS and IS_COMPACT
+    let decorated = HAS_DECORATIONS.lock().unwrap();
+    let compact = IS_COMPACT.lock().unwrap();
+    if !*decorated && *compact {
+        let size = LogicalSize {
+            width: WindowSize::COMPACT.width,
+            height: WindowSize::COMPACT.height + UNDECORATED_TITLE_SIZE,
+        };
+        try_set_size(size, window);
+    }
 }
 
-
 /**
- * We could do this by passing the object into a custom function that adds the commands but I wanted
- * to practice more with rust. Plus it makes the setup cleaner.
+* We could do this by passing the object into a custom function that adds the commands but I wanted
+* to practice more with rust. Plus it makes the setup cleaner.
 
- * Switch to a function that takes and returns tauri::Builder<Wry> or uses a reference if we need to
- * switch it.
- */
+* Switch to a function that takes and returns tauri::Builder<Wry> or uses a reference if we need to
+* switch it.
+*/
 pub trait PomatezCommands {
     fn register_pomatez_commands(self) -> tauri::Builder<Wry>;
 }
 
 impl PomatezCommands for Builder<Wry> {
     fn register_pomatez_commands(self) -> tauri::Builder<Wry> {
-        self.invoke_handler(tauri::generate_handler![set_show, set_always_on_top,
-            set_fullscreen_break, set_compact_mode, set_ui_theme, set_native_titlebar,
-            system_tray::tray_icon_update, set_close, set_minimize, updater::check_for_updates,
+        self.invoke_handler(tauri::generate_handler![
+            set_show,
+            set_always_on_top,
+            set_fullscreen_break,
+            set_compact_mode,
+            set_ui_theme,
+            set_native_titlebar,
+            system_tray::tray_icon_update,
+            set_close,
+            set_minimize,
+            updater::check_for_updates,
             updater::install_update
         ])
     }

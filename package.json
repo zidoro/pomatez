@@ -28,7 +28,8 @@
     "gen:tts": "lerna run gen:tts --stream",
     "format": "prettier --write .",
     "tauri": "tauri",
-    "tauri:dev": "tauri dev --config ./app/tauri/release.conf.json",
+    "tauri:dev": "tauri dev",
+    "tauri:dev-with-updater": "tauri dev --config ./app/tauri/release.conf.json",
     "tauri:updateversion": "node ./app/tauri/util/cargo-version-updater.js"
   },
   "config": {
