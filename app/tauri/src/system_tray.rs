@@ -1,14 +1,16 @@
 use std::path::PathBuf;
-use tauri::{App, Icon, Manager, Runtime};
+use tauri::path::BaseDirectory;
 use tauri::{
     menu::{MenuBuilder, MenuItemBuilder},
     tray::{ClickType, TrayIconBuilder},
 };
-use tauri::path::BaseDirectory;
+use tauri::{App, Icon, Manager, Runtime};
 
 use base64;
-use base64::Engine;
 use base64::engine::general_purpose;
+use base64::Engine;
+
+use crate::main_window;
 
 #[tauri::command]
 pub fn tray_icon_update<R: Runtime>(data_url: String, window: tauri::Window<R>) {
@@ -33,7 +35,6 @@ pub fn tray_icon_update<R: Runtime>(data_url: String, window: tauri::Window<R>) 
     }
 }
 
-
 /**
 * We could do this by passing the object into a custom function that adds the commands but I wanted
 * to practice more with rust. Plus it makes the setup cleaner.
@@ -46,11 +47,10 @@ pub trait PomatezTray {
 }
 
 impl PomatezTray for App {
-
     /*
      * The icon is updated after rendering on the frontend so that is handled in the commands file.
      * However the initial setup and behavior is handled here.
-    */
+     */
     fn set_pomatez_system_tray(&self) {
         println!("Setting system tray");
         // Was defined in tauri.config.json to start in v1
@@ -58,10 +58,17 @@ impl PomatezTray for App {
 
         let show = MenuItemBuilder::with_id("show", "Show").build(self);
         let quit = MenuItemBuilder::with_id("quit", "Quit").build(self);
-        let menu = MenuBuilder::new(self).items(&[&show, &quit]).build().expect("failed to build menu");
+        let menu = MenuBuilder::new(self)
+            .items(&[&show, &quit])
+            .build()
+            .expect("failed to build menu");
 
-        let icon_path = self.path().resolve::<PathBuf>("icons/icon.png".into(), BaseDirectory::Resource)
-            .expect("failed to resolve icon path, this should not happen as it is an internal file");
+        let icon_path = self
+            .path()
+            .resolve::<PathBuf>("icons/icon.png".into(), BaseDirectory::Resource)
+            .expect(
+                "failed to resolve icon path, this should not happen as it is an internal file",
+            );
 
         let _ = TrayIconBuilder::new()
             .menu(&menu)
@@ -80,12 +87,14 @@ impl PomatezTray for App {
             .on_tray_icon_event(|tray, event| {
                 if event.click_type == ClickType::Left {
                     let app = tray.app_handle();
+                    main_window::create_main_window(app);
                     let window = app.get_window("main").unwrap();
                     window.show().unwrap();
                     window.set_focus().unwrap();
                 }
             })
             .icon(Icon::File(icon_path))
-            .build(self).expect("failed to build tray icon");
+            .build(self)
+            .expect("failed to build tray icon");
     }
 }

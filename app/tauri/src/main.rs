@@ -1,27 +1,31 @@
 #![cfg_attr(
-all(not(debug_assertions), target_os = "windows"),
-windows_subsystem = "windows"
+    all(not(debug_assertions), target_os = "windows"),
+    windows_subsystem = "windows"
 )]
 
 #[cfg(debug_assertions)]
-use tauri::{Manager};
-use tauri::{RunEvent};
+use tauri::Manager;
+use tauri::RunEvent;
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_window;
 
 #[macro_use]
 mod commands;
-mod system_tray;
 mod global_shortcuts;
+mod main_window;
+mod system_tray;
 mod updater;
 
 use commands::PomatezCommands;
+use global_shortcuts::{PomatezGlobalShortcutsRegister, PomatezGlobalShortcutsSetup};
 use system_tray::PomatezTray;
-use global_shortcuts::{PomatezGlobalShortcutsSetup, PomatezGlobalShortcutsRegister};
 
 fn main() {
     let app = tauri::Builder::default()
-        .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
+        .plugin(tauri_plugin_autostart::init(
+            MacosLauncher::LaunchAgent,
+            None,
+        ))
         .plugin(tauri_plugin_window::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_notification::init())
@@ -30,6 +34,7 @@ fn main() {
         .setup(|app| {
             #[cfg(desktop)]
             {
+                main_window::create_main_window(&app.handle());
                 app.setup_global_shortcuts();
                 app.set_pomatez_system_tray();
             }
@@ -48,6 +53,9 @@ fn main() {
             app_handle.get_window("main").unwrap().open_devtools();
 
             println!("Pomatez is ready");
+        }
+        RunEvent::ExitRequested { api, .. } => {
+            api.prevent_exit();
         }
         _ => {}
     });
