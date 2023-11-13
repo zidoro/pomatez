@@ -8,8 +8,8 @@ use tauri::{Builder, LogicalSize, Runtime, Wry};
 #[non_exhaustive]
 struct WindowSize;
 
-use crate::system_tray;
-use crate::updater;
+use crate::desktop::system_tray;
+use crate::desktop::updater;
 
 impl WindowSize {
     // Not sure why, if its due to UI scaling or what though these values seem to size smaller than the same values on electron

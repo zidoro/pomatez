@@ -37,15 +37,13 @@ pub fn run() {
     let builder = builder.register_pomatez_commands();
 
     #[cfg(desktop)]
-    {
-        let builder = builder
-            .setup(|app| {
-                app.setup_global_shortcuts();
-                app.set_pomatez_system_tray();
+    let builder = builder
+        .setup(|app| {
+            app.setup_global_shortcuts();
+            app.set_pomatez_system_tray();
 
-                Ok(())
-            });
-    }
+            Ok(())
+        });
 
     let app = builder.build(tauri::generate_context!())
         .expect("error while running tauri application");
