@@ -28,7 +28,7 @@ import { listen } from "@tauri-apps/api/event";
 import { open } from "@tauri-apps/plugin-shell";
 import { setUpdateBody, setUpdateVersion } from "../../store/update";
 
-export const TauriInvokeConnector = {
+export const TauriDesktopInvokeConnector = {
   send: (event: string, ...payload: any) => {
     invoke(event.toLowerCase(), ...payload).catch((err) =>
       console.error(err)
@@ -36,7 +36,9 @@ export const TauriInvokeConnector = {
   },
 };
 
-export const TauriConnectorProvider: React.FC = ({ children }) => {
+export const TauriDesktopConnectorProvider: React.FC = ({
+  children,
+}) => {
   const dispatch = useDispatch();
 
   const settings: SettingTypes = useSelector(
@@ -118,8 +120,9 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
-  const { count, duration, timerType, shouldFullscreen } =
-    useContext(CounterContext);
+  const { count, duration, timerType, shouldFullscreen } = useContext(
+    CounterContext
+  );
   const dashOffset = (duration - count) * (24 / duration);
 
   const onMinimizeCallback = useCallback(() => {
@@ -192,7 +195,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
       const img = new Image();
       img.src = svgXML;
 
-      img.onload = function () {
+      img.onload = function() {
         ctx?.drawImage(img, 0, 0);
         const dataUrl = canvas.toDataURL("image/png");
 

@@ -5,9 +5,14 @@ import {
   ElectronInvokeConnector,
 } from "./connectors/ElectronConnector";
 import {
-  TauriConnectorProvider,
-  TauriInvokeConnector,
-} from "./connectors/TauriConnector";
+  TauriDesktopConnectorProvider,
+  TauriDesktopInvokeConnector,
+} from "./connectors/TauriDesktopConnector";
+import { detectOS } from "../utils";
+import {
+  TauriMobileConnectorProvider,
+  TauriMobileInvokeConnector,
+} from "./connectors/TauriMobileConnector";
 
 export type ConnectorProps = {
   onMinimizeCallback?: () => void;
@@ -23,7 +28,10 @@ export function getInvokeConnector() {
   if (isElectron()) {
     return ElectronInvokeConnector;
   } else if (window.__TAURI__) {
-    return TauriInvokeConnector;
+    let os = detectOS();
+    if (os === "iOS" || os === "Android")
+      return TauriMobileInvokeConnector;
+    return TauriDesktopInvokeConnector;
   }
   return undefined;
 }
@@ -33,7 +41,12 @@ export const ConnectorProvider: React.FC = ({ children }) => {
   if (isElectron()) {
     Connector = ElectronConnectorProvider;
   } else if (window.__TAURI__) {
-    Connector = TauriConnectorProvider;
+    let os = detectOS();
+    if (os === "iOS" || os === "Android") {
+      Connector = TauriMobileConnectorProvider;
+    } else {
+      Connector = TauriDesktopConnectorProvider;
+    }
   }
 
   return <Connector children={children} />;
