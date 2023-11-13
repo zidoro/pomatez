@@ -1,8 +1,6 @@
-
-
 #[cfg(debug_assertions)]
-use tauri::{Manager};
-use tauri::{RunEvent};
+use tauri::Manager;
+use tauri::RunEvent;
 #[cfg(desktop)]
 use tauri_plugin_autostart::MacosLauncher;
 #[cfg(desktop)]
@@ -26,7 +24,11 @@ pub fn run() {
     let builder = tauri::Builder::default();
 
     #[cfg(desktop)]
-    let builder = builder.plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
+    let builder = builder
+        .plugin(tauri_plugin_autostart::init(
+            MacosLauncher::LaunchAgent,
+            None,
+        ))
         .plugin(tauri_plugin_window::init())
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_updater::Builder::new().build());
@@ -37,15 +39,15 @@ pub fn run() {
     let builder = builder.register_pomatez_commands();
 
     #[cfg(desktop)]
-    let builder = builder
-        .setup(|app| {
-            app.setup_global_shortcuts();
-            app.set_pomatez_system_tray();
+    let builder = builder.setup(|app| {
+        app.setup_global_shortcuts();
+        app.set_pomatez_system_tray();
 
-            Ok(())
-        });
+        Ok(())
+    });
 
-    let app = builder.build(tauri::generate_context!())
+    let app = builder
+        .build(tauri::generate_context!())
         .expect("error while running tauri application");
 
     #[allow(unused_variables)]
