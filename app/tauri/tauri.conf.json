@@ -36,18 +36,9 @@
         "signingIdentity": null
       },
       "publisher": "Roldan Montilla Jr",
-      "resources": [
-        "icons/icon.png"
-      ],
+      "resources": ["icons/icon.png"],
       "shortDescription": "",
-      "targets": [
-        "deb",
-        "appimage",
-        "msi",
-        "nsis",
-        "dmg",
-        "updater"
-      ],
+      "targets": ["deb", "appimage", "msi", "nsis", "dmg", "updater"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
@@ -72,14 +63,9 @@
     "security": {
       "csp": null
     },
-    "windows": [
-      {
-        "fullscreen": false,
-        "height": 502,
-        "resizable": true,
-        "title": "pomatez",
-        "width": 340
-      }
-    ]
+    "windows": []
+  },
+  "plugins": {
+    "updater": {}
   }
 }
