@@ -442,11 +442,16 @@ ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
 });
 
 ipcMain.on(SET_OPEN_AT_LOGIN, (e, { openAtLogin }) => {
-  store.safeSet("openAtLogin", openAtLogin);
-  app.setLoginItemSettings({
-    openAtLogin: openAtLogin,
-    openAsHidden: openAtLogin,
-  });
+  const storeOpenAtLogin = store.safeGet("openAtLogin");
+
+  if (storeOpenAtLogin !== openAtLogin) {
+    store.safeSet("openAtLogin", openAtLogin);
+
+    app.setLoginItemSettings({
+      openAtLogin: openAtLogin,
+      openAsHidden: openAtLogin,
+    });
+  }
 });
 
 app.on("window-all-closed", () => {
