@@ -5,6 +5,8 @@ on:
       - master
     paths:
       - "website"
+  release:
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
