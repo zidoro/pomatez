@@ -24,6 +24,10 @@ export const NAV_LINKS = [
     label: "Release notes",
     link: `${PROJECT_RELEASES_URL}/latest`,
   },
+  {
+    label: "Discord",
+    link: `https://discord.gg/ZqPqN3hwcB`,
+  },
 ];
 
 export const ENV = {

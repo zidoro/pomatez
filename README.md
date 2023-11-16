@@ -12,7 +12,7 @@
   <br>
   <a href="#sparkles-features">Features</a>
   .
-  <a href="#world_map-roadmap">Road Map</a>
+  <a href="https://discord.gg/ZqPqN3hwcB" target="_blank">Discord</a>
   .
   <a href="#call_me_hand-development">Development</a>
   .
@@ -81,18 +81,6 @@
 - **Strict mode** - once enabled, the app will strictly follow the rules you have set and prevent you from pausing, skipping, and resetting the timer when it started.
 
 - **Compact Mode** - once enabled, the app will occupy less space on your screen and it will be useful if you're using a small-screen device.
-
-## :world_map: Roadmap
-
-- **Customizable shortcuts** - provide a way to make the default keyboard shortcuts customizable by the users.
-
-- **Website Blocker** - enable users to block specific websites while working in order to stay on focus.
-
-- **Productivity report** - provide some useful summary about the users' productivity to have some sense of accomplishments.
-
-- **Time extender** - enable the users to extend the timer if needed. Useful when they want to finish the task first before taking up a break.
-
-- **Tasks database** - enable users to save completed tasks into a database. Useful when the users want to monitor or track previous tasks.
 
 ## :zap: Quick Setup
 
