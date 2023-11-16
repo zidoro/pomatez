@@ -18,7 +18,11 @@ import {
 } from "@pomatez/shareables";
 import { encodeSvg } from "../../utils";
 import { TraySVG } from "../../components";
-import { enable, disable } from "@tauri-apps/plugin-autostart";
+import {
+  enable,
+  disable,
+  isEnabled,
+} from "@tauri-apps/plugin-autostart";
 import { invoke } from "@tauri-apps/api/primitives";
 import { listen } from "@tauri-apps/api/event";
 import { open } from "@tauri-apps/plugin-shell";
@@ -92,7 +96,13 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
     if (settings.openAtLogin) {
       enable().catch((err) => console.error(err));
     } else {
-      disable().catch((err) => console.error(err));
+      // The autostart-plugin fails when trying to disble if it is already disabled
+      // https://github.com/tauri-apps/plugins-workspace/issues/24#issuecomment-1528958008
+      isEnabled()
+        .then((enabled) => {
+          if (enabled) disable().catch((err) => console.error(err));
+        })
+        .catch((err) => console.error(err));
     }
   }, [settings.openAtLogin]);
 
