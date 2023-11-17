@@ -55,16 +55,18 @@ export const StyledStarButton = styled(StyledButtonSecondary)`
 
 export const StyledSectionSticky = styled.div`
   width: 100%;
-  height: 10.1rem;
+  height: 7.5rem;
 
   position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
 
+  gap: 1rem;
+
   background-color: var(--color-bg-primary);
 
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr;
   align-items: start;
 

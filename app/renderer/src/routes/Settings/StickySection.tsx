@@ -11,6 +11,13 @@ const StickySection: React.FC = () => {
       >
         Star it on GitHub
       </StyledStarButton>
+      <StyledStarButton
+        as="a"
+        href="https://discord.gg/ZqPqN3hwcB"
+        target="_blank"
+      >
+        Join us on Discord!
+      </StyledStarButton>
     </StyledSectionSticky>
   );
 };
