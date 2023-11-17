@@ -165,7 +165,7 @@ export const StyledHeroBetaDescription = styled(motion.h2).attrs(
     variants: fadeFromBottom,
   })
 )`
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 400;
   line-height: 1.7;
   margin-top: 4.8rem;
