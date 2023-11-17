@@ -59,6 +59,10 @@ jobs:
             built-*/*.snap
             built-*/*.blockmap
             tauri-release/*
+      - name: Invoke website publish
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Deploy Website
   publish-to-homebrew-cask:
     name: Publish to Homebrew Cask
     needs:

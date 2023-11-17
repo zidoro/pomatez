@@ -27,6 +27,8 @@ export const useLandingQuery = () =>
             frontmatter {
               title
               subTitle
+              betaText
+              mobileText
             }
           }
         }

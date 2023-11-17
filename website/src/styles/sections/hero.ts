@@ -98,7 +98,6 @@ export const StyledWaterMarkRight = styled(WaterMarkRight)`
 
 export const StyledHeroActionContainer = styled.div`
   display: grid;
-  row-gap: 4.8rem;
   justify-content: center;
   justify-items: center;
 
@@ -150,6 +149,27 @@ export const StyledHeroDescription = styled(motion.h2).attrs(() => ({
   font-size: 2.2rem;
   font-weight: 400;
   line-height: 1.7;
+  margin-bottom: 4.8rem;
+
+  ${media.tabletSm} {
+    line-height: 1.5;
+  }
+
+  ${media.mobileXl} {
+    font-size: 2rem;
+  }
+`;
+
+export const StyledHeroBetaDescription = styled(motion.h2).attrs(
+  () => ({
+    variants: fadeFromBottom,
+  })
+)`
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.7;
+  margin-top: 4.8rem;
+  margin-bottom: 2.8rem;
 
   ${media.tabletSm} {
     line-height: 1.5;
@@ -164,7 +184,7 @@ export const StyledHeroActionWrapper = styled(motion.div).attrs(() => ({
   variants: fadeFromBottom,
 }))`
   display: grid;
-  grid-template-columns: repeat(2, max-content);
+  grid-template-columns: repeat(3, max-content);
   gap: 2rem;
 
   ${media.tabletMd} {
