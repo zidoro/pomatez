@@ -35,6 +35,8 @@ type CompanyList = {
 export type Frontmatter = {
   title: string;
   subTitle?: string;
+  betaText?: string;
+  mobileText?: string;
   features?: FeatureList[];
   boosters?: BoosterList[];
   stepList?: StepList[];
