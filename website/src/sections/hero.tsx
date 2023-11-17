@@ -18,11 +18,7 @@ import {
   StyledWatermarkContainer,
   StyledHeroBetaDescription,
 } from "../styles";
-import {
-  MAC_x64_INSTALLER,
-  PROJECT_GITHUB_URL,
-  INSTALLERS,
-} from "../config";
+import { PROJECT_GITHUB_URL, INSTALLERS } from "../config";
 import { OSTypes, detectOS } from "../utils";
 import { ThemeContext } from "../context";
 import { useLandingQuery } from "../queries";
@@ -91,7 +87,7 @@ export function Hero() {
         }
         return (
           <StyledCTADownloader>
-            <a href={MAC_x64_INSTALLER}>
+            <a href={INSTALLERS.ELECTRON.MAC[isArm ? "arm" : "x64"]}>
               <SVG name="apple" />
               for macOS {isArm ? "Apple Silicon" : "Intel"}
             </a>

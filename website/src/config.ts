@@ -56,7 +56,7 @@ export const INSTALLERS = {
       universal: `${DOWNLOAD_PREFIX}/Pomatez_${json.version}_universal-mac-tauri-beta.dmg`,
     },
   },
-};
+} as const;
 
 export const NAV_LINKS = [
   { label: "Features", link: "features", offset: -24 },
@@ -69,10 +69,10 @@ export const NAV_LINKS = [
     label: "Discord",
     link: `https://discord.gg/ZqPqN3hwcB`,
   },
-];
+] as const;
 
 export const ENV = {
   GOOGLE_VERIFICATION: process.env.GOOGLE_VERIFICATION || "",
   GA_TRACKING_ID: process.env.GA_TRACKING_ID || "",
   IS_DEV: process.env.NODE_ENV !== "production",
-};
+} as const;
