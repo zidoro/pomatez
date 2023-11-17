@@ -6,6 +6,9 @@ on:
     paths:
       - "website"
   workflow_dispatch:
+  release:
+    types:
+      - published
 jobs:
   deploy:
     runs-on: ubuntu-latest
