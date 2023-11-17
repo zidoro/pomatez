@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0](https://github.com/zidoro/pomatez/compare/v1.4.2...v1.5.0) (2023-11-17)
+
+
+### Features ✨
+
+* add a link to our community discord ([8b2802f](https://github.com/zidoro/pomatez/commit/8b2802f61f7e8004260a27090ad4c768a0a4185f))
+
+
+### Bug Fixes 🐛
+
+* **tauri:** check autostart status to prevent error with `@tauri-apps/plugin-autostart` on Windows ([de4f8b9](https://github.com/zidoro/pomatez/commit/de4f8b9441b7a8e9d8f1225285e43fd0cb3c8e62))
+* **tauri:** github link opens in app ([09e5ae3](https://github.com/zidoro/pomatez/commit/09e5ae39436ffe95b032df12e6c6752cfa704ab1))
+* **tauri:** high dpi screen scaling ([a9ff671](https://github.com/zidoro/pomatez/commit/a9ff6713054ac00692844c6f264c35ca896a80a7))
+
 ## [1.4.2](https://github.com/zidoro/pomatez/compare/v1.4.1...v1.4.2) (2023-11-12)
 
 
