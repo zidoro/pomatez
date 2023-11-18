@@ -42,4 +42,8 @@ export const StyledShortcutKey = styled.input`
   border: none;
   border-radius: 0.3rem;
   background-color: var(--color-bg-secondary);
+
+  &:focus {
+    outline: 1px solid var(--color-primary);
+  }
 `;
