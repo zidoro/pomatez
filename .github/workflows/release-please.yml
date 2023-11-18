@@ -60,7 +60,7 @@ jobs:
             built-*/*.blockmap
             tauri-release/*
       - name: Invoke website publish
-        uses: benc-uk/workflow-dispatch@v1
+        uses: benc-uk/workflow-dispatch@v121
         with:
           workflow: Deploy Website
   publish-to-homebrew-cask:
