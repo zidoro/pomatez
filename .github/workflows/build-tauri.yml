@@ -65,7 +65,7 @@ jobs:
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Prepare for app notarization
-        if: startsWith(matrix.os[0], 'macos')
+        if: startsWith(matrix.os, 'macos')
         # Import Apple API key for app notarization on macOS
         run: |
           mkdir -p ~/private_keys/
