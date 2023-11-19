@@ -93,17 +93,25 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (settings.openAtLogin) {
-      enable().catch((err) => console.error(err));
-    } else {
-      // The autostart-plugin fails when trying to disble if it is already disabled
-      // https://github.com/tauri-apps/plugins-workspace/issues/24#issuecomment-1528958008
-      isEnabled()
-        .then((enabled) => {
-          if (enabled) disable().catch((err) => console.error(err));
-        })
-        .catch((err) => console.error(err));
-    }
+    // The autostart-plugin fails when trying to disble if it is already disabled
+    // https://github.com/tauri-apps/plugins-workspace/issues/24#issuecomment-1528958008
+    isEnabled().then((enabled) => {
+      if (settings.openAtLogin) {
+        if (!enabled)
+          enable()
+            .then(() => {
+              console.log("Enabled autostart");
+            })
+            .catch((err) => console.error(err));
+      } else {
+        if (enabled)
+          disable()
+            .then(() => {
+              console.log("Disabled autostart");
+            })
+            .catch((err) => console.error(err));
+      }
+    });
   }, [settings.openAtLogin]);
 
   // TODO do logic to switch out the connectors based on the platform
