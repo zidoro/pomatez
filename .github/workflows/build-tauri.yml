@@ -74,7 +74,7 @@ jobs:
         shell: bash
         run: |
           for target in ${{ join(matrix.tauri_target, ' ') }}; do
-            yarn build:tauri --target $target --config ./app/tauri/release.conf.json --verbose
+            yarn build:tauri --target $target --config ./app/tauri/release.conf.json
           done
         env:
           APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
