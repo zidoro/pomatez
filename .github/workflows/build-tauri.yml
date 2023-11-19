@@ -63,6 +63,12 @@ jobs:
       - name: Install NPM Packages
         run: |
           yarn install --immutable --network-timeout 120000
+      - name: Prepare for app notarization
+        if: startsWith(matrix.os[0], 'macos')
+        # Import Apple API key for app notarization on macOS
+        run: |
+          mkdir -p ~/private_keys/
+          echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
       - name: Build
         shell: bash
         run: |
@@ -70,6 +76,12 @@ jobs:
             yarn build:tauri --target $target --config ./app/tauri/release.conf.json
           done
         env:
+          APPLE_API_ISSUER: $${{ secrets.APPLE_API_ISSUER }}
+          APPLE_API_KEY_PATH: ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
+          APPLE_API_KEY: $${{ secrets.APPLE_API_KEY }}
+          APPLE_CERTIFICATE: $${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: $${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: $${{ secrets.APPLE_SIGNING_IDENTITY }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
