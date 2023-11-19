@@ -2,10 +2,11 @@ name: Build Tauri
 
 on:
   push:
-    branches-ignore:
-      - "master"
+    branches:
+      - master
     paths-ignore:
       - "website"
+      - "CHANGELOG.md"
   workflow_call:
   workflow_dispatch:
 jobs:
