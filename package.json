@@ -30,7 +30,13 @@
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
     "tauri:dev-with-updater": "tauri dev --config ./app/tauri/release.conf.json",
-    "tauri:updateversion": "node ./app/tauri/util/cargo-version-updater.js"
+    "tauri:updateversion": "node ./app/tauri/util/cargo-version-updater.js",
+    "tauri:android:dev": "tauri android dev",
+    "tauri:android:open": "tauri android open",
+    "tauri:android:build": "tauri android build",
+    "tauri:ios:dev": "tauri ios dev",
+    "tauri:ios:open": "tauri ios open",
+    "tauri:ios:build": "tauri ios build"
   },
   "config": {
     "commitizen": {
