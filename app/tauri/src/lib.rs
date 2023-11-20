@@ -27,7 +27,10 @@ use crate::commands::try_set_native_titlebar;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let mut context = tauri::generate_context!();
+    let context = tauri::generate_context!();
+
+    #[cfg(desktop)]
+    let mut context = context;
 
     #[cfg(desktop)]
     let config = context.config_mut();
