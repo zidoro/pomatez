@@ -45,7 +45,8 @@ pub fn run() {
 
     let app = app.plugin(tauri_plugin_window::init())
         .plugin(tauri_plugin_shell::init())
-        .plugin(tauri_plugin_notification::init());
+        .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_os::init());
 
     #[cfg(desktop)]
     let mut app = app;

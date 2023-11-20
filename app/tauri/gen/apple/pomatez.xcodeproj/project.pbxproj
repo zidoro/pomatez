@@ -22,15 +22,18 @@
 
 /* Begin PBXFileReference section */
 		3D7D53A9230BB5602199B74A /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		3E2BA8BAEDA3D642B9581B7F /* mod.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = mod.rs; sourceTree = "<group>"; };
 		3F1BEDBB190142CAFC748FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FAA3B6C73D09A559E849A0B /* libpomatez.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpomatez.a; sourceTree = "<group>"; };
-		5847E0A483E1D4416F0A93D8 /* global_shortcuts.rs */ = {isa = PBXFileReference; lastKnownFileType = file; path = global_shortcuts.rs; sourceTree = "<group>"; };
 		5BCC6085DA3BAAD6F0D2724E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		5E54572C28EC544931F1901B /* updater.rs */ = {isa = PBXFileReference; lastKnownFileType = file; path = updater.rs; sourceTree = "<group>"; };
+		7A7B70953EE83C0E30F1234B /* updater.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = updater.rs; sourceTree = "<group>"; };
 		7B0BF6C26872684E733BA37D /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		88637405736E11552059F10A /* lib.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = lib.rs; sourceTree = "<group>"; };
+		8A01864D0058CD628A91EC7E /* commands.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = commands.rs; sourceTree = "<group>"; };
 		8FEF8906163FB03D4B833A4B /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
+		98547F8A80545AE1F33E47A5 /* global_shortcuts.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = global_shortcuts.rs; sourceTree = "<group>"; };
 		9D8D5B5BFA81B2CA2F94B120 /* main.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.rs; sourceTree = "<group>"; };
-		9E73DDB0E61619020B6916BE /* commands.rs */ = {isa = PBXFileReference; lastKnownFileType = file; path = commands.rs; sourceTree = "<group>"; };
+		AA4EC421DFFBECC293613197 /* system_tray.rs */ = {isa = PBXFileReference; lastKnownFileType = text; path = system_tray.rs; sourceTree = "<group>"; };
 		B1FCAA4D6A85DA8C08666168 /* pomatez_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pomatez_iOS.entitlements; sourceTree = "<group>"; };
 		B478B8146852093869DBAB06 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		D69D650EBB8987E11DA3AD9A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -39,7 +42,6 @@
 		EC80E0387671021C43156452 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F0B951715D36C8F3EF902710 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F517A08ACB3C99339208ECEC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FE1746F712051F16E9E8CC8F /* system_tray.rs */ = {isa = PBXFileReference; lastKnownFileType = file; path = system_tray.rs; sourceTree = "<group>"; };
 		FF594C8B7B838F5DC8253895 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,14 +96,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		88952291D5AF12E4722235DF /* desktop */ = {
+			isa = PBXGroup;
+			children = (
+				8A01864D0058CD628A91EC7E /* commands.rs */,
+				98547F8A80545AE1F33E47A5 /* global_shortcuts.rs */,
+				3E2BA8BAEDA3D642B9581B7F /* mod.rs */,
+				AA4EC421DFFBECC293613197 /* system_tray.rs */,
+				7A7B70953EE83C0E30F1234B /* updater.rs */,
+			);
+			path = desktop;
+			sourceTree = "<group>";
+		};
 		9FAADF5648F0DDF5E03B9387 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				9E73DDB0E61619020B6916BE /* commands.rs */,
-				5847E0A483E1D4416F0A93D8 /* global_shortcuts.rs */,
+				88637405736E11552059F10A /* lib.rs */,
 				9D8D5B5BFA81B2CA2F94B120 /* main.rs */,
-				FE1746F712051F16E9E8CC8F /* system_tray.rs */,
-				5E54572C28EC544931F1901B /* updater.rs */,
+				88952291D5AF12E4722235DF /* desktop */,
 			);
 			name = src;
 			path = ../../src;
@@ -327,8 +339,6 @@
 					"\".\"",
 				);
 				INFOPLIST_FILE = pomatez_iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pomatez;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,8 +453,6 @@
 					"\".\"",
 				);
 				INFOPLIST_FILE = pomatez_iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pomatez;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
