@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/zidoro/pomatez/compare/v1.6.0...v1.6.1) (2023-11-23)
+
+
+### Bug Fixes 🐛
+
+* release issue (didn't release to homebrew or winget) ([fe854b0](https://github.com/zidoro/pomatez/commit/fe854b040446afa169478359413b4937ffdc75ae))
+
 ## [1.6.0](https://github.com/zidoro/pomatez/compare/v1.5.0...v1.6.0) (2023-11-23)
 
 
