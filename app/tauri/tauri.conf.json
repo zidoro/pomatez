@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Pomatez",
-    "version": "1.5.0"
+    "version": "1.6.0"
   },
   "tauri": {
     "bundle": {
@@ -36,9 +36,18 @@
         "signingIdentity": null
       },
       "publisher": "Roldan Montilla Jr",
-      "resources": ["icons/icon.png"],
+      "resources": [
+        "icons/icon.png"
+      ],
       "shortDescription": "",
-      "targets": ["deb", "appimage", "msi", "nsis", "dmg", "updater"],
+      "targets": [
+        "deb",
+        "appimage",
+        "msi",
+        "nsis",
+        "dmg",
+        "updater"
+      ],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",

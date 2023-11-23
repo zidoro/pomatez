@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.6.0](https://github.com/zidoro/pomatez/compare/v1.5.0...v1.6.0) (2023-11-23)
+
+
+### Features ✨
+
+* shortcuts for adding new cards with `Enter` & `Ctrl+Enter` ([a73fca7](https://github.com/zidoro/pomatez/commit/a73fca70847836bf7b96bdef54e67023813bda29))
+
+
+### Bug Fixes 🐛
+
+* electron open at login notification showed up on every start up ([654c4db](https://github.com/zidoro/pomatez/commit/654c4dbbeaaa07c69bade454855ab96259d17516))
+* **tauri:** avoid setting open at login if already set ([1e836ee](https://github.com/zidoro/pomatez/commit/1e836ee7f8d4670208e276912faf5c7d1fc1ad0f))
+* **website:** wrong download link for macOS apple silicon installer ([476b232](https://github.com/zidoro/pomatez/commit/476b232615b257e04c9f9065e435b26860b2995a))
+
 ## [1.5.0](https://github.com/zidoro/pomatez/compare/v1.4.2...v1.5.0) (2023-11-17)
 
 
