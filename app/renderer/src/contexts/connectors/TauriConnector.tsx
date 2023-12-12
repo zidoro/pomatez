@@ -106,8 +106,6 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
     }
   }, [settings.openAtLogin]);
 
-  // TODO do logic to switch out the connectors based on the platform
-
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
   const { shouldFullscreen } = useContext(CounterContext);

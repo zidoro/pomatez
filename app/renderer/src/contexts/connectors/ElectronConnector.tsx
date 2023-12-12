@@ -29,8 +29,6 @@ export const ElectronInvokeConnector: InvokeConnector = {
 export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
-  // TODO do logic to switch out the connectors based on the platform
-
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
   const settings: SettingTypes = useSelector(

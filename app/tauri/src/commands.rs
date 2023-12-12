@@ -177,6 +177,7 @@ fn set_compact_mode<R: Runtime>(compact_mode: bool, window: tauri::Window<R>) {
     }
 }
 
+// TODO - This is doing nothing - Remove or fix
 #[tauri::command]
 fn set_ui_theme<R: Runtime>(is_dark_mode: bool, _window: tauri::Window<R>) {
     println!("set_ui_theme! {}", is_dark_mode);
