@@ -43,6 +43,7 @@
     "productName": "Pomatez",
     "appId": "com.roldanjr.pomatez",
     "copyright": "Copyright © 2020 ${author}",
+    "afterSign": "./electron-builder/afterSign.js",
     "files": [
       "build"
     ],
