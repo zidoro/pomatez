@@ -139,7 +139,7 @@ const SpecialField: React.FC<Props> = ({
 
   useEffect(() => {
     function registerEscape(e: KeyboardEvent) {
-      if (e.keyCode === 27) {
+      if (e.code === "Escape") {
         setShowSetter(false);
       }
     }
@@ -161,7 +161,7 @@ const SpecialField: React.FC<Props> = ({
           }
         }}
         onKeyDown={(e) => {
-          if (e.keyCode === 13) {
+          if (e.key === "Enter") {
             setShowSetter(true);
           }
         }}

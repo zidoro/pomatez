@@ -149,7 +149,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 
     useEffect(() => {
       function registerEscape(e: KeyboardEvent) {
-        if (e.keyCode === 27) {
+        if (e.key === "Escape") {
           if (onExit) {
             onExit();
           }
