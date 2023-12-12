@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/zidoro/pomatez/compare/v1.6.1...v1.6.2) (2023-12-12)
+
+
+### Bug Fixes 🐛
+
+* winget release fix ([8759751](https://github.com/zidoro/pomatez/commit/875975112d282572f08d848047fe577a12db0401))
+
 ## [1.6.1](https://github.com/zidoro/pomatez/compare/v1.6.0...v1.6.1) (2023-11-23)
 
 
