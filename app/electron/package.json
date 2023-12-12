@@ -109,6 +109,7 @@
     "electron-builder": "23.6.0",
     "regenerator-runtime": "^0.13.11",
     "electron-reload": "2.0.0-alpha.1",
+    "electron-notarize": "1.2.2",
     "ts-jest": "^26.5.6"
   }
 }
