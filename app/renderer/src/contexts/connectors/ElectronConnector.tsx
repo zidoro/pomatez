@@ -15,9 +15,8 @@ import {
   TRAY_ICON_UPDATE,
   SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
-import { encodeSvg } from "../../utils";
-import { TraySVG } from "../../components";
 import { InvokeConnector } from "../InvokeConnector";
+import { useTrayIconUpdates } from "hooks/useTrayIconUpdates";
 
 export const ElectronInvokeConnector: InvokeConnector = {
   send: (event: string, ...payload: any) => {
@@ -38,9 +37,7 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
-  const { count, duration, timerType, shouldFullscreen } =
-    useContext(CounterContext);
-  const dashOffset = (duration - count) * (24 / duration);
+  const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
     electron.send(SET_MINIMIZE, {
@@ -111,29 +108,9 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
     });
   }, [electron, settings.openAtLogin]);
 
-  useEffect(() => {
-    if (timer.playing) {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-
-      canvas.width = 16;
-      canvas.height = 16;
-
-      let svgXML = encodeSvg(
-        <TraySVG timerType={timerType} dashOffset={dashOffset} />
-      );
-
-      const img = new Image();
-      img.src = svgXML;
-
-      img.onload = function () {
-        ctx?.drawImage(img, 0, 0);
-        const dataUrl = canvas.toDataURL("image/png");
-
-        electron.send(TRAY_ICON_UPDATE, dataUrl);
-      };
-    }
-  }, [electron, timer.playing, timerType, dashOffset]);
+  useTrayIconUpdates((dataUrl) => {
+    electron.send(TRAY_ICON_UPDATE, { dataUrl });
+  });
 
   return (
     <ConnnectorContext.Provider

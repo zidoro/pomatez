@@ -16,8 +16,6 @@ import {
   TRAY_ICON_UPDATE,
   UPDATE_AVAILABLE,
 } from "@pomatez/shareables";
-import { encodeSvg } from "../../utils";
-import { TraySVG } from "../../components";
 import {
   enable,
   disable,
@@ -27,6 +25,7 @@ import { invoke } from "@tauri-apps/api/primitives";
 import { listen } from "@tauri-apps/api/event";
 import { open } from "@tauri-apps/plugin-shell";
 import { setUpdateBody, setUpdateVersion } from "../../store/update";
+import { useTrayIconUpdates } from "hooks/useTrayIconUpdates";
 
 export const TauriInvokeConnector = {
   send: (event: string, ...payload: any) => {
@@ -43,11 +42,12 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
     (state: AppStateTypes) => state.settings
   );
 
+  // Prevent webpage behavior (naitive apps shouldn't refresh with F5 or Ctrl+R)
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (
-        (event.ctrlKey && (event.key === "r" || event.key === "R")) ||
-        event.key === "F5"
+        (event.ctrlKey && event.code === "KeyR") ||
+        event.code === "F5"
       ) {
         event.preventDefault();
       }
@@ -110,9 +110,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
 
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
-  const { count, duration, timerType, shouldFullscreen } =
-    useContext(CounterContext);
-  const dashOffset = (duration - count) * (24 / duration);
+  const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
     send(SET_MINIMIZE, {
@@ -169,29 +167,9 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
     });
   }, [send, settings.useNativeTitlebar]);
 
-  useEffect(() => {
-    if (timer.playing) {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-
-      canvas.width = 16;
-      canvas.height = 16;
-
-      let svgXML = encodeSvg(
-        <TraySVG timerType={timerType} dashOffset={dashOffset} />
-      );
-
-      const img = new Image();
-      img.src = svgXML;
-
-      img.onload = function () {
-        ctx?.drawImage(img, 0, 0);
-        const dataUrl = canvas.toDataURL("image/png");
-
-        send(TRAY_ICON_UPDATE, { dataUrl });
-      };
-    }
-  }, [send, timer.playing, timerType, dashOffset]);
+  useTrayIconUpdates((dataUrl) => {
+    send(TRAY_ICON_UPDATE, { dataUrl });
+  });
 
   // Workaround to make sure it only calls once on mount
   const checkUpdate = useCallback(() => {
