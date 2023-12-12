@@ -88,6 +88,6 @@ jobs:
         with:
           identifier: Zidoro.Pomatez
           installers-regex: 'setup\.exe$'
-          max-versions-to-keep: 5 # keep only latest 5 versions
+          fork-user: SekkieBot
           release-tag: ${{ needs.release-please.outputs.tag }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
