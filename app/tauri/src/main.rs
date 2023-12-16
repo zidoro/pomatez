@@ -60,6 +60,7 @@ fn main() {
         RunEvent::Ready => {
             app_handle.register_global_shortcuts();
 
+            #[cfg(any(target_os = "macos", debug_assertions))]
             let window = app_handle.get_window("main").unwrap();
 
             // There is a bug on mac where the size is not properly respected initially, though this seems to fix it.

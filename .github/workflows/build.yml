@@ -1,10 +1,11 @@
 name: Build
 on:
   push:
-    branches-ignore:
-      - "master"
+    branches:
+      - master
     paths-ignore:
       - "website"
+      - "CHANGELOG.md"
   workflow_call:
   workflow_dispatch:
 jobs:
@@ -39,7 +40,19 @@ jobs:
       - name: Install
         run: |
           yarn install --immutable --network-timeout 120000
+      - name: Prepare for app notarization
+        if: startsWith(matrix.os, 'macos')
+        # Import Apple API key for app notarization on macOS
+        run: |
+          mkdir -p ~/private_keys/
+          echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
       - name: Build
+        env:
+          APPLE_API_KEY_PATH: ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
+          API_KEY_ID: ${{ secrets.APPLE_API_KEY }}
+          API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
         run: |
           yarn build
           yarn lerna run ${{ matrix.task }} --stream

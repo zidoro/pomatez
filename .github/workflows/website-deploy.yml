@@ -1,10 +1,5 @@
 name: Deploy Website
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "website"
   workflow_dispatch:
   workflow_call:
 jobs:
