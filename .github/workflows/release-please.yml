@@ -65,6 +65,7 @@ jobs:
       - publish
       - release-please
     runs-on: macos-latest
+    continue-on-error: true
     steps:
       - uses: Homebrew/actions/bump-packages@master
         with:
@@ -83,6 +84,7 @@ jobs:
       - publish
       - release-please
     runs-on: windows-latest
+    continue-on-error: true
     steps:
       - uses: vedantmgoyal2009/winget-releaser@v2
         with:
