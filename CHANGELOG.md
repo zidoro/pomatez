@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.4](https://github.com/zidoro/pomatez/compare/v1.6.3...v1.6.4) (2023-12-16)
+
+
+### Bug Fixes 🐛
+
+* electron and tauri signing (release 1.6.3 was skipped) ([6442717](https://github.com/zidoro/pomatez/commit/64427172d5721f9384d0d7f5ebf26c8130938812))
+
 ## [1.6.3](https://github.com/zidoro/pomatez/compare/v1.6.2...v1.6.3) (2023-12-16)
 
 
