@@ -91,5 +91,6 @@ jobs:
         with:
           identifier: Zidoro.Pomatez
           installers-regex: 'setup\.exe$'
+          fork-user: SekkieBot
           release-tag: ${{ needs.release-please.outputs.tag }}
           token: ${{ secrets.PAT }}
