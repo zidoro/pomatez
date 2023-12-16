@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.3](https://github.com/zidoro/pomatez/compare/v1.6.2...v1.6.3) (2023-12-16)
+
+
+### Bug Fixes 🐛
+
+* mac signing for electron and tauri ([2c542fe](https://github.com/zidoro/pomatez/commit/2c542feec3f243847dd685913d093f2a48395b00))
+
 ## [1.6.2](https://github.com/zidoro/pomatez/compare/v1.6.1...v1.6.2) (2023-12-12)
 
 
