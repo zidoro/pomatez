@@ -14,11 +14,11 @@ import path from "path";
 import {
   SET_ALWAYS_ON_TOP,
   SET_FULLSCREEN_BREAK,
-  SET_MINIMIZE,
-  SET_CLOSE,
+  MINIMIZE_WINDOW,
+  CLOSE_WINDOW,
   SET_UI_THEME,
   SET_NATIVE_TITLEBAR,
-  SET_SHOW,
+  SHOW_WINDOW,
   RELEASE_NOTES_LINK,
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
@@ -396,7 +396,7 @@ ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
   store.safeSet("isDarkMode", isDarkMode);
 });
 
-ipcMain.on(SET_SHOW, () => {
+ipcMain.on(SHOW_WINDOW, () => {
   if (!win?.isVisible()) {
     win?.show();
   } else {
@@ -404,7 +404,7 @@ ipcMain.on(SET_SHOW, () => {
   }
 });
 
-ipcMain.on(SET_MINIMIZE, (e, { minimizeToTray }) => {
+ipcMain.on(MINIMIZE_WINDOW, (e, { minimizeToTray }) => {
   if (!minimizeToTray) {
     win?.minimize();
   } else {
@@ -415,7 +415,7 @@ ipcMain.on(SET_MINIMIZE, (e, { minimizeToTray }) => {
   }
 });
 
-ipcMain.on(SET_CLOSE, (e, { closeToTray }) => {
+ipcMain.on(CLOSE_WINDOW, (e, { closeToTray }) => {
   if (!closeToTray) {
     app.exit();
   } else {

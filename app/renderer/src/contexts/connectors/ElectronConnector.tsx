@@ -5,12 +5,12 @@ import { AppStateTypes, SettingTypes } from "../../store";
 import { CounterContext } from "../CounterContext";
 import {
   SET_ALWAYS_ON_TOP,
-  SET_CLOSE,
+  CLOSE_WINDOW,
   SET_COMPACT_MODE,
   SET_FULLSCREEN_BREAK,
-  SET_MINIMIZE,
+  MINIMIZE_WINDOW,
   SET_NATIVE_TITLEBAR,
-  SET_SHOW,
+  SHOW_WINDOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
   SET_OPEN_AT_LOGIN,
@@ -38,13 +38,13 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
-    electron.send(SET_MINIMIZE, {
+    electron.send(MINIMIZE_WINDOW, {
       minimizeToTray: settings.minimizeToTray,
     });
   }, [electron, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
-    electron.send(SET_CLOSE, {
+    electron.send(CLOSE_WINDOW, {
       closeToTray: settings.closeToTray,
     });
   }, [electron, settings.closeToTray]);
@@ -65,7 +65,7 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!settings.enableFullscreenBreak) {
-      electron.send(SET_SHOW);
+      electron.send(SHOW_WINDOW);
     }
   }, [electron, timer.timerType, settings.enableFullscreenBreak]);
 

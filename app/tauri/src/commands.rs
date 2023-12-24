@@ -31,7 +31,7 @@ static HAS_DECORATIONS: Mutex<bool> = Mutex::new(true);
 static IS_COMPACT: Mutex<bool> = Mutex::new(false);
 
 #[tauri::command]
-fn set_minimize<R: Runtime>(minimize_to_tray: bool, window: tauri::Window<R>) {
+fn minimize_window<R: Runtime>(minimize_to_tray: bool, window: tauri::Window<R>) {
     println!("Minimize! {}", minimize_to_tray.to_string().as_str());
     if minimize_to_tray {
         window.hide().unwrap();
@@ -41,7 +41,7 @@ fn set_minimize<R: Runtime>(minimize_to_tray: bool, window: tauri::Window<R>) {
 }
 
 #[tauri::command]
-fn set_close<R: Runtime>(close_to_tray: bool, window: tauri::Window<R>) {
+fn close_window<R: Runtime>(close_to_tray: bool, window: tauri::Window<R>) {
     println!("set_close! {}", close_to_tray);
     if close_to_tray {
         window.hide().unwrap();
@@ -51,7 +51,7 @@ fn set_close<R: Runtime>(close_to_tray: bool, window: tauri::Window<R>) {
 }
 
 #[tauri::command]
-fn set_show<R: Runtime>(_window: tauri::Window<R>) {
+fn show_window<R: Runtime>(_window: tauri::Window<R>) {
     println!("set_show!");
 }
 
@@ -233,15 +233,15 @@ pub trait PomatezCommands {
 impl PomatezCommands for Builder<Wry> {
     fn register_pomatez_commands(self) -> tauri::Builder<Wry> {
         self.invoke_handler(tauri::generate_handler![
-            set_show,
+            show_window,
             set_always_on_top,
             set_fullscreen_break,
             set_compact_mode,
             set_ui_theme,
             set_native_titlebar,
             system_tray::tray_icon_update,
-            set_close,
-            set_minimize,
+            close_window,
+            minimize_window,
             updater::check_for_updates,
             updater::install_update
         ])

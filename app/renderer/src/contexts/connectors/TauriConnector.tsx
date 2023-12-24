@@ -6,12 +6,12 @@ import { CounterContext } from "../CounterContext";
 import {
   CHECK_FOR_UPDATES,
   SET_ALWAYS_ON_TOP,
-  SET_CLOSE,
+  CLOSE_WINDOW,
   SET_COMPACT_MODE,
   SET_FULLSCREEN_BREAK,
-  SET_MINIMIZE,
+  MINIMIZE_WINDOW,
   SET_NATIVE_TITLEBAR,
-  SET_SHOW,
+  SHOW_WINDOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
   UPDATE_AVAILABLE,
@@ -111,14 +111,14 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
   const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
-    send(SET_MINIMIZE, {
+    send(MINIMIZE_WINDOW, {
       minimizeToTray: settings.minimizeToTray,
     });
     console.log("Minimize callback");
   }, [send, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
-    send(SET_CLOSE, {
+    send(CLOSE_WINDOW, {
       closeToTray: settings.closeToTray,
     });
   }, [send, settings.closeToTray]);
@@ -130,7 +130,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!settings.enableFullscreenBreak) {
-      send(SET_SHOW);
+      send(SHOW_WINDOW);
     }
   }, [send, timer.timerType, settings.enableFullscreenBreak]);
 
