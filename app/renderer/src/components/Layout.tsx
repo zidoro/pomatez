@@ -37,10 +37,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
 
   const registerKey = useCallback(
     (e: KeyboardEvent) => {
-      const keyCode = e.keyCode;
-      const keyChar = String.fromCharCode(keyCode);
-
-      if (e.altKey && e.shiftKey && keyChar === "T") {
+      if (e.altKey && e.shiftKey && e.code === "KeyT") {
         if (toggleThemeAction) toggleThemeAction();
       }
     },

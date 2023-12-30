@@ -5,19 +5,18 @@ import { AppStateTypes, SettingTypes } from "../../store";
 import { CounterContext } from "../CounterContext";
 import {
   SET_ALWAYS_ON_TOP,
-  SET_CLOSE,
+  CLOSE_WINDOW,
   SET_COMPACT_MODE,
   SET_FULLSCREEN_BREAK,
-  SET_MINIMIZE,
+  MINIMIZE_WINDOW,
   SET_NATIVE_TITLEBAR,
-  SET_SHOW,
+  SHOW_WINDOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
   SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
-import { encodeSvg } from "../../utils";
-import { TraySVG } from "../../components";
 import { InvokeConnector } from "../InvokeConnector";
+import { useTrayIconUpdates } from "hooks/useTrayIconUpdates";
 
 export const ElectronInvokeConnector: InvokeConnector = {
   send: (event: string, ...payload: any) => {
@@ -30,26 +29,22 @@ export const ElectronInvokeConnector: InvokeConnector = {
 export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
-  // TODO do logic to switch out the connectors based on the platform
-
   const timer = useSelector((state: AppStateTypes) => state.timer);
 
   const settings: SettingTypes = useSelector(
     (state: AppStateTypes) => state.settings
   );
 
-  const { count, duration, timerType, shouldFullscreen } =
-    useContext(CounterContext);
-  const dashOffset = (duration - count) * (24 / duration);
+  const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
-    electron.send(SET_MINIMIZE, {
+    electron.send(MINIMIZE_WINDOW, {
       minimizeToTray: settings.minimizeToTray,
     });
   }, [electron, settings.minimizeToTray]);
 
   const onExitCallback = useCallback(() => {
-    electron.send(SET_CLOSE, {
+    electron.send(CLOSE_WINDOW, {
       closeToTray: settings.closeToTray,
     });
   }, [electron, settings.closeToTray]);
@@ -70,7 +65,7 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!settings.enableFullscreenBreak) {
-      electron.send(SET_SHOW);
+      electron.send(SHOW_WINDOW);
     }
   }, [electron, timer.timerType, settings.enableFullscreenBreak]);
 
@@ -111,29 +106,9 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
     });
   }, [electron, settings.openAtLogin]);
 
-  useEffect(() => {
-    if (timer.playing) {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-
-      canvas.width = 16;
-      canvas.height = 16;
-
-      let svgXML = encodeSvg(
-        <TraySVG timerType={timerType} dashOffset={dashOffset} />
-      );
-
-      const img = new Image();
-      img.src = svgXML;
-
-      img.onload = function () {
-        ctx?.drawImage(img, 0, 0);
-        const dataUrl = canvas.toDataURL("image/png");
-
-        electron.send(TRAY_ICON_UPDATE, dataUrl);
-      };
-    }
-  }, [electron, timer.playing, timerType, dashOffset]);
+  useTrayIconUpdates((dataUrl) => {
+    electron.send(TRAY_ICON_UPDATE, { dataUrl });
+  });
 
   return (
     <ConnnectorContext.Provider

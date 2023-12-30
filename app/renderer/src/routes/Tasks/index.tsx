@@ -48,13 +48,13 @@ export default function Tasks() {
       const activeElement = document.activeElement?.tagName;
 
       if (activeElement !== "INPUT" && activeElement !== "TEXTAREA") {
-        if (e.ctrlKey && e.key === "z") {
+        if (e.ctrlKey && e.code === "KeyZ") {
           if (tasks.past.length > 0) {
             dispatch(UndoActionCreator.undo());
           }
         }
 
-        if (e.ctrlKey && e.key === "Z") {
+        if (e.ctrlKey && e.shiftKey && e.code === "KeyZ") {
           if (tasks.future.length > 0) {
             dispatch(UndoActionCreator.redo());
           }
