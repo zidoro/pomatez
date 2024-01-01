@@ -15,7 +15,7 @@ import {
   StyledDescriptionPreviewer,
   StyledTaskForm,
 } from "../styles";
-import { getInvokeConnector } from "../contexts";
+import { getInvokeConnector } from "contexts/InvokeConnectors";
 import { INSTALL_UPDATE } from "@pomatez/shareables";
 import { useNotification } from "../hooks";
 import notificationIcon from "../assets/logos/notification-dark.png";

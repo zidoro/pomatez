@@ -1,13 +1,11 @@
 import React from "react";
 import isElectron from "is-electron";
-import {
-  ElectronConnectorProvider,
-  ElectronInvokeConnector,
-} from "./connectors/ElectronConnector";
-import {
-  TauriConnectorProvider,
-  TauriInvokeConnector,
-} from "./connectors/TauriConnector";
+
+import { ElectronConnectorProvider } from "./connectors/ElectronConnector";
+import { TauriConnectorProvider } from "./connectors/TauriConnector";
+import { AgnosticConnector } from "./connectors/AgnosticConnector";
+
+import { getInvokeConnector } from "./InvokeConnectors";
 
 export type ConnectorProps = {
   onMinimizeCallback?: () => void;
@@ -19,15 +17,6 @@ export const ConnnectorContext = React.createContext<ConnectorProps>(
   {}
 );
 
-export function getInvokeConnector() {
-  if (isElectron()) {
-    return ElectronInvokeConnector;
-  } else if (window.__TAURI__) {
-    return TauriInvokeConnector;
-  }
-  return undefined;
-}
-
 export const ConnectorProvider: React.FC = ({ children }) => {
   let Connector: React.FC<ConnectorProps> = () => <>{children}</>;
   if (isElectron()) {
@@ -36,5 +25,9 @@ export const ConnectorProvider: React.FC = ({ children }) => {
     Connector = TauriConnectorProvider;
   }
 
-  return <Connector children={children} />;
+  return (
+    <AgnosticConnector invoker={getInvokeConnector()}>
+      <Connector children={children} />;
+    </AgnosticConnector>
+  );
 };
