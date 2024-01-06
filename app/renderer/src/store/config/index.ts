@@ -13,16 +13,28 @@ const configSlice = createSlice({
   name: "config",
   initialState,
   reducers: {
-    setStayFocus(state, action: PayloadAction<number>) {
+    setStayFocus(
+      state,
+      action: PayloadAction<ConfigTypes["stayFocus"]>
+    ) {
       state.stayFocus = action.payload;
     },
-    setShorBreak(state, action: PayloadAction<number>) {
+    setShorBreak(
+      state,
+      action: PayloadAction<ConfigTypes["shortBreak"]>
+    ) {
       state.shortBreak = action.payload;
     },
-    setLongBreak(state, action: PayloadAction<number>) {
+    setLongBreak(
+      state,
+      action: PayloadAction<ConfigTypes["longBreak"]>
+    ) {
       state.longBreak = action.payload;
     },
-    setSessionRounds(state, action: PayloadAction<number>) {
+    setSessionRounds(
+      state,
+      action: PayloadAction<ConfigTypes["sessionRounds"]>
+    ) {
       state.sessionRounds = action.payload;
     },
     restoreDefaultConfig() {
