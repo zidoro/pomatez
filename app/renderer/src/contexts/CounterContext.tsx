@@ -106,69 +106,72 @@ const CounterProvider: React.FC = ({ children }) => {
           padNum(date.getHours()) + ":" + padNum(date.getMinutes());
 
         if (timer.timerType !== TimerStatus.SPECIAL_BREAK) {
-          switch (currentTime) {
-            case firstBreak.fromTime:
-              dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
-              setTimerDuration(firstBreak.duration);
-              notification(
-                "Special break started.",
-                {
-                  body: `Enjoy your ${firstBreak?.duration} ${
-                    isEqualToOne(firstBreak.duration)
-                      ? "minute"
-                      : "minutes"
-                  } special break.`,
-                },
-                specialBreakStartedWav
-              );
-              break;
-            case secondBreak.fromTime:
-              dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
-              setTimerDuration(secondBreak.duration);
-              notification(
-                "Special break started.",
-                {
-                  body: `Enjoy your ${secondBreak.duration} ${
-                    isEqualToOne(secondBreak.duration)
-                      ? "minute"
-                      : "minutes"
-                  } special break.`,
-                },
-                specialBreakStartedWav
-              );
-              break;
-            case thirdBreak.fromTime:
-              dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
-              setTimerDuration(thirdBreak.duration);
-              notification(
-                "Special break started.",
-                {
-                  body: `Enjoy your ${thirdBreak.duration} ${
-                    isEqualToOne(thirdBreak.duration)
-                      ? "minute"
-                      : "minutes"
-                  } special break.`,
-                },
-                specialBreakStartedWav
-              );
-              break;
-            case fourthBreak.fromTime:
-              dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
-              setTimerDuration(fourthBreak.duration);
-              notification(
-                "Special break started.",
-                {
-                  body: `Enjoy your ${fourthBreak.duration} ${
-                    isEqualToOne(fourthBreak.duration)
-                      ? "minute"
-                      : "minutes"
-                  } special break.`,
-                },
-                specialBreakStartedWav
-              );
-              break;
-            default:
-              return;
+          if (firstBreak && currentTime === firstBreak.fromTime) {
+            dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            setTimerDuration(firstBreak.duration);
+            notification(
+              "Special break started.",
+              {
+                body: `Enjoy your ${firstBreak.duration} ${
+                  isEqualToOne(firstBreak.duration)
+                    ? "minute"
+                    : "minutes"
+                } special break.`,
+              },
+              specialBreakStartedWav
+            );
+            return;
+          }
+
+          if (secondBreak && currentTime === secondBreak.fromTime) {
+            dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            setTimerDuration(secondBreak.duration);
+            notification(
+              "Special break started.",
+              {
+                body: `Enjoy your ${secondBreak.duration} ${
+                  isEqualToOne(secondBreak.duration)
+                    ? "minute"
+                    : "minutes"
+                } special break.`,
+              },
+              specialBreakStartedWav
+            );
+            return;
+          }
+
+          if (thirdBreak && currentTime === thirdBreak.fromTime) {
+            dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            setTimerDuration(thirdBreak.duration);
+            notification(
+              "Special break started.",
+              {
+                body: `Enjoy your ${thirdBreak.duration} ${
+                  isEqualToOne(thirdBreak.duration)
+                    ? "minute"
+                    : "minutes"
+                } special break.`,
+              },
+              specialBreakStartedWav
+            );
+            return;
+          }
+
+          if (fourthBreak && currentTime === fourthBreak.fromTime) {
+            dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            setTimerDuration(fourthBreak.duration);
+            notification(
+              "Special break started.",
+              {
+                body: `Enjoy your ${fourthBreak.duration} ${
+                  isEqualToOne(fourthBreak.duration)
+                    ? "minute"
+                    : "minutes"
+                } special break.`,
+              },
+              specialBreakStartedWav
+            );
+            return;
           }
         } else {
           return clearInterval(interval);

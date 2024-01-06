@@ -14,9 +14,9 @@ import { Time, SVG } from "components";
 import { parseTime } from "utils";
 
 type SpecialFieldProps = {
-  fromTime: string;
-  toTime: string;
-  duration: number;
+  fromTime?: string;
+  toTime?: string;
+  duration?: number;
 };
 
 type Props = {
@@ -88,6 +88,7 @@ const SpecialField: React.FC<Props> = ({
       if (
         values.fromTime &&
         values.toTime &&
+        values.duration &&
         values.duration >= 5 &&
         onFieldSubmit
       ) {
@@ -218,7 +219,9 @@ const SpecialField: React.FC<Props> = ({
             />
             <StyledSpecialBreakDuration>
               Duration:&nbsp;
-              {values.duration < 5 && errors.duration ? (
+              {!values.duration ? (
+                ""
+              ) : (values.duration || 0) < 5 && errors.duration ? (
                 <StyledSpecialBreakDurationSpan error>
                   {values.duration > 1
                     ? `${values.duration} minutes`
