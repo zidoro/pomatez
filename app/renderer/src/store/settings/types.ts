@@ -1,3 +1,5 @@
+import { PayloadAction } from "@reduxjs/toolkit";
+
 export type SettingTypes = {
   ignoreUpdate: string;
   alwaysOnTop: boolean;
@@ -21,3 +23,6 @@ export const enum NotificationTypes {
   NORMAL = "normal",
   EXTRA = "extra",
 }
+
+export type SettingsPayload<T extends keyof SettingTypes> =
+  PayloadAction<SettingTypes[T]>;

@@ -1,13 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getFromStorage } from "utils";
-import { SettingTypes } from "./types";
+import { SettingTypes, SettingsPayload } from "./types";
 import { defaultSettings } from "./defaultSettings";
 
 export type { SettingTypes };
-
-type SettingsPayload<T extends keyof SettingTypes> = PayloadAction<
-  SettingTypes[T]
->;
 
 const settings =
   (getFromStorage("state") && getFromStorage("state").settings) ||

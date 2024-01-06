@@ -1,3 +1,5 @@
+import { PayloadAction } from "@reduxjs/toolkit";
+
 export type SpecialBreakTypes = {
   fromTime: string;
   toTime: string;
@@ -16,3 +18,7 @@ export type ConfigTypes = {
     fourthBreak?: SpecialBreakTypes;
   };
 };
+
+export type ConfigPayload<T extends keyof ConfigTypes> = PayloadAction<
+  ConfigTypes[T]
+>;
