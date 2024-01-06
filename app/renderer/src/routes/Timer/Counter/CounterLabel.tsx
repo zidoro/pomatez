@@ -1,17 +1,17 @@
 import React from "react";
-import { TimerTypes } from "store";
+import { TimerStatus } from "store/timer/types";
 import { StyledCounterLabel } from "styles";
 
 type Props = {
-  timerType?: TimerTypes["timerType"];
+  timerType?: TimerStatus;
 };
 
 const CounterLabel: React.FC<Props> = ({ timerType }) => {
   return (
     <StyledCounterLabel>
-      {(timerType === "SHORT_BREAK" && "Short Break") ||
-        (timerType === "LONG_BREAK" && "Long Break") ||
-        (timerType === "SPECIAL_BREAK" && "Special Break") ||
+      {(timerType === TimerStatus.SHORT_BREAK && "Short Break") ||
+        (timerType === TimerStatus.LONG_BREAK && "Long Break") ||
+        (timerType === TimerStatus.SHORT_BREAK && "Special Break") ||
         "Stay Focused"}
     </StyledCounterLabel>
   );

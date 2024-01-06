@@ -1,10 +1,10 @@
 import React from "react";
-import { TimerTypes } from "store";
+import { TimerStatus } from "store/timer/types";
 import { StyledSessions, StyledSessionReset } from "styles";
 import { SVG } from "components";
 
 type Props = {
-  timerType: TimerTypes["timerType"];
+  timerType: TimerStatus;
   round: number;
   sessionRounds: number;
   onClick?:

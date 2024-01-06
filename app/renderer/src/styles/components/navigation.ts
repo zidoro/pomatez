@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { SHORT_BREAK, LONG_BREAK, SPECIAL_BREAK } from "store";
+import { TimerStatus } from "store/timer/types";
 import { NavLink } from "react-router-dom";
 import { themes } from "../themes";
 
@@ -46,7 +46,7 @@ export const StyledNavListItem = styled.li`
   align-items: center;
 `;
 
-type NavLinkProps = { type?: string };
+type NavLinkProps = { type?: TimerStatus };
 
 export const StyledNavIconWrapper = styled.div`
   position: relative;
@@ -79,13 +79,13 @@ export const StyledNavLink = styled(NavLink)<NavLinkProps>`
 
   &.active {
     color: ${(p) =>
-      (p.type === SHORT_BREAK &&
+      (p.type === TimerStatus.SHORT_BREAK &&
         p.to === "/" &&
         "var(--color-green)") ||
-      (p.type === LONG_BREAK &&
+      (p.type === TimerStatus.LONG_BREAK &&
         p.to === "/" &&
         "var(--color-yellow)") ||
-      (p.type === SPECIAL_BREAK &&
+      (p.type === TimerStatus.SPECIAL_BREAK &&
         p.to === "/" &&
         "var(--color-yellow)") ||
       "var(--color-primary)"};

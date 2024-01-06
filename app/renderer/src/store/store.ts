@@ -4,7 +4,7 @@ import debounce from "lodash.debounce";
 import { saveToStorage, getFromStorage } from "utils";
 import configReducer from "./config";
 import settingReducer from "./settings";
-import { timerReducer } from "./timer";
+import timerReducer from "./timer";
 import { undoableTasksReducer } from "./tasks";
 import updateReducer from "./update";
 

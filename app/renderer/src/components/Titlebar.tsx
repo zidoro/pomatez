@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from "react";
-import { TimerTypes } from "store";
+import { TimerStatus } from "store/timer/types";
 import {
   StyledTitlebar,
   StyledWindowActions,
@@ -23,7 +23,7 @@ import appIconLongBreakDark from "assets/logos/tray-dark-lb.png";
 
 type Props = {
   darkMode: boolean;
-  timerType?: TimerTypes["timerType"];
+  timerType?: TimerStatus;
 };
 
 const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
@@ -32,11 +32,11 @@ const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
 
   const getAppIcon = useCallback(() => {
     switch (timerType) {
-      case "STAY_FOCUS":
+      case TimerStatus.STAY_FOCUS:
         return darkMode ? appIconDark : appIcon;
-      case "SHORT_BREAK":
+      case TimerStatus.SHORT_BREAK:
         return darkMode ? appIconShortBreakDark : appIconShortBreak;
-      case "LONG_BREAK":
+      case TimerStatus.LONG_BREAK:
         return darkMode ? appIconLongBreakDark : appIconLongBreak;
       default:
         return darkMode ? appIconLongBreakDark : appIconLongBreak;

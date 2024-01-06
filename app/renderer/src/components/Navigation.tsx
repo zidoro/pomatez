@@ -1,6 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { AppStateTypes, TimerTypes } from "store";
+import { useAppSelector } from "hooks/storeHooks";
 import {
   StyledNav,
   StyledNavList,
@@ -11,17 +10,16 @@ import {
 import { NavNotify } from "components";
 import { routes } from "config";
 import SVG from "./SVG";
+import { TimerStatus } from "store/timer/types";
 
 type Props = {
-  timerType?: TimerTypes["timerType"];
+  timerType?: TimerStatus;
 };
 
 const Navigation: React.FC<Props> = ({ timerType }) => {
-  const settings = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
-  const state = useSelector((state: AppStateTypes) => state);
+  const state = useAppSelector((state) => state);
 
   return (
     <StyledNav useNativeTitlebar={settings.useNativeTitlebar}>
