@@ -1,5 +1,5 @@
 import React, { useCallback, useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import {
   setAlwaysOnTop,
   setEnableStrictMode,
@@ -21,13 +21,14 @@ import { ThemeContext } from "contexts";
 
 import SettingSection from "./SettingSection";
 import { detectOS } from "utils";
+import { NotificationTypes } from "store/settings/types";
 
 const FeatureSection: React.FC = () => {
-  const settings: SettingTypes = useSelector(
+  const settings: SettingTypes = useAppSelector(
     (state: AppStateTypes) => state.settings
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { isDarkMode, toggleThemeAction } = useContext(ThemeContext);
 
@@ -145,7 +146,9 @@ const FeatureSection: React.FC = () => {
 
   const onChangeNotificationProps = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch(setNotificationType(e.target.value));
+      dispatch(
+        setNotificationType(e.target.value as NotificationTypes)
+      );
     },
     [dispatch]
   );
@@ -169,24 +172,28 @@ const FeatureSection: React.FC = () => {
           id="none"
           label="none"
           name="notification"
-          value="none"
-          checked={settings.notificationType === "none"}
+          value={NotificationTypes.NONE}
+          checked={settings.notificationType === NotificationTypes.NONE}
           onChange={onChangeNotificationProps}
         />
         <Radio
           id="normal"
           label="normal"
           name="notification"
-          value="normal"
-          checked={settings.notificationType === "normal"}
+          value={NotificationTypes.NORMAL}
+          checked={
+            settings.notificationType === NotificationTypes.NORMAL
+          }
           onChange={onChangeNotificationProps}
         />
         <Radio
           id="extra"
           label="extra"
           name="notification"
-          value="extra"
-          checked={settings.notificationType === "extra"}
+          value={NotificationTypes.EXTRA}
+          checked={
+            settings.notificationType === NotificationTypes.EXTRA
+          }
           onChange={onChangeNotificationProps}
         />
       </Collapse>
