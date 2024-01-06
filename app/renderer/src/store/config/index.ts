@@ -3,6 +3,10 @@ import { getFromStorage } from "utils";
 import { ConfigTypes } from "./types";
 import { defaultConfig } from "./defaultConfig";
 
+type ConfigPayload<T extends keyof ConfigTypes> = PayloadAction<
+  ConfigTypes[T]
+>;
+
 const config =
   (getFromStorage("state") && getFromStorage("state").config) ||
   defaultConfig;
@@ -13,51 +17,47 @@ const configSlice = createSlice({
   name: "config",
   initialState,
   reducers: {
-    setStayFocus(
-      state,
-      action: PayloadAction<ConfigTypes["stayFocus"]>
-    ) {
+    setStayFocus(state, action: ConfigPayload<"stayFocus">) {
       state.stayFocus = action.payload;
     },
-    setShorBreak(
-      state,
-      action: PayloadAction<ConfigTypes["shortBreak"]>
-    ) {
+
+    setShorBreak(state, action: ConfigPayload<"shortBreak">) {
       state.shortBreak = action.payload;
     },
-    setLongBreak(
-      state,
-      action: PayloadAction<ConfigTypes["longBreak"]>
-    ) {
+
+    setLongBreak(state, action: ConfigPayload<"longBreak">) {
       state.longBreak = action.payload;
     },
-    setSessionRounds(
-      state,
-      action: PayloadAction<ConfigTypes["sessionRounds"]>
-    ) {
+
+    setSessionRounds(state, action: ConfigPayload<"sessionRounds">) {
       state.sessionRounds = action.payload;
     },
+
     restoreDefaultConfig() {
       return defaultConfig;
     },
+
     setFirstSpecialBreak(
       state,
       action: PayloadAction<ConfigTypes["specialBreaks"]["firstBreak"]>
     ) {
       state.specialBreaks.firstBreak = action.payload;
     },
+
     setSecondSpecialBreak(
       state,
       action: PayloadAction<ConfigTypes["specialBreaks"]["secondBreak"]>
     ) {
       state.specialBreaks.secondBreak = action.payload;
     },
+
     setThirdSpecialBreak(
       state,
       action: PayloadAction<ConfigTypes["specialBreaks"]["thirdBreak"]>
     ) {
       state.specialBreaks.thirdBreak = action.payload;
     },
+
     setFourthSpecialBreak(
       state,
       action: PayloadAction<ConfigTypes["specialBreaks"]["fourthBreak"]>

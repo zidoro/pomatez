@@ -5,6 +5,10 @@ import { defaultSettings } from "./defaultSettings";
 
 export type { SettingTypes };
 
+type SettingsPayload<T extends keyof SettingTypes> = PayloadAction<
+  SettingTypes[T]
+>;
+
 const settings =
   (getFromStorage("state") && getFromStorage("state").settings) ||
   defaultSettings;
@@ -15,17 +19,11 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    setIgnoreUpdate(
-      state,
-      action: PayloadAction<SettingTypes["ignoreUpdate"]>
-    ) {
+    setIgnoreUpdate(state, action: SettingsPayload<"ignoreUpdate">) {
       state.ignoreUpdate = action.payload;
     },
 
-    setAlwaysOnTop(
-      state,
-      action: PayloadAction<SettingTypes["alwaysOnTop"]>
-    ) {
+    setAlwaysOnTop(state, action: SettingsPayload<"alwaysOnTop">) {
       state.alwaysOnTop = action.payload;
     },
 
@@ -35,85 +33,79 @@ const settingsSlice = createSlice({
 
     setEnableDarkTheme(
       state,
-      action: PayloadAction<SettingTypes["enableDarkTheme"]>
+      action: SettingsPayload<"enableDarkTheme">
     ) {
       state.enableDarkTheme = action.payload;
     },
 
     setEnableCompactMode(
       state,
-      action: PayloadAction<SettingTypes["compactMode"]>
+      action: SettingsPayload<"compactMode">
     ) {
       state.compactMode = action.payload;
     },
 
     setEnableFullscreenBreak(
       state,
-      action: PayloadAction<SettingTypes["enableFullscreenBreak"]>
+      action: SettingsPayload<"enableFullscreenBreak">
     ) {
       state.enableFullscreenBreak = action.payload;
     },
 
     setEnableStrictMode(
       state,
-      action: PayloadAction<SettingTypes["enableStrictMode"]>
+      action: SettingsPayload<"enableStrictMode">
     ) {
       state.enableStrictMode = action.payload;
     },
 
     setEnableProgressAnimation(
       state,
-      action: PayloadAction<SettingTypes["enableProgressAnimation"]>
+      action: SettingsPayload<"enableProgressAnimation">
     ) {
       state.enableProgressAnimation = action.payload;
     },
 
     setEnableVoiceAssistance(
       state,
-      action: PayloadAction<SettingTypes["enableVoiceAssistance"]>
+      action: SettingsPayload<"enableVoiceAssistance">
     ) {
       state.enableVoiceAssistance = action.payload;
     },
 
     setUseNativeTitlebar(
       state,
-      action: PayloadAction<SettingTypes["useNativeTitlebar"]>
+      action: SettingsPayload<"useNativeTitlebar">
     ) {
       state.useNativeTitlebar = action.payload;
     },
 
     setNotificationType(
       state,
-      action: PayloadAction<SettingTypes["notificationType"]>
+      action: SettingsPayload<"notificationType">
     ) {
       state.notificationType = action.payload;
     },
 
-    setCloseToTray(
-      state,
-      action: PayloadAction<SettingTypes["closeToTray"]>
-    ) {
+    setCloseToTray(state, action: SettingsPayload<"closeToTray">) {
       state.closeToTray = action.payload;
     },
 
     setMinimizeToTray(
       state,
-      action: PayloadAction<SettingTypes["minimizeToTray"]>
+      action: SettingsPayload<"minimizeToTray">
     ) {
       state.minimizeToTray = action.payload;
     },
 
     setAutoStartWorkTime(
       state,
-      action: PayloadAction<SettingTypes["autoStartWorkTime"]>
+      action: SettingsPayload<"autoStartWorkTime">
     ) {
       state.autoStartWorkTime = action.payload;
     },
 
-    setOpenAtLogin(
-      state,
-      action: PayloadAction<SettingTypes["openAtLogin"]>
-    ) {
+    setOpenAtLogin(state, action: SettingsPayload<"openAtLogin">) {
       state.openAtLogin = action.payload;
     },
 

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import styled from "styled-components/macro";
 import ReactMarkdown from "react-markdown";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import { AppStateTypes, setIgnoreUpdate, SettingTypes } from "../store";
 import {
   setUpdateBody,
@@ -51,14 +51,14 @@ const IgnoreVersion = styled.div`
 `;
 
 const Updater: React.FC = () => {
-  const settings: SettingTypes = useSelector(
+  const settings: SettingTypes = useAppSelector(
     (state: AppStateTypes) => state.settings
   );
-  const update: UpdateTypes = useSelector(
+  const update: UpdateTypes = useAppSelector(
     (state: AppStateTypes) => state.update
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <UpdateWrapper>
