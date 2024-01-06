@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "hooks/storeHooks";
 import { restoreDefaultConfig } from "store";
 
 import { StyledHeaderButton } from "styles";
 import { Header } from "components";
 
 const ConfigHeader: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [success, setSuccess] = useState(false);
 

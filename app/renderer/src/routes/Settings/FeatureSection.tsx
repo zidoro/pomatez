@@ -3,9 +3,7 @@ import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import {
   setAlwaysOnTop,
   setEnableStrictMode,
-  AppStateTypes,
   setEnableProgressAnimation,
-  SettingTypes,
   setNotificationType,
   setEnableFullscreenBreak,
   setUseNativeTitlebar,
@@ -24,9 +22,7 @@ import { detectOS } from "utils";
 import { NotificationTypes } from "store/settings/types";
 
 const FeatureSection: React.FC = () => {
-  const settings: SettingTypes = useAppSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   const dispatch = useAppDispatch();
 

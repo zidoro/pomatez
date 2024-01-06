@@ -7,13 +7,10 @@ import {
 } from "contexts";
 import { Layout, Preloader } from "components";
 import { compactRoutes, routes } from "config";
-import { useSelector } from "react-redux";
-import { AppStateTypes } from "store";
+import { useAppSelector } from "hooks/storeHooks";
 
 export default function App() {
-  const settings = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   useEffect(() => {
     const contextEvent = (event: MouseEvent) => {

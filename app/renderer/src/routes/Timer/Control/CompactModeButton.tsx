@@ -1,17 +1,14 @@
 import { SVG } from "components";
 import { CounterContext } from "contexts";
 import { useRippleEffect } from "hooks";
+import { useAppSelector } from "hooks/storeHooks";
 import React, { useCallback, useRef } from "react";
-import { useSelector } from "react-redux";
-import { AppStateTypes, SettingTypes } from "store";
 import { StyledCompactButton } from "styles";
 
 type Props = { flipped?: boolean } & React.HTMLProps<HTMLButtonElement>;
 
 const CompactModeButton: React.FC<Props> = ({ onClick, flipped }) => {
-  const { compactMode }: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const { compactMode } = useAppSelector((state) => state.settings);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 

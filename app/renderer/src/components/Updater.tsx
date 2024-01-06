@@ -3,12 +3,8 @@ import Header from "./Header";
 import styled from "styled-components/macro";
 import ReactMarkdown from "react-markdown";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
-import { AppStateTypes, setIgnoreUpdate, SettingTypes } from "../store";
-import {
-  setUpdateBody,
-  setUpdateVersion,
-  UpdateTypes,
-} from "../store/update";
+import { setIgnoreUpdate } from "../store";
+import { setUpdateBody, setUpdateVersion } from "../store/update";
 import {
   StyledButtonNormal,
   StyledButtonPrimary,
@@ -51,12 +47,8 @@ const IgnoreVersion = styled.div`
 `;
 
 const Updater: React.FC = () => {
-  const settings: SettingTypes = useAppSelector(
-    (state: AppStateTypes) => state.settings
-  );
-  const update: UpdateTypes = useAppSelector(
-    (state: AppStateTypes) => state.update
-  );
+  const settings = useAppSelector((state) => state.settings);
+  const update = useAppSelector((state) => state.update);
 
   const dispatch = useAppDispatch();
 

@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useAppSelector, useAppDispatch } from "hooks/storeHooks";
 import {
-  AppStateTypes,
   setFirstSpecialBreak,
   setSecondSpecialBreak,
   setThirdSpecialBreak,
@@ -15,7 +14,7 @@ import {
 import SpecialField from "./SpecialField";
 
 const SpecialBreaks: React.FC = () => {
-  const config = useAppSelector((state: AppStateTypes) => state.config);
+  const config = useAppSelector((state) => state.config);
 
   const dispath = useAppDispatch();
 

@@ -1,7 +1,7 @@
 import { SVGTypes } from "components";
 import { TaskList, Config, Timer, Settings } from "routes";
 import { ConfigSliderProps } from "routes";
-import { AppStateTypes, SettingTypes } from "./store";
+import { AppStateTypes } from "./store";
 import { DefaultRootState } from "react-redux";
 
 export const APP_NAME = "Pomatez";

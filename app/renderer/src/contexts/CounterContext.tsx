@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useStayAwake from "use-stay-awake";
-import { setRound, setTimerType, SettingTypes, setPlay } from "store";
+import { setRound, setTimerType, setPlay } from "store";
 import { useNotification } from "hooks";
 import { padNum, isEqualToOne } from "utils";
 
@@ -36,9 +36,7 @@ const CounterProvider: React.FC = ({ children }) => {
     config: state.config,
   }));
 
-  const settings: SettingTypes = useAppSelector(
-    (state) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   const { preventSleeping, allowSleeping } = useStayAwake();
 
