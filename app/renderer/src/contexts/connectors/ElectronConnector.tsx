@@ -104,7 +104,7 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
   }, [electron, settings.openAtLogin]);
 
   useTrayIconUpdates((dataUrl) => {
-    electron.send(TRAY_ICON_UPDATE, { dataUrl });
+    electron.send(TRAY_ICON_UPDATE, dataUrl);
   });
 
   return (
