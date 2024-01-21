@@ -204,7 +204,7 @@ Please consider starring this project to show your :blue_heart: and support. Tha
 
 ## :shield: Privacy
 
-This app has analytics that will track the number of users only and nothing more ([analytics.ts](https://github.com/zidoro/pomatez/blob/master/app/main/src/helpers/analytics.ts)).
+This app has analytics that will track the number of users only and nothing more ([analytics.ts](https://github.com/zidoro/pomatez/blob/master/app/electron/src/helpers/analytics.ts)).
 
 ## :newspaper: License
 
