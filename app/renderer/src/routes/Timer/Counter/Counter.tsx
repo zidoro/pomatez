@@ -1,8 +1,7 @@
 import { CounterContext } from "contexts";
 import { useTime } from "hooks";
 import React, { useContext } from "react";
-import { useSelector } from "react-redux";
-import { AppStateTypes, SettingTypes } from "store";
+import { useAppSelector } from "hooks/storeHooks";
 import {
   StyledCounterContainer,
   StyledCounterProgress,
@@ -13,9 +12,7 @@ import CounterTimer from "./CounterTimer";
 import CounterType from "./CounterType";
 
 const Counter: React.FC = () => {
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   const { count, duration, timerType, shouldFullscreen } =
     useContext(CounterContext);

@@ -2,13 +2,9 @@ import React from "react";
 import Header from "./Header";
 import styled from "styled-components/macro";
 import ReactMarkdown from "react-markdown";
-import { useDispatch, useSelector } from "react-redux";
-import { AppStateTypes, setIgnoreUpdate, SettingTypes } from "../store";
-import {
-  setUpdateBody,
-  setUpdateVersion,
-  UpdateTypes,
-} from "../store/update";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
+import { setIgnoreUpdate } from "../store";
+import { setUpdateBody, setUpdateVersion } from "../store/update";
 import {
   StyledButtonNormal,
   StyledButtonPrimary,
@@ -51,14 +47,10 @@ const IgnoreVersion = styled.div`
 `;
 
 const Updater: React.FC = () => {
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
-  const update: UpdateTypes = useSelector(
-    (state: AppStateTypes) => state.update
-  );
+  const settings = useAppSelector((state) => state.settings);
+  const update = useAppSelector((state) => state.update);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <UpdateWrapper>

@@ -6,28 +6,20 @@ import React, {
   useRef,
 } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
-import {
-  AppStateTypes,
-  SHORT_BREAK,
-  LONG_BREAK,
-  SPECIAL_BREAK,
-  SettingTypes,
-} from "store";
 import { StyledLayout } from "styles";
 
 import Titlebar from "./Titlebar";
 import Navigation from "./Navigation";
 import { ThemeContext } from "contexts";
+import { TimerStatus } from "store/timer/types";
+import { useAppSelector } from "hooks/storeHooks";
 
 type Props = {} & RouteComponentProps;
 
 const Layout: React.FC<Props> = ({ history, location, children }) => {
-  const timer = useSelector((state: AppStateTypes) => state.timer);
+  const timer = useAppSelector((state) => state.timer);
 
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   const { toggleThemeAction } = useContext(ThemeContext);
 
@@ -52,9 +44,9 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
   useEffect(() => {
     if (settings.enableFullscreenBreak) {
       if (
-        timer.timerType === SHORT_BREAK ||
-        timer.timerType === LONG_BREAK ||
-        timer.timerType === SPECIAL_BREAK
+        timer.timerType === TimerStatus.SHORT_BREAK ||
+        timer.timerType === TimerStatus.LONG_BREAK ||
+        timer.timerType === TimerStatus.SPECIAL_BREAK
       ) {
         if (location.pathname !== "/") {
           setNoTransition(true);

@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "hooks/storeHooks";
 import {
-  AppStateTypes,
   setStayFocus,
   setSessionRounds,
   setShorBreak,
@@ -11,15 +10,15 @@ import { StyledConfigSliderSection } from "styles";
 import ConfigSlider, { ConfigSliderProps } from "./ConfigSlider";
 
 const SliderSection: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const { stayFocus, shortBreak, longBreak, sessionRounds } =
-    useSelector(({ config }: AppStateTypes) => ({
+    useAppSelector(({ config }) => ({
       stayFocus: config.stayFocus,
       shortBreak: config.shortBreak,
       longBreak: config.longBreak,
       sessionRounds: config.sessionRounds,
     }));
-
-  const dispatch = useDispatch();
 
   const sliderRangeList: ConfigSliderProps[] = [
     {

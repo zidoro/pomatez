@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import { ConnnectorContext } from "../ConnnectorContext";
-import { useDispatch, useSelector } from "react-redux";
-import { AppStateTypes, SettingTypes } from "../../store";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import { CounterContext } from "../CounterContext";
 import {
   CHECK_FOR_UPDATES,
@@ -36,11 +35,9 @@ export const TauriInvokeConnector = {
 };
 
 export const TauriConnectorProvider: React.FC = ({ children }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   // Prevent webpage behavior (naitive apps shouldn't refresh with F5 or Ctrl+R)
   useEffect(() => {
@@ -114,7 +111,7 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
     });
   }, [settings.openAtLogin]);
 
-  const timer = useSelector((state: AppStateTypes) => state.timer);
+  const timer = useAppSelector((state) => state.timer);
 
   const { shouldFullscreen } = useContext(CounterContext);
 

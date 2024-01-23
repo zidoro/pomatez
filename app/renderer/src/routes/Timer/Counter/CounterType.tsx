@@ -1,20 +1,20 @@
 import React from "react";
-import { TimerTypes } from "store";
+import { TimerStatus } from "store/timer/types";
 import { StyledCounterType } from "styles";
 import { SVG } from "components";
 
 type Props = {
-  timerType?: TimerTypes["timerType"];
+  timerType?: TimerStatus;
 };
 
 const CounterType: React.FC<Props> = ({ timerType }) => {
   return (
     <StyledCounterType>
-      {(timerType === "SHORT_BREAK" && <SVG name="mug" />) ||
-        (timerType === "LONG_BREAK" && <SVG name="nap" />) ||
-        (timerType === "SPECIAL_BREAK" && <SVG name="fast-food" />) || (
-          <SVG name="laptop" />
-        )}
+      {(timerType === TimerStatus.SHORT_BREAK && <SVG name="mug" />) ||
+        (timerType === TimerStatus.LONG_BREAK && <SVG name="nap" />) ||
+        (timerType === TimerStatus.SPECIAL_BREAK && (
+          <SVG name="fast-food" />
+        )) || <SVG name="laptop" />}
     </StyledCounterType>
   );
 };

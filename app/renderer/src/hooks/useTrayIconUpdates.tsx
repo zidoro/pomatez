@@ -1,14 +1,13 @@
 import { CounterContext } from "contexts";
 import { useEffect, useContext } from "react";
-import { useSelector } from "react-redux";
-import type { AppStateTypes } from "store";
+import { useAppSelector } from "./storeHooks";
 import { TraySVG } from "components";
 import { encodeSvg } from "utils";
 
 export const useTrayIconUpdates = (
   onNewIcon: (dataUrl: string) => void
 ) => {
-  const timer = useSelector((state: AppStateTypes) => state.timer);
+  const timer = useAppSelector((state) => state.timer);
 
   const { count, duration, timerType } = useContext(CounterContext);
   const dashOffset = (duration - count) * (24 / duration);

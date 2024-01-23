@@ -1,9 +1,9 @@
 import React from "react";
-import { TimerTypes } from "store";
+import { TimerStatus } from "store/timer/types";
 import { StyledCounterTimer } from "styles";
 
 type Props = {
-  timerType?: TimerTypes["timerType"];
+  timerType?: TimerStatus;
   hours: string;
   minutes: string;
   seconds: string;

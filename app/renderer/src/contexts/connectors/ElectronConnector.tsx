@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import { ConnnectorContext } from "../ConnnectorContext";
-import { useSelector } from "react-redux";
-import { AppStateTypes, SettingTypes } from "../../store";
+import { useAppSelector } from "hooks/storeHooks";
 import { CounterContext } from "../CounterContext";
 import {
   SET_ALWAYS_ON_TOP,
@@ -29,11 +28,9 @@ export const ElectronInvokeConnector: InvokeConnector = {
 export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
-  const timer = useSelector((state: AppStateTypes) => state.timer);
+  const timer = useAppSelector((state) => state.timer);
 
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
   const { shouldFullscreen } = useContext(CounterContext);
 

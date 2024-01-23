@@ -1,19 +1,14 @@
 import WarningBell from "assets/audios/warning-bell.wav";
 import { SVG } from "components";
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
+import { TimerStatus } from "store/timer/types";
 import {
-  AppStateTypes,
-  LONG_BREAK,
   setEnableCompactMode,
   setPlay,
   setRound,
   setTimerType,
-  SettingTypes,
-  SHORT_BREAK,
   skipTimer,
-  SPECIAL_BREAK,
-  STAY_FOCUS,
   toggleNotificationSound,
 } from "store";
 import {
@@ -35,16 +30,14 @@ type Props = {
 };
 
 const Control: React.FC<Props> = ({ resetTimerAction }) => {
-  const { timer, config } = useSelector((state: AppStateTypes) => ({
+  const { timer, config } = useAppSelector((state) => ({
     timer: state.timer,
     config: state.config,
   }));
 
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [warn, setWarn] = useState(false);
 
@@ -98,29 +91,29 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     }
 
     switch (timer.timerType) {
-      case STAY_FOCUS:
+      case TimerStatus.STAY_FOCUS:
         if (timer.round < config.sessionRounds) {
-          dispatch(skipTimer("SHORT_BREAK"));
+          dispatch(skipTimer(TimerStatus.SHORT_BREAK));
         } else {
-          dispatch(skipTimer("LONG_BREAK"));
+          dispatch(skipTimer(TimerStatus.LONG_BREAK));
         }
         if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
-      case SHORT_BREAK:
-        dispatch(skipTimer("STAY_FOCUS"));
+      case TimerStatus.SHORT_BREAK:
+        dispatch(skipTimer(TimerStatus.STAY_FOCUS));
         dispatch(setRound(timer.round + 1));
         if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
-      case LONG_BREAK:
-        dispatch(skipTimer("STAY_FOCUS"));
+      case TimerStatus.LONG_BREAK:
+        dispatch(skipTimer(TimerStatus.STAY_FOCUS));
         dispatch(setRound(1));
         if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
-      case SPECIAL_BREAK:
-        dispatch(skipTimer("STAY_FOCUS"));
+      case TimerStatus.SPECIAL_BREAK:
+        dispatch(skipTimer(TimerStatus.STAY_FOCUS));
         if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
     }
@@ -135,7 +128,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   ]);
 
   const onResetSessionCallback = useCallback(() => {
-    dispatch(setTimerType("STAY_FOCUS"));
+    dispatch(setTimerType(TimerStatus.STAY_FOCUS));
     dispatch(setRound(1));
   }, [dispatch]);
 
