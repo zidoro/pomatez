@@ -1,11 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  AppStateTypes,
-  setTaskCardDone,
-  skipTaskCard,
-  removeTaskCard,
-} from "store";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { setTaskCardDone, skipTaskCard, removeTaskCard } from "store";
 
 import {
   StyledPriorityCardContainer,
@@ -24,14 +19,11 @@ import {
 } from "styles";
 import { SVG } from "components";
 import { useTargetOutside } from "hooks";
-import { isObjectEmpty } from "utils";
 
 const PriorityCard: React.FC = () => {
-  const tasks = useSelector(
-    (state: AppStateTypes) => state.tasks.present
-  );
+  const tasks = useAppSelector((state) => state.tasks.present);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const priorityList = tasks.find((list) => list.priority);
 
@@ -48,22 +40,32 @@ const PriorityCard: React.FC = () => {
   });
 
   const setTaskCardDoneCallback = () => {
-    if (!isObjectEmpty(priorityCard)) {
-      dispatch(setTaskCardDone(priorityList?._id, priorityCard?._id));
+    if (priorityCard && priorityList) {
+      dispatch(
+        setTaskCardDone({
+          listId: priorityList?._id,
+          cardId: priorityCard?._id,
+        })
+      );
     }
     setShowOptions(false);
   };
 
   const skipTaskCardCallback = () => {
-    if (!isObjectEmpty(priorityCard)) {
+    if (priorityList) {
       dispatch(skipTaskCard(priorityList?._id));
     }
     setShowOptions(false);
   };
 
   const deleteTaskCardCallback = () => {
-    if (!isObjectEmpty(priorityCard)) {
-      dispatch(removeTaskCard(priorityList?._id, priorityCard?._id));
+    if (priorityList && priorityCard) {
+      dispatch(
+        removeTaskCard({
+          listId: priorityList?._id,
+          cardId: priorityCard?._id,
+        })
+      );
     }
     setShowOptions(false);
   };
