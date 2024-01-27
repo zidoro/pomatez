@@ -86,7 +86,7 @@
 
 ### :page_with_curl: Prerequisites
 
-1. You need to have `node` v16 and `npm` v8 installed on your machine. If you don't have it yet, you can install it by running the following command.
+1. You need to have `node` v18 and `npm` v8 installed on your machine. If you don't have it yet, you can install it by running the following command.
 
    1. For Mac
 

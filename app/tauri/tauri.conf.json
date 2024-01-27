@@ -14,7 +14,7 @@
     "bundle": {
       "active": true,
       "category": "Productivity",
-      "copyright": "Copyright © 2020 Roldan Montilla Jr",
+      "copyright": "Copyright © 2024 Roldan Montilla Jr",
       "deb": {
         "depends": []
       },
@@ -36,18 +36,9 @@
         "signingIdentity": null
       },
       "publisher": "Roldan Montilla Jr",
-      "resources": [
-        "icons/icon.png"
-      ],
+      "resources": ["icons/icon.png"],
       "shortDescription": "",
-      "targets": [
-        "deb",
-        "appimage",
-        "msi",
-        "nsis",
-        "dmg",
-        "updater"
-      ],
+      "targets": ["deb", "appimage", "msi", "nsis", "dmg", "updater"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
