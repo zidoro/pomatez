@@ -2,6 +2,7 @@ import { Task, TaskList } from "./types";
 import { v4 as uuid } from "uuid";
 
 type CreateTaskListParams = Pick<TaskList, "title" | "priority">;
+type EditableTaskListFields = Partial<CreateTaskListParams>;
 
 export const createTaskList = ({
   title,
@@ -13,6 +14,13 @@ export const createTaskList = ({
     cards: [],
     priority,
   };
+};
+
+export const editTaskList = (
+  taskList: TaskList,
+  newFields: EditableTaskListFields
+): TaskList => {
+  return { ...taskList, ...newFields };
 };
 
 export const addTaskToList = (
@@ -33,11 +41,4 @@ export const removeTaskFromList = (
     ...taskList,
     cards: taskList.cards.filter((task) => task._id !== taskId),
   };
-};
-
-export const setListPriority = (
-  taskList: TaskList,
-  priority: boolean
-): TaskList => {
-  return { ...taskList, priority };
 };

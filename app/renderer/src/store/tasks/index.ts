@@ -6,8 +6,8 @@ import undoable from "redux-undo";
 import {
   addTaskToList,
   createTaskList,
-  setListPriority,
   removeTaskFromList,
+  editTaskList,
 } from "./TaskList";
 import { createTask, editTask } from "./Task";
 export * from "./types";
@@ -24,12 +24,11 @@ const tasksSlice = createSlice({
     addTaskList: (state, action: ListPayload<"title">) => {
       const priority = state.length === 0 ? true : false;
 
-      const taskList = createTaskList({
-        title: action.payload.trim().toUpperCase(),
-        priority,
-      });
+      const title = action.payload.trim().toUpperCase();
 
-      state.push(taskList);
+      const taskList = createTaskList({ title, priority });
+
+      return [...state, taskList];
     },
 
     removeTaskList: (state, action: ListPayload<"_id">) => {
@@ -37,13 +36,15 @@ const tasksSlice = createSlice({
     },
 
     setTaskListPriority: (state, action: ListPayload<"_id">) => {
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload
-      );
+      const newState = state.map((list) => {
+        if (list._id !== action.payload) {
+          return editTaskList(list, { priority: false });
+        }
 
-      if (listIndex === -1) return;
+        return editTaskList(list, { priority: true });
+      });
 
-      state[listIndex] = setListPriority(state[listIndex], true);
+      return newState;
     },
 
     editTaskTitle: (
@@ -55,10 +56,9 @@ const tasksSlice = createSlice({
     ) => {
       return state.map((list) => {
         if (list._id === action.payload.listId) {
-          return {
-            ...list,
-            title: action.payload.listTitle.trim().toUpperCase(),
-          };
+          const title = action.payload.listTitle.trim().toUpperCase();
+
+          return editTaskList(list, { title });
         }
         return list;
       });
@@ -71,17 +71,18 @@ const tasksSlice = createSlice({
         cardText: Task["text"];
       }>
     ) => {
-      const newTask = createTask({
-        text: action.payload.cardText.trim().capitalize(),
+      const text = action.payload.cardText.trim().capitalize();
+
+      const newTask = createTask({ text });
+
+      const newState = state.map((list) => {
+        if (list._id === action.payload.listId) {
+          return addTaskToList(list, newTask);
+        }
+        return list;
       });
 
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload.listId
-      );
-
-      if (listIndex === -1) return;
-
-      state[listIndex] = addTaskToList(state[listIndex], newTask);
+      return newState;
     },
 
     editTaskCardText: (
@@ -92,25 +93,21 @@ const tasksSlice = createSlice({
         cardText: Task["text"];
       }>
     ) => {
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload.listId
-      );
-      if (listIndex === -1) return state;
-      const list = state[listIndex];
+      const newState = state.map((list) => {
+        if (list._id !== action.payload.listId) return list;
 
-      const cardIndex = list.cards.findIndex(
-        (card) => card._id === action.payload.cardId
-      );
+        const newCards = list.cards.map((card) => {
+          if (card._id !== action.payload.cardId) return card;
 
-      if (cardIndex === -1) return state;
+          const text = action.payload.cardText.trim().capitalize();
 
-      const taskToEdit = list.cards[cardIndex];
+          return editTask(card, { text });
+        });
 
-      const newTask = editTask(taskToEdit, {
-        text: action.payload.cardText.trim().capitalize(),
+        return { ...list, cards: newCards };
       });
 
-      state[listIndex].cards.splice(cardIndex, 1, newTask);
+      return newState;
     },
 
     editTaskCard: (
@@ -121,23 +118,22 @@ const tasksSlice = createSlice({
         description?: Task["description"];
       }>
     ) => {
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload.listId
-      );
-      if (listIndex === -1) return state;
-      const list = state[listIndex];
+      const newState = state.map((list) => {
+        if (list._id !== action.payload.listId) return list;
 
-      const taskIndex = list.cards.findIndex(
-        (card) => card._id === action.payload.cardId
-      );
-      if (taskIndex === -1) return state;
-      const oldTask = list.cards[taskIndex];
+        const newCards = list.cards.map((card) => {
+          if (card._id !== action.payload.cardId) return card;
 
-      const newTask = editTask(oldTask, {
-        description: action.payload.description?.capitalize() || "",
+          const description =
+            action.payload.description?.capitalize() || "";
+
+          return editTask(card, { description });
+        });
+
+        return { ...list, cards: newCards };
       });
 
-      state[listIndex].cards.splice(taskIndex, 1, newTask);
+      return newState;
     },
 
     removeTaskCard: (
@@ -147,18 +143,13 @@ const tasksSlice = createSlice({
         cardId: Task["_id"];
       }>
     ) => {
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload.listId
-      );
-      if (listIndex === -1) return;
-      const oldTaskList = state[listIndex];
+      const newState = state.map((list) => {
+        if (list._id !== action.payload.listId) return list;
 
-      const newTaskList = removeTaskFromList(
-        oldTaskList,
-        action.payload.cardId
-      );
+        return removeTaskFromList(list, action.payload.cardId);
+      });
 
-      state[listIndex] = newTaskList;
+      return newState;
     },
 
     setTaskCardDone: (
@@ -168,24 +159,21 @@ const tasksSlice = createSlice({
         cardId?: Task["_id"];
       }>
     ) => {
-      if (!action.payload.cardId) return;
+      if (!action.payload.cardId) return state;
 
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload.listId
-      );
-      if (listIndex === -1) return state;
-      const list = state[listIndex];
+      const newState = state.map((list) => {
+        if (list._id !== action.payload.listId) return list;
 
-      const taskIndex = list.cards.findIndex(
-        (card) => card._id === action.payload.cardId
-      );
-      if (taskIndex === -1) return;
+        const newCards = list.cards.map((card) => {
+          if (card._id !== action.payload.cardId) return card;
 
-      const oldTask = list.cards[taskIndex];
+          return editTask(card, { done: true });
+        });
 
-      const newTask = editTask(oldTask, { done: true });
+        return { ...list, cards: newCards };
+      });
 
-      state[listIndex].cards.splice(taskIndex, 1, newTask);
+      return newState;
     },
 
     setTaskCardNotDone: (
@@ -197,21 +185,19 @@ const tasksSlice = createSlice({
     ) => {
       if (!action.payload.cardId) return;
 
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload.listId
-      );
-      if (listIndex === -1) return;
-      const list = state[listIndex];
+      const newState = state.map((list) => {
+        if (list._id !== action.payload.listId) return list;
 
-      const taskIndex = list.cards.findIndex(
-        (card) => card._id === action.payload.cardId
-      );
-      if (taskIndex === -1) return;
-      const oldTask = list.cards[taskIndex];
+        const newCards = list.cards.map((card) => {
+          if (card._id !== action.payload.cardId) return card;
 
-      const newTask = editTask(oldTask, { done: false });
+          return editTask(card, { done: false });
+        });
 
-      state[listIndex].cards.splice(taskIndex, 1, newTask);
+        return { ...list, cards: newCards };
+      });
+
+      return newState;
     },
 
     skipTaskCard: (state, action: ListPayload<"_id">) => {
