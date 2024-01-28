@@ -8,8 +8,8 @@ import {
   createTaskList,
   removeTaskFromList,
   editTaskList,
-} from "./TaskList";
-import { createTask, editTask } from "./Task";
+} from "./utils/tasklist";
+import { createTask, editTask } from "./utils/task";
 export * from "./types";
 
 const tasks =

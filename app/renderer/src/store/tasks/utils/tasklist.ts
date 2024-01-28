@@ -1,4 +1,4 @@
-import { Task, TaskList } from "./types";
+import { Task, TaskList } from "../types";
 import { v4 as uuid } from "uuid";
 
 type CreateTaskListParams = Pick<TaskList, "title" | "priority">;

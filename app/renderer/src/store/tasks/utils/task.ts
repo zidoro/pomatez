@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import type { Task } from "./types";
+import type { Task } from "../types";
 
 type CreateTaskParams = Pick<Task, "text"> &
   Partial<Pick<Task, "description">>;
