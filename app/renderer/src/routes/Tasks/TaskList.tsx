@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "hooks";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import {
-  TaskTypes,
   addTaskCard,
   editTaskTitle,
   editTaskCardText,
@@ -11,7 +10,7 @@ import {
   removeTaskCard,
 } from "store";
 import { StyledTaskSectionItem, StyledCardWrapper } from "styles";
-
+import type { TaskList as TaskListType } from "store";
 import TaskHeader from "./TaskHeader";
 import TaskFormButton from "./TaskFormButton";
 import TaskDetails from "./TaskDetails";
@@ -21,7 +20,7 @@ type Props = {
   priority: boolean;
   listId: string;
   title: string;
-  cards: TaskTypes["cards"];
+  cards: TaskListType["cards"];
   index: number;
 };
 
@@ -38,14 +37,14 @@ const TaskList: React.FC<Props> = ({
 
   const [cardId, setCardId] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const onCardAdd = (value: string) => {
-    dispatch(addTaskCard(listId, value));
+  const onCardAdd = (cardText: string) => {
+    dispatch(addTaskCard({ listId, cardText }));
   };
 
-  const onEditListTitle = (title: string) => {
-    dispatch(editTaskTitle(listId, title));
+  const onEditListTitle = (listTitle: string) => {
+    dispatch(editTaskTitle({ listId, listTitle }));
   };
 
   const onRemoveListAction = () => {
@@ -81,7 +80,7 @@ const TaskList: React.FC<Props> = ({
                   />
 
                   <StyledCardWrapper>
-                    {cards?.map(({ _id, text, done }, index) => (
+                    {cards.map(({ _id, text, done }, index) => (
                       <TaskCard
                         key={_id}
                         text={text}
@@ -93,10 +92,18 @@ const TaskList: React.FC<Props> = ({
                           setShowDetails(true);
                         }}
                         onSaveCardText={(text) =>
-                          dispatch(editTaskCardText(listId, _id, text))
+                          dispatch(
+                            editTaskCardText({
+                              listId,
+                              cardId: _id,
+                              cardText: text,
+                            })
+                          )
                         }
                         onDeleteCard={() =>
-                          dispatch(removeTaskCard(listId, _id))
+                          dispatch(
+                            removeTaskCard({ listId, cardId: _id })
+                          )
                         }
                       />
                     ))}

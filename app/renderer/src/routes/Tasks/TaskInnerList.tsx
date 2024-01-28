@@ -1,10 +1,10 @@
 import React from "react";
-import { TaskTypes } from "store";
+import type { TaskList as TaskListType } from "store";
 import TaskList from "./TaskList";
 import { StyledTaskSection } from "styles";
 
 type Props = {
-  tasks: TaskTypes[];
+  tasks: TaskListType[];
 };
 
 const TaskInnerList: React.FC<Props> = ({ tasks }) => {
