@@ -1,7 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { getFromStorage } from "utils";
-import type { Task, TaskList, TasksPayload } from "./types";
+import type { Task, TaskList, ListPayload } from "./types";
 import undoable from "redux-undo";
 import {
   addTaskToList,
@@ -21,7 +21,7 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addTaskList: (state, action: TasksPayload<"title">) => {
+    addTaskList: (state, action: ListPayload<"title">) => {
       const priority = state.length === 0 ? true : false;
 
       const taskList = createTaskList({
@@ -32,11 +32,11 @@ const tasksSlice = createSlice({
       state.push(taskList);
     },
 
-    removeTaskList: (state, action: TasksPayload<"_id">) => {
+    removeTaskList: (state, action: ListPayload<"_id">) => {
       return state.filter((list) => list._id !== action.payload);
     },
 
-    setTaskListPriority: (state, action: TasksPayload<"_id">) => {
+    setTaskListPriority: (state, action: ListPayload<"_id">) => {
       const listIndex = state.findIndex(
         (list) => list._id === action.payload
       );
@@ -214,33 +214,28 @@ const tasksSlice = createSlice({
       state[listIndex].cards.splice(taskIndex, 1, newTask);
     },
 
-    skipTaskCard: (state, action: TasksPayload<"_id">) => {
-      const listIndex = state.findIndex(
-        (list) => list._id === action.payload
-      );
-      if (listIndex === -1) return;
-      const list = state[listIndex];
+    skipTaskCard: (state, action: ListPayload<"_id">) => {
+      const newState = state.map((list) => {
+        if (list._id !== action.payload) return list;
 
-      if (list.cards.length === 0) return;
+        const doneCards = list.cards.filter((card) => card.done);
+        const notDoneCards = list.cards.filter((card) => !card.done);
 
-      const notDoneCards = list.cards.filter((card) => !card.done);
-      const doneCards = list.cards.filter((card) => card.done);
+        const firstNotDoneCard = notDoneCards.at(0);
 
-      const firstNotDoneCard = notDoneCards.at(0);
+        if (!firstNotDoneCard) return list;
 
-      if (!firstNotDoneCard) return;
+        const newNotDoneCards = notDoneCards.filter(
+          (card) => card._id !== firstNotDoneCard._id
+        );
 
-      state[listIndex] = {
-        ...list,
-        cards: [
-          // Not done without the old first card
-          ...notDoneCards.splice(0, 1),
-          // The old first card moved to the end
-          firstNotDoneCard,
-          // Then the done cards
-          ...doneCards,
-        ],
-      };
+        return {
+          ...list,
+          cards: [...newNotDoneCards, firstNotDoneCard, ...doneCards],
+        };
+      });
+
+      return newState;
     },
 
     dragList: (

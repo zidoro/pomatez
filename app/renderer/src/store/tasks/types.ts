@@ -1,9 +1,9 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export type TasksPayload<T extends keyof TaskList> = PayloadAction<
+export type ListPayload<T extends keyof TaskList> = PayloadAction<
   TaskList[T]
 >;
-export type CardsPayload<T extends keyof Task> = PayloadAction<Task[T]>;
+export type TaskPayload<T extends keyof Task> = PayloadAction<Task[T]>;
 
 export type Task = {
   _id: string;
