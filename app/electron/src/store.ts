@@ -9,6 +9,7 @@ type StoreProps = {
   useNativeTitlebar?: boolean;
   compactMode?: boolean;
   openAtLogin?: boolean;
+  alwaysOnTop?: boolean;
 };
 
 /**
@@ -17,7 +18,7 @@ type StoreProps = {
  * This also ensures that we can force calling the store safely. Though I have switched the names to safeGet and safeSet to make it more clear.
  */
 class SafeStore<
-  T extends Record<string, any> = Record<string, unknown>,
+  T extends Record<string, any> = Record<string, unknown>
 > {
   private store: ElectronStore<T>;
   constructor(props: Options<T>) {
@@ -58,6 +59,7 @@ const store = new SafeStore<StoreProps>({
     useNativeTitlebar: !isWindow(),
     compactMode: false,
     openAtLogin: false,
+    alwaysOnTop: false,
   },
 });
 
