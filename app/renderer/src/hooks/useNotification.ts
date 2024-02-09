@@ -23,11 +23,11 @@ export const useNotification = (
     // in all Operating System
 
     if (!constantOptions?.mute) {
-      new Audio(bell).play().catch((e) => {
-        console.warn("There was a problem playing sound", e);
-      });
-
-      if (audioSrc) {
+      if (!audioSrc) {
+        new Audio(bell).play().catch((e) => {
+          console.warn("There was a problem playing sound", e);
+        });
+      } else {
         setTimeout(() => {
           new Audio(audioSrc).play().catch((e) => {
             console.warn("There was a problem playing sound", e);

@@ -1,19 +1,26 @@
-import React, { useState, useEffect, useCallback } from "react";
-import useStayAwake from "use-stay-awake";
-import { setRound, setTimerType, setPlay } from "store";
 import { useNotification } from "hooks";
-import { padNum, isEqualToOne } from "utils";
+import React, { useCallback, useEffect, useState } from "react";
+import { setPlay, setRound, setTimerType } from "store";
+import useStayAwake from "use-stay-awake";
+import { isEqualToOne, padNum } from "utils";
 
 import notificationIcon from "assets/logos/notification-dark.png";
 
-import breakFinishedWav from "assets/audios/break-finished.wav";
-import focusFinishedWav from "assets/audios/focus-finished.wav";
-import sessionCompletedWav from "assets/audios/session-completed.wav";
-import sixtySecondsLeftWav from "assets/audios/sixty-seconds-left.wav";
-import specialBreakStartedWav from "assets/audios/special-break-started.wav";
-import thirtySecondsLeftWav from "assets/audios/thirty-seconds-left.wav";
+import breakFinishedAssistanceWav from "assets/audios/voiceAssistance/break-finished.wav";
+import focusFinishedAssistanceWav from "assets/audios/voiceAssistance/focus-finished.wav";
+import sessionCompletedAssistanceWav from "assets/audios/voiceAssistance/session-completed.wav";
+import sixtySecondsLeftAssistanceWav from "assets/audios/voiceAssistance/sixty-seconds-left.wav";
+import specialBreakStartedAssistanceWav from "assets/audios/voiceAssistance/special-break-started.wav";
+import thirtySecondsLeftAssistanceWav from "assets/audios/voiceAssistance/thirty-seconds-left.wav";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import { TimerStatus } from "store/timer/types";
+
+import focusFinishedMp3 from "assets/audios/focus-finished.mp3";
+import longBreakFinishedMp3 from "assets/audios/long-break-finished.mp3";
+import sessionFinishedMp3 from "assets/audios/session-finished.mp3";
+import shortBreakFinishedMp3 from "assets/audios/short-break-finished.mp3";
+import sixtySecondsLeftBreakMp3 from "assets/audios/sixty-seconds-left-break.mp3";
+import threeMinsLeftFocusMp3 from "assets/audios/three-mins-left-focus.mp3";
 
 type CounterProps = {
   count: number;
@@ -118,7 +125,7 @@ const CounterProvider: React.FC = ({ children }) => {
                     : "minutes"
                 } special break.`,
               },
-              specialBreakStartedWav
+              specialBreakStartedAssistanceWav
             );
             return;
           }
@@ -135,7 +142,7 @@ const CounterProvider: React.FC = ({ children }) => {
                     : "minutes"
                 } special break.`,
               },
-              specialBreakStartedWav
+              specialBreakStartedAssistanceWav
             );
             return;
           }
@@ -152,7 +159,7 @@ const CounterProvider: React.FC = ({ children }) => {
                     : "minutes"
                 } special break.`,
               },
-              specialBreakStartedWav
+              specialBreakStartedAssistanceWav
             );
             return;
           }
@@ -169,7 +176,7 @@ const CounterProvider: React.FC = ({ children }) => {
                     : "minutes"
                 } special break.`,
               },
-              specialBreakStartedWav
+              specialBreakStartedAssistanceWav
             );
             return;
           }
@@ -231,29 +238,36 @@ const CounterProvider: React.FC = ({ children }) => {
           notification(
             "60 seconds left.",
             { body: "Prepare yourself to stay focused again." },
-            settings.enableVoiceAssistance && sixtySecondsLeftWav
+            settings.enableVoiceAssistance
+              ? sixtySecondsLeftAssistanceWav
+              : sixtySecondsLeftBreakMp3
           );
         } else if (timer.timerType === TimerStatus.LONG_BREAK) {
           notification(
             "60 seconds left.",
             { body: "Prepare yourself to stay focused again." },
-            settings.enableVoiceAssistance && sixtySecondsLeftWav
+            settings.enableVoiceAssistance
+              ? sixtySecondsLeftAssistanceWav
+              : sixtySecondsLeftBreakMp3
           );
         } else if (timer.timerType === TimerStatus.SPECIAL_BREAK) {
           notification(
             "60 seconds left.",
             { body: "Prepare yourself to stay focused again." },
-            settings.enableVoiceAssistance && sixtySecondsLeftWav
+            settings.enableVoiceAssistance &&
+              sixtySecondsLeftAssistanceWav
           );
         }
       } else if (
-        count === 31 &&
+        count === 60 &&
         timer.timerType === TimerStatus.STAY_FOCUS
       ) {
         notification(
-          "30 seconds left.",
+          "60 seconds left.",
           { body: "Pause all media playing if there's one." },
-          settings.enableVoiceAssistance && thirtySecondsLeftWav
+          settings.enableVoiceAssistance
+            ? thirtySecondsLeftAssistanceWav
+            : threeMinsLeftFocusMp3
         );
       }
     }
@@ -272,7 +286,9 @@ const CounterProvider: React.FC = ({ children }) => {
                       : "minutes"
                   } short break.`,
                 },
-                settings.enableVoiceAssistance && focusFinishedWav
+                settings.enableVoiceAssistance
+                  ? focusFinishedAssistanceWav
+                  : focusFinishedMp3
               );
 
               dispatch(setTimerType(TimerStatus.SHORT_BREAK));
@@ -288,7 +304,9 @@ const CounterProvider: React.FC = ({ children }) => {
                       : "minutes"
                   } long break.`,
                 },
-                settings.enableVoiceAssistance && sessionCompletedWav
+                settings.enableVoiceAssistance
+                  ? sessionCompletedAssistanceWav
+                  : sessionFinishedMp3
               );
 
               dispatch(setTimerType(TimerStatus.LONG_BREAK));
@@ -307,7 +325,9 @@ const CounterProvider: React.FC = ({ children }) => {
                   isEqualToOne(config.stayFocus) ? "minute" : "minutes"
                 }.`,
               },
-              settings.enableVoiceAssistance && breakFinishedWav
+              settings.enableVoiceAssistance
+                ? breakFinishedAssistanceWav
+                : shortBreakFinishedMp3
             );
 
             dispatch(setTimerType(TimerStatus.STAY_FOCUS));
@@ -330,7 +350,9 @@ const CounterProvider: React.FC = ({ children }) => {
                   isEqualToOne(config.stayFocus) ? "minute" : "minutes"
                 }.`,
               },
-              settings.enableVoiceAssistance && breakFinishedWav
+              settings.enableVoiceAssistance
+                ? breakFinishedAssistanceWav
+                : longBreakFinishedMp3
             );
 
             dispatch(setTimerType(TimerStatus.STAY_FOCUS));
@@ -353,7 +375,8 @@ const CounterProvider: React.FC = ({ children }) => {
                   isEqualToOne(config.stayFocus) ? "minute" : "minutes"
                 }.`,
               },
-              settings.enableVoiceAssistance && breakFinishedWav
+              settings.enableVoiceAssistance &&
+                breakFinishedAssistanceWav
             );
 
             dispatch(setTimerType(TimerStatus.STAY_FOCUS));

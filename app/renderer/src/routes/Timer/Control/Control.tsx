@@ -1,8 +1,7 @@
-import WarningBell from "assets/audios/warning-bell.wav";
+import WarningBell from "assets/audios/notification-bell.wav";
 import { SVG } from "components";
-import React, { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
-import { TimerStatus } from "store/timer/types";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   setEnableCompactMode,
   setPlay,
@@ -11,12 +10,13 @@ import {
   skipTimer,
   toggleNotificationSound,
 } from "store";
+import { TimerStatus } from "store/timer/types";
 import {
   StyledControl,
   StyledControlMain,
+  StyledControlSpacer,
   StyledStrictIndicator,
   StyledStrictSnackbar,
-  StyledControlSpacer,
 } from "styles";
 import CompactModeButton from "./CompactModeButton";
 import PlayButton from "./PlayButton";
