@@ -3674,6 +3674,11 @@
   resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-2.0.0-alpha.9.tgz#5684ea6f94f6ca52351202212e4925e583f70efc"
   integrity sha512-Q5BiIQa2ToICdaJSYZdmtwbKSfdk+uQbQ7xMnbWI5C5C3frEVFlT92kVXgZFKIwrTLZBWHfiowkPR6rbFqAHIg==
 
+"@tauri-apps/api@2.0.0-beta.2":
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-2.0.0-beta.2.tgz#adec036f5ece03b88f59fdb7fa18e315c77d0738"
+  integrity sha512-4r1r6kgttzIWxJ3HxkZQH+b7EiUtKhdUCPbi0KSalD+2T3j6klw+v8VyxhKwEdjM/eo60NE+J33v1E/Urq8puw==
+
 "@tauri-apps/cli-darwin-arm64@2.0.0-alpha.17":
   version "2.0.0-alpha.17"
   resolved "https://registry.yarnpkg.com/@tauri-apps/cli-darwin-arm64/-/cli-darwin-arm64-2.0.0-alpha.17.tgz#e893b708e41e7a60266135e7edf04373a30e9bbb"
@@ -3747,12 +3752,12 @@
   dependencies:
     "@tauri-apps/api" "2.0.0-alpha.9"
 
-"@tauri-apps/plugin-global-shortcut@2.0.0-alpha.2":
-  version "2.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-global-shortcut/-/plugin-global-shortcut-2.0.0-alpha.2.tgz#7af492a6c5f31e04d3a3083ec63d97a6cf5e1238"
-  integrity sha512-V9JzFNufJBP6CRz/DRl0dIY/IJsSK05tRyDDVag9GJzexmQZp3ESXrPS22V4/s1jNIoKFlYTlUgvXryPHm+LIw==
+"@tauri-apps/plugin-global-shortcut@2.0.0-beta.1":
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-global-shortcut/-/plugin-global-shortcut-2.0.0-beta.1.tgz#8155ab7e708f6871177347f2e8fd9d663b6878d8"
+  integrity sha512-RPPcG45L7coIb9yP/NTLSNC6leAFcbDsOv+AlyQYpvEwTAWfwzzi4YU0XaTGT2H56Ozd6L3KrT4RAxIKAHZ9Cg==
   dependencies:
-    "@tauri-apps/api" "2.0.0-alpha.9"
+    "@tauri-apps/api" "2.0.0-beta.2"
 
 "@tauri-apps/plugin-shell@^2.0.0-alpha.3":
   version "2.0.0-alpha.3"
