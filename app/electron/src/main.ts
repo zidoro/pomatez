@@ -34,7 +34,6 @@ import {
   getFromStorage,
   createContextMenu,
 } from "./helpers";
-import { activateUser } from "./helpers/analytics";
 import isDev from "electron-is-dev";
 import store from "./store";
 
@@ -361,7 +360,6 @@ if (!onlySingleInstance) {
       },
     });
   });
-  activateUser();
 }
 
 ipcMain.on(SET_ALWAYS_ON_TOP, (e, { alwaysOnTop }) => {

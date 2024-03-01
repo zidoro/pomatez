@@ -202,10 +202,6 @@ Download the latest version from the [Releases Page](https://github.com/zidoro/p
 
 Please consider starring this project to show your :blue_heart: and support. Thank you so much :bowing_man:
 
-## :shield: Privacy
-
-This app has analytics that will track the number of users only and nothing more ([analytics.ts](https://github.com/zidoro/pomatez/blob/master/app/electron/src/helpers/analytics.ts)).
-
 ## :newspaper: License
 
 MIT © [Roldan Montilla Jr](https://github.com/roldanjr)
