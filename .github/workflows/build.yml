@@ -33,7 +33,7 @@ jobs:
           node-version: 18.x
           cache: "yarn"
       - name: Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: "node_modules"
           key: ${{ runner.os }}-build-${{ hashFiles('yarn.lock') }}
