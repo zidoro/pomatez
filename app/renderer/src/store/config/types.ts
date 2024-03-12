@@ -7,7 +7,7 @@ export type SpecialBreakTypes = {
 };
 
 export type ConfigTypes = {
-  stayFocus: number;
+  stayFocused: number;
   shortBreak: number;
   longBreak: number;
   sessionRounds: number;

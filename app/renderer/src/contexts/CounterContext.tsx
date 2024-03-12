@@ -50,9 +50,9 @@ const CounterProvider: React.FC = ({ children }) => {
 
   const [shouldFullscreen, setShouldFullscreen] = useState(false);
 
-  const [count, setCount] = useState(config.stayFocus * 60);
+  const [count, setCount] = useState(config.stayFocused * 60);
 
-  const [duration, setDuration] = useState(config.stayFocus * 60);
+  const [duration, setDuration] = useState(config.stayFocused * 60);
 
   const setTimerDuration = useCallback((time: number) => {
     setDuration(time * 60);
@@ -62,7 +62,7 @@ const CounterProvider: React.FC = ({ children }) => {
   const resetTimerAction = useCallback(() => {
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:
-        setTimerDuration(config.stayFocus);
+        setTimerDuration(config.stayFocused);
         break;
       case TimerStatus.SHORT_BREAK:
         setTimerDuration(config.shortBreak);
@@ -77,7 +77,7 @@ const CounterProvider: React.FC = ({ children }) => {
     }
   }, [
     config.longBreak,
-    config.stayFocus,
+    config.stayFocused,
     config.shortBreak,
     timer.timerType,
     duration,
@@ -192,7 +192,7 @@ const CounterProvider: React.FC = ({ children }) => {
   useEffect(() => {
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:
-        setTimerDuration(config.stayFocus);
+        setTimerDuration(config.stayFocused);
         break;
       case TimerStatus.SHORT_BREAK:
         setTimerDuration(config.shortBreak);
@@ -204,7 +204,7 @@ const CounterProvider: React.FC = ({ children }) => {
   }, [
     setTimerDuration,
     timer.timerType,
-    config.stayFocus,
+    config.stayFocused,
     config.shortBreak,
     config.longBreak,
   ]);
@@ -302,9 +302,9 @@ const CounterProvider: React.FC = ({ children }) => {
               "Break time finished.",
               {
                 body: `Stay focused as much as possible for ${
-                  config.stayFocus
+                  config.stayFocused
                 } ${
-                  isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+                  isEqualToOne(config.stayFocused) ? "minute" : "minutes"
                 }.`,
               },
               settings.enableVoiceAssistance && breakFinishedWav
@@ -325,9 +325,9 @@ const CounterProvider: React.FC = ({ children }) => {
               "Break time finished.",
               {
                 body: `Stay focused as much as possible for ${
-                  config.stayFocus
+                  config.stayFocused
                 } ${
-                  isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+                  isEqualToOne(config.stayFocused) ? "minute" : "minutes"
                 }.`,
               },
               settings.enableVoiceAssistance && breakFinishedWav
@@ -348,9 +348,9 @@ const CounterProvider: React.FC = ({ children }) => {
               "Break time finished.",
               {
                 body: `Stay focused as much as possible for ${
-                  config.stayFocus
+                  config.stayFocused
                 } ${
-                  isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+                  isEqualToOne(config.stayFocused) ? "minute" : "minutes"
                 }.`,
               },
               settings.enableVoiceAssistance && breakFinishedWav
@@ -372,7 +372,7 @@ const CounterProvider: React.FC = ({ children }) => {
     timer.timerType,
     dispatch,
     notification,
-    config.stayFocus,
+    config.stayFocused,
     config.shortBreak,
     config.longBreak,
     config.sessionRounds,

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useAppSelector, useAppDispatch } from "hooks/storeHooks";
 import {
-  setStayFocus,
+  setStayFocused,
   setSessionRounds,
   setShorBreak,
   setLongBreak,
@@ -12,9 +12,9 @@ import ConfigSlider, { ConfigSliderProps } from "./ConfigSlider";
 const SliderSection: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const { stayFocus, shortBreak, longBreak, sessionRounds } =
+  const { stayFocused, shortBreak, longBreak, sessionRounds } =
     useAppSelector(({ config }) => ({
-      stayFocus: config.stayFocus,
+      stayFocused: config.stayFocused,
       shortBreak: config.shortBreak,
       longBreak: config.longBreak,
       sessionRounds: config.sessionRounds,
@@ -22,13 +22,13 @@ const SliderSection: React.FC = () => {
 
   const sliderRangeList: ConfigSliderProps[] = [
     {
-      label: "Stay focus",
+      label: "Stay focused",
       valueType: "mins",
       minValue: 1,
       maxValue: 120,
-      value: stayFocus,
+      value: stayFocused,
       handleConfigChange: useCallback(
-        (value) => dispatch(setStayFocus(parseInt(value))),
+        (value) => dispatch(setStayFocused(parseInt(value))),
         [dispatch]
       ),
     },
