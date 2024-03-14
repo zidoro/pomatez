@@ -91,7 +91,7 @@
     "electron-updater": "^4.6.5",
     "lodash.debounce": "^4.0.8",
     "node-notifier": "10.0.1",
-    "universal-analytics": "^0.4.23",
+    "universal-analytics": "^0.5.3",
     "uuid": "7.0.3",
     "v8-compile-cache": "^2.1.1"
   },
