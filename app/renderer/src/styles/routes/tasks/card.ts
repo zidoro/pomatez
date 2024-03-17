@@ -7,6 +7,7 @@ export const StyledCardText = styled.p<{ done?: boolean }>`
 
   display: flex;
   align-items: center;
+  overflow: hidden;
 
   ${(p) =>
     p.done &&
@@ -56,14 +57,10 @@ export const StyledCardActionWrapper = styled.div`
 
 export const StyledCardEditButton = styled(StyledButton)`
   ${ButtonCardStyles};
-  color: transparent;
-  background-color: transparent;
 `;
 
 export const StyledCardDeleteButton = styled(StyledButton)`
   ${ButtonCardStyles};
-  color: transparent;
-  background-color: transparent;
 
   &:hover {
     color: var(--color-pink) !important;
@@ -98,9 +95,7 @@ export const StyledCard = styled.div<CardProps>`
   border-bottom-color: var(--color-border-input-secondary);
   background-color: var(--color-bg-task-card);
 
-:w  transition:
-    box-shadow 320ms ease-out,
-    background-color 320ms ease-out,
+  transition: box-shadow 320ms ease-out, background-color 320ms ease-out,
     border-color 320ms ease-out;
 
   ${(p) =>
