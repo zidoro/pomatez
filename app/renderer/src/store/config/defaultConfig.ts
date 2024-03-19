@@ -1,7 +1,7 @@
 import { ConfigTypes } from "./types";
 
 export const defaultConfig: Readonly<ConfigTypes> = Object.freeze({
-  stayFocused: 25,
+  stayFocus: 25,
   shortBreak: 5,
   longBreak: 15,
   sessionRounds: 4,
