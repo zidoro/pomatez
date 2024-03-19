@@ -57,7 +57,7 @@ const ConfigSlider: React.FC<ConfigSliderProps> = ({
 };
 
 ConfigSlider.defaultProps = {
-  label: "Stay focus",
+  label: "Stay focused",
   valueType: "mins",
 };
 

@@ -65,7 +65,7 @@ export const compactRoutes: NavItemTypes[] = [
 
 export const rangeConfig: ConfigSliderProps[] = [
   {
-    label: "Stay focus",
+    label: "Stay focused",
     valueType: "mins",
     minValue: 0,
     maxValue: 60,
