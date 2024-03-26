@@ -2,73 +2,63 @@
 
 ## [1.6.4](https://github.com/zidoro/pomatez/compare/v1.6.3...v1.6.4) (2023-12-16)
 
-
 ### Bug Fixes 🐛
 
-* electron and tauri signing (release 1.6.3 was skipped) ([6442717](https://github.com/zidoro/pomatez/commit/64427172d5721f9384d0d7f5ebf26c8130938812))
+- electron and tauri signing (release 1.6.3 was skipped) ([6442717](https://github.com/zidoro/pomatez/commit/64427172d5721f9384d0d7f5ebf26c8130938812))
 
 ## [1.6.3](https://github.com/zidoro/pomatez/compare/v1.6.2...v1.6.3) (2023-12-16)
 
-
 ### Bug Fixes 🐛
 
-* mac signing for electron and tauri ([2c542fe](https://github.com/zidoro/pomatez/commit/2c542feec3f243847dd685913d093f2a48395b00))
+- mac signing for electron and tauri ([2c542fe](https://github.com/zidoro/pomatez/commit/2c542feec3f243847dd685913d093f2a48395b00))
 
 ## [1.6.2](https://github.com/zidoro/pomatez/compare/v1.6.1...v1.6.2) (2023-12-12)
 
-
 ### Bug Fixes 🐛
 
-* winget release fix ([8759751](https://github.com/zidoro/pomatez/commit/875975112d282572f08d848047fe577a12db0401))
+- winget release fix ([8759751](https://github.com/zidoro/pomatez/commit/875975112d282572f08d848047fe577a12db0401))
 
 ## [1.6.1](https://github.com/zidoro/pomatez/compare/v1.6.0...v1.6.1) (2023-11-23)
 
-
 ### Bug Fixes 🐛
 
-* release issue (didn't release to homebrew or winget) ([fe854b0](https://github.com/zidoro/pomatez/commit/fe854b040446afa169478359413b4937ffdc75ae))
+- release issue (didn't release to homebrew or winget) ([fe854b0](https://github.com/zidoro/pomatez/commit/fe854b040446afa169478359413b4937ffdc75ae))
 
 ## [1.6.0](https://github.com/zidoro/pomatez/compare/v1.5.0...v1.6.0) (2023-11-23)
 
-
 ### Features ✨
 
-* shortcuts for adding new cards with `Enter` & `Ctrl+Enter` ([a73fca7](https://github.com/zidoro/pomatez/commit/a73fca70847836bf7b96bdef54e67023813bda29))
-
+- shortcuts for adding new cards with `Enter` & `Ctrl+Enter` ([a73fca7](https://github.com/zidoro/pomatez/commit/a73fca70847836bf7b96bdef54e67023813bda29))
 
 ### Bug Fixes 🐛
 
-* electron open at login notification showed up on every start up ([654c4db](https://github.com/zidoro/pomatez/commit/654c4dbbeaaa07c69bade454855ab96259d17516))
-* **tauri:** avoid setting open at login if already set ([1e836ee](https://github.com/zidoro/pomatez/commit/1e836ee7f8d4670208e276912faf5c7d1fc1ad0f))
-* **website:** wrong download link for macOS apple silicon installer ([476b232](https://github.com/zidoro/pomatez/commit/476b232615b257e04c9f9065e435b26860b2995a))
+- electron open at login notification showed up on every start up ([654c4db](https://github.com/zidoro/pomatez/commit/654c4dbbeaaa07c69bade454855ab96259d17516))
+- **tauri:** avoid setting open at login if already set ([1e836ee](https://github.com/zidoro/pomatez/commit/1e836ee7f8d4670208e276912faf5c7d1fc1ad0f))
+- **website:** wrong download link for macOS apple silicon installer ([476b232](https://github.com/zidoro/pomatez/commit/476b232615b257e04c9f9065e435b26860b2995a))
 
 ## [1.5.0](https://github.com/zidoro/pomatez/compare/v1.4.2...v1.5.0) (2023-11-17)
 
-
 ### Features ✨
 
-* add a link to our community discord ([8b2802f](https://github.com/zidoro/pomatez/commit/8b2802f61f7e8004260a27090ad4c768a0a4185f))
-
+- add a link to our community discord ([8b2802f](https://github.com/zidoro/pomatez/commit/8b2802f61f7e8004260a27090ad4c768a0a4185f))
 
 ### Bug Fixes 🐛
 
-* **tauri:** check autostart status to prevent error with `@tauri-apps/plugin-autostart` on Windows ([de4f8b9](https://github.com/zidoro/pomatez/commit/de4f8b9441b7a8e9d8f1225285e43fd0cb3c8e62))
-* **tauri:** github link opens in app ([09e5ae3](https://github.com/zidoro/pomatez/commit/09e5ae39436ffe95b032df12e6c6752cfa704ab1))
-* **tauri:** high dpi screen scaling ([a9ff671](https://github.com/zidoro/pomatez/commit/a9ff6713054ac00692844c6f264c35ca896a80a7))
+- **tauri:** check autostart status to prevent error with `@tauri-apps/plugin-autostart` on Windows ([de4f8b9](https://github.com/zidoro/pomatez/commit/de4f8b9441b7a8e9d8f1225285e43fd0cb3c8e62))
+- **tauri:** github link opens in app ([09e5ae3](https://github.com/zidoro/pomatez/commit/09e5ae39436ffe95b032df12e6c6752cfa704ab1))
+- **tauri:** high dpi screen scaling ([a9ff671](https://github.com/zidoro/pomatez/commit/a9ff6713054ac00692844c6f264c35ca896a80a7))
 
 ## [1.4.2](https://github.com/zidoro/pomatez/compare/v1.4.1...v1.4.2) (2023-11-12)
 
-
 ### Bug Fixes 🐛
 
-* **tauri:** mac ipc added to connect-src CSP ([b535250](https://github.com/zidoro/pomatez/commit/b535250f5ae720cc75ad50badee381ee7d5a4c47))
+- **tauri:** mac ipc added to connect-src CSP ([b535250](https://github.com/zidoro/pomatez/commit/b535250f5ae720cc75ad50badee381ee7d5a4c47))
 
 ## [1.4.1](https://github.com/zidoro/pomatez/compare/v1.4.0...v1.4.1) (2023-11-12)
 
-
 ### Bug Fixes 🐛
 
-* **tauri:** links now open in the default browser ([901b824](https://github.com/zidoro/pomatez/commit/901b82481eab8da6e5aade01a97874e52a1905c4))
+- **tauri:** links now open in the default browser ([901b824](https://github.com/zidoro/pomatez/commit/901b82481eab8da6e5aade01a97874e52a1905c4))
 
 ## [1.4.0](https://github.com/zidoro/pomatez/compare/v1.3.1...v1.4.0) (2023-11-12)
 
