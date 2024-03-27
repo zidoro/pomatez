@@ -4,6 +4,8 @@ import { StyledButton, StyledButtonPrimary } from "styles";
 export const StyledCardText = styled.p<{ done?: boolean }>`
   min-height: 2.4rem;
   margin-right: 5px;
+  white-space: pre-wrap;
+  word-break: break-word;
 
   display: flex;
   align-items: center;
