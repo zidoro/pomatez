@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.7.0](https://github.com/zidoro/pomatez/compare/v1.6.4...v1.7.0) (2024-03-27)
+
+
+### Features ✨
+
+* allow user to input shortcuts in the Shortcut component (requires backend changes) ([#523](https://github.com/zidoro/pomatez/issues/523)) ([47ecece](https://github.com/zidoro/pomatez/commit/47ececea7ae9c929215e064272ef4e57004d615e))
+
+
+### Bug Fixes 🐛
+
+* add word wrapping for card titles ([#637](https://github.com/zidoro/pomatez/issues/637)) ([a63a21e](https://github.com/zidoro/pomatez/commit/a63a21ec3e98f433ad8e18e1425f731cd922fc0d))
+
+
+### Reverts ⏪️
+
+* remove google analytics in the app ([#610](https://github.com/zidoro/pomatez/issues/610)) ([95dae58](https://github.com/zidoro/pomatez/commit/95dae58e67f449a161dbd5e86daffe447ef3883d)), closes [#609](https://github.com/zidoro/pomatez/issues/609)
+
 ## [1.6.4](https://github.com/zidoro/pomatez/compare/v1.6.3...v1.6.4) (2023-12-16)
 
 ### Bug Fixes 🐛
