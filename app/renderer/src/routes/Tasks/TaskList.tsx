@@ -63,6 +63,7 @@ const TaskList: React.FC<Props> = ({
             {...dragProvided.draggableProps}
             {...dragProvided.dragHandleProps}
             ref={dragProvided.innerRef}
+            style={{ overflow: "hidden" }}
           >
             <Droppable droppableId={listId}>
               {(dropProvided) => (
