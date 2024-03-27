@@ -91,7 +91,6 @@
     "electron-updater": "^4.6.5",
     "lodash.debounce": "^4.0.8",
     "node-notifier": "10.0.1",
-    "universal-analytics": "^0.4.23",
     "uuid": "7.0.3",
     "v8-compile-cache": "^2.1.1"
   },
@@ -101,7 +100,6 @@
     "electron-devtools-installer": "^3.2.0",
     "@types/lodash.debounce": "^4.0.6",
     "@types/node-notifier": "8.0.2",
-    "@types/universal-analytics": "^0.4.4",
     "@types/uuid": "7.0.3",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.3",
