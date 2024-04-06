@@ -22,7 +22,7 @@ const SliderSection: React.FC = () => {
 
   const sliderRangeList: ConfigSliderProps[] = [
     {
-      label: "Stay focus",
+      label: "Stay focused",
       valueType: "mins",
       minValue: 1,
       maxValue: 120,
