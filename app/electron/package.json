@@ -85,9 +85,9 @@
   },
   "dependencies": {
     "@pomatez/shareables": "^1.0.0",
+    "electron-is-dev": "^2.0.0",
     "electron-log": "^4.2.4",
     "electron-store": "^6.0.1",
-    "electron-is-dev": "^2.0.0",
     "electron-updater": "^4.6.5",
     "lodash.debounce": "^4.0.8",
     "node-notifier": "10.0.1",
@@ -95,9 +95,7 @@
     "v8-compile-cache": "^2.1.1"
   },
   "devDependencies": {
-    "nodemon": "2.0.20",
     "@jest-runner/electron": "^3.0.0",
-    "electron-devtools-installer": "^3.2.0",
     "@types/lodash.debounce": "^4.0.6",
     "@types/node-notifier": "8.0.2",
     "@types/uuid": "7.0.3",
@@ -105,9 +103,11 @@
     "babel-jest": "^26.6.3",
     "electron": "18.1.0",
     "electron-builder": "23.6.0",
-    "regenerator-runtime": "^0.13.11",
-    "electron-reload": "2.0.0-alpha.1",
+    "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "1.2.2",
+    "electron-reload": "2.0.0-alpha.1",
+    "nodemon": "2.0.20",
+    "regenerator-runtime": "^0.13.11",
     "ts-jest": "^26.5.6"
   }
 }

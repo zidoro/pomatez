@@ -23,6 +23,7 @@ import {
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
   SET_OPEN_AT_LOGIN,
+  PLAY_PAUSE,
 } from "@pomatez/shareables";
 import {
   activateGlobalShortcuts,
@@ -312,6 +313,16 @@ if (!onlySingleInstance) {
         blockShortcutKeys(win, blockKeys);
       }
     }
+
+    win?.on("focus", () => {
+      globalShortcut.register("SPACE", () => {
+        win?.webContents.send(PLAY_PAUSE);
+      });
+    });
+
+    win?.on("blur", () => {
+      globalShortcut.unregister("SPACE");
+    });
 
     activateGlobalShortcuts([
       {

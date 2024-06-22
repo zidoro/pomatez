@@ -11,6 +11,7 @@ export const CLOSE_WINDOW = "CLOSE_WINDOW";
 export const SHOW_WINDOW = "SHOW_WINDOW";
 export const UPDATE_AVAILABLE = "UPDATE_AVAILABLE";
 export const INSTALL_UPDATE = "INSTALL_UPDATE";
+export const PLAY_PAUSE = "PLAY_PAUSE";
 
 export const TO_MAIN: string[] = [
   SET_ALWAYS_ON_TOP,
@@ -26,7 +27,7 @@ export const TO_MAIN: string[] = [
   INSTALL_UPDATE,
 ];
 
-export const FROM_MAIN: string[] = [UPDATE_AVAILABLE];
+export const FROM_MAIN: string[] = [PLAY_PAUSE, UPDATE_AVAILABLE];
 
 export const RELEASE_NOTES_LINK =
   "https://github.com/zidoro/pomatez/releases/latest";

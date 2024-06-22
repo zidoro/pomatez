@@ -19,6 +19,9 @@ contextBridge.exposeInMainWorld("electron", {
       );
     }
   },
+  stopReceive: (channel: string) => {
+    ipcRenderer.removeAllListeners(channel);
+  },
   openExternal: (
     url: string,
     options?: Electron.OpenExternalOptions

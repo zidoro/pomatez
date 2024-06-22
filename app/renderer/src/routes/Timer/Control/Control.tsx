@@ -2,6 +2,7 @@ import WarningBell from "assets/audios/warning-bell.wav";
 import { SVG } from "components";
 import React, { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
+// import { ipcRenderer } from "electron";
 import { TimerStatus } from "store/timer/types";
 import {
   setEnableCompactMode,
@@ -24,6 +25,7 @@ import ResetButton from "./ResetButton";
 import Sessions from "./Sessions";
 import SkipButton from "./SkipButton";
 import VolumeButton from "./VolumeButton";
+import { MINIMIZE_WINDOW, PLAY_PAUSE } from "@pomatez/shareables";
 
 type Props = {
   resetTimerAction: () => void;
@@ -131,6 +133,26 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     dispatch(setTimerType(TimerStatus.STAY_FOCUS));
     dispatch(setRound(1));
   }, [dispatch]);
+
+  const playPauseAction = useCallback(() => {
+    if (timer.playing) {
+      dispatch(setPlay(false));
+    } else {
+      dispatch(setPlay(true));
+      window.electron.send(MINIMIZE_WINDOW, {
+        minimizeToTray: settings.minimizeToTray,
+      });
+    }
+  }, [dispatch, timer.playing, settings.minimizeToTray]);
+
+  useEffect(() => {
+    const electronCallback = () => playPauseAction();
+    window.electron.receive(PLAY_PAUSE, electronCallback);
+
+    return () => {
+      window.electron.stopReceive(PLAY_PAUSE);
+    };
+  }, [playPauseAction]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
