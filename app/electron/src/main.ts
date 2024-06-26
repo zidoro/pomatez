@@ -314,15 +314,21 @@ if (!onlySingleInstance) {
       }
     }
 
-    win?.on("focus", () => {
+    const registerPlayPause = () => {
       globalShortcut.register("SPACE", () => {
         win?.webContents.send(PLAY_PAUSE);
       });
-    });
+    };
+
+    win?.on("focus", registerPlayPause);
 
     win?.on("blur", () => {
       globalShortcut.unregister("SPACE");
     });
+
+    if (win?.isFocused()) {
+      registerPlayPause();
+    }
 
     activateGlobalShortcuts([
       {
