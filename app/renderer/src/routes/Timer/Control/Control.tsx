@@ -138,20 +138,14 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     if (timer.playing) {
       dispatch(setPlay(false));
     } else {
-      if (timer.timerType !== TimerStatus.STAY_FOCUS) {
-        dispatch(setTimerType(TimerStatus.STAY_FOCUS));
-      }
+      dispatch(setTimerType(TimerStatus.STAY_FOCUS));
       dispatch(setPlay(true));
+
       window.electron.send(MINIMIZE_WINDOW, {
         minimizeToTray: settings.minimizeToTray,
       });
     }
-  }, [
-    dispatch,
-    timer.playing,
-    timer.timerType,
-    settings.minimizeToTray,
-  ]);
+  }, [dispatch, timer.playing, settings.minimizeToTray]);
 
   useEffect(() => {
     const electronCallback = () => playPauseAction();
