@@ -1,1 +1,6 @@
-{ "image": "ubuntu:22.04" }
+{
+  "name": "Pomatez Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}
