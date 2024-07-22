@@ -12,7 +12,9 @@ RUN apt-get update && apt-get install -y \
     libgtk-3-dev \
     libayatana-appindicator3-dev \
     librsvg2-dev \
-    javascriptcoregtk-4.1
+    javascriptcoregtk-4.1 \
+    python3 \
+    python3-pip
 
 
 
@@ -26,3 +28,5 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | b
     && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
     && nvm install 18 \
     && npm install -g yarn
+
+RUN pip install pre-commit
