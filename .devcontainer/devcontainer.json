@@ -1,5 +1,6 @@
 {
-    "name": "Pomatez Dev",
-    "image": "ubuntu:22.04",
-    "postCreateCommand": "apt-get update && apt-get install -y curl git && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && export NVM_DIR=\"$HOME/.nvm\" && [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" && [ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\""
+  "name": "Pomatez Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
 }
