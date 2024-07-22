@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components/macro";
 import { themes } from "styles/themes";
 
-export const StyledCheckboxBox = styled.span`
+export const StyledCheckboxBox = styled.span<{ hidden?: boolean }>`
   width: 1.1em;
   height: 1.1em;
 
-  display: flex;
+  display: ${({ hidden }) => (hidden ? "none" : "flex")};
   align-items: center;
   justify-content: center;
 
@@ -44,7 +44,6 @@ export const StyledCheckboxLabel = styled.span`
 `;
 
 export const StyledCheckbox = styled.label<{
-  disabled?: boolean;
   asPrimary?: boolean;
 }>`
   & > input {
@@ -79,35 +78,21 @@ export const StyledCheckbox = styled.label<{
 
   &:hover ${StyledCheckboxBox} {
     box-shadow: ${(p) =>
-      p.disabled
-        ? `0 0 0 0.2rem rgba(var(--${
-            p.asPrimary ? "color-primary" : "color-green"
-          }-rgb), 0)`
-        : `0 0 0 0.2rem rgba(var(--${
-            p.asPrimary ? "color-primary" : "color-green"
-          }-rgb), 0.16)`};
+      `0 0 0 0.2rem rgba(var(--${
+        p.asPrimary ? "color-primary" : "color-green"
+      }-rgb), 0.16)`};
   }
 
   &:active ${StyledCheckboxBox} {
     box-shadow: ${(p) =>
-      p.disabled
-        ? `0 0 0 0.4rem rgba(var(--${
-            p.asPrimary ? "color-primary" : "color-green"
-          }-rgb), 0)`
-        : `0 0 0 0.4rem rgba(var(--${
-            p.asPrimary ? "color-primary" : "color-green"
-          }-rgb), 0.16)`};
+      `0 0 0 0.4rem rgba(var(--${
+        p.asPrimary ? "color-primary" : "color-green"
+      }-rgb), 0.16)`};
   }
 
   &:hover ${StyledCheckboxLabel}, &:focus ${StyledCheckboxLabel} {
     color: ${(p) =>
-      p.disabled
-        ? "var(--color-disabled-text)"
-        : `var(--${p.asPrimary ? "color-primary" : "color-green"})`};
-  }
-
-  ${StyledCheckboxLabel} {
-    color: ${(p) => p.disabled && "var(--color-disabled-text)"};
+      `var(--${p.asPrimary ? "color-primary" : "color-green"})`};
   }
 
   display: inline-flex;
