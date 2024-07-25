@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.7.0](https://github.com/zidoro/pomatez/compare/v1.6.4...v1.7.0) (2024-07-25)
+
+
+### Features ✨
+
+* allow user to input shortcuts in the Shortcut component (requires backend changes) ([#523](https://github.com/zidoro/pomatez/issues/523)) ([47ecece](https://github.com/zidoro/pomatez/commit/47ececea7ae9c929215e064272ef4e57004d615e))
+* hide preview button when the text in not being edited ([#657](https://github.com/zidoro/pomatez/issues/657)) ([b1ed5af](https://github.com/zidoro/pomatez/commit/b1ed5af1ec9012a3b14a762bcc1658d7d9dee0f4))
+
+
+### Bug Fixes 🐛
+
+* add word wrapping for card titles ([#637](https://github.com/zidoro/pomatez/issues/637)) ([a63a21e](https://github.com/zidoro/pomatez/commit/a63a21ec3e98f433ad8e18e1425f731cd922fc0d))
+* typo with "stay focused" ([9c5cbd6](https://github.com/zidoro/pomatez/commit/9c5cbd616d4e6a063ae293acaec951da7e6d09f2))
+
+
+### Reverts ⏪️
+
+* remove google analytics in the app ([#610](https://github.com/zidoro/pomatez/issues/610)) ([95dae58](https://github.com/zidoro/pomatez/commit/95dae58e67f449a161dbd5e86daffe447ef3883d)), closes [#609](https://github.com/zidoro/pomatez/issues/609)
+
 ## [1.6.4](https://github.com/zidoro/pomatez/compare/v1.6.3...v1.6.4) (2023-12-16)
 
 ### Bug Fixes 🐛
