@@ -174,7 +174,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
             Description
             <Checkbox
               label="preview"
-              disabled={!editingDescription}
+              hidden={!editingDescription}
               onChange={showPreviewCallback}
               asPrimary
             />

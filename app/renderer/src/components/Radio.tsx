@@ -9,12 +9,7 @@ import { CheckboxProps } from "./Checkbox";
 export const Radio = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ id, label, name, disabled, asPrimary, ...props }, ref) => {
     return (
-      <StyledCheckbox
-        htmlFor={id}
-        disabled={disabled}
-        tabIndex={0}
-        asPrimary={asPrimary}
-      >
+      <StyledCheckbox htmlFor={id} tabIndex={0} asPrimary={asPrimary}>
         <input
           type="radio"
           name={name}
