@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/zidoro/pomatez/compare/v1.7.0...v1.7.1) (2024-08-30)
+
+
+### Bug Fixes 🐛
+
+* add extra logic to keep track of time accurately when in the background ([#664](https://github.com/zidoro/pomatez/issues/664)) ([5276215](https://github.com/zidoro/pomatez/commit/52762152aa5b4a5eee0b679342966df14b04339f)), closes [#608](https://github.com/zidoro/pomatez/issues/608)
+
 ## [1.7.0](https://github.com/zidoro/pomatez/compare/v1.6.4...v1.7.0) (2024-07-25)
 
 
