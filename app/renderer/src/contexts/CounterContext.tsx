@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useStayAwake from "use-stay-awake";
-import { setRound, setTimerType, setPlay } from "store";
+import { setPlay, setRound, setTimerType } from "store";
 import { useNotification } from "hooks";
-import { padNum, isEqualToOne } from "utils";
+import { isEqualToOne, padNum } from "utils";
 
 import notificationIcon from "assets/logos/notification-dark.png";
 
@@ -51,12 +51,24 @@ const CounterProvider: React.FC = ({ children }) => {
   const [shouldFullscreen, setShouldFullscreen] = useState(false);
 
   const [count, setCount] = useState(config.stayFocus * 60);
+  const [lastCountTime, setLastCountTime] = useState(Date.now());
+  const [hasNotified30Seconds, setHasNotified30Seconds] =
+    useState(false);
+  const [hasNotified60Seconds, setHasNotified60Seconds] =
+    useState(false);
+  const [hasNotifiedBreak, setHasNotifiedBreak] = useState(false);
 
   const [duration, setDuration] = useState(config.stayFocus * 60);
 
   const setTimerDuration = useCallback((time: number) => {
     setDuration(time * 60);
     setCount(time * 60);
+    setLastCountTime(Date.now());
+    setHasNotified30Seconds(false);
+    if (time > 1) {
+      setHasNotified60Seconds(false);
+    }
+    setHasNotifiedBreak(false);
   }, []);
 
   const resetTimerAction = useCallback(() => {
@@ -71,8 +83,7 @@ const CounterProvider: React.FC = ({ children }) => {
         setTimerDuration(config.longBreak);
         break;
       case TimerStatus.SPECIAL_BREAK:
-        setDuration(duration);
-        setCount(duration);
+        setTimerDuration(duration / 60);
         break;
     }
   }, [
@@ -81,9 +92,14 @@ const CounterProvider: React.FC = ({ children }) => {
     config.shortBreak,
     timer.timerType,
     duration,
-    setDuration,
     setTimerDuration,
   ]);
+
+  useEffect(() => {
+    if (timer.playing) {
+      setLastCountTime(Date.now());
+    }
+  }, [timer.playing]);
 
   useEffect(() => {
     if (timer.playing && timer.timerType !== TimerStatus.STAY_FOCUS) {
@@ -212,21 +228,28 @@ const CounterProvider: React.FC = ({ children }) => {
   useEffect(() => {
     let timerInterval: NodeJS.Timeout;
 
+    // calculate how far off a full second the countdown timer is and adjust the countdown timer accordingly
+    const offset = count % 1;
     if (timer.playing) {
       timerInterval = setInterval(() => {
         setCount((prevState) => {
-          let remaining = prevState - 1;
-          return remaining;
+          // Calculate time passed since last count
+          const now = Date.now();
+          const timePassed = now - lastCountTime;
+
+          setLastCountTime(Date.now());
+          return prevState - timePassed / 1000;
         });
-      }, 1000);
+      }, offset * 1000);
     }
 
     return () => clearInterval(timerInterval);
-  }, [timer.playing]);
+  }, [timer.playing, lastCountTime, count]);
 
   useEffect(() => {
     if (settings.notificationType === "extra") {
-      if (count === 61) {
+      if (count <= 60 && count > 0 && !hasNotified60Seconds) {
+        setHasNotified60Seconds(true);
         if (timer.timerType === TimerStatus.SHORT_BREAK) {
           notification(
             "60 seconds left.",
@@ -247,9 +270,12 @@ const CounterProvider: React.FC = ({ children }) => {
           );
         }
       } else if (
-        count === 31 &&
-        timer.timerType === TimerStatus.STAY_FOCUS
+        count <= 30 &&
+        count > 0 &&
+        timer.timerType === TimerStatus.STAY_FOCUS &&
+        !hasNotified30Seconds
       ) {
+        setHasNotified30Seconds(true);
         notification(
           "30 seconds left.",
           { body: "Pause all media playing if there's one." },
@@ -258,7 +284,8 @@ const CounterProvider: React.FC = ({ children }) => {
       }
     }
 
-    if (count === 0) {
+    if (count <= 0 && !hasNotifiedBreak) {
+      setHasNotifiedBreak(true);
       switch (timer.timerType) {
         case TimerStatus.STAY_FOCUS:
           if (timer.round < config.sessionRounds) {
@@ -379,6 +406,12 @@ const CounterProvider: React.FC = ({ children }) => {
     settings.notificationType,
     settings.autoStartWorkTime,
     settings.enableVoiceAssistance,
+    hasNotified60Seconds,
+    hasNotified60Seconds,
+    hasNotifiedBreak,
+    setHasNotified30Seconds,
+    setHasNotified60Seconds,
+    setHasNotifiedBreak,
   ]);
 
   useEffect(() => {
@@ -394,7 +427,7 @@ const CounterProvider: React.FC = ({ children }) => {
   return (
     <CounterContext.Provider
       value={{
-        count,
+        count: Math.ceil(count),
         duration,
         resetTimerAction,
         shouldFullscreen,
