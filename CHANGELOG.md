@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/zidoro/pomatez/compare/v1.7.1...v1.7.2) (2024-08-30)
+
+
+### Bug Fixes 🐛
+
+* react warning that was blocking the previous release ([#666](https://github.com/zidoro/pomatez/issues/666)) ([c2f0861](https://github.com/zidoro/pomatez/commit/c2f0861f3400f028fe6c767b1af6d33da60edd92))
+
 ## [1.7.1](https://github.com/zidoro/pomatez/compare/v1.7.0...v1.7.1) (2024-08-30)
 
 
