@@ -406,7 +406,7 @@ const CounterProvider: React.FC = ({ children }) => {
     settings.notificationType,
     settings.autoStartWorkTime,
     settings.enableVoiceAssistance,
-    hasNotified60Seconds,
+    hasNotified30Seconds,
     hasNotified60Seconds,
     hasNotifiedBreak,
     setHasNotified30Seconds,
