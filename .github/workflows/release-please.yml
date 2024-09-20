@@ -87,7 +87,7 @@ jobs:
     runs-on: windows-latest
     continue-on-error: true
     steps:
-      - uses: vedantmgoyal2009/winget-releaser@v2
+      - uses: vedantmgoyal2009/winget-releaser@main
         with:
           identifier: Zidoro.Pomatez
           installers-regex: 'setup\.exe$'
