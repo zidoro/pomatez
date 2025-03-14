@@ -105,6 +105,13 @@ const settingsSlice = createSlice({
       state.openAtLogin = action.payload;
     },
 
+    setShowTimerInTray(
+      state,
+      action: SettingsPayload<"showTimerInTray">
+    ) {
+      state.showTimerInTray = action.payload;
+    },
+
     restoreDefaultSettings() {
       return defaultSettings;
     },
@@ -126,6 +133,7 @@ export const {
   setMinimizeToTray,
   setNotificationType,
   setOpenAtLogin,
+  setShowTimerInTray,
   setUseNativeTitlebar,
   toggleNotificationSound,
 } = settingsSlice.actions;

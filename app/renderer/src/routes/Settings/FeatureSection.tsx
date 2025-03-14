@@ -13,6 +13,7 @@ import {
   setEnableVoiceAssistance,
   setEnableCompactMode,
   setOpenAtLogin,
+  setShowTimerInTray,
 } from "store";
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import { ThemeContext } from "contexts";
@@ -134,6 +135,19 @@ const FeatureSection: React.FC = () => {
       }, [dispatch, settings.openAtLogin]),
       style: {
         ...(detectOS() === "Linux" && {
+          display: "none",
+        }),
+      },
+    },
+    {
+      id: "show-timer-in-tray",
+      label: "Show Timer in Tray",
+      checked: settings.showTimerInTray,
+      onChange: useCallback(() => {
+        dispatch(setShowTimerInTray(!settings.showTimerInTray));
+      }, [dispatch, settings.showTimerInTray]),
+      style: {
+        ...(detectOS() !== "MacOS" && {
           display: "none",
         }),
       },

@@ -12,10 +12,12 @@ import {
   SHOW_WINDOW,
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
+  TRAY_TITLE_UPDATE,
   SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
 import { InvokeConnector } from "../InvokeConnector";
 import { useTrayIconUpdates } from "hooks/useTrayIconUpdates";
+import { detectOS } from "utils";
 
 export const ElectronInvokeConnector: InvokeConnector = {
   send: (event: string, ...payload: any) => {
@@ -103,9 +105,36 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
     });
   }, [electron, settings.openAtLogin]);
 
-  useTrayIconUpdates((dataUrl) => {
-    electron.send(TRAY_ICON_UPDATE, dataUrl);
-  });
+  useEffect(() => {
+    const isMacOS = detectOS() === "MacOS";
+    if (isMacOS) {
+      if (!settings.showTimerInTray) {
+        electron.send(TRAY_TITLE_UPDATE, "");
+      }
+    }
+  }, [electron, settings.showTimerInTray, timer.playing]);
+
+  useTrayIconUpdates(
+    (dataUrl) => {
+      const isMacOS = detectOS() === "MacOS";
+      const showTimerInTray = settings.showTimerInTray && isMacOS;
+
+      if (!showTimerInTray || !timer.playing) {
+        electron.send(TRAY_ICON_UPDATE, dataUrl);
+      }
+    },
+    (title) => {
+      const isMacOS = detectOS() === "MacOS";
+
+      if (isMacOS) {
+        if (settings.showTimerInTray) {
+          electron.send(TRAY_TITLE_UPDATE, title);
+        } else {
+          electron.send(TRAY_TITLE_UPDATE, "");
+        }
+      }
+    }
+  );
 
   return (
     <ConnnectorContext.Provider
