@@ -16,6 +16,7 @@ export type SettingTypes = {
   autoStartWorkTime: boolean;
   notificationType: NotificationTypes;
   openAtLogin: boolean;
+  showTimerInTray: boolean;
 };
 
 export const enum NotificationTypes {

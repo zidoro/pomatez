@@ -23,6 +23,7 @@ import {
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
   SET_OPEN_AT_LOGIN,
+  TRAY_TITLE_UPDATE,
 } from "@pomatez/shareables";
 import {
   activateGlobalShortcuts,
@@ -437,6 +438,28 @@ ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
 ipcMain.on(TRAY_ICON_UPDATE, (e, dataUrl) => {
   const image = nativeImage.createFromDataURL(dataUrl);
   tray?.setImage(image);
+});
+
+ipcMain.on(TRAY_TITLE_UPDATE, (e, title) => {
+  if (isMacOS()) {
+    tray?.setTitle(title);
+
+    if (title && title.trim() !== "") {
+      // Hide the icon when the title is not empty
+      const transparentIcon = nativeImage.createEmpty();
+      const emptyBuffer = Buffer.from([0, 0, 0, 0]); // transparent
+      transparentIcon.addRepresentation({
+        width: 1,
+        height: 1,
+        buffer: emptyBuffer,
+        scaleFactor: 1.0,
+      });
+      tray?.setImage(transparentIcon);
+    } else {
+      // Restore the normal icon when the title is empty
+      tray?.setImage(nativeImage.createFromPath(trayIcon));
+    }
+  }
 });
 
 ipcMain.on(SET_OPEN_AT_LOGIN, (e, { openAtLogin }) => {

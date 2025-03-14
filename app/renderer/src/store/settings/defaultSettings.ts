@@ -17,4 +17,5 @@ export const defaultSettings: Readonly<SettingTypes> = Object.freeze({
   autoStartWorkTime: false,
   useNativeTitlebar: detectOS() === "Windows" ? false : true,
   openAtLogin: false,
+  showTimerInTray: detectOS() === "MacOS",
 });
