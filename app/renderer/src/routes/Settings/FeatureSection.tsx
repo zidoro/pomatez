@@ -13,6 +13,7 @@ import {
   setEnableVoiceAssistance,
   setEnableCompactMode,
   setOpenAtLogin,
+  setFollowSystemTheme,
 } from "store";
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import { ThemeContext } from "contexts";
@@ -67,11 +68,20 @@ const FeatureSection: React.FC = () => {
       id: "dark-theme",
       label: "Dark Theme",
       checked: isDarkMode,
+      disabled: settings.followSystemTheme,
       onChange: () => {
         if (toggleThemeAction) {
           toggleThemeAction();
         }
       },
+    },
+    {
+      id: "follow-system-theme",
+      label: "Follow System Theme",
+      checked: settings.followSystemTheme,
+      onChange: useCallback(() => {
+        dispatch(setFollowSystemTheme(!settings.followSystemTheme));
+      }, [dispatch, settings.followSystemTheme]),
     },
     {
       id: "native-titlebar",
@@ -152,12 +162,16 @@ const FeatureSection: React.FC = () => {
   return (
     <SettingSection heading="App Features">
       {featureList.map(
-        ({ id, label, checked, onChange, ...rest }, index) => (
+        (
+          { id, label, checked, onChange, disabled = false, ...rest },
+          index
+        ) => (
           <Toggler
             id={id}
             key={index}
             label={label}
             checked={checked}
+            disabled={disabled}
             onChange={onChange}
             {...rest}
           />

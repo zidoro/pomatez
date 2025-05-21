@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { isPreferredDark } from "utils";
 import { GlobalStyles } from "styles";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
@@ -23,6 +23,21 @@ const ThemeProvider: React.FC = ({ children }) => {
   const toggleThemeAction = () => {
     dispatch(setEnableDarkTheme(!settings.enableDarkTheme));
   };
+
+  useEffect(() => {
+    if (!settings.followSystemTheme) return;
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const listener = (e: MediaQueryListEvent) => {
+      dispatch(setEnableDarkTheme(e.matches));
+    };
+    // Ensure theme matches current system theme
+    dispatch(setEnableDarkTheme(media.matches));
+    media.addEventListener("change", listener);
+    return () => {
+      media.removeEventListener("change", listener);
+    };
+  }, [dispatch, settings.followSystemTheme]);
 
   return (
     <ThemeContext.Provider
