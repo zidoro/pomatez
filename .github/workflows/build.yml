@@ -62,19 +62,19 @@ jobs:
           sudo snap install snapcraft --classic
           yarn lerna run build:snap --stream
       - name: Upload windows all-in-one build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-all-in-one-${{ matrix.name }}
           path: |
             app/electron/dist/Pomatez-v+([0-9]).+([0-9]).+([0-9])-win-*.exe
       - name: Upload ia32 builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-ia32-${{ matrix.name }}
           path: |
             app/electron/dist/Pomatez*ia32*.*
       - name: Upload x64 builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-x64-${{ matrix.name }}
           path: |
@@ -82,20 +82,20 @@ jobs:
             app/electron/dist/Pomatez*x86_64*.*
             app/electron/dist/Pomatez*amd64*.*
       - name: Upload arm64 builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-arm64-${{ matrix.name }}
           path: |
             app/electron/dist/Pomatez*arm64*.*
             app/electron/dist/Pomatez*aarch64*.*
       - name: Upload armv7l builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-armv7l-${{ matrix.name }}
           path: |
             app/electron/dist/Pomatez*armv7l*.*
       - name: Upload autoupdaters
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-AutoUpdater-${{ matrix.name }}
           path: |
