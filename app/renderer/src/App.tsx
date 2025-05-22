@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import {
   ThemeProvider,
   CounterProvider,
@@ -46,7 +46,7 @@ export default function App() {
     <ThemeProvider>
       <CounterProvider>
         <ConnectorProvider>
-          <HashRouter>
+          <Router>
             <Layout>
               <Suspense fallback={<Preloader />}>
                 <Switch>
@@ -74,7 +74,7 @@ export default function App() {
                 </Switch>
               </Suspense>
             </Layout>
-          </HashRouter>
+          </Router>
         </ConnectorProvider>
       </CounterProvider>
     </ThemeProvider>

@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-22.04
+          - os: ubuntu-latest
             name: linux
             # https://tauri.app/v1/guides/building/linux#cross-compiling-tauri-applications-for-arm-based-devices
             # Cross Compiling is also more of a pain it seems for linux atm, explore later

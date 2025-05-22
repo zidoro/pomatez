@@ -3911,7 +3911,7 @@ __metadata:
     "@types/react-beautiful-dnd": "npm:^13.0.0"
     "@types/react-dom": "npm:^16.9.19"
     "@types/react-redux": "npm:^7.1.9"
-    "@types/react-router-dom": "npm:^5.1.5"
+    "@types/react-router-dom": "npm:^5.3.3"
     "@types/styled-components": "npm:^5.1.2"
     autosize: "npm:^4.0.4"
     is-electron: "npm:^2.2.0"
@@ -4984,7 +4984,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:^5.1.5":
+"@types/react-router-dom@npm:^5.3.3":
   version: 5.3.3
   resolution: "@types/react-router-dom@npm:5.3.3"
   dependencies:
