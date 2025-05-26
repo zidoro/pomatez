@@ -5,9 +5,35 @@ import { defaultSettings } from "./defaultSettings";
 
 export type { SettingTypes };
 
-const settings =
-  (getFromStorage("state") && getFromStorage("state").settings) ||
-  defaultSettings;
+function mergeSettings(
+  base: SettingTypes,
+  override: Partial<SettingTypes>
+): SettingTypes {
+  const merged: any = { ...base };
+
+  for (const key in base) {
+    if (
+      typeof base[key] === "object" &&
+      base[key] !== null &&
+      !Array.isArray(base[key])
+    ) {
+      merged[key] = mergeSettings(
+        base[key],
+        (override?.[key] as any) || {}
+      );
+    } else {
+      merged[key] = override?.[key] ?? base[key];
+    }
+  }
+  return merged as SettingTypes;
+}
+
+const settings = mergeSettings(
+  defaultSettings,
+  getFromStorage("state") && getFromStorage("state").settings
+);
+
+console.log("settings", settings);
 
 const initialState: SettingTypes = settings;
 
@@ -32,6 +58,13 @@ const settingsSlice = createSlice({
       action: SettingsPayload<"enableDarkTheme">
     ) {
       state.enableDarkTheme = action.payload;
+    },
+
+    setFollowSystemTheme(
+      state,
+      action: SettingsPayload<"followSystemTheme">
+    ) {
+      state.followSystemTheme = action.payload;
     },
 
     setEnableCompactMode(
@@ -118,6 +151,7 @@ export const {
   setCloseToTray,
   setEnableCompactMode,
   setEnableDarkTheme,
+  setFollowSystemTheme,
   setEnableFullscreenBreak,
   setEnableProgressAnimation,
   setEnableStrictMode,

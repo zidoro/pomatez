@@ -36,5 +36,5 @@ export const ConnectorProvider: React.FC = ({ children }) => {
     Connector = TauriConnectorProvider;
   }
 
-  return <Connector children={children} />;
+  return <Connector>{children}</Connector>;
 };

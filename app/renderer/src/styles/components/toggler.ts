@@ -40,6 +40,8 @@ export const StyledTogglerSwitch = styled.input`
 
   position: relative;
 
+  transition: opacity 0.15s;
+
   &::before,
   &::after {
     content: "";
@@ -86,6 +88,10 @@ export const StyledTogglerSwitch = styled.input`
 
   &:active::after {
     box-shadow: 0 0 0 0.6rem rgba(var(--color-primary-rgb), 0.24);
+  }
+
+  &:disabled {
+    opacity: 0.2;
   }
 
   &:checked::before {

@@ -46,7 +46,7 @@
     "@types/react-beautiful-dnd": "^13.0.0",
     "@types/react-dom": "^16.9.19",
     "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
+    "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.2",
     "autosize": "^4.0.4",
     "is-electron": "^2.2.0",

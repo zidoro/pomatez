@@ -6,6 +6,7 @@ export type SettingTypes = {
   compactMode: boolean;
   enableFullscreenBreak: boolean;
   enableDarkTheme: boolean;
+  followSystemTheme: boolean;
   enableStrictMode: boolean;
   enableProgressAnimation: boolean;
   enableVoiceAssistance: boolean;
