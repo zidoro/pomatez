@@ -1,6 +1,6 @@
 {
   "name": "pomatez",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "private": true,
   "license": "MIT",
   "main": "./build/main.js",
