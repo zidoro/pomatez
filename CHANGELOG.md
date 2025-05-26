@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/zidoro/pomatez/compare/v1.7.2...v1.8.0) (2025-05-26)
+
+
+### Features ✨
+
+* add setting to follow the system theme ([#690](https://github.com/zidoro/pomatez/issues/690)) ([96b2318](https://github.com/zidoro/pomatez/commit/96b2318f881ab753d6ba6024c31e6b809ddc42db))
+
 ## [1.7.2](https://github.com/zidoro/pomatez/compare/v1.7.1...v1.7.2) (2024-08-30)
 
 
