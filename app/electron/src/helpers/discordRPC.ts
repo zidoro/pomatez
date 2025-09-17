@@ -16,6 +16,7 @@ interface RpcActivityData {
   start?: Date;
   end?: Date;
 }
+
 interface Button {
   label: string;
   url: string;
