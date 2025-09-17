@@ -144,6 +144,10 @@ const settingsSlice = createSlice({
       state.openAtLogin = action.payload;
     },
 
+    setEnableRPC(state, action: SettingsPayload<"enableRPC">) {
+      state.enableRPC = action.payload;
+    },
+
     restoreDefaultSettings() {
       return defaultSettings;
     },
@@ -166,6 +170,7 @@ export const {
   setMinimizeToTray,
   setNotificationType,
   setOpenAtLogin,
+  setEnableRPC,
   setUseNativeTitlebar,
   toggleNotificationSound,
 } = settingsSlice.actions;
