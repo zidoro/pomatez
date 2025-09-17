@@ -78,7 +78,6 @@ export function setActivity(
     startTimestamp: start || Date.now(),
     endTimestamp: end,
   };
-  console.log(JSON.stringify(activity));
   rpc.setActivity(activity).catch(console.error);
 }
 
