@@ -1,4 +1,9 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { ConnnectorContext } from "../ConnnectorContext";
 import { useAppSelector } from "hooks/storeHooks";
 import { CounterContext } from "../CounterContext";
@@ -11,11 +16,13 @@ import {
   SET_NATIVE_TITLEBAR,
   SHOW_WINDOW,
   SET_UI_THEME,
+  SET_RPC_ACTIVITY,
   TRAY_ICON_UPDATE,
   SET_OPEN_AT_LOGIN,
 } from "@pomatez/shareables";
 import { InvokeConnector } from "../InvokeConnector";
 import { useTrayIconUpdates } from "hooks/useTrayIconUpdates";
+import { TimerStatus } from "store/timer/types";
 
 export const ElectronInvokeConnector: InvokeConnector = {
   send: (event: string, ...payload: any) => {
@@ -29,10 +36,10 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
   const timer = useAppSelector((state) => state.timer);
+  const { count, duration, shouldFullscreen } =
+    useContext(CounterContext);
 
   const settings = useAppSelector((state) => state.settings);
-
-  const { shouldFullscreen } = useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
     electron.send(MINIMIZE_WINDOW, {
@@ -59,6 +66,49 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
       }
     });
   }, [electron]);
+
+  const countRef = useRef(count);
+  useEffect(() => {
+    countRef.current = count;
+  }, [count]);
+
+  useEffect(() => {
+    let activity = "Idle";
+    let timerstart;
+    let timerend;
+
+    if (timer.playing) {
+      switch (timer.timerType) {
+        case TimerStatus.STAY_FOCUS:
+          activity = "Focus";
+          break;
+        case TimerStatus.SHORT_BREAK:
+          activity = "Break";
+          break;
+        case TimerStatus.LONG_BREAK:
+          activity = "Break";
+          break;
+        case TimerStatus.SPECIAL_BREAK:
+          activity = "Break";
+          break;
+      }
+      const startime = new Date(Date.now());
+      startime.setSeconds(
+        startime.getSeconds() - (duration - countRef.current)
+      );
+      timerstart = startime;
+
+      const endtime = new Date(Date.now());
+      endtime.setSeconds(endtime.getSeconds() + duration);
+      timerend = endtime;
+    }
+
+    electron.send(SET_RPC_ACTIVITY, {
+      type: activity,
+      start: timerstart,
+      end: timerend,
+    });
+  }, [electron, duration, timer.playing, timer.timerType]);
 
   useEffect(() => {
     if (!settings.enableFullscreenBreak) {

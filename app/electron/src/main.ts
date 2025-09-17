@@ -33,6 +33,7 @@ import {
   isMacOS,
   getFromStorage,
   createContextMenu,
+  initializeRPC,
 } from "./helpers";
 import isDev from "electron-is-dev";
 import store from "./store";
@@ -292,6 +293,7 @@ if (!onlySingleInstance) {
 
       for (const tool of extensions) {
         try {
+          //@ts-expect-error
           await installer.default(installer[tool], true);
         } catch (e) {
           console.log(e);
@@ -300,6 +302,7 @@ if (!onlySingleInstance) {
     }
 
     createMainWindow();
+    initializeRPC();
 
     if (onProduction) {
       if (win) {
