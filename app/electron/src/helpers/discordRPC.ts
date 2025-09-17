@@ -7,7 +7,8 @@ import {
 } from "@pomatez/shareables";
 
 const clientId = "1416789071350730762";
-const rpc = new RPC.Client({ transport: "ipc" });
+let rpc: RPC.Client | undefined;
+let currentActivity: RpcActivityData;
 
 type RpcActivityType = "Idle" | "Focus" | "Break";
 
@@ -15,6 +16,8 @@ interface RpcActivityData {
   type: RpcActivityType;
   start?: Date;
   end?: Date;
+  round?: number;
+  sessionRounds?: number;
 }
 
 interface Button {
@@ -24,23 +27,20 @@ interface Button {
 
 interface DiscordActivity {
   details: string;
-  state: string;
+  state?: string;
   largeImageKey: string;
   largeImageText: string;
-  startTimestamp: number;
-  endTimestamp: number;
+  startTimestamp?: number;
+  endTimestamp?: number;
   instance: boolean;
-  detailsUrl: string;
   buttons: [Button, Button];
 }
 
 const DefaultActivity: DiscordActivity = {
-  details: "Open Source Pomodoro Timer",
-  detailsUrl: RELEASE_NOTES_LINK,
-  state: "Idling",
+  details: "Idling",
   largeImageKey: "logo_pomatez_dark",
   largeImageText: "Pomatez",
-  instance: false,
+  instance: true,
   startTimestamp: Date.now(),
   endTimestamp: Date.now(),
   buttons: [
@@ -52,43 +52,67 @@ const DefaultActivity: DiscordActivity = {
 const presetActivities: Record<RpcActivityType, DiscordActivity> = {
   Idle: {
     ...DefaultActivity,
-    state: "Idling",
+    details: "Idling",
+    state: "Open Source Pomodoro Timer",
   },
   Focus: {
     ...DefaultActivity,
-    state: "Staying Focused",
+    details: "Staying focused",
+    state: "Session",
   },
   Break: {
     ...DefaultActivity,
-    state: "Taking a break",
+    details: "Taking a break",
+    state: "Break",
   },
 };
 
-rpc.on("ready", () => {
-  setActivity("Idle");
-});
+export function setActivity(data: RpcActivityData): void {
+  if (!(rpc instanceof RPC.Client)) {
+    return;
+  }
 
-export function setActivity(
-  type: RpcActivityType,
-  start?: Date,
-  end?: Date
-): void {
-  const baseActivity = presetActivities[type];
+  const baseActivity = presetActivities[data.type];
+  const state = presetActivities[data.type].state;
   const activity = {
     ...baseActivity,
-    startTimestamp: start || Date.now(),
-    endTimestamp: end,
+    state:
+      data.type === "Idle"
+        ? undefined
+        : `${state} (${data.round} of ${data.sessionRounds})`,
+    startTimestamp: Date.now(),
+    endTimestamp:
+      data.end instanceof Date ? data.end.getTime() : undefined, //this is supposed to make it count down, but its not working
   };
+
   rpc.setActivity(activity).catch(console.error);
 }
 
 export function initializeRPC(): void {
+  if (rpc instanceof RPC.Client) {
+    return;
+  }
+
+  rpc = new RPC.Client({ transport: "ipc" });
+
   rpc.login({ clientId }).catch(console.error);
+
+  rpc.on("ready", () => {
+    setActivity(currentActivity || { type: "Idle" });
+  });
+}
+
+export function uninitializeRPC(): void {
+  if (rpc instanceof RPC.Client) {
+    rpc.destroy().catch(console.error);
+    rpc = undefined;
+  }
 }
 
 ipcMain.on(
   SET_RPC_ACTIVITY,
   (event: IpcMainEvent, data: RpcActivityData) => {
-    setActivity(data.type, data.start, data.end);
+    currentActivity = data;
+    setActivity(data);
   }
 );
