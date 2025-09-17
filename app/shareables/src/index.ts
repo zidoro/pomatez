@@ -32,3 +32,5 @@ export const FROM_MAIN: string[] = [UPDATE_AVAILABLE];
 
 export const RELEASE_NOTES_LINK =
   "https://github.com/zidoro/pomatez/releases/latest";
+
+export const DISCORD_LINK = "https://discord.com/invite/ZqPqN3hwcB";
