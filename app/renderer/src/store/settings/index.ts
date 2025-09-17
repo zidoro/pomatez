@@ -13,15 +13,20 @@ function mergeSettings(
 
   for (const key in base) {
     if (
+      //@ts-expect-error
       typeof base[key] === "object" &&
+      //@ts-expect-error
       base[key] !== null &&
+      //@ts-expect-error
       !Array.isArray(base[key])
     ) {
+      //@ts-expect-error
       merged[key] = mergeSettings(
         base[key],
         (override?.[key] as any) || {}
       );
     } else {
+      //@ts-expect-error
       merged[key] = override?.[key] ?? base[key];
     }
   }
