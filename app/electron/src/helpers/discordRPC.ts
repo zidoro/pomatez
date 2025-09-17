@@ -3,6 +3,7 @@ import * as RPC from "discord-rpc";
 import {
   SET_RPC_ACTIVITY,
   RELEASE_NOTES_LINK,
+  DISCORD_LINK,
 } from "@pomatez/shareables";
 
 const clientId = "1416789071350730762";
@@ -15,6 +16,10 @@ interface RpcActivityData {
   start?: Date;
   end?: Date;
 }
+interface Button {
+  label: string;
+  url: string;
+}
 
 interface DiscordActivity {
   details: string;
@@ -25,12 +30,7 @@ interface DiscordActivity {
   endTimestamp: number;
   instance: boolean;
   detailsUrl: string;
-  buttons: [
-    {
-      label: string;
-      url: string;
-    }
-  ];
+  buttons: [Button, Button];
 }
 
 const DefaultActivity: DiscordActivity = {
@@ -42,7 +42,10 @@ const DefaultActivity: DiscordActivity = {
   instance: false,
   startTimestamp: Date.now(),
   endTimestamp: Date.now(),
-  buttons: [{ label: "Download Pomatez", url: RELEASE_NOTES_LINK }],
+  buttons: [
+    { label: "Download Pomatez", url: RELEASE_NOTES_LINK },
+    { label: "Join Discord", url: DISCORD_LINK },
+  ],
 };
 
 const presetActivities: Record<RpcActivityType, DiscordActivity> = {
