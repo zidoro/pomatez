@@ -20,9 +20,10 @@ function mergeSettings(
       //@ts-expect-error
       !Array.isArray(base[key])
     ) {
-      //@ts-expect-error
       merged[key] = mergeSettings(
+        //@ts-expect-error
         base[key],
+        //@ts-expect-error
         (override?.[key] as any) || {}
       );
     } else {
