@@ -16,9 +16,9 @@ import {
   SET_NATIVE_TITLEBAR,
   SHOW_WINDOW,
   SET_UI_THEME,
-  SET_RPC_ACTIVITY,
   TRAY_ICON_UPDATE,
   SET_OPEN_AT_LOGIN,
+  SET_RPC_ACTIVITY,
   SET_ENABLE_RPC,
 } from "@pomatez/shareables";
 import { InvokeConnector } from "../InvokeConnector";
@@ -36,15 +36,14 @@ export const ElectronInvokeConnector: InvokeConnector = {
 export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
-  const { timer, config } = useAppSelector((state) => ({
+  const { timer, config, settings } = useAppSelector((state) => ({
     timer: state.timer,
     config: state.config,
+    settings: state.settings,
   }));
 
   const { count, duration, shouldFullscreen } =
     useContext(CounterContext);
-
-  const settings = useAppSelector((state) => state.settings);
 
   const onMinimizeCallback = useCallback(() => {
     electron.send(MINIMIZE_WINDOW, {
