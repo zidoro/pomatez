@@ -16,12 +16,9 @@ import {
   StyledHeroHeading,
   StyledHeroDescription,
   StyledWatermarkContainer,
+  StyledHeroBetaDescription,
 } from "../styles";
-import {
-  WINDOWS_INSTALLER,
-  MAC_INSTALLER,
-  PROJECT_GITHUB_URL,
-} from "../config";
+import { PROJECT_GITHUB_URL, INSTALLERS } from "../config";
 import { OSTypes, detectOS } from "../utils";
 import { ThemeContext } from "../context";
 import { useLandingQuery } from "../queries";
@@ -55,27 +52,71 @@ export function Hero() {
     setOperatingSystem(detectOS());
   }, []);
 
-  const renderDownloadButton = () => {
+  const renderDownloadButton = (beta: boolean, isArm: boolean) => {
     switch (operatingSystem) {
       case "Windows":
         return (
           <StyledCTADownloader>
-            <a href={WINDOWS_INSTALLER}>
+            <a
+              href={
+                INSTALLERS[beta ? "TAURI" : "ELECTRON"].WINDOWS[
+                  isArm ? "arm" : "x64"
+                ]
+              }
+            >
               <SVG name="windows" />
-              for Windows
+              for Windows {isArm ? "ARM" : "x64"}
             </a>
           </StyledCTADownloader>
         );
       case "MacOS":
+        if (beta) {
+          if (isArm) {
+            // We only want to show one universal button
+            return <></>;
+          } else {
+            return (
+              <StyledCTADownloader>
+                <a href={INSTALLERS.TAURI.MAC.universal}>
+                  <SVG name="apple" />
+                  for macOS Intel & Apple Silicon
+                </a>
+              </StyledCTADownloader>
+            );
+          }
+        }
         return (
           <StyledCTADownloader>
-            <a href={MAC_INSTALLER}>
+            <a href={INSTALLERS.ELECTRON.MAC[isArm ? "arm" : "x64"]}>
               <SVG name="apple" />
-              for Mac OS
+              for macOS {isArm ? "Apple Silicon" : "Intel"}
             </a>
           </StyledCTADownloader>
         );
       case "Linux":
+        if (beta) {
+          // Weird way of doing it, but arm  versions are not currently being build for these.
+          if (isArm) {
+            return (
+              <StyledCTADownloader>
+                <a href={INSTALLERS.TAURI.LINUX.deb}>
+                  <SVG name="tux" />
+                  for Linux Deb
+                </a>
+              </StyledCTADownloader>
+            );
+          } else {
+            return (
+              <StyledCTADownloader>
+                <a href={INSTALLERS.TAURI.LINUX.appImage.x64}>
+                  <SVG name="tux" />
+                  for Linux AppImage
+                </a>
+              </StyledCTADownloader>
+            );
+          }
+        }
+        if (!isArm) return <></>;
         return (
           <StyledCTADownloader>
             <ScrollLink
@@ -91,20 +132,23 @@ export function Hero() {
           </StyledCTADownloader>
         );
       default:
-        return (
-          <StyledCTADownloader>
-            <ScrollLink
-              href="/"
-              to="installers"
-              offset={-24}
-              duration={420}
-              smooth
-            >
-              <SVG name="download" />
-              See Installers
-            </ScrollLink>
-          </StyledCTADownloader>
-        );
+        if (!beta && !isArm) {
+          return (
+            <StyledCTADownloader>
+              <ScrollLink
+                href="/"
+                to="installers"
+                offset={-24}
+                duration={420}
+                smooth
+              >
+                <SVG name="download" />
+                See Installers
+              </ScrollLink>
+            </StyledCTADownloader>
+          );
+        }
+        return <></>;
     }
   };
 
@@ -125,7 +169,8 @@ export function Hero() {
           </StyledHeroHeader>
 
           <StyledHeroActionWrapper>
-            {renderDownloadButton()}
+            {renderDownloadButton(false, false)}
+            {renderDownloadButton(false, true)}
             <StyledGithubLink
               as={"a"}
               href={PROJECT_GITHUB_URL}
@@ -135,6 +180,15 @@ export function Hero() {
               <SVG name="github" />
               GitHub Repo
             </StyledGithubLink>
+          </StyledHeroActionWrapper>
+          <StyledHeroBetaDescription>
+            {operatingSystem === "Mobile"
+              ? frontmatter.mobileText
+              : frontmatter.betaText}
+          </StyledHeroBetaDescription>
+          <StyledHeroActionWrapper>
+            {renderDownloadButton(true, false)}
+            {renderDownloadButton(true, true)}
           </StyledHeroActionWrapper>
         </StyledHeroActionContainer>
 

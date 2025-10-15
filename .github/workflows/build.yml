@@ -1,10 +1,11 @@
 name: Build
 on:
   push:
-    branches-ignore:
-      - "master"
+    branches:
+      - master
     paths-ignore:
       - "website"
+      - "CHANGELOG.md"
   workflow_call:
   workflow_dispatch:
 jobs:
@@ -29,7 +30,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: "yarn"
       - name: Cache
         uses: actions/cache@v3
@@ -39,7 +40,19 @@ jobs:
       - name: Install
         run: |
           yarn install --immutable --network-timeout 120000
+      - name: Prepare for app notarization
+        if: startsWith(matrix.os, 'macos')
+        # Import Apple API key for app notarization on macOS
+        run: |
+          mkdir -p ~/private_keys/
+          echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
       - name: Build
+        env:
+          APPLE_API_KEY_PATH: ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
+          API_KEY_ID: ${{ secrets.APPLE_API_KEY }}
+          API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
         run: |
           yarn build
           yarn lerna run ${{ matrix.task }} --stream
@@ -49,41 +62,41 @@ jobs:
           sudo snap install snapcraft --classic
           yarn lerna run build:snap --stream
       - name: Upload windows all-in-one build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-all-in-one-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez-v+([0-9]).+([0-9]).+([0-9])-win-*.exe
+            app/electron/dist/Pomatez-v+([0-9]).+([0-9]).+([0-9])-win-*.exe
       - name: Upload ia32 builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-ia32-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*ia32*.*
+            app/electron/dist/Pomatez*ia32*.*
       - name: Upload x64 builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-x64-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*x64*.*
-            app/main/dist/Pomatez*x86_64*.*
-            app/main/dist/Pomatez*amd64*.*
+            app/electron/dist/Pomatez*x64*.*
+            app/electron/dist/Pomatez*x86_64*.*
+            app/electron/dist/Pomatez*amd64*.*
       - name: Upload arm64 builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-arm64-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*arm64*.*
-            app/main/dist/Pomatez*aarch64*.*
+            app/electron/dist/Pomatez*arm64*.*
+            app/electron/dist/Pomatez*aarch64*.*
       - name: Upload armv7l builds
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-armv7l-${{ matrix.name }}
           path: |
-            app/main/dist/Pomatez*armv7l*.*
+            app/electron/dist/Pomatez*armv7l*.*
       - name: Upload autoupdaters
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-app-AutoUpdater-${{ matrix.name }}
           path: |
-            app/main/dist/latest*
+            app/electron/dist/latest*

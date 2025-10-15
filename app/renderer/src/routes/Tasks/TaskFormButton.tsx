@@ -25,7 +25,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
   const [isOpen, setOpen] = useTargetOutside({ ref: formRef });
 
   const doSubmit = useCallback(
-    (ref: HTMLInputElement | HTMLTextAreaElement) => {
+    (ref: HTMLInputElement | HTMLTextAreaElement, keepOpen = false) => {
       const { value } = ref;
       if (!value) return false;
 
@@ -37,7 +37,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
           formRef.current.reset();
         }
       }
-      setOpen(false);
+      if (!keepOpen) setOpen(false);
 
       return true;
     },
@@ -54,9 +54,9 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
           inputRef.current.focus();
 
           inputRef.current.onkeypress = (e: KeyboardEvent) => {
-            if (e.keyCode === 10 && inputRef.current) {
+            if (e.code === "Enter" && inputRef.current) {
               e.preventDefault();
-              doSubmit(inputRef.current);
+              doSubmit(inputRef.current, e.ctrlKey);
             }
           };
         }
@@ -66,10 +66,10 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
           autoSize(areaRef.current);
 
           areaRef.current.onkeypress = (e: KeyboardEvent) => {
-            if (e.keyCode === 10 && areaRef.current) {
+            if (e.code === "Enter" && areaRef.current) {
               e.preventDefault();
               if (
-                doSubmit(areaRef.current) &&
+                doSubmit(areaRef.current, e.ctrlKey) &&
                 areaRef?.current?.style?.height
               )
                 areaRef.current.style.height = "inherit";
@@ -85,7 +85,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
       e.preventDefault();
 
       if (forList) {
-        inputRef.current && doSubmit(inputRef.current);
+        inputRef.current && doSubmit(inputRef.current, false);
       } else {
         if (areaRef.current && doSubmit(areaRef.current)) {
           areaRef.current.style.height = "inherit";

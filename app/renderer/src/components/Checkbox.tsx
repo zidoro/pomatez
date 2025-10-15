@@ -8,18 +8,15 @@ import {
 export type CheckboxProps = {
   label?: string;
   asPrimary?: boolean;
+  hidden?: boolean;
 } & React.HTMLProps<HTMLInputElement>;
 
 export const Checkbox = React.forwardRef<
   HTMLInputElement,
   CheckboxProps
->(({ id, label, name, disabled, asPrimary, ...props }, ref) => {
+>(({ id, label, name, disabled, asPrimary, hidden, ...props }, ref) => {
   return (
-    <StyledCheckbox
-      htmlFor={id}
-      disabled={disabled}
-      asPrimary={asPrimary}
-    >
+    <StyledCheckbox htmlFor={id} asPrimary={asPrimary}>
       <input
         type="checkbox"
         name={name}
@@ -28,8 +25,8 @@ export const Checkbox = React.forwardRef<
         disabled={disabled}
         {...props}
       />
-      <StyledCheckboxBox />
-      <StyledCheckboxLabel>{label}</StyledCheckboxLabel>
+      <StyledCheckboxBox hidden={hidden} />
+      <StyledCheckboxLabel>{hidden ? "" : label}</StyledCheckboxLabel>
     </StyledCheckbox>
   );
 });

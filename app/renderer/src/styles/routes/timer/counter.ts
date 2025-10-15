@@ -1,18 +1,19 @@
 import styled, { css } from "styled-components/macro";
-import { LONG_BREAK, SHORT_BREAK, SPECIAL_BREAK } from "store";
+import { TimerStatus } from "store/timer/types";
 import { ProgressSVG } from "assets/icons";
 
 export type ProgressProps = {
   offset: number;
   animate: "true" | "false";
+  type?: TimerStatus;
 };
 
 export const StyledCounterProgress = styled(ProgressSVG)<ProgressProps>`
   #progress {
     stroke: ${(p) =>
-      (p.type === SHORT_BREAK && "var(--color-green)") ||
-      (p.type === LONG_BREAK && "var(--color-yellow)") ||
-      (p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
+      (p.type === TimerStatus.SHORT_BREAK && "var(--color-green)") ||
+      (p.type === TimerStatus.LONG_BREAK && "var(--color-yellow)") ||
+      (p.type === TimerStatus.SPECIAL_BREAK && "var(--color-yellow)") ||
       "var(--color-primary)"};
     stroke-width: 0.6rem;
     stroke-linecap: round;
@@ -115,7 +116,7 @@ export const StyledCounterType = styled.div`
 `;
 
 type TimerProps = {
-  type?: string;
+  type?: TimerStatus;
   hours: string;
 } & CounterContainerProps;
 
@@ -123,9 +124,9 @@ export const StyledCounterTimer = styled.h3<TimerProps>`
   font-size: 4rem;
   font-weight: 400;
   color: ${(p) =>
-    (p.type === SHORT_BREAK && "var(--color-green)") ||
-    (p.type === LONG_BREAK && "var(--color-yellow)") ||
-    (p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
+    (p.type === TimerStatus.SHORT_BREAK && "var(--color-green)") ||
+    (p.type === TimerStatus.LONG_BREAK && "var(--color-yellow)") ||
+    (p.type === TimerStatus.SPECIAL_BREAK && "var(--color-yellow)") ||
     "var(--color-primary)"};
 
   line-height: 1.2;

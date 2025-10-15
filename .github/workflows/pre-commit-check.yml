@@ -11,7 +11,7 @@ concurrency:
 jobs:
   pre-commit-check:
     name: Run pre-commit checks
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,14 +28,14 @@ jobs:
 
       # run only if changed files were detected
       - name: Run against changes
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
         if: steps.filter.outputs.addedOrModified == 'true'
         with:
           extra_args: --files ${{ steps.filter.outputs.addedOrModified_files }}
 
       # run if no changed files were detected (e.g. workflow_dispatch on master branch)
       - name: Run against all files
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
         if: steps.filter.outputs.addedOrModified != 'true'
         with:
           extra_args: --all-files

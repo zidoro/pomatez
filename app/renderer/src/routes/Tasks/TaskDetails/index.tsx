@@ -5,16 +5,15 @@ import React, {
   useContext,
   useCallback,
 } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks";
 import {
-  AppStateTypes,
   editTaskCard,
   editTaskCardText,
   removeTaskCard,
   setTaskCardDone,
   setTaskCardNotDone,
 } from "store";
-import { ElectronContext } from "contexts";
+import { ConnnectorContext } from "contexts";
 import autoSize from "autosize";
 
 import {
@@ -45,13 +44,11 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
     const descriptionAreaRef = useRef<HTMLTextAreaElement>(null);
     const descriptionFormRef = useRef<HTMLFormElement>(null);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const tasks = useSelector(
-      (state: AppStateTypes) => state.tasks.present
-    );
+    const tasks = useAppSelector((state) => state.tasks.present);
 
-    const { openExternalCallback } = useContext(ElectronContext);
+    const { openExternalCallback } = useContext(ConnnectorContext);
 
     const card = tasks
       .find((list) => list._id === listId)
@@ -90,11 +87,11 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
     const onEditCardText = useCallback(() => {
       if (cardTextAreaRef.current && cardTextAreaRef.current.value) {
         dispatch(
-          editTaskCardText(
+          editTaskCardText({
             listId,
             cardId,
-            cardTextAreaRef.current.value
-          )
+            cardText: cardTextAreaRef.current.value,
+          })
         );
       }
     }, [dispatch, cardId, listId]);
@@ -102,14 +99,14 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
     const onSubmitAction = useCallback(
       (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(editTaskCard(listId, cardId, description));
+        dispatch(editTaskCard({ listId, cardId, description }));
         setEditingDescription(false);
       },
       [dispatch, cardId, description, listId]
     );
 
     const onCardDeleteAction = useCallback(() => {
-      dispatch(removeTaskCard(listId, cardId));
+      dispatch(removeTaskCard({ listId, cardId }));
 
       if (onExit) {
         onExit();
@@ -124,9 +121,9 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
     const setTaskCardDoneCallback = useCallback(
       (e) => {
         if (e.currentTarget.checked) {
-          dispatch(setTaskCardDone(listId, card?._id));
+          dispatch(setTaskCardDone({ listId, cardId: card?._id }));
         } else {
-          dispatch(setTaskCardNotDone(listId, card?._id));
+          dispatch(setTaskCardNotDone({ listId, cardId: card?._id }));
         }
       },
       [dispatch, listId, card]
@@ -149,7 +146,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 
     useEffect(() => {
       function registerEscape(e: KeyboardEvent) {
-        if (e.keyCode === 27) {
+        if (e.key === "Escape") {
           if (onExit) {
             onExit();
           }
@@ -177,7 +174,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
             Description
             <Checkbox
               label="preview"
-              disabled={!editingDescription}
+              hidden={!editingDescription}
               onChange={showPreviewCallback}
               asPrimary
             />

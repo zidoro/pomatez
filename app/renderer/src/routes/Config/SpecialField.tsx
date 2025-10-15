@@ -14,9 +14,9 @@ import { Time, SVG } from "components";
 import { parseTime } from "utils";
 
 type SpecialFieldProps = {
-  fromTime: string;
-  toTime: string;
-  duration: number;
+  fromTime?: string;
+  toTime?: string;
+  duration?: number;
 };
 
 type Props = {
@@ -88,6 +88,7 @@ const SpecialField: React.FC<Props> = ({
       if (
         values.fromTime &&
         values.toTime &&
+        values.duration &&
         values.duration >= 5 &&
         onFieldSubmit
       ) {
@@ -139,7 +140,7 @@ const SpecialField: React.FC<Props> = ({
 
   useEffect(() => {
     function registerEscape(e: KeyboardEvent) {
-      if (e.keyCode === 27) {
+      if (e.code === "Escape") {
         setShowSetter(false);
       }
     }
@@ -161,7 +162,7 @@ const SpecialField: React.FC<Props> = ({
           }
         }}
         onKeyDown={(e) => {
-          if (e.keyCode === 13) {
+          if (e.key === "Enter") {
             setShowSetter(true);
           }
         }}
@@ -218,7 +219,9 @@ const SpecialField: React.FC<Props> = ({
             />
             <StyledSpecialBreakDuration>
               Duration:&nbsp;
-              {values.duration < 5 && errors.duration ? (
+              {!values.duration ? (
+                ""
+              ) : (values.duration || 0) < 5 && errors.duration ? (
                 <StyledSpecialBreakDurationSpan error>
                   {values.duration > 1
                     ? `${values.duration} minutes`

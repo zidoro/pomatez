@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "hooks/storeHooks";
 import {
-  AppStateTypes,
   setFirstSpecialBreak,
   setSecondSpecialBreak,
   setThirdSpecialBreak,
@@ -15,9 +14,9 @@ import {
 import SpecialField from "./SpecialField";
 
 const SpecialBreaks: React.FC = () => {
-  const config = useSelector((state: AppStateTypes) => state.config);
+  const config = useAppSelector((state) => state.config);
 
-  const dispath = useDispatch();
+  const dispath = useAppDispatch();
 
   const setFirstSpecialBreakCallback = useCallback(
     (values) => {

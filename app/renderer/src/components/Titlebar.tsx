@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from "react";
-import { TimerTypes } from "store";
+import { TimerStatus } from "store/timer/types";
 import {
   StyledTitlebar,
   StyledWindowActions,
@@ -9,7 +9,7 @@ import {
   StyledMarkLogo,
   StyledMarkName,
 } from "styles";
-import { ElectronContext } from "contexts";
+import { ConnnectorContext } from "contexts";
 import { APP_NAME } from "config";
 
 import Json from "../../package.json";
@@ -23,20 +23,20 @@ import appIconLongBreakDark from "assets/logos/tray-dark-lb.png";
 
 type Props = {
   darkMode: boolean;
-  timerType?: TimerTypes["timerType"];
+  timerType?: TimerStatus;
 };
 
 const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
   const { onMinimizeCallback, onExitCallback } =
-    useContext(ElectronContext);
+    useContext(ConnnectorContext);
 
   const getAppIcon = useCallback(() => {
     switch (timerType) {
-      case "STAY_FOCUS":
+      case TimerStatus.STAY_FOCUS:
         return darkMode ? appIconDark : appIcon;
-      case "SHORT_BREAK":
+      case TimerStatus.SHORT_BREAK:
         return darkMode ? appIconShortBreakDark : appIconShortBreak;
-      case "LONG_BREAK":
+      case TimerStatus.LONG_BREAK:
         return darkMode ? appIconLongBreakDark : appIconLongBreak;
       default:
         return darkMode ? appIconLongBreakDark : appIconLongBreak;
@@ -44,7 +44,7 @@ const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
   }, [darkMode, timerType]);
 
   return (
-    <StyledTitlebar>
+    <StyledTitlebar data-tauri-drag-region>
       <StyledMarkWrapper>
         <StyledMarkLogo src={getAppIcon()} />
         <StyledMarkName>

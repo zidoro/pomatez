@@ -1,0 +1,6 @@
+{
+  "name": "Pomatez Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  }
+}

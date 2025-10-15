@@ -1,11 +1,9 @@
 import React, { useCallback, useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import {
   setAlwaysOnTop,
   setEnableStrictMode,
-  AppStateTypes,
   setEnableProgressAnimation,
-  SettingTypes,
   setNotificationType,
   setEnableFullscreenBreak,
   setUseNativeTitlebar,
@@ -15,19 +13,19 @@ import {
   setEnableVoiceAssistance,
   setEnableCompactMode,
   setOpenAtLogin,
+  setFollowSystemTheme,
 } from "store";
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
 import { ThemeContext } from "contexts";
 
 import SettingSection from "./SettingSection";
 import { detectOS } from "utils";
+import { NotificationTypes } from "store/settings/types";
 
 const FeatureSection: React.FC = () => {
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { isDarkMode, toggleThemeAction } = useContext(ThemeContext);
 
@@ -70,11 +68,20 @@ const FeatureSection: React.FC = () => {
       id: "dark-theme",
       label: "Dark Theme",
       checked: isDarkMode,
+      disabled: settings.followSystemTheme,
       onChange: () => {
         if (toggleThemeAction) {
           toggleThemeAction();
         }
       },
+    },
+    {
+      id: "follow-system-theme",
+      label: "Follow System Theme",
+      checked: settings.followSystemTheme,
+      onChange: useCallback(() => {
+        dispatch(setFollowSystemTheme(!settings.followSystemTheme));
+      }, [dispatch, settings.followSystemTheme]),
     },
     {
       id: "native-titlebar",
@@ -145,7 +152,9 @@ const FeatureSection: React.FC = () => {
 
   const onChangeNotificationProps = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch(setNotificationType(e.target.value));
+      dispatch(
+        setNotificationType(e.target.value as NotificationTypes)
+      );
     },
     [dispatch]
   );
@@ -153,12 +162,16 @@ const FeatureSection: React.FC = () => {
   return (
     <SettingSection heading="App Features">
       {featureList.map(
-        ({ id, label, checked, onChange, ...rest }, index) => (
+        (
+          { id, label, checked, onChange, disabled = false, ...rest },
+          index
+        ) => (
           <Toggler
             id={id}
             key={index}
             label={label}
             checked={checked}
+            disabled={disabled}
             onChange={onChange}
             {...rest}
           />
@@ -169,24 +182,28 @@ const FeatureSection: React.FC = () => {
           id="none"
           label="none"
           name="notification"
-          value="none"
-          checked={settings.notificationType === "none"}
+          value={NotificationTypes.NONE}
+          checked={settings.notificationType === NotificationTypes.NONE}
           onChange={onChangeNotificationProps}
         />
         <Radio
           id="normal"
           label="normal"
           name="notification"
-          value="normal"
-          checked={settings.notificationType === "normal"}
+          value={NotificationTypes.NORMAL}
+          checked={
+            settings.notificationType === NotificationTypes.NORMAL
+          }
           onChange={onChangeNotificationProps}
         />
         <Radio
           id="extra"
           label="extra"
           name="notification"
-          value="extra"
-          checked={settings.notificationType === "extra"}
+          value={NotificationTypes.EXTRA}
+          checked={
+            settings.notificationType === NotificationTypes.EXTRA
+          }
           onChange={onChangeNotificationProps}
         />
       </Collapse>

@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { isPreferredDark } from "utils";
 import { GlobalStyles } from "styles";
-import { useSelector, useDispatch } from "react-redux";
-import { AppStateTypes, setEnableDarkTheme, SettingTypes } from "store";
+import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
+import { setEnableDarkTheme } from "store";
 
 type ThemeProps = {
   isDarkMode: boolean;
@@ -14,17 +14,30 @@ const ThemeContext = React.createContext<ThemeProps>({
 });
 
 const ThemeProvider: React.FC = ({ children }) => {
-  const settings: SettingTypes = useSelector(
-    (state: AppStateTypes) => state.settings
-  );
+  const settings = useAppSelector((state) => state.settings);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const useNativeTitlebar = useRef(settings.useNativeTitlebar);
 
   const toggleThemeAction = () => {
     dispatch(setEnableDarkTheme(!settings.enableDarkTheme));
   };
+
+  useEffect(() => {
+    if (!settings.followSystemTheme) return;
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const listener = (e: MediaQueryListEvent) => {
+      dispatch(setEnableDarkTheme(e.matches));
+    };
+    // Ensure theme matches current system theme
+    dispatch(setEnableDarkTheme(media.matches));
+    media.addEventListener("change", listener);
+    return () => {
+      media.removeEventListener("change", listener);
+    };
+  }, [dispatch, settings.followSystemTheme]);
 
   return (
     <ThemeContext.Provider

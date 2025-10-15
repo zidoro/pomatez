@@ -122,8 +122,6 @@ export const StyledLinuxInstallerWrapper = styled.div`
 
     padding: 0 1.2rem;
 
-    overflow: hidden;
-
     & > a {
       padding: 0 1.2rem;
     }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { ActionCreators as UndoActionCreator } from "redux-undo";
 import {
   DragDropContext,
@@ -12,15 +12,15 @@ import {
   StyledTaskWrapper,
   StyledTaskMain,
 } from "styles";
-import { AppStateTypes, addTaskList, dragList } from "store";
+import { addTaskList, dragList } from "store";
 
 import TaskFormButton from "./TaskFormButton";
 import TaskInnerList from "./TaskInnerList";
 
 export default function Tasks() {
-  const tasks = useSelector((state: AppStateTypes) => state.tasks);
+  const tasks = useAppSelector((state) => state.tasks);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onListAdd = (value: string) => dispatch(addTaskList(value));
 
@@ -32,14 +32,14 @@ export default function Tasks() {
     }
 
     dispatch(
-      dragList(
-        source.droppableId,
-        destination.droppableId,
-        source.index,
-        destination.index,
+      dragList({
+        sourceId: source.droppableId,
+        destinationId: destination.droppableId,
+        sourceIndex: source.index,
+        destinationIndex: destination.index,
         draggableId,
-        type
-      )
+        type,
+      })
     );
   };
 
@@ -48,14 +48,16 @@ export default function Tasks() {
       const activeElement = document.activeElement?.tagName;
 
       if (activeElement !== "INPUT" && activeElement !== "TEXTAREA") {
-        if (e.ctrlKey && e.key === "z") {
+        if (e.ctrlKey && e.code === "KeyZ") {
           if (tasks.past.length > 0) {
+            // @ts-ignore This is a problem with redux-undo types
             dispatch(UndoActionCreator.undo());
           }
         }
 
-        if (e.ctrlKey && e.key === "Z") {
+        if (e.ctrlKey && e.shiftKey && e.code === "KeyZ") {
           if (tasks.future.length > 0) {
+            // @ts-ignore This is a problem with redux-undo types
             dispatch(UndoActionCreator.redo());
           }
         }

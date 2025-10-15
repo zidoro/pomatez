@@ -52,7 +52,7 @@ const TaskHeader: React.FC<Props> = ({
         };
 
         inputRef.current.onkeyup = (e: KeyboardEvent) => {
-          if (e.keyCode === 13 || e.keyCode === 10) {
+          if (e.key === "Enter" || e.keyCode === 10) {
             if (inputRef.current) {
               if (onEditTitle && inputRef.current.value) {
                 onEditTitle(inputRef.current.value);

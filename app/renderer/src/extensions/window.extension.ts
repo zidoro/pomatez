@@ -10,6 +10,7 @@ declare global {
         options?: Electron.OpenExternalOptions
       ) => Promise<void>;
     };
+    __TAURI__: {};
   }
 }
 

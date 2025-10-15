@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "source": "src/index.ts",
   "license": "MIT",
   "files": [
@@ -11,6 +12,7 @@
   "scripts": {
     "prepare": "yarn build",
     "start": "rollup -c -w",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "dev:renderer": "rollup -c"
   }
 }

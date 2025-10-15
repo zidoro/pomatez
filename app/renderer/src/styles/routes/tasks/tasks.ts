@@ -99,6 +99,9 @@ export const StyledTaskHeading = styled.h3`
   font-weight: 500;
   text-transform: uppercase;
   color: var(--color-heading-text);
+
+  overflow: hidden;
+  overflow-wrap: break-word;
 `;
 
 export const StyledTaskHeadeInput = styled(StyledInput)`

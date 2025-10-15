@@ -15,11 +15,11 @@ import {
 } from "../styles";
 import { Header, SVG } from "../components";
 import {
-  WINDOWS_INSTALLER,
   DEB_INSTALLER,
-  APP_IMAGE_INSTALLER,
   RPM_INSTALLER,
-  MAC_INSTALLER,
+  MAC_x64_INSTALLER,
+  WINDOWS_x64_INSTALLER,
+  APP_IMAGE_x64_INSTALLER,
 } from "../config";
 import { useDownloadQuery } from "../queries";
 
@@ -50,9 +50,9 @@ export function Download() {
             </StyledDownloadOSLogo>
 
             <StyledDownloadButton>
-              <a href={WINDOWS_INSTALLER}>
+              <a href={WINDOWS_x64_INSTALLER}>
                 <SVG name="download" />
-                Windows 7, 8 and 10
+                Windows 7+ x64
               </a>
             </StyledDownloadButton>
           </StyledDownloadForWindows>
@@ -70,7 +70,7 @@ export function Download() {
                 </a>
               </StyledDownloadButton>
               <StyledDownloadButton>
-                <a href={APP_IMAGE_INSTALLER} id="app-image">
+                <a href={APP_IMAGE_x64_INSTALLER} id="app-image">
                   <SVG name="download" />
                   .AppImage
                 </a>
@@ -103,7 +103,7 @@ export function Download() {
             </StyledDownloadOSLogo>
 
             <StyledDownloadButton>
-              <a href={MAC_INSTALLER}>
+              <a href={MAC_x64_INSTALLER}>
                 <SVG name="download" />
                 Mac OS 10.10+
               </a>

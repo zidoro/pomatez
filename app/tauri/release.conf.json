@@ -1,0 +1,18 @@
+{
+  "plugins": {
+    "updater": {
+      "dialog": false,
+      "endpoints": [
+        "https://api.github.com/repos/zidoro/pomatez/this/is/not/a/valid/url/and/will/be/set/in/rust"
+      ]
+    }
+  },
+  "tauri": {
+    "bundle": {
+      "updater": {
+        "active": true,
+        "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDVDNUI3N0FBQTI3NkEwOTQKUldTVW9IYWlxbmRiWElmTjM2blhVVzJ4RW9iaXhZa0xHY0lKNWMxQ2FnUks2bXBCSG5UcXZiQzkK"
+      }
+    }
+  }
+}

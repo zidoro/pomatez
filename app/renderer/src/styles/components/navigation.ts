@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { SHORT_BREAK, LONG_BREAK, SPECIAL_BREAK } from "store";
+import { TimerStatus } from "store/timer/types";
 import { NavLink } from "react-router-dom";
 import { themes } from "../themes";
 
@@ -40,17 +40,33 @@ export const StyledNavList = styled.ul`
 export const StyledNavListItem = styled.li`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
-type NavLinkProps = { type?: string };
+type NavLinkProps = { type?: TimerStatus };
+
+export const StyledNavIconWrapper = styled.div`
+  position: relative;
+  box-sizing: content-box;
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 14px;
+  margin-bottom: 0.4rem;
+`;
 
 export const StyledNavLink = styled(NavLink)<NavLinkProps>`
   width: 100%;
   height: 100%;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   justify-items: center;
-  row-gap: 0.4rem;
+  text-align: center;
 
   position: relative;
   cursor: pointer;
@@ -63,13 +79,13 @@ export const StyledNavLink = styled(NavLink)<NavLinkProps>`
 
   &.active {
     color: ${(p) =>
-      (p.type === SHORT_BREAK &&
+      (p.type === TimerStatus.SHORT_BREAK &&
         p.to === "/" &&
         "var(--color-green)") ||
-      (p.type === LONG_BREAK &&
+      (p.type === TimerStatus.LONG_BREAK &&
         p.to === "/" &&
         "var(--color-yellow)") ||
-      (p.type === SPECIAL_BREAK &&
+      (p.type === TimerStatus.SPECIAL_BREAK &&
         p.to === "/" &&
         "var(--color-yellow)") ||
       "var(--color-primary)"};

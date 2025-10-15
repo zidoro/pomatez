@@ -10,8 +10,13 @@
   "extra-files": [
     {
       "type": "json",
-      "path": "app/main/package.json",
+      "path": "app/electron/package.json",
       "jsonpath": "$.version"
+    },
+    {
+      "type": "json",
+      "path": "app/tauri/tauri.conf.json",
+      "jsonpath": "$.package.version"
     },
     {
       "type": "json",

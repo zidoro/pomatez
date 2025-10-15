@@ -1,10 +1,5 @@
 import styled, { css } from "styled-components/macro";
-import {
-  SHORT_BREAK,
-  LONG_BREAK,
-  SPECIAL_BREAK,
-  TimerTypes,
-} from "store";
+import { TimerStatus } from "store/timer/types";
 import { themes } from "../../themes";
 
 const ControlButton = css`
@@ -34,7 +29,7 @@ const ControlButton = css`
   }
 `;
 
-type ControlProps = { type?: TimerTypes["timerType"] };
+type ControlProps = { type?: TimerStatus };
 
 export const StyledControlSpacer = styled.div<ControlProps>`
   flex: 1 0;
@@ -53,16 +48,19 @@ export const StyledControl = styled.div<ControlProps>`
   column-gap: 1rem;
 
   color: ${(p) =>
-    (p.type === SHORT_BREAK && "var(--color-green)") ||
-    (p.type === LONG_BREAK && "var(--color-yellow)") ||
-    (p.type === SPECIAL_BREAK && "var(--color-yellow)") ||
+    (p.type === TimerStatus.SHORT_BREAK && "var(--color-green)") ||
+    (p.type === TimerStatus.LONG_BREAK && "var(--color-yellow)") ||
+    (p.type === TimerStatus.SPECIAL_BREAK && "var(--color-yellow)") ||
     "var(--color-primary)"};
 
   .ripple-hook {
     background-color: ${(p) =>
-      (p.type === SHORT_BREAK && "var(--color-bg-ripple-green)") ||
-      (p.type === LONG_BREAK && "var(--color-bg-ripple-yellow)") ||
-      (p.type === SPECIAL_BREAK && "var(--color-bg-ripple-yellow)") ||
+      (p.type === TimerStatus.SHORT_BREAK &&
+        "var(--color-bg-ripple-green)") ||
+      (p.type === TimerStatus.LONG_BREAK &&
+        "var(--color-bg-ripple-yellow)") ||
+      (p.type === TimerStatus.SPECIAL_BREAK &&
+        "var(--color-bg-ripple-yellow)") ||
       "var(--color-bg-ripple-primary)"};
   }
 
@@ -72,7 +70,7 @@ export const StyledControl = styled.div<ControlProps>`
   }
 `;
 
-type SessionProps = { timerType?: TimerTypes["timerType"] };
+type SessionProps = { timerType?: TimerStatus };
 
 export const StyledSessionReset = styled.button<SessionProps>`
   position: absolute;
@@ -100,9 +98,12 @@ export const StyledSessionReset = styled.button<SessionProps>`
 
   &:hover {
     color: ${(p) =>
-      (p.timerType === SHORT_BREAK && "var(--color-green)") ||
-      (p.timerType === LONG_BREAK && "var(--color-yellow)") ||
-      (p.timerType === SPECIAL_BREAK && "var(--color-yellow)") ||
+      (p.timerType === TimerStatus.SHORT_BREAK &&
+        "var(--color-green)") ||
+      (p.timerType === TimerStatus.LONG_BREAK &&
+        "var(--color-yellow)") ||
+      (p.timerType === TimerStatus.SPECIAL_BREAK &&
+        "var(--color-yellow)") ||
       "var(--color-primary)"};
   }
 

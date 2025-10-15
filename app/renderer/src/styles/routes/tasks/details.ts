@@ -162,6 +162,8 @@ export const StyledDescriptionPreviewer = styled.div<{
 
   p {
     color: ${(p) => !p.hasValue && "var(--color-disabled-text)"};
+    // fixes an issue where the bullet points show not on the same line
+    display: inline-block;
   }
 
   h1 {

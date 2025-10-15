@@ -1,15 +1,14 @@
 import { CounterContext } from "contexts";
 import React, { useCallback, useContext } from "react";
-import { useSelector } from "react-redux";
-import { AppStateTypes } from "store";
+import { useAppSelector } from "hooks/storeHooks";
 import { StyledTimer } from "styles";
 import Control from "./Control";
 import Counter from "./Counter";
 import PriorityCard from "./PriorityCard";
 
 export default function Timer() {
-  const compactMode = useSelector(
-    (state: AppStateTypes) => state.settings.compactMode
+  const compactMode = useAppSelector(
+    (state) => state.settings.compactMode
   );
   const { resetTimerAction } = useContext(CounterContext);
 

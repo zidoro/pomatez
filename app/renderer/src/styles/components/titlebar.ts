@@ -38,6 +38,7 @@ export const StyledMarkWrapper = styled.div`
   column-gap: 0.8rem;
 
   padding-left: 1rem;
+  pointer-events: none;
 `;
 
 export const StyledMarkLogo = styled.img`

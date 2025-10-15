@@ -12,7 +12,7 @@
   <br>
   <a href="#sparkles-features">Features</a>
   .
-  <a href="#world_map-roadmap">Road Map</a>
+  <a href="https://discord.gg/ZqPqN3hwcB" target="_blank">Discord</a>
   .
   <a href="#call_me_hand-development">Development</a>
   .
@@ -82,23 +82,11 @@
 
 - **Compact Mode** - once enabled, the app will occupy less space on your screen and it will be useful if you're using a small-screen device.
 
-## :world_map: Roadmap
-
-- **Customizable shortcuts** - provide a way to make the default keyboard shortcuts customizable by the users.
-
-- **Website Blocker** - enable users to block specific websites while working in order to stay on focus.
-
-- **Productivity report** - provide some useful summary about the users' productivity to have some sense of accomplishments.
-
-- **Time extender** - enable the users to extend the timer if needed. Useful when they want to finish the task first before taking up a break.
-
-- **Tasks database** - enable users to save completed tasks into a database. Useful when the users want to monitor or track previous tasks.
-
 ## :zap: Quick Setup
 
 ### :page_with_curl: Prerequisites
 
-1. You need to have `node` v16 and `npm` v8 installed on your machine. If you don't have it yet, you can install it by running the following command.
+1. You need to have `node` v18 and `npm` v8 installed on your machine. If you don't have it yet, you can install it by running the following command.
 
    1. For Mac
 
@@ -213,10 +201,6 @@ Download the latest version from the [Releases Page](https://github.com/zidoro/p
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pomatez)
 
 Please consider starring this project to show your :blue_heart: and support. Thank you so much :bowing_man:
-
-## :shield: Privacy
-
-This app has analytics that will track the number of users only and nothing more ([analytics.ts](https://github.com/zidoro/pomatez/blob/master/app/main/src/helpers/analytics.ts)).
 
 ## :newspaper: License
 
