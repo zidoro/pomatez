@@ -17,6 +17,7 @@ export type SettingTypes = {
   autoStartWorkTime: boolean;
   notificationType: NotificationTypes;
   openAtLogin: boolean;
+  enableRPC: boolean;
 };
 
 export const enum NotificationTypes {

@@ -13,15 +13,21 @@ function mergeSettings(
 
   for (const key in base) {
     if (
+      //@ts-expect-error
       typeof base[key] === "object" &&
+      //@ts-expect-error
       base[key] !== null &&
+      //@ts-expect-error
       !Array.isArray(base[key])
     ) {
       merged[key] = mergeSettings(
+        //@ts-expect-error
         base[key],
+        //@ts-expect-error
         (override?.[key] as any) || {}
       );
     } else {
+      //@ts-expect-error
       merged[key] = override?.[key] ?? base[key];
     }
   }
@@ -138,6 +144,10 @@ const settingsSlice = createSlice({
       state.openAtLogin = action.payload;
     },
 
+    setEnableRPC(state, action: SettingsPayload<"enableRPC">) {
+      state.enableRPC = action.payload;
+    },
+
     restoreDefaultSettings() {
       return defaultSettings;
     },
@@ -160,6 +170,7 @@ export const {
   setMinimizeToTray,
   setNotificationType,
   setOpenAtLogin,
+  setEnableRPC,
   setUseNativeTitlebar,
   toggleNotificationSound,
 } = settingsSlice.actions;
