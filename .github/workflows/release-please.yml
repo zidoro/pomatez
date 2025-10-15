@@ -44,7 +44,7 @@ jobs:
         uses: actions/download-artifact@v4
       - name: Upload Release Assets
         id: upload-release-asset
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2.4.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
