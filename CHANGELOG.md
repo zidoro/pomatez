@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.9.0](https://github.com/zidoro/pomatez/compare/v1.8.0...v1.9.0) (2025-11-09)
+
+
+### Features ✨
+
+* **electron:** Discord Rich Presence ([#700](https://github.com/zidoro/pomatez/issues/700)) ([de82067](https://github.com/zidoro/pomatez/commit/de82067f7090812fae149eaf50d477ddb6c9994d))
+
+
+### Bug Fixes 🐛
+
+* **electron:** discord rpc not initialising on start ([#717](https://github.com/zidoro/pomatez/issues/717)) ([df4e2b4](https://github.com/zidoro/pomatez/commit/df4e2b47619805b4e649328a3bb4dfbe6dad0285))
+
 ## [1.8.0](https://github.com/zidoro/pomatez/compare/v1.7.2...v1.8.0) (2025-05-26)
 
 
