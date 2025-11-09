@@ -4,8 +4,10 @@ export const SET_FULLSCREEN_BREAK = "SET_FULLSCREEN_BREAK";
 export const SET_COMPACT_MODE = "SET_COMPACT_MODE";
 export const SET_NATIVE_TITLEBAR = "SET_NATIVE_TITLEBAR";
 export const SET_OPEN_AT_LOGIN = "SET_OPEN_AT_LOGIN";
+export const SET_ENABLE_RPC = "SET_ENABLE_RPC";
 export const TRAY_ICON_UPDATE = "TRAY_ICON_UPDATE";
 export const SET_UI_THEME = "SET_UI_THEME";
+export const SET_RPC_ACTIVITY = "SET_RPC_ACTIVITY";
 export const MINIMIZE_WINDOW = "MINIMIZE_WINDOW";
 export const CLOSE_WINDOW = "CLOSE_WINDOW";
 export const SHOW_WINDOW = "SHOW_WINDOW";
@@ -17,9 +19,10 @@ export const TO_MAIN: string[] = [
   SET_FULLSCREEN_BREAK,
   SET_COMPACT_MODE,
   SET_NATIVE_TITLEBAR,
-  SET_OPEN_AT_LOGIN,
+  SET_ENABLE_RPC,
   TRAY_ICON_UPDATE,
   SET_UI_THEME,
+  SET_RPC_ACTIVITY,
   MINIMIZE_WINDOW,
   CLOSE_WINDOW,
   SHOW_WINDOW,
@@ -30,3 +33,5 @@ export const FROM_MAIN: string[] = [UPDATE_AVAILABLE];
 
 export const RELEASE_NOTES_LINK =
   "https://github.com/zidoro/pomatez/releases/latest";
+
+export const DISCORD_LINK = "https://discord.com/invite/ZqPqN3hwcB";

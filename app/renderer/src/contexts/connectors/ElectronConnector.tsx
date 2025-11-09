@@ -1,4 +1,9 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { ConnnectorContext } from "../ConnnectorContext";
 import { useAppSelector } from "hooks/storeHooks";
 import { CounterContext } from "../CounterContext";
@@ -13,9 +18,12 @@ import {
   SET_UI_THEME,
   TRAY_ICON_UPDATE,
   SET_OPEN_AT_LOGIN,
+  SET_RPC_ACTIVITY,
+  SET_ENABLE_RPC,
 } from "@pomatez/shareables";
 import { InvokeConnector } from "../InvokeConnector";
 import { useTrayIconUpdates } from "hooks/useTrayIconUpdates";
+import { TimerStatus } from "store/timer/types";
 
 export const ElectronInvokeConnector: InvokeConnector = {
   send: (event: string, ...payload: any) => {
@@ -28,11 +36,14 @@ export const ElectronInvokeConnector: InvokeConnector = {
 export const ElectronConnectorProvider: React.FC = ({ children }) => {
   const { electron } = window;
 
-  const timer = useAppSelector((state) => state.timer);
+  const { timer, config, settings } = useAppSelector((state) => ({
+    timer: state.timer,
+    config: state.config,
+    settings: state.settings,
+  }));
 
-  const settings = useAppSelector((state) => state.settings);
-
-  const { shouldFullscreen } = useContext(CounterContext);
+  const { count, duration, shouldFullscreen } =
+    useContext(CounterContext);
 
   const onMinimizeCallback = useCallback(() => {
     electron.send(MINIMIZE_WINDOW, {
@@ -102,6 +113,64 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
       openAtLogin: settings.openAtLogin,
     });
   }, [electron, settings.openAtLogin]);
+
+  const countRef = useRef(count);
+  useEffect(() => {
+    countRef.current = count;
+  }, [count]);
+
+  useEffect(() => {
+    let activity = "Idle";
+    let timerstart;
+    let timerend;
+
+    if (timer.playing) {
+      switch (timer.timerType) {
+        case TimerStatus.STAY_FOCUS:
+          activity = "Focus";
+          break;
+        case TimerStatus.SHORT_BREAK:
+          activity = "Break";
+          break;
+        case TimerStatus.LONG_BREAK:
+          activity = "Break";
+          break;
+        case TimerStatus.SPECIAL_BREAK:
+          activity = "Break";
+          break;
+      }
+      const startime = new Date(Date.now());
+      startime.setSeconds(
+        startime.getSeconds() - (duration - countRef.current)
+      );
+      timerstart = startime;
+
+      const endtime = new Date(Date.now());
+      endtime.setSeconds(endtime.getSeconds() + duration);
+      timerend = endtime;
+    }
+
+    electron.send(SET_RPC_ACTIVITY, {
+      type: activity,
+      start: timerstart,
+      end: timerend,
+      round: timer.round,
+      sessionRounds: config.sessionRounds,
+    });
+  }, [
+    electron,
+    duration,
+    timer.playing,
+    timer.round,
+    timer.timerType,
+    config.sessionRounds,
+  ]);
+
+  useEffect(() => {
+    electron.send(SET_ENABLE_RPC, {
+      enableRPC: settings.enableRPC,
+    });
+  }, [electron, settings.enableRPC]);
 
   useTrayIconUpdates((dataUrl) => {
     electron.send(TRAY_ICON_UPDATE, dataUrl);

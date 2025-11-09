@@ -23,6 +23,7 @@ import {
   TRAY_ICON_UPDATE,
   SET_COMPACT_MODE,
   SET_OPEN_AT_LOGIN,
+  SET_ENABLE_RPC,
 } from "@pomatez/shareables";
 import {
   activateGlobalShortcuts,
@@ -33,6 +34,8 @@ import {
   isMacOS,
   getFromStorage,
   createContextMenu,
+  initializeRPC,
+  uninitializeRPC,
 } from "./helpers";
 import isDev from "electron-is-dev";
 import store from "./store";
@@ -292,6 +295,7 @@ if (!onlySingleInstance) {
 
       for (const tool of extensions) {
         try {
+          //@ts-expect-error
           await installer.default(installer[tool], true);
         } catch (e) {
           console.log(e);
@@ -300,6 +304,18 @@ if (!onlySingleInstance) {
     }
 
     createMainWindow();
+    debounce(async () => {
+      try {
+        if (win) {
+          const data = await getFromStorage(win, "state");
+          if (data.settings.enableRPC) {
+            initializeRPC();
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
 
     if (onProduction) {
       if (win) {
@@ -449,6 +465,19 @@ ipcMain.on(SET_OPEN_AT_LOGIN, (e, { openAtLogin }) => {
       openAtLogin: openAtLogin,
       openAsHidden: openAtLogin,
     });
+  }
+});
+
+ipcMain.on(SET_ENABLE_RPC, (e, { enableRPC }) => {
+  const enableRPCAtLogin = store.safeGet("openAtLogin");
+
+  if (enableRPCAtLogin !== enableRPC) {
+    store.safeSet("openAtLogin", enableRPC);
+    if (enableRPC) {
+      initializeRPC();
+    } else {
+      uninitializeRPC();
+    }
   }
 });
 

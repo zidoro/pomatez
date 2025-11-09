@@ -13,6 +13,7 @@ import {
   setEnableVoiceAssistance,
   setEnableCompactMode,
   setOpenAtLogin,
+  setEnableRPC,
   setFollowSystemTheme,
 } from "store";
 import { Toggler, TogglerProps, Collapse, Radio } from "components";
@@ -147,6 +148,14 @@ const FeatureSection: React.FC = () => {
           display: "none",
         }),
       },
+    },
+    {
+      id: "enable-rpc",
+      label: "Enable Rich Presence",
+      checked: settings.enableRPC,
+      onChange: useCallback(() => {
+        dispatch(setEnableRPC(!settings.enableRPC));
+      }, [dispatch, settings.enableRPC]),
     },
   ];
 
