@@ -66,6 +66,6 @@
   "resolutions": {
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.19",
-    "react-error-overlay": "6.0.9"
+    "react-error-overlay": "6.0.11"
   }
 }
