@@ -304,18 +304,16 @@ if (!onlySingleInstance) {
     }
 
     createMainWindow();
-    debounce(async () => {
-      try {
-        if (win) {
-          const data = await getFromStorage(win, "state");
-          if (data.settings.enableRPC) {
-            initializeRPC();
-          }
+    try {
+      if (win) {
+        const data = await getFromStorage(win, "state");
+        if (data.settings.enableRPC) {
+          initializeRPC();
         }
-      } catch (error) {
-        console.log(error);
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
 
     if (onProduction) {
       if (win) {

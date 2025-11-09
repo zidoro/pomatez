@@ -7,7 +7,7 @@ import {
 } from "@pomatez/shareables";
 
 const clientId = "1416789071350730762";
-let rpc: RPC.Client | undefined;
+let rpcClient: RPC.Client | undefined;
 let currentActivity: RpcActivityData;
 
 type RpcActivityType = "Idle" | "Focus" | "Break";
@@ -68,7 +68,9 @@ const presetActivities: Record<RpcActivityType, DiscordActivity> = {
 };
 
 export function setActivity(data: RpcActivityData): void {
-  if (!(rpc instanceof RPC.Client)) {
+  console.log("Setting RPC Activity:", data, RPC);
+  if (!(rpcClient instanceof RPC.Client)) {
+    console.log("RPC Client not initialized.");
     return;
   }
 
@@ -85,27 +87,28 @@ export function setActivity(data: RpcActivityData): void {
       data.end instanceof Date ? data.end.getTime() : undefined, //this is supposed to make it count down, but its not working
   };
 
-  rpc.setActivity(activity).catch(console.error);
+  rpcClient.setActivity(activity).catch(console.error);
 }
 
 export function initializeRPC(): void {
-  if (rpc instanceof RPC.Client) {
+  console.log("Initializing Discord RPC...", RPC.Client);
+  if (rpcClient instanceof RPC.Client) {
     return;
   }
 
-  rpc = new RPC.Client({ transport: "ipc" });
+  rpcClient = new RPC.Client({ transport: "ipc" });
 
-  rpc.login({ clientId }).catch(console.error);
+  rpcClient.login({ clientId }).catch(console.error);
 
-  rpc.on("ready", () => {
+  rpcClient.on("ready", () => {
     setActivity(currentActivity || { type: "Idle" });
   });
 }
 
 export function uninitializeRPC(): void {
-  if (rpc instanceof RPC.Client) {
-    rpc.destroy().catch(console.error);
-    rpc = undefined;
+  if (rpcClient instanceof RPC.Client) {
+    rpcClient.destroy().catch(console.error);
+    rpcClient = undefined;
   }
 }
 
