@@ -103,7 +103,7 @@
     "@types/uuid": "7.0.3",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.3",
-    "electron": "18.1.0",
+    "electron": "35.7.5",
     "electron-builder": "23.6.0",
     "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "1.2.2",
