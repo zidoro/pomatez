@@ -46,9 +46,9 @@ jobs:
               ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 18.x
           cache: "yarn"
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         # Download-artifact cannot do a wildcard and if all are downloaded it can download the results from the electron stage
         # We could filter that but this is faster to avoid unneeded downloads.
       - name: Download Win
@@ -133,7 +133,7 @@ jobs:
           name: tauri-linux
           path: artifacts/tauri-linux
       - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: 18.x
           cache: "yarn"
