@@ -101,7 +101,7 @@ While it may be available on others, here are the officially maintained ones.
 
 Please consider starring this project to show your :blue_heart: and support. Thank you so much :bowing_man:
 
-# Contributing & Dev Setup
+# 🛠️ Contributing & Dev Setup
 
 If you want to contribute to this project, feel free to open an issue or a pull request. Any kind of contribution is welcome!
 
