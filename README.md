@@ -194,13 +194,24 @@ Available for Windows, macOS, and Linux.
 
 Download the latest version from the [Releases Page](https://github.com/zidoro/pomatez/releases/latest) or from the :point_right: [Download Page](https://zidoro.github.io/pomatez/) .
 
-**For Linux users:**
+### Package Managers
 
-> If you want to be always updated with the latest release, recommended way to install it is via Snap Store.
+While it may be available on others, here are the officially maintained ones.
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pomatez)
+- Linux
+
+  - [![Snap](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pomatez)
+
+- Mac
+  - [Homebrew](https://formulae.brew.sh/cask/pomatez)
 
 Please consider starring this project to show your :blue_heart: and support. Thank you so much :bowing_man:
+
+# Contributing & Dev Setup
+
+If you want to contribute to this project, feel free to open an issue or a pull request. Any kind of contribution is welcome!
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## :newspaper: License
 
