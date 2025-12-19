@@ -53,3 +53,31 @@ to reproduce.
 
 We will happily add any configurations or list any plugins suggested that may
 help with local development.
+
+## Building for Production
+
+1. Build Windows installer.
+   ```sh
+   yarn build:win
+   ```
+2. Build macOS installer.
+   ```sh
+   yarn build:mac
+   ```
+3. Build Linux installer.
+   ```sh
+   yarn build:linux
+   ```
+4. Build macOS, Windows and Linux installer at once.
+   ```sh
+   yarn build:mwl
+   ```
+5. Build tauri version
+   ```sh
+   yarn tauri:build
+   ```
+
+## Pre-Commit
+
+If your pr is being rejected due to the pre-commit checks, just download pre-commit using `pip install pre-commit` or via one of the commands [here](https://pre-commit.com/#install).
+Once that is installed just running `pre-commit` should automatically fix the files.
