@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/zidoro/pomatez/compare/v1.9.0...v1.10.0) (2025-12-23)
+
+
+### Features ✨
+
+* **electron:** add close confirmation during sessions for the tray context menu ([5015a50](https://github.com/zidoro/pomatez/commit/5015a50fee15ea70afcfafc1d527e190dd7e2c52))
+
 ## [1.9.0](https://github.com/zidoro/pomatez/compare/v1.8.0...v1.9.0) (2025-11-09)
 
 
