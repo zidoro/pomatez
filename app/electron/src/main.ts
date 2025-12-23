@@ -248,10 +248,6 @@ const contextMenu = Menu.buildFromTemplate([
         icon: getIcon(),
       });
 
-      console.log(
-        JSON.stringify(await getFromStorage(win!, "state"), null, 2)
-      );
-
       if (response === QuitConfirm.YES) {
         app.exit();
       }
