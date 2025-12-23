@@ -7,6 +7,7 @@ import {
   Tray,
   shell,
   nativeImage,
+  dialog,
 } from "electron";
 import debounce from "lodash.debounce";
 import notifier from "node-notifier";
@@ -36,6 +37,7 @@ import {
   createContextMenu,
   initializeRPC,
   uninitializeRPC,
+  isUserHaveSession,
 } from "./helpers";
 import isDev from "electron-is-dev";
 import store from "./store";
@@ -222,8 +224,37 @@ const contextMenu = Menu.buildFromTemplate([
   },
   {
     label: "Quit",
-    click: () => {
-      app.exit();
+    click: async () => {
+      if (!win || !(await isUserHaveSession(win))) {
+        app.exit();
+        return;
+      }
+
+      const quitConfirmButtons = ["Yes, end session", "Cancel"];
+      const enum QuitConfirm {
+        YES,
+        NO,
+      }
+
+      // https://www.electronjs.org/docs/latest/api/dialog#dialogshowmessageboxsyncwindow-options
+      // First argument is optional; null will not throw
+      const response = dialog.showMessageBoxSync(win!, {
+        type: "question",
+        title: "Confirm Exit",
+        message: "Are you sure you want to end the session?",
+        buttons: quitConfirmButtons,
+        defaultId: QuitConfirm.NO, // Cancel as default (better UX)
+        cancelId: QuitConfirm.NO, // Esc/Cancel = Cancel,
+        icon: getIcon(),
+      });
+
+      console.log(
+        JSON.stringify(await getFromStorage(win!, "state"), null, 2)
+      );
+
+      if (response === QuitConfirm.YES) {
+        app.exit();
+      }
     },
   },
 ]);

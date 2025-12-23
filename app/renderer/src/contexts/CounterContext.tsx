@@ -71,6 +71,15 @@ const CounterProvider: React.FC = ({ children }) => {
     setHasNotifiedBreak(false);
   }, []);
 
+  // @ts-expect-error
+  window.isUserHaveSession = () => {
+    try {
+      return count < config.stayFocus * 60 || timer.round > 1;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const resetTimerAction = useCallback(() => {
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:

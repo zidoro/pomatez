@@ -8,3 +8,4 @@ export * from "./getIcon";
 export * from "./getFromStorage";
 export * from "./contextMenu";
 export * from "./discordRPC";
+export * from "./isUserHaveSession";
