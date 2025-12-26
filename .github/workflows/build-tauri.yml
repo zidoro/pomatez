@@ -109,17 +109,17 @@ jobs:
         # Download-artifact cannot do a wildcard and if all are downloaded it can download the results from the electron stage
         # We could filter that but this is faster to avoid unneeded downloads.
       - name: Download Win
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: tauri-win
           path: artifacts/tauri-win
       - name: Download Mac
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: tauri-mac
           path: artifacts/tauri-mac
       - name: Download Linux
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: tauri-linux
           path: artifacts/tauri-linux
