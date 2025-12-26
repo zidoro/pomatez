@@ -28,6 +28,10 @@ jobs:
             name: mac
             targets: "aarch64-apple-darwin,x86_64-apple-darwin"
             tauri_target: ["universal-apple-darwin"]
+          - os: ubuntu-latest
+            name: linux-arm
+            targets: "aarch64-unknown-linux-gnu"
+            tauri_target: ["aarch64-unknown-linux-gnu"]
           - os: windows-latest
             name: win
             targets: "aarch64-pc-windows-msvc,x86_64-pc-windows-msvc"
@@ -118,6 +122,11 @@ jobs:
         with:
           name: tauri-mac
           path: artifacts/tauri-mac
+      - name: Download Linux Arm
+        uses: actions/download-artifact@v3
+        with:
+          name: tauri-linux-arm
+          path: artifacts/tauri-linux-arm
       - name: Download Linux
         uses: actions/download-artifact@v4
         with:
