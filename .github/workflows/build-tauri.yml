@@ -105,7 +105,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         # Download-artifact cannot do a wildcard and if all are downloaded it can download the results from the electron stage
         # We could filter that but this is faster to avoid unneeded downloads.
       - name: Download Win
