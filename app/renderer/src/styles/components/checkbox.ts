@@ -46,9 +46,19 @@ export const StyledCheckboxLabel = styled.span`
 export const StyledCheckbox = styled.label<{
   asPrimary?: boolean;
 }>`
+  position: relative;
+
   & > input {
+    position: absolute;
     width: 0;
     height: 0;
+
+    margin: 0;
+    opacity: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
 
   & > input + ${StyledCheckboxBox} {
