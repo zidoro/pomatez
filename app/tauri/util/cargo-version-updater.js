@@ -9,9 +9,17 @@ let cargo = fs.readFileSync(
 
 let versionRegex = /\nversion = "([0-9.]+)"/g;
 
+let resolvedVersion =
+  (tauriConfig.package && tauriConfig.package.version) ||
+  tauriConfig.version;
+
+if (!resolvedVersion) {
+  throw new Error("Missing version in tauri.conf.json");
+}
+
 let newContents = cargo.replace(
   versionRegex,
-  `\nversion = "${tauriConfig.package.version}"`
+  `\nversion = "${resolvedVersion}"`
 );
 
 fs.writeFileSync(
@@ -20,6 +28,4 @@ fs.writeFileSync(
   "utf8"
 );
 
-console.log(
-  "Setting Cargo.toml to version " + tauriConfig.package.version
-);
+console.log("Setting Cargo.toml to version " + resolvedVersion);
