@@ -5,7 +5,7 @@ export const supportedLanguages: Array<{
   label: string;
 }> = [
   { code: "en", label: "English / English" },
-  { code: "es", label: "Spanish / Espanol" },
+  { code: "es", label: "Spanish / Español" },
   { code: "zh", label: "Chinese / 中文" },
   { code: "ja", label: "Japanese / 日本語" },
 ];
