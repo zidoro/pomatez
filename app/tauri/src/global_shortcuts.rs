@@ -1,7 +1,7 @@
 use lazy_static::lazy_static;
 use tauri::{App, AppHandle, Manager};
 use tauri_plugin_global_shortcut::Code;
-use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut, ShortcutEvent};
 
 lazy_static! {
     static ref SHOW_SHORTCUT: Shortcut =
@@ -17,9 +17,12 @@ pub trait PomatezGlobalShortcutsSetup {
 
 impl PomatezGlobalShortcutsSetup for App {
     fn setup_global_shortcuts(&self) {
-        let window = self.get_window("main").expect("Failed to get window");
+        let window = self
+            .get_webview_window("main")
+            .expect("Failed to get window");
         let global_shortcut_plugin = {
-            tauri_plugin_global_shortcut::Builder::with_handler(move |_app_handle, shortcut| {
+            tauri_plugin_global_shortcut::Builder::new().with_handler(
+                move |_app_handle, shortcut: &Shortcut, _event: ShortcutEvent| {
                 println!("Shortcut pressed: {:?}", shortcut);
                 match shortcut.id() {
                     key if SHOW_SHORTCUT.id() == key => {
@@ -54,7 +57,8 @@ impl PomatezGlobalShortcutsSetup for App {
                 } else {
                     println!("Shortcut pressed: {:?}", shortcut);
                 }
-            })
+            },
+            )
             .build()
         };
         let app_handle = self.handle();

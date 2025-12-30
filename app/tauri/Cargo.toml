@@ -3,7 +3,7 @@ name = "pomatez"
 # In the current version of release please, unless the toml file is in the root of the project it cannot be updated.
 # https://github.com/googleapis/release-please/issues/1724
 # util/cargo-version-updater.js will run to keep this value up to date before rust builds.
-version = "1.7.2"
+version = "1.10.0"
 description = "Attractive pomodoro timer for Windows, Mac, and Linux."
 authors = ["Roldan Montilla Jr"]
 license = "MIT"
@@ -20,20 +20,20 @@ tauri-build = { version = "2.0.0-alpha.10", features = [] }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 url = "2.4.1"
-tauri = { version = "2.0.0-alpha.17", features =  ["tray-icon", "icon-png"] }
+tauri = { version = "2.9.5", features =  ["tray-icon", "image-png"] }
 reqwest = { version = "0.11.22", features = ["json"] }
-tauri-plugin-window = "2.0.0-alpha.2"
-tauri-plugin-autostart = "2.0.0-alpha.3"
+tauri-plugin-autostart = "2.5.1"
 lazy_static = "1.4.0"
 base64 = { version = "0.21.4", features = [] }
-tauri-plugin-notification = "2.0.0-alpha.5"
-tauri-plugin-shell = "2.0.0-alpha.4"
+tauri-plugin-notification = "2.3.3"
+tauri-plugin-shell = "2.3.3"
 
 # This one is for toying with global hotkeys from the browser mostly
 # We can use https://github.com/tauri-apps/global-hotkey directly tbh
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
-tauri-plugin-global-shortcut = "2.0.0-alpha.3"
-tauri-plugin-updater = "2.0.0-alpha.3"
+tauri-plugin-global-shortcut = "2.3.1"
+tauri-plugin-updater = "2.9.0"
+tauri-plugin-window-state = "2"
 
 [features]
 # by default Tauri runs in production mode
