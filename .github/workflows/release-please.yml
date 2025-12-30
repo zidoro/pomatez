@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
       - name: Upload Release Assets
         id: upload-release-asset
         uses: softprops/action-gh-release@v0.1.15
