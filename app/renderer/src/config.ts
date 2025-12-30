@@ -20,7 +20,7 @@ export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
 ) => [
   {
     icon: "task",
-    name: "Task List",
+    name: "nav.taskList",
     exact: false,
     path: "/task-list",
     component: TaskList,
@@ -28,7 +28,7 @@ export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
   },
   {
     icon: "config",
-    name: "Config",
+    name: "nav.config",
     exact: true,
     path: "/config",
     component: Config,
@@ -36,7 +36,7 @@ export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
   },
   {
     icon: "timer",
-    name: "Timer",
+    name: "nav.timer",
     exact: true,
     path: "/",
     component: Timer,
@@ -44,7 +44,7 @@ export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
   },
   {
     icon: "settings",
-    name: "Settings",
+    name: "nav.settings",
     exact: true,
     path: "/settings",
     component: Settings,
@@ -55,7 +55,7 @@ export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
 export const compactRoutes: NavItemTypes[] = [
   {
     icon: "timer",
-    name: "Timer",
+    name: "nav.timer",
     exact: false,
     path: "/",
     component: Timer,

@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   StyledSpecialField,
   StyledSpecialClearButton,
@@ -31,6 +32,7 @@ const SpecialField: React.FC<Props> = ({
   disabled,
   onFieldSubmit,
 }) => {
+  const { t } = useTranslation();
   const [showSetter, setShowSetter] = useState(false);
 
   const [values, setValues] = useState({
@@ -172,7 +174,7 @@ const SpecialField: React.FC<Props> = ({
         <input
           type="number"
           value={duration === 0 ? "" : duration}
-          placeholder="min"
+          placeholder={t("units.min")}
           disabled
         />
         <StyledSpecialClearButton
@@ -223,14 +225,20 @@ const SpecialField: React.FC<Props> = ({
                 ""
               ) : (values.duration || 0) < 5 && errors.duration ? (
                 <StyledSpecialBreakDurationSpan error>
-                  {values.duration > 1
-                    ? `${values.duration} minutes`
-                    : `${values.duration} minute`}
+                  {values.duration}{" "}
+                  {values.duration === 1
+                    ? t("units.min")
+                    : t("units.mins")}
                   &nbsp;is not a valid duration.
                 </StyledSpecialBreakDurationSpan>
               ) : (
                 <StyledSpecialBreakDurationSpan>
-                  {values.duration >= 5 && `${values.duration} minutes`}
+                  {values.duration >= 5 &&
+                    `${values.duration} ${
+                      values.duration === 1
+                        ? t("units.min")
+                        : t("units.mins")
+                    }`}
                 </StyledSpecialBreakDurationSpan>
               )}
             </StyledSpecialBreakDuration>

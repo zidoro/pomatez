@@ -19,4 +19,5 @@ export const defaultSettings: Readonly<SettingTypes> = Object.freeze({
   useNativeTitlebar: detectOS() === "Windows" ? false : true,
   openAtLogin: false,
   enableRPC: true,
+  language: "auto",
 });

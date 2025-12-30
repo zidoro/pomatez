@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import SettingSection from "./SettingSection";
 import { ConnnectorContext } from "contexts";
 import { Help } from "components";
 
 const HelpSection: React.FC = () => {
+  const { t } = useTranslation();
   const { openExternalCallback } = useContext(ConnnectorContext);
 
   useEffect(() => {
@@ -13,17 +15,17 @@ const HelpSection: React.FC = () => {
   }, [openExternalCallback]);
 
   return (
-    <SettingSection heading="Need Help ?">
+    <SettingSection heading={t("help.heading")}>
       <Help
-        label="Official website"
+        label={t("help.officialWebsite")}
         link="https://zidoro.github.io/pomatez/"
       />
       <Help
-        label="Open an issue"
+        label={t("help.openIssue")}
         link="https://github.com/zidoro/pomatez/issues"
       />
       <Help
-        label="Release notes"
+        label={t("help.releaseNotes")}
         link="https://github.com/zidoro/pomatez/releases/latest"
       />
     </SettingSection>

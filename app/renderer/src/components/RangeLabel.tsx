@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   StyledRangeInputWrapper,
   StyledRangeInputLabel,
@@ -18,18 +19,14 @@ const RangeLabel: React.FC<Props> = ({
   valueType,
   children,
 }) => {
+  const { t } = useTranslation();
+
   const getValueLabel = () => {
     switch (valueType) {
       case "mins":
-        if (value <= 1) {
-          return "min";
-        }
-        return valueType;
+        return value === 1 ? t("units.min") : t("units.mins");
       case "rounds":
-        if (value <= 1) {
-          return "round";
-        }
-        return valueType;
+        return value === 1 ? t("units.round") : t("units.rounds");
     }
   };
 

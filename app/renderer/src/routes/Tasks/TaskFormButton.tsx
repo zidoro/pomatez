@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import {
   StyledTaskForm,
   StyledButtonPrimary,
@@ -18,6 +19,7 @@ type Props = {
 };
 
 const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const areaRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -106,7 +108,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
         onClick={showFormAction}
       >
         <SVG name="add" />
-        Add another list
+        {t("tasks.addAnotherList")}
       </StyledButtonNormal>
     ) : (
       <StyledButton
@@ -114,16 +116,19 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
         onClick={showFormAction}
       >
         <SVG name="add" />
-        Add another card
+        {t("tasks.addAnotherCard")}
       </StyledButton>
     );
 
   const renderFormInput = () =>
     forList ? (
-      <StyledTaskInput placeholder="Enter list title" ref={inputRef} />
+      <StyledTaskInput
+        placeholder={t("tasks.enterListTitlePlaceholder")}
+        ref={inputRef}
+      />
     ) : (
       <StyledTaskTextArea
-        placeholder="Enter a title for this card..."
+        placeholder={t("tasks.enterCardTitlePlaceholder")}
         ref={areaRef}
       />
     );
@@ -143,7 +148,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
     <StyledTaskForm onSubmit={onSubmitAction} ref={formRef}>
       {renderFormInput()}
       <StyledButtonPrimary type="submit">
-        {forList ? "Add List" : "Add Card"}
+        {forList ? t("tasks.addList") : t("tasks.addCard")}
       </StyledButtonPrimary>
       {renderCancelButton()}
     </StyledTaskForm>

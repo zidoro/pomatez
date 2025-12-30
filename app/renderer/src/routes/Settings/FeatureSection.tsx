@@ -1,4 +1,5 @@
 import React, { useCallback, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import {
   setAlwaysOnTop,
@@ -24,6 +25,7 @@ import { detectOS } from "utils";
 import { NotificationTypes } from "store/settings/types";
 
 const FeatureSection: React.FC = () => {
+  const { t } = useTranslation();
   const settings = useAppSelector((state) => state.settings);
 
   const dispatch = useAppDispatch();
@@ -33,7 +35,7 @@ const FeatureSection: React.FC = () => {
   const featureList: TogglerProps[] = [
     {
       id: "always-on-top",
-      label: "Always On Top",
+      label: t("settings.alwaysOnTop"),
       checked: settings.alwaysOnTop,
       onChange: useCallback(() => {
         dispatch(setAlwaysOnTop(!settings.alwaysOnTop));
@@ -41,7 +43,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "compact-mode",
-      label: "Compact Mode",
+      label: t("settings.compactMode"),
       checked: settings.compactMode,
       onChange: useCallback(() => {
         dispatch(setEnableCompactMode(!settings.compactMode));
@@ -49,7 +51,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "fullscreen-break",
-      label: "Fullscreen Break",
+      label: t("settings.fullscreenBreak"),
       checked: settings.enableFullscreenBreak,
       onChange: useCallback(() => {
         dispatch(
@@ -59,7 +61,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "strict-mode",
-      label: "Strict Mode",
+      label: t("settings.strictMode"),
       checked: settings.enableStrictMode,
       onChange: useCallback(() => {
         dispatch(setEnableStrictMode(!settings.enableStrictMode));
@@ -67,7 +69,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "dark-theme",
-      label: "Dark Theme",
+      label: t("settings.darkTheme"),
       checked: isDarkMode,
       disabled: settings.followSystemTheme,
       onChange: () => {
@@ -78,7 +80,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "follow-system-theme",
-      label: "Follow System Theme",
+      label: t("settings.followSystemTheme"),
       checked: settings.followSystemTheme,
       onChange: useCallback(() => {
         dispatch(setFollowSystemTheme(!settings.followSystemTheme));
@@ -86,7 +88,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "native-titlebar",
-      label: "Native Titlebar",
+      label: t("settings.nativeTitlebar"),
       checked: settings.useNativeTitlebar,
       onChange: useCallback(() => {
         dispatch(setUseNativeTitlebar(!settings.useNativeTitlebar));
@@ -94,7 +96,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "progress-animation",
-      label: "Progress Animation",
+      label: t("settings.progressAnimation"),
       checked: settings.enableProgressAnimation,
       onChange: useCallback(() => {
         dispatch(
@@ -104,7 +106,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "auto-start-work-time",
-      label: "Auto-start Work Time",
+      label: t("settings.autoStartWorkTime"),
       checked: settings.autoStartWorkTime,
       onChange: useCallback(() => {
         dispatch(setAutoStartWorkTime(!settings.autoStartWorkTime));
@@ -112,7 +114,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "minimize-to-tray",
-      label: "Minimize To Tray",
+      label: t("settings.minimizeToTray"),
       checked: settings.minimizeToTray,
       onChange: useCallback(() => {
         dispatch(setMinimizeToTray(!settings.minimizeToTray));
@@ -120,7 +122,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "close-to-tray",
-      label: "Close To Tray",
+      label: t("settings.closeToTray"),
       checked: settings.closeToTray,
       onChange: useCallback(() => {
         dispatch(setCloseToTray(!settings.closeToTray));
@@ -128,7 +130,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "voice-assistance",
-      label: "Voice Assistance",
+      label: t("settings.voiceAssistance"),
       checked: settings.enableVoiceAssistance,
       onChange: useCallback(() => {
         dispatch(
@@ -138,7 +140,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "open-at-login",
-      label: "Open At Login",
+      label: t("settings.openAtLogin"),
       checked: settings.openAtLogin,
       onChange: useCallback(() => {
         dispatch(setOpenAtLogin(!settings.openAtLogin));
@@ -151,7 +153,7 @@ const FeatureSection: React.FC = () => {
     },
     {
       id: "enable-rpc",
-      label: "Enable Rich Presence",
+      label: t("settings.enableRichPresence"),
       checked: settings.enableRPC,
       onChange: useCallback(() => {
         dispatch(setEnableRPC(!settings.enableRPC));
@@ -169,7 +171,7 @@ const FeatureSection: React.FC = () => {
   );
 
   return (
-    <SettingSection heading="App Features">
+    <SettingSection heading={t("settings.appFeatures")}>
       {featureList.map(
         (
           { id, label, checked, onChange, disabled = false, ...rest },
@@ -189,7 +191,7 @@ const FeatureSection: React.FC = () => {
       <Collapse>
         <Radio
           id="none"
-          label="none"
+          label={t("settings.notificationNone")}
           name="notification"
           value={NotificationTypes.NONE}
           checked={settings.notificationType === NotificationTypes.NONE}
@@ -197,7 +199,7 @@ const FeatureSection: React.FC = () => {
         />
         <Radio
           id="normal"
-          label="normal"
+          label={t("settings.notificationNormal")}
           name="notification"
           value={NotificationTypes.NORMAL}
           checked={
@@ -207,7 +209,7 @@ const FeatureSection: React.FC = () => {
         />
         <Radio
           id="extra"
-          label="extra"
+          label={t("settings.notificationExtra")}
           name="notification"
           value={NotificationTypes.EXTRA}
           checked={

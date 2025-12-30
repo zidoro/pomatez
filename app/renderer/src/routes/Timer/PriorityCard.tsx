@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { setTaskCardDone, skipTaskCard, removeTaskCard } from "store";
 
@@ -21,6 +22,7 @@ import { SVG } from "components";
 import { useTargetOutside } from "hooks";
 
 const PriorityCard: React.FC = () => {
+  const { t } = useTranslation();
   const tasks = useAppSelector((state) => state.tasks.present);
 
   const dispatch = useAppDispatch();
@@ -105,7 +107,7 @@ const PriorityCard: React.FC = () => {
             ref={optionRef}
           >
             <StyledPopperHeader>
-              <h4>Actions</h4>
+              <h4>{t("tasks.actions")}</h4>
               <button onClick={() => setShowOptions(false)}>
                 <SVG name="close" />
               </button>
@@ -113,13 +115,13 @@ const PriorityCard: React.FC = () => {
 
             <StyledOptionList>
               <StyledOptionDone onClick={setTaskCardDoneCallback}>
-                Done
+                {t("tasks.done")}
               </StyledOptionDone>
               <StyledOptionPriority onClick={skipTaskCardCallback}>
-                Skip
+                {t("tasks.skip")}
               </StyledOptionPriority>
               <StyledOptionDelete onClick={deleteTaskCardCallback}>
-                Delete
+                {t("tasks.delete")}
               </StyledOptionDelete>
             </StyledOptionList>
           </StyledPopperContent>

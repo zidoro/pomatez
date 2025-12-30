@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   StyledTaskHeader,
   StyledTaskHeaderOption,
@@ -27,6 +28,7 @@ const TaskHeader: React.FC<Props> = ({
   onRemoveList,
   onMakeListPriority,
 }) => {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const optionRef = useRef<HTMLDivElement>(null);
 
@@ -92,7 +94,7 @@ const TaskHeader: React.FC<Props> = ({
           ref={optionRef}
         >
           <StyledPopperHeader>
-            <h4>Actions</h4>
+            <h4>{t("tasks.actions")}</h4>
             <button onClick={() => setShowOptions(false)}>
               <SVG name="close" />
             </button>
@@ -105,7 +107,7 @@ const TaskHeader: React.FC<Props> = ({
                 setShowOptions(false);
               }}
             >
-              Priority List
+              {t("tasks.priorityList")}
             </StyledOptionPriority>
 
             <StyledOptionDelete
@@ -114,7 +116,7 @@ const TaskHeader: React.FC<Props> = ({
                 setShowOptions(false);
               }}
             >
-              Delete
+              {t("tasks.delete")}
             </StyledOptionDelete>
           </StyledOptionList>
         </StyledPopperContent>
