@@ -20,7 +20,7 @@ import {
   disable,
   isEnabled,
 } from "@tauri-apps/plugin-autostart";
-import { invoke } from "@tauri-apps/api/primitives";
+import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { open } from "@tauri-apps/plugin-shell";
 import { setUpdateBody, setUpdateVersion } from "../../store/update";

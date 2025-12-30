@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
-use tauri::{Manager, Runtime};
+use tauri::{Emitter, Manager, Runtime};
 use tauri_plugin_updater::{Update, UpdaterExt};
 use url::Url;
 
@@ -28,7 +28,7 @@ struct UpdateAvailable {
 pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Window<R>) {
     let handle = window.app_handle().clone();
 
-    if !handle.config().tauri.bundle.updater.active {
+    if !handle.config().plugins.0.contains_key("updater") {
         return;
     }
 
@@ -108,15 +108,24 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
                 return;
             }
         };
-        let updater_builder = match handle
-            .updater_builder()
-            .endpoints(vec![tauri_release_endpoint])
-            .header("User-Agent", "pomatez")
-        {
+        let updater_builder = handle.updater_builder();
+
+        let updater_builder = match updater_builder.endpoints(vec![tauri_release_endpoint]) {
             Ok(updater_builder) => updater_builder,
             Err(e) => {
                 println!(
-                    "Failed to build updater builder: {:?}. Failed to check for updates",
+                    "Failed to set updater endpoints: {:?}. Failed to check for updates",
+                    e
+                );
+                return;
+            }
+        };
+
+        let updater_builder = match updater_builder.header("User-Agent", "pomatez") {
+            Ok(updater_builder) => updater_builder,
+            Err(e) => {
+                println!(
+                    "Failed to set updater headers: {:?}. Failed to check for updates",
                     e
                 );
                 return;
@@ -138,7 +147,7 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
 
         let response = updater.check().await;
 
-        println!("Update check response: {:?}", response);
+        println!("Update check completed: {}", response.is_ok());
 
         match response {
             Ok(Some(update)) => {

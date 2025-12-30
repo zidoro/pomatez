@@ -2,9 +2,9 @@ use std::path::PathBuf;
 use tauri::path::BaseDirectory;
 use tauri::{
     menu::{MenuBuilder, MenuItemBuilder},
-    tray::{ClickType, TrayIconBuilder},
+    tray::{MouseButton, TrayIconBuilder, TrayIconEvent},
 };
-use tauri::{App, Icon, Manager, Runtime};
+use tauri::{image::Image, App, Manager, Runtime};
 
 use base64;
 use base64::engine::general_purpose;
@@ -23,10 +23,15 @@ pub fn tray_icon_update<R: Runtime>(data_url: String, window: tauri::Window<R>) 
         }
     };
 
-    let icon: Icon = Icon::Raw(decoded_vec);
-    let tray = window.app_handle().tray();
+    let icon = match Image::from_bytes(&decoded_vec) {
+        Ok(icon) => icon,
+        Err(e) => {
+            eprintln!("Error decoding tray icon image: {}", e);
+            return;
+        }
+    };
 
-    if let Some(tray) = tray {
+    if let Some(tray) = window.app_handle().tray_by_id("main") {
         if let Err(e) = tray.set_icon(Some(icon)) {
             eprintln!("Error setting tray icon: {}", e);
         }
@@ -54,8 +59,12 @@ impl PomatezTray for App {
         // Was defined in tauri.config.json to start in v1
         // That was created with an id of 1 though this gives more control
 
-        let show = MenuItemBuilder::with_id("show", "Show").build(self);
-        let quit = MenuItemBuilder::with_id("quit", "Quit").build(self);
+        let show = MenuItemBuilder::with_id("show", "Show")
+            .build(self)
+            .expect("failed to build Show menu item");
+        let quit = MenuItemBuilder::with_id("quit", "Quit")
+            .build(self)
+            .expect("failed to build Quit menu item");
         let menu = MenuBuilder::new(self)
             .items(&[&show, &quit])
             .build()
@@ -67,13 +76,14 @@ impl PomatezTray for App {
             .expect(
                 "failed to resolve icon path, this should not happen as it is an internal file",
             );
+        let icon = Image::from_path(icon_path).expect("failed to load tray icon image");
 
-        let _ = TrayIconBuilder::new()
+        let _ = TrayIconBuilder::with_id("main")
             .menu(&menu)
             .tooltip("Pomatez")
             .on_menu_event(move |app, event| match event.id().as_ref() {
                 "show" => {
-                    let window = app.get_window("main").unwrap();
+                    let window = app.get_webview_window("main").unwrap();
                     window.show().unwrap();
                     window.set_focus().unwrap();
                 }
@@ -83,14 +93,20 @@ impl PomatezTray for App {
                 _ => {}
             })
             .on_tray_icon_event(|tray, event| {
-                if event.click_type == ClickType::Left {
+                if matches!(
+                    event,
+                    TrayIconEvent::Click {
+                        button: MouseButton::Left,
+                        ..
+                    }
+                ) {
                     let app = tray.app_handle();
-                    let window = app.get_window("main").unwrap();
+                    let window = app.get_webview_window("main").unwrap();
                     window.show().unwrap();
                     window.set_focus().unwrap();
                 }
             })
-            .icon(Icon::File(icon_path))
+            .icon(icon)
             .build(self)
             .expect("failed to build tray icon");
     }

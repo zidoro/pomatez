@@ -3,10 +3,10 @@
     windows_subsystem = "windows"
 )]
 
-use tauri::{Manager};
-use tauri::{RunEvent};
+use std::time::{Duration, Instant};
+use tauri::{Manager, RunEvent, WindowEvent};
+use tauri_plugin_window_state::{AppHandleExt, StateFlags, WindowExt};
 use tauri_plugin_autostart::MacosLauncher;
-use tauri_plugin_window;
 
 #[macro_use]
 mod commands;
@@ -26,18 +26,17 @@ fn main() {
 
     let config = context.config_mut();
 
+    let updater_enabled = config.plugins.0.contains_key("updater");
+
     let mut app = tauri::Builder::default()
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             None,
         ))
-        .plugin(tauri_plugin_window::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_notification::init());
 
-
-
-    if config.tauri.bundle.updater.active {
+    if updater_enabled {
         app = app.plugin(tauri_plugin_updater::Builder::new().build());
     }
 
@@ -46,6 +45,29 @@ fn main() {
         .setup(|app| {
             #[cfg(desktop)]
             {
+                app.handle()
+                    .plugin(tauri_plugin_window_state::Builder::default().build())?;
+                if let Some(window) = app.get_webview_window("main") {
+                    let _ = window.restore_state(StateFlags::all());
+                    #[cfg(debug_assertions)]
+                    {
+                        static LAST_SAVE: std::sync::Mutex<Option<Instant>> =
+                            std::sync::Mutex::new(None);
+                        let app_handle = app.handle().clone();
+                        window.on_window_event(move |event| {
+                            if matches!(event, WindowEvent::Moved(_)) {
+                                let mut last_save = LAST_SAVE.lock().unwrap();
+                                if let Some(last) = *last_save {
+                                    if last.elapsed() < Duration::from_millis(500) {
+                                        return;
+                                    }
+                                }
+                                *last_save = Some(Instant::now());
+                                let _ = app_handle.save_window_state(StateFlags::all());
+                            }
+                        });
+                    }
+                }
                 app.setup_global_shortcuts();
                 app.set_pomatez_system_tray();
             }
@@ -61,7 +83,7 @@ fn main() {
             app_handle.register_global_shortcuts();
 
             #[cfg(any(target_os = "macos", debug_assertions))]
-            let window = app_handle.get_window("main").unwrap();
+            let window = app_handle.get_webview_window("main").unwrap();
 
             // There is a bug on mac where the size is not properly respected initially, though this seems to fix it.
             #[cfg(target_os = "macos")]

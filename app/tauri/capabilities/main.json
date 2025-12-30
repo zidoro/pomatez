@@ -1,0 +1,15 @@
+{
+  "identifier": "main",
+  "description": "Default permissions for the main window.",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "core:event:default",
+    "core:window:allow-start-dragging",
+    "autostart:default",
+    "notification:default",
+    "window-state:default"
+  ]
+}
