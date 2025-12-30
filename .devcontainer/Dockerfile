@@ -26,7 +26,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | b
     && export NVM_DIR="$HOME/.nvm" \
     && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
     && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
-    && nvm install 18 \
+    && nvm install 24 \
     && npm install -g yarn
 
 RUN pip install pre-commit

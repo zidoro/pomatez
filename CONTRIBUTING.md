@@ -38,7 +38,7 @@ versions, feel free to open a small pr to correct it.
 
 ### Requirements
 
-- Node.js v18
+- Node.js v24
 - Rust (only required for the Tauri version)
 - Yarn
 
