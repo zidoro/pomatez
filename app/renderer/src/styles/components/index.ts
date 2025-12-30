@@ -10,6 +10,7 @@ export * from "./shortcuts";
 export * from "./help";
 export * from "./button";
 export * from "./input";
+export * from "./select";
 export * from "./textarea";
 export * from "./dimmer";
 export * from "./checkbox";

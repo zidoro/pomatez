@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "hooks/storeHooks";
 import {
   setFirstSpecialBreak,
@@ -14,6 +15,7 @@ import {
 import SpecialField from "./SpecialField";
 
 const SpecialBreaks: React.FC = () => {
+  const { t } = useTranslation();
   const config = useAppSelector((state) => state.config);
 
   const dispath = useAppDispatch();
@@ -49,7 +51,7 @@ const SpecialBreaks: React.FC = () => {
   return (
     <StyledConfigSpecialBreaks>
       <StyledSpecialBreakHeading>
-        Special Breaks
+        {t("config.specialBreaks")}
       </StyledSpecialBreakHeading>
 
       <SpecialField

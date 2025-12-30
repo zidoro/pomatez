@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from "hooks/storeHooks";
 import {
   setStayFocus,
@@ -10,6 +11,7 @@ import { StyledConfigSliderSection } from "styles";
 import ConfigSlider, { ConfigSliderProps } from "./ConfigSlider";
 
 const SliderSection: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const { stayFocus, shortBreak, longBreak, sessionRounds } =
@@ -22,7 +24,7 @@ const SliderSection: React.FC = () => {
 
   const sliderRangeList: ConfigSliderProps[] = [
     {
-      label: "Stay focused",
+      label: t("config.stayFocused"),
       valueType: "mins",
       minValue: 1,
       maxValue: 120,
@@ -33,7 +35,7 @@ const SliderSection: React.FC = () => {
       ),
     },
     {
-      label: "Short break",
+      label: t("config.shortBreak"),
       valueType: "mins",
       minValue: 1,
       maxValue: 60,
@@ -44,7 +46,7 @@ const SliderSection: React.FC = () => {
       ),
     },
     {
-      label: "Long break",
+      label: t("config.longBreak"),
       valueType: "mins",
       minValue: 1,
       maxValue: 60,
@@ -55,7 +57,7 @@ const SliderSection: React.FC = () => {
       ),
     },
     {
-      label: "Session rounds",
+      label: t("config.sessionRounds"),
       valueType: "rounds",
       minValue: 1,
       maxValue: 10,

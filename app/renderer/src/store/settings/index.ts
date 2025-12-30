@@ -148,6 +148,10 @@ const settingsSlice = createSlice({
       state.enableRPC = action.payload;
     },
 
+    setLanguage(state, action: SettingsPayload<"language">) {
+      state.language = action.payload;
+    },
+
     restoreDefaultSettings() {
       return defaultSettings;
     },
@@ -171,6 +175,7 @@ export const {
   setNotificationType,
   setOpenAtLogin,
   setEnableRPC,
+  setLanguage,
   setUseNativeTitlebar,
   toggleNotificationSound,
 } = settingsSlice.actions;

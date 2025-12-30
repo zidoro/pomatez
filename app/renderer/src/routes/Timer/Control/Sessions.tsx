@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { TimerStatus } from "store/timer/types";
 import { StyledSessions, StyledSessionReset } from "styles";
 import { SVG } from "components";
@@ -18,12 +19,14 @@ const Sessions: React.FC<Props> = ({
   sessionRounds,
   onClick,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <StyledSessions>
       <span>
         {round} / {sessionRounds}
       </span>
-      <span>Sessions</span>
+      <span>{t("timer.sessions")}</span>
 
       <StyledSessionReset timerType={timerType} onClick={onClick}>
         <SVG name="refresh" />

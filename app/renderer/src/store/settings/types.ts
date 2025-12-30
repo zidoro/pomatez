@@ -18,7 +18,12 @@ export type SettingTypes = {
   notificationType: NotificationTypes;
   openAtLogin: boolean;
   enableRPC: boolean;
+  language: LanguageOption;
 };
+
+export type LanguageCode = "en" | "es" | "zh" | "ja";
+
+export type LanguageOption = "auto" | LanguageCode;
 
 export const enum NotificationTypes {
   NONE = "none",

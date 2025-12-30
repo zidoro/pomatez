@@ -7,10 +7,12 @@ import {
 } from "contexts";
 import { Layout, Preloader } from "components";
 import { compactRoutes, routes } from "config";
+import { useLanguageSync } from "hooks";
 import { useAppSelector } from "hooks/storeHooks";
 
 export default function App() {
   const settings = useAppSelector((state) => state.settings);
+  useLanguageSync();
 
   useEffect(() => {
     const contextEvent = (event: MouseEvent) => {

@@ -48,6 +48,9 @@ export const StyledSectionHeading = styled.h4`
 `;
 
 export const StyledStarButton = styled(StyledButtonSecondary)`
+  width: auto;
+  flex: 1 1 auto;
+
   & > svg {
     margin-left: -1rem;
   }
@@ -55,7 +58,7 @@ export const StyledStarButton = styled(StyledButtonSecondary)`
 
 export const StyledSectionSticky = styled.div`
   width: 100%;
-  height: 7.5rem;
+  min-height: 7.5rem;
 
   position: sticky;
   bottom: 0;
@@ -67,8 +70,10 @@ export const StyledSectionSticky = styled.div`
   background-color: var(--color-bg-primary);
 
   display: flex;
+  flex-wrap: wrap;
   grid-template-columns: 1fr;
   align-items: start;
 
   padding-top: 2rem;
+  padding-bottom: 2rem;
 `;

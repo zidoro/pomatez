@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "hooks/storeHooks";
 import {
   StyledNav,
@@ -17,6 +18,7 @@ type Props = {
 };
 
 const Navigation: React.FC<Props> = ({ timerType }) => {
+  const { t } = useTranslation();
   const settings = useAppSelector((state) => state.settings);
 
   const state = useAppSelector((state) => state);
@@ -39,7 +41,7 @@ const Navigation: React.FC<Props> = ({ timerType }) => {
                     <SVG name={icon} />
                     {notify && <NavNotify />}
                   </StyledNavIconWrapper>
-                  {name}
+                  {t(name)}
                 </StyledNavLink>
               </StyledNavListItem>
             );

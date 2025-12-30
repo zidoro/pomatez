@@ -1,60 +1,63 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import SettingSection from "./SettingSection";
 import { Shortcut } from "components";
 
 const ShortcutSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <SettingSection heading="Local Shortcut Keys">
+      <SettingSection heading={t("shortcuts.localHeading")}>
         <Shortcut
-          name="Escape Form / Popup"
-          shortcutKey="Press Esc"
+          name={t("shortcuts.escapeFormPopup")}
+          shortcutKey={t("shortcuts.pressEsc")}
           id="escape-form-popup"
         />
         <Shortcut
-          name="Toggle Theme"
+          name={t("shortcuts.toggleTheme")}
           shortcutKey="Alt + Shift + T"
           id="toggle-themes"
         />
         <Shortcut
-          name="Cut Text"
+          name={t("shortcuts.cutText")}
           shortcutKey="Cmd/Ctrl + X"
           id="cut-text"
         />
         <Shortcut
-          name="Copy Text"
+          name={t("shortcuts.copyText")}
           shortcutKey="Cmd/Ctrl + C"
           id="copy-text"
         />
         <Shortcut
-          name="Paste Text"
+          name={t("shortcuts.pasteText")}
           shortcutKey="Cmd/Ctrl + V"
           id="paste-text"
         />
         <Shortcut
-          name="Select All Text"
+          name={t("shortcuts.selectAllText")}
           shortcutKey="Cmd/Ctrl + A"
           id="select-all-text"
         />
         <Shortcut
-          name="Undo Action"
+          name={t("shortcuts.undoAction")}
           shortcutKey="Cmd/Ctrl + Z"
           id="undo-action"
         />
         <Shortcut
-          name="Redo Action"
+          name={t("shortcuts.redoAction")}
           shortcutKey="Cmd/Ctrl + Shift + Z"
           id="redo-action"
         />
       </SettingSection>
-      <SettingSection heading="Global Shortcut Key">
+      <SettingSection heading={t("shortcuts.globalHeading")}>
         <Shortcut
-          name="Hide the App"
+          name={t("shortcuts.hideApp")}
           shortcutKey="Alt + Shift + H"
           id="hide-the-app"
         />
         <Shortcut
-          name="Show the App"
+          name={t("shortcuts.showApp")}
           shortcutKey="Alt + Shift + S"
           id="show-the-app"
         />

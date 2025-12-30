@@ -31,6 +31,7 @@ import {
 } from "styles";
 import { Checkbox, SVG } from "components";
 import MDPreviewer from "./MDPreviewer";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   listId: string;
@@ -40,6 +41,7 @@ type Props = {
 
 const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
   ({ listId, cardId, onExit }, ref) => {
+    const { t } = useTranslation();
     const cardTextAreaRef = useRef<HTMLTextAreaElement>(null);
     const descriptionAreaRef = useRef<HTMLTextAreaElement>(null);
     const descriptionFormRef = useRef<HTMLFormElement>(null);
@@ -171,9 +173,9 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
 
         <StyledDescriptionWrappper>
           <StyledDescriptionHeading>
-            Description
+            {t("tasks.description")}
             <Checkbox
-              label="preview"
+              label={t("tasks.preview")}
               hidden={!editingDescription}
               onChange={showPreviewCallback}
               asPrimary
@@ -190,20 +192,22 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
               ) : (
                 <>
                   <StyledDescriptionArea
-                    placeholder="Add a more detailed description..."
+                    placeholder={t(
+                      "tasks.detailedDescriptionPlaceholder"
+                    )}
                     value={description}
                     onChange={setDescriptionCallback}
                     ref={descriptionAreaRef}
                   />
                   <StyledButtonPrimary type="submit">
-                    Save
+                    {t("tasks.save")}
                   </StyledButtonPrimary>
 
                   <StyledButtonNormal
                     type="reset"
                     onClick={dontEditDescriptionCallback}
                   >
-                    Cancel
+                    {t("tasks.cancel")}
                   </StyledButtonNormal>
 
                   <StyledDescriptionFormatHelp
@@ -211,7 +215,7 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
                     rel="noopener noreferrer"
                     href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
                   >
-                    Formatting Help
+                    {t("tasks.formattingHelp")}
                   </StyledDescriptionFormatHelp>
                 </>
               )}
@@ -223,14 +227,14 @@ const TaskDetails = React.forwardRef<HTMLDivElement, Props>(
             />
           )}
           <Checkbox
-            label="Done"
+            label={t("tasks.done")}
             checked={card?.done}
             onChange={setTaskCardDoneCallback}
           />
         </StyledDescriptionWrappper>
 
         <StyledDeleteButton onClick={onCardDeleteAction}>
-          <SVG name="trash" /> Delete Card
+          <SVG name="trash" /> {t("tasks.deleteCard")}
         </StyledDeleteButton>
       </StyledDetailContainer>
     );

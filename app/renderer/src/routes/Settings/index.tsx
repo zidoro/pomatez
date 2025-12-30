@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { getFromStorage, saveToStorage } from "utils";
 import { StyledSettings } from "styles";
 import { Alert } from "components";
 
 import FeatureSection from "./FeatureSection";
+import LanguageSection from "./LanguageSection";
 import HelpSection from "./HelpSection";
 import ShortcutSection from "./ShortcutSection";
 import StickySection from "./StickySection";
@@ -12,6 +14,7 @@ import { useAppSelector } from "hooks/storeHooks";
 import { Updater } from "../../components";
 
 export default function Settings() {
+  const { t } = useTranslation();
   const alertState = getFromStorage("alert") || null;
 
   const update = useAppSelector((state) => state.update);
@@ -25,15 +28,15 @@ export default function Settings() {
       <SettingHeader />
       {alert === null && (
         <Alert
-          heading="Hi 👋,"
-          body="If you liked this app, please consider starring this project on GitHub to show your ❤️ and
-				support."
+          heading={t("settings.alertHeading")}
+          body={t("settings.alertBody")}
           onClose={() => {
             saveToStorage("alert", "hide");
             setAlert("hide");
           }}
         />
       )}
+      <LanguageSection />
       <FeatureSection />
       <ShortcutSection />
       <HelpSection />

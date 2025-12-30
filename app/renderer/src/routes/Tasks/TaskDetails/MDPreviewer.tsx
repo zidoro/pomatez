@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyledDescriptionPreviewer } from "styles";
 import ReactMarkdown from "react-markdown";
 
@@ -10,6 +11,8 @@ type Props = {
 };
 
 const MDPreviewer: React.FC<Props> = ({ description, onClick }) => {
+  const { t } = useTranslation();
+
   return (
     <StyledDescriptionPreviewer
       className="md-previewer"
@@ -28,7 +31,7 @@ const MDPreviewer: React.FC<Props> = ({ description, onClick }) => {
         source={
           description
             ? description
-            : "Add a more detailed description..."
+            : t("tasks.detailedDescriptionPlaceholder")
         }
       />
     </StyledDescriptionPreviewer>
