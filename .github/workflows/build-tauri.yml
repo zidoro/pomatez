@@ -87,7 +87,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
           APPLE_PROVIDER_SHORT_NAME: ${{ secrets.APPLE_PROVIDER_SHORT_NAME }}
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: tauri-${{ matrix.name }}
           path: |
@@ -130,7 +130,7 @@ jobs:
           cache: "yarn"
       - name: Generate updater file
         run: node app/tauri/release-prep/release-prep.js
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: tauri-release
           path: |
