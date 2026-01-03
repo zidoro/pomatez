@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.11.0](https://github.com/zidoro/pomatez/compare/v1.10.0...v1.11.0) (2026-01-03)
+
+
+### Features ✨
+
+* add translation support ([8f24913](https://github.com/zidoro/pomatez/commit/8f2491336e0636519e589ae31c9adc797427d73c))
+
+
+### Bug Fixes 🐛
+
+* **tauri:** on mac hide the native checkmarks ([3cf59ff](https://github.com/zidoro/pomatez/commit/3cf59ffd3a6f3514a027980aba5245d42cdd354d))
+
 ## [1.10.0](https://github.com/zidoro/pomatez/compare/v1.9.0...v1.10.0) (2025-12-23)
 
 
