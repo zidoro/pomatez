@@ -81,3 +81,10 @@ help with local development.
 
 If your pr is being rejected due to the pre-commit checks, just download pre-commit using `pip install pre-commit` or via one of the commands [here](https://pre-commit.com/#install).
 Once that is installed just running `pre-commit` should automatically fix the files.
+
+## Known Build Issues
+
+### Linux (AppImage)
+
+- `Error failed to bundle project failed to run linuxdeploy`
+  - On linux if you are having issues with linuxdeploy then try running it with the arg NO_STRIP=1
