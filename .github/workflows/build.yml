@@ -7,10 +7,21 @@ on:
       - "website"
       - "CHANGELOG.md"
   workflow_call:
+    inputs:
+      target_release_env:
+        description: "Target the Release environment for this workflow."
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      target_release_env:
+        description: "Target the Release environment for this workflow."
+        type: boolean
+        default: false
 jobs:
-  build:
+  build: &build_job
     name: "Build"
+    if: ${{ !inputs.target_release_env }}
     strategy:
       matrix:
         include:
@@ -100,3 +111,8 @@ jobs:
           name: built-app-AutoUpdater-${{ matrix.name }}
           path: |
             app/electron/dist/latest*
+  build-release:
+    <<: *build_job
+    name: "Build (Release env)"
+    if: ${{ inputs.target_release_env }}
+    environment: Release

@@ -25,12 +25,16 @@ jobs:
     needs: release-please
     if: needs.release-please.outputs.release_created
     uses: ./.github/workflows/build.yml
+    with:
+      target_release_env: true
     secrets: inherit
   build-tauri:
     name: "Build Tauri"
     needs: release-please
     if: needs.release-please.outputs.release_created
     uses: ./.github/workflows/build-tauri.yml
+    with:
+      target_release_env: true
     secrets: inherit
   publish:
     name: Publish
@@ -85,6 +89,7 @@ jobs:
       - publish
       - release-please
     runs-on: windows-latest
+    environment: Release
     continue-on-error: true
     steps:
       - uses: vedantmgoyal2009/winget-releaser@main

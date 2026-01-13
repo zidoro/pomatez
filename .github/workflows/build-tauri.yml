@@ -8,11 +8,21 @@ on:
       - "website"
       - "CHANGELOG.md"
   workflow_call:
+    inputs:
+      target_release_env:
+        description: "Target the Release environment for this workflow."
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      target_release_env:
+        description: "Target the Release environment for this workflow."
+        type: boolean
+        default: false
 jobs:
-  build:
+  build: &build_job
     name: "Test Build"
-
+    if: ${{ !inputs.target_release_env }}
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -73,8 +83,13 @@ jobs:
       - name: Build
         shell: bash
         run: |
+          if [[ "${{ inputs.target_release_env }}" == "true" ]]; then
+            config_args="--config ./app/tauri/release.conf.json"
+          else
+            config_args=""
+          fi
           for target in ${{ join(matrix.tauri_target, ' ') }}; do
-            yarn build:tauri --target $target --config ./app/tauri/release.conf.json
+            yarn build:tauri --target $target $config_args
           done
         env:
           APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
@@ -100,8 +115,16 @@ jobs:
             app/tauri/target/*/release/bundle/macos/**/*.tar.gz
             app/tauri/target/*/release/bundle/**/*.zip
             app/tauri/target/*/release/bundle/**/*.sig
+  build-release:
+    <<: *build_job
+    name: "Test Build (Release env)"
+    if: ${{ inputs.target_release_env }}
+    environment: Release
   generate-updater-file:
-    needs: build
+    needs:
+      - build
+      - build-release
+    if: ${{ needs.build.result == 'success' || needs.build-release.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
