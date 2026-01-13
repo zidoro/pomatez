@@ -3,9 +3,14 @@
     windows_subsystem = "windows"
 )]
 
+#[cfg(debug_assertions)]
 use std::time::{Duration, Instant};
+
+#[cfg(desktop)]
 use tauri::{Manager, RunEvent, WindowEvent};
+#[cfg(desktop)]
 use tauri_plugin_window_state::{AppHandleExt, StateFlags, WindowExt};
+
 use tauri_plugin_autostart::MacosLauncher;
 
 #[macro_use]
