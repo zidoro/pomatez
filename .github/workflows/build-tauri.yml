@@ -80,27 +80,12 @@ jobs:
         run: |
           mkdir -p ~/private_keys/
           echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
-      - name: Build
+      - name: Build (non-release)
         shell: bash
         run: |
-          if [[ "${{ inputs.target_release_env }}" == "true" ]]; then
-            config_args="--config ./app/tauri/release.conf.json"
-          else
-            config_args=""
-          fi
           for target in ${{ join(matrix.tauri_target, ' ') }}; do
-            yarn build:tauri --target $target $config_args
+            yarn build:tauri --target $target
           done
-        env:
-          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
-          APPLE_API_KEY_PATH: ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
-          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
-          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
-          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-          APPLE_PROVIDER_SHORT_NAME: ${{ secrets.APPLE_PROVIDER_SHORT_NAME }}
       # Possibly set up some basic unit testing just to make sure parts render and none of the libraries are straight up breaking
       - uses: actions/upload-artifact@v4
         with:
@@ -176,16 +161,11 @@ jobs:
         run: |
           mkdir -p ~/private_keys/
           echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
-      - name: Build
+      - name: Build (release)
         shell: bash
         run: |
-          if [[ "${{ inputs.target_release_env }}" == "true" ]]; then
-            config_args="--config ./app/tauri/release.conf.json"
-          else
-            config_args=""
-          fi
           for target in ${{ join(matrix.tauri_target, ' ') }}; do
-            yarn build:tauri --target $target $config_args
+            yarn build:tauri --target $target --config ./app/tauri/release.conf.json
           done
         env:
           APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
