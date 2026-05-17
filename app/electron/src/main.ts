@@ -42,7 +42,6 @@ import {
 import isDev from "electron-is-dev";
 import store from "./store";
 
-import "v8-compile-cache";
 import {
   FullscreenState,
   setFullscreenBreakHandler,

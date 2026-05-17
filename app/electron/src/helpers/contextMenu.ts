@@ -43,7 +43,7 @@ export const createContextMenu = (win: BrowserWindow) => {
     }
 
     if (props.isEditable) {
-      menu.popup();
+      menu.popup({ window: win });
     }
   });
 };

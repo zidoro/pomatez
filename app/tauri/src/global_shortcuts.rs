@@ -1,7 +1,7 @@
 use lazy_static::lazy_static;
 use tauri::{App, AppHandle, Manager};
 use tauri_plugin_global_shortcut::Code;
-use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
 
 lazy_static! {
     static ref SHOW_SHORTCUT: Shortcut =
@@ -17,56 +17,44 @@ pub trait PomatezGlobalShortcutsSetup {
 
 impl PomatezGlobalShortcutsSetup for App {
     fn setup_global_shortcuts(&self) {
-        let window = self.get_window("main").expect("Failed to get window");
-        let global_shortcut_plugin = {
-            tauri_plugin_global_shortcut::Builder::with_handler(move |_app_handle, shortcut| {
+        let window = self
+            .get_webview_window("main")
+            .expect("Failed to get main window");
+
+        let global_shortcut_plugin = tauri_plugin_global_shortcut::Builder::new()
+            .with_handler(move |_app_handle, shortcut, event| {
+                // Only react on key press, not on release.
+                if event.state() != ShortcutState::Pressed {
+                    return;
+                }
+
                 println!("Shortcut pressed: {:?}", shortcut);
                 match shortcut.id() {
                     key if SHOW_SHORTCUT.id() == key => {
-                        match window.show() {
-                            Ok(_) => {}
-                            Err(e) => {
-                                println!("Failed to show window: {:?}", e);
-                            }
+                        if let Err(e) = window.show() {
+                            println!("Failed to show window: {:?}", e);
                         }
-                        match window.set_focus() {
-                            Ok(_) => {}
-                            Err(e) => {
-                                println!("Failed to focus window: {:?}", e);
-                            }
+                        if let Err(e) = window.set_focus() {
+                            println!("Failed to focus window: {:?}", e);
                         }
                     }
-                    key if HIDE_SHORTCUT.id() == key => match window.hide() {
-                        Ok(_) => {}
-                        Err(e) => {
-                            println!("Failed to hide window: {:?}", e);
-                        }
-                    },
-                    _ => println!("Shortcut pressed: {:?}", shortcut),
-                }
-                if shortcut.matches(Modifiers::ALT | Modifiers::SHIFT, Code::KeyH) {
-                    match window.hide() {
-                        Ok(_) => {}
-                        Err(e) => {
+                    key if HIDE_SHORTCUT.id() == key => {
+                        if let Err(e) = window.hide() {
                             println!("Failed to hide window: {:?}", e);
                         }
                     }
-                } else {
-                    println!("Shortcut pressed: {:?}", shortcut);
+                    _ => println!("Unhandled shortcut: {:?}", shortcut),
                 }
             })
-            .build()
-        };
+            .build();
+
         let app_handle = self.handle();
 
-        match app_handle.plugin(global_shortcut_plugin) {
-            Ok(_) => {}
-            Err(e) => {
-                println!("Failed to register global shortcut plugin: {:?}", e);
-            }
+        if let Err(e) = app_handle.plugin(global_shortcut_plugin) {
+            println!("Failed to register global shortcut plugin: {:?}", e);
+        } else {
+            println!("Registered global shortcut plugin");
         }
-
-        println!("Registered global shortcut plugin");
     }
 }
 
@@ -77,19 +65,12 @@ pub trait PomatezGlobalShortcutsRegister {
 impl PomatezGlobalShortcutsRegister for AppHandle {
     fn register_global_shortcuts(&self) {
         let global_shortcut = self.global_shortcut();
-        match global_shortcut.register(SHOW_SHORTCUT.clone()) {
-            Ok(_) => {}
-            Err(e) => {
-                println!("Failed to register global shortcut: {:?}", e);
-            }
-        };
-        match global_shortcut.register(HIDE_SHORTCUT.clone()) {
-            Ok(_) => {}
-            Err(e) => {
-                println!("Failed to register global shortcut: {:?}", e);
-            }
-        };
-
+        if let Err(e) = global_shortcut.register(SHOW_SHORTCUT.clone()) {
+            println!("Failed to register show shortcut: {:?}", e);
+        }
+        if let Err(e) = global_shortcut.register(HIDE_SHORTCUT.clone()) {
+            println!("Failed to register hide shortcut: {:?}", e);
+        }
         println!("Registered global shortcuts");
     }
 }

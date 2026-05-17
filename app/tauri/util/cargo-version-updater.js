@@ -11,7 +11,7 @@ let versionRegex = /\nversion = "([0-9.]+)"/g;
 
 let newContents = cargo.replace(
   versionRegex,
-  `\nversion = "${tauriConfig.package.version}"`
+  `\nversion = "${tauriConfig.version}"`
 );
 
 fs.writeFileSync(
@@ -20,6 +20,4 @@ fs.writeFileSync(
   "utf8"
 );
 
-console.log(
-  "Setting Cargo.toml to version " + tauriConfig.package.version
-);
+console.log("Setting Cargo.toml to version " + tauriConfig.version);

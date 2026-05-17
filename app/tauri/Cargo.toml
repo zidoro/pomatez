@@ -9,36 +9,38 @@ authors = ["Roldan Montilla Jr"]
 license = "MIT"
 repository = "https://github.com/zidoro/pomatez"
 edition = "2021"
-rust-version = "1.57"
+rust-version = "1.77.2"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+# The `_lib` suffix avoids a name conflict with the bin target on Windows.
+# https://github.com/rust-lang/cargo/issues/8519
+name = "pomatez_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-alpha.10", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
-serde_json = "1.0"
-serde = { version = "1.0", features = ["derive"] }
-url = "2.4.1"
-tauri = { version = "2.0.0-alpha.17", features =  ["tray-icon", "icon-png"] }
-reqwest = { version = "0.11.22", features = ["json"] }
-tauri-plugin-window = "2.0.0-alpha.2"
-tauri-plugin-autostart = "2.0.0-alpha.3"
-lazy_static = "1.4.0"
-base64 = { version = "0.21.4", features = [] }
-tauri-plugin-notification = "2.0.0-alpha.5"
-tauri-plugin-shell = "2.0.0-alpha.4"
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+url = "2"
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+reqwest = { version = "0.12", features = ["json"] }
+tauri-plugin-autostart = "2"
+lazy_static = "1"
+base64 = "0.22"
+tauri-plugin-notification = "2"
+tauri-plugin-shell = "2"
 
-# This one is for toying with global hotkeys from the browser mostly
-# We can use https://github.com/tauri-apps/global-hotkey directly tbh
+# Desktop-only plugins.
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
-tauri-plugin-global-shortcut = "2.0.0-alpha.3"
-tauri-plugin-updater = "2.0.0-alpha.3"
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-updater = "2"
 
 [features]
 # by default Tauri runs in production mode
-# when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
+# when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devUrl` is an URL
 default = ["custom-protocol"]
-# this feature is used used for production builds where `devPath` points to the filesystem
+# this feature is used for production builds where `frontendDist` points to the filesystem
 # DO NOT remove this
 custom-protocol = ["tauri/custom-protocol"]

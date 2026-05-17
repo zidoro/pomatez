@@ -2,13 +2,14 @@
 // Will tidy up in the future
 
 use std::sync::Mutex;
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use tauri::{Builder, LogicalSize, Runtime, Wry};
 
 #[non_exhaustive]
 struct WindowSize;
 
 use crate::system_tray;
+#[cfg(desktop)]
 use crate::updater;
 
 impl WindowSize {
@@ -56,7 +57,7 @@ fn show_window<R: Runtime>(_window: tauri::Window<R>) {
 }
 
 #[tauri::command]
-fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::Window<R>) {
+fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::WebviewWindow<R>) {
     println!("set_always_on_top! {}", always_on_top);
     try_set_always_on_top(always_on_top, &window);
 }
@@ -65,7 +66,7 @@ fn set_always_on_top<R: Runtime>(always_on_top: bool, window: tauri::Window<R>) 
 fn set_fullscreen_break<R: Runtime>(
     should_fullscreen: bool,
     always_on_top: bool,
-    window: tauri::Window<R>,
+    window: tauri::WebviewWindow<R>,
 ) {
     println!(
         "set_fullscreen_break! {} {}",
@@ -85,21 +86,21 @@ fn set_fullscreen_break<R: Runtime>(
     try_set_fullscreen(should_fullscreen, &window);
 }
 
-fn try_set_fullscreen<R: Runtime>(fullscreen: bool, window: &tauri::Window<R>) {
+fn try_set_fullscreen<R: Runtime>(fullscreen: bool, window: &tauri::WebviewWindow<R>) {
     match window.set_fullscreen(fullscreen) {
         Ok(_) => (),
         Err(e) => println!("There was a problem setting fullscreen: {}", e),
     }
 }
 
-fn try_set_always_on_top<R: Runtime>(always_on_top: bool, window: &tauri::Window<R>) {
+fn try_set_always_on_top<R: Runtime>(always_on_top: bool, window: &tauri::WebviewWindow<R>) {
     match window.set_always_on_top(always_on_top) {
         Ok(_) => (),
         Err(e) => println!("There was a problem altering always on top: {}", e),
     }
 }
 
-fn try_set_min_size<R: Runtime>(size: Option<LogicalSize<u32>>, window: &tauri::Window<R>) {
+fn try_set_min_size<R: Runtime>(size: Option<LogicalSize<u32>>, window: &tauri::WebviewWindow<R>) {
     match window.set_min_size(size) {
         //Some(size)) {
         Ok(_) => (),
@@ -107,7 +108,7 @@ fn try_set_min_size<R: Runtime>(size: Option<LogicalSize<u32>>, window: &tauri::
     }
 }
 
-fn try_set_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::Window<R>) {
+fn try_set_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::WebviewWindow<R>) {
     match window.set_size(size) {
         Ok(_) => (),
         Err(e) => println!("There was a problem setting the window size! {:?}", e),
@@ -115,7 +116,7 @@ fn try_set_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::Window<R>) {
     println!("Set size to {:?}", size);
 }
 
-fn try_set_resizeable<R: Runtime>(resizeable: bool, window: &tauri::Window<R>) {
+fn try_set_resizeable<R: Runtime>(resizeable: bool, window: &tauri::WebviewWindow<R>) {
     println!("Window resizeable {:?}", resizeable);
     match window.set_resizable(resizeable) {
         Ok(_) => (),
@@ -123,7 +124,7 @@ fn try_set_resizeable<R: Runtime>(resizeable: bool, window: &tauri::Window<R>) {
     }
 }
 
-fn set_window_fixed_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::Window<R>) {
+fn set_window_fixed_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::WebviewWindow<R>) {
     let decorations = HAS_DECORATIONS.lock().unwrap();
 
     let new_height = size.height
@@ -145,7 +146,7 @@ fn set_window_fixed_size<R: Runtime>(size: LogicalSize<u32>, window: &tauri::Win
 fn set_window_resizeable<R: Runtime>(
     min_size: LogicalSize<u32>,
     size: LogicalSize<u32>,
-    window: &tauri::Window<R>,
+    window: &tauri::WebviewWindow<R>,
 ) {
     try_set_resizeable(true, window);
     try_set_size(size, window);
@@ -153,7 +154,7 @@ fn set_window_resizeable<R: Runtime>(
 }
 
 #[tauri::command]
-fn set_compact_mode<R: Runtime>(compact_mode: bool, window: tauri::Window<R>) {
+fn set_compact_mode<R: Runtime>(compact_mode: bool, window: tauri::WebviewWindow<R>) {
     {
         let mut compact = IS_COMPACT.lock().unwrap();
         *compact = compact_mode;
@@ -179,12 +180,12 @@ fn set_compact_mode<R: Runtime>(compact_mode: bool, window: tauri::Window<R>) {
 
 // TODO - This is doing nothing - Remove or fix
 #[tauri::command]
-fn set_ui_theme<R: Runtime>(is_dark_mode: bool, _window: tauri::Window<R>) {
+fn set_ui_theme<R: Runtime>(is_dark_mode: bool, _window: tauri::WebviewWindow<R>) {
     println!("set_ui_theme! {}", is_dark_mode);
 }
 
 #[tauri::command]
-fn set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: tauri::Window<R>) {
+fn set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: tauri::WebviewWindow<R>) {
     {
         let mut decorations = HAS_DECORATIONS.lock().unwrap();
         if *decorations == use_native_titlebar {
@@ -197,7 +198,7 @@ fn set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: tauri::Win
     try_set_native_titlebar(use_native_titlebar, &window);
 }
 
-pub fn try_set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: &tauri::Window<R>) {
+pub fn try_set_native_titlebar<R: Runtime>(use_native_titlebar: bool, window: &tauri::WebviewWindow<R>) {
     match window.set_decorations(use_native_titlebar) {
         Ok(_) => (),
         Err(e) => println!(
@@ -231,6 +232,7 @@ pub trait PomatezCommands {
 }
 
 impl PomatezCommands for Builder<Wry> {
+    #[cfg(desktop)]
     fn register_pomatez_commands(self) -> tauri::Builder<Wry> {
         self.invoke_handler(tauri::generate_handler![
             show_window,
@@ -244,6 +246,21 @@ impl PomatezCommands for Builder<Wry> {
             minimize_window,
             updater::check_for_updates,
             updater::install_update
+        ])
+    }
+
+    #[cfg(not(desktop))]
+    fn register_pomatez_commands(self) -> tauri::Builder<Wry> {
+        self.invoke_handler(tauri::generate_handler![
+            show_window,
+            set_always_on_top,
+            set_fullscreen_break,
+            set_compact_mode,
+            set_ui_theme,
+            set_native_titlebar,
+            system_tray::tray_icon_update,
+            close_window,
+            minimize_window
         ])
     }
 }

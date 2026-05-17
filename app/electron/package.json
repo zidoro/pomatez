@@ -17,7 +17,7 @@
     "predev:main": "wait-on http://127.0.0.1:3000",
     "dev:main": "nodemon --exec \"yarn build && electron .\"",
     "start": "yarn dev:main",
-    "build": "tsc && copyfiles -u 2 \"src/assets/*\" build/assets",
+    "build": "tsc && esbuild src/preload.ts --bundle --platform=node --external:electron --outfile=build/preload.js && copyfiles -u 2 \"src/assets/*\" build/assets",
     "build:mwl": "electron-builder -mwl --ia32 --x64 --arm64",
     "build:dir": "electron-builder --dir",
     "build:win": "electron-builder --win --ia32 --x64 --publish=never",
@@ -89,12 +89,11 @@
     "discord-rpc": "^4.0.1",
     "electron-is-dev": "^2.0.0",
     "electron-log": "^4.2.4",
-    "electron-store": "^6.0.1",
-    "electron-updater": "^4.6.5",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.6.2",
     "lodash.debounce": "^4.0.8",
     "node-notifier": "10.0.1",
-    "uuid": "7.0.3",
-    "v8-compile-cache": "^2.1.1"
+    "uuid": "7.0.3"
   },
   "devDependencies": {
     "@jest-runner/electron": "^3.0.0",
@@ -103,12 +102,13 @@
     "@types/uuid": "7.0.3",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.3",
-    "electron": "18.1.0",
-    "electron-builder": "23.6.0",
+    "@electron/notarize": "^2.5.0",
+    "esbuild": "^0.25.0",
+    "electron": "34.5.8",
+    "electron-builder": "^25.0.0",
     "electron-devtools-installer": "^3.2.0",
-    "electron-notarize": "1.2.2",
-    "electron-reload": "2.0.0-alpha.1",
-    "nodemon": "2.0.20",
+    "electron-reload": "^1.5.0",
+    "nodemon": "^3.1.0",
     "regenerator-runtime": "^0.13.11",
     "ts-jest": "^26.5.6"
   }

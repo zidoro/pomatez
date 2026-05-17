@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     name: "Build"
+    environment: Release
     strategy:
       matrix:
         include:
@@ -51,7 +52,7 @@ jobs:
           APPLE_API_KEY_PATH: ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
           API_KEY_ID: ${{ secrets.APPLE_API_KEY }}
           API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER }}
-          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_LINK: ${{ secrets.APPLE_CERTIFICATE }}
           CSC_KEY_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
         run: |
           yarn build

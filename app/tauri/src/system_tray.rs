@@ -1,18 +1,19 @@
 use std::path::PathBuf;
 use tauri::path::BaseDirectory;
 use tauri::{
+    image::Image,
     menu::{MenuBuilder, MenuItemBuilder},
-    tray::{ClickType, TrayIconBuilder},
+    tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
+    App, Manager, Runtime,
 };
-use tauri::{App, Icon, Manager, Runtime};
 
-use base64;
 use base64::engine::general_purpose;
 use base64::Engine;
 
+const TRAY_ID: &str = "main";
+
 #[tauri::command]
 pub fn tray_icon_update<R: Runtime>(data_url: String, window: tauri::Window<R>) {
-    println!("tray_icon_update!");
     let base64_str = data_url.trim_start_matches("data:image/png;base64,");
 
     let decoded_vec = match general_purpose::STANDARD.decode(base64_str) {
@@ -23,23 +24,21 @@ pub fn tray_icon_update<R: Runtime>(data_url: String, window: tauri::Window<R>) 
         }
     };
 
-    let icon: Icon = Icon::Raw(decoded_vec);
-    let tray = window.app_handle().tray();
+    let icon = match Image::from_bytes(&decoded_vec) {
+        Ok(img) => img,
+        Err(e) => {
+            eprintln!("Error parsing tray icon image: {}", e);
+            return;
+        }
+    };
 
-    if let Some(tray) = tray {
+    if let Some(tray) = window.app_handle().tray_by_id(TRAY_ID) {
         if let Err(e) = tray.set_icon(Some(icon)) {
             eprintln!("Error setting tray icon: {}", e);
         }
     }
 }
 
-/**
-* We could do this by passing the object into a custom function that adds the commands but I wanted
-* to practice more with rust. Plus it makes the setup cleaner.
-
-* Switch to a function that takes and returns tauri::Builder<Wry> or uses a reference if we need to
-* switch it.
- */
 pub trait PomatezTray {
     fn set_pomatez_system_tray(&self);
 }
@@ -51,31 +50,35 @@ impl PomatezTray for App {
      */
     fn set_pomatez_system_tray(&self) {
         println!("Setting system tray");
-        // Was defined in tauri.config.json to start in v1
-        // That was created with an id of 1 though this gives more control
 
-        let show = MenuItemBuilder::with_id("show", "Show").build(self);
-        let quit = MenuItemBuilder::with_id("quit", "Quit").build(self);
+        let show = MenuItemBuilder::with_id("show", "Show")
+            .build(self)
+            .expect("failed to build show menu item");
+        let quit = MenuItemBuilder::with_id("quit", "Quit")
+            .build(self)
+            .expect("failed to build quit menu item");
         let menu = MenuBuilder::new(self)
             .items(&[&show, &quit])
             .build()
             .expect("failed to build menu");
 
-        let icon_path = self
+        let icon_path: PathBuf = self
             .path()
-            .resolve::<PathBuf>("icons/icon.png".into(), BaseDirectory::Resource)
-            .expect(
-                "failed to resolve icon path, this should not happen as it is an internal file",
-            );
+            .resolve("icons/icon.png", BaseDirectory::Resource)
+            .expect("failed to resolve icon path; this should not happen as it is an internal file");
 
-        let _ = TrayIconBuilder::new()
+        let icon = Image::from_path(&icon_path).expect("failed to load tray icon image");
+
+        let _ = TrayIconBuilder::with_id(TRAY_ID)
             .menu(&menu)
             .tooltip("Pomatez")
-            .on_menu_event(move |app, event| match event.id().as_ref() {
+            .icon(icon)
+            .on_menu_event(|app, event| match event.id().as_ref() {
                 "show" => {
-                    let window = app.get_window("main").unwrap();
-                    window.show().unwrap();
-                    window.set_focus().unwrap();
+                    if let Some(window) = app.get_webview_window("main") {
+                        let _ = window.show();
+                        let _ = window.set_focus();
+                    }
                 }
                 "quit" => {
                     app.exit(0);
@@ -83,14 +86,19 @@ impl PomatezTray for App {
                 _ => {}
             })
             .on_tray_icon_event(|tray, event| {
-                if event.click_type == ClickType::Left {
+                if let TrayIconEvent::Click {
+                    button: MouseButton::Left,
+                    button_state: MouseButtonState::Up,
+                    ..
+                } = event
+                {
                     let app = tray.app_handle();
-                    let window = app.get_window("main").unwrap();
-                    window.show().unwrap();
-                    window.set_focus().unwrap();
+                    if let Some(window) = app.get_webview_window("main") {
+                        let _ = window.show();
+                        let _ = window.set_focus();
+                    }
                 }
             })
-            .icon(Icon::File(icon_path))
             .build(self)
             .expect("failed to build tray icon");
     }

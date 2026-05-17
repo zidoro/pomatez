@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
-use tauri::{Manager, Runtime};
+use tauri::{Emitter, Manager, Runtime};
 use tauri_plugin_updater::{Update, UpdaterExt};
 use url::Url;
 
@@ -28,7 +28,9 @@ struct UpdateAvailable {
 pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Window<R>) {
     let handle = window.app_handle().clone();
 
-    if !handle.config().tauri.bundle.updater.active {
+    // The updater plugin is only registered when the merged tauri config contains a
+    // `plugins.updater` block (i.e. for release builds via `release.conf.json`).
+    if !handle.config().plugins.0.contains_key("updater") {
         return;
     }
 
@@ -82,7 +84,7 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
             }
         };
 
-        // Find an asset named "tauri-release.json".
+        // Find an asset named "tauri-updater.json".
         let tauri_release_asset = latest_release
             .assets
             .iter()
@@ -92,7 +94,7 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
         let tauri_release_asset = match tauri_release_asset {
             Some(tauri_release_asset) => tauri_release_asset,
             None => {
-                println!("Failed to find tauri-release.json asset. Failed to check for updates\n\nFound Assets are:");
+                println!("Failed to find tauri-updater.json asset. Failed to check for updates\n\nFound Assets are:");
                 // Print a list of the assets found
                 for asset in latest_release.assets {
                     println!("  {:?}", asset.name);
@@ -111,14 +113,20 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
         let updater_builder = match handle
             .updater_builder()
             .endpoints(vec![tauri_release_endpoint])
-            .header("User-Agent", "pomatez")
         {
             Ok(updater_builder) => updater_builder,
             Err(e) => {
                 println!(
-                    "Failed to build updater builder: {:?}. Failed to check for updates",
+                    "Failed to set updater endpoints: {:?}. Failed to check for updates",
                     e
                 );
+                return;
+            }
+        };
+        let updater_builder = match updater_builder.header("User-Agent", "pomatez") {
+            Ok(updater_builder) => updater_builder,
+            Err(e) => {
+                println!("Failed to set updater header: {:?}", e);
                 return;
             }
         };
@@ -138,30 +146,24 @@ pub fn check_for_updates<R: Runtime>(ignore_version: String, window: tauri::Wind
 
         let response = updater.check().await;
 
-        println!("Update check response: {:?}", response);
+        println!("Update check response is error: {:?}", response.is_err());
 
-        match response {
-            Ok(Some(update)) => {
-                if ignore_version == update.version {
-                    println!("Ignoring update as user has asked to ignore this version.");
-                    return;
-                }
-                UPDATE_INFO.lock().unwrap().replace(update.clone());
-
-                match window.emit(
-                    "UPDATE_AVAILABLE",
-                    Some(UpdateAvailable {
-                        version: update.version,
-                        body: update.body,
-                    }),
-                ) {
-                    Ok(_) => {}
-                    Err(e) => {
-                        println!("Failed to emit update available event: {:?}", e);
-                    }
-                }
+        if let Ok(Some(update)) = response {
+            if ignore_version == update.version {
+                println!("Ignoring update as user has asked to ignore this version.");
+                return;
             }
-            _ => {}
+            UPDATE_INFO.lock().unwrap().replace(update.clone());
+
+            if let Err(e) = window.emit(
+                "UPDATE_AVAILABLE",
+                Some(UpdateAvailable {
+                    version: update.version,
+                    body: update.body,
+                }),
+            ) {
+                println!("Failed to emit update available event: {:?}", e);
+            }
         }
     });
 }
