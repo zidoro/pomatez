@@ -19,6 +19,7 @@
       "core:window:allow-set-size",
       "core:window:allow-set-min-size",
       "core:window:allow-set-resizable",
+      "core:window:allow-start-dragging",
       "autostart:default",
       "global-shortcut:default",
       "notification:default",
