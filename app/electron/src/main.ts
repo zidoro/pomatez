@@ -80,6 +80,8 @@ let tray: Tray | null = null;
 
 let win: BrowserWindow | null;
 
+let isRecreatingWindow = false;
+
 type WindowStateProps = {
   isOnCompactMode: boolean;
 } & FullscreenState;
@@ -467,9 +469,25 @@ ipcMain.on(CLOSE_WINDOW, (e, { closeToTray }) => {
 ipcMain.on(SET_NATIVE_TITLEBAR, (e, { useNativeTitlebar }) => {
   if (store.safeGet("useNativeTitlebar") !== useNativeTitlebar) {
     store.safeSet("useNativeTitlebar", useNativeTitlebar);
+    const bounds = win?.getBounds();
     setTimeout(() => {
-      app.relaunch();
-      app.exit();
+      isRecreatingWindow = true;
+      win?.destroy();
+      win = null;
+      createMainWindow();
+      isRecreatingWindow = false;
+      if (bounds) {
+        // Set in createMainWindow but the ts compiler seems to see it as never
+        (win as BrowserWindow | null)?.setBounds(bounds);
+      }
+      if (onProduction && win) {
+        blockShortcutKeys(win, [
+          "CommandOrControl+R",
+          "CommandOrControl+Shift+R",
+          "CommandOrControl+Alt+Q",
+          "F11",
+        ]);
+      }
     }, 1000);
   }
 });
@@ -506,7 +524,7 @@ ipcMain.on(SET_ENABLE_RPC, (e, { enableRPC }) => {
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
+  if (!isRecreatingWindow && process.platform !== "darwin") {
     app.quit();
   }
 });
