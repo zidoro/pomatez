@@ -71,12 +71,20 @@ jobs:
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Prepare for app notarization
-        if: startsWith(matrix.os, 'macos')
+        if: inputs.environment == 'Release' && startsWith(matrix.os, 'macos')
         # Import Apple API key for app notarization on macOS
         run: |
           mkdir -p ~/private_keys/
           echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
       - name: Build
+        if: inputs.environment != 'Release'
+        shell: bash
+        run: |
+          for target in ${{ join(matrix.tauri_target, ' ') }}; do
+            yarn build:tauri --target $target
+          done
+      - name: Build (Release)
+        if: inputs.environment == 'Release'
         shell: bash
         run: |
           for target in ${{ join(matrix.tauri_target, ' ') }}; do

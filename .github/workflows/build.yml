@@ -47,12 +47,20 @@ jobs:
         run: |
           yarn install --immutable --network-timeout 120000
       - name: Prepare for app notarization
-        if: startsWith(matrix.os, 'macos')
+        if: inputs.environment == 'Release' && startsWith(matrix.os, 'macos')
         # Import Apple API key for app notarization on macOS
         run: |
           mkdir -p ~/private_keys/
           echo '${{ secrets.APPLE_API_KEY_FILE }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
       - name: Build
+        if: inputs.environment != 'Release'
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: |
+          yarn build
+          yarn lerna run ${{ matrix.task }} --stream
+      - name: Build (Release)
+        if: inputs.environment == 'Release'
         env:
           APPLE_API_KEY_PATH: ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY }}.p8
           API_KEY_ID: ${{ secrets.APPLE_API_KEY }}
