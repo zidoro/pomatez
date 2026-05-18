@@ -8,11 +8,16 @@ on:
       - "website"
       - "CHANGELOG.md"
   workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: false
+        default: ""
   workflow_dispatch:
 jobs:
   build:
     name: "Test Build"
-    environment: Release
+    environment: ${{ inputs.environment }}
 
     runs-on: ${{ matrix.os }}
 

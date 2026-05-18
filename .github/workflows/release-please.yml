@@ -26,12 +26,16 @@ jobs:
     if: needs.release-please.outputs.release_created
     uses: ./.github/workflows/build.yml
     secrets: inherit
+    with:
+      environment: Release
   build-tauri:
     name: "Build Tauri"
     needs: release-please
     if: needs.release-please.outputs.release_created
     uses: ./.github/workflows/build-tauri.yml
     secrets: inherit
+    with:
+      environment: Release
   publish:
     name: Publish
     needs:

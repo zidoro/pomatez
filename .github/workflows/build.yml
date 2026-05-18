@@ -7,11 +7,16 @@ on:
       - "website"
       - "CHANGELOG.md"
   workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: false
+        default: ""
   workflow_dispatch:
 jobs:
   build:
     name: "Build"
-    environment: Release
+    environment: ${{ inputs.environment }}
     strategy:
       matrix:
         include:
