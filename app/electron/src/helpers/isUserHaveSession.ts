@@ -8,7 +8,7 @@ const isUserHaveSession = async (
       `window.isUserHaveSession()`
     );
 
-    if (data === null) {
+    if (data === null || typeof data !== "string") {
       return false;
     }
     return JSON.parse(data);
