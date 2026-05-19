@@ -36,15 +36,15 @@ jobs:
           - os: ubuntu-latest
             name: linux
             targets: "x86_64-unknown-linux-gnu"
-            tauri_target: ["'x86_64-unknown-linux-gnu --bundles deb,appimage,updater'"]
+            tauri_target: ["'x86_64-unknown-linux-gnu --bundles deb,appimage'"]
           - os: ubuntu-24.04-arm
             name: linux-arm
             targets: "aarch64-unknown-linux-gnu"
-            tauri_target: ["'aarch64-unknown-linux-gnu --bundles deb,appimage,updater'"]
+            tauri_target: ["'aarch64-unknown-linux-gnu --bundles deb,appimage'"]
           - os: macos-latest
             name: mac
             targets: "aarch64-apple-darwin,x86_64-apple-darwin"
-            tauri_target: ["'universal-apple-darwin --bundles app,dmg,updater'"]
+            tauri_target: ["'universal-apple-darwin --bundles app,dmg'"]
           - os: windows-latest
             name: win
             targets: "aarch64-pc-windows-msvc,x86_64-pc-windows-msvc"
@@ -54,8 +54,8 @@ jobs:
             # Another note is embedBootstrapper is enabled to improve support on window 7. Though windows 7 doesn't support arm64.
             tauri_target:
               [
-                "'aarch64-pc-windows-msvc --bundles nsis,updater'",
-                "'x86_64-pc-windows-msvc --bundles msi,updater'",
+                "'aarch64-pc-windows-msvc --bundles nsis'",
+                "'x86_64-pc-windows-msvc --bundles msi'",
               ]
 
     steps:
@@ -99,7 +99,7 @@ jobs:
         shell: bash
         run: |
           for target in ${{ join(matrix.tauri_target, ' ') }}; do
-            yarn build:tauri --target $target --config ./release.conf.json
+            yarn build:tauri --target $target
           done
         env:
           APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
