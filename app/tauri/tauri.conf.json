@@ -41,8 +41,16 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "resources": ["icons/icon.png"],
-    "targets": ["deb", "appimage", "msi", "nsis", "dmg"],
+    "resources": [
+      "icons/icon.png"
+    ],
+    "targets": [
+      "deb",
+      "appimage",
+      "msi",
+      "nsis",
+      "dmg"
+    ],
     "linux": {
       "deb": {
         "depends": []

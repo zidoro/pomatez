@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.11.0](https://github.com/zidoro/pomatez/compare/v1.10.0...v1.11.0) (2026-05-19)
+
+
+### Features ✨
+
+* add translation support ([8f24913](https://github.com/zidoro/pomatez/commit/8f2491336e0636519e589ae31c9adc797427d73c))
+* **electron:** improve native title bar toggle behavior ([680ccd6](https://github.com/zidoro/pomatez/commit/680ccd69c283809df34c039ea44d5f218d5cc458))
+* update tauri & electron ([ce3639c](https://github.com/zidoro/pomatez/commit/ce3639c461fc8c61301a3caccd258f29e66ee29f))
+
+
+### Bug Fixes 🐛
+
+* **tauri:** add webkit flag to set on linux to stop crashes on wayland ([1cf6173](https://github.com/zidoro/pomatez/commit/1cf6173a4abefc8d4abcff2e555c6f988220cf19))
+* **tauri:** dragging on mac after tauri update ([709a83e](https://github.com/zidoro/pomatez/commit/709a83e770543f9fb672b26d75d5a45d53715d96))
+* **tauri:** dragging on mac after tauri update ([30eaf22](https://github.com/zidoro/pomatez/commit/30eaf2236b2ad7046c4cd2de946fa1d99ec0ff90))
+* **tauri:** on mac hide the native checkmarks ([3cf59ff](https://github.com/zidoro/pomatez/commit/3cf59ffd3a6f3514a027980aba5245d42cdd354d))
+
 ## [1.10.0](https://github.com/zidoro/pomatez/compare/v1.9.0...v1.10.0) (2025-12-23)
 
 
