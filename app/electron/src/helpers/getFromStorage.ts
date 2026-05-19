@@ -8,7 +8,7 @@ const getFromStorage = async (
     const data = await win.webContents.executeJavaScript(
       `localStorage.getItem("${key}")`
     );
-    if (data === null) {
+    if (data === null || typeof data !== "string") {
       return undefined;
     }
     return JSON.parse(data);
