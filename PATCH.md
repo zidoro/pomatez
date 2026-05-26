@@ -22,6 +22,7 @@ a `globalShortcut` because it is an OS-level close binding on macOS that bypasse
 webContents input.
 
 **Files changed:**
+
 - `app/electron/src/helpers/globalShortcuts.ts`
 - `app/electron/src/lifecycleEventHandlers/fullScreenBreak.ts`
 - `app/electron/src/lifecycleEventHandlers/__tests__/fullScreenBreak.test.ts`
@@ -71,11 +72,11 @@ function handleBreakInput(event, input) {
 }
 EOF
 
-# 3. Repack and replace
+# 3. Repack and replace (scriptable — no drag-and-drop required, per r-cto-dev125)
 npx asar pack pomatez-patched /tmp/app-patched.asar
-sudo cp /Applications/Pomatez.app/Contents/Resources/app.asar \
-        /Applications/Pomatez.app/Contents/Resources/app.asar.bak
-sudo cp /tmp/app-patched.asar /Applications/Pomatez.app/Contents/Resources/app.asar
+cp /Applications/Pomatez.app/Contents/Resources/app.asar \
+   /Applications/Pomatez.app/Contents/Resources/app.asar.bak
+cp /tmp/app-patched.asar /Applications/Pomatez.app/Contents/Resources/app.asar
 
 # 4. Restart Pomatez
 pkill -x Pomatez || true
@@ -150,12 +151,12 @@ brew install --cask pomatez
 
 ## Tracking
 
-| Field | Value |
-|---|---|
-| Upstream repo | https://github.com/zidoro/pomatez |
-| Our fork | https://github.com/richtong/pomatez |
-| Upstream PR | https://github.com/zidoro/pomatez/pull/752 |
-| Patch status | `pr_open` |
-| Pinned version | `1.11.0-esc-fix` |
-| Viability TTL | 90 days — re-evaluate if upstream PR stalls |
-| Related issue | upstream #49 (same root, closed, Linux) |
+| Field          | Value                                       |
+| -------------- | ------------------------------------------- |
+| Upstream repo  | https://github.com/zidoro/pomatez           |
+| Our fork       | https://github.com/richtong/pomatez         |
+| Upstream PR    | https://github.com/zidoro/pomatez/pull/752  |
+| Patch status   | `pr_open`                                   |
+| Pinned version | `1.11.0-esc-fix`                            |
+| Viability TTL  | 90 days — re-evaluate if upstream PR stalls |
+| Related issue  | upstream #49 (same root, closed, Linux)     |
