@@ -1,0 +1,57 @@
+---
+name: Sync Upstream Release
+
+on:
+  schedule:
+    - cron: "0 9 1 * *" # 1st of every month at 09:00 UTC
+  workflow_dispatch: # manual trigger any time
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check upstream for new release
+        id: check
+        run: |
+          UPSTREAM=$(curl -s https://api.github.com/repos/zidoro/pomatez/releases/latest \
+            | jq -r '.tag_name')
+          CURRENT=$(git tag --list 'v*' --sort=-version:refname | head -1 | sed 's/-esc-fix//')
+          echo "upstream=$UPSTREAM" >> $GITHUB_OUTPUT
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          if [ "$UPSTREAM" = "$CURRENT" ]; then
+            echo "new=false" >> $GITHUB_OUTPUT
+            echo "No new upstream release ($UPSTREAM). Nothing to do."
+          else
+            echo "new=true" >> $GITHUB_OUTPUT
+            echo "New upstream release: $UPSTREAM (we have $CURRENT)"
+          fi
+
+      - name: Rebase patch onto new upstream tag
+        if: steps.check.outputs.new == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/zidoro/pomatez.git
+          git fetch upstream
+          TAG=${{ steps.check.outputs.upstream }}
+          git checkout -b fix/esc-key-global-shortcut-leak-$TAG upstream/$TAG
+          git cherry-pick origin/fix/esc-key-global-shortcut-leak..HEAD || true
+          git push origin fix/esc-key-global-shortcut-leak-$TAG
+
+      - name: Open PR if rebase succeeded
+        if: steps.check.outputs.new == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG=${{ steps.check.outputs.upstream }}
+          gh pr create \
+            --title "chore: rebase ESC fix onto upstream $TAG" \
+            --body "Upstream released $TAG. Rebased fix/esc-key-global-shortcut-leak onto the new tag. Review, merge, then build and update the homebrew cask per PATCH.md Option B." \
+            --base master \
+            --head fix/esc-key-global-shortcut-leak-$TAG || echo "PR already exists"

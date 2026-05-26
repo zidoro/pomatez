@@ -56,7 +56,9 @@ export const setFullscreenBreakHandler = (
   if (shouldFullscreen) {
     setFullScreen(true, alwaysOnTop, win, isFullscreen);
 
-    activateFullScreenShortcuts(() => {});
+    if (win) {
+      activateFullScreenShortcuts(win, () => {});
+    }
 
     tray?.setToolTip("");
     tray?.setContextMenu(
@@ -69,7 +71,9 @@ export const setFullscreenBreakHandler = (
   } else {
     setFullScreen(false, alwaysOnTop, win, isFullscreen);
 
-    deactivateFullScreenShortcuts();
+    if (win) {
+      deactivateFullScreenShortcuts(win);
+    }
     tray?.setToolTip(trayTooltip);
     tray?.setContextMenu(contextMenu);
   }
