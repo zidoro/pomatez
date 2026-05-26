@@ -38,10 +38,13 @@ describe("Fullscreen break", () => {
       setToolTip: jest.spyOn(tray, "setToolTip"),
       setContextMenu: jest.spyOn(tray, "setContextMenu"),
     };
+    // Esc is no longer a globalShortcut — it is handled via webContents
     expect(globalShortcut.isRegistered("Esc")).toBe(false);
     expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(
       false
     );
+
+    const webContentsOnSpy = jest.spyOn(window.webContents, "on");
 
     setFullscreenBreakHandler(
       { shouldFullscreen: true, alwaysOnTop: true },
@@ -69,8 +72,13 @@ describe("Fullscreen break", () => {
     );
     expect(fullscreenState.isFullscreen).toEqual(true);
 
-    // Verify that shortcuts have been set
-    expect(globalShortcut.isRegistered("Esc")).toBe(true);
+    // Esc is blocked via webContents.before-input-event (window-local, not global)
+    expect(webContentsOnSpy).toHaveBeenCalledWith(
+      "before-input-event",
+      expect.any(Function)
+    );
+    expect(globalShortcut.isRegistered("Esc")).toBe(false);
+    // Cmd+W still uses globalShortcut (OS-level close binding on macOS)
     expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(
       true
     );
@@ -94,11 +102,11 @@ describe("Fullscreen break", () => {
       setToolTip: jest.spyOn(tray, "setToolTip"),
       setContextMenu: jest.spyOn(tray, "setContextMenu"),
     };
-    globalShortcut.registerAll(["Esc", "CommandOrControl+W"], () => {});
-    expect(globalShortcut.isRegistered("Esc")).toBe(true);
-    expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(
-      true
-    );
+    // Simulate state from a prior enter-fullscreen: Cmd+W registered, webContents listener active
+    globalShortcut.register("CommandOrControl+W", () => {});
+    const removeListenerSpy = jest.spyOn(window.webContents, "removeListener");
+    expect(globalShortcut.isRegistered("Esc")).toBe(false);
+    expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(true);
 
     setFullscreenBreakHandler(
       { shouldFullscreen: false, alwaysOnTop: true },
@@ -126,11 +134,13 @@ describe("Fullscreen break", () => {
     );
     expect(fullscreenState.isFullscreen).toEqual(false);
 
-    // Verify that shortcuts have been set
-    expect(globalShortcut.isRegistered("Esc")).toBe(false);
-    expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(
-      false
+    // Verify before-input-event listener removed and Cmd+W unregistered
+    expect(removeListenerSpy).toHaveBeenCalledWith(
+      "before-input-event",
+      expect.any(Function)
     );
+    expect(globalShortcut.isRegistered("Esc")).toBe(false);
+    expect(globalShortcut.isRegistered("CommandOrControl+W")).toBe(false);
 
     // Verify that tray has been updated
     expect(traySpies.setToolTip).toHaveBeenCalledTimes(1);
