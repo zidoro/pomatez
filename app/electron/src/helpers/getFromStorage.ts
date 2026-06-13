@@ -6,7 +6,7 @@ const getFromStorage = async (
 ): Promise<any> => {
   try {
     const data = await win.webContents.executeJavaScript(
-      `localStorage.getItem("${key}")`
+      `localStorage.getItem(${JSON.stringify(key)})`
     );
     if (data === null) {
       return undefined;
