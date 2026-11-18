@@ -24,6 +24,16 @@ test("heartbeat CAS fences a contender and recovers only committed time", async 
   await assert.rejects(
     staleConnection.update("first", tracker.snapshot())
   );
+  await assert.rejects(
+    staleConnection.update(
+      "first",
+      undefined,
+      undefined,
+      midnight,
+      true
+    ),
+    /Only the current writer/
+  );
   await second.update("second");
   const records = await second.records();
   assert.deepEqual(

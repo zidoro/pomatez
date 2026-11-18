@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   checkpointRecording,
+  closeRecording,
   finishRecording,
   observeRecording,
   recordSuspend,
@@ -447,7 +448,9 @@ const CounterProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const sample = window.setInterval(observeRecording, 1000);
     const checkpoint = window.setInterval(checkpointRecording, 5000);
-    const quit = () => finishRecording("quit");
+    const quit = (event: PageTransitionEvent) => {
+      if (!event.persisted) void closeRecording();
+    };
     window.addEventListener("pagehide", quit);
     const unsubscribePower = window.electron?.onHistoryPower?.(
       (suspended) =>

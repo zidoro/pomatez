@@ -11,9 +11,10 @@ let unavailable = false;
 let owner: string;
 let contender: { writer: Writer; since: number } | undefined;
 let owned = false;
+let closing = false;
 let observationEpoch = 0;
 
-function commit(snapshot?: Snapshot) {
+function commit(snapshot?: Snapshot, release = false) {
   if (unavailable) return;
   // A stalled database must not grow an unbounded retry queue.
   if (pending >= 16) {
@@ -27,7 +28,7 @@ function commit(snapshot?: Snapshot) {
   pending++;
   queue = queue
     .then(async () => {
-      if (unavailable) return;
+      if (unavailable || (release && !owned)) return;
       owner ??= crypto.randomUUID();
       database ??= Repository.open(
         indexedDB,
@@ -42,7 +43,9 @@ function commit(snapshot?: Snapshot) {
         await db.update(
           owner,
           takeover || epoch !== observationEpoch ? undefined : snapshot,
-          takeover
+          takeover,
+          Date.now(),
+          release
         );
         if (takeover) {
           current = undefined;
@@ -84,6 +87,15 @@ export function finishRecording(reason: string) {
   current = undefined;
 }
 
+export function closeRecording() {
+  if (closing) return queue;
+  closing = true;
+  current?.end(Date.now(), performance.now(), "quit");
+  commit(current?.snapshot(), true);
+  current = undefined;
+  return queue;
+}
+
 export function syncRecording(
   phase: string,
   playing: boolean,
@@ -91,7 +103,7 @@ export function syncRecording(
   round: number,
   remaining: number
 ) {
-  if (contender || unavailable) return;
+  if (closing || contender || unavailable) return;
   duration = Math.round(duration);
   if (current && current.phase !== phase)
     finishRecording(
@@ -127,6 +139,7 @@ export function observeRecording() {
 }
 
 export function checkpointRecording() {
+  if (closing) return queue;
   observeRecording();
   commit(current?.snapshot());
   return queue;

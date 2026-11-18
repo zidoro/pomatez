@@ -40,7 +40,8 @@ export class Repository {
     owner: string,
     snapshot?: Snapshot,
     takeover?: Writer,
-    now = Date.now()
+    now = Date.now(),
+    release = false
   ): Promise<Writer> {
     return new Promise((resolve, reject) => {
       const stores = ["meta", "events", "checkpoint", "coverage"];
@@ -70,8 +71,15 @@ export class Repository {
         const previous = read.result as Metadata | undefined;
         const current = previous?.writer;
         const sameOwner = current?.owner === owner;
+        if (release && !sameOwner) {
+          failure = new Error(
+            "Only the current writer can release ownership"
+          );
+          tx.abort();
+          return;
+        }
         if (
-          current &&
+          current?.owner &&
           !sameOwner &&
           (takeover?.owner !== current.owner ||
             takeover.revision !== current.revision)
@@ -193,6 +201,9 @@ export class Repository {
                   "session"
                 );
             }
+            if (release && saved && !snapshot?.reason)
+              throw new Error("Cannot release an unfinished session");
+            if (release) writer = { ...writer, owner: "" };
             meta.put(
               { writer, deviceId, sequence, finished },
               "history"
