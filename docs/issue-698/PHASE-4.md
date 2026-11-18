@@ -42,3 +42,11 @@ after recording and restarting, change the reporting timezone, and confirm
 the same events rebucket without modifying timer state. Check keyboard use,
 dark and light styling, and scrolling at the minimum supported window size.
 Validate actual Tauri webview storage and navigation on a supported desktop.
+
+## Recorded results
+
+Feature commit `2942d43` passed 14 independent tests, the focused strict
+type check, all three workspace builds, and the Electron Statistics smoke
+test under Xvfb. Both fullscreen tests still fail at their existing
+`setSkipTaskbar` assertions. The full renderer type check still reports the
+dependency declaration errors above.
