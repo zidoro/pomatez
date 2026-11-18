@@ -66,6 +66,7 @@
     "use-stay-awake": "^0.1.5"
   },
   "devDependencies": {
+    "fake-indexeddb": "6.2.4",
     "react-scripts": "5.0.1",
     "say": "^0.16.0"
   },
