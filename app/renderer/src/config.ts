@@ -1,5 +1,5 @@
 import { SVGTypes } from "components";
-import { TaskList, Config, Timer, Settings } from "routes";
+import { TaskList, Config, Timer, Settings, Statistics } from "routes";
 import { ConfigSliderProps } from "routes";
 import { AppStateTypes } from "./store";
 import { DefaultRootState } from "react-redux";
@@ -40,6 +40,14 @@ export const routes: (state?: AppStateTypes) => NavItemTypes[] = (
     exact: true,
     path: "/",
     component: Timer,
+    notify: false,
+  },
+  {
+    icon: "timer",
+    name: "Statistics",
+    exact: true,
+    path: "/statistics",
+    component: Statistics,
     notify: false,
   },
   {

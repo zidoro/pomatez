@@ -32,6 +32,7 @@
     }
   },
   "dependencies": {
+    "@js-temporal/polyfill": "0.5.1",
     "@pomatez/shareables": "*",
     "@reduxjs/toolkit": "2.0.1",
     "@tauri-apps/api": "^2",
