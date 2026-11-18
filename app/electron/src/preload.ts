@@ -19,6 +19,14 @@ contextBridge.exposeInMainWorld("electron", {
       );
     }
   },
+  onHistoryPower: (callback: (suspended: boolean) => void) => {
+    const listener = (
+      _event: Electron.IpcRendererEvent,
+      suspended: boolean
+    ) => callback(suspended);
+    ipcRenderer.on("history-power", listener);
+    return () => ipcRenderer.removeListener("history-power", listener);
+  },
   openExternal: (
     url: string,
     options?: Electron.OpenExternalOptions

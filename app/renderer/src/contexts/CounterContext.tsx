@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  checkpointRecording,
+  finishRecording,
+  observeRecording,
+  recordSuspend,
+  syncRecording,
+} from "../features/sessionHistory/recorder";
 import useStayAwake from "use-stay-awake";
 import { setPlay, setRound, setTimerType } from "store";
 import { useNotification } from "hooks";
@@ -60,7 +67,13 @@ const CounterProvider: React.FC = ({ children }) => {
 
   const [duration, setDuration] = useState(config.stayFocus * 60);
 
+  const [timerRevision, setTimerRevision] = useState(0);
+  const remainingForHistory = useRef(count);
+  remainingForHistory.current = count;
+  const requestedDuration = useRef<number | null>(null);
   const setTimerDuration = useCallback((time: number) => {
+    requestedDuration.current = time * 60;
+    setTimerRevision((value) => value + 1);
     setDuration(time * 60);
     setCount(time * 60);
     setLastCountTime(Date.now());
@@ -81,6 +94,7 @@ const CounterProvider: React.FC = ({ children }) => {
   };
 
   const resetTimerAction = useCallback(() => {
+    finishRecording("reset");
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:
         setTimerDuration(config.stayFocus);
@@ -133,6 +147,7 @@ const CounterProvider: React.FC = ({ children }) => {
         if (timer.timerType !== TimerStatus.SPECIAL_BREAK) {
           if (firstBreak && currentTime === firstBreak.fromTime) {
             dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            finishRecording("special_break");
             setTimerDuration(firstBreak.duration);
             notification(
               "Special break started.",
@@ -150,6 +165,7 @@ const CounterProvider: React.FC = ({ children }) => {
 
           if (secondBreak && currentTime === secondBreak.fromTime) {
             dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            finishRecording("special_break");
             setTimerDuration(secondBreak.duration);
             notification(
               "Special break started.",
@@ -167,6 +183,7 @@ const CounterProvider: React.FC = ({ children }) => {
 
           if (thirdBreak && currentTime === thirdBreak.fromTime) {
             dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            finishRecording("special_break");
             setTimerDuration(thirdBreak.duration);
             notification(
               "Special break started.",
@@ -184,6 +201,7 @@ const CounterProvider: React.FC = ({ children }) => {
 
           if (fourthBreak && currentTime === fourthBreak.fromTime) {
             dispatch(setTimerType(TimerStatus.SPECIAL_BREAK));
+            finishRecording("special_break");
             setTimerDuration(fourthBreak.duration);
             notification(
               "Special break started.",
@@ -215,6 +233,8 @@ const CounterProvider: React.FC = ({ children }) => {
   ]);
 
   useEffect(() => {
+    if (timer.timerType !== TimerStatus.SPECIAL_BREAK)
+      finishRecording("config_changed");
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:
         setTimerDuration(config.stayFocus);
@@ -294,6 +314,7 @@ const CounterProvider: React.FC = ({ children }) => {
     }
 
     if (count <= 0 && !hasNotifiedBreak) {
+      finishRecording("completed");
       setHasNotifiedBreak(true);
       switch (timer.timerType) {
         case TimerStatus.STAY_FOCUS:
@@ -421,6 +442,51 @@ const CounterProvider: React.FC = ({ children }) => {
     setHasNotified30Seconds,
     setHasNotified60Seconds,
     setHasNotifiedBreak,
+  ]);
+
+  useEffect(() => {
+    const sample = window.setInterval(observeRecording, 1000);
+    const checkpoint = window.setInterval(checkpointRecording, 5000);
+    const quit = () => finishRecording("quit");
+    window.addEventListener("pagehide", quit);
+    const unsubscribePower = window.electron?.onHistoryPower?.(
+      (suspended) =>
+        recordSuspend(
+          suspended,
+          Math.max(0, remainingForHistory.current * 1000)
+        )
+    );
+    checkpointRecording();
+    return () => {
+      unsubscribePower?.();
+      window.clearInterval(sample);
+      window.clearInterval(checkpoint);
+      window.removeEventListener("pagehide", quit);
+    };
+  }, []);
+
+  useEffect(() => {
+    const phase =
+      timer.timerType === TimerStatus.STAY_FOCUS
+        ? "focus"
+        : timer.timerType.toLowerCase();
+    const resetDuration = requestedDuration.current;
+    requestedDuration.current = null;
+    syncRecording(
+      phase,
+      timer.playing && (!hasNotifiedBreak || resetDuration !== null),
+      (resetDuration ?? duration) * 1000,
+      timer.round,
+      (resetDuration ?? count) * 1000
+    );
+  }, [
+    timer.timerType,
+    timer.playing,
+    timer.round,
+    timerRevision,
+    duration,
+    count,
+    hasNotifiedBreak,
   ]);
 
   useEffect(() => {

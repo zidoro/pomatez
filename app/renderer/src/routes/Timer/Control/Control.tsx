@@ -1,3 +1,4 @@
+import { finishRecording } from "../../../features/sessionHistory/recorder";
 import WarningBell from "assets/audios/warning-bell.wav";
 import { SVG } from "components";
 import React, { useCallback, useEffect, useState } from "react";
@@ -90,6 +91,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
       return;
     }
 
+    finishRecording("skipped");
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:
         if (timer.round < config.sessionRounds) {
@@ -128,6 +130,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   ]);
 
   const onResetSessionCallback = useCallback(() => {
+    finishRecording("reset");
     dispatch(setTimerType(TimerStatus.STAY_FOCUS));
     dispatch(setRound(1));
   }, [dispatch]);

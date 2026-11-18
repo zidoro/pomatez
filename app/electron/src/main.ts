@@ -8,6 +8,7 @@ import {
   shell,
   nativeImage,
   dialog,
+  powerMonitor,
 } from "electron";
 import debounce from "lodash.debounce";
 import notifier from "node-notifier";
@@ -315,6 +316,12 @@ if (!onlySingleInstance) {
   });
 
   app.whenReady().then(async () => {
+    powerMonitor.on("suspend", () =>
+      win?.webContents.send("history-power", true)
+    );
+    powerMonitor.on("resume", () =>
+      win?.webContents.send("history-power", false)
+    );
     if (isDev) {
       console.log("Installing devtools");
       const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];

@@ -1,0 +1,360 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pomatez draft v1 session history event",
+  "description": "Proposed format, not implemented. Timestamp arithmetic and cross-record consistency require semantic validation.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "record_type": {
+          "const": "session_started"
+        },
+        "source": {
+          "const": "pomatez"
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "phase": {
+          "enum": [
+            "focus",
+            "short_break",
+            "long_break",
+            "special_break"
+          ]
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "configured_duration_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "round": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_type",
+        "source",
+        "device_id",
+        "event_id",
+        "sequence",
+        "recorded_at",
+        "session_id",
+        "phase",
+        "task_id",
+        "started_at",
+        "configured_duration_ms",
+        "round"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "record_type": {
+          "const": "active_segment"
+        },
+        "source": {
+          "const": "pomatez"
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "phase": {
+          "enum": [
+            "focus",
+            "short_break",
+            "long_break",
+            "special_break"
+          ]
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "observed_ended_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "end_reason": {
+          "enum": [
+            "paused",
+            "completed",
+            "skipped",
+            "reset",
+            "quit",
+            "recovered",
+            "special_break",
+            "config_changed",
+            "suspended",
+            "clock_changed",
+            "observation_gap"
+          ]
+        },
+        "quality_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "recovered",
+              "clock_adjusted",
+              "coverage_gap",
+              "suspend_detected"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_type",
+        "source",
+        "device_id",
+        "event_id",
+        "sequence",
+        "recorded_at",
+        "session_id",
+        "phase",
+        "task_id",
+        "started_at",
+        "ended_at",
+        "observed_ended_at",
+        "duration_ms",
+        "end_reason",
+        "quality_flags"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "record_type": {
+          "const": "session_ended"
+        },
+        "source": {
+          "const": "pomatez"
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "phase": {
+          "enum": [
+            "focus",
+            "short_break",
+            "long_break",
+            "special_break"
+          ]
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+        },
+        "status": {
+          "enum": ["completed", "interrupted"]
+        },
+        "end_reason": {
+          "enum": [
+            "completed",
+            "skipped",
+            "reset",
+            "quit",
+            "recovered",
+            "special_break",
+            "config_changed"
+          ]
+        },
+        "quality_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "recovered",
+              "clock_adjusted",
+              "coverage_gap",
+              "suspend_detected"
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_type",
+        "source",
+        "device_id",
+        "event_id",
+        "sequence",
+        "recorded_at",
+        "session_id",
+        "phase",
+        "task_id",
+        "ended_at",
+        "status",
+        "end_reason",
+        "quality_flags"
+      ],
+      "oneOf": [
+        {
+          "properties": {
+            "status": {
+              "const": "completed"
+            },
+            "end_reason": {
+              "const": "completed"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "interrupted"
+            },
+            "end_reason": {
+              "not": {
+                "const": "completed"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
