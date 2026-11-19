@@ -7,3 +7,5 @@ export { default as Config } from "./Config";
 export { default as Settings } from "./Settings";
 
 export const TaskList = lazy(() => import("./Tasks"));
+
+export const Statistics = lazy(() => import("./Statistics"));

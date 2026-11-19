@@ -1,0 +1,92 @@
+.history-page {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+.history-page h2 {
+  margin-top: 1rem;
+}
+.history-page p {
+  margin: 0.5rem 0;
+}
+.history-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.7rem 0;
+}
+.history-controls label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.history-page :is(button, select, input) {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 0.35rem;
+  color: inherit;
+  background: var(--color-bg-primary);
+  font: inherit;
+}
+.history-page button {
+  cursor: pointer;
+}
+.history-page :is(button, select, input):focus-visible {
+  outline: 2px solid var(--color-primary);
+}
+.history-totals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+.history-totals div {
+  border: 1px solid var(--color-border-primary);
+  padding: 0.6rem;
+  border-radius: 0.35rem;
+}
+.history-totals dd {
+  font-weight: bold;
+}
+.history-chart,
+.history-sessions {
+  list-style: none;
+  padding: 0;
+}
+.history-chart li,
+.history-sessions li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--color-border-primary);
+}
+.history-sessions li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+}
+.history-legend span {
+  margin-right: 0.85rem;
+}
+.history-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.3em;
+}
+.history-bar {
+  display: flex;
+  height: 0.55rem;
+  margin: 0.2rem 0;
+}
+.history-bar span:first-child,
+.history-legend span:first-child::before {
+  background: var(--color-primary);
+}
+.history-bar span:nth-child(2),
+.history-legend span:nth-child(2)::before {
+  background: var(--color-green);
+}
+
+.history-export-message {
+  overflow-wrap: anywhere;
+}

@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "commit": "git-cz",
+    "test:session-history": "node --test tests/sessionHistory/*.test.ts",
     "dev:renderer": "lerna run dev:renderer --stream",
     "dev:main": "lerna run dev:main --stream",
     "dev:tauri": "lerna run dev:renderer --stream",

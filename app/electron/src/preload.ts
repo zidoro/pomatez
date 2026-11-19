@@ -19,6 +19,16 @@ contextBridge.exposeInMainWorld("electron", {
       );
     }
   },
+  saveHistoryJsonl: (filename: string, contents: string) =>
+    ipcRenderer.invoke("save-history-jsonl", filename, contents),
+  onHistoryPower: (callback: (suspended: boolean) => void) => {
+    const listener = (
+      _event: Electron.IpcRendererEvent,
+      suspended: boolean
+    ) => callback(suspended);
+    ipcRenderer.on("history-power", listener);
+    return () => ipcRenderer.removeListener("history-power", listener);
+  },
   openExternal: (
     url: string,
     options?: Electron.OpenExternalOptions

@@ -1,6 +1,7 @@
 // jest.config.js
 module.exports = {
-  preset: "ts-jest",
+  transform: { "^.+\\.tsx?$": "<rootDir>/jest-transform.js" },
+  testRunner: "jest-jasmine2",
   modulePathIgnorePatterns: ["build"],
   runner: "@jest-runner/electron/main",
   testEnvironment: "node",
