@@ -30,9 +30,11 @@ new Function("module", "exports", "require", text)(
   createRequire(import.meta.url)
 );
 // The isolated component uses the same React instance as the application.
-const HistoryReport = (view.exports as {
-  default: React.ComponentType<any>;
-}).default;
+const HistoryReport = (
+  view.exports as {
+    default: React.ComponentType<any>;
+  }
+).default;
 
 test("history reports loading, retry, empty period, and unsupported data", () => {
   const render = (state: unknown) =>

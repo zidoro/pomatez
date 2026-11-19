@@ -97,8 +97,9 @@ test("DST days use local boundaries and aggregate all break phases", () => {
   ] as const) {
     const local = day(date);
     const start = local.toZonedDateTime(zone).epochMilliseconds;
-    const finish = local.add({ days: 1 }).toZonedDateTime(zone)
-      .epochMilliseconds;
+    const finish = local
+      .add({ days: 1 })
+      .toZonedDateTime(zone).epochMilliseconds;
     const records = ["short_break", "long_break", "special_break"].map(
       (phase, i) => ({
         ...segment,

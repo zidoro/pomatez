@@ -10,21 +10,6 @@ RUN apt-get update && apt-get install -y \
     file \
     libssl-dev \
     libgtk-3-dev \
-    libdbus-1-3 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libpango-1.0-0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libgbm1 \
-    libxkbcommon0 \
-    libasound2 \
-    libatspi2.0-0 \
-    xvfb \
-    xauth \
     libayatana-appindicator3-dev \
     librsvg2-dev \
     javascriptcoregtk-4.1 \
