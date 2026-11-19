@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pomatez JSONL v1 line",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "record_type": {
+          "const": "export_header"
+        },
+        "export_version": {
+          "const": 1
+        },
+        "source": {
+          "const": "pomatez"
+        },
+        "reporting_timezone": {
+          "type": "string",
+          "minLength": 1
+        },
+        "range": {
+          "enum": ["day", "week", "month"]
+        },
+        "first_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "last_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "start_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ignored_records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ignored_coverage": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "record_type",
+        "export_version",
+        "source",
+        "reporting_timezone",
+        "range",
+        "first_date",
+        "last_date",
+        "start_at",
+        "end_at",
+        "event_count",
+        "ignored_records",
+        "ignored_coverage"
+      ]
+    },
+    {
+      "$ref": "session-record.schema.json"
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "record_type": {
+          "const": "coverage_gap"
+        },
+        "export_version": {
+          "const": 1
+        },
+        "source": {
+          "const": "pomatez"
+        },
+        "device_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "from_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "enum": ["clock_changed", "observation_gap", "suspended"]
+        }
+      },
+      "required": [
+        "record_type",
+        "export_version",
+        "source",
+        "device_id",
+        "session_id",
+        "from_at",
+        "to_at",
+        "reason"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,8 @@ import {
   summarize,
 } from "../../features/sessionHistory/summary";
 import { Range } from "../../features/sessionHistory/summary";
+import { makeExport } from "../../features/sessionHistory/export";
+import { saveExport } from "../../features/sessionHistory/saveExport";
 import HistoryReport from "./HistoryReport";
 import { ReportState } from "./HistoryReport";
 import "./statistics.css";
@@ -34,7 +36,7 @@ function initialZone() {
 }
 
 type ReadState =
-  | { kind: "ready"; records: unknown[] }
+  | { kind: "ready"; records: unknown[]; coverage: unknown[] }
   | { kind: "error" }
   | { kind: "loading" };
 
@@ -49,7 +51,15 @@ export default function Statistics() {
   const [reading, setReading] = useState<ReadState>({
     kind: "loading",
   });
+  const [saving, setSaving] = useState(false);
+  const [exportMessage, setExportMessage] = useState("");
+  const [exportError, setExportError] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    setExportMessage("");
+    setExportError(false);
+  }, [date, range, zone, attempt]);
+
   useEffect(() => {
     let cancelled = false;
     let repository: Repository | undefined;
@@ -63,8 +73,8 @@ export default function Statistics() {
           "pomatez-session-history"
         );
         if (cancelled) return;
-        const records = await repository.records();
-        if (!cancelled) setReading({ kind: "ready", records });
+        const history = await repository.readHistory();
+        if (!cancelled) setReading({ kind: "ready", ...history });
       } catch {
         if (!cancelled) setReading({ kind: "error" });
       } finally {
@@ -92,6 +102,67 @@ export default function Statistics() {
   const refresh = () => {
     setReading({ kind: "loading" });
     setAttempt((value) => value + 1);
+  };
+
+  const exportPeriod = async () => {
+    if (saving || reading.kind !== "ready") return;
+    setSaving(true);
+    setExportMessage("");
+    setExportError(false);
+    try {
+      const file = makeExport(reading.records, reading.coverage, {
+        date,
+        range,
+        zone,
+      });
+      if (!file.eventCount) {
+        setExportMessage(
+          file.ignored
+            ? "No valid session records to export."
+            : "No session records in this period."
+        );
+        return;
+      }
+      if (
+        new TextEncoder().encode(file.contents).byteLength >
+        32 * 1024 * 1024
+      ) {
+        setExportError(true);
+        setExportMessage(
+          "This export exceeds 32 MiB. Select a shorter period."
+        );
+        return;
+      }
+      const result = await saveExport(file.filename, file.contents);
+      if (result.status === "saved") {
+        setExportMessage(
+          "Saved " +
+            result.path +
+            (file.ignored
+              ? ". Skipped " +
+                file.ignored +
+                " damaged or unsupported entries."
+              : ".")
+        );
+      } else if (result.status === "cancelled") {
+        setExportMessage("Export cancelled.");
+      } else {
+        setExportError(true);
+        setExportMessage(
+          "A file with that name already exists. Choose a different filename."
+        );
+      }
+    } catch (error) {
+      setExportError(true);
+      setExportMessage(
+        error instanceof Error &&
+          /Conflicting|Ambiguous/.test(error.message)
+          ? "Session history has conflicting records. No file was saved."
+          : "Could not save JSONL. Check the destination and try again."
+      );
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -171,6 +242,28 @@ export default function Statistics() {
         <button type="submit">Apply</button>
       </form>
       {zoneError && <p role="status">{zoneError}</p>}
+      <div className="history-controls">
+        <button
+          disabled={reading.kind !== "ready" || saving}
+          onClick={() => void exportPeriod()}
+        >
+          {saving ? "Exporting…" : "Export JSONL"}
+        </button>
+        <span>
+          Selected period in {zone}.{" "}
+          {window.electron?.saveHistoryJsonl
+            ? "Choose where to save."
+            : "Saves to Downloads."}
+        </span>
+      </div>
+      {exportMessage && (
+        <p
+          className="history-export-message"
+          role={exportError ? "alert" : "status"}
+        >
+          {exportMessage}
+        </p>
+      )}
       <HistoryReport state={state} zone={zone} retry={refresh} />
     </StyledSettings>
   );

@@ -86,3 +86,7 @@
 .history-legend span:nth-child(2)::before {
   background: var(--color-green);
 }
+
+.history-export-message {
+  overflow-wrap: anywhere;
+}

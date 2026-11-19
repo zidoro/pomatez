@@ -3,6 +3,13 @@ import Electron from "electron";
 declare global {
   interface Window {
     electron: {
+      saveHistoryJsonl?: (
+        filename: string,
+        contents: string
+      ) => Promise<{
+        status: "saved" | "cancelled" | "exists";
+        path?: string;
+      }>;
       onHistoryPower?: (
         callback: (suspended: boolean) => void
       ) => () => void;

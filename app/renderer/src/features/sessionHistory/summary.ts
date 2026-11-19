@@ -38,7 +38,7 @@ const id = (value: unknown): value is string =>
 const positive = (value: unknown): value is number =>
   typeof value === "number" && Number.isSafeInteger(value) && value > 0;
 
-function decode(value: unknown) {
+export function decode(value: unknown) {
   if (!value || typeof value !== "object") return;
   const r = value as Record<string, unknown>;
   if (
@@ -108,8 +108,7 @@ function decode(value: unknown) {
   }
 }
 
-export function summarize(
-  records: readonly unknown[],
+export function periodDays(
   date: Temporal.PlainDate,
   range: Range,
   zone: string
@@ -131,6 +130,16 @@ export function summarize(
     focus: 0,
     breaks: 0,
   }));
+  return days;
+}
+
+export function summarize(
+  records: readonly unknown[],
+  date: Temporal.PlainDate,
+  range: Range,
+  zone: string
+) {
+  const days = periodDays(date, range, zone);
   const from = days[0].start;
   const until = days[days.length - 1].end;
   const seen = new Set<string>();

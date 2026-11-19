@@ -229,6 +229,24 @@ export class Repository {
     });
   }
 
+  readHistory(): Promise<{
+    records: Record<string, unknown>[];
+    coverage: unknown[];
+  }> {
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction(["events", "coverage"]);
+      const records = tx
+        .objectStore("events")
+        .index("sequence")
+        .getAll();
+      const coverage = tx.objectStore("coverage").getAll();
+      tx.oncomplete = () =>
+        resolve({ records: records.result, coverage: coverage.result });
+      tx.onabort = () =>
+        reject(tx.error ?? new Error("History read aborted"));
+    });
+  }
+
   close(): void {
     this.db.close();
   }

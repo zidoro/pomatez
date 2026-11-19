@@ -10,6 +10,10 @@ import {
   dialog,
   powerMonitor,
 } from "electron";
+import {
+  saveHistoryExport,
+  validExportRequest,
+} from "./helpers/historyExport";
 import debounce from "lodash.debounce";
 import notifier from "node-notifier";
 import path from "path";
@@ -442,6 +446,31 @@ ipcMain.on(SET_COMPACT_MODE, (e, args) => {
 ipcMain.on(SET_UI_THEME, (e, { isDarkMode }) => {
   store.safeSet("isDarkMode", isDarkMode);
 });
+
+ipcMain.handle(
+  "save-history-jsonl",
+  async (event, filename: unknown, contents: unknown) => {
+    const parent = win;
+    if (
+      !parent ||
+      event.sender !== parent.webContents ||
+      event.senderFrame !== event.sender.mainFrame ||
+      typeof contents !== "string" ||
+      !validExportRequest(filename, contents)
+    ) {
+      throw new Error("Invalid history export request");
+    }
+    return saveHistoryExport(
+      () =>
+        dialog.showSaveDialog(parent, {
+          title: "Export session history",
+          defaultPath: path.join(app.getPath("downloads"), filename),
+          filters: [{ name: "JSON Lines", extensions: ["jsonl"] }],
+        }),
+      contents
+    );
+  }
+);
 
 ipcMain.on(SHOW_WINDOW, () => {
   if (!win?.isVisible()) {

@@ -1,3 +1,5 @@
+#[cfg(desktop)]
+mod history_export;
 use tauri::{Manager, RunEvent};
 use tauri_plugin_autostart::MacosLauncher;
 
