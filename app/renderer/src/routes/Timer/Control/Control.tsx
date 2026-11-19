@@ -130,10 +130,12 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
   ]);
 
   const onResetSessionCallback = useCallback(() => {
-    finishRecording("reset");
+    if (timer.timerType !== TimerStatus.STAY_FOCUS) {
+      finishRecording("reset");
+    }
     dispatch(setTimerType(TimerStatus.STAY_FOCUS));
     dispatch(setRound(1));
-  }, [dispatch]);
+  }, [dispatch, timer.timerType]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
