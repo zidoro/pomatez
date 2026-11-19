@@ -125,4 +125,27 @@ IndexedDB snapshot. Credited totals matched the dashboard at 50 minutes of
 focus, 20 minutes of breaks, two completed focus sessions and one reset.
 Native cancellation, collision protection, and storage error retry passed.
 The old fullscreen suite still fails both baseline setSkipTaskbar assertions.
+
+## Submission validation
+
+The packaged Linux Electron build at `d2fc58c` passed a real timer
+start, pause, resume, natural completion, skip, restart, and native save
+workflow. Independent comparison of the export against IndexedDB and
+Statistics found 60,157 ms of focus, 5,382 ms of break, 11 unique events,
+and one excluded observation gap. A follow-up Electron smoke test
+verified that resetting the round during focus leaves the current history
+session open, matching the unchanged countdown. The history suite,
+workspace builds, and TypeScript checks passed.
+
+Linux native Tauri testing requires the dependencies listed in
+`.github/workflows/build-tauri.yml`. Cargo reached dependency compilation,
+where pkg-config could not find the GLib and GObject development files.
+WebKitGTK, JavaScriptCoreGTK, GTK, and Ayatana development files were
+also unavailable. A standalone Rust test exercised the filesystem
+writer, including suffix selection for an existing destination and
+failure when the directory is missing. The native command, webview
+reopening, tray shutdown, checkpoint recovery, and sleep/wake still
+need testing in Tauri. Tauri writes directly to Downloads under a new
+filename and has no save dialog to cancel. Windows native runtime
+validation was deferred.
 The full renderer declaration issue documented in Phase 4 is unchanged.
